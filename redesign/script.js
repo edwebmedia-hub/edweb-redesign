@@ -90,24 +90,19 @@
     }
   }
 
-  // --- Portfolio carousel ------------------------------------------------------
-  document.querySelectorAll('.carousel-wrap').forEach((wrap) => {
-    const track = wrap.querySelector('.carousel');
-    const prevBtn = wrap.querySelector('.carousel-prev');
-    const nextBtn = wrap.querySelector('.carousel-next');
-    if (!track) return;
-
-    const scrollByCard = (direction) => {
-      const card = track.querySelector('.portfolio-item');
+  // --- Portfolio carousel -------------------------------------------------------
+  const carousel = document.getElementById('portfolio-carousel');
+  if (carousel) {
+    const prevBtn = document.getElementById('carousel-prev');
+    const nextBtn = document.getElementById('carousel-next');
+    const scrollByCard = (dir) => {
+      const card = carousel.querySelector('.portfolio-item');
       if (!card) return;
-      const gap = parseFloat(getComputedStyle(track).gap) || 0;
-      const amount = card.getBoundingClientRect().width + gap;
-      track.scrollBy({ left: direction * amount, behavior: 'smooth' });
+      carousel.scrollBy({ left: dir * (card.offsetWidth + 24), behavior: 'smooth' });
     };
-
     prevBtn?.addEventListener('click', () => scrollByCard(-1));
     nextBtn?.addEventListener('click', () => scrollByCard(1));
-  });
+  }
 
   // --- Review card slider (Google reviews) -------------------------------------
   document.querySelectorAll('.review-card').forEach((card) => {
@@ -155,6 +150,115 @@
       }, 300);
     }, 2600);
   });
+
+  // --- Schedule a call calendar -------------------------------------------------
+  const calDays = document.getElementById('cal-days');
+  if (calDays) {
+    const monthLabel = document.getElementById('cal-month');
+    const prevBtn = document.getElementById('cal-prev');
+    const nextBtn = document.getElementById('cal-next');
+    const timesWrap = document.getElementById('cal-times');
+    const summary = document.getElementById('cal-summary');
+    const requestBtn = document.getElementById('cal-request');
+
+    const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    const times = ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00'];
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    let viewDate = new Date(today.getFullYear(), today.getMonth(), 1);
+    let selectedDate = null;
+    let selectedTime = null;
+
+    const updateSummary = () => {
+      if (!selectedDate) {
+        summary.textContent = 'Select a date and time to continue.';
+        requestBtn.classList.add('is-disabled');
+        return;
+      }
+      const dateLabel = selectedDate.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' });
+      if (!selectedTime) {
+        summary.textContent = `${dateLabel} — now pick a time.`;
+        requestBtn.classList.add('is-disabled');
+        return;
+      }
+      summary.textContent = `Requesting a call on ${dateLabel} at ${selectedTime}.`;
+      requestBtn.classList.remove('is-disabled');
+    };
+
+    const renderCalendar = () => {
+      monthLabel.textContent = `${monthNames[viewDate.getMonth()]} ${viewDate.getFullYear()}`;
+      calDays.innerHTML = '';
+
+      const firstOfMonth = new Date(viewDate.getFullYear(), viewDate.getMonth(), 1);
+      const startOffset = (firstOfMonth.getDay() + 6) % 7; // Monday-first grid
+      const gridStart = new Date(firstOfMonth);
+      gridStart.setDate(gridStart.getDate() - startOffset);
+
+      for (let i = 0; i < 42; i++) {
+        const day = new Date(gridStart);
+        day.setDate(gridStart.getDate() + i);
+
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'scheduler-day';
+        btn.textContent = String(day.getDate());
+
+        if (day.getMonth() !== viewDate.getMonth()) btn.classList.add('is-outside');
+        if (day.getTime() === today.getTime()) btn.classList.add('is-today');
+        if (selectedDate && day.getTime() === selectedDate.getTime()) btn.classList.add('is-selected');
+
+        if (day < today) {
+          btn.disabled = true;
+        } else {
+          btn.addEventListener('click', () => {
+            selectedDate = day;
+            renderCalendar();
+            updateSummary();
+          });
+        }
+
+        calDays.appendChild(btn);
+      }
+    };
+
+    times.forEach((time) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'scheduler-time';
+      btn.textContent = time;
+      btn.addEventListener('click', () => {
+        selectedTime = time;
+        timesWrap.querySelectorAll('.scheduler-time').forEach((b) => b.classList.toggle('is-selected', b === btn));
+        updateSummary();
+      });
+      timesWrap.appendChild(btn);
+    });
+
+    prevBtn.addEventListener('click', () => {
+      viewDate = new Date(viewDate.getFullYear(), viewDate.getMonth() - 1, 1);
+      renderCalendar();
+    });
+    nextBtn.addEventListener('click', () => {
+      viewDate = new Date(viewDate.getFullYear(), viewDate.getMonth() + 1, 1);
+      renderCalendar();
+    });
+
+    requestBtn.addEventListener('click', (e) => {
+      if (!selectedDate || !selectedTime) {
+        e.preventDefault();
+        return;
+      }
+      const dateLabel = selectedDate.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+      const messageEl = document.getElementById('message');
+      if (messageEl) {
+        messageEl.value = `Hi, I'd like to request a call on ${dateLabel} at ${selectedTime}. Please confirm if this time works.`;
+      }
+    });
+
+    renderCalendar();
+    updateSummary();
+  }
 
   // --- FAQ category tabs ---------------------------------------------------------
   const tabs = document.querySelectorAll('.faq-tab');

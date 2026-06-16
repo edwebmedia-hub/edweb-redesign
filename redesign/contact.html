@@ -129,6 +129,46 @@
       </div>
     </section>
 
+    <!-- ============================== SCHEDULE A CALL ============================== -->
+    <section class="section" id="schedule">
+      <div class="container">
+        <div class="section-head section-head--center reveal">
+          <div class="eyebrow" style="justify-content:center">Book a Call</div>
+          <h2>Schedule a meeting</h2>
+          <p>Pick a date and time that suits you and we'll confirm the call by phone or email.</p>
+        </div>
+
+        <div class="scheduler reveal" style="--reveal-delay:80ms">
+          <div class="scheduler-calendar">
+            <div class="scheduler-cal-header">
+              <button type="button" class="scheduler-nav" id="cal-prev" aria-label="Previous month">
+                <span class="material-symbols-outlined" aria-hidden="true">chevron_left</span>
+              </button>
+              <span class="scheduler-month" id="cal-month"></span>
+              <button type="button" class="scheduler-nav" id="cal-next" aria-label="Next month">
+                <span class="material-symbols-outlined" aria-hidden="true">chevron_right</span>
+              </button>
+            </div>
+            <div class="scheduler-weekdays">
+              <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+            </div>
+            <div class="scheduler-days" id="cal-days"></div>
+          </div>
+
+          <div class="scheduler-details">
+            <div>
+              <h3>Select a time</h3>
+              <div class="scheduler-times" id="cal-times"></div>
+            </div>
+            <div class="scheduler-summary">
+              <p id="cal-summary">Select a date and time to continue.</p>
+              <a href="#contact" class="btn btn--primary btn--block is-disabled" id="cal-request">Request this time</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- ============================== FAQ ============================== -->
     <section class="section section--alt" id="faq">
       <div class="container faq-layout">
@@ -223,7 +263,7 @@
     </div>
     <div class="container footer-bottom">
       <span>© 2026 Edweb Media. Designed for Success. All rights reserved.</span>
-      <span>Built with care in Cape Town.</span>
+      <span class="footer-credit">Built with care in Cape Town.</span>
     </div>
   </footer>
 
