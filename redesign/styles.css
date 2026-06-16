@@ -209,7 +209,7 @@ summary:focus-visible {
   align-items: center;
   justify-content: center;
   gap: var(--sp-2);
-  padding: 0.9rem 1.9rem;
+  padding: 0.75rem 1.6rem;
   font-size: var(--fs-sm);
   font-weight: 600;
   letter-spacing: 0.02em;
@@ -492,7 +492,7 @@ summary:focus-visible {
 
 .hero-badge {
   text-decoration: none;
-  padding: 0.75rem var(--sp-5);
+  padding: 0.75rem 1.6rem;
   height: auto;
   align-self: stretch;
 }
@@ -537,8 +537,8 @@ summary:focus-visible {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(80% 60% at 85% 15%, rgba(201, 164, 92, 0.55), transparent 60%),
-    radial-gradient(60% 50% at 10% 90%, rgba(201, 164, 92, 0.30), transparent 60%),
+    radial-gradient(80% 60% at 85% 15%, rgba(201, 164, 92, 0.18), transparent 60%),
+    radial-gradient(60% 50% at 10% 90%, rgba(201, 164, 92, 0.09), transparent 60%),
     linear-gradient(160deg, #1a1a1a 0%, #2b2b2b 55%, #1a1a1a 100%);
   pointer-events: none;
 }
@@ -1486,8 +1486,8 @@ summary:focus-visible {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(80% 60% at 85% 15%, rgba(201, 164, 92, 0.55), transparent 60%),
-    radial-gradient(60% 50% at 10% 90%, rgba(201, 164, 92, 0.30), transparent 60%),
+    radial-gradient(80% 60% at 85% 15%, rgba(201, 164, 92, 0.18), transparent 60%),
+    radial-gradient(60% 50% at 10% 90%, rgba(201, 164, 92, 0.09), transparent 60%),
     linear-gradient(160deg, #1a1a1a 0%, #2b2b2b 55%, #1a1a1a 100%);
   pointer-events: none;
 }
@@ -1670,7 +1670,9 @@ summary:focus-visible {
   .scheduler { grid-template-columns: 1fr; gap: var(--sp-6); padding: var(--sp-6); }
   .footer-grid { grid-template-columns: 1fr; padding-top: var(--sp-10); padding-bottom: var(--sp-10); }
 
-  .hero-actions .btn { flex: 1 1 0; }
+  .hero-actions { justify-content: center; }
+  .hero-actions .btn,
+  .hero-actions .hero-badge { flex: 1 1 0; min-width: 0; }
 
   .whatsapp-float { width: 52px; height: 52px; bottom: var(--sp-4); right: var(--sp-4); }
   .whatsapp-float svg { width: 26px; height: 26px; }
