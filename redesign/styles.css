@@ -2126,3 +2126,37 @@ summary:focus-visible {
 }
 .msf-success h2 { color: var(--text-inverse); }
 .msf-success p { color: rgba(255,255,255,0.6); }
+
+/* ==========================================================================
+   MSF — MOBILE OVERRIDES (must come after base MSF styles above)
+   ========================================================================== */
+@media (max-width: 768px) {
+  .contact-grid { gap: var(--sp-8); }
+
+  .msf {
+    padding: var(--sp-5);
+    min-width: 0;
+    border-radius: var(--radius-md);
+    gap: var(--sp-5);
+  }
+
+  .msf-title { font-size: var(--fs-2xl); }
+
+  .msf-steps { gap: 0; }
+  .msf-step-label { display: none; }
+  .msf-connector { flex: 1; }
+
+  .msf-services { grid-template-columns: repeat(2, 1fr); gap: var(--sp-2); }
+  .msf-service-card { padding: var(--sp-3) var(--sp-2); }
+  .msf-service-icon { font-size: 22px; }
+  .msf-service-name { font-size: 10px; }
+
+  .msf-sub-radio { grid-template-columns: 1fr; }
+  .msf-nav { flex-direction: row; gap: var(--sp-3); }
+  .msf-nav .btn { flex: 1; justify-content: center; }
+
+  .msf-budget-note { font-size: 10px; }
+
+  .contact-info h2 { font-size: var(--fs-2xl); }
+  .contact-info > p { font-size: var(--fs-base); }
+}
