@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -47,7 +47,7 @@
         <div class="eyebrow reveal">Contact</div>
         <h1 class="reveal" style="--reveal-delay:80ms">Say hello</h1>
         <p class="reveal" style="--reveal-delay:160ms">
-          Tell us a little about your business and what you need, and we'll get
+          Tell us a little about your business and what you need and we'll get
           back to you quickly with next steps.
         </p>
       </div>
@@ -92,45 +92,190 @@
           </div>
         </div>
 
-        <form class="contact-form reveal" style="--reveal-delay:100ms" novalidate>
-          <div class="eyebrow" style="margin-bottom:var(--sp-2)">Say Hello</div>
-          <h2 style="font-size:var(--fs-2xl);margin-bottom:var(--sp-6)">Send us a message</h2>
-          <div class="form-row">
-            <div class="field">
-              <label for="first-name">First Name</label>
-              <input type="text" id="first-name" name="first-name" autocomplete="given-name" required />
+        <!-- ====== MULTI-STEP CONTACT FORM ====== -->
+        <div class="msf reveal" style="--reveal-delay:100ms" id="msf" role="region" aria-label="Contact form">
+
+          <!-- Step indicator -->
+          <div class="msf-steps" aria-label="Form progress" role="list">
+            <div class="msf-step is-active" data-step="1" role="listitem">
+              <div class="msf-step-dot"><span>1</span></div>
+              <span class="msf-step-label">Services</span>
             </div>
-            <div class="field">
-              <label for="last-name">Last Name</label>
-              <input type="text" id="last-name" name="last-name" autocomplete="family-name" required />
+            <div class="msf-connector"></div>
+            <div class="msf-step" data-step="2" role="listitem">
+              <div class="msf-step-dot"><span>2</span></div>
+              <span class="msf-step-label">Details</span>
             </div>
-          </div>
-          <div class="form-row">
-            <div class="field">
-              <label for="email">Email</label>
-              <input type="email" id="email" name="email" autocomplete="email" required />
-            </div>
-            <div class="field">
-              <label for="phone">Phone Number</label>
-              <input type="tel" id="phone" name="phone" autocomplete="tel" />
+            <div class="msf-connector"></div>
+            <div class="msf-step" data-step="3" role="listitem">
+              <div class="msf-step-dot"><span>3</span></div>
+              <span class="msf-step-label">Contact</span>
             </div>
           </div>
-          <div class="package-notice" id="package-notice" style="display:none">
-            Selected package: <strong id="package-notice-text"></strong>
-            <input type="hidden" id="package" name="package" />
+
+          <form id="msf-form" novalidate>
+            <input type="hidden" id="msf-package" name="package" />
+
+            <!-- ── Step 1: Service selection ── -->
+            <div class="msf-panel is-active" data-panel="1">
+              <div class="eyebrow" style="margin-bottom:var(--sp-2)">Step 1 of 3</div>
+              <h2 class="msf-title">What do you need?</h2>
+              <p class="msf-sub">Select everything that applies "" we'll tailor the right package for you.</p>
+              <div class="msf-services" role="group" aria-label="Select services">
+                <label class="msf-service-card">
+                  <input type="checkbox" name="services" value="Website Design" id="chk-webdesign" />
+                  <span class="msf-service-icon material-symbols-outlined" aria-hidden="true">language</span>
+                  <span class="msf-service-name">Website Design</span>
+                </label>
+                <label class="msf-service-card">
+                  <input type="checkbox" name="services" value="App Development" />
+                  <span class="msf-service-icon material-symbols-outlined" aria-hidden="true">smartphone</span>
+                  <span class="msf-service-name">App Development</span>
+                </label>
+                <label class="msf-service-card">
+                  <input type="checkbox" name="services" value="Digital Marketing" />
+                  <span class="msf-service-icon material-symbols-outlined" aria-hidden="true">campaign</span>
+                  <span class="msf-service-name">Digital Marketing</span>
+                </label>
+                <label class="msf-service-card">
+                  <input type="checkbox" name="services" value="Google Ads" />
+                  <span class="msf-service-icon material-symbols-outlined" aria-hidden="true">ads_click</span>
+                  <span class="msf-service-name">Google Ads</span>
+                </label>
+                <label class="msf-service-card">
+                  <input type="checkbox" name="services" value="Branding" />
+                  <span class="msf-service-icon material-symbols-outlined" aria-hidden="true">palette</span>
+                  <span class="msf-service-name">Branding</span>
+                </label>
+                <label class="msf-service-card">
+                  <input type="checkbox" name="services" value="Visual Content" />
+                  <span class="msf-service-icon material-symbols-outlined" aria-hidden="true">photo_camera</span>
+                  <span class="msf-service-name">Visual Content</span>
+                </label>
+              </div>
+
+              <!-- Web Design sub-options (shown when Web Design is checked) -->
+              <div class="msf-sub-options" id="msf-webdesign-options" hidden>
+                <p class="msf-sub-label">What kind of website?</p>
+                <div class="msf-sub-radio" role="radiogroup" aria-label="Website type">
+                  <label class="msf-radio-card">
+                    <input type="radio" name="website-type" value="Business Website" />
+                    <span class="msf-service-icon material-symbols-outlined" aria-hidden="true">store</span>
+                    <div>
+                      <span class="msf-service-name">Business Website</span>
+                      <span class="msf-service-desc">Showcase your brand, services and contact info</span>
+                    </div>
+                  </label>
+                  <label class="msf-radio-card">
+                    <input type="radio" name="website-type" value="E-Commerce Website" />
+                    <span class="msf-service-icon material-symbols-outlined" aria-hidden="true">shopping_cart</span>
+                    <div>
+                      <span class="msf-service-name">E-Commerce Website</span>
+                      <span class="msf-service-desc">Sell products or services online</span>
+                    </div>
+                  </label>
+                </div>
+                <label class="msf-addon-card">
+                  <input type="checkbox" name="addons" value="SEO" id="chk-seo" />
+                  <span class="material-symbols-outlined" aria-hidden="true">query_stats</span>
+                  <div>
+                    <span class="msf-addon-name">Add SEO optimisation</span>
+                    <span class="msf-addon-desc">Rank higher on Google and get found by more customers</span>
+                  </div>
+                  <span class="msf-addon-check material-symbols-outlined" aria-hidden="true">check_circle</span>
+                </label>
+              </div>
+
+              <p class="msf-error" id="msf-err-1" role="alert" aria-live="polite"></p>
+              <div class="msf-nav">
+                <span></span>
+                <button type="button" class="btn btn--primary" data-msf-next="1">Next <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></button>
+              </div>
+            </div>
+
+            <!-- ── Step 2: Project details ── -->
+            <div class="msf-panel" data-panel="2">
+              <div class="eyebrow" style="margin-bottom:var(--sp-2)">Step 2 of 3</div>
+              <h2 class="msf-title">Your budget &amp; goals</h2>
+              <p class="msf-sub" id="msf-budget-sub">All our services are on a simple monthly fee — no large upfront costs.</p>
+              <div class="field">
+                <label for="msf-budget" id="msf-budget-label">Monthly budget <span aria-hidden="true">*</span></label>
+                <select id="msf-budget" name="budget" required>
+                  <option value="">Select a range…</option>
+                </select>
+                <p class="msf-budget-note" id="msf-budget-note"></p>
+              </div>
+              <div class="field">
+                <label for="msf-timeline">When do you want to start? <span class="field-optional">(optional)</span></label>
+                <select id="msf-timeline" name="timeline">
+                  <option value="">Select a timeline…</option>
+                  <option value="ASAP">As soon as possible</option>
+                  <option value="Within 1 month">Within the next month</option>
+                  <option value="1–3 months">1–3 months from now</option>
+                  <option value="Flexible">I'm flexible</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="msf-message">Tell us about your business <span aria-hidden="true">*</span></label>
+                <textarea id="msf-message" name="message" rows="4" required placeholder="What does your business do? Who are your customers? Any ideas you have for the website?"></textarea>
+                <p class="msf-error" id="msf-err-2" role="alert" aria-live="polite"></p>
+              </div>
+              <div class="msf-nav">
+                <button type="button" class="btn btn--ghost" data-msf-prev="2"><span class="material-symbols-outlined" aria-hidden="true">arrow_back</span> Back</button>
+                <button type="button" class="btn btn--primary" data-msf-next="2">Next <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></button>
+              </div>
+            </div>
+
+            <!-- ── Step 3: Contact info ── -->
+            <div class="msf-panel" data-panel="3">
+              <div class="eyebrow" style="margin-bottom:var(--sp-2)">Step 3 of 3</div>
+              <h2 class="msf-title">How can we reach you?</h2>
+              <p class="msf-sub">We'll get back to you within one business day.</p>
+              <div class="form-row">
+                <div class="field">
+                  <label for="msf-first">First Name <span aria-hidden="true">*</span></label>
+                  <input type="text" id="msf-first" name="first-name" autocomplete="given-name" required />
+                </div>
+                <div class="field">
+                  <label for="msf-last">Last Name <span aria-hidden="true">*</span></label>
+                  <input type="text" id="msf-last" name="last-name" autocomplete="family-name" required />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="field">
+                  <label for="msf-email">Email <span aria-hidden="true">*</span></label>
+                  <input type="email" id="msf-email" name="email" autocomplete="email" required />
+                </div>
+                <div class="field">
+                  <label for="msf-phone">Phone <span class="field-optional">(optional)</span></label>
+                  <input type="tel" id="msf-phone" name="phone" autocomplete="tel" />
+                </div>
+              </div>
+              <p class="msf-error" id="msf-err-3" role="alert" aria-live="polite"></p>
+              <div class="msf-nav">
+                <button type="button" class="btn btn--ghost" data-msf-prev="3"><span class="material-symbols-outlined" aria-hidden="true">arrow_back</span> Back</button>
+                <button type="submit" class="btn btn--primary" id="msf-submit">
+                  <span class="msf-submit-label">Send Message</span>
+                  <span class="msf-submit-spinner" aria-hidden="true"></span>
+                </button>
+              </div>
+            </div>
+          </form>
+
+          <!-- ── Success state ── -->
+          <div class="msf-success" id="msf-success" aria-live="polite" hidden>
+            <div class="msf-success-icon material-symbols-outlined" aria-hidden="true">check_circle</div>
+            <h2>Message sent!</h2>
+            <p>Thanks for reaching out. We'll be in touch within one business day.</p>
+            <a href="index.html" class="btn btn--primary" style="margin-top:var(--sp-6)">Back to Home</a>
           </div>
-          <div class="field">
-            <label for="message">Message</label>
-            <textarea id="message" name="message" required></textarea>
-          </div>
-          <button type="submit" class="btn btn--primary btn--block">Submit</button>
-          <p class="form-note">We typically respond within one business day.</p>
-        </form>
+
+        </div><!-- /msf -->
       </div>
     </section>
 
     <!-- ============================== SCHEDULE A CALL ============================== -->
-    <section class="section" id="schedule">
+    <section class="section section--alt" id="schedule">
       <div class="container">
         <div class="section-head section-head--center reveal">
           <div class="eyebrow" style="justify-content:center">Book a Call</div>
@@ -170,7 +315,7 @@
     </section>
 
     <!-- ============================== FAQ ============================== -->
-    <section class="section section--alt" id="faq">
+    <section class="section" id="faq">
       <div class="container faq-layout">
         <div class="reveal">
           <div class="eyebrow">FAQ</div>
@@ -213,7 +358,7 @@
                 <span class="icon" aria-hidden="true">+</span>
               </button>
               <div class="faq-answer">
-                <p>You can provide your own content, or we can help structure and refine it to suit your website and audience.</p>
+                <p>You can provide your own content or we can help structure and refine it to suit your website and audience.</p>
               </div>
             </div>
           </div>
@@ -262,7 +407,7 @@
       </div>
     </div>
     <div class="container footer-bottom">
-      <span>© 2026 Edweb Media. Designed for Success. All rights reserved.</span>
+      <span>© 2026 Edweb Media. <span class="footer-tagline">Designed for Success.</span> All rights reserved.</span>
       <span class="footer-credit">Built with care in Cape Town.</span>
     </div>
   </footer>
@@ -274,3 +419,4 @@
   <script src="script.js"></script>
 </body>
 </html>
+
