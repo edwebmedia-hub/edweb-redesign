@@ -272,14 +272,29 @@
       data.set('services', services.join(', '));
 
       try {
-        // Replace the action URL below with your real endpoint (Formspree, Netlify, etc.)
-        // For now we simulate a 1-second network request
-        await new Promise((res) => setTimeout(res, 1000));
+        const payload = {
+          type: 'contact',
+          first_name: data.get('first_name'),
+          last_name:  data.get('last_name'),
+          email:      data.get('email'),
+          phone:      data.get('phone'),
+          services:   data.get('services'),
+          budget:     data.get('budget'),
+          timeline:   data.get('timeline'),
+          message:    data.get('message'),
+        };
+        const res  = await fetch('/send-mail.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        const json = await res.json();
+        if (!res.ok || !json.success) throw new Error(json.message || 'Failed');
         form.hidden = true;
         msf.querySelector('.msf-steps').hidden = true;
         document.getElementById('msf-success').removeAttribute('hidden');
       } catch (_) {
-        err.textContent = 'Something went wrong. Please try again or email us directly.';
+        err.textContent = 'Something went wrong. Please try again or email us directly at info@edwebmedia.com';
         submit.classList.remove('is-loading');
         submit.disabled = false;
       }
@@ -475,19 +490,16 @@
       label.style.opacity = '0.5';
 
       try {
-        const res = await fetch('https://api.web3forms.com/submit', {
+        const res = await fetch('/send-mail.php', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
           body: JSON.stringify({
-            access_key: 'YOUR_WEB3FORMS_ACCESS_KEY',
-            subject: `Meeting Request — ${dateLabel} at ${selectedTime}`,
-            from_name: name,
+            type: 'booking',
             name,
             email,
             phone,
             meeting_date: `${dateLabel} at ${selectedTime}`,
-            note: note || 'No note provided',
-            botcheck: '',
+            note: note || '',
           }),
         });
         const json = await res.json();
