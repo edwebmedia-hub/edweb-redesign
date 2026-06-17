@@ -301,14 +301,57 @@
           </div>
 
           <div class="scheduler-details">
-            <div>
+
+            <!-- Step 1: time picker + proceed -->
+            <div id="sched-step-1">
               <h3>Select a time</h3>
               <div class="scheduler-times" id="cal-times"></div>
+              <div class="scheduler-summary">
+                <p id="cal-summary">Select a date and time to continue.</p>
+                <button type="button" class="btn btn--primary btn--block is-disabled" id="cal-request">
+                  Continue &rarr;
+                </button>
+              </div>
             </div>
-            <div class="scheduler-summary">
-              <p id="cal-summary">Select a date and time to continue.</p>
-              <a href="#contact" class="btn btn--primary btn--block is-disabled" id="cal-request">Request this time</a>
+
+            <!-- Step 2: contact details form -->
+            <form class="booking-form" id="booking-form" hidden>
+              <button type="button" class="booking-back" id="booking-back">
+                <span class="material-symbols-outlined" aria-hidden="true">arrow_back</span> Change date / time
+              </button>
+              <h3>Your details</h3>
+              <p class="booking-echo" id="booking-echo"></p>
+              <div class="field">
+                <label for="book-name">Full Name <span aria-hidden="true">*</span></label>
+                <input type="text" id="book-name" name="name" required placeholder="Your full name" />
+              </div>
+              <div class="field">
+                <label for="book-email">Email <span aria-hidden="true">*</span></label>
+                <input type="email" id="book-email" name="email" required placeholder="you@example.com" />
+              </div>
+              <div class="field">
+                <label for="book-phone">Phone Number <span aria-hidden="true">*</span></label>
+                <input type="tel" id="book-phone" name="phone" required placeholder="+27 84 000 0000" />
+              </div>
+              <div class="field">
+                <label for="book-note">Note <span class="field-optional">(optional)</span></label>
+                <textarea id="book-note" name="note" rows="2" placeholder="Anything we should know before the call?"></textarea>
+              </div>
+              <p class="msf-error" id="book-err" role="alert" aria-live="polite"></p>
+              <button type="submit" class="btn btn--primary btn--block" id="book-submit">
+                <span id="book-submit-label">Confirm Booking</span>
+                <span class="msf-submit-spinner" id="book-spinner"></span>
+              </button>
+            </form>
+
+            <!-- Step 3: success -->
+            <div class="booking-success" id="booking-success" hidden>
+              <span class="material-symbols-outlined booking-success-icon" aria-hidden="true">check_circle</span>
+              <h3>Booking requested!</h3>
+              <p id="booking-success-msg"></p>
+              <p style="margin-top:0.5rem;font-size:var(--fs-sm);color:var(--text-muted)">We'll confirm via email or phone within one business day.</p>
             </div>
+
           </div>
         </div>
       </div>

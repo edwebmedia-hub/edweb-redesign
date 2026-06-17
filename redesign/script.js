@@ -440,15 +440,68 @@
       renderCalendar();
     });
 
-    requestBtn.addEventListener('click', (e) => {
-      if (!selectedDate || !selectedTime) {
-        e.preventDefault();
-        return;
-      }
+    // Step 1 → Step 2: show booking form
+    requestBtn.addEventListener('click', () => {
+      if (!selectedDate || !selectedTime) return;
       const dateLabel = selectedDate.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
-      const messageEl = document.getElementById('message');
-      if (messageEl) {
-        messageEl.value = `Hi, I'd like to request a call on ${dateLabel} at ${selectedTime}. Please confirm if this time works.`;
+      document.getElementById('booking-echo').textContent = `📅 ${dateLabel} at ${selectedTime}`;
+      document.getElementById('sched-step-1').hidden = true;
+      document.getElementById('booking-form').hidden = false;
+    });
+
+    // Step 2 → Step 1: go back
+    document.getElementById('booking-back').addEventListener('click', () => {
+      document.getElementById('booking-form').hidden = true;
+      document.getElementById('sched-step-1').hidden = false;
+      document.getElementById('book-err').textContent = '';
+    });
+
+    // Step 2 submit: send booking email
+    document.getElementById('booking-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const dateLabel = selectedDate.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+      const name  = document.getElementById('book-name').value.trim();
+      const email = document.getElementById('book-email').value.trim();
+      const phone = document.getElementById('book-phone').value.trim();
+      const note  = document.getElementById('book-note').value.trim();
+      const err       = document.getElementById('book-err');
+      const submitBtn = document.getElementById('book-submit');
+      const spinner   = document.getElementById('book-spinner');
+      const label     = document.getElementById('book-submit-label');
+
+      err.textContent = '';
+      submitBtn.disabled = true;
+      spinner.style.display = 'inline-block';
+      label.style.opacity = '0.5';
+
+      try {
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({
+            access_key: 'YOUR_WEB3FORMS_ACCESS_KEY',
+            subject: `Meeting Request — ${dateLabel} at ${selectedTime}`,
+            from_name: name,
+            name,
+            email,
+            phone,
+            meeting_date: `${dateLabel} at ${selectedTime}`,
+            note: note || 'No note provided',
+            botcheck: '',
+          }),
+        });
+        const json = await res.json();
+        if (!res.ok || !json.success) throw new Error(json.message || 'Failed');
+
+        document.getElementById('booking-form').hidden = true;
+        document.getElementById('booking-success-msg').textContent =
+          `We've received your request for ${dateLabel} at ${selectedTime}, ${name}.`;
+        document.getElementById('booking-success').hidden = false;
+      } catch (_) {
+        err.textContent = 'Something went wrong. Please email us directly at info@edwebmedia.com';
+        submitBtn.disabled = false;
+        spinner.style.display = 'none';
+        label.style.opacity = '1';
       }
     });
 
