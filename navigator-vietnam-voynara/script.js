@@ -197,8 +197,18 @@
         });
         const data = await res.json().catch(() => ({}));
         if (res.ok && data.success !== false) {
-          statusEl.textContent = "Thanks! We've received your message and will be in touch within 24 hours.";
-          statusEl.className = 'form-status success';
+          const successEl = document.getElementById('formSuccess');
+          if (successEl) {
+            form.hidden = true;
+            successEl.hidden = false;
+            requestAnimationFrame(() => successEl.classList.add('is-shown'));
+            const heading = document.getElementById('formSuccessHeading');
+            if (heading) heading.focus();
+            successEl.scrollIntoView({ block: 'center', behavior: 'smooth' });
+          } else {
+            statusEl.textContent = "Thanks! We've received your message and will be in touch within 24 hours.";
+            statusEl.className = 'form-status success';
+          }
           form.reset();
         } else {
           throw new Error(data.message || 'Something went wrong.');
@@ -211,5 +221,20 @@
         submitLabel.textContent = 'Submit';
       }
     });
+
+    const sendAnother = document.getElementById('sendAnother');
+    const successEl = document.getElementById('formSuccess');
+    if (sendAnother && successEl) {
+      sendAnother.addEventListener('click', () => {
+        successEl.classList.remove('is-shown');
+        successEl.hidden = true;
+        form.hidden = false;
+        statusEl.textContent = '';
+        statusEl.className = 'form-status';
+        const firstInput = document.getElementById('name');
+        if (firstInput) firstInput.focus();
+        form.scrollIntoView({ block: 'center', behavior: 'smooth' });
+      });
+    }
   }
 })();
