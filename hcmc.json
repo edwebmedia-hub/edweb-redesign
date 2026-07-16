@@ -1,0 +1,44 @@
+{
+  "slug": "hcmc",
+  "name": "Ho Chi Minh City",
+  "meta_desc": "Soaring skyscrapers, French-colonial architecture and deeply rooted wartime history in Vietnam's largest, most bustling city. Explore Ho Chi Minh City with Navigator Vietnam.",
+  "tagline": "Commonly known as Saigon, Vietnam's largest and most bustling city, where modern skyscrapers blend with French colonial architecture and wartime history.",
+  "hero_alt": "Skyline and streets of Ho Chi Minh City",
+  "overview": "Ho Chi Minh City, commonly known as Saigon, is Vietnam's largest and most bustling city. Located in the south of the country, it is a vibrant and fast-paced economic and cultural hub with a much more modern twist than its northern sister Hanoi. Ho Chi Minh City is a place where soaring modern skyscrapers blend seamlessly with well-preserved French colonial architecture and deeply rooted wartime history &mdash; an iconic and deeply significant place in Vietnamese culture as the location where the Reunification of Vietnam was finally achieved.",
+  "highlights": [
+    "Independence Palace, where the American War was ended",
+    "The National War Remnants Museum",
+    "The Cu Chi Tunnels",
+    "The Saigon Central Post Office",
+    "Ben Thanh Market",
+    "Bui Vi&ecirc;n Street",
+    "Notre Dame Cathedral",
+    "Landmark 81 sky view, the tallest building in Vietnam"
+  ],
+  "culture_heading": "History",
+  "culture": "Ho Chi Minh City is steeped in the rich history of Vietnam. Its early roots begin in 1698 with the establishment of the Gia Dinh prefecture, marking the city's official founding date. The French Colonial Era followed from 1859 to 1954, when French troops occupied the city and it became the capital of the colony of Cochinchina. During the American War, Vietnam split into a communist North and non-communist South, and the city served as the capital of South Vietnam and a key headquarters for U.S. military forces until Reunification Day, when North Vietnamese troops captured Saigon on April 30, 1975. In 1976 the government renamed the city Ho Chi Minh City to honor the late revolutionary leader, and sweeping free market reforms in the 1980s allowed it to grow into the modern financial powerhouse it is today.",
+  "tips_heading": "Travel Tips",
+  "tips": [
+    "Download the Grab app to navigate the busy traffic and bustling streets",
+    "Stay in District 1, the city centre, for proximity to most attractions",
+    "Carry cash &mdash; as a tourist, cash is king",
+    "Book a day trip to the Cu Chi Tunnels with an organised guide, a must-see just outside the city",
+    "Cross the street at a steady pace and let the motorbikes flow around you &mdash; don't stop or run suddenly",
+    "Keep valuables secure, petty theft and phone snatching can happen in busy areas",
+    "Agree on prices before exchanging money or doing business to avoid scams"
+  ],
+  "best_time": "The best time to visit is December to February during the dry season, with more comfortable temperatures and minimal rainfall. During the rainy season (May to November), HCMC can experience significant flooding.",
+  "gem_location": "Hidden Gem",
+  "gem_title": "The Cafe Apartment",
+  "gem_meta1": "Half-Day Visit",
+  "gem_meta2": "Easy",
+  "gem_desc": "A quirky, multi-storey French-era apartment block on Nguyen Hue Street reimagined as a vertical stack of independent cafes, each with its own view over the city.",
+  "gem_img_alt": "The Cafe Apartment building in Ho Chi Minh City",
+  "contact_dest": "Ho%20Chi%20Minh%20City",
+  "gallery": [
+    {"img": "hcmc-gallery-1.jpg", "alt": "Independence Palace in Ho Chi Minh City", "small": "Landmark", "name": "Independence Palace"},
+    {"img": "hcmc-gallery-2.jpg", "alt": "Street scene in Ho Chi Minh City", "small": "Streets", "name": "City Streets"},
+    {"img": "hcmc-gallery-3.jpg", "alt": "Notre Dame Cathedral in Ho Chi Minh City", "small": "Landmark", "name": "Notre Dame Cathedral"},
+    {"img": "hcmc-gallery-4.jpg", "alt": "Skyline of Ho Chi Minh City", "small": "Skyline", "name": "City Skyline"}
+  ]
+}

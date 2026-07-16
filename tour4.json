@@ -1,0 +1,79 @@
+{
+  "slug": "peaks-passes-caves",
+  "name": "Vietnam: Peaks, Passes &amp; Caves",
+  "meta_desc": "15 days through Hanoi, the Ha Giang Loop, Phong Nha's caves, imperial Hue and Hoi An. Vietnam at its wildest and most adventurous.",
+  "tagline": "15 days through towering mountain passes, remote ethnic villages, world-famous caves and lantern-lit ancient towns.",
+  "duration": "15 Days",
+  "style": "Adventure, Nature &amp; History",
+  "activity_level": "Active",
+  "accommodation_style": "Eco-Lodges, Sleeper Train &amp; Cave Camping",
+  "route": ["Hanoi", "Ha Giang", "Phong Nha", "Hue", "Hoi An"],
+  "hero_img": "../assets/destinations/ha-giang/hg-hero.jpg",
+  "hero_alt": "Winding mountain road through the Ha Giang Loop",
+  "overview": "Discover Vietnam at its most spectacular on this unforgettable 15-day adventure through towering mountain passes, remote ethnic villages, world-famous caves, imperial cities and charming ancient towns. Designed for adventurous travellers who want to experience far more than the typical tourist trail, this journey combines Vietnam's breathtaking natural landscapes with authentic cultural encounters and fascinating history. Travel the legendary Ha Giang Loop, trek deep into Phong Nha-Ke Bang National Park to camp inside the enormous Hang En Cave, explore the wartime history of Central Vietnam, and finish your adventure among the lantern-lit streets of Hoi An. From winding mountain roads and hidden valleys to underground rivers and UNESCO World Heritage Sites, this itinerary showcases Vietnam at its wildest, most authentic and most unforgettable.",
+  "highlights": [
+    "Explore Hanoi on an exciting Army Jeep/Motorbike Tour",
+    "Learn the secrets behind Vietnam's famous coffee culture",
+    "Journey through the spectacular Ha Giang Loop",
+    "Cross the legendary Ma Pi Leng Pass",
+    "Cruise along the emerald waters of the Nho Que River",
+    "Meet remote ethnic minority communities in Northern Vietnam",
+    "Travel overnight aboard the comfortable Laman Express sleeper train",
+    "Experience the incredible 2-day Hang En Cave Trek with Oxalis",
+    "Camp inside one of the world's largest natural caves",
+    "Visit the historic Vinh Moc Tunnels and former DMZ",
+    "Discover Vietnam's imperial history in Hue",
+    "Drive across the breathtaking Hai Van Pass",
+    "Visit the towering Lady Buddha overlooking Da Nang",
+    "Explore the magical lantern-lit streets of Hoi An",
+    "Join a traditional Vietnamese cooking class and basket boat experience"
+  ],
+  "itinerary": [
+    {"day": "Day 1", "title": "Welcome to Vietnam", "desc": "Arrive in Hanoi and settle into Vietnam's vibrant capital. Meet your guide and enjoy a welcome dinner introducing you to the country's incredible cuisine and culture."},
+    {"day": "Day 2", "title": "Discover Hanoi", "desc": "Explore Hanoi's bustling streets aboard a vintage Army Jeep before learning the art of Vietnamese coffee making during a hands-on workshop."},
+    {"day": "Day 3", "title": "Journey to Ha Giang", "desc": "Travel north into Vietnam's spectacular mountain frontier and climb aboard your private Army Jeep. Over the next three days you'll explore one of the world's most scenic road journeys, travelling through dramatic mountain passes, remote ethnic villages and breathtaking valleys in complete comfort."},
+    {"day": "Day 4", "title": "Ha Giang Loop Adventure", "desc": "Continue your Army Jeep adventure across some of Vietnam's most spectacular roads. Cross the famous Ma Pi Leng Pass, visit the northernmost point of Vietnam at Lung Cu, and enjoy unforgettable mountain scenery around every bend."},
+    {"day": "Day 5", "title": "Nho Que River &amp; Du Gia", "desc": "Cruise the emerald waters of the Nho Que River before continuing through remote valleys and traditional villages to peaceful Du Gia."},
+    {"day": "Day 6", "title": "Sleeper Train to Phong Nha", "desc": "Return to Hanoi before boarding the comfortable overnight sleeper train south to Dong Hoi, adding another memorable experience to your journey."},
+    {"day": "Day 7", "title": "Relax in Phong Nha", "desc": "Arrive in the peaceful village of Phong Nha and enjoy a leisurely day preparing for the adventure ahead."},
+    {"day": "Day 8", "title": "Hang En Cave Expedition", "desc": "Begin one of Vietnam's greatest trekking adventures. Hike through dense jungle, cross rivers, visit the remote Doong Village, and arrive at the enormous Hang En Cave where you'll camp beneath one of nature's most incredible ceilings."},
+    {"day": "Day 9", "title": "Explore Hang En Cave", "desc": "Continue exploring the immense cave system before trekking back through the national park, celebrating your achievement upon returning to Phong Nha."},
+    {"day": "Day 10", "title": "Vietnam's Wartime History", "desc": "Travel south to Hue, stopping at the remarkable Vinh Moc Tunnels and the former Demilitarized Zone to gain a deeper understanding of Vietnam's history."},
+    {"day": "Day 11", "title": "Explore Imperial Hue", "desc": "Discover the magnificent Imperial City, Thien Mu Pagoda and the rich heritage of Vietnam's last royal dynasty."},
+    {"day": "Day 12", "title": "Scenic Journey to Hoi An", "desc": "Cross the famous Hai Van Pass, visit the towering Lady Buddha before arriving in the enchanting Ancient Town of Hoi An."},
+    {"day": "Day 13", "title": "Vietnamese Cooking Experience", "desc": "Immerse yourself in local culinary traditions with a market visit, hands-on cooking class and basket boat ride through Hoi An's coconut forests."},
+    {"day": "Day 14", "title": "Explore Hoi An", "desc": "Spend the day exploring at your own pace. Wander lantern-lined streets, browse local markets, visit historic temples, or have custom clothing made by Hoi An's famous tailors."},
+    {"day": "Day 15", "title": "Farewell Vietnam", "desc": "Enjoy one final morning before transferring to the airport for your onward journey."}
+  ],
+  "accommodation": [
+    {"location": "Hanoi", "hotel": "La Siesta Classic Ma May Hotel (or similar)"},
+    {"location": "Ha Giang", "hotel": "Selected Boutique Mountain Hotels &amp; Eco-Lodges"},
+    {"location": "Phong Nha", "hotel": "Phong Nha Farmstay (or similar)"},
+    {"location": "Hang En Expedition", "hotel": "Oxalis Cave Camp"},
+    {"location": "Hue", "hotel": "Senna Hue Hotel (or similar)"},
+    {"location": "Hoi An", "hotel": "La Siesta Hoi An Resort (or similar)"}
+  ],
+  "inclusions": [
+    "Vietnam Visa", "Airport arrival and departure transfers", "Accommodation throughout the journey",
+    "Overnight sleeper train experience", "Hang En Cave expedition with Oxalis", "Daily breakfast",
+    "Selected lunches and dinners", "Private transportation", "Professional English-speaking guides",
+    "Entrance fees and sightseeing as listed", "Hanoi Army Jeep Tour", "Vietnamese Coffee Experience",
+    "Ha Giang Loop Adventure", "Nho Que River Boat Trip", "Hang En Cave Trek", "Vinh Moc Tunnels &amp; DMZ Tour",
+    "Hue Imperial City Tour", "Hoi An Cooking Class", "Basket Boat Experience", "Bottled drinking water during transfers"
+  ],
+  "exclusions": [
+    "International flights", "Travel and medical insurance", "Drinks and personal refreshments",
+    "Meals not specifically mentioned", "Optional activities", "Personal expenses",
+    "Laundry and minibar charges", "Tips and gratuities", "Early check-in or late check-out",
+    "Services not listed under &quot;Inclusions&quot;"
+  ],
+  "travel_notes": [
+    "Best travel season: September to April",
+    "Excellent fitness is recommended for the Hang En Cave Trek",
+    "Participants should be comfortable hiking over uneven terrain and crossing streams",
+    "Weather conditions vary considerably between Northern and Central Vietnam",
+    "Comfortable trekking shoes are essential",
+    "Comprehensive travel insurance is compulsory"
+  ],
+  "flexible_note": "This itinerary has been carefully designed for adventurous travellers but can be fully customised to match your interests, fitness level, accommodation preferences, budget and available travel time. Whether you'd like to extend your stay, upgrade accommodation, add extra trekking experiences, or combine this journey with other regions of Vietnam, our team will create a personalised adventure that's perfect for you."
+}

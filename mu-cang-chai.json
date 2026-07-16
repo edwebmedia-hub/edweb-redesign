@@ -1,0 +1,43 @@
+{
+  "slug": "mu-cang-chai",
+  "name": "Mu Cang Chai",
+  "meta_desc": "Spectacular terraced rice fields and rich ethnic culture in Vietnam's Northern Highlands, an authentic alternative to Sapa. Explore Mu Cang Chai with Navigator Vietnam.",
+  "tagline": "A rugged, mountainous district famed for its spectacular terraced rice fields, an authentic and less commercial alternative to Sapa.",
+  "hero_alt": "Terraced rice fields in Mu Cang Chai",
+  "overview": "Mu Cang Chai is a rugged, mountainous district in Vietnam's Northern Highlands. Sitting at the foot of the Hoang Lien Son mountain range and spanning nearly 1,200 square kilometres, this lesser known area is famous for its spectacular terraced rice fields and rich local ethnic culture. The flowing rice fields are so breathtaking they have been recognised as a National Heritage site. Inhabiting the peaceful valleys are the Mong and Thai ethnic groups, offering a glimpse into traditional highland village life in their vibrant stilt-house villages &mdash; an authentic, less commercial alternative to Sapa for travelers seeking true rural culture and spectacular natural scenery.",
+  "highlights": [
+    "Hiking Raspberry Hill (Mam Xoi)",
+    "Mong Nua Hill",
+    "Trekking the Nahu Chu bamboo forest",
+    "Riding the Khau Pha Pass, one of Vietnam's most famous and challenging mountain passes",
+    "The multi-tiered Mo Waterfall",
+    "The communes of La Pan Tan, Che Cu Nha and De Xu Phinh"
+  ],
+  "culture_heading": "Unique Farming Culture",
+  "culture": "The vibrant culture of these mountains is deeply shaped by the indigenous Black Hmong and Thai people, who have cultivated these steep mountainsides for generations using ancient, sustainable agricultural techniques. Unlike static tourist attractions, the terraced fields are a working agricultural landscape, tirelessly carved by hand. Farming at such high, steep altitudes requires incredible water management, so indigenous farmers engineered sophisticated bamboo piping systems to pull water from mountain streams, defying gravity to irrigate otherwise unworkable terrain. This delicate relationship between human ingenuity and nature showcases the authentic, unique way of life of the highland communities.",
+  "tips_heading": "Travel Tips",
+  "tips": [
+    "The best way to get there is by sleeper bus from Hanoi, around 6&ndash;8 hours",
+    "Book an easy rider for the Khau Pha Pass, the roads can be challenging and steep",
+    "Carry cash, ATMs are rare in these mountainous provinces",
+    "Stay with a local family at a homestay to learn from the ethnic minority groups",
+    "Rent a motorbike in Mu Cang Chai town to explore freely, if you're confident to do so",
+    "Book accommodation in advance during peak photography seasons",
+    "Avoid travelling during the heavy monsoon season (July to August) due to potential landslides",
+    "Try C&#7889;m T&uacute; L&#7879; (fragrant green rice flakes) and X&ocirc;i Ng&#361; S&#7855;c (five-colour sticky rice)"
+  ],
+  "best_time": "Golden Season (mid-September to October) is the most popular time, when the valleys turn golden for breathtaking photography. Water Pouring Season (May to June) sees farmers flood the terraces, creating mirror-like reflections.",
+  "gem_location": "Hidden Gem",
+  "gem_title": "M&oacute;ng Ng&#7921;a (Horseshoe) Hill",
+  "gem_meta1": "Sunset Viewpoint",
+  "gem_meta2": "Easy",
+  "gem_desc": "Sunset at the iconic curving rice terraces of Horseshoe Hill, a National Heritage site of Vietnam.",
+  "gem_img_alt": "Horseshoe-shaped rice terraces at Mong Ngua Hill in Mu Cang Chai",
+  "contact_dest": "Mu%20Cang%20Chai",
+  "gallery": [
+    {"img": "mcc-gallery-1.jpg", "alt": "Terraced rice fields in Mu Cang Chai", "small": "Terraces", "name": "Rice Terraces"},
+    {"img": "mcc-gallery-2.jpg", "alt": "Mountain scenery in Mu Cang Chai", "small": "Scenery", "name": "Highland Views"},
+    {"img": "mcc-gallery-3.jpg", "alt": "Stilt house village in Mu Cang Chai", "small": "Village", "name": "Stilt Villages"},
+    {"img": "mcc-gallery-4.jpg", "alt": "Golden rice fields in Mu Cang Chai", "small": "Harvest", "name": "Golden Season"}
+  ]
+}

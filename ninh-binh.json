@@ -1,0 +1,43 @@
+{
+  "slug": "ninh-binh",
+  "name": "Ninh Binh",
+  "meta_desc": "Dramatic limestone karsts, rice paddies and winding rivers, nicknamed Ha Long Bay on Land. Explore Ninh Binh with Navigator Vietnam.",
+  "tagline": "A picturesque province nicknamed Ha Long Bay on Land for its dramatic limestone karsts, lush rice paddies and winding rivers.",
+  "hero_alt": "Boat on the river through Ninh Binh's limestone karsts",
+  "overview": "Ninh Binh is a picturesque province in the North of Vietnam, home to the UNESCO-recognized Trang An Landscape Complex. Nicknamed &quot;Ha Long Bay on Land&quot; for its dramatic limestone karsts, lush green rice paddies and winding rivers, the province offers a tranquil escape into nature just a short 2.5 hour bus journey from Hanoi. Immerse yourself in ancient history exploring Buddhist complexes nestled amongst the cliffs, quiet nature trails and iconic river boat tours through hidden caves and valleys. Ninh Binh, once the ancient capital of Vietnam, promises an enchanting journey into the country's natural beauty and cultural richness.",
+  "highlights": [
+    "A boat ride through the Trang An Landscape Complex, a UNESCO site",
+    "A boat ride in Tam Coc, famous for its feet-rowing boatmen",
+    "The climb to Hang Mua viewpoint",
+    "Bich Dong Pagoda",
+    "Bai Dinh Pagoda",
+    "The Hoa Lu Ancient Capital",
+    "The Hoa Lu lotus fields",
+    "Four Paws Ninh Binh bear sanctuary, supporting bears liberated from the illegal bile trade"
+  ],
+  "culture_heading": "Ancient Capital of Vietnam",
+  "culture": "Hoa Lu, nestled in the mountains of Ninh Binh, was Vietnam's ancient capital in the 10th century, serving as the political and cultural centre of the Đinh and Early Lê dynasties. It offers a fascinating look at the country's early independence and royal heritage. As Vietnam's first centralized feudal capital, it was chosen for its naturally defensive landscape of towering limestone mountains and rivers, serving as the capital of the ancient kingdom of Dai Co Viet for 42 years before the capital moved to Th&#259;ng Long (modern-day Hanoi) in 1010.",
+  "tips_heading": "Travel Tips",
+  "tips": [
+    "The best way to get there is by bus from Hanoi, a 2.5 hour journey",
+    "Visit Hang Mua between late May and July to see the lotus fields in bloom",
+    "Trek to Hang Mua viewpoint early morning or evening to avoid the midday heat, the steps are steep",
+    "Rent a motorbike, Ninh Binh is flat and easy to navigate",
+    "Take advantage of the free bicycles most homestays offer to explore the surrounding area",
+    "Book in Tam Coc for a social area with shops and restaurants, or Trang An for a peaceful, secluded stay"
+  ],
+  "best_time": "September to November offers ideal, comfortable weather. May to early June brings the iconic golden rice harvests and full lotus fields.",
+  "gem_location": "Hidden Gem",
+  "gem_title": "Thung Nham Bird Valley Ecotourism Zone",
+  "gem_meta1": "Full-Day Visit",
+  "gem_meta2": "Easy",
+  "gem_desc": "Spend the day exploring caves, viewpoints, boat rides and a huge swimming pool, then watch the wild birds return at sunset. At night the complex is lit up with various displays and artwork.",
+  "gem_img_alt": "Thung Nham Bird Valley Ecotourism Zone in Ninh Binh",
+  "contact_dest": "Ninh%20Binh",
+  "gallery": [
+    {"img": "nb-gallery-1.jpg", "alt": "Boat tour through Trang An Landscape Complex", "small": "Boat Tour", "name": "Trang An"},
+    {"img": "nb-gallery-2.jpg", "alt": "Limestone karsts of Tam Coc", "small": "Karsts", "name": "Tam Coc"},
+    {"img": "nb-gallery-3.jpg", "alt": "View from Hang Mua viewpoint in Ninh Binh", "small": "Viewpoint", "name": "Hang Mua"},
+    {"img": "nb-gallery-4.jpg", "alt": "Rice paddies in Ninh Binh", "small": "Rice Fields", "name": "Rice Paddies"}
+  ]
+}

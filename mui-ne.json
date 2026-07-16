@@ -1,0 +1,38 @@
+{
+  "slug": "mui-ne",
+  "name": "Mui Ne",
+  "meta_desc": "Towering sand dunes, world-class kitesurfing and fresh seafood in this vibrant coastal resort town. Explore Mui Ne with Navigator Vietnam.",
+  "tagline": "A vibrant coastal resort town famed for its unique microclimate, towering sand dunes and world-class kitesurfing.",
+  "hero_alt": "Sand dunes and coastline of Mui Ne",
+  "overview": "Mui Ne is a vibrant coastal resort town in southern Vietnam, located around 4 hours by bus or train from Ho Chi Minh City. A popular beach destination for both locals and tourists alike, it's famous for its unique microclimate, towering sand dunes and world-class kitesurfing, and home to a bustling fishing port offering some of Vietnam's freshest and tastiest seafood. Mui Ne is the perfect destination filled with variety, offering something for everyone.",
+  "highlights": [
+    "The White Sand Dunes, famous for ATV rides and sandboarding",
+    "The Red Sand Dunes, a glowing landscape perfect for sunset chasing",
+    "The Fairy Stream walk to the waterfall at the end",
+    "Fresh seafood from Mui Ne Fishing Village, best visited at sunrise",
+    "Kitesurfing, thanks to the consistent sea breeze"
+  ],
+  "culture_heading": "Action-Packed Activities",
+  "culture": "Mui Ne is the perfect destination for adventurers and thrill seekers. Consistent cross-onshore winds make it ideal for watersports like windsurfing, kitesurfing and parasailing, with dedicated sports schools throughout town. The action doesn't stop at the water's edge either &mdash; Mui Ne is famous for its dramatic Red and White Sand Dunes, where adventure seekers can rent quad bikes, slide down steep hills on sandboards, or take Jeep safaris under the sunset. If you're looking for a destination to let your hair down with unique activities, Mui Ne is the place for you.",
+  "tips_heading": "Travel Tips",
+  "tips": [
+    "Take a sleeper bus from Ho Chi Minh City, the journey is around 4&ndash;5 hours",
+    "Take on the sand dunes at sunset or sunrise for the best views",
+    "Head to the fishing village before 6:00am to see fishermen trading their daily catch",
+    "Book midweek where possible, as a popular beach destination, weekend accommodation books up fast"
+  ],
+  "best_time": "The best time to visit is from November to March when the weather is sunny, dry and cool (22&ndash;27&deg;C), perfect for outdoor sports.",
+  "gem_location": "Hidden Gem",
+  "gem_title": "Mui Ne Fishing Village at Dawn",
+  "gem_meta1": "Sunrise Visit",
+  "gem_meta2": "Easy",
+  "gem_desc": "Visit the Mui Ne Fishing Village at 5:30am to see hundreds of colorful traditional basket boats floating under the sunrise.",
+  "gem_img_alt": "Traditional basket boats at Mui Ne Fishing Village at sunrise",
+  "contact_dest": "Mui%20Ne",
+  "gallery": [
+    {"img": "mn-gallery-1.jpg", "alt": "Red Sand Dunes in Mui Ne", "small": "Dunes", "name": "Red Sand Dunes"},
+    {"img": "mn-gallery-2.jpg", "alt": "White Sand Dunes in Mui Ne", "small": "Dunes", "name": "White Sand Dunes"},
+    {"img": "mn-gallery-3.jpg", "alt": "Kitesurfing off the coast of Mui Ne", "small": "Watersport", "name": "Kitesurfing"},
+    {"img": "mn-gallery-4.jpg", "alt": "Coastline of Mui Ne", "small": "Coast", "name": "Mui Ne Coastline"}
+  ]
+}

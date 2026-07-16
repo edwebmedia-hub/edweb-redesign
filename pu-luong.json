@@ -1,0 +1,41 @@
+{
+  "slug": "pu-luong",
+  "name": "Pu Luong",
+  "meta_desc": "Dramatic mountains, lush jungle and sweeping rice terraces in this tranquil, off-the-beaten-track ecotourism reserve. Explore Pu Luong with Navigator Vietnam.",
+  "tagline": "A stunning and tranquil ecotourism destination, nicknamed Little Sapa, famed for its dramatic mountains and sweeping green rice terraces.",
+  "hero_alt": "Rice terraces and Thai stilt village in Pu Luong",
+  "overview": "Pu Luong Nature Reserve is a stunning and tranquil ecotourism destination nestled in Northern Vietnam, famous for its dramatic mountains, lush tropical jungles and sweeping green rice terraces. Unlike major tourist hotspots, Pu Luong offers an authentic, off-the-beaten-track, nature-centered experience, allowing visitors to immerse themselves in untouched landscapes and the traditional culture of local ethnic minority communities living in the valley's quaint villages. Just a short 4 hour drive from Hanoi, it's the perfect destination for an easy-access nature getaway.",
+  "highlights": [
+    "Hiking nature trails through lush jungle and mountain passes",
+    "A dip in Ban Hieu Waterfall",
+    "Exploring the massive limestone depths of Kho Muong Bat Cave",
+    "Renting a bike to ride through the small mountain villages",
+    "Bamboo rafting along the Cham Stream",
+    "Staying in traditional stilt houses with the Black Thai and Muong ethnic groups",
+    "Shopping at Pho Doan Market"
+  ],
+  "culture_heading": "Nature",
+  "culture": "Pu Luong Nature Reserve is famous for its untouched natural landscapes, where towering limestone mountains blend effortlessly with sprawling farmland below. It offers a quiet, serene escape with pristine jungles, dramatic waterfalls and authentic rural villages that feel untouched by mass tourism thanks to being off the main tourist route. Nicknamed &quot;Little Sapa,&quot; Pu Luong is known for its multi-layered, cultivated rice paddies spilling across the hillsides. Because the region enjoys two harvests a year, the valley shifts quickly between watery mirrors and glowing golden and green hues depending on the season, making it a perfect destination for nature photography year-round.",
+  "tips_heading": "Travel Tips",
+  "tips": [
+    "Rent a motorbike to explore the local ethnic villages",
+    "The best way to get there is by bus or private transfer from Hanoi",
+    "Book accommodation in advance, being off the beaten track means rooms can fill up quickly",
+    "Stay with a local family for a true authentic experience",
+    "Bring cash, ATMs and card payments are extremely scarce in the villages"
+  ],
+  "best_time": "Spring (February to May) and autumn (September to November), when the weather is pleasant and the terraced rice fields are at their most vibrant.",
+  "gem_location": "Hidden Gem",
+  "gem_title": "Kho Muong Village",
+  "gem_meta1": "Half-Day Visit",
+  "gem_meta2": "Easy",
+  "gem_desc": "A vibrant, authentic ethnic minority village of only 50 houses, tucked into the mountains near the Kho Muong Bat Cave.",
+  "gem_img_alt": "Kho Muong Village in Pu Luong",
+  "contact_dest": "Pu%20Luong",
+  "gallery": [
+    {"img": "pl-gallery-1.jpg", "alt": "Rice terraces in Pu Luong", "small": "Terraces", "name": "Rice Terraces"},
+    {"img": "pl-gallery-2.jpg", "alt": "Mountain scenery in Pu Luong", "small": "Scenery", "name": "Mountain Views"},
+    {"img": "pl-gallery-3.jpg", "alt": "Stilt houses in a Pu Luong village", "small": "Village", "name": "Stilt Villages"},
+    {"img": "pl-gallery-4.jpg", "alt": "Jungle trail in Pu Luong Nature Reserve", "small": "Jungle", "name": "Nature Trails"}
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "slug": "mekong-delta",
+  "name": "Mekong Delta",
+  "meta_desc": "Emerald rice paddies, winding canals and bustling floating markets in Vietnam's fertile Fruit Basket. Explore the Mekong Delta with Navigator Vietnam.",
+  "tagline": "A vast, beautiful labyrinth of emerald rice paddies, winding canals and bustling floating markets, nicknamed the Fruit Basket of Vietnam.",
+  "hero_alt": "Floating market boats on the Mekong Delta",
+  "overview": "The Mekong Delta is a vast and beautiful region of Vietnam, known for its tropical climate, tasty food and friendly people. It is a labyrinth of emerald-green rice paddies, winding palm-fringed canals and bustling floating markets, nicknamed the &quot;Fruit Basket of Vietnam&quot; for its immense agricultural output to the rest of the country. The Mekong Delta shows you a way of life that has continued unchanged for hundreds of years and remains a vital cog in Vietnam's well-oiled machine.",
+  "highlights": [
+    "A sampan boat through the mangroves",
+    "A 2 day, 1 night cruise down the delta",
+    "The Cai Rang floating markets",
+    "Cycling through lush fruit orchards",
+    "Ben Tre craft market",
+    "Tra Su Mangrove Forest",
+    "Vinh Trang Pagoda"
+  ],
+  "culture_heading": "The Rice Bowl of Vietnam",
+  "culture": "The Mekong Delta is dubbed the &quot;Rice Bowl of Vietnam&quot; because it produces over 50% of the country's total rice output, a staggering 95% of its rice exports, and around 70% of its total fruit and vegetable production. This massive yield is driven by the river's annual monsoon flooding, which deposits nutrient-rich silt, and a flat, water-dense landscape that allows for up to four harvests a year. As a result, the Mekong Delta is one of the most fertile agricultural regions in Southeast Asia, with farmers trading directly off wooden boats to local vendors and export markets, creating a vibrant trade culture unlike anywhere else in Vietnam.",
+  "tips_heading": "Travel Tips",
+  "tips": [
+    "Visit the markets early, they're most active between 5am and 8am when vendors come to trade",
+    "Bring cash, ATMs are less frequent in rural farming villages",
+    "Opt for private charters from local docks over overcrowded group tours for a quieter trip",
+    "Dress modestly for pagodas, temples and ancestral homes, pack a light layer for shoulders and knees",
+    "Ditch the hotels for an authentic riverside homestay to learn traditional cooking and stilt-house life",
+    "The best way to get there is by bus or private transfer from Ho Chi Minh City"
+  ],
+  "best_time": "The best time to visit the Mekong Delta is during the dry season from December to April, with sunny, pleasant weather and minimal rain.",
+  "gem_location": "Hidden Gem",
+  "gem_title": "Sa Dec Flower Village",
+  "gem_meta1": "Half-Day Visit",
+  "gem_meta2": "Easy",
+  "gem_desc": "A traditional craft village over 100 years old. Explore the floating flower orchards on a traditional sampan boat.",
+  "gem_img_alt": "Floating flower orchards at Sa Dec Village in the Mekong Delta",
+  "contact_dest": "Mekong%20Delta",
+  "gallery": [
+    {"img": "mekong-gallery-1.jpg", "alt": "Cai Rang floating market in the Mekong Delta", "small": "Market", "name": "Floating Markets"},
+    {"img": "mekong-gallery-2.jpg", "alt": "Canals winding through the Mekong Delta", "small": "Canals", "name": "Delta Canals"},
+    {"img": "mekong-gallery-3.jpg", "alt": "Fruit orchards in the Mekong Delta", "small": "Orchards", "name": "Fruit Orchards"},
+    {"img": "mekong-gallery-4.jpg", "alt": "Mangroves in the Mekong Delta", "small": "Mangroves", "name": "Mangrove Forest"}
+  ]
+}

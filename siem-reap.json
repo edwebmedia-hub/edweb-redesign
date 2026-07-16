@@ -1,0 +1,45 @@
+{
+  "slug": "siem-reap",
+  "name": "Siem Reap",
+  "meta_desc": "Home to Angkor Wat, the largest religious monument in the world, blending ancient wonder with modern nightlife. Explore Siem Reap, Cambodia with Navigator Vietnam.",
+  "tagline": "A vibrant city in northwest Cambodia, home to the world famous Angkor Wat, the largest religious monument in the world.",
+  "hero_alt": "Angkor Wat temple complex at sunrise in Siem Reap",
+  "overview": "Siem Reap is a vibrant city in northwest Cambodia and home to the world famous UNESCO World Heritage site, the Angkor Wat temple complex, the largest religious monument in the world. This rapidly growing city seamlessly blends centuries of archaeological wonder, history and culture with a modern hub of food, arts and nightlife, a unique balance that makes it a popular destination for travelers.",
+  "highlights": [
+    "Angkor Archaeological Park and the world famous Angkor Wat temple",
+    "Bayon Temple in the ancient walled city of Angkor Thom",
+    "Ta Prohm temple, the &quot;Tomb Raider Temple&quot;",
+    "Tonl&eacute; Sap Floating Villages",
+    "The buzzing nightlife of Pub Street",
+    "Psar Chas Market",
+    "The APOPO Visitor Center, home of the landmine-detecting &quot;HeroRATs&quot;",
+    "The Cambodia War Museum",
+    "Wat Thmei (Killing Field), a sobering but important historical site"
+  ],
+  "culture_heading": "Culture",
+  "culture": "Siem Reap is the heart of Cambodia and the gateway to the world famous Angkor region. Angkor Wat temple is the ultimate symbol of Cambodia's rich ancient history and the crown jewel of the Khmer Empire. Originally built as a massive Hindu temple complex in the 12th century, it was later transformed into a Buddhist shrine in the 13th century and stands today as the largest religious structure in the world. Angkor Wat remains a marvel of ancient wonder still significant to modern Cambodian life, and Khmer art forms such as Apsara Dance and Phare, the Cambodian Circus, continue to preserve the region's history today.",
+  "tips_heading": "Travel Tips",
+  "tips": [
+    "Opt for a 3-day temple pass to explore the vast complex in bite-sized chunks without temple burnout",
+    "Dress respectfully, temples are sacred sites, keep shoulders and knees covered",
+    "Wake up early to catch the sunrise at Angkor Wat and beat the crowds",
+    "Fly into the new Siem Reap-Angkor International Airport (SAI), around 45&ndash;60 minutes from the city",
+    "Download the Grab app for easy transport around the area",
+    "Try the famous local dishes Fish Amok, Num Pang and Nom Banh Chok",
+    "Head to Pub Street for lively nightlife, or Street 26 for a more mellow, laid-back vibe"
+  ],
+  "best_time": "November to March for dry, cooler weather, or April to October for lush greenery and fewer crowds.",
+  "gem_location": "Hidden Gem",
+  "gem_title": "The Crawling Trees of Ta Prohm",
+  "gem_meta1": "Half-Day Visit",
+  "gem_meta2": "Easy",
+  "gem_desc": "See the ancient stone ruins reclaimed by the wild, untamed jungle. The most recognizable tree is a massive Silk-Cotton tree known as the &quot;Tomb Raider Tree,&quot; made globally famous after appearing in the 2001 film Lara Croft: Tomb Raider.",
+  "gem_img_alt": "The Tomb Raider Tree at Ta Prohm temple in Siem Reap",
+  "contact_dest": "Siem%20Reap",
+  "gallery": [
+    {"img": "sr-gallery-1.jpg", "alt": "Angkor Wat temple in Siem Reap", "small": "Temple", "name": "Angkor Wat"},
+    {"img": "sr-gallery-2.jpg", "alt": "Tuk tuk near Angkor Wat in Siem Reap", "small": "Transport", "name": "Angkor Tuk Tuks"},
+    {"img": "sr-gallery-3.jpg", "alt": "Temple ruins in Siem Reap", "small": "Ruins", "name": "Temple Ruins"},
+    {"img": "sr-gallery-4.jpg", "alt": "Ancient carvings at Angkor Thom", "small": "Carvings", "name": "Angkor Thom"}
+  ]
+}

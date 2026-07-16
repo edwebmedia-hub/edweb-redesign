@@ -1,0 +1,45 @@
+{
+  "slug": "hoi-an",
+  "name": "Hoi An",
+  "meta_desc": "A beautifully preserved 15th-century port town of lantern-lit alleys, world-famous tailors and legendary food. Explore Hoi An with Navigator Vietnam.",
+  "tagline": "An iconic port town on Vietnam's central coast, renowned for its beautifully preserved Ancient Town, beaches and world-famous tailors.",
+  "hero_alt": "Lantern-lit streets of Hoi An Ancient Town",
+  "overview": "Hoi An is an iconic port town nestled along the central coast of Vietnam with a rich history dating back to the 15th century. Listed as a UNESCO World Heritage site in 1999, it's renowned for its incredibly well preserved Ancient Town, beautiful beaches and world famous tailors. Once a major trading hub on the Silk Road, Hoi An's vibrant history is still visible today, hidden in its quaint lantern-lit alleys and intricate architecture. Its rich past as an international trading hub led to a unique culinary fusion, making it one of Vietnam's top culinary destinations.",
+  "highlights": [
+    "Hoi An Ancient Town, a UNESCO World Heritage site",
+    "A ride on the iconic basket boats",
+    "The Ancient Japanese Bridge",
+    "Tailor-made clothes from the world-famous local tailors",
+    "An Bang or Cua Dai Beach",
+    "The night markets in the Ancient Town",
+    "Bicycle rides through the rice fields and farmlands",
+    "A lantern-lit sampan boat ride on the Thu Bon River",
+    "A local cooking class or lantern making class"
+  ],
+  "culture_heading": "Food",
+  "culture": "The food in Hoi An is legendary thanks to the unique blend of Chinese, Japanese and Vietnamese flavours that resulted from bustling 15th-century trade. Merchants who settled in this port brought their own culinary traditions, creating a melting pot of techniques that blended with native Vietnamese ingredients to form the iconic dishes we know today. Many staple dishes here are difficult to replicate elsewhere due to hyper-local ingredients &mdash; look out for Cao L&#7847;u, b&aacute;nh bao b&aacute;nh v&#7841;c, Cơm G&agrave; and freshly caught local seafood. The best way to experience Hoi An's flavours is on a street food tour in the Ancient Town or a local cooking class.",
+  "tips_heading": "Travel Tips",
+  "tips": [
+    "Visit the tailors early in your trip to allow time for any alterations",
+    "Fly into Da Nang and take a taxi into Hoi An, around a 45-minute journey",
+    "Take a basket boat from the Basket Boat Cafe to avoid crowds and tourist scams, its price is set",
+    "Book accommodation around An Bang Beach for a quieter, more relaxed stay away from the busy Ancient Town",
+    "Use Grab taxis and never get on an unlisted bike for safety",
+    "Visit the Ancient Town early morning to beat the crowds and heat before the night markets get busy",
+    "Look out for full moon lantern festivals, when hundreds of lanterns are released onto the river"
+  ],
+  "best_time": "February to April is best for sightseeing, with minimal rainfall and comfortable temperatures. May to August is best for the beaches.",
+  "gem_location": "Hidden Gem",
+  "gem_title": "Cham Island",
+  "gem_meta1": "Day Trip / Overnight",
+  "gem_meta2": "Easy",
+  "gem_desc": "Take the ferry across to Cham Island, off the coast of Hoi An, famous for its pristine beaches, crystal clear water and unique marine biodiversity. Spend the night at a local homestay and explore this quaint, untouched island.",
+  "gem_img_alt": "Cham Island off the coast of Hoi An",
+  "contact_dest": "Hoi%20An",
+  "gallery": [
+    {"img": "hoi-an-gallery-1.jpg", "alt": "Lantern-lit Ancient Town in Hoi An", "small": "Lanterns", "name": "Ancient Town by Night"},
+    {"img": "hoi-an-gallery-2.jpg", "alt": "Basket boats in Hoi An", "small": "Boats", "name": "Basket Boats"},
+    {"img": "hoi-an-gallery-3.jpg", "alt": "Streets of Hoi An old town", "small": "Streets", "name": "Old Town Streets"},
+    {"img": "hoi-an-gallery-4.jpg", "alt": "Thu Bon River in Hoi An", "small": "River", "name": "Thu Bon River"}
+  ]
+}

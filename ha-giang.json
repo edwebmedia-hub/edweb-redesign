@@ -1,0 +1,41 @@
+{
+  "slug": "ha-giang",
+  "name": "Ha Giang",
+  "meta_desc": "Dramatic limestone peaks, deep canyons and Vietnam's most spectacular mountain pass. Explore Ha Giang with Navigator Vietnam.",
+  "tagline": "A remote and ruggedly beautiful mountainous region bordering China, famed for its breathtaking landscapes and diverse ethnic cultures.",
+  "hero_alt": "Winding mountain road through the Ha Giang Loop",
+  "overview": "Ha Giang is a remote and ruggedly beautiful mountainous region of Northern Vietnam bordering China. Known for its breathtaking landscapes and diverse ethnic cultures, Ha Giang offers dramatic scenery of limestone peaks and deep canyons and is famous for its 370km driving loop, deemed one of the most spectacular mountain passes in Vietnam. Accessible via a 6-hour bus ride from Hanoi, this raw, culturally rich region is the perfect destination for nature and adventure lovers alike.",
+  "highlights": [
+    "The Ha Giang Loop, a world-famous 370km mountain pass ridden over 3&ndash;4 days through breathtaking landscapes and ethnic minority villages",
+    "Ma Pi Leng Pass, the &quot;King of Passes,&quot; carved into the cliffside at 1,500 metres above the emerald Nho Que River and Tu San Canyon",
+    "L&#361;ng C&uacute; Flag Tower, marking the absolute northernmost tip of Vietnam",
+    "H'Mong King's Palace at Sa Ph&igrave;n, a historically significant early-20th-century wooden fortress",
+    "Quan Ba Heaven's Gate, the stunning introductory viewpoint of the loop",
+    "A boat ride on the Nho Que River beneath Tu San Canyon",
+    "Du Gia Village, a lush, remote valley off the main tourist trail famed for waterfalls and rice fields"
+  ],
+  "culture_heading": "Adventure",
+  "culture": "Ha Giang is one of Vietnam's top adventure destinations. Famed for its spectacular mountain passes and daring roads, it attracts bikers, hikers, climbers and adventure lovers alike. The rugged, wild and almost untouched terrain is the perfect place to travel off the beaten path, immerse yourself in vibrant local communities and experience the true rural beauty of Vietnam's Northern Mountains.",
+  "tips_heading": "Travel Tips",
+  "tips": [
+    "Research your tour company for the Ha Giang Loop before you go &mdash; book with a reputable, licensed operator that meets your travel needs",
+    "Book an easy rider unless you're an experienced motorbike rider &mdash; the roads are notoriously difficult and dangerous",
+    "Bring cash &mdash; once you leave Ha Giang city there are no ATMs",
+    "Pack light with warm layers and waterproof clothing, weather in the Northern Highlands can turn surprisingly cold",
+    "Tip your easy rider generously (around $40&ndash;$60 on top of their fee) for keeping you safe on the journey"
+  ],
+  "best_time": "September to November (autumn) and March to May (spring) offer the most comfortable riding conditions for the Ha Giang Loop, with dry roads, clear skies and mild temperatures.",
+  "gem_location": "Hidden Gem",
+  "gem_title": "Cafe MY, Ma Pi Leng Pass",
+  "gem_meta1": "Coffee Stop",
+  "gem_meta2": "Easy",
+  "gem_desc": "A hidden cafe perched on the Ma Pi Leng Pass, offering panoramic views over the iconic Tu San Canyon below.",
+  "gem_img_alt": "Hidden cafe on the Ma Pi Leng Pass in Ha Giang",
+  "contact_dest": "Ha%20Giang",
+  "gallery": [
+    {"img": "hg-gallery-1.jpg", "alt": "Sunset over Bac Son Valley near Ha Giang", "small": "Scenery", "name": "Bac Son Valley"},
+    {"img": "hg-gallery-2.jpg", "alt": "Village view in Ha Giang province", "small": "Village", "name": "Ha Giang Village"},
+    {"img": "hg-gallery-3.jpg", "alt": "The road from Yen Minh to Meo Vac on the Ha Giang Loop", "small": "Loop", "name": "Yen Minh to Meo Vac"},
+    {"img": "hg-gallery-4.jpg", "alt": "Lake in Ha Giang province", "small": "Lake", "name": "Ha Giang Lake"}
+  ]
+}

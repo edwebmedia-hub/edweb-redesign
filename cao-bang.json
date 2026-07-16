@@ -1,0 +1,39 @@
+{
+  "slug": "cao-bang",
+  "name": "Cao Bang",
+  "meta_desc": "Karst landscapes, trans-border waterfalls and revolutionary history in Vietnam's remote north. Explore Cao Bang with Navigator Vietnam.",
+  "tagline": "A lesser-known province in Vietnam's remote north, famed for karst landscapes, trans-border waterfalls and rich revolutionary history.",
+  "hero_alt": "Ban Gioc Waterfall crossing the border between Vietnam and China",
+  "overview": "Cao Bang Province is a lesser known province in the remote northern reaches of Vietnam. Famed for its breathtaking karst landscapes, cascading trans-border waterfalls and rich revolutionary history, Cao Bang is the perfect place for those seeking to experience the true authentic soul of Vietnam away from the crowds and off the beaten track, nestled amongst some of Vietnam's best untouched natural landscapes.",
+  "highlights": [
+    "Ban Gioc Waterfall, one of the largest waterfalls in Asia, crossing the border between Vietnam and China",
+    "N&uacute;i M&#7855;t Th&#7847;n (Angel Eye Mountain), a rare natural formation of a 50ft hole directly through the mountain",
+    "Thang Hen Lake system, a vast water system home to 36 interconnected lakes",
+    "Pac Bo Cave, the historical site where Ho Chi Minh spent time during the early Vietnamese Revolution",
+    "Tr&uacute;c L&acirc;m Ph&#7853;t T&iacute;ch Pagoda, a sacred temple overlooking Ban Gioc Waterfall",
+    "The Cao Bang Loop, a 3&ndash;4 day motorbike excursion through ethnic villages and breathtaking landscapes",
+    "Canh Cao Sinkhole, abseiling 150 metres into a cavern with a prehistoric rainforest at its base"
+  ],
+  "culture_heading": "Culture &amp; Nature",
+  "culture": "Cao Bang is home to the Non Nuoc Cao Bang UNESCO Global Geopark, a 3,000-square-kilometre geological and cultural reserve. The Geopark features 500-million-year-old rock formations, vast protected waterways and sweeping agricultural land, and is home to ethnic minority groups such as the Tay, Nung, Dao and H'mong, whose communities still live in harmony with these striking natural landscapes.",
+  "tips": [
+    "Book the Cao Bang Loop &mdash; explore the Geopark over 3 days on the back of a motorbike, either self-driven or with an easy rider",
+    "Interact with the local ethnic communities, rich with culture, tradition and ancient knowledge",
+    "Book camping below Angel Eye Mountain in advance, it's a popular activity with limited availability",
+    "Easiest to reach from Hanoi or H&agrave; Giang, with direct bus routes available"
+  ],
+  "best_time": "Visit between August and October for lush, vibrant green rice paddies and full, flowing waterfalls. March to April brings drier weather and better access to waterfalls and lakes thanks to lower water levels.",
+  "gem_location": "Hidden Gem",
+  "gem_title": "Phia Thap Village",
+  "gem_meta1": "Half-Day Visit",
+  "gem_meta2": "Easy",
+  "gem_desc": "A 100-year-old settlement run by the Nung An ethnic minority, celebrated for its centuries-old tradition of hand-rolling aromatic natural incense sticks.",
+  "gem_img_alt": "Traditional village in Cao Bang province",
+  "contact_dest": "Cao%20Bang",
+  "gallery": [
+    {"img": "cb-gallery-1.jpg", "alt": "Camping beneath Angel Eye Mountain in Cao Bang", "small": "Camp", "name": "Angel Eye Mountain"},
+    {"img": "cb-gallery-2.jpg", "alt": "The Canh Cao Sinkhole in Cao Bang", "small": "Adventure", "name": "Canh Cao Sinkhole"},
+    {"img": "cb-gallery-3.jpg", "alt": "Karst landscape of Cao Bang province", "small": "Scenery", "name": "Karst Landscapes"},
+    {"img": "cb-gallery-4.jpg", "alt": "Cao Bang town", "small": "Town", "name": "Cao Bang Town"}
+  ]
+}

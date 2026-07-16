@@ -1,0 +1,68 @@
+{
+  "slug": "northern-highlights",
+  "name": "Vietnam's Northern Highlights",
+  "meta_desc": "10 days through Hanoi, Ha Long Bay, Ninh Binh and Sapa. A carefully crafted journey through Northern Vietnam's cities, bays and rice terraces.",
+  "tagline": "10 days through the vibrant streets of Hanoi, the emerald waters of Ha Long Bay, the limestone valleys of Ninh Binh and the misty rice terraces of Sapa.",
+  "duration": "10 Days",
+  "style": "Culture &amp; Nature",
+  "activity_level": "Moderately Active",
+  "accommodation_style": "Boutique Hotels &amp; Cruise",
+  "route": ["Hanoi", "Ha Long Bay", "Ninh Binh", "Sapa"],
+  "hero_img": "../assets/destinations/ha-long-bay/hlb-hero.jpg",
+  "hero_alt": "Cruise ship among the limestone islands of Ha Long Bay",
+  "overview": "Experience the very best of Northern Vietnam on this unforgettable journey through vibrant cities, breathtaking landscapes, rich cultural heritage and authentic local experiences. From the bustling streets of Hanoi to the emerald waters of Ha Long Bay, the dramatic limestone scenery of Ninh Binh, and the world-famous rice terraces of Sapa, this carefully crafted itinerary showcases the incredible diversity of Northern Vietnam. Designed for travellers seeking a balance of culture, adventure, relaxation and meaningful local encounters, this tour combines comfortable accommodation, expert local guides, outstanding cuisine and unforgettable experiences throughout the region.",
+  "highlights": [
+    "Explore the fascinating streets, culture and cuisine of Hanoi",
+    "Experience a unique Army Jeep Tour through the capital's iconic landmarks",
+    "Cruise overnight through the spectacular UNESCO World Heritage Site of Ha Long Bay",
+    "Discover the stunning limestone landscapes of Ninh Binh, often called &quot;Ha Long Bay on Land&quot;",
+    "Visit Hoa Lu Ancient Capital, Trang An Landscape Complex and Bich Dong Pagoda",
+    "Journey through the magnificent mountain scenery of Sapa",
+    "Ride the Fansipan Cable Car to the highest peak in Indochina",
+    "Trek through Muong Hoa Valley and visit local ethnic minority communities",
+    "Enjoy authentic Vietnamese cuisine and local cultural experiences",
+    "Travel comfortably with private transportation and experienced local guides"
+  ],
+  "itinerary": [
+    {"day": "Day 1", "title": "Welcome to Vietnam", "desc": "Arrive in Hanoi and settle into the heart of the Old Quarter. Enjoy a welcome dinner and your first taste of Northern Vietnamese cuisine while soaking up the energy of Vietnam's vibrant capital."},
+    {"day": "Day 2", "title": "Discover Hanoi", "desc": "Explore Hanoi's fascinating blend of ancient traditions and modern life. Travel through the city on a unique Army Jeep Tour, visit historic landmarks, discover hidden alleyways, and indulge in some of the country's finest local food."},
+    {"day": "Day 3", "title": "Cruise Ha Long Bay", "desc": "Journey to the UNESCO World Heritage Site of Ha Long Bay and board your overnight cruise. Sail through emerald waters surrounded by towering limestone islands while enjoying activities such as kayaking, cave exploration, swimming and sunset views."},
+    {"day": "Day 4", "title": "From Sea to Mountains", "desc": "Enjoy a peaceful morning on the bay before travelling to Ninh Binh, often referred to as &quot;Ha Long Bay on Land.&quot; Relax amongst dramatic limestone peaks, winding rivers and tranquil countryside landscapes."},
+    {"day": "Day 5", "title": "Explore Ninh Binh", "desc": "Discover the cultural and natural wonders of Ninh Binh. Visit the ancient capital of Hoa Lu, explore the UNESCO-listed Trang An Landscape Complex by boat, and admire the beauty of Bich Dong Pagoda."},
+    {"day": "Day 6", "title": "Journey to Sapa", "desc": "Travel through Northern Vietnam's spectacular mountain scenery to Sapa. Upon arrival, unwind and enjoy breathtaking views of the region's world-famous rice terraces."},
+    {"day": "Day 7", "title": "Fansipan &amp; Mountain Culture", "desc": "Explore Sapa Town and nearby villages before ascending Fansipan Mountain via cable car to the highest peak in Indochina. Enjoy panoramic views across valleys, mountains and endless rice terraces."},
+    {"day": "Day 8", "title": "Trek Through the Rice Terraces", "desc": "Experience one of Vietnam's most memorable adventures as you trek through the stunning Muong Hoa Valley. Meet local ethnic minority communities, learn about traditional lifestyles, and discover some of the country's most beautiful landscapes."},
+    {"day": "Day 9", "title": "Return to Hanoi", "desc": "Travel back to Hanoi with time to relax, shop and explore before celebrating your journey with a farewell street food experience in the bustling Old Quarter."},
+    {"day": "Day 10", "title": "Farewell Vietnam", "desc": "Enjoy a final morning at leisure before transferring to the airport for your onward journey, taking home unforgettable memories of Northern Vietnam."}
+  ],
+  "accommodation": [
+    {"location": "Hanoi", "hotel": "La Siesta Classic Ma May Hotel (or similar)"},
+    {"location": "Ha Long Bay", "hotel": "Genesis Majesty Cruise (or similar)"},
+    {"location": "Ninh Binh", "hotel": "Emeralda Tam Coc Resort (or similar)"},
+    {"location": "Sapa", "hotel": "Laxsik Ecolodge (or similar)"}
+  ],
+  "inclusions": [
+    "Vietnam Visa", "Airport arrival and departure transfers", "Accommodation throughout the tour",
+    "Daily breakfast", "Selected lunches and dinners as specified in the itinerary", "Overnight Ha Long Bay cruise",
+    "Private transportation throughout the tour", "Professional English-speaking guides",
+    "Entrance fees and sightseeing activities as mentioned", "Hanoi Army Jeep Tour",
+    "Fansipan Cable Car Experience", "Sapa trekking experience with local guide", "Trang An boat trip",
+    "Bottled drinking water during transfers"
+  ],
+  "exclusions": [
+    "International flights", "Domestic flights", "Travel and medical insurance",
+    "Drinks, alcoholic beverages and personal refreshments", "Meals not specifically mentioned in the itinerary",
+    "Optional activities and excursions", "Personal spending money",
+    "Laundry services, telephone calls and minibar expenses", "Tips and gratuities",
+    "Additional airport transfers outside scheduled tour dates", "Early check-in and late check-out fees",
+    "Any services not specifically mentioned under &quot;Inclusions&quot;"
+  ],
+  "travel_notes": [
+    "Best travel season: September to May",
+    "Moderate fitness level recommended for trekking activities in Sapa",
+    "Weather can vary significantly between Hanoi, Ha Long Bay, Ninh Binh and Sapa &mdash; layered clothing is recommended",
+    "Comfortable walking shoes are recommended throughout the journey",
+    "Travel insurance is compulsory for all travellers"
+  ],
+  "flexible_note": "This itinerary is designed as a private, tailor-made journey and can be fully customised to suit your interests, travel style, budget and preferred pace of travel. Whether you would like to upgrade accommodation, add extra experiences, extend your stay or modify activities, our team will be happy to create the perfect Vietnam adventure for you."
+}

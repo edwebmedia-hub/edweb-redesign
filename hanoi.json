@@ -1,0 +1,46 @@
+{
+  "slug": "hanoi",
+  "name": "Hanoi",
+  "meta_desc": "The vibrant capital of Vietnam, blending 1,000 years of history with the Old Quarter's colorful modern energy. Explore Hanoi with Navigator Vietnam.",
+  "tagline": "The vibrant capital of Vietnam, a bustling metropolis that blends 1,000-year-old history with colorful, chaotic modern energy.",
+  "hero_alt": "Cafes and streets of Hanoi's Old Quarter",
+  "overview": "Hanoi is the vibrant capital of Vietnam and second-largest city in the country, home to over 8.8 million residents. It is a bustling metropolis that seamlessly blends a 1,000-year-old history with colorful and sometimes chaotic modern energy. The city is famed for its ancient Old Quarter, French-colonial architecture and serene lakes nestled amongst the busy cityscape. Hanoi's charm is seen wherever you look, its magic never stopping in this city that never sleeps.",
+  "highlights": [
+    "The ancient Old Quarter and Ho&agrave;n Kiếm Lake",
+    "St John's Cathedral",
+    "Ho Chi Minh Mausoleum",
+    "The cafes on Train Street, watching the train pass by",
+    "A coffee making class",
+    "Michelin-rated restaurants &mdash; Tam Vi Restaurant, Pho 10, Bun Cha Ta",
+    "The Women's Museum",
+    "Hanoi's famous sky bar scene",
+    "A Jeep tour across the city"
+  ],
+  "culture_heading": "Food",
+  "culture": "Hanoi is famous for its incredible street food scene, built on centuries-old culinary traditions, a bustling Old Quarter and a deeply rooted communal dining culture still prevalent today. Locals and visitors alike gather on the unique open sidewalk restaurants and iconic plastic stools to eat recipes perfected and passed down for generations. Hanoi is the birthplace of some of Vietnam's most recognizable dishes &mdash; Ph&#7903;, B&uacute;n Ch&#7843;, B&aacute;nh Cu&#7889;n and egg coffee &mdash; so one of the best ways to experience Hanoi is through your tastebuds.",
+  "tips_heading": "Travel Tips",
+  "tips": [
+    "Download apps like Grab and Xanh Taxi for easy transport across the city",
+    "Keep belongings zipped up &mdash; Hanoi is safe, but bustling streets make pickpocketing easy",
+    "Join an organised street food tour",
+    "Cross the road at a slow, steady pace &mdash; traffic doesn't stop, so don't run or stop suddenly, it flows around you like water",
+    "Confirm prices before purchase or money exchange to avoid scams",
+    "Only drink bottled water",
+    "Take frequent breaks in the many air-conditioned cafes when the humidity gets unbearable",
+    "Hanoi is a central hub for travel to most of Vietnam by bus, train or plane"
+  ],
+  "best_time": "The best time to visit Hanoi is during autumn (September to November) or spring (March to April), with more pleasant temperatures, lower humidity and less rainfall, perfect for walking the Old Quarter and touring Hoan Kiem Lake.",
+  "gem_location": "Hidden Gem",
+  "gem_title": "Hidden Gem Cafe, Ho&agrave;n Kiếm",
+  "gem_meta1": "Coffee Stop",
+  "gem_meta2": "Easy",
+  "gem_desc": "A quiet, tucked-away cafe near Hoan Kiem Lake, offering a peaceful break from the Old Quarter's buzz and a true taste of Hanoi's coffee culture.",
+  "gem_img_alt": "Hidden cafe near Hoan Kiem Lake in Hanoi",
+  "contact_dest": "Hanoi",
+  "gallery": [
+    {"img": "hanoi-gallery-1.jpg", "alt": "Streets of Hanoi's Old Quarter", "small": "Streets", "name": "Old Quarter"},
+    {"img": "hanoi-gallery-2.jpg", "alt": "Ho Chi Minh Mausoleum in Hanoi", "small": "Landmark", "name": "Ho Chi Minh Mausoleum"},
+    {"img": "hanoi-gallery-3.jpg", "alt": "Street scene in Hanoi", "small": "Culture", "name": "City Life"},
+    {"img": "hanoi-gallery-4.jpg", "alt": "Jeep tour through Hanoi's Old Quarter", "small": "Tour", "name": "Old Quarter Jeep Tour"}
+  ]
+}

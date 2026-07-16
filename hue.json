@@ -1,0 +1,44 @@
+{
+  "slug": "hue",
+  "name": "Hue",
+  "meta_desc": "Ancient palaces, royal tombs and a serene riverside heart, the former capital of the Nguyen Dynasty. Explore Hue with Navigator Vietnam.",
+  "tagline": "Once the capital of the Nguyen Dynasty, renowned for its harmonious blend of ancient palaces, peaceful riverside life and deep cultural traditions.",
+  "hero_alt": "Imperial architecture and riverside views of Hue",
+  "overview": "Hue, once the capital of the Nguyen Dynasty, is renowned for its harmonious blend of ancient palaces, peaceful riverside life and deeply rooted cultural traditions. From its iconic Imperial City to its peaceful Buddhist temples, Hue offers travelers a serene escape into Vietnam's rich history and spiritual heart. Today Hue remains a regal city, home to scholars, artists and culinary masters who still maintain the rich traditions passed down from its royal dynasties &mdash; a perfect destination for history lovers and foodies wanting to experience timeless traditions rooted in Vietnamese culture.",
+  "highlights": [
+    "The Citadel, Imperial City and Forbidden Purple City of the Nguyen Dynasty",
+    "A food tour through some of Vietnam's most famous dishes, born in Hue",
+    "Thien Mu Pagoda",
+    "A boat trip down the Perfume River",
+    "Dong Ba Market",
+    "The royal tombs",
+    "Thuy Xuan Incense Village, learning the art of rolling incense",
+    "The lights at Trang Tien Bridge"
+  ],
+  "culture_heading": "History",
+  "culture": "Hue's history is significant because the city once served as the political, cultural and religious heart of the country under Vietnam's last royal family, the Nguyen Dynasty, from 1802 to 1945. It stands as a symbol of national unification, royal heritage and resilience through modern conflicts. From this era came many aspects of traditional Vietnamese art, cuisine, music and poetry still celebrated nationwide today, making Hue a bustling hub for creatives and a living museum for Vietnam's national identity. Despite significant destruction during the American War, its iconic monuments have undergone reconstruction and received global recognition as a UNESCO World Heritage site in 1993 for their crucial role in Vietnamese national identity.",
+  "tips_heading": "Travel Tips",
+  "tips": [
+    "Rent a bicycle inside the Imperial Citadel, the grounds are large and walking in the heat is tough",
+    "Beat the heat with a morning tour, the Imperial City has little shade and Hue can get extremely humid",
+    "Book a local tour guide for the Citadel to gain deeper insight into this iconic complex",
+    "Do an organised food tour to try Hue's famous dishes",
+    "Dress respectfully and modestly around Hue's culturally significant monuments",
+    "Drive the Hai Van Pass from Da Nang to Hue, an iconic coastal road to travel and sightsee at once",
+    "Take the Reunification Express, Hue is one of its iconic stops"
+  ],
+  "best_time": "The best time to visit Hue is from February to April. During this spring window, temperatures average a comfortable 20&deg;C to 25&deg;C with minimal rainfall.",
+  "gem_location": "Hidden Gem",
+  "gem_title": "Madam Thu Restaurant",
+  "gem_meta1": "Meal Stop",
+  "gem_meta2": "Easy",
+  "gem_desc": "A taste of Hue in one sitting. Order the iconic Hue taster platter and try all the region's most famous dishes in one go.",
+  "gem_img_alt": "Traditional Hue dishes at Madam Thu restaurant",
+  "contact_dest": "Hue",
+  "gallery": [
+    {"img": "hue-gallery-1.jpg", "alt": "Imperial City architecture in Hue", "small": "Imperial City", "name": "The Citadel"},
+    {"img": "hue-gallery-2.jpg", "alt": "Thien Mu Pagoda in Hue", "small": "Pagoda", "name": "Thien Mu Pagoda"},
+    {"img": "hue-gallery-3.jpg", "alt": "The Hai Van Pass between Hue and Da Nang", "small": "Coastal Road", "name": "Hai Van Pass"},
+    {"img": "hue-gallery-4.jpg", "alt": "Perfume River in Hue", "small": "River", "name": "Perfume River"}
+  ]
+}

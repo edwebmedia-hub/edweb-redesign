@@ -1,0 +1,40 @@
+{
+  "slug": "ha-long-bay",
+  "name": "Ha Long Bay",
+  "meta_desc": "Emerald waters and thousands of towering limestone islands at Vietnam's most iconic UNESCO World Heritage site. Explore Ha Long Bay with Navigator Vietnam.",
+  "tagline": "A world-famous UNESCO World Heritage site, renowned for its emerald waters and thousands of towering limestone islands shaped over millions of years.",
+  "hero_alt": "Cruise ship among the limestone islands of Ha Long Bay",
+  "overview": "Ha Long Bay is a world famous UNESCO World Heritage site, renowned for its emerald waters and thousands of towering limestone islands shaped by millions of years of geological erosion. The bay spans an area of around 1,500 square kilometres and is one of Vietnam's most iconic landscapes, home to ancient floating fishing villages preserved as heritage sites offering a glimpse into the traditional marine life that once flourished here.",
+  "highlights": [
+    "A 2 day, 1 night cruise of Ha Long and Lan Ha Bay",
+    "Sung Sot Cave (Surprise Cave), the bay's largest cave, located on Bo Hon Island",
+    "A hike to the summit of Ti Top Island for panoramic views of the bay",
+    "Kayaking to Luon Cave",
+    "Snorkelling amongst the bay's limestone karsts",
+    "Bai Tra Dao Beach"
+  ],
+  "culture_heading": "UNESCO World Heritage Site",
+  "culture": "Ha Long Bay was recognized by UNESCO in 1994 for its outstanding universal aesthetic value, and again in 2000 for its unique geological and geomorphological value. Its limestone cliffs are some of the most iconic landscapes in the world, home to a massive marine and terrestrial ecosystem including endemic species like the Cat Ba Langur, plus rare mangrove and coral systems. Legend holds that &quot;Ha Long&quot; translates to &quot;descending dragon&quot; &mdash; an ancient dragon said to have descended from the sky to defend the Vietnamese people, spitting out jewels and jade that became the bay's thousands of islands.",
+  "tips_heading": "Travel Tips",
+  "tips": [
+    "Research your cruise company beforehand &mdash; quality varies a lot, so check reviews before booking",
+    "Pack grippy, closed-toe shoes for the steep viewpoints on Ti Top Island or the steps inside Sung Sot Cave",
+    "Bring cash &mdash; some onboard drinks aren't included, and it's needed for staff tips",
+    "Consider a trip to Lan Ha Bay or Bai Tu Long Bay, the less crowded sister bays of Ha Long",
+    "Summer (June&ndash;August) is great for swimming but carries a risk of typhoons and last-minute cruise cancellations"
+  ],
+  "best_time": "The best time to visit is during spring (March to April) and autumn (September to November), offering the most comfortable temperatures, clear skies and calm waters ideal for cruising, kayaking and swimming.",
+  "gem_location": "Hidden Gem",
+  "gem_title": "Cua Van Fishing Village",
+  "gem_meta1": "Half-Day Visit",
+  "gem_meta2": "Easy",
+  "gem_desc": "Once voted one of the 16 most beautiful ancient villages in the world. Located roughly 20 kilometres from Tuan Chau Pier, it features over 300 floating houses and a floating cultural centre, offering a fascinating insight into the ancient marine communities that still thrive here.",
+  "gem_img_alt": "Floating houses of Cua Van fishing village in Ha Long Bay",
+  "contact_dest": "Ha%20Long%20Bay",
+  "gallery": [
+    {"img": "hlb-gallery-1.jpg", "alt": "Bai Tra Dao beach in Lan Ha Bay", "small": "Beach", "name": "Bai Tra Dao"},
+    {"img": "hlb-gallery-2.jpg", "alt": "Limestone karsts in Ha Long Bay", "small": "Scenery", "name": "Limestone Islands"},
+    {"img": "hlb-gallery-3.jpg", "alt": "Boats among the islands of Ha Long Bay", "small": "Cruise", "name": "Bay Cruise"},
+    {"img": "hlb-gallery-4.jpg", "alt": "Ha Long Bay coastline", "small": "Coast", "name": "Ha Long Coastline"}
+  ]
+}

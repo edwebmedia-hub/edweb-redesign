@@ -1,0 +1,82 @@
+{
+  "slug": "vietnam-cambodia",
+  "name": "Vietnam &amp; Cambodia: From Ha Long Bay to Angkor Wat",
+  "meta_desc": "16 days across Vietnam and Cambodia, from Hanoi and Ha Long Bay to the caves of Phong Nha, imperial Hue, Hoi An and the temples of Angkor Wat.",
+  "tagline": "16 days across two extraordinary countries &mdash; from the karsts of Ha Long Bay and the caves of Phong Nha to sunrise over Angkor Wat.",
+  "duration": "16 Days",
+  "style": "Culture, Nature, History &amp; UNESCO Heritage",
+  "activity_level": "Moderately Active",
+  "accommodation_style": "Boutique Hotels, Luxury Cruise &amp; Eco-Lodges",
+  "route": ["Hanoi", "Ha Long Bay", "Pu Luong", "Phong Nha", "Hue", "Hoi An", "Siem Reap"],
+  "hero_img": "../assets/destinations/siem-reap/sr-hero.jpg",
+  "hero_alt": "Angkor Wat temple complex at sunrise in Siem Reap",
+  "overview": "Experience the very best of Southeast Asia on this unforgettable 16-day journey through Vietnam and Cambodia. From the bustling streets of Hanoi and the emerald waters of Ha Long Bay to the tranquil rice terraces of Pu Luong, the spectacular caves of Phong Nha, the imperial history of Hue, the lantern-lit charm of Hoi An, and the magnificent temples of Angkor Wat, this itinerary showcases the incredible diversity of two remarkable countries. Designed for travellers seeking the perfect balance of culture, nature, history and authentic local experiences, this journey combines iconic highlights with hidden gems rarely found on standard tours. Whether it's your first visit to Southeast Asia or you're looking for a comprehensive journey through two extraordinary destinations, this itinerary offers memories that will last a lifetime.",
+  "highlights": [
+    "Explore Hanoi aboard a vintage Army Jeep or motorbike",
+    "Discover the secrets of Vietnam's famous coffee culture",
+    "Cruise through the spectacular limestone islands of Ha Long Bay overnight",
+    "Trek through the breathtaking rice terraces of Pu Luong Nature Reserve",
+    "Visit local Thai ethnic minority communities",
+    "Explore the magnificent caves of Phong Nha-Ke Bang National Park",
+    "Discover Vietnam's wartime history at the Vinh Moc Tunnels and DMZ",
+    "Explore the Imperial City of Hue",
+    "Drive across the spectacular Hai Van Pass",
+    "Join a hands-on Vietnamese cooking class in Hoi An",
+    "Experience a traditional bamboo basket boat ride",
+    "Visit Cambodia's inspiring APOPO HeroRATs Centre",
+    "Watch sunrise over the magnificent Angkor Wat",
+    "Explore the incredible temples of the Angkor Archaeological Park"
+  ],
+  "itinerary": [
+    {"day": "Day 1", "title": "Welcome to Hanoi", "desc": "Arrive in Vietnam's vibrant capital and settle into your hotel in the Old Quarter. Meet your guide and enjoy a welcome dinner while experiencing your first taste of authentic Vietnamese cuisine."},
+    {"day": "Day 2", "title": "Discover Hanoi", "desc": "Explore Hanoi aboard a vintage Army Jeep or Motorbike, visiting famous landmarks including Train Street, Ho Chi Minh Mausoleum, West Lake, and the Old Quarter before learning the art of Vietnamese coffee during an interactive coffee workshop."},
+    {"day": "Day 3", "title": "Ha Long Bay Cruise", "desc": "Travel to the spectacular UNESCO World Heritage Site of Ha Long Bay and board your overnight luxury cruise. Explore hidden caves, kayak through limestone islands, enjoy swimming opportunities, and watch the sunset over one of the world's most beautiful seascapes."},
+    {"day": "Day 4", "title": "Ha Long Bay to Pu Luong", "desc": "Enjoy your final morning cruising through Ha Long Bay before travelling inland to the peaceful mountains of Pu Luong Nature Reserve, home to spectacular rice terraces and traditional Thai villages."},
+    {"day": "Day 5", "title": "Trek Through Pu Luong", "desc": "Spend the day trekking through lush valleys, picturesque rice terraces and remote villages while learning about the traditions and daily life of the local Thai ethnic minority communities."},
+    {"day": "Day 6", "title": "Journey to Phong Nha", "desc": "Travel south to the peaceful village of Phong Nha, surrounded by dramatic limestone mountains and the gateway to one of Asia's most impressive cave systems."},
+    {"day": "Day 7", "title": "Explore Phong Nha", "desc": "Visit the famous Phong Nha Cave, cruise along the Son River, enjoy local cuisine, and experience the relaxed countryside atmosphere of this beautiful UNESCO National Park."},
+    {"day": "Day 8", "title": "Paradise Cave &amp; Commander Cave", "desc": "Discover two of Vietnam's most remarkable cave systems while learning about their incredible geological formations and important role during the Vietnam War."},
+    {"day": "Day 9", "title": "Vietnam's Wartime History", "desc": "Travel towards Hue via the Vinh Moc Tunnels and the former Demilitarized Zone, gaining a fascinating insight into Vietnam's modern history."},
+    {"day": "Day 10", "title": "Imperial Hue", "desc": "Explore the magnificent Imperial City, ancient citadel and rich heritage of Vietnam's last royal dynasty before enjoying free time to discover Hue's famous cuisine and vibrant markets."},
+    {"day": "Day 11", "title": "Scenic Journey to Hoi An", "desc": "Drive across the breathtaking Hai Van Pass, visit the towering Lady Buddha overlooking Da Nang, and arrive in the enchanting UNESCO-listed Ancient Town of Hoi An."},
+    {"day": "Day 12", "title": "Hoi An Cooking Experience", "desc": "Visit Hoi An's colourful local market before enjoying a hands-on Vietnamese cooking class and a traditional bamboo basket boat ride through the peaceful coconut forests."},
+    {"day": "Day 13", "title": "Vietnam to Cambodia", "desc": "Transfer to Da Nang Airport for your short flight to Siem Reap, Cambodia, where you'll begin the second chapter of your Southeast Asian adventure."},
+    {"day": "Day 14", "title": "Discover Siem Reap", "desc": "Visit the inspiring APOPO HeroRATs Centre to learn about Cambodia's remarkable landmine clearance programme before exploring the fascinating Lotus Silk Farm and discovering traditional Khmer craftsmanship."},
+    {"day": "Day 15", "title": "Sunrise at Angkor Wat", "desc": "Wake before dawn to witness one of the world's most unforgettable sunrises over Angkor Wat before spending the day exploring the magnificent temples of the Angkor Archaeological Park, including Bayon, Ta Prohm and Angkor Thom City."},
+    {"day": "Day 16", "title": "Farewell Cambodia", "desc": "Enjoy breakfast before transferring to Siem Reap International Airport for your onward journey home."}
+  ],
+  "accommodation": [
+    {"location": "Hanoi", "hotel": "La Siesta Classic Ma May Hotel (or similar)"},
+    {"location": "Ha Long Bay", "hotel": "4&#9733; Genesis Majesty Overnight Cruise (or similar)"},
+    {"location": "Pu Luong", "hotel": "Pu Luong Retreat (or similar)"},
+    {"location": "Phong Nha", "hotel": "Phong Nha Farmstay (or similar)"},
+    {"location": "Hue", "hotel": "Senna Hue Hotel (or similar)"},
+    {"location": "Hoi An", "hotel": "La Siesta Hoi An Resort (or similar)"},
+    {"location": "Siem Reap", "hotel": "Golden Temple Residence (or similar)"}
+  ],
+  "inclusions": [
+    "Vietnam Visa", "Cambodia Visa", "Airport arrival and departure transfers throughout Vietnam and Cambodia",
+    "Boutique accommodation throughout the journey", "One-night Ha Long Bay luxury cruise", "Daily breakfast",
+    "Selected lunches and dinners", "Private transportation", "Professional English-speaking guides",
+    "Entrance fees and sightseeing as listed", "Hanoi Army Jeep/Motorbike Tour", "Vietnamese Coffee Experience",
+    "Ha Long Bay Cruise", "Pu Luong Guided Trek", "Phong Nha Cave Tour", "Paradise Cave &amp; Commander Cave",
+    "Vinh Moc Tunnels &amp; DMZ Tour", "Hue Imperial City Tour", "Hai Van Pass Scenic Drive", "Hoi An Cooking Class",
+    "Bamboo Basket Boat Experience", "APOPO HeroRATs Centre", "Lotus Silk Farm Experience",
+    "Full-Day Angkor Archaeological Park Tour", "Bottled drinking water during transfers"
+  ],
+  "exclusions": [
+    "International and regional flights (we recommend preferred flight numbers and departure times for seamless connections)",
+    "Travel and medical insurance", "Drinks and personal refreshments", "Meals not specifically mentioned",
+    "Optional activities", "Personal expenses", "Laundry and minibar charges", "Tips and gratuities",
+    "Early check-in or late check-out", "Services not listed under Inclusions"
+  ],
+  "travel_notes": [
+    "Best travel season: October to April",
+    "Comfortable walking shoes are recommended for sightseeing and light trekking",
+    "Modest clothing covering shoulders and knees is required when visiting temples, including Angkor Wat and the Imperial City of Hue",
+    "Vietnam uses the Vietnamese Dong (VND), while Cambodia accepts both the Cambodian Riel (KHR) and US Dollar (USD)",
+    "Travel insurance is compulsory",
+    "This itinerary includes a combination of cultural sightseeing, scenic walks and light trekking, suitable for most travellers with a moderate level of fitness"
+  ],
+  "flexible_note": "This itinerary has been carefully designed to showcase the very best of Vietnam and Cambodia but can be fully customised to suit your interests, travel style, accommodation preferences, budget and available travel time. Whether you'd like to extend your stay, upgrade your accommodation, add additional destinations or enjoy more leisure time, our team will create a personalised journey that's perfect for you."
+}

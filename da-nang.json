@@ -1,0 +1,39 @@
+{
+  "slug": "da-nang",
+  "name": "Da Nang",
+  "meta_desc": "Pristine beaches, iconic modern architecture and world-class street food on Vietnam's premier coastal hub. Explore Da Nang with Navigator Vietnam.",
+  "tagline": "A vibrant ocean side city blending urban excitement with natural beauty, and the gateway to Vietnam's ancient UNESCO heritage sites.",
+  "hero_alt": "Coastline and skyline of Da Nang, Vietnam",
+  "overview": "Da Nang is a vibrant ocean side city offering visitors a perfect blend of urban excitement and natural beauty. As Vietnam's premier coastal hub, it's famed for its pristine beaches, iconic modern architecture, world-class street food and iconic cultural sites, all while serving as a gateway to the country's ancient UNESCO heritage sites.",
+  "highlights": [
+    "Marble Mountains, a cluster of five limestone hills adorned with Buddhist temples, pagodas and caves",
+    "My Khe Beach, one of Vietnam's most iconic beaches stretching the length of the city",
+    "Dragon Bridge, a modern architectural work of art that breathes fire from its mouth",
+    "Lady Buddha, the tallest Buddha statue in Vietnam, looking over the Son Tra Peninsula",
+    "Ba Na Hills and the Golden Bridge, a mountain top resort offering panoramic views and unique attractions",
+    "Son Tra Night Market, street food, souvenirs and local activities for a perfect evening by the river"
+  ],
+  "culture_heading": "Food &amp; Flavour",
+  "culture": "Da Nang is famous for its vibrant street food scene, highly characterized by its location between the ancient capitals of Hue and Hoi An. It sits at a crossroads of flavors, combining the fresh seafood of the East Sea with the refined, royal-influenced techniques of neighboring Hue. The city's cuisine stands out for bold, punchy flavors &mdash; be sure to try the famous Mi Quang (savory turmeric noodles) and Banh Xeo (crispy Vietnamese pancakes).",
+  "tips_heading": "Travel Tips",
+  "tips": [
+    "Use the Grab app for easy, safe and affordable transport across the city and to nearby attractions",
+    "Head to the Han River at 9:00pm on Saturdays and Sundays to watch the iconic Dragon Bridge shoot fire and water",
+    "Use Da Nang International Airport as a travel hub, with both domestic and international flights at affordable prices",
+    "Take note of beach safety signage &mdash; Da Nang can have strong, dangerous currents, so stick to designated safe swimming areas"
+  ],
+  "best_time": "The best time for beach vibes and sunny days is from February to May. The rainy and stormy season lasts from September to November, which can cause unpredictable weather and rough sea conditions.",
+  "gem_location": "Hidden Gem",
+  "gem_title": "The Hai Van Pass",
+  "gem_meta1": "Day Ride",
+  "gem_meta2": "Easy",
+  "gem_desc": "One of Vietnam's most iconic routes, a spectacular 21-kilometre coastal mountain road connecting Da Nang and Hue. Sitting 500 metres above sea level, it offers sweeping hairpin turns, lush mountain jungles and dramatic views of the East Sea.",
+  "gem_img_alt": "The Hai Van Pass coastal mountain road near Da Nang",
+  "contact_dest": "Da%20Nang",
+  "gallery": [
+    {"img": "da-nang-gallery-1.jpg", "alt": "Marble Mountains near Da Nang", "small": "Landmark", "name": "Marble Mountains"},
+    {"img": "da-nang-gallery-2.jpg", "alt": "Golden Bridge at Ba Na Hills", "small": "Icon", "name": "Golden Bridge"},
+    {"img": "da-nang-gallery-3.jpg", "alt": "Dragon Bridge in Da Nang at night", "small": "Icon", "name": "Dragon Bridge"},
+    {"img": "da-nang-gallery-4.jpg", "alt": "My Khe Beach in Da Nang", "small": "Beach", "name": "My Khe Beach"}
+  ]
+}

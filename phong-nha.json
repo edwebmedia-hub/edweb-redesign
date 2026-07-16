@@ -1,0 +1,40 @@
+{
+  "slug": "phong-nha",
+  "name": "Phong Nha",
+  "meta_desc": "Home to the world's biggest cave and Vietnam's adventure capital, set in an ancient 400-million-year-old karst landscape. Explore Phong Nha with Navigator Vietnam.",
+  "tagline": "Voted the adventure capital of Vietnam, home to some of the most spectacular and record-breaking cave systems on the planet.",
+  "hero_alt": "Inside the vast Hang En cave in Phong Nha",
+  "overview": "Phong Nha is located in central Vietnam and has been voted the adventure capital of Vietnam due to it being home to some of the most spectacular and record-breaking cave systems on the planet, including the world's biggest cave, Hang Son Doong. Centered around the UNESCO-listed Phong Nha-Ke Bang National Park, this lush mountainous area features an ancient limestone karst landscape formed over 400 million years ago, untamed jungle and vibrant working farmland. It truly is a place that has it all, and a must-go destination on your route through Vietnam.",
+  "highlights": [
+    "The many accessible caves, such as Paradise Cave, Dark Cave and Commander Cave",
+    "A boat trip down the Son River",
+    "Outdoor activities like zip lining, bungee jumping and cliff jumping",
+    "Historical war sites, Phong Nha was a crucial transport hub on the Ho Chi Minh Trail",
+    "Swimming or kayaking on the river",
+    "A visit to the Duck Stop to become a duck leader"
+  ],
+  "culture_heading": "The Cave Kingdom",
+  "culture": "Phong Nha has been nicknamed the &quot;Cave Kingdom&quot; for its unique ancient landscape. The national park is home to the oldest karst mountains in Asia, dating back over 400 million years, featuring a network of over 220 kilometres of mapped subterranean waterways and caverns &mdash; with new cave systems still being discovered. It's most famously recognised as the home of the world's largest cave, Hang Son Doong. Discovered in 2009, this massive cave is so large it has its own localized weather system, towering stalagmites and internal rainforests. The combination of immense scale, geological history and varied accessibility makes Phong Nha a premier destination for travelers and nature enthusiasts globally.",
+  "tips_heading": "Travel Tips",
+  "tips": [
+    "Book well in advance for Hang Son Doong, the waiting list runs over a year for this once-in-a-lifetime cave",
+    "Stay for 2&ndash;3 days to make the most of the trip, there's a lot to see and explore",
+    "Rent a bicycle or motorbike to explore the surrounding rice paddies and villages at your own pace",
+    "Book transit to Dong Hoi, the closest transport hub, then a taxi, bus or private car to Phong Nha Town (around 45 minutes)",
+    "Check out community-driven hostels like Easy Tiger if traveling solo, they help you split cave tour and transport costs with other travelers"
+  ],
+  "best_time": "The best time to visit is during the dry season from February to August, when the weather is most favorable for cave exploration, jungle trekking and river activities.",
+  "gem_location": "Hidden Gem",
+  "gem_title": "Sunset Sidecar Ride, Phong Nha Farmstay",
+  "gem_meta1": "Evening Ride",
+  "gem_meta2": "Easy",
+  "gem_desc": "A sunset sidecar ride through the beautiful rice paddies from Phong Nha Farmstay, ending with a cold beer at the 'Pub With Cold Beer'.",
+  "gem_img_alt": "Sidecar ride through rice paddies near Phong Nha",
+  "contact_dest": "Phong%20Nha",
+  "gallery": [
+    {"img": "pn-gallery-1.jpg", "alt": "Inside a cave in Phong Nha-Ke Bang National Park", "small": "Caves", "name": "Cave Systems"},
+    {"img": "pn-gallery-2.jpg", "alt": "River through Phong Nha-Ke Bang National Park", "small": "River", "name": "Son River"},
+    {"img": "pn-gallery-3.jpg", "alt": "Karst mountains in Phong Nha", "small": "Karsts", "name": "Karst Landscape"},
+    {"img": "pn-gallery-4.jpg", "alt": "Jungle scenery in Phong Nha-Ke Bang National Park", "small": "Jungle", "name": "National Park"}
+  ]
+}
