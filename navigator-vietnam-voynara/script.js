@@ -175,11 +175,14 @@
         return;
       }
 
+      const val = (id) => { const el = document.getElementById(id); return el ? el.value.trim() : ''; };
       const payload = {
         name: fields.name.el.value.trim(),
         email: fields.email.el.value.trim(),
-        phone: document.getElementById('phone').value.trim(),
-        destination: document.getElementById('destination').value.trim(),
+        phone: val('phone'),
+        destination: val('destination'),
+        dates: val('dates'),
+        travellers: val('travellers'),
         message: fields.message.el.value.trim(),
       };
 

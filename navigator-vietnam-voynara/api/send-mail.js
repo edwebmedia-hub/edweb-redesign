@@ -18,7 +18,7 @@ module.exports = async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(204).end();
   if (req.method !== 'POST') return res.status(405).json({ success: false, message: 'Method not allowed' });
 
-  const { name, email, phone, destination, message } = req.body;
+  const { name, email, phone, destination, dates, travellers, message } = req.body;
 
   if (!name || !email || !message) {
     return res.status(400).json({ success: false, message: 'Name, email and message are required.' });
@@ -35,6 +35,8 @@ module.exports = async function handler(req, res) {
         `Email: ${email}`,
         phone ? `Phone: ${phone}` : null,
         destination ? `Destination: ${destination}` : null,
+        dates ? `Travel dates: ${dates}` : null,
+        travellers ? `Travellers: ${travellers}` : null,
         '',
         message,
       ].filter(Boolean).join('\n'),

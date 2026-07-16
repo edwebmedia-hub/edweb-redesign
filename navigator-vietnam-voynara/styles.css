@@ -60,7 +60,9 @@ h1, h2, h3, h4 {
   font-weight: 700;
   line-height: 1.08;
   letter-spacing: -0.02em;
+  text-wrap: balance;
 }
+p { text-wrap: pretty; }
 
 ::selection { background: var(--forest); color: var(--cream); }
 
@@ -656,6 +658,7 @@ html:not(.js) .reveal-stagger > * { opacity: 1 !important; transform: none !impo
 .signature-highlights li { display: flex; gap: 12px; padding: 7px 0; font-size: 0.98rem; color: var(--ink); }
 .signature-highlights li svg { width: 18px; height: 18px; color: var(--gold); flex-shrink: 0; margin-top: 3px; }
 .signature-media { position: relative; }
+.signature-media .adv-card { max-width: 440px; margin-inline: auto; }
 
 /* ---- Advertising card (signature side) ---- */
 .adv-card {
@@ -699,7 +702,8 @@ html:not(.js) .reveal-stagger > * { opacity: 1 !important; transform: none !impo
 .adv-card-foot .btn { width: 100%; justify-content: center; }
 
 @media (min-width: 900px) {
-  .signature-grid { grid-template-columns: 1fr 1fr; }
+  .signature-grid { grid-template-columns: 1.25fr 0.75fr; }
+  .signature-media .adv-card-media { aspect-ratio: 5 / 4; }
 }
 
 /* ============================================================
@@ -1097,9 +1101,14 @@ a.contact-card:hover { background: rgba(255, 255, 255, 0.12); transform: transla
 .contact-side-item span, .contact-side-item a { font-size: 0.95rem; color: var(--body); }
 
 .contact-form { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: clamp(26px, 4vw, 40px); box-shadow: var(--shadow-sm); }
+.form-hint { font-size: 0.9rem; color: var(--body); margin-bottom: 22px; }
+.form-hint .req { color: var(--gold-2); font-weight: 700; }
 .form-row { display: grid; grid-template-columns: 1fr; gap: 18px; }
 .form-field { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
 .form-field label { font-size: 0.9rem; font-weight: 600; color: var(--ink); font-family: var(--font-display); }
+.form-field label .req { color: var(--gold-2); }
+.form-field label .opt { color: var(--body); font-weight: 400; font-family: var(--font-body); }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 .form-field input, .form-field textarea {
   font: inherit;
   font-size: 0.98rem;
@@ -1110,7 +1119,8 @@ a.contact-card:hover { background: rgba(255, 255, 255, 0.12); transform: transla
   color: var(--ink);
   transition: border-color 0.3s var(--ease), background 0.3s var(--ease);
 }
-.form-field input:focus, .form-field textarea:focus { outline: none; border-color: var(--forest); background: #fff; }
+.form-field input:focus, .form-field textarea:focus { outline: none; border-color: var(--forest); background: #fff; box-shadow: 0 0 0 3px rgba(20, 49, 31, 0.1); }
+.form-field input[aria-invalid="true"], .form-field textarea[aria-invalid="true"] { border-color: #b23b3b; }
 .form-field textarea { resize: vertical; }
 .field-error { color: #b23b3b; font-size: 0.82rem; min-height: 1em; }
 .contact-form .btn { width: 100%; justify-content: center; margin-top: 6px; }
@@ -1217,6 +1227,9 @@ a.contact-card:hover { background: rgba(255, 255, 255, 0.12); transform: transla
 .footer-cta-card p { color: var(--body); }
 .footer-cta-card .btn { margin-top: 30px; }
 .footer-cta .btn { margin-top: 34px; }
+.footer-cta-alt { margin-top: 22px; font-size: 0.92rem; color: rgba(255, 255, 255, 0.72); }
+.footer-cta-alt a { color: var(--gold); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+.footer-cta-alt a:hover { color: var(--gold-soft); }
 
 /* ============================================================
    FOOTER
@@ -1451,10 +1464,21 @@ a.contact-card:hover { background: rgba(255, 255, 255, 0.12); transform: transla
   margin-top: 44px;
   padding: clamp(24px, 3vw, 34px);
   background: var(--cream-2);
+  border: 1px solid var(--line);
   border-radius: var(--radius);
-  border-left: 4px solid var(--gold);
 }
-.tour-flex-note h3 { font-size: 1.15rem; margin-bottom: 10px; }
+.tour-flex-note h3 { font-size: 1.15rem; margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+.tour-flex-note h3::before {
+  content: "";
+  flex-shrink: 0;
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: var(--gold-soft);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23B58F3C' stroke-width='2.4'%3E%3Cpath d='M20 6L9 17l-5-5'/%3E%3C/svg%3E");
+  background-size: 14px 14px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
 .tour-flex-note p { color: var(--body); font-size: 0.96rem; }
 
 /* ---- Create Your Own: step list ---- */

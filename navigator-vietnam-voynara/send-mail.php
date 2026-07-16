@@ -21,6 +21,8 @@ $name = trim($input['name'] ?? '');
 $email = trim($input['email'] ?? '');
 $phone = trim($input['phone'] ?? '');
 $destination = trim($input['destination'] ?? '');
+$dates = trim($input['dates'] ?? '');
+$travellers = trim($input['travellers'] ?? '');
 $message = trim($input['message'] ?? '');
 
 if (!$name || !$email || !filter_var($email, FILTER_VALIDATE_EMAIL) || !$message) {
@@ -35,6 +37,8 @@ $subject = 'New trip enquiry from ' . $name;
 $body = "Name: $name\nEmail: $email\n";
 if ($phone) $body .= "Phone: $phone\n";
 if ($destination) $body .= "Destination: $destination\n";
+if ($dates) $body .= "Travel dates: $dates\n";
+if ($travellers) $body .= "Travellers: $travellers\n";
 $body .= "\n$message";
 
 $headers = "From: Navigator Vietnam Website <info@navigator-vietnam.com>\r\n";
