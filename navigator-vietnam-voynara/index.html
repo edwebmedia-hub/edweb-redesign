@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=34" />
+  <link rel="stylesheet" href="styles.css?v=44" />
 </head>
 <body>
   <a href="#main" class="skip-link">Skip to main content</a>
@@ -54,189 +54,158 @@
 
   <main id="main">
 
-    <!-- ===================== HERO ===================== -->
-    <section class="hero">
-      <img src="assets/hero.jpg" alt="Local women carrying baskets across a river in Vietnam" class="hero-bg" fetchpriority="high" />
-      <div class="hero-overlay"></div>
-      <div class="container hero-grid">
-        <div class="hero-copy reveal-stagger">
-          <h1>Explore Every Corner of Vietnam</h1>
-          <span class="eyebrow hero-eyebrow">Local-Led Since 2018</span>
-          <p class="hero-lead">Slow, story-rich journeys led by certified local guides. Small groups, honest pacing and the real Vietnam, not the brochure version.</p>
-          <div class="hero-actions">
-            <a href="tours.html" class="btn btn-accent">
-              Start Planning
-              <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-            </a>
-            <a href="about.html" class="btn btn-outline on-dark">Our Story</a>
-          </div>
-        </div>
-
-        <form class="hero-form reveal" action="contact.html" method="get" aria-label="Plan your trip">
-          <div class="hero-form-head">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18.5 22 12 17.5 5.5 22l2-8.5L2 9h7z"/></svg>
-            Plan Your Trip
-          </div>
-          <div class="hero-field">
-            <label for="hero-dest">Destination</label>
-            <input type="text" id="hero-dest" name="destination" placeholder="Where would you like to go?" autocomplete="off" />
-          </div>
-          <div class="hero-field-row">
-            <div class="hero-field">
-              <label for="hero-dep">Departure</label>
-              <input type="text" id="hero-dep" name="departure" placeholder="Choose your dates" onfocus="this.type='date'" onblur="if(!this.value)this.type='text'" />
-            </div>
-            <div class="hero-field">
-              <label for="hero-trav">Travelers</label>
-              <input type="number" id="hero-trav" name="travelers" min="1" placeholder="Number of guests" />
-            </div>
-          </div>
-          <button type="submit" class="btn btn-primary">
-            Submit
+    <!-- ===================== HERO (photo) ===================== -->
+    <section class="page-hero dest-hero has-photo home-hero">
+      <img src="assets/hero.jpg" alt="Local women carrying baskets across a river in Vietnam" class="dest-hero-bg" fetchpriority="high" />
+      <div class="dest-hero-overlay"></div>
+      <div class="container">
+        <h1 class="reveal">Explore Every Corner of Vietnam</h1>
+        <div class="dest-hero-divider reveal"></div>
+        <p class="page-hero-lead dest-hero-lead reveal">Slow, story-rich journeys led by certified local guides. Small groups, honest pacing and the real Vietnam, not the brochure version.</p>
+        <div class="hero-actions reveal">
+          <a href="tours.html" class="btn btn-accent">
+            Start Planning
             <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </button>
-          <p class="hero-trust">Trusted by 500+ happy travelers across Vietnam.</p>
-        </form>
+          </a>
+          <a href="about.html" class="btn btn-outline on-dark">Our Story</a>
+        </div>
       </div>
     </section>
 
     <!-- ===================== REGIONS (slider, 4 per view) ===================== -->
-    <section class="section region-section" data-carousel>
+    <section class="section region-section" data-loop-carousel>
       <div class="container">
         <div class="slider-head reveal">
           <div>
             <span class="eyebrow">Destinations</span>
             <h2>Wander Vietnam by Region</h2>
           </div>
-          <div class="slider-nav">
-            <button type="button" class="slider-arrow" data-dir="-1" aria-label="Previous destination">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
-            </button>
-            <button type="button" class="slider-arrow" data-dir="1" aria-label="Next destination">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-            </button>
-          </div>
         </div>
-        <div class="region-track reveal">
+      </div>
+      <div class="region-viewport reveal">
+        <div class="region-track">
           <a href="destinations/sapa.html" class="region-slide">
-            <img src="assets/destinations/sapa.jpg" alt="Terraced rice fields of Sapa" loading="lazy" />
-            <span class="region-slide-body"><small>Rugged mountains and lush valleys</small><strong>Sapa</strong></span>
+            <span class="region-slide-media"><img src="assets/destinations/sapa.jpg" alt="Terraced rice fields of Sapa" loading="lazy" /></span>
+            <span class="region-slide-body">
+              <span class="region-slide-title"><strong>Sapa</strong><svg class="region-slide-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+              <small>Rugged mountains and lush valleys</small>
+            </span>
           </a>
           <a href="destinations/ha-giang.html" class="region-slide">
-            <img src="assets/destinations/ha-giang.jpg" alt="Dramatic mountain passes of Ha Giang" loading="lazy" />
-            <span class="region-slide-body"><small>Dramatic passes and untamed beauty</small><strong>Hà Giang</strong></span>
+            <span class="region-slide-media"><img src="assets/destinations/ha-giang.jpg" alt="Dramatic mountain passes of Ha Giang" loading="lazy" /></span>
+            <span class="region-slide-body">
+              <span class="region-slide-title"><strong>Hà Giang</strong><svg class="region-slide-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+              <small>Dramatic passes and untamed beauty</small>
+            </span>
           </a>
           <a href="destinations/ha-long-bay.html" class="region-slide">
-            <img src="assets/destinations/ha-long-bay.jpg" alt="Limestone islands of Ha Long Bay" loading="lazy" />
-            <span class="region-slide-body"><small>Emerald waters and limestone islands</small><strong>Ha Long Bay</strong></span>
+            <span class="region-slide-media"><img src="assets/destinations/ha-long-bay.jpg" alt="Limestone islands of Ha Long Bay" loading="lazy" /></span>
+            <span class="region-slide-body">
+              <span class="region-slide-title"><strong>Ha Long Bay</strong><svg class="region-slide-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+              <small>Emerald waters and limestone islands</small>
+            </span>
           </a>
           <a href="destinations/ninh-binh.html" class="region-slide">
-            <img src="assets/destinations/ninh-binh.jpg" alt="Karst landscape and rice paddies of Ninh Binh" loading="lazy" />
-            <span class="region-slide-body"><small>Limestone cliffs and peaceful paddies</small><strong>Ninh Binh</strong></span>
+            <span class="region-slide-media"><img src="assets/destinations/ninh-binh.jpg" alt="Karst landscape and rice paddies of Ninh Binh" loading="lazy" /></span>
+            <span class="region-slide-body">
+              <span class="region-slide-title"><strong>Ninh Binh</strong><svg class="region-slide-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+              <small>Limestone cliffs and peaceful paddies</small>
+            </span>
           </a>
           <a href="destinations/hanoi.html" class="region-slide">
-            <img src="assets/destinations/hanoi.jpg" alt="Vibrant streets around Hanoi" loading="lazy" />
-            <span class="region-slide-body"><small>Timeless charm meets modern energy</small><strong>Hanoi</strong></span>
+            <span class="region-slide-media"><img src="assets/destinations/hanoi.jpg" alt="Vibrant streets around Hanoi" loading="lazy" /></span>
+            <span class="region-slide-body">
+              <span class="region-slide-title"><strong>Hanoi</strong><svg class="region-slide-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+              <small>Timeless charm meets modern energy</small>
+            </span>
           </a>
           <a href="destinations/hoi-an.html" class="region-slide">
-            <img src="assets/destinations/hoi-an.jpg" alt="Lantern-lit streets of Hoi An" loading="lazy" />
-            <span class="region-slide-body"><small>Lantern-lit streets and riverside charm</small><strong>Hội An</strong></span>
+            <span class="region-slide-media"><img src="assets/destinations/hoi-an.jpg" alt="Lantern-lit streets of Hoi An" loading="lazy" /></span>
+            <span class="region-slide-body">
+              <span class="region-slide-title"><strong>Hội An</strong><svg class="region-slide-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+              <small>Lantern-lit streets and riverside charm</small>
+            </span>
           </a>
           <a href="destinations/da-nang.html" class="region-slide">
-            <img src="assets/destinations/da-nang.jpg" alt="Golden beaches near Da Nang" loading="lazy" />
-            <span class="region-slide-body"><small>Golden beaches and coastal spirit</small><strong>Da Nang</strong></span>
+            <span class="region-slide-media"><img src="assets/destinations/da-nang.jpg" alt="Golden beaches near Da Nang" loading="lazy" /></span>
+            <span class="region-slide-body">
+              <span class="region-slide-title"><strong>Da Nang</strong><svg class="region-slide-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+              <small>Golden beaches and coastal spirit</small>
+            </span>
           </a>
           <a href="destinations/cao-bang.html" class="region-slide">
-            <img src="assets/destinations/cao-bang.jpg" alt="Ban Gioc Waterfall in Cao Bang" loading="lazy" />
-            <span class="region-slide-body"><small>Karst peaks and border waterfalls</small><strong>Cao Bang</strong></span>
+            <span class="region-slide-media"><img src="assets/destinations/cao-bang.jpg" alt="Ban Gioc Waterfall in Cao Bang" loading="lazy" /></span>
+            <span class="region-slide-body">
+              <span class="region-slide-title"><strong>Cao Bang</strong><svg class="region-slide-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+              <small>Karst peaks and border waterfalls</small>
+            </span>
           </a>
           <a href="destinations/hcmc.html" class="region-slide">
-            <img src="assets/destinations/hcmc.jpg" alt="Streets of Ho Chi Minh City" loading="lazy" />
-            <span class="region-slide-body"><small>Skyscrapers and saigon soul</small><strong>Ho Chi Minh City</strong></span>
+            <span class="region-slide-media"><img src="assets/destinations/hcmc.jpg" alt="Streets of Ho Chi Minh City" loading="lazy" /></span>
+            <span class="region-slide-body">
+              <span class="region-slide-title"><strong>Ho Chi Minh City</strong><svg class="region-slide-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+              <small>Skyscrapers and saigon soul</small>
+            </span>
           </a>
           <a href="destinations/hue.html" class="region-slide">
-            <img src="assets/destinations/hue.jpg" alt="Imperial architecture of Hue" loading="lazy" />
-            <span class="region-slide-body"><small>Ancient palaces and royal heritage</small><strong>Hue</strong></span>
+            <span class="region-slide-media"><img src="assets/destinations/hue.jpg" alt="Imperial architecture of Hue" loading="lazy" /></span>
+            <span class="region-slide-body">
+              <span class="region-slide-title"><strong>Hue</strong><svg class="region-slide-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+              <small>Ancient palaces and royal heritage</small>
+            </span>
           </a>
           <a href="destinations/mekong-delta.html" class="region-slide">
-            <img src="assets/destinations/mekong-delta.jpg" alt="Floating markets of the Mekong Delta" loading="lazy" />
-            <span class="region-slide-body"><small>Floating markets and river life</small><strong>Mekong Delta</strong></span>
+            <span class="region-slide-media"><img src="assets/destinations/mekong-delta.jpg" alt="Floating markets of the Mekong Delta" loading="lazy" /></span>
+            <span class="region-slide-body">
+              <span class="region-slide-title"><strong>Mekong Delta</strong><svg class="region-slide-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+              <small>Floating markets and river life</small>
+            </span>
           </a>
           <a href="destinations/mu-cang-chai.html" class="region-slide">
-            <img src="assets/destinations/mu-cang-chai.jpg" alt="Terraced rice fields of Mu Cang Chai" loading="lazy" />
-            <span class="region-slide-body"><small>Golden terraces off the beaten path</small><strong>Mu Cang Chai</strong></span>
+            <span class="region-slide-media"><img src="assets/destinations/mu-cang-chai.jpg" alt="Terraced rice fields of Mu Cang Chai" loading="lazy" /></span>
+            <span class="region-slide-body">
+              <span class="region-slide-title"><strong>Mu Cang Chai</strong><svg class="region-slide-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+              <small>Golden terraces off the beaten path</small>
+            </span>
           </a>
           <a href="destinations/mui-ne.html" class="region-slide">
-            <img src="assets/destinations/mui-ne.jpg" alt="Sand dunes of Mui Ne" loading="lazy" />
-            <span class="region-slide-body"><small>Sand dunes and coastal kitesurfing</small><strong>Mui Ne</strong></span>
+            <span class="region-slide-media"><img src="assets/destinations/mui-ne.jpg" alt="Sand dunes of Mui Ne" loading="lazy" /></span>
+            <span class="region-slide-body">
+              <span class="region-slide-title"><strong>Mui Ne</strong><svg class="region-slide-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+              <small>Sand dunes and coastal kitesurfing</small>
+            </span>
           </a>
           <a href="destinations/phong-nha.html" class="region-slide">
-            <img src="assets/destinations/phong-nha.jpg" alt="Caves of Phong Nha" loading="lazy" />
-            <span class="region-slide-body"><small>The world's biggest caves</small><strong>Phong Nha</strong></span>
+            <span class="region-slide-media"><img src="assets/destinations/phong-nha.jpg" alt="Caves of Phong Nha" loading="lazy" /></span>
+            <span class="region-slide-body">
+              <span class="region-slide-title"><strong>Phong Nha</strong><svg class="region-slide-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+              <small>The world's biggest caves</small>
+            </span>
           </a>
           <a href="destinations/pu-luong.html" class="region-slide">
-            <img src="assets/destinations/pu-luong.jpg" alt="Rice terraces of Pu Luong" loading="lazy" />
-            <span class="region-slide-body"><small>Quiet valleys and little Sapa views</small><strong>Pu Luong</strong></span>
+            <span class="region-slide-media"><img src="assets/destinations/pu-luong.jpg" alt="Rice terraces of Pu Luong" loading="lazy" /></span>
+            <span class="region-slide-body">
+              <span class="region-slide-title"><strong>Pu Luong</strong><svg class="region-slide-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+              <small>Quiet valleys and little Sapa views</small>
+            </span>
           </a>
           <a href="destinations/siem-reap.html" class="region-slide">
-            <img src="assets/destinations/siem-reap.jpg" alt="Angkor Wat near Siem Reap" loading="lazy" />
-            <span class="region-slide-body"><small>Ancient temples of Angkor</small><strong>Siem Reap</strong></span>
+            <span class="region-slide-media"><img src="assets/destinations/siem-reap.jpg" alt="Angkor Wat near Siem Reap" loading="lazy" /></span>
+            <span class="region-slide-body">
+              <span class="region-slide-title"><strong>Siem Reap</strong><svg class="region-slide-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+              <small>Ancient temples of Angkor</small>
+            </span>
           </a>
         </div>
+        <button type="button" class="region-arrow prev" aria-label="Previous destinations">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button type="button" class="region-arrow next" aria-label="Next destinations">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
       </div>
     </section>
 
-
-    <!-- ===================== SIGNATURE JOURNEY ===================== -->
-    <section class="section" style="background:var(--cream-2);">
-      <div class="container">
-        <div class="section-head reveal">
-          <span class="eyebrow">Signature Journey</span>
-          <h2>Our Most Beloved Adventure</h2>
-        </div>
-        <div class="signature-grid">
-          <div class="signature-copy reveal">
-            <p class="signature-quote">"Incredible! Driving the Ha Giang Loop was the highlight of our whole trip, a real local experience we'd never have found on our own."</p>
-            <span class="signature-author">Sophie Gill, Navigator Traveler</span>
-            <p>Three days winding through the far north on two wheels, past terraced valleys, hill-tribe villages and mountain passes that open onto the Chinese border. Guided by locals, staying in family homestays, limited to small groups so every moment feels personal.</p>
-            <div class="signature-highlights">
-              <h4>Journey Highlights</h4>
-              <ul>
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Ride the legendary Yen Minh to Meo Vac pass</li>
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Stay in authentic hill-tribe homestays</li>
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Certified local guides on every leg</li>
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Small groups, honest pacing, no crowds</li>
-              </ul>
-            </div>
-          </div>
-          <div class="signature-media reveal">
-            <article class="adv-card">
-              <div class="adv-card-media">
-                <img src="assets/destinations/ha-giang.jpg" alt="Two women in traditional red headwear on the Ha Giang Loop" loading="lazy" />
-              </div>
-              <div class="adv-card-body">
-                <span class="adv-card-location">Hà Giang</span>
-                <div class="adv-card-head">
-                  <h3>Ha Giang Loop Expedition</h3>
-                  <span class="adv-card-rating"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18.5 22 12 17.5 5.5 22l2-8.5L2 9h7z"/></svg>5.0</span>
-                </div>
-                <div class="adv-card-meta">
-                  <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>6-10</span>
-                  <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>4D / 3N</span>
-                  <span class="adv-card-diff">Moderate</span>
-                </div>
-                <div class="adv-card-foot">
-                  <a href="tours/peaks-passes-caves.html" class="btn btn-primary">
-                    View Full Itinerary
-                    <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-                  </a>
-                </div>
-              </div>
-            </article>
-          </div>
-        </div>
-      </div>
-    </section>
 
     <!-- ===================== FUN FACT / STATS ===================== -->
     <section class="funfact">
@@ -378,76 +347,8 @@
       </div>
     </section>
 
-    <!-- ===================== GALLERY ===================== -->
-    <section class="section" style="background:var(--cream-2);">
-      <div class="container">
-        <div class="section-head reveal">
-          <span class="eyebrow">Gallery</span>
-          <h2>Breathtaking Places to Explore</h2>
-        </div>
-        <div class="gallery-grid reveal">
-          <a href="tours.html" class="gallery-card gallery-card--lg">
-            <img src="assets/gallery/cruise.jpg" alt="Cruise boat sailing through Ha Long Bay's limestone islands" loading="lazy" />
-            <span class="gallery-caption"><small>Cruise</small>Ha Long Bay</span>
-          </a>
-          <a href="tours.html" class="gallery-card">
-            <img src="assets/gallery/hai-van-pass.jpg" alt="Travellers on motorbikes at a Hai Van Pass viewpoint in Central Vietnam" loading="lazy" />
-            <span class="gallery-caption"><small>Mountain Pass</small>Central Vietnam</span>
-          </a>
-          <a href="tours.html" class="gallery-card">
-            <img src="assets/gallery/train-street.jpg" alt="Train Street in Hanoi's Old Quarter" loading="lazy" />
-            <span class="gallery-caption"><small>Train Street</small>Hanoi</span>
-          </a>
-          <a href="tours.html" class="gallery-card">
-            <img src="assets/gallery/fansipan.jpg" alt="Fansipan summit shrine rising above a sea of clouds in Sapa" loading="lazy" />
-            <span class="gallery-caption"><small>Fansipan</small>Sapa</span>
-          </a>
-          <a href="tours.html" class="gallery-card">
-            <img src="assets/gallery/loop.jpg" alt="Motorbike loop tour through Ha Giang's mountain roads" loading="lazy" />
-            <span class="gallery-caption"><small>Loop Tour</small>Hà Giang</span>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===================== HOW IT WORKS ===================== -->
-    <section class="section">
-      <div class="container">
-        <div class="section-head reveal">
-          <span class="eyebrow">How It Works</span>
-          <h2>From Dream to Destination</h2>
-        </div>
-        <div class="steps-grid reveal-stagger">
-          <div class="step-card">
-            <div class="step-media">
-              <span class="step-num">1</span>
-              <img src="assets/how/step1.jpg" alt="Traveler choosing a Vietnam experience" loading="lazy" />
-            </div>
-            <h3>Find Your Experience</h3>
-            <p>Explore Vietnam's hidden villages, misty mountains and vibrant city escapes.</p>
-          </div>
-          <div class="step-card">
-            <div class="step-media">
-              <span class="step-num">2</span>
-              <img src="assets/how/step2.jpg" alt="Booking a tour with ease" loading="lazy" />
-            </div>
-            <h3>Book with Ease</h3>
-            <p>Pick your dates, customize the details and confirm your spot in a few simple steps.</p>
-          </div>
-          <div class="step-card">
-            <div class="step-media">
-              <span class="step-num">3</span>
-              <img src="assets/how/step3.jpg" alt="Traveler ready to depart" loading="lazy" />
-            </div>
-            <h3>Get Ready and Go</h3>
-            <p>Receive your itinerary, travel tips and meet your guide as the adventure begins.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- ===================== TESTIMONIALS (Google reviews slider) ===================== -->
-    <section class="section testi-section" data-carousel style="background:var(--cream-2);">
+    <section class="section testi-section" data-carousel style="background:var(--paper-2);">
       <div class="container">
         <div class="slider-head reveal">
           <div>
@@ -455,7 +356,7 @@
             <h2>What Our Adventurers Say</h2>
             <p class="testi-google-rating">
               <svg viewBox="0 0 24 24" width="20" height="20"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.99.66-2.26 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.85A11 11 0 0012 23z"/><path fill="#FBBC05" d="M5.84 14.09A6.6 6.6 0 015.5 12c0-.73.13-1.43.34-2.09V7.06H2.18A11 11 0 001 12c0 1.77.43 3.45 1.18 4.94l3.66-2.85z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1A11 11 0 002.18 7.06l3.66 2.85C6.71 7.31 9.14 5.38 12 5.38z"/></svg>
-              <strong>5.0</strong> out of 5 on Google reviews
+              <strong>5.0</strong> out of 5, based on 26 Google reviews
             </p>
           </div>
           <div class="slider-nav">
@@ -553,6 +454,54 @@
             </div>
           </article>
 
+          <article class="testi-card">
+            <div class="testi-card-top">
+              <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+              <svg class="testi-google-icon" viewBox="0 0 24 24" width="18" height="18"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.99.66-2.26 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.85A11 11 0 0012 23z"/><path fill="#FBBC05" d="M5.84 14.09A6.6 6.6 0 015.5 12c0-.73.13-1.43.34-2.09V7.06H2.18A11 11 0 001 12c0 1.77.43 3.45 1.18 4.94l3.66-2.85z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1A11 11 0 002.18 7.06l3.66 2.85C6.71 7.31 9.14 5.38 12 5.38z"/></svg>
+            </div>
+            <p class="testi-clamp">Navigator Vietnam planned the trip of a lifetime for us. These guys really know their stuff when it comes to organizing a tour around this amazing country. All our accommodations were expertly selected, and conveniently located for the sights we wanted to see. From nature to nightlife, we saw it all, with expert guidance. If you want the real Vietnam experience, these guys have it covered.</p>
+            <div class="testi-card-foot">
+              <span class="testi-avatar">WA</span>
+              <div><strong>Wesley Ayliffe</strong><small>Verified Google review</small></div>
+            </div>
+          </article>
+
+          <article class="testi-card">
+            <div class="testi-card-top">
+              <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+              <svg class="testi-google-icon" viewBox="0 0 24 24" width="18" height="18"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.99.66-2.26 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.85A11 11 0 0012 23z"/><path fill="#FBBC05" d="M5.84 14.09A6.6 6.6 0 015.5 12c0-.73.13-1.43.34-2.09V7.06H2.18A11 11 0 001 12c0 1.77.43 3.45 1.18 4.94l3.66-2.85z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1A11 11 0 002.18 7.06l3.66 2.85C6.71 7.31 9.14 5.38 12 5.38z"/></svg>
+            </div>
+            <p class="testi-clamp">Just returned from a magical three week trip through Vietnam from Ho Chi Minh to Sapa. We just told them which places we wanted to visit and they seamlessly did the rest, from putting together our itinerary to booking everything and arranging English and Vietnamese speaking guides. We did a Jeep tour in Hanoi, a coffee making masterclass, a boat ride through Trang An and the Hai Van Pass. Everything was organised and executed to the highest standard.</p>
+            <div class="testi-card-foot">
+              <span class="testi-avatar">LS</span>
+              <div><strong>Lesley Skermer</strong><small>Verified Google review</small></div>
+            </div>
+          </article>
+
+          <article class="testi-card">
+            <div class="testi-card-top">
+              <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+              <svg class="testi-google-icon" viewBox="0 0 24 24" width="18" height="18"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.99.66-2.26 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.85A11 11 0 0012 23z"/><path fill="#FBBC05" d="M5.84 14.09A6.6 6.6 0 015.5 12c0-.73.13-1.43.34-2.09V7.06H2.18A11 11 0 001 12c0 1.77.43 3.45 1.18 4.94l3.66-2.85z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1A11 11 0 002.18 7.06l3.66 2.85C6.71 7.31 9.14 5.38 12 5.38z"/></svg>
+            </div>
+            <p class="testi-clamp">We used Navigator to assist with a six week film production throughout Vietnam and Jurgie was with us all the way as our production manager and fixer. He speaks fluent Vietnamese, always willing to help and walk the extra mile, but most importantly always generous and kindhearted towards everyone. A highlight of course was staying at their very own homestay in Ta Vanh.</p>
+            <div class="testi-card-foot">
+              <span class="testi-avatar">WH</span>
+              <div><strong>Willem van den Heever</strong><small>Verified Google review</small></div>
+            </div>
+          </article>
+
+          <article class="testi-card">
+            <div class="testi-card-top">
+              <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+              <svg class="testi-google-icon" viewBox="0 0 24 24" width="18" height="18"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.99.66-2.26 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.85A11 11 0 0012 23z"/><path fill="#FBBC05" d="M5.84 14.09A6.6 6.6 0 015.5 12c0-.73.13-1.43.34-2.09V7.06H2.18A11 11 0 001 12c0 1.77.43 3.45 1.18 4.94l3.66-2.85z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1A11 11 0 002.18 7.06l3.66 2.85C6.71 7.31 9.14 5.38 12 5.38z"/></svg>
+            </div>
+            <p class="testi-clamp">Amazing experience around Vietnam, we were able to create a tour for our group which was the perfect mix of cities and rural sightseeing. Highly recommend using this company, Danni and Jurgie are great and friendly guides.</p>
+            <div class="testi-card-foot">
+              <span class="testi-avatar">V</span>
+              <div><strong>Victoria</strong><small>Verified Google review</small></div>
+            </div>
+          </article>
+
 
         </div>
       </div>
@@ -568,6 +517,42 @@
           <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
         <p class="footer-cta-alt">Prefer to talk it through? Call <a href="tel:+84335472584">+84 33 547 2584</a> or message us on WhatsApp.</p>
+      </div>
+    </section>
+
+    <!-- ===================== HOW IT WORKS ===================== -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">How It Works</span>
+          <h2>From Dream to Destination</h2>
+        </div>
+        <div class="steps-grid reveal-stagger">
+          <div class="step-card">
+            <div class="step-media">
+              <span class="step-num">1</span>
+              <img src="assets/how/step1.jpg" alt="Traveler choosing a Vietnam experience" loading="lazy" />
+            </div>
+            <h3>Find Your Experience</h3>
+            <p>Explore Vietnam's hidden villages, misty mountains and vibrant city escapes.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-media">
+              <span class="step-num">2</span>
+              <img src="assets/how/step2.jpg" alt="Booking a tour with ease" loading="lazy" />
+            </div>
+            <h3>Book with Ease</h3>
+            <p>Pick your dates, customize the details and confirm your spot in a few simple steps.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-media">
+              <span class="step-num">3</span>
+              <img src="assets/how/step3.jpg" alt="Traveler ready to depart" loading="lazy" />
+            </div>
+            <h3>Get Ready and Go</h3>
+            <p>Receive your itinerary, travel tips and meet your guide as the adventure begins.</p>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -622,6 +607,6 @@
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 00-8.5 15.2L2 22l4.9-1.5A10 10 0 1012 2zm5.7 14.2c-.2.6-1.3 1.2-1.9 1.3-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.7-.6-3-1.3-4.9-4.3-5.1-4.5-.1-.2-1.2-1.6-1.2-3s.7-2.1 1-2.4c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5s.7 1.7.8 1.8c.1.2.1.4 0 .6-.1.2-.2.3-.4.5-.2.2-.4.4-.5.6-.2.2-.4.4-.2.8.2.4.9 1.5 2 2.4 1.3 1.2 2.4 1.6 2.8 1.7.4.2.6.1.8-.1.2-.3.7-.9.9-1.2.2-.3.4-.2.7-.1.3.1 1.7.8 2 1 .3.1.4.2.5.3.1.2.1.7-.1 1.3z"/></svg>
   </a>
 
-  <script src="script.js?v=34"></script>
+  <script src="script.js?v=44"></script>
 </body>
 </html>

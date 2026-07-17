@@ -122,10 +122,85 @@
     update();
   });
 
+  /* ---------- Looping full-bleed carousel (destinations) ---------- */
+  document.querySelectorAll('[data-loop-carousel]').forEach((wrap) => {
+    const viewport = wrap.querySelector('.region-viewport');
+    const track = wrap.querySelector('.region-track');
+    const prevBtn = wrap.querySelector('.region-arrow.prev');
+    const nextBtn = wrap.querySelector('.region-arrow.next');
+    if (!viewport || !track || !prevBtn || !nextBtn) return;
+
+    const originals = [...track.children];
+    const count = originals.length;
+    if (!count) return;
+
+    // Three sets (clones, originals, clones). The leading clones give the track
+    // something to bleed off the left edge at rest, and either direction has a
+    // full set of identical content to wrap onto.
+    const cloneSet = () => originals.map((el) => {
+      const clone = el.cloneNode(true);
+      clone.setAttribute('aria-hidden', 'true');
+      clone.setAttribute('tabindex', '-1');
+      return clone;
+    });
+    cloneSet().forEach((c) => track.appendChild(c));
+    cloneSet().reverse().forEach((c) => track.insertBefore(c, track.firstChild));
+
+    const first = () => track.children[count]; // first real card, after the leading clones
+    const setWidth = () => track.children[count * 2].offsetLeft - first().offsetLeft;
+    const step = () => track.children[1].offsetLeft - track.children[0].offsetLeft;
+
+    // Rest on a snap point one set in, so the first real card lands on the gutter
+    // with the previous card bleeding off the left edge. The track's own padding
+    // is the gutter, so the peek is symmetric with the right edge by construction —
+    // only scrollLeft 0 showed a dead gutter, and the leading clones remove that.
+    const rest = () => first().offsetLeft - (parseFloat(getComputedStyle(track).paddingLeft) || 0);
+
+    // Snap fights programmatic scrollLeft writes, so silence it for the jump.
+    const jump = (delta) => {
+      const snap = track.style.scrollSnapType;
+      track.style.scrollSnapType = 'none';
+      track.scrollLeft += delta;
+      void track.offsetWidth;
+      track.style.scrollSnapType = snap;
+    };
+
+    // Keep the position inside one set-width window anchored at rest.
+    const normalize = () => {
+      const w = setWidth();
+      if (w <= 0) return;
+      const r = rest();
+      if (track.scrollLeft < r) jump(w);
+      else if (track.scrollLeft >= r + w) jump(-w);
+    };
+
+    const go = (dir) => track.scrollBy({ left: dir * step(), behavior: 'smooth' });
+
+    prevBtn.addEventListener('click', () => go(-1));
+    nextBtn.addEventListener('click', () => go(1));
+
+    let idle;
+    track.addEventListener('scroll', () => {
+      clearTimeout(idle);
+      idle = setTimeout(normalize, 140);
+    }, { passive: true });
+
+    // Centre the arrows on the image rather than the whole card.
+    const measure = () => {
+      const media = track.querySelector('.region-slide-media');
+      if (media) viewport.style.setProperty('--media-h', media.getBoundingClientRect().height + 'px');
+    };
+    const settle = () => { measure(); jump(rest() - track.scrollLeft); };
+    settle();
+    requestAnimationFrame(settle);
+    window.addEventListener('load', settle);
+    window.addEventListener('resize', () => { measure(); normalize(); });
+  });
+
   /* ---------- Prefill contact destination from hero form (?destination=) or tour link (?tour=) ---------- */
   const TOUR_NAMES = {
     'northern-highlights': "Vietnam's Northern Highlights",
-    'highlights-hidden-gems': 'Vietnam Highlights & Hidden Gems',
+    'highlights-hidden-gems': "Vietnam's Highlights & Hidden Gems",
     'vietnam-cambodia': 'Vietnam & Cambodia',
     'peaks-passes-caves': 'Vietnam: Peaks, Passes & Caves',
     'north-to-south': 'Vietnam: North to South',
