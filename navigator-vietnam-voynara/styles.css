@@ -40,6 +40,9 @@
   --accent-mute:  #E9DBB6;
 
   --olive-2:      color-mix(in srgb, var(--olive) 78%, #000);
+  /* Every button hovers to this one olive-forest green, whatever its base colour,
+     so hover reads the same across the whole site. Dark enough for cream text. */
+  --btn-hover:    color-mix(in srgb, var(--olive) 52%, var(--deep));
 
   --ink:          #14271B;
   --ink-deep:     color-mix(in srgb, #14271B 55%, #000);
@@ -186,18 +189,18 @@ p { text-wrap: pretty; }
 .btn-arrow { width: 18px; height: 18px; transition: transform 0.35s var(--ease); }
 .btn:hover .btn-arrow { transform: translateX(4px); }
 
+/* Bases differ (forest / gold / near-black / outline), but every hover lands on
+   the same olive-green with a cream label, so the interaction is consistent. */
 .btn-primary { background: var(--deep); color: var(--paper); }
-.btn-primary:hover { background: var(--deep-2); box-shadow: var(--shadow-sm); }
+.btn-primary:hover { background: var(--btn-hover); color: var(--paper); box-shadow: var(--shadow-sm); }
 
 .btn-accent { background: var(--accent-soft); color: var(--deep-2); }
-/* Inverts on hover: the background goes dark, so the label has to go light with
-   it or the dark-on-dark drops to ~2:1. */
-.btn-accent:hover { background: var(--accent); color: var(--paper); box-shadow: 0 14px 30px -14px color-mix(in srgb, var(--accent-soft) 70%, transparent); }
+.btn-accent:hover { background: var(--btn-hover); color: var(--paper); box-shadow: 0 14px 30px -14px color-mix(in srgb, var(--btn-hover) 70%, transparent); }
 
 .btn-outline { background: transparent; border-color: var(--line); color: var(--ink); }
-.btn-outline:hover { border-color: var(--deep); background: var(--deep); color: var(--paper); }
+.btn-outline:hover { border-color: var(--btn-hover); background: var(--btn-hover); color: var(--paper); }
 .btn-outline.on-dark { border-color: var(--line-dark); color: var(--paper); }
-.btn-outline.on-dark:hover { background: var(--paper); color: var(--deep); border-color: var(--paper); }
+.btn-outline.on-dark:hover { background: var(--btn-hover); color: var(--paper); border-color: var(--btn-hover); }
 
 /* ============================================================
    HEADER
@@ -256,8 +259,8 @@ p { text-wrap: pretty; }
    mid olive only reaches ~2.9:1 against the cream label. */
 .site-header .nav-cta:hover,
 .site-header:not(.scrolled) .nav-cta:hover {
-  background: var(--olive-2);
-  border-color: var(--olive-2);
+  background: var(--btn-hover);
+  border-color: var(--btn-hover);
   color: var(--paper);
 }
 
@@ -619,8 +622,12 @@ html:not(.js) .reveal-stagger > * { opacity: 1 !important; transform: none !impo
   line-height: 1.5;
 }
 
-@media (min-width: 620px) { .region-viewport { --per-view: 3; --arrow-size: 56px; } }
-@media (min-width: 1024px) { .region-viewport { --per-view: 4; } }
+@media (min-width: 620px) { .region-viewport { --per-view: 2; --arrow-size: 56px; } }
+@media (min-width: 1024px) {
+  .region-viewport { --per-view: 3; }
+  /* Wider 3-up cards would be very tall at 4/5; square keeps the whole card in view. */
+  .region-slide-media { aspect-ratio: 1 / 1; }
+}
 
 /* ============================================================
    PACKAGE cards
@@ -686,17 +693,20 @@ html:not(.js) .reveal-stagger > * { opacity: 1 !important; transform: none !impo
 /* ============================================================
    SIGNATURE journey  (quote + highlights + image)
 ============================================================ */
+/* Tighter than a default .section so the whole journey fits the eye at once. */
+.signature-section { padding-block: clamp(44px, 5.5vw, 82px); }
+.signature-section .section-head { margin-bottom: clamp(26px, 3.5vw, 44px); }
 .signature-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: clamp(30px, 5vw, 60px);
+  gap: clamp(28px, 4vw, 52px);
   align-items: center;
 }
-.signature-quote { font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2.15rem); font-weight: 600; font-style: italic; color: var(--ink); line-height: 1.28; }
-.signature-author { display: block; margin-top: 16px; font-size: 0.92rem; color: var(--accent); font-weight: 600; letter-spacing: 0.02em; }
-.signature-copy > p { margin-top: 24px; }
+.signature-quote { font-family: var(--font-display); font-size: clamp(1.35rem, 2.5vw, 1.9rem); font-weight: 600; font-style: italic; color: var(--ink); line-height: 1.3; }
+.signature-author { display: block; margin-top: 14px; font-size: 0.92rem; color: var(--accent); font-weight: 600; letter-spacing: 0.02em; }
+.signature-copy > p { margin-top: 18px; }
 .signature-highlights {
-  margin-top: 28px;
+  margin-top: 22px;
   background: var(--card);
   border: 1px solid var(--line);
   border-radius: var(--radius-sm);
@@ -707,7 +717,7 @@ html:not(.js) .reveal-stagger > * { opacity: 1 !important; transform: none !impo
 /* Darker olive: these sit on the --paper-2 band, where mid olive is only 2.6:1. */
 .signature-highlights li svg { width: 18px; height: 18px; color: var(--olive-2); flex-shrink: 0; margin-top: 3px; }
 .signature-media { position: relative; }
-.signature-media .adv-card { max-width: 440px; margin-inline: auto; }
+.signature-media .adv-card { max-width: 520px; margin-inline: auto; }
 
 /* ---- Advertising card (signature side) ---- */
 .adv-card {
@@ -751,7 +761,7 @@ html:not(.js) .reveal-stagger > * { opacity: 1 !important; transform: none !impo
 .adv-card-foot .btn { width: 100%; justify-content: center; }
 
 @media (min-width: 900px) {
-  .signature-grid { grid-template-columns: 1.25fr 0.75fr; }
+  .signature-grid { grid-template-columns: 1.05fr 0.95fr; }
   .signature-media .adv-card-media { aspect-ratio: 5 / 4; }
 }
 
@@ -1028,6 +1038,17 @@ html:not(.js) .reveal-stagger > * { opacity: 1 !important; transform: none !impo
   color: var(--body);
 }
 .testi-google-rating strong { color: var(--ink); font-family: var(--font-display); }
+
+/* Dark testimonials: white review cards pop against forest, alternating with the
+   light activities accordion above and the cream How It Works below. */
+.testi-section { background: var(--deep); color: var(--paper); }
+.testi-section .slider-head h2 { color: var(--paper); }
+.testi-section .eyebrow { color: var(--accent-soft); }
+.testi-section .testi-google-rating { color: rgba(255, 255, 255, 0.82); }
+.testi-section .testi-google-rating strong { color: var(--paper); }
+.testi-section .slider-arrow { border-color: var(--line-dark); color: var(--paper); }
+.testi-section .slider-arrow:hover { background: var(--accent-soft); color: var(--deep); border-color: var(--accent-soft); }
+.testi-section .slider-arrow:disabled:hover { background: transparent; color: var(--paper); border-color: var(--line-dark); }
 
 .testi-track {
   --per-view: 1;
@@ -1628,9 +1649,111 @@ a.contact-card:hover { background: rgba(255, 255, 255, 0.12); transform: transla
 /* ============================================================
    Reduced motion
 ============================================================ */
+/* ============================================================
+   TRAVEL ACTIVITIES (accordion)
+============================================================ */
+/* White so the accordion reads crisp between the two dark sliders around it. */
+.activities-section { background: var(--card); }
+.activities {
+  max-width: 940px;
+  margin-inline: auto;
+  border-top: 1px solid var(--line);
+}
+.activity { border-bottom: 1px solid var(--line); }
+.activity-head {
+  display: flex;
+  align-items: center;
+  gap: clamp(16px, 3vw, 30px);
+  padding: clamp(20px, 3vw, 30px) 4px;
+  cursor: pointer;
+  list-style: none;
+  transition: padding-left 0.35s var(--ease);
+}
+.activity-head::-webkit-details-marker { display: none; }
+.activity-head:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 6px; }
+.activity-num {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  color: var(--body);
+  opacity: 0.7;
+  flex: none;
+}
+.activity-icon {
+  flex: none;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--olive) 16%, #fff);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.35s var(--ease);
+}
+.activity-icon svg { width: 24px; height: 24px; color: var(--olive-2); }
+.activity-title {
+  flex: 1;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.25rem, 2.4vw, 1.7rem);
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  transition: color 0.35s var(--ease);
+}
+.activity-chevron {
+  flex: none;
+  width: 24px;
+  height: 24px;
+  color: var(--body);
+  transition: transform 0.4s var(--ease), color 0.35s var(--ease);
+}
+/* Only the icon "button" changes when active. Title and chevron colours stay put. */
+.activity[open] .activity-chevron { transform: rotate(180deg); }
+.activity[open] .activity-icon { background: var(--deep); }
+.activity[open] .activity-icon svg { color: var(--paper); }
+.activity-head:hover { padding-left: 10px; }
+
+.activity-panel {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(18px, 3vw, 32px);
+  padding: 0 4px clamp(28px, 4vw, 40px) calc(52px + clamp(16px, 3vw, 30px) + 0.95rem + clamp(16px, 3vw, 30px));
+}
+.activity-media {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.activity-media img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+  display: block;
+}
+.activity-copy {
+  align-self: center;
+  /* Darker than --body: this sits on the deeper --paper-3 band where plain
+     --body is 4.47:1, just under AA. */
+  color: color-mix(in srgb, var(--body) 82%, #000);
+  font-size: 1rem;
+  line-height: 1.7;
+  max-width: 62ch;
+}
+.activity[open] .activity-panel { animation: activityReveal 0.45s var(--ease) both; }
+@keyframes activityReveal {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: none; }
+}
+@media (min-width: 860px) {
+  .activity-panel { grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); align-items: center; }
+  .activity-media img { aspect-ratio: 5 / 4; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
   .reveal, .reveal-stagger > * { opacity: 1 !important; transform: none !important; }
   .form-success { opacity: 1 !important; transform: none !important; }
   .success-circle, .success-tick { stroke-dashoffset: 0 !important; }
+  .activity[open] .activity-panel { animation: none !important; }
 }
