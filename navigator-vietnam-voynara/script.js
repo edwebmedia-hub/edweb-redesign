@@ -299,6 +299,9 @@
     const fields = {
       name: { el: document.getElementById('name'), errEl: document.getElementById('name-error'), validate: (v) => (v.trim().length > 1 ? '' : 'Please enter your name.') },
       email: { el: document.getElementById('email'), errEl: document.getElementById('email-error'), validate: (v) => (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) ? '' : 'Please enter a valid email address.') },
+      phone: { el: document.getElementById('phone'), errEl: document.getElementById('phone-error'), validate: (v) => (v.trim().length > 5 ? '' : 'Please enter your phone number.') },
+      country: { el: document.getElementById('country'), errEl: document.getElementById('country-error'), validate: (v) => (v ? '' : 'Please select your country of residence.') },
+      travellers: { el: document.getElementById('travellers'), errEl: document.getElementById('travellers-error'), validate: (v) => (Number(v) >= 1 ? '' : 'Please enter how many travellers.') },
       message: { el: document.getElementById('message'), errEl: document.getElementById('message-error'), validate: (v) => (v.trim().length > 5 ? '' : 'Please tell us a bit more.') },
     };
 
@@ -329,6 +332,7 @@
         name: fields.name.el.value.trim(),
         email: fields.email.el.value.trim(),
         phone: val('phone'),
+        country: val('country'),
         destination: val('destination'),
         dates: val('dates'),
         travellers: val('travellers'),

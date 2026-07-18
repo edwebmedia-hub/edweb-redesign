@@ -32,7 +32,7 @@ module.exports = async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(204).end();
   if (req.method !== 'POST') return res.status(405).json({ success: false, message: 'Method not allowed' });
 
-  const { name, email, phone, destination, dates, travellers, message, company } = req.body;
+  const { name, email, phone, country, destination, dates, travellers, message, company } = req.body;
 
   // Honeypot: bots fill the hidden "company" field; humans never see it. Pretend
   // success so the bot gets no signal, but send nothing.
@@ -43,8 +43,8 @@ module.exports = async function handler(req, res) {
     return res.status(429).json({ success: false, message: 'Too many messages. Please try again in a few minutes.' });
   }
 
-  if (!name || !email || !message) {
-    return res.status(400).json({ success: false, message: 'Name, email and message are required.' });
+  if (!name || !email || !phone || !country || !travellers || !message) {
+    return res.status(400).json({ success: false, message: 'Please fill in all required fields.' });
   }
   if (String(message).length > 5000 || String(name).length > 200) {
     return res.status(400).json({ success: false, message: 'Message is too long.' });
@@ -60,6 +60,7 @@ module.exports = async function handler(req, res) {
         `Name: ${name}`,
         `Email: ${email}`,
         phone ? `Phone: ${phone}` : null,
+        country ? `Country of residence: ${country}` : null,
         destination ? `Destination: ${destination}` : null,
         dates ? `Travel dates: ${dates}` : null,
         travellers ? `Travellers: ${travellers}` : null,
