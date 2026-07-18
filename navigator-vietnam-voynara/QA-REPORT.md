@@ -44,5 +44,8 @@ No horizontal overflow at any width. No broken images. Zero console errors on an
 ## Not a defect (documented)
 - One reveal element occasionally reads `opacity < 1` at capture time (mid-transition) — transient, content is present and reveals on scroll. Not user-facing.
 
+## Responsive images (follow-up, verified)
+`srcset` (480/800/1200 w variants) + `sizes` added to 148 images. WebKit @2× DPR confirms the browser fetches the small variant on mobile (`hero-800w.jpg` at 375) and the original on desktop (`hero.jpg` at 1280) — 63% lighter heroes on mobile, no layout change, 0 broken, image quality crisp.
+
 ## Deferred
 - None. Full 4-width + interaction pass complete in WebKit. (Chromium parity not separately captured this session — in-app pane was unreliable — but WebKit is the stricter engine for layout; no WebKit-specific breaks found.)

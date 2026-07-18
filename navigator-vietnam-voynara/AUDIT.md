@@ -40,7 +40,14 @@ Image optimisation was approved, attempted, and **reverted — it isn't worthwhi
 - **In-place JPEG re-compression (q82):** only 8 of 131 files shrank; **+1% total.** The source JPEGs are already aggressively compressed.
 - **WebP @ q80:** 33.5 MB → 31.2 MB, **only 7% smaller** — because the JPEGs are already low-weight-per-pixel. Not worth a 131-image `<picture>` refactor across 28 files (high markup risk, and unverifiable blind this session) for 7%.
 - Dimensions are already display-appropriate (~1600–2000 px); lazy-loading + `fetchpriority` + preconnect are already correct.
-- **Verdict:** the 34 MB total is spread across 28 pages (no page loads all of it) and is largely irreducible without visible quality loss. A real further win needs a **responsive-image (`srcset`/`sizes`) + CDN** strategy, done with visual QA — a separate, deliberate job, not a blind health-pass edit. Assets left **pristine** (`git` clean).
+- **Verdict:** format conversion is a dead end here. The real lever is **size-appropriate delivery** — see below.
+
+## Performance — responsive images DONE (follow-up pass)
+Approved and applied after the browser tooling was restored.
+- Generated 3 downscaled variants (480/800/1200 w) for every JPEG — **323 variants**.
+- Added `srcset` + context-aware `sizes` to **148 `<img>`** across 28 pages (heroes `100vw`; grid images responsive). Original kept as `src` fallback.
+- **Verified in WebKit @2× DPR:** mobile (375) fetches the 800w variants (`hero-800w.jpg` etc.), desktop (1280) fetches the full original — automatically, correct pick per width. Sample hero: 627 KB → 230 KB @800w (**63% lighter on mobile**). No layout change, 0 broken images, 0 console errors, image quality crisp.
+- CDN: handled by Vercel automatically on deploy — nothing to change in code.
 
 ---
 
@@ -67,7 +74,7 @@ Image optimisation was approved, attempted, and **reverted — it isn't worthwhi
 
 ## Outstanding
 1. ~~Full `/visual-qa`~~ — **DONE.** Completed in Playwright WebKit across 5 templates × 4 widths (375/768/1280/1536) + all interactions; all pass. See `QA-REPORT.md`. (Required switching the preview to the repo's Node `static-server.mjs` — python `http.server` stalls on this machine for images >100 KB, which had corrupted every earlier browser attempt.)
-2. **Responsive-image + CDN pass** for real image-weight reduction — deliberate, visually-verified job (not a blind edit). Still recommended, still optional.
+2. ~~Responsive-image + CDN pass~~ — **DONE.** `srcset`/`sizes` on 148 images, 323 variants, WebKit-verified (63% lighter heroes on mobile). CDN is automatic on Vercel.
 
 ## Change log (this pass)
 - Gallery dead anchors → `<figure>` — 16 destination pages.
