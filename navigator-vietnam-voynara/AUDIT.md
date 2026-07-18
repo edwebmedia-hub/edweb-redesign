@@ -65,9 +65,9 @@ Image optimisation was approved, attempted, and **reverted — it isn't worthwhi
 
 ---
 
-## Outstanding (blocked on tooling, not on decisions)
-1. **Full `/visual-qa`** — 4-width sweep (375/768/1280/1440) + WebKit spot-check. Blocked this session by browser-tool contention (see limitation). The only layout-affecting change was gallery `<a>`→`<figure>`, which is CSS-verified safe (`*{margin:0}` neutralises figure margin; all `img` styling is descendant/class-based, hover retained) but not yet confirmed on a rendered page. Everything else was `<head>` meta (no layout impact).
-2. **Responsive-image + CDN pass** for real image-weight reduction — deliberate, visually-verified job (not a blind edit).
+## Outstanding
+1. ~~Full `/visual-qa`~~ — **DONE.** Completed in Playwright WebKit across 5 templates × 4 widths (375/768/1280/1536) + all interactions; all pass. See `QA-REPORT.md`. (Required switching the preview to the repo's Node `static-server.mjs` — python `http.server` stalls on this machine for images >100 KB, which had corrupted every earlier browser attempt.)
+2. **Responsive-image + CDN pass** for real image-weight reduction — deliberate, visually-verified job (not a blind edit). Still recommended, still optional.
 
 ## Change log (this pass)
 - Gallery dead anchors → `<figure>` — 16 destination pages.
