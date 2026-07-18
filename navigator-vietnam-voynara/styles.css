@@ -40,9 +40,17 @@
   --accent-mute:  #E9DBB6;
 
   --olive-2:      color-mix(in srgb, var(--olive) 78%, #000);
-  /* Every button hovers to this one olive-forest green, whatever its base colour,
-     so hover reads the same across the whole site. Dark enough for cream text. */
-  --btn-hover:    color-mix(in srgb, var(--olive) 52%, var(--deep));
+
+  /* Logo sun orange — reserved for the highlight badge only, not buttons. */
+  --orange:       #FC7C0C;
+
+  /* One button language across the whole site: dark olive at rest, a lighter
+     olive on hover (mixed from the same two tokens, so it's always in-family).
+     Cream label throughout — contrast holds at both ends (9.7:1 / 5.6:1). */
+  --btn:          #373E02;
+  --btn-hover:    color-mix(in srgb, var(--btn) 55%, var(--olive) 45%);
+  --btn-ink:      var(--paper);
+  --btn-ink-hover: var(--paper);
 
   --ink:          #14271B;
   --ink-deep:     color-mix(in srgb, #14271B 55%, #000);
@@ -198,18 +206,19 @@ p { text-wrap: pretty; }
 .btn-arrow { width: 18px; height: 18px; transition: transform 0.35s var(--ease); }
 .btn:hover .btn-arrow { transform: translateX(4px); }
 
-/* Bases differ (forest / gold / near-black / outline), but every hover lands on
-   the same olive-green with a cream label, so the interaction is consistent. */
-.btn-primary { background: var(--deep); color: var(--paper); }
-.btn-primary:hover { background: var(--btn-hover); color: var(--paper); box-shadow: var(--shadow-sm); }
+/* Every button is identical: dark olive-green fill at rest, lightening to
+   the same family on hover. */
+.btn-primary,
+.btn-accent { background: var(--btn); color: var(--btn-ink); }
+.btn-primary:hover,
+.btn-accent:hover { background: var(--btn-hover); color: var(--btn-ink-hover); box-shadow: 0 14px 30px -14px color-mix(in srgb, var(--btn-hover) 60%, transparent); }
 
-.btn-accent { background: var(--accent-soft); color: var(--deep-2); }
-.btn-accent:hover { background: var(--btn-hover); color: var(--paper); box-shadow: 0 14px 30px -14px color-mix(in srgb, var(--btn-hover) 70%, transparent); }
-
-.btn-outline { background: transparent; border-color: var(--line); color: var(--ink); }
-.btn-outline:hover { border-color: var(--btn-hover); background: var(--btn-hover); color: var(--paper); }
+/* Outline stays a secondary affordance but speaks the same two colours:
+   olive outline at rest, filling with the lighter olive on hover. */
+.btn-outline { background: transparent; border-color: var(--btn); color: var(--btn); }
+.btn-outline:hover { border-color: var(--btn-hover); background: var(--btn-hover); color: var(--btn-ink-hover); }
 .btn-outline.on-dark { border-color: var(--line-dark); color: var(--paper); }
-.btn-outline.on-dark:hover { background: var(--btn-hover); color: var(--paper); border-color: var(--btn-hover); }
+.btn-outline.on-dark:hover { background: var(--btn-hover); color: var(--btn-ink-hover); border-color: var(--btn-hover); }
 
 /* ============================================================
    HEADER
@@ -256,21 +265,20 @@ p { text-wrap: pretty; }
 .site-header.scrolled .nav-links a.active { color: var(--accent); }
 
 .nav-cta { display: none; }
-/* Solid near-black in both header states (over the hero and scrolled), greening on hover. */
+/* Same button language as the rest of the site: dark olive at rest in both
+   header states (over the hero and scrolled), logo-orange on hover. */
 .site-header .nav-cta,
 .site-header:not(.scrolled) .nav-cta {
-  background: var(--ink-deep);
-  border: 1.5px solid var(--ink-deep);
-  color: var(--paper);
+  background: var(--btn);
+  border: 1.5px solid var(--btn);
+  color: var(--btn-ink);
   backdrop-filter: none;
 }
-/* Near-black at rest, olive green on hover. Uses the darker olive because the
-   mid olive only reaches ~2.9:1 against the cream label. */
 .site-header .nav-cta:hover,
 .site-header:not(.scrolled) .nav-cta:hover {
   background: var(--btn-hover);
   border-color: var(--btn-hover);
-  color: var(--paper);
+  color: var(--btn-ink-hover);
 }
 
 .nav-toggle {
@@ -655,23 +663,24 @@ html:not(.js) .reveal-stagger > * { opacity: 1 !important; transform: none !impo
 .package-media { position: relative; aspect-ratio: 16 / 11; overflow: hidden; }
 .package-media img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.9s var(--ease); }
 .package-card:hover .package-media img { transform: scale(1.05); }
+/* Status highlight (Guide Favorite / Bestseller / Adventure): logo orange. */
 .package-badge {
   position: absolute;
   top: 16px;
   right: 16px;
-  background: var(--accent-soft);
+  background: var(--orange);
   color: var(--deep-2);
   font-weight: 700;
   font-size: 0.82rem;
   padding: 7px 14px;
   border-radius: 999px;
 }
+/* Region/category tag: the site's dark olive-green, the badge's counterpart. */
 .package-tag {
   position: absolute;
   top: 16px;
   left: 16px;
-  background: color-mix(in srgb, var(--deep) 50%, transparent);
-  backdrop-filter: blur(6px);
+  background: var(--btn);
   color: var(--paper);
   font-size: 0.78rem;
   letter-spacing: 0.05em;
@@ -1722,7 +1731,7 @@ a.contact-card:hover { background: rgba(255, 255, 255, 0.12); transform: transla
   display: grid;
   grid-template-columns: 1fr;
   gap: clamp(18px, 3vw, 32px);
-  padding: 0 4px clamp(28px, 4vw, 40px) calc(52px + clamp(16px, 3vw, 30px) + 0.95rem + clamp(16px, 3vw, 30px));
+  padding: 0 4px clamp(28px, 4vw, 40px) calc(52px + clamp(16px, 3vw, 30px));
 }
 .activity-media {
   display: grid;
