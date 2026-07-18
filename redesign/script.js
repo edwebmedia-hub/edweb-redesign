@@ -128,15 +128,15 @@
       });
     }
 
-    const MONTHLY_SERVICES = ['Website Design', 'App Development', 'Google Ads', 'Digital Marketing'];
-    const ONCEOF_SERVICES  = ['Branding', 'Visual Content'];
+    const MONTHLY_SERVICES = ['App Development', 'Google Ads', 'Digital Marketing'];
 
     function buildBudgetOptions() {
-      const selected = [...form.querySelectorAll('input[name="services"]:checked')].map((c) => c.value);
+      const selected    = [...form.querySelectorAll('input[name="services"]:checked')].map((c) => c.value);
       const hasMonthly  = selected.some((s) => MONTHLY_SERVICES.includes(s));
       const hasBranding = selected.includes('Branding');
       const hasVisual   = selected.includes('Visual Content');
-      const onceOffOnly = !hasMonthly && (hasBranding || hasVisual);
+      const hasWebsite  = selected.includes('Website Design');
+      const websiteType = form.querySelector('input[name="website-type"]:checked')?.value || '';
 
       const budgetSel  = document.getElementById('msf-budget');
       const budgetLbl  = document.getElementById('msf-budget-label');
@@ -144,23 +144,72 @@
       const budgetNote = document.getElementById('msf-budget-note');
 
       budgetSel.value = '';
-
-      // Clear existing options (keep placeholder)
       while (budgetSel.options.length) budgetSel.remove(0);
 
-      if (onceOffOnly) {
-        // --- Once-off only ---
-        budgetSub.textContent = 'Branding and visual content are priced as a once-off fee.';
+      if (hasWebsite) {
+        // --- Once-off website design — show actual plan prices ---
+        budgetSub.textContent = 'All packages include basic SEO. Hosting and email are available as a separate monthly add-on.';
+        budgetLbl.innerHTML = 'Which package suits you? <span aria-hidden="true">*</span>';
 
+        if (websiteType === 'Business Website') {
+          budgetNote.textContent = 'Once-off design fee. Basic SEO included in all plans.';
+          [
+            ['', 'Select a plan…'],
+            ['Business Website — Silver Plan (R3,999)',   'Silver Plan — R3,999 once-off · 5 pages'],
+            ['Business Website — Gold Plan (R4,999)',     'Gold Plan — R4,999 once-off · 10 pages'],
+            ['Business Website — Platinum Plan (R6,499)', 'Platinum Plan — R6,499 once-off · 20 pages'],
+            ['Not sure', "Not sure yet — let's discuss"],
+          ].forEach(([v, t]) => { const o = new Option(t, v); budgetSel.add(o); });
+        } else if (websiteType === 'E-Commerce Website') {
+          budgetNote.textContent = 'Once-off design fee. Basic SEO included in all plans.';
+          [
+            ['', 'Select a plan…'],
+            ['E-commerce Website — Silver Plan (R5,999)',   'Silver Plan — R5,999 once-off · up to 10 products'],
+            ['E-commerce Website — Gold Plan (R7,499)',     'Gold Plan — R7,499 once-off · up to 25 products'],
+            ['E-commerce Website — Platinum Plan (R9,499)', 'Platinum Plan — R9,499 once-off · up to 50 products'],
+            ['Not sure', "Not sure yet — let's discuss"],
+          ].forEach(([v, t]) => { const o = new Option(t, v); budgetSel.add(o); });
+        } else if (websiteType === 'Directory Website') {
+          budgetNote.textContent = 'Once-off design fee. Final price may vary based on features and requirements.';
+          [
+            ['', 'Select a plan…'],
+            ['Directory Website — Silver Plan (R8,999)',        'Silver Plan — R8,999 once-off · up to 25 listings'],
+            ['Directory Website — Gold Plan (R11,999)',         'Gold Plan — R11,999 once-off · up to 50 listings'],
+            ['Directory Website — Platinum Plan (from R14,999)', 'Platinum Plan — from R14,999 once-off · unlimited listings'],
+            ['Not sure', "Not sure yet — let's discuss"],
+          ].forEach(([v, t]) => { const o = new Option(t, v); budgetSel.add(o); });
+        } else {
+          budgetNote.textContent = 'Business from R3,999 · E-commerce from R5,999 · Directory from R8,999.';
+          [
+            ['', 'Select a plan…'],
+            ['Business Website — Silver Plan (R3,999)',        'Business Silver — R3,999 once-off'],
+            ['Business Website — Gold Plan (R4,999)',          'Business Gold — R4,999 once-off'],
+            ['Business Website — Platinum Plan (R6,499)',      'Business Platinum — R6,499 once-off'],
+            ['E-commerce Website — Silver Plan (R5,999)',      'E-commerce Silver — R5,999 once-off'],
+            ['E-commerce Website — Gold Plan (R7,499)',        'E-commerce Gold — R7,499 once-off'],
+            ['E-commerce Website — Platinum Plan (R9,499)',    'E-commerce Platinum — R9,499 once-off'],
+            ['Directory Website — Silver Plan (R8,999)',       'Directory Silver — R8,999 once-off'],
+            ['Directory Website — Gold Plan (R11,999)',        'Directory Gold — R11,999 once-off'],
+            ['Directory Website — Platinum Plan (from R14,999)', 'Directory Platinum — from R14,999 once-off'],
+            ['Not sure', "Not sure yet — let's discuss"],
+          ].forEach(([v, t]) => { const o = new Option(t, v); budgetSel.add(o); });
+        }
+        if (hasBranding || hasVisual) {
+          budgetNote.textContent += ' Branding and visual content quoted separately.';
+        }
+
+      } else if (!hasMonthly && (hasBranding || hasVisual)) {
+        // --- Once-off branding / visual only ---
+        budgetSub.textContent = 'Branding and visual content are priced as a once-off fee.';
         if (hasBranding && hasVisual) {
           budgetLbl.innerHTML = 'Estimated budget (once-off) <span aria-hidden="true">*</span>';
           budgetNote.textContent = 'Combined branding and visual content package.';
           [
             ['', 'Select a range…'],
-            ['R4 000–R6 000', 'R4 000 – R6 000'],
-            ['R6 000–R10 000', 'R6 000 – R10 000'],
-            ['R10 000–R15 000', 'R10 000 – R15 000'],
-            ['R15 000+', 'R15 000+'],
+            ['R4,000–R6,000', 'R4,000 – R6,000'],
+            ['R6,000–R10,000', 'R6,000 – R10,000'],
+            ['R10,000–R15,000', 'R10,000 – R15,000'],
+            ['R15,000+', 'R15,000+'],
             ['Not sure', 'Not sure yet — let\'s discuss'],
           ].forEach(([v, t]) => { const o = new Option(t, v); budgetSel.add(o); });
         } else if (hasBranding) {
@@ -169,41 +218,39 @@
           [
             ['', 'Select a range…'],
             ['Under R500', 'Under R500'],
-            ['R500–R1 000', 'R500 – R1 000'],
-            ['R1 000–R2 000', 'R1 000 – R2 000'],
-            ['R2 000–R5 000', 'R2 000 – R5 000'],
-            ['R5 000+', 'R5 000+'],
+            ['R500–R1,000', 'R500 – R1,000'],
+            ['R1,000–R2,000', 'R1,000 – R2,000'],
+            ['R2,000–R5,000', 'R2,000 – R5,000'],
+            ['R5,000+', 'R5,000+'],
             ['Not sure', 'Not sure yet — let\'s discuss'],
           ].forEach(([v, t]) => { const o = new Option(t, v); budgetSel.add(o); });
-        } else if (hasVisual) {
+        } else {
           budgetLbl.innerHTML = 'Visual content budget (once-off) <span aria-hidden="true">*</span>';
           budgetNote.textContent = 'Professional photography and video — priced per project.';
           [
             ['', 'Select a range…'],
-            ['R4 000–R6 000', 'R4 000 – R6 000'],
-            ['R6 000–R8 000', 'R6 000 – R8 000'],
-            ['R8 000–R12 000', 'R8 000 – R12 000'],
-            ['R12 000+', 'R12 000+'],
+            ['R4,000–R6,000', 'R4,000 – R6,000'],
+            ['R6,000–R8,000', 'R6,000 – R8,000'],
+            ['R8,000–R12,000', 'R8,000 – R12,000'],
+            ['R12,000+', 'R12,000+'],
             ['Not sure', 'Not sure yet — let\'s discuss'],
           ].forEach(([v, t]) => { const o = new Option(t, v); budgetSel.add(o); });
         }
 
       } else {
-        // --- Monthly (with optional once-off add-ons) ---
-        budgetSub.textContent = 'Our website, app and marketing services run on a simple monthly fee — no large upfront costs.';
+        // --- Monthly (App Dev, Ads, Marketing) ---
+        budgetSub.textContent = 'App development and marketing services are quoted based on your requirements.';
         budgetLbl.innerHTML = 'Monthly budget <span aria-hidden="true">*</span>';
-        if (hasBranding || hasVisual) {
-          budgetNote.textContent = 'Branding and visual content will be quoted separately as a once-off fee.';
-        } else {
-          budgetNote.textContent = '';
-        }
+        budgetNote.textContent = (hasBranding || hasVisual)
+          ? 'Branding and visual content will be quoted separately as a once-off fee.'
+          : '';
         [
           ['', 'What can you comfortably pay per month?'],
           ['Under R500/mo', 'Under R500 / month'],
-          ['R500–R1 000/mo', 'R500 – R1 000 / month'],
-          ['R1 000–R2 000/mo', 'R1 000 – R2 000 / month'],
-          ['R2 000–R3 500/mo', 'R2 000 – R3 500 / month'],
-          ['R3 500+/mo', 'R3 500+ / month'],
+          ['R500–R1,000/mo', 'R500 – R1,000 / month'],
+          ['R1,000–R2,000/mo', 'R1,000 – R2,000 / month'],
+          ['R2,000–R3,500/mo', 'R2,000 – R3,500 / month'],
+          ['R3,500+/mo', 'R3,500+ / month'],
           ['Not sure/mo', 'Not sure yet — let\'s discuss'],
         ].forEach(([v, t]) => { const o = new Option(t, v); budgetSel.add(o); });
       }
@@ -220,7 +267,7 @@
           const webChecked = form.querySelector('#chk-webdesign:checked');
           if (webChecked) {
             const typeSelected = form.querySelector('input[name="website-type"]:checked');
-            if (!typeSelected) { err.textContent = 'Please choose a website type — Business or E-Commerce.'; return; }
+            if (!typeSelected) { err.textContent = 'Please choose a website type — Business, E-Commerce or Directory.'; return; }
           }
           err.textContent = '';
           buildBudgetOptions();
@@ -270,20 +317,25 @@
       const data = new FormData(form);
       const services = [...form.querySelectorAll('input[name="services"]:checked')].map((cb) => cb.value);
       data.set('services', services.join(', '));
+      const addons = [...form.querySelectorAll('input[name="addons"]:checked')].map((cb) => cb.value);
+      data.set('addons', addons.join(', '));
 
       try {
         const payload = {
           type: 'contact',
-          first_name: data.get('first_name'),
-          last_name:  data.get('last_name'),
+          first_name: data.get('first-name'),
+          last_name:  data.get('last-name'),
           email:      data.get('email'),
           phone:      data.get('phone'),
           services:   data.get('services'),
+          addons:     data.get('addons'),
           budget:     data.get('budget'),
           timeline:   data.get('timeline'),
           message:    data.get('message'),
+          package:    data.get('package'),
+          company: (document.getElementById('company')?.value || '').trim(),
         };
-        const res  = await fetch('/send-mail.php', {
+        const res  = await fetch('/api/send-mail', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
           body: JSON.stringify(payload),
@@ -301,19 +353,6 @@
     });
   })();
 
-  // --- Portfolio carousel -------------------------------------------------------
-  const carousel = document.getElementById('portfolio-carousel');
-  if (carousel) {
-    const prevBtn = document.getElementById('carousel-prev');
-    const nextBtn = document.getElementById('carousel-next');
-    const scrollByCard = (dir) => {
-      const card = carousel.querySelector('.portfolio-item');
-      if (!card) return;
-      carousel.scrollBy({ left: dir * (card.offsetWidth + 24), behavior: 'smooth' });
-    };
-    prevBtn?.addEventListener('click', () => scrollByCard(-1));
-    nextBtn?.addEventListener('click', () => scrollByCard(1));
-  }
 
   // --- Review card slider (Google reviews) -------------------------------------
   document.querySelectorAll('.review-card').forEach((card) => {
@@ -490,7 +529,7 @@
       label.style.opacity = '0.5';
 
       try {
-        const res = await fetch('/send-mail.php', {
+        const res = await fetch('/api/send-mail', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
           body: JSON.stringify({
@@ -506,10 +545,11 @@
         if (!res.ok || !json.success) throw new Error(json.message || 'Failed');
 
         document.getElementById('booking-form').hidden = true;
+        document.getElementById('booking-success').hidden = false;
         document.getElementById('booking-success-msg').textContent =
           `We've received your request for ${dateLabel} at ${selectedTime}, ${name}.`;
-        document.getElementById('booking-success').hidden = false;
       } catch (_) {
+        document.getElementById('booking-success').hidden = true;
         err.textContent = 'Something went wrong. Please email us directly at info@edwebmedia.com';
         submitBtn.disabled = false;
         spinner.style.display = 'none';
@@ -539,4 +579,65 @@
       });
     });
   });
+
+  // --- Pricing plan chooser tabs --------------------------------------------------
+  const planTabs = document.querySelectorAll('.plan-chooser-item');
+  planTabs.forEach((planTab) => {
+    planTab.addEventListener('click', () => {
+      planTabs.forEach((t) => {
+        t.classList.remove('is-active');
+        t.setAttribute('aria-selected', 'false');
+      });
+      planTab.classList.add('is-active');
+      planTab.setAttribute('aria-selected', 'true');
+
+      document.querySelectorAll('.pricing-panel').forEach((panel) => {
+        panel.hidden = panel.id !== planTab.dataset.target;
+      });
+    });
+  });
+
+  // --- Dashboard card (About section): tabs, dark toggle, tilt -----------------
+  const dcard = document.getElementById('dcard');
+  if (dcard) {
+    const dToggle = document.getElementById('dtoggle');
+    const dToggleIcon = document.getElementById('dtoggleIcon');
+    const dTabs = document.querySelectorAll('#dtabs button');
+    const dIndicator = document.getElementById('dtabsIndicator');
+    const dPanels = dcard.querySelectorAll('.dpanel');
+    const dTabWidth = 94;
+
+    dToggle?.addEventListener('click', () => {
+      dcard.classList.toggle('dark');
+      dToggleIcon.textContent = dcard.classList.contains('dark') ? 'dark_mode' : 'light_mode';
+    });
+
+    dTabs.forEach((tab, i) => {
+      tab.addEventListener('click', () => {
+        dTabs.forEach((t) => t.classList.remove('is-active'));
+        tab.classList.add('is-active');
+        dIndicator.style.left = `${i * dTabWidth}px`;
+        dPanels.forEach((panel) => {
+          panel.classList.toggle('is-active', panel.dataset.panel === tab.dataset.tab);
+        });
+      });
+    });
+
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      dcard.addEventListener('mousemove', (e) => {
+        const rect = dcard.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const rotateY = ((x - rect.width / 2) / (rect.width / 2)) * 6;
+        const rotateX = ((y - rect.height / 2) / (rect.height / 2)) * -6;
+        dcard.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+      });
+      dcard.addEventListener('mouseenter', () => dcard.classList.add('is-hovered'));
+      dcard.addEventListener('mouseleave', () => {
+        dcard.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
+        dcard.classList.remove('is-hovered');
+      });
+    }
+  }
+
 })();

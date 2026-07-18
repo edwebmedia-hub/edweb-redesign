@@ -1,16 +1,31 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Packages | Edweb Media</title>
-  <meta name="description" content="Simple, transparent monthly packages for business and e-commerce websites, no large upfront fees, fully managed with ongoing support." />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <title>Website Packages & Pricing | Edweb Media Cape Town</title>
+  <meta name="description" content="Once-off website design packages for South African businesses. Business, e-commerce and directory websites with optional hosting and management add-ons. Clear, transparent pricing." />
+  <link rel="canonical" href="https://edwebmedia.com/packages" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://edwebmedia.com/packages" />
+  <meta property="og:title" content="Website Packages & Pricing | Edweb Media Cape Town" />
+  <meta property="og:description" content="Once-off website design packages for South African businesses. Optional hosting and management add-ons. Transparent pricing, no surprises." />
+  <meta property="og:site_name" content="Edweb Media" />
+  <meta property="og:image" content="https://edwebmedia.com/assets/edweb-logo-dark.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Website Packages & Pricing | Edweb Media Cape Town" />
+  <meta name="twitter:description" content="Once-off website design packages for South African businesses. Optional hosting and management add-ons." />
+  <meta name="twitter:image" content="https://edwebmedia.com/assets/edweb-logo-dark.png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=block" rel="stylesheet" />
 
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=20260758" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -26,7 +41,8 @@
       <nav class="nav-links" aria-label="Primary">
         <a href="index.html">Home</a>
         <a href="about-us.html">About Us</a>
-        <a href="packages.html">Packages</a>
+        <a href="projects.html">Projects</a>
+        <a href="packages.html">Pricing</a>
         <a href="contact.html">Contact</a>
       </nav>
 
@@ -44,170 +60,281 @@
     <section class="page-hero">
       <div class="container page-hero-inner">
         <div class="eyebrow reveal">Packages</div>
-        <h1 class="reveal" style="--reveal-delay:80ms">Simple, transparent monthly packages</h1>
+        <h1 class="reveal" style="--reveal-delay:80ms">Clear, once-off website pricing</h1>
         <p class="reveal" style="--reveal-delay:160ms">
-          No large upfront design fees, just a professional website, hosting,
-          domain, SSL, updates and ongoing support, all managed for you.
+          Your website design is a once-off fee. Hosting and management are optional monthly add-ons — no hidden costs, no lock-in.
         </p>
       </div>
     </section>
 
-    <!-- ============================== BUSINESS PACKAGES ============================== -->
-    <section class="section" id="business">
+    <!-- ============================== PLAN CHOOSER ============================== -->
+    <section class="plan-chooser-section">
+      <div class="container">
+        <div class="plan-chooser reveal" role="tablist" aria-label="Choose a website type">
+          <button type="button" class="plan-chooser-item is-active" data-target="business" role="tab" aria-selected="true" aria-controls="business">
+            Business Websites
+          </button>
+          <button type="button" class="plan-chooser-item" data-target="ecommerce" role="tab" aria-selected="false" aria-controls="ecommerce">
+            E-commerce Websites
+          </button>
+          <button type="button" class="plan-chooser-item" data-target="directory" role="tab" aria-selected="false" aria-controls="directory">
+            Directory Websites
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== BUSINESS WEBSITES ============================== -->
+    <section class="section pricing-panel" id="business" role="tabpanel">
       <div class="container">
         <div class="section-head section-head--center reveal">
-          <div class="eyebrow" style="justify-content:center">Business Packages</div>
-          <h2>Pick the plan that fits your business</h2>
-          <p>Every plan includes a free domain, SSL certificate, social media integration and ongoing updates.</p>
+          <h2>Business Websites</h2>
+          <p>A professionally designed website for your business. Once-off design fee. Hosting and email are available as a separate monthly add-on.</p>
+        </div>
+        <div class="pricing-grid">
+          <article class="pricing-card is-featured reveal">
+            <span class="pricing-badge">Most Popular</span>
+            <h3>Silver Plan</h3>
+            <div class="pricing-price">R3,999<span> once-off</span></div>
+            <ul class="pricing-features">
+              <li>5 Page Custom Design</li>
+              <li>SSL Certificate</li>
+              <li>Contact Form</li>
+              <li>Social Media Integration</li>
+              <li>Basic SEO</li>
+              <li>Blog Section</li>
+              <li>WhatsApp Button</li>
+              <li>Mobile Responsive</li>
+            </ul>
+            <a href="contact.html?package=Business+Website+%E2%80%94+Silver+Plan+%28R3%2C999%29" class="btn btn--primary btn--block" rel="nofollow">Get Started</a>
+          </article>
+          <article class="pricing-card reveal" style="--reveal-delay:80ms">
+            <h3>Gold Plan</h3>
+            <div class="pricing-price">R4,999<span> once-off</span></div>
+            <ul class="pricing-features">
+              <li>10 Page Custom Design</li>
+              <li>SSL Certificate</li>
+              <li>Contact Form</li>
+              <li>Social Media Integration</li>
+              <li>Basic SEO</li>
+              <li>Blog Section</li>
+              <li>WhatsApp Button</li>
+              <li>Mobile Responsive</li>
+            </ul>
+            <a href="contact.html?package=Business+Website+%E2%80%94+Gold+Plan+%28R4%2C999%29" class="btn btn--primary btn--block" rel="nofollow">Get Started</a>
+          </article>
+          <article class="pricing-card reveal" style="--reveal-delay:160ms">
+            <h3>Platinum Plan</h3>
+            <div class="pricing-price">R6,499<span> once-off</span></div>
+            <ul class="pricing-features">
+              <li>20 Page Custom Design</li>
+              <li>SSL Certificate</li>
+              <li>Contact Form</li>
+              <li>Social Media Integration</li>
+              <li>Advanced SEO</li>
+              <li>Blog Section</li>
+              <li>WhatsApp Button</li>
+              <li>Mobile Responsive</li>
+            </ul>
+            <a href="contact.html?package=Business+Website+%E2%80%94+Platinum+Plan+%28R6%2C499%29" class="btn btn--primary btn--block" rel="nofollow">Get Started</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== E-COMMERCE WEBSITES ============================== -->
+    <section class="section pricing-panel" id="ecommerce" role="tabpanel" hidden>
+      <div class="container">
+        <div class="section-head section-head--center reveal">
+          <h2>E-commerce Websites</h2>
+          <p>A fully functional online store, built and ready to take orders. Once-off design fee. Hosting and email are available as a separate monthly add-on.</p>
         </div>
         <div class="pricing-grid">
           <article class="pricing-card reveal">
             <h3>Silver Plan</h3>
-            <div class="pricing-price">R450<span>/month</span></div>
+            <div class="pricing-price">R5,999<span> once-off</span></div>
             <ul class="pricing-features">
-              <li>5 Page Custom Design</li>
-              <li>Free Domain Setup</li>
+              <li>Up to 10 Products</li>
+              <li>Secure Online Payments</li>
               <li>SSL Certificate</li>
-              <li>1 Professional E-mail</li>
-              <li>Social Media Integration</li>
+              <li>Cart &amp; Checkout Pages</li>
+              <li>Discount Codes</li>
               <li>Basic SEO</li>
-              <li>1 Hour of Updates</li>
+              <li>Mobile Responsive</li>
             </ul>
-            <a href="contact.html?package=Business+Silver+Plan+%28R450%2Fmonth%29" class="btn btn--primary btn--block" rel="nofollow">Get Started</a>
+            <a href="contact.html?package=E-commerce+Website+%E2%80%94+Silver+Plan+%28R5%2C999%29" class="btn btn--primary btn--block" rel="nofollow">Get Started</a>
           </article>
           <article class="pricing-card is-featured reveal" style="--reveal-delay:80ms">
             <span class="pricing-badge">Most Popular</span>
             <h3>Gold Plan</h3>
-            <div class="pricing-price">R600<span>/month</span></div>
+            <div class="pricing-price">R7,499<span> once-off</span></div>
             <ul class="pricing-features">
-              <li>10 Page Custom Design</li>
-              <li>Free Domain Setup</li>
+              <li>Up to 25 Products</li>
+              <li>Secure Online Payments</li>
               <li>SSL Certificate</li>
-              <li>1 Professional E-mail</li>
-              <li>Social Media Integration</li>
+              <li>Cart &amp; Checkout Pages</li>
+              <li>Discount Codes</li>
               <li>Basic SEO</li>
-              <li>1 Hour of Updates</li>
+              <li>Mobile Responsive</li>
             </ul>
-            <a href="contact.html?package=Business+Gold+Plan+%28R600%2Fmonth%29" class="btn btn--primary btn--block" rel="nofollow">Get Started</a>
+            <a href="contact.html?package=E-commerce+Website+%E2%80%94+Gold+Plan+%28R7%2C499%29" class="btn btn--primary btn--block" rel="nofollow">Get Started</a>
           </article>
           <article class="pricing-card reveal" style="--reveal-delay:160ms">
             <h3>Platinum Plan</h3>
-            <div class="pricing-price">R900<span>/month</span></div>
+            <div class="pricing-price">R9,499<span> once-off</span></div>
             <ul class="pricing-features">
-              <li>20 Page Custom Design</li>
-              <li>Free Domain Setup</li>
+              <li>Up to 50 Products</li>
+              <li>Secure Online Payments</li>
               <li>SSL Certificate</li>
-              <li>10 E-mail Alias</li>
-              <li>Social Media Integration</li>
-              <li>Advanced SEO</li>
-              <li>1 Hour of Updates</li>
+              <li>Cart &amp; Checkout Pages</li>
+              <li>Discount Codes</li>
+              <li>Basic SEO</li>
+              <li>Mobile Responsive</li>
             </ul>
-            <a href="contact.html?package=Business+Platinum+Plan+%28R900%2Fmonth%29" class="btn btn--primary btn--block" rel="nofollow">Get Started</a>
+            <a href="contact.html?package=E-commerce+Website+%E2%80%94+Platinum+Plan+%28R9%2C499%29" class="btn btn--primary btn--block" rel="nofollow">Get Started</a>
+          </article>
+        </div>
+        <p class="pricing-disclaimer reveal">The e-commerce package price is for the once-off website build only. It does not include ongoing monthly store management, product updates, sales support, content changes or regular website changes. Ongoing management is available as a separate monthly add-on.</p>
+      </div>
+    </section>
+
+    <!-- ============================== DIRECTORY WEBSITES ============================== -->
+    <section class="section pricing-panel" id="directory" role="tabpanel" hidden>
+      <div class="container">
+        <div class="section-head section-head--center reveal">
+          <h2>Directory Websites</h2>
+          <p>A searchable, filterable directory to list businesses, services or properties — think a local business directory or property listings portal. Once-off design fee. Hosting and email are available as a separate monthly add-on.</p>
+        </div>
+        <div class="pricing-grid">
+          <article class="pricing-card reveal">
+            <h3>Silver Plan</h3>
+            <div class="pricing-price">R8,999<span> once-off</span></div>
+            <ul class="pricing-features">
+              <li>Up to 25 Listings</li>
+              <li>Search &amp; Filter</li>
+              <li>User Registration</li>
+              <li>Listing Management</li>
+              <li>SSL Certificate</li>
+              <li>Basic SEO</li>
+              <li>Mobile Responsive</li>
+            </ul>
+            <a href="contact.html?package=Directory+Website+%E2%80%94+Silver+Plan+%28R8%2C999%29" class="btn btn--primary btn--block" rel="nofollow">Get Started</a>
+          </article>
+          <article class="pricing-card is-featured reveal" style="--reveal-delay:80ms">
+            <span class="pricing-badge">Most Popular</span>
+            <h3>Gold Plan</h3>
+            <div class="pricing-price">R11,999<span> once-off</span></div>
+            <ul class="pricing-features">
+              <li>Up to 50 Listings</li>
+              <li>Search &amp; Filter</li>
+              <li>User Registration</li>
+              <li>Listing Management</li>
+              <li>SSL Certificate</li>
+              <li>Basic SEO</li>
+              <li>Mobile Responsive</li>
+            </ul>
+            <a href="contact.html?package=Directory+Website+%E2%80%94+Gold+Plan+%28R11%2C999%29" class="btn btn--primary btn--block" rel="nofollow">Get Started</a>
+          </article>
+          <article class="pricing-card reveal" style="--reveal-delay:160ms">
+            <h3>Platinum Plan</h3>
+            <div class="pricing-price"><span style="font-size:var(--fs-base);font-weight:500;color:var(--text-muted)">From </span>R14,999</div>
+            <ul class="pricing-features">
+              <li>Unlimited Listings</li>
+              <li>Search &amp; Filter</li>
+              <li>User Registration</li>
+              <li>Listing Management</li>
+              <li>SSL Certificate</li>
+              <li>Basic SEO</li>
+              <li>Mobile Responsive</li>
+            </ul>
+            <a href="contact.html?package=Directory+Website+%E2%80%94+Platinum+Plan+%28from+R14%2C999%29" class="btn btn--primary btn--block" rel="nofollow">Get Started</a>
           </article>
         </div>
       </div>
     </section>
 
     <!-- ============================== ADD-ONS ============================== -->
-    <section class="section section--alt" id="more">
+    <section class="section section--alt" id="addons">
       <div class="container">
         <div class="section-head section-head--center reveal">
-          <div class="eyebrow" style="justify-content:center">More Than Just a Website</div>
-          <h2>Add-ons that round out your online presence</h2>
+          <h2>Optional Monthly Add-ons</h2>
+          <p>Your website design is paid once. Hosting and management are separate monthly services — take both, one, or neither.</p>
         </div>
+
         <div class="addon-grid">
+          <!-- Hosting -->
           <article class="addon-card reveal">
-            <h3>Website + Visual Content</h3>
-            <p>Upgrade your presence with professional photography or videography. High-quality visuals make your business stand out and create a more engaging experience.</p>
-            <a href="contact.html" class="btn btn--primary">Enquire</a>
+            <h3>Hosting</h3>
+            <div class="pricing-price" style="font-size:var(--fs-xl);margin:var(--sp-3) 0">R199<span style="font-size:var(--fs-md);font-weight:500;color:var(--text-muted)">/month</span></div>
+            <p>Available for all website packages.</p>
+            <ul class="pricing-features" style="margin-top:var(--sp-4)">
+              <li>Website Hosting</li>
+              <li>Professional Email</li>
+            </ul>
+            <a href="contact.html?package=Hosting+Add-on+%28R199%2Fmonth%29" class="btn btn--primary btn--block" style="margin-top:var(--sp-6)" rel="nofollow">Add to Package</a>
           </article>
+
+          <!-- Management -->
           <article class="addon-card reveal" style="--reveal-delay:80ms">
-            <h3>Website + Social Media</h3>
-            <p>Add social media management to keep your business active and visible online. We create and manage content that builds trust and keeps your brand consistent.</p>
-            <a href="contact.html" class="btn btn--primary">Enquire</a>
+            <h3>Website Management</h3>
+            <div style="margin:var(--sp-3) 0 var(--sp-4)">
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:var(--sp-2) 0;border-bottom:1px solid var(--border)">
+                <span>Business Website</span>
+                <strong>R199/month</strong>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:var(--sp-2) 0;border-bottom:1px solid var(--border)">
+                <span>E-commerce Website</span>
+                <strong>R249/month</strong>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:var(--sp-2) 0">
+                <span>Directory Website</span>
+                <strong>R249/month</strong>
+              </div>
+            </div>
+            <p style="font-size:var(--fs-sm);color:var(--text-muted)">All plans include 1 hour of monthly management. Any work beyond the included hour must be quoted separately or billed as additional work.</p>
+            <ul class="pricing-features" style="margin-top:var(--sp-4)">
+              <li>Website Updates</li>
+              <li>Plugin Updates</li>
+              <li>Theme Updates</li>
+              <li>Basic Content Updates</li>
+              <li>General Maintenance</li>
+            </ul>
+            <a href="contact.html?package=Website+Management+Add-on" class="btn btn--primary btn--block" style="margin-top:var(--sp-6)" rel="nofollow">Add to Package</a>
           </article>
+
+          <!-- Extra services -->
           <article class="addon-card reveal" style="--reveal-delay:160ms">
-            <h3>Website + Branding</h3>
-            <p>Build a strong, consistent brand identity with logo design and visual elements that align with your website, making your business more recognisable and trustworthy.</p>
-            <a href="contact.html" class="btn btn--primary">Enquire</a>
+            <h3>Extra Services</h3>
+            <p>Round out your online presence with additional services tailored to your business.</p>
+            <ul class="pricing-features" style="margin-top:var(--sp-4)">
+              <li>Professional Videography</li>
+              <li>Professional Photography</li>
+              <li>Logo &amp; Branding</li>
+              <li>Social Media Management</li>
+              <li>Google Ads</li>
+              <li>SEO Optimisation</li>
+            </ul>
+            <a href="contact.html" class="btn btn--primary btn--block" style="margin-top:var(--sp-6)">Enquire</a>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- ============================== E-COMMERCE PACKAGES ============================== -->
-    <section class="section" id="ecommerce">
-      <div class="container">
-        <div class="section-head section-head--center reveal">
-          <div class="eyebrow" style="justify-content:center">E-commerce Packages</div>
-          <h2>Sell online with a fully managed store</h2>
-          <p>Every plan includes secure online payments, cart and checkout pages and ongoing updates.</p>
-        </div>
-        <div class="pricing-grid">
-          <article class="pricing-card reveal">
-            <h3>Silver Plan</h3>
-            <div class="pricing-price">R600<span>/month</span></div>
-            <ul class="pricing-features">
-              <li>Up to 10 Products</li>
-              <li>Free Domain Setup</li>
-              <li>Secure Online Payments</li>
-              <li>1 Professional E-mail</li>
-              <li>Cart and Checkout Pages</li>
-              <li>Basic SEO</li>
-              <li>1 Hour of Updates</li>
-            </ul>
-            <a href="contact.html?package=E-commerce+Silver+Plan+%28R600%2Fmonth%29" class="btn btn--primary btn--block" rel="nofollow">Get Started</a>
-          </article>
-          <article class="pricing-card is-featured reveal" style="--reveal-delay:80ms">
-            <span class="pricing-badge">Most Popular</span>
-            <h3>Gold Plan</h3>
-            <div class="pricing-price">R900<span>/month</span></div>
-            <ul class="pricing-features">
-              <li>Up to 20 Products</li>
-              <li>Free Domain Setup</li>
-              <li>Secure Online Payments</li>
-              <li>1 Professional E-mail</li>
-              <li>Cart and Checkout Pages</li>
-              <li>Basic SEO</li>
-              <li>1 Hour of Updates</li>
-            </ul>
-            <a href="contact.html?package=E-commerce+Gold+Plan+%28R900%2Fmonth%29" class="btn btn--primary btn--block" rel="nofollow">Get Started</a>
-          </article>
-          <article class="pricing-card reveal" style="--reveal-delay:160ms">
-            <h3>Platinum Plan</h3>
-            <div class="pricing-price">R1600<span>/month</span></div>
-            <ul class="pricing-features">
-              <li>Up to 50 Products</li>
-              <li>Free Domain Setup</li>
-              <li>Secure Online Payments</li>
-              <li>10 E-mail Alias</li>
-              <li>Cart and Checkout Pages</li>
-              <li>Advanced SEO</li>
-              <li>2 Hours of Updates</li>
-            </ul>
-            <a href="contact.html?package=E-commerce+Platinum+Plan+%28R1600%2Fmonth%29" class="btn btn--primary btn--block" rel="nofollow">Get Started</a>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================== FAQ ============================== -->
     <!-- ============================== CTA BAND ============================== -->
     <section class="cta-band">
       <div class="container reveal">
-        <div class="eyebrow" style="justify-content:center">Not Sure What You Need?</div>
-        <h2>Let's find the right package for you</h2>
-        <p>Tell us about your business and we'll recommend the package that fits, no pressure, no jargon.</p>
+        <h2>Not sure which package suits you?</h2>
+        <p>Tell us about your business and we'll recommend the right option — no pressure, no jargon.</p>
         <div class="hero-actions">
           <a href="contact.html" class="btn btn--primary">Contact Us</a>
         </div>
       </div>
     </section>
 
+    <!-- ============================== FAQ ============================== -->
     <section class="section section--alt" id="faq">
       <div class="container faq-layout">
         <div class="reveal">
-          <div class="eyebrow">FAQ</div>
           <h2>Pricing Questions</h2>
           <p style="margin-top:1rem;color:var(--text-muted)">Everything you need to know about how our pricing works. Can't find your answer? <a href="contact.html" style="text-decoration:underline">Get in touch</a>.</p>
         </div>
@@ -216,20 +343,29 @@
           <div class="faq-panel is-active" id="faq-pricing" role="tabpanel">
             <div class="faq-item" data-open="false">
               <button class="faq-question" aria-expanded="false">
-                Do I need to pay upfront for a website?
+                Is the website design fee a once-off payment?
                 <span class="icon" aria-hidden="true">+</span>
               </button>
               <div class="faq-answer">
-                <p>No. We don't charge large upfront design fees. Our monthly model gets you a professional website without a big initial cost.</p>
+                <p>Yes. The design fee is a once-off payment. You pay it once and the website is yours. Hosting and management are separate optional monthly add-ons.</p>
               </div>
             </div>
             <div class="faq-item" data-open="false">
               <button class="faq-question" aria-expanded="false">
-                What does the monthly fee include?
+                Do I need hosting to keep my website live?
                 <span class="icon" aria-hidden="true">+</span>
               </button>
               <div class="faq-answer">
-                <p>Your website, hosting, domain, SSL, updates and ongoing support: everything is managed for you.</p>
+                <p>Yes. Every website needs hosting to stay live on the internet. Our hosting add-on is R199 per month and includes website hosting and a professional email address. You can also use your own hosting provider if you prefer.</p>
+              </div>
+            </div>
+            <div class="faq-item" data-open="false">
+              <button class="faq-question" aria-expanded="false">
+                What happens if I don't pay my monthly hosting or management fee?
+                <span class="icon" aria-hidden="true">+</span>
+              </button>
+              <div class="faq-answer">
+                <p>If a monthly payment is missed, services such as hosting, email access and website updates may be suspended until payment is received. We will always notify you before any action is taken.</p>
               </div>
             </div>
             <div class="faq-item" data-open="false">
@@ -238,16 +374,16 @@
                 <span class="icon" aria-hidden="true">+</span>
               </button>
               <div class="faq-answer">
-                <p>No. Our pricing is clear and transparent, so you know exactly what you're paying for with no unexpected charges.</p>
+                <p>No. Your once-off design fee covers the full website build. Hosting and management are clearly priced optional add-ons. No unexpected charges.</p>
               </div>
             </div>
             <div class="faq-item" data-open="false">
               <button class="faq-question" aria-expanded="false">
-                Can I cancel my plan at any time?
+                Can I cancel hosting or management at any time?
                 <span class="icon" aria-hidden="true">+</span>
               </button>
               <div class="faq-answer">
-                <p>Yes. You can cancel at any time, full flexibility, with no long-term commitments.</p>
+                <p>Yes. Monthly services can be cancelled at any time by notifying us in writing before the next billing date. No long-term commitments.</p>
               </div>
             </div>
             <div class="faq-item" data-open="false">
@@ -261,11 +397,11 @@
             </div>
             <div class="faq-item" data-open="false">
               <button class="faq-question" aria-expanded="false">
-                Do you provide support after the website is live?
+                Will I own the website files once it's built?
                 <span class="icon" aria-hidden="true">+</span>
               </button>
               <div class="faq-answer">
-                <p>Yes. Your website is fully managed with ongoing support, updates and improvements included, so you are never left on your own.</p>
+                <p>Yes. Once the once-off design fee is paid in full, all website files and design work belong to you. Files will be handed over upon request once all outstanding fees are settled.</p>
               </div>
             </div>
           </div>
@@ -283,9 +419,9 @@
         </a>
         <p>Follow Edweb Media for updates, tips and our latest work. Contact us for any enquiries and we'll get back to you as soon as possible.</p>
         <div class="contact-socials" style="margin-top:1.5rem">
-          <a href="#" aria-label="Edweb Media on Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7h2.4l.4-2.8h-2.8v-1.6c0-.8.2-1.4 1.4-1.4h1.5V5.7c-.3 0-1.2-.1-2.2-.1-2.3 0-3.8 1.4-3.8 3.9v1.7H8v2.8h2.4V21h3.1z"/></svg></a>
-          <a href="#" aria-label="Edweb Media on Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="3.5"/><circle cx="17.2" cy="6.8" r="0.8" fill="currentColor" stroke="none"/></svg></a>
-          <a href="#" aria-label="Edweb Media on WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-1.2-.6-2-1-2.8-2.3-.2-.3 0-.5.2-.7.2-.2.4-.5.6-.7.1-.2.1-.4 0-.6-.1-.2-.6-1.5-.8-2-.1-.4-.3-.4-.5-.4h-.4c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.1s.9 2.5 1.1 2.7c.1.2 1.6 2.5 4 3.4 2 .8 2.4.7 2.8.6.4-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2 0-.1-.2-.2-.4-.3z"/></svg></a>
+          <a href="https://www.facebook.com/edwebmediasolutions" target="_blank" rel="noopener" aria-label="Edweb Media on Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7h2.4l.4-2.8h-2.8v-1.6c0-.8.2-1.4 1.4-1.4h1.5V5.7c-.3 0-1.2-.1-2.2-.1-2.3 0-3.8 1.4-3.8 3.9v1.7H8v2.8h2.4V21h3.1z"/></svg></a>
+          <a href="https://www.instagram.com/edwebmedia/" target="_blank" rel="noopener" aria-label="Edweb Media on Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="3.5"/><circle cx="17.2" cy="6.8" r="0.8" fill="currentColor" stroke="none"/></svg></a>
+          <a href="https://wa.me/27846204583" target="_blank" rel="noopener" aria-label="Edweb Media on WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-1.2-.6-2-1-2.8-2.3-.2-.3 0-.5.2-.7.2-.2.4-.5.6-.7.1-.2.1-.4 0-.6-.1-.2-.6-1.5-.8-2-.1-.4-.3-.4-.5-.4h-.4c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.1s.9 2.5 1.1 2.7c.1.2 1.6 2.5 4 3.4 2 .8 2.4.7 2.8.6.4-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2 0-.1-.2-.2-.4-.3z"/></svg></a>
         </div>
       </div>
       <div class="footer-col">
@@ -293,6 +429,7 @@
         <ul>
           <li><a href="index.html">Home</a></li>
           <li><a href="about-us.html">About</a></li>
+          <li><a href="projects.html">Projects</a></li>
           <li><a href="packages.html">Pricing</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
@@ -323,7 +460,6 @@
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-1.2-.6-2-1-2.8-2.3-.2-.3 0-.5.2-.7.2-.2.4-.5.6-.7.1-.2.1-.4 0-.6-.1-.2-.6-1.5-.8-2-.1-.4-.3-.4-.5-.4h-.4c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.1s.9 2.5 1.1 2.7c.1.2 1.6 2.5 4 3.4 2 .8 2.4.7 2.8.6.4-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2 0-.1-.2-.2-.4-.3z"/></svg>
   </a>
 
-  <script src="script.js"></script>
+  <script src="script.js?v=20260758"></script>
 </body>
 </html>
-
