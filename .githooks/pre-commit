@@ -1,0 +1,48 @@
+#!/bin/sh
+# Guardrail: one client site per branch, one site per commit.
+# Prevents the failure where two concurrent sessions share a branch and a
+# site's work lands on another site's branch (e.g. navigator on icon-fruit).
+# Active via: git config core.hooksPath .githooks
+
+SITES="redesign spiralguard-redesign navigator-vietnam-voynara tee-to-trail icon-fruit-redesign die-lekker-doos"
+
+site_of() {
+  for s in $SITES; do
+    case "$1" in "$s"/*) echo "$s"; return;; esac
+  done
+}
+
+staged=$(git diff --cached --name-only)
+[ -z "$staged" ] && exit 0
+
+# Site folder(s) touched by THIS commit
+this=$(for f in $staged; do site_of "$f"; done | sort -u)
+n=$(printf '%s\n' "$this" | grep -c .)
+[ "$n" -eq 0 ] && exit 0   # no site folder touched (config/docs) -> allow
+
+branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
+
+if [ "$n" -gt 1 ]; then
+  echo "pre-commit BLOCKED: this commit mixes multiple client sites:" $this
+  echo "Rule: one site per commit. Stage a single site's folder and commit it separately."
+  exit 1
+fi
+
+# Sites already committed on this branch (since it diverged from main)
+base=$(git merge-base HEAD main 2>/dev/null)
+prior=""
+if [ -n "$base" ]; then
+  prior=$(git log "$base"..HEAD --name-only --pretty=format: 2>/dev/null \
+          | while IFS= read -r f; do site_of "$f"; done | sort -u)
+fi
+
+for s in $prior; do
+  [ -n "$s" ] || continue
+  if [ "$s" != "$this" ]; then
+    echo "pre-commit BLOCKED: branch '$branch' already has commits for site '$s',"
+    echo "but you are committing site '$this'. Sites must not share a branch."
+    echo "Fix: git switch main && git switch -c ${this}-work   (commit the site there)"
+    exit 1
+  fi
+done
+exit 0
