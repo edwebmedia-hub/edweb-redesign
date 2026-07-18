@@ -333,6 +333,7 @@
         dates: val('dates'),
         travellers: val('travellers'),
         message: fields.message.el.value.trim(),
+        company: val('company'), // honeypot: real users leave this empty
       };
 
       submitBtn.disabled = true;

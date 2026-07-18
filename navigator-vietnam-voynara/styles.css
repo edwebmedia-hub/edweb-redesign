@@ -1221,6 +1221,8 @@ a.contact-card:hover { background: rgba(255, 255, 255, 0.12); transform: transla
 .form-field label .req { color: var(--accent); }
 .form-field label .opt { color: var(--body); font-weight: 400; font-family: var(--font-body); }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+/* Honeypot: off-screen for people, tempting for bots. Real users never fill it. */
+.hp-field { position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden; }
 .form-field input, .form-field textarea {
   font: inherit;
   font-size: 0.98rem;
