@@ -16,21 +16,38 @@
   const menu = document.getElementById('mobileMenu');
   const toggle = document.querySelector('.nav-toggle');
   const closeBtn = document.querySelector('.mobile-menu-close');
+  const focusablesIn = (el) => [...el.querySelectorAll('a[href], button:not([disabled])')].filter((n) => n.offsetParent !== null);
   const openMenu = () => {
     menu.classList.add('open');
     toggle && toggle.setAttribute('aria-expanded', 'true');
     document.body.style.overflow = 'hidden';
+    const first = focusablesIn(menu)[0];
+    if (first) first.focus();
   };
   const closeMenu = () => {
+    const wasOpen = menu.classList.contains('open');
     menu.classList.remove('open');
     toggle && toggle.setAttribute('aria-expanded', 'false');
     document.body.style.overflow = '';
+    // Return focus to the trigger so keyboard users aren't dropped at the top.
+    if (wasOpen && toggle) toggle.focus();
   };
   if (menu && toggle) {
     toggle.addEventListener('click', openMenu);
     closeBtn && closeBtn.addEventListener('click', closeMenu);
     menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', closeMenu));
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMenu(); });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') { closeMenu(); return; }
+      // Trap Tab within the open menu.
+      if (e.key === 'Tab' && menu.classList.contains('open')) {
+        const items = focusablesIn(menu);
+        if (!items.length) return;
+        const first = items[0];
+        const last = items[items.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+    });
   }
 
   /* ---------- Scroll reveal (IO + resilient fallback) ---------- */
@@ -120,6 +137,63 @@
     track.addEventListener('scroll', update, { passive: true });
     window.addEventListener('resize', update);
     update();
+  });
+
+  /* ---------- Looping contained strip (feature cards) ---------- */
+  document.querySelectorAll('[data-loop-strip]').forEach((wrap) => {
+    const track = wrap.querySelector('.feature-track');
+    const prevBtn = wrap.querySelector('[data-dir="-1"]');
+    const nextBtn = wrap.querySelector('[data-dir="1"]');
+    if (!track || !prevBtn || !nextBtn) return;
+
+    const originals = [...track.children];
+    const count = originals.length;
+    if (count < 2) return;
+
+    // Three sets of cards so either direction always has identical content to
+    // wrap onto; clones are hidden from the a11y tree.
+    const cloneSet = () => originals.map((el) => {
+      const clone = el.cloneNode(true);
+      clone.setAttribute('aria-hidden', 'true');
+      return clone;
+    });
+    cloneSet().forEach((c) => track.appendChild(c));
+    cloneSet().reverse().forEach((c) => track.insertBefore(c, track.firstChild));
+
+    const first = () => track.children[count];
+    const setWidth = () => track.children[count * 2].offsetLeft - first().offsetLeft;
+    const step = () => track.children[1].offsetLeft - track.children[0].offsetLeft;
+    const rest = () => first().offsetLeft - (parseFloat(getComputedStyle(track).paddingLeft) || 0);
+
+    const jump = (delta) => {
+      const snap = track.style.scrollSnapType;
+      track.style.scrollSnapType = 'none';
+      track.scrollLeft += delta;
+      void track.offsetWidth;
+      track.style.scrollSnapType = snap;
+    };
+    const normalize = () => {
+      const w = setWidth();
+      if (w <= 0) return;
+      const r = rest();
+      if (track.scrollLeft < r) jump(w);
+      else if (track.scrollLeft >= r + w) jump(-w);
+    };
+    const go = (dir) => track.scrollBy({ left: dir * step(), behavior: 'smooth' });
+
+    prevBtn.addEventListener('click', () => go(-1));
+    nextBtn.addEventListener('click', () => go(1));
+    let idle;
+    track.addEventListener('scroll', () => {
+      clearTimeout(idle);
+      idle = setTimeout(normalize, 140);
+    }, { passive: true });
+
+    const settle = () => jump(rest() - track.scrollLeft);
+    settle();
+    requestAnimationFrame(settle);
+    window.addEventListener('load', settle);
+    window.addEventListener('resize', () => { normalize(); });
   });
 
   /* ---------- Looping full-bleed carousel (destinations) ---------- */

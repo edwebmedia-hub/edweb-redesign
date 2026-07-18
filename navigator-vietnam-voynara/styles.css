@@ -154,7 +154,7 @@ p { text-wrap: pretty; }
 .eyebrow {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   font-family: var(--font-body);
   font-weight: 600;
   font-size: 0.78rem;
@@ -163,8 +163,17 @@ p { text-wrap: pretty; }
   color: var(--accent);
   margin-bottom: 16px;
 }
-.eyebrow::before { content: ""; width: 34px; height: 1.5px; background: currentColor; opacity: 0.8; }
-.section-head .eyebrow::after { content: ""; width: 34px; height: 1.5px; background: currentColor; opacity: 0.8; }
+/* A small mountain glyph leads every label (echoes the logo). Mask + currentColor
+   so it adapts to the eyebrow colour on light and dark sections alike. */
+.eyebrow::before {
+  content: "";
+  width: 20px;
+  height: 20px;
+  flex: none;
+  background: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M2 20l6.5-12 4 7 2.7-4.5L22 20z' fill='%23000'/%3E%3C/svg%3E") center / contain no-repeat;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M2 20l6.5-12 4 7 2.7-4.5L22 20z' fill='%23000'/%3E%3C/svg%3E") center / contain no-repeat;
+}
 .eyebrow.on-dark { color: var(--accent-soft); }
 
 /* ---------- Buttons ---------- */
@@ -516,10 +525,6 @@ html:not(.js) .reveal-stagger > * { opacity: 1 !important; transform: none !impo
 .slider-arrow svg { width: 22px; height: 22px; }
 .slider-arrow:disabled { opacity: 0.3; cursor: default; }
 .slider-arrow:disabled:hover { background: transparent; color: var(--ink); border-color: var(--line); transform: none; }
-/* The feature slider sits on bark, where the default ink-on-line arrow disappears. */
-.feature-section .slider-arrow { border-color: var(--line-dark); color: var(--paper); }
-.feature-section .slider-arrow:hover { background: var(--accent-soft); color: var(--deep); border-color: var(--accent-soft); }
-.feature-section .slider-arrow:disabled:hover { background: transparent; color: var(--paper); border-color: var(--line-dark); }
 
 /* Full-bleed track: sits outside .container, but its padding recreates the
    container gutter so cards line up with the heading while neighbours bleed
@@ -712,7 +717,7 @@ html:not(.js) .reveal-stagger > * { opacity: 1 !important; transform: none !impo
   border-radius: var(--radius-sm);
   padding: 24px 26px;
 }
-.signature-highlights h4 { font-size: 0.8rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
+.signature-highlights h3 { font-size: 0.8rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
 .signature-highlights li { display: flex; gap: 12px; padding: 7px 0; font-size: 0.98rem; color: var(--ink); }
 /* Darker olive: these sit on the --paper-2 band, where mid olive is only 2.6:1. */
 .signature-highlights li svg { width: 18px; height: 18px; color: var(--olive-2); flex-shrink: 0; margin-top: 3px; }
@@ -850,8 +855,10 @@ html:not(.js) .reveal-stagger > * { opacity: 1 !important; transform: none !impo
 .feature-card p { margin-top: 12px; }
 
 @media (min-width: 720px) { .feature-track { grid-auto-columns: 46%; } }
+/* Stays a 3-per-view horizontal scroller on desktop (was a static grid) so the
+   five cards scroll and loop. */
 @media (min-width: 1024px) {
-  .feature-track { grid-auto-columns: 1fr; grid-auto-flow: row; grid-template-columns: repeat(3, 1fr); overflow: visible; margin-inline: 0; padding-inline: 0; }
+  .feature-track { grid-auto-columns: calc((100% - 2 * 22px) / 3); margin-inline: 0; padding-inline: 0; }
 }
 
 /* ============================================================
@@ -1334,24 +1341,6 @@ a.contact-card:hover { background: rgba(255, 255, 255, 0.12); transform: transla
 .footer-cta h2 { color: var(--ink); font-size: clamp(2.2rem, 5vw, 3.6rem); }
 .footer-cta p { margin-top: 18px; color: var(--body); }
 
-/* Floating card variant: photo shows through, content sits on a card */
-.footer-cta.has-card { padding-block: clamp(70px, 10vw, 130px); }
-.footer-cta.has-card:not(.has-photo) {
-  background: var(--paper-2);
-  padding-block: clamp(40px, 5vw, 72px) clamp(70px, 9vw, 120px);
-}
-.footer-cta.has-card:not(.has-photo)::before { display: none; }
-.footer-cta-card {
-  background: var(--card);
-  border-radius: var(--radius);
-  padding: clamp(56px, 7vw, 92px) clamp(40px, 6vw, 68px);
-  box-shadow: var(--shadow-sm);
-  max-width: 640px;
-  margin-inline: auto;
-}
-.footer-cta-card h2 { color: var(--ink); }
-.footer-cta-card p { color: var(--body); }
-.footer-cta-card .btn { margin-top: 30px; }
 .footer-cta .btn { margin-top: 34px; }
 .footer-cta-alt { margin-top: 22px; font-size: 0.92rem; color: var(--body); }
 .footer-cta-alt a { color: var(--accent); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
@@ -1383,7 +1372,7 @@ a.contact-card:hover { background: rgba(255, 255, 255, 0.12); transform: transla
 }
 .footer-social a:hover { background: var(--accent-soft); color: var(--deep-2); border-color: var(--accent-soft); transform: translateY(-3px); }
 .footer-social svg { width: 20px; height: 20px; }
-.footer-col h4 { color: var(--paper); font-size: 1rem; margin-bottom: 18px; font-family: var(--font-display); }
+.footer-col h3 { color: var(--paper); font-size: 1rem; margin-bottom: 18px; font-family: var(--font-display); }
 .footer-col ul { display: flex; flex-direction: column; gap: 12px; }
 .footer-col a { font-size: 0.95rem; transition: color 0.3s var(--ease); }
 .footer-col a:hover { color: var(--accent-soft); }
@@ -1398,6 +1387,8 @@ a.contact-card:hover { background: rgba(255, 255, 255, 0.12); transform: transla
   font-size: 0.86rem;
   color: rgba(255, 255, 255, 0.55);
 }
+.footer-bottom a { color: var(--paper); font-weight: 600; text-decoration: none; transition: color 0.3s var(--ease); }
+.footer-bottom a:hover { color: var(--accent-soft); text-decoration: underline; text-underline-offset: 3px; }
 @media (min-width: 640px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
 @media (min-width: 980px) { .footer-grid { grid-template-columns: 1.6fr 1fr 1fr 1.3fr; gap: 30px; } }
 
@@ -1559,7 +1550,7 @@ a.contact-card:hover { background: rgba(255, 255, 255, 0.12); transform: transla
   letter-spacing: 0.02em;
   text-align: center;
 }
-.itinerary-day summary h4 { font-size: 1.02rem; font-weight: 600; color: var(--ink); flex: 1; }
+.itinerary-day summary h3 { font-size: 1.02rem; font-weight: 600; color: var(--ink); flex: 1; }
 .itinerary-day summary svg {
   width: 20px; height: 20px; color: var(--accent); flex-shrink: 0;
   transition: transform 0.35s var(--ease);
@@ -1571,7 +1562,7 @@ a.contact-card:hover { background: rgba(255, 255, 255, 0.12); transform: transla
 
 .incl-excl-grid { display: grid; grid-template-columns: 1fr; gap: 28px; margin-top: 20px; }
 @media (min-width: 700px) { .incl-excl-grid { grid-template-columns: 1fr 1fr; } }
-.incl-excl-col h4 { font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
+.incl-excl-col h3 { font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
 .incl-excl-col ul { display: flex; flex-direction: column; gap: 10px; }
 .incl-excl-col li { display: flex; gap: 12px; font-size: 0.94rem; color: var(--body); }
 .incl-excl-col li svg { width: 18px; height: 18px; flex-shrink: 0; margin-top: 2px; }
@@ -1624,7 +1615,7 @@ a.contact-card:hover { background: rgba(255, 255, 255, 0.12); transform: transla
   display: flex; align-items: center; justify-content: center;
   font-family: var(--font-display); font-weight: 700; font-size: 1.05rem;
 }
-.cyo-step h4 { font-size: 1.05rem; margin-bottom: 6px; }
+.cyo-step h3 { font-size: 1.05rem; margin-bottom: 6px; }
 .cyo-step p { color: var(--body); font-size: 0.95rem; }
 
 .cyo-tag-cloud { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
