@@ -1116,7 +1116,7 @@ html:not(.js) .reveal-stagger > * { opacity: 1 !important; transform: none !impo
   height: 42px;
   border-radius: 999px;
   background: var(--deep);
-  color: var(--accent-soft);
+  color: var(--paper);
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 0.9rem;
@@ -1149,8 +1149,8 @@ html:not(.js) .reveal-stagger > * { opacity: 1 !important; transform: none !impo
   top: 16px; left: 16px;
   width: 46px; height: 46px;
   border-radius: 50%;
-  background: var(--btn);
-  color: var(--btn-ink);
+  background: var(--accent-soft);
+  color: var(--deep-2);
   display: inline-flex; align-items: center; justify-content: center;
   font-family: var(--font-display); font-weight: 700; font-size: 1.2rem;
   box-shadow: 0 10px 22px -8px color-mix(in srgb, var(--deep) 50%, transparent);
