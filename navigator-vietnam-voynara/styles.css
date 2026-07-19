@@ -760,8 +760,8 @@ html:not(.js) .reveal-stagger > * { opacity: 1 !important; transform: none !impo
 .adv-card-meta svg { width: 17px; height: 17px; color: var(--accent); }
 .adv-card-diff {
   margin-left: auto;
-  background: var(--accent-soft);
-  color: var(--deep-2);
+  background: var(--btn);
+  color: var(--paper);
   font-weight: 600;
   font-size: 0.82rem;
   padding: 5px 13px;
