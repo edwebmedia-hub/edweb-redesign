@@ -44,9 +44,11 @@
   /* Logo sun orange — reserved for the highlight badge only, not buttons. */
   --orange:       #FC7C0C;
 
-  /* One button language across the whole site: Edgar's Forest swatch at rest,
-     darkens on hover (mixed toward --deep-2, so it's always in-family).
-     Cream label throughout. */
+  /* Solid buttons/badges (Olive swatch) darken to Forest on hover; outline
+     buttons stay Forest throughout since they show as text on a light page,
+     where Olive wouldn't read. Both from Edgar's palette, no invented hex. */
+  --btn-fill:      #BAB9A7;
+  --btn-fill-ink:  var(--ink);
   --btn:          #4D4738;
   --btn-hover:    color-mix(in srgb, var(--btn) 70%, var(--deep-2) 30%);
   --btn-ink:      var(--paper);
@@ -206,15 +208,16 @@ p { text-wrap: pretty; }
 .btn-arrow { width: 18px; height: 18px; transition: transform 0.35s var(--ease); }
 .btn:hover .btn-arrow { transform: translateX(4px); }
 
-/* Every button is identical: dark olive-green fill at rest, lightening to
-   the same family on hover. */
+/* Every solid button is identical: Olive fill at rest, darkens to Forest
+   on hover. */
 .btn-primary,
-.btn-accent { background: var(--btn); color: var(--btn-ink); }
+.btn-accent { background: var(--btn-fill); color: var(--btn-fill-ink); }
 .btn-primary:hover,
-.btn-accent:hover { background: var(--btn-hover); color: var(--btn-ink-hover); box-shadow: 0 14px 30px -14px color-mix(in srgb, var(--btn-hover) 60%, transparent); }
+.btn-accent:hover { background: var(--btn); color: var(--btn-ink); box-shadow: 0 14px 30px -14px color-mix(in srgb, var(--btn) 60%, transparent); }
 
-/* Outline stays a secondary affordance but speaks the same two colours:
-   olive outline at rest, filling with the lighter olive on hover. */
+/* Outline stays a secondary affordance: Forest text/border at rest (Olive
+   would be too light to read on the page background), darkening further
+   when it fills solid on hover. */
 .btn-outline { background: transparent; border-color: var(--btn); color: var(--btn); }
 .btn-outline:hover { border-color: var(--btn-hover); background: var(--btn-hover); color: var(--btn-ink-hover); }
 .btn-outline.on-dark { border-color: var(--line-dark); color: var(--paper); }
@@ -265,20 +268,20 @@ p { text-wrap: pretty; }
 .site-header.scrolled .nav-links a.active { color: var(--accent); }
 
 .nav-cta { display: none; }
-/* Same button language as the rest of the site: dark olive at rest in both
-   header states (over the hero and scrolled), logo-orange on hover. */
+/* Same button language as the rest of the site: Olive fill in both header
+   states (over the hero and scrolled), darkens to Forest on hover. */
 .site-header .nav-cta,
 .site-header:not(.scrolled) .nav-cta {
-  background: var(--btn);
-  border: 1.5px solid var(--btn);
-  color: var(--btn-ink);
+  background: var(--btn-fill);
+  border: 1.5px solid var(--btn-fill);
+  color: var(--btn-fill-ink);
   backdrop-filter: none;
 }
 .site-header .nav-cta:hover,
 .site-header:not(.scrolled) .nav-cta:hover {
-  background: var(--btn-hover);
-  border-color: var(--btn-hover);
-  color: var(--btn-ink-hover);
+  background: var(--btn);
+  border-color: var(--btn);
+  color: var(--btn-ink);
 }
 
 .nav-toggle {
@@ -580,9 +583,9 @@ html:not(.js) .reveal-stagger > * { opacity: 1 !important; transform: none !impo
 .region-arrow.prev { left: max(10px, calc(var(--gutter) - var(--arrow-size) / 2)); }
 .region-arrow.next { right: max(10px, calc(var(--gutter) - var(--arrow-size) / 2)); }
 .region-arrow.prev,
-.region-arrow.next { background: var(--btn); color: var(--btn-ink); }
+.region-arrow.next { background: var(--btn-fill); color: var(--btn-fill-ink); }
 .region-arrow.prev:hover,
-.region-arrow.next:hover { background: var(--btn-hover); color: var(--btn-ink-hover); transform: translateY(-50%) scale(1.06); }
+.region-arrow.next:hover { background: var(--btn); color: var(--btn-ink); transform: translateY(-50%) scale(1.06); }
 .region-slide {
   scroll-snap-align: start;
   display: flex;
@@ -1149,8 +1152,8 @@ html:not(.js) .reveal-stagger > * { opacity: 1 !important; transform: none !impo
   top: 16px; left: 16px;
   width: 46px; height: 46px;
   border-radius: 50%;
-  background: var(--btn);
-  color: var(--btn-ink);
+  background: var(--btn-fill);
+  color: var(--btn-fill-ink);
   display: inline-flex; align-items: center; justify-content: center;
   font-family: var(--font-display); font-weight: 700; font-size: 1.2rem;
   box-shadow: 0 10px 22px -8px color-mix(in srgb, var(--deep) 50%, transparent);
