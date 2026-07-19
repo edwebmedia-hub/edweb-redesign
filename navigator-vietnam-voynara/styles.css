@@ -44,23 +44,21 @@
   /* Logo sun orange — reserved for the highlight badge only, not buttons. */
   --orange:       #FC7C0C;
 
-  /* Three-tone system sourced from the actual logo mark: dark olive is the
-     site's original button colour blended with the logo's sampled ink
-     (#402805), lighter olive and charcoal are both derived from that one
-     value via color-mix — nothing invented. Solid buttons/badges use the
-     lighter olive at rest (dark ink text — checked at 4.9:1), darkening to
-     dark olive on hover (paper text, 10.4:1). Outline buttons stay dark
-     olive throughout since they show as text on a light page. */
-  --btn-fill:      #939174;
-  --btn-fill-ink:  var(--ink);
-  --btn:          #3A3703;
-  --btn-hover:    color-mix(in srgb, var(--btn) 70%, var(--deep-2) 30%);
+  /* Edgar's pick: original dark olive at rest everywhere on light
+     backgrounds (buttons, nav CTA, arrows, badges, outline text), darkens
+     to charcoal on hover. --btn-fill is now just an alias — kept so the
+     component rules below don't all need touching if this changes again. */
+  --btn:          #373E02;
+  --btn-fill:     var(--btn);
+  --btn-fill-ink: var(--paper);
   --btn-ink:      var(--paper);
   --btn-ink-hover: var(--paper);
-  /* Charcoal black — same derivation, darkened further toward black.
-     Footer and similar deep backgrounds; kept separate from --deep-2 so it
-     doesn't ripple into shadows/hover-mixing that already use that token. */
+  /* Charcoal black, derived from the dark olive darkened toward black.
+     Doubles as the hover target for every solid/outline button, and the
+     footer background. Kept separate from --deep-2 so it doesn't ripple
+     into shadows/hover-mixing that already use that token. */
   --charcoal:     #1A1901;
+  --btn-hover:    var(--charcoal);
 
   --ink:          #14271B;
   --ink-deep:     color-mix(in srgb, #14271B 55%, #000);
@@ -221,7 +219,7 @@ p { text-wrap: pretty; }
 .btn-primary,
 .btn-accent { background: var(--btn-fill); color: var(--btn-fill-ink); }
 .btn-primary:hover,
-.btn-accent:hover { background: var(--btn); color: var(--btn-ink); box-shadow: 0 14px 30px -14px color-mix(in srgb, var(--btn) 60%, transparent); }
+.btn-accent:hover { background: var(--btn-hover); color: var(--btn-ink); box-shadow: 0 14px 30px -14px color-mix(in srgb, var(--btn-hover) 60%, transparent); }
 
 /* Outline stays a secondary affordance: Forest text/border at rest (Olive
    would be too light to read on the page background), darkening further
@@ -287,8 +285,8 @@ p { text-wrap: pretty; }
 }
 .site-header .nav-cta:hover,
 .site-header:not(.scrolled) .nav-cta:hover {
-  background: var(--btn);
-  border-color: var(--btn);
+  background: var(--btn-hover);
+  border-color: var(--btn-hover);
   color: var(--btn-ink);
 }
 
@@ -593,7 +591,7 @@ html:not(.js) .reveal-stagger > * { opacity: 1 !important; transform: none !impo
 .region-arrow.prev,
 .region-arrow.next { background: var(--btn-fill); color: var(--btn-fill-ink); }
 .region-arrow.prev:hover,
-.region-arrow.next:hover { background: var(--btn); color: var(--btn-ink); transform: translateY(-50%) scale(1.06); }
+.region-arrow.next:hover { background: var(--btn-hover); color: var(--btn-ink); transform: translateY(-50%) scale(1.06); }
 .region-slide {
   scroll-snap-align: start;
   display: flex;
@@ -1410,9 +1408,9 @@ a.contact-card:hover { background: rgba(255, 255, 255, 0.12); transform: transla
 .footer-col h3 { color: var(--paper); font-size: 1rem; margin-bottom: 18px; font-family: var(--font-display); }
 .footer-col ul { display: flex; flex-direction: column; gap: 12px; }
 .footer-col a { font-size: 0.95rem; transition: color 0.3s var(--ease); }
-.footer-col a:hover { color: var(--btn-fill); }
+.footer-col a:hover { color: var(--paper); }
 .footer-contact li { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 14px; font-size: 0.94rem; }
-.footer-contact svg { width: 20px; height: 20px; color: var(--btn-fill); flex-shrink: 0; margin-top: 2px; }
+.footer-contact svg { width: 20px; height: 20px; color: var(--paper); flex-shrink: 0; margin-top: 2px; }
 .footer-bottom {
   display: flex;
   flex-wrap: wrap;
@@ -1423,7 +1421,7 @@ a.contact-card:hover { background: rgba(255, 255, 255, 0.12); transform: transla
   color: rgba(255, 255, 255, 0.55);
 }
 .footer-bottom a { color: var(--paper); font-weight: 600; text-decoration: none; transition: color 0.3s var(--ease); }
-.footer-bottom a:hover { color: var(--btn-fill); text-decoration: underline; text-underline-offset: 3px; }
+.footer-bottom a:hover { color: var(--paper); text-decoration: underline; text-underline-offset: 3px; }
 @media (min-width: 640px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
 @media (min-width: 980px) { .footer-grid { grid-template-columns: 1.6fr 1fr 1fr 1.3fr; gap: 30px; } }
 
