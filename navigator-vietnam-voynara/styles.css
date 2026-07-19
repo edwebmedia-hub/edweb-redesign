@@ -44,21 +44,13 @@
   /* Logo sun orange — reserved for the highlight badge only, not buttons. */
   --orange:       #FC7C0C;
 
-  /* Edgar's pick: original dark olive at rest everywhere on light
-     backgrounds (buttons, nav CTA, arrows, badges, outline text), darkens
-     to charcoal on hover. --btn-fill is now just an alias — kept so the
-     component rules below don't all need touching if this changes again. */
+  /* One button language across the whole site: dark olive at rest, a lighter
+     olive on hover (mixed from the same two tokens, so it's always in-family).
+     Cream label throughout — contrast holds at both ends (9.7:1 / 5.6:1). */
   --btn:          #373E02;
-  --btn-fill:     var(--btn);
-  --btn-fill-ink: var(--paper);
+  --btn-hover:    color-mix(in srgb, var(--btn) 70%, var(--deep-2) 30%);
   --btn-ink:      var(--paper);
   --btn-ink-hover: var(--paper);
-  /* Charcoal black, derived from the dark olive darkened toward black.
-     Doubles as the hover target for every solid/outline button, and the
-     footer background. Kept separate from --deep-2 so it doesn't ripple
-     into shadows/hover-mixing that already use that token. */
-  --charcoal:     #1A1901;
-  --btn-hover:    var(--charcoal);
 
   --ink:          #14271B;
   --ink-deep:     color-mix(in srgb, #14271B 55%, #000);
@@ -214,16 +206,15 @@ p { text-wrap: pretty; }
 .btn-arrow { width: 18px; height: 18px; transition: transform 0.35s var(--ease); }
 .btn:hover .btn-arrow { transform: translateX(4px); }
 
-/* Every solid button is identical: Olive fill at rest, darkens to Forest
-   on hover. */
+/* Every button is identical: dark olive-green fill at rest, lightening to
+   the same family on hover. */
 .btn-primary,
-.btn-accent { background: var(--btn-fill); color: var(--btn-fill-ink); }
+.btn-accent { background: var(--btn); color: var(--btn-ink); }
 .btn-primary:hover,
-.btn-accent:hover { background: var(--btn-hover); color: var(--btn-ink); box-shadow: 0 14px 30px -14px color-mix(in srgb, var(--btn-hover) 60%, transparent); }
+.btn-accent:hover { background: var(--btn-hover); color: var(--btn-ink-hover); box-shadow: 0 14px 30px -14px color-mix(in srgb, var(--btn-hover) 60%, transparent); }
 
-/* Outline stays a secondary affordance: Forest text/border at rest (Olive
-   would be too light to read on the page background), darkening further
-   when it fills solid on hover. */
+/* Outline stays a secondary affordance but speaks the same two colours:
+   olive outline at rest, filling with the lighter olive on hover. */
 .btn-outline { background: transparent; border-color: var(--btn); color: var(--btn); }
 .btn-outline:hover { border-color: var(--btn-hover); background: var(--btn-hover); color: var(--btn-ink-hover); }
 .btn-outline.on-dark { border-color: var(--line-dark); color: var(--paper); }
@@ -274,20 +265,20 @@ p { text-wrap: pretty; }
 .site-header.scrolled .nav-links a.active { color: var(--accent); }
 
 .nav-cta { display: none; }
-/* Same button language as the rest of the site: Olive fill in both header
-   states (over the hero and scrolled), darkens to Forest on hover. */
+/* Same button language as the rest of the site: dark olive at rest in both
+   header states (over the hero and scrolled), logo-orange on hover. */
 .site-header .nav-cta,
 .site-header:not(.scrolled) .nav-cta {
-  background: var(--btn-fill);
-  border: 1.5px solid var(--btn-fill);
-  color: var(--btn-fill-ink);
+  background: var(--btn);
+  border: 1.5px solid var(--btn);
+  color: var(--btn-ink);
   backdrop-filter: none;
 }
 .site-header .nav-cta:hover,
 .site-header:not(.scrolled) .nav-cta:hover {
   background: var(--btn-hover);
   border-color: var(--btn-hover);
-  color: var(--btn-ink);
+  color: var(--btn-ink-hover);
 }
 
 .nav-toggle {
@@ -589,9 +580,9 @@ html:not(.js) .reveal-stagger > * { opacity: 1 !important; transform: none !impo
 .region-arrow.prev { left: max(10px, calc(var(--gutter) - var(--arrow-size) / 2)); }
 .region-arrow.next { right: max(10px, calc(var(--gutter) - var(--arrow-size) / 2)); }
 .region-arrow.prev,
-.region-arrow.next { background: var(--btn-fill); color: var(--btn-fill-ink); }
+.region-arrow.next { background: var(--btn); color: var(--btn-ink); }
 .region-arrow.prev:hover,
-.region-arrow.next:hover { background: var(--btn-hover); color: var(--btn-ink); transform: translateY(-50%) scale(1.06); }
+.region-arrow.next:hover { background: var(--btn-hover); color: var(--btn-ink-hover); transform: translateY(-50%) scale(1.06); }
 .region-slide {
   scroll-snap-align: start;
   display: flex;
@@ -636,8 +627,8 @@ html:not(.js) .reveal-stagger > * { opacity: 1 !important; transform: none !impo
   color: var(--ink);
   transition: transform 0.3s var(--ease), color 0.3s var(--ease);
 }
-.region-slide:hover .region-slide-title strong { color: var(--btn); }
-.region-slide:hover .region-slide-arrow { transform: translateX(4px); color: var(--btn); }
+.region-slide:hover .region-slide-title strong { color: var(--accent); }
+.region-slide:hover .region-slide-arrow { transform: translateX(4px); color: var(--accent); }
 .region-slide-body small {
   color: var(--body);
   font-size: 0.92rem;
@@ -1158,8 +1149,8 @@ html:not(.js) .reveal-stagger > * { opacity: 1 !important; transform: none !impo
   top: 16px; left: 16px;
   width: 46px; height: 46px;
   border-radius: 50%;
-  background: var(--btn-fill);
-  color: var(--btn-fill-ink);
+  background: var(--btn);
+  color: var(--btn-ink);
   display: inline-flex; align-items: center; justify-content: center;
   font-family: var(--font-display); font-weight: 700; font-size: 1.2rem;
   box-shadow: 0 10px 22px -8px color-mix(in srgb, var(--deep) 50%, transparent);
@@ -1382,7 +1373,7 @@ a.contact-card:hover { background: rgba(255, 255, 255, 0.12); transform: transla
 /* ============================================================
    FOOTER
 ============================================================ */
-.site-footer { background: var(--charcoal); color: rgba(255, 255, 255, 0.75); padding-block: clamp(50px, 7vw, 84px) 30px; }
+.site-footer { background: var(--deep-2); color: rgba(255, 255, 255, 0.75); padding-block: clamp(50px, 7vw, 84px) 30px; }
 .footer-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -1403,14 +1394,14 @@ a.contact-card:hover { background: rgba(255, 255, 255, 0.12); transform: transla
   justify-content: center;
   transition: background 0.3s var(--ease), color 0.3s var(--ease), transform 0.3s var(--ease);
 }
-.footer-social a:hover { background: var(--btn-fill); color: var(--btn-fill-ink); border-color: var(--btn-fill); transform: translateY(-3px); }
+.footer-social a:hover { background: var(--accent-soft); color: var(--deep-2); border-color: var(--accent-soft); transform: translateY(-3px); }
 .footer-social svg { width: 20px; height: 20px; }
 .footer-col h3 { color: var(--paper); font-size: 1rem; margin-bottom: 18px; font-family: var(--font-display); }
 .footer-col ul { display: flex; flex-direction: column; gap: 12px; }
 .footer-col a { font-size: 0.95rem; transition: color 0.3s var(--ease); }
-.footer-col a:hover { color: var(--paper); }
+.footer-col a:hover { color: var(--accent-soft); }
 .footer-contact li { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 14px; font-size: 0.94rem; }
-.footer-contact svg { width: 20px; height: 20px; color: var(--paper); flex-shrink: 0; margin-top: 2px; }
+.footer-contact svg { width: 20px; height: 20px; color: var(--accent-soft); flex-shrink: 0; margin-top: 2px; }
 .footer-bottom {
   display: flex;
   flex-wrap: wrap;
@@ -1421,7 +1412,7 @@ a.contact-card:hover { background: rgba(255, 255, 255, 0.12); transform: transla
   color: rgba(255, 255, 255, 0.55);
 }
 .footer-bottom a { color: var(--paper); font-weight: 600; text-decoration: none; transition: color 0.3s var(--ease); }
-.footer-bottom a:hover { color: var(--paper); text-decoration: underline; text-underline-offset: 3px; }
+.footer-bottom a:hover { color: var(--accent-soft); text-decoration: underline; text-underline-offset: 3px; }
 @media (min-width: 640px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
 @media (min-width: 980px) { .footer-grid { grid-template-columns: 1.6fr 1fr 1fr 1.3fr; gap: 30px; } }
 
