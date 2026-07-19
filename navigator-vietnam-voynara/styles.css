@@ -48,9 +48,9 @@
      olive on hover (mixed from the same two tokens, so it's always in-family).
      Cream label throughout — contrast holds at both ends (9.7:1 / 5.6:1). */
   --btn:          #373E02;
-  --btn-hover:    color-mix(in srgb, var(--btn) 70%, var(--deep-2) 30%);
+  --btn-hover:    var(--accent-soft);
   --btn-ink:      var(--paper);
-  --btn-ink-hover: var(--paper);
+  --btn-ink-hover: var(--deep-2);
 
   --ink:          #14271B;
   --ink-deep:     color-mix(in srgb, #14271B 55%, #000);
