@@ -40,11 +40,12 @@ H1: exactly 1. Heading order clean in main content (footer `<h4>` noted as minor
 - **Nav toggle:** opens/closes, `aria-expanded` toggles.
 - **Reveal:** hero visible on load; sections reveal on scroll (IO) in foreground; fail-safes cover no-JS / throttled / hidden-tab.
 - **Form:** submit handler posts JSON to `/api/send-mail`; honeypot + rate-limit server-side; graceful failure alert. (Live send needs the Vercel `SMTP_PASS` env — not exercised locally.)
+  - **Live send confirmed 2026-07-19:** Edgar submitted the live quote form manually; the enquiry email **arrived in info@spiralguard.co.za**. End-to-end path (form → serverless → Hostinger SMTP → mailbox) verified in production.
 
 ## Accessibility (WCAG 2.2 AA pass)
 - Skip link, visible `:focus-visible` rings, semantic landmarks, single H1, labelled icon controls — all present.
 - Modal dialog semantics now complete (D2).
-- **Contrast:** body/muted/inverse text all pass (5.1, 4.8, 7.3–8.8:1). **Open item O1:** white-on-accent button labels = **4.22:1** (below 4.5) — brand-colour decision, left for Edgar.
+- **Contrast:** body/muted/inverse text all pass (5.1, 4.8, 7.3–8.8:1). **O1 RESOLVED 2026-07-19:** filled button labels moved from `--accent` `#f3182e` (4.22:1) to `--accent-dark` `#c8101f` — now **5.92:1**, passes AA. New `--accent-darker` `#a50d19` token drives hover. Verified live on spiralguard.co.za.
 
 ## WebKit / Safari spot-check
 No Safari/WebKit engine is available on this Windows machine, so this is a **code-level compatibility review**, not a live Safari render. A real-device pass (Mac/iPhone or BrowserStack) is recommended before launch.
@@ -60,4 +61,4 @@ No Safari/WebKit engine is available on this Windows machine, so this is a **cod
 ---
 
 ## Open items for Edgar (not changed — design/brand)
-O1 button contrast · O2 "Helix SpiralGuard" naming · O3 dead sticky-CTA · O4 unused CSS (~250 lines) · O5 768 grid density · O6 render-blocking fonts · O7 nav-toggle 40×32 tap · O8 footer h4 hierarchy · O9 sitemap `lastmod` / Product `priceValidUntil`. Detail in AUDIT.md.
+~~O1 button contrast~~ **✓ RESOLVED 2026-07-19 (token swap, live)** · O2 "Helix SpiralGuard" naming · O3 dead sticky-CTA · O4 unused CSS (~250 lines) · O5 768 grid density · O6 render-blocking fonts · O7 nav-toggle 40×32 tap · O8 footer h4 hierarchy · O9 sitemap `lastmod` / Product `priceValidUntil`. Detail in AUDIT.md.

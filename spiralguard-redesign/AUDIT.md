@@ -69,7 +69,7 @@ LocalBusiness structured data lists email only; the phone (+27 84 620 4583) is p
 
 ## Needs your call — not changed (design / brand)
 
-- **O1 — Primary button contrast 4.22:1 (below WCAG AA 4.5).** White label on brand red `#f3182e`; button text is 15–16px bold (not "large text"), so it fails AA. Fixing means darkening the CTA (e.g. use `--accent-dark #c8101f` for button backgrounds), which changes the look — your brand call.
+- **O1 — Primary button contrast 4.22:1 (below WCAG AA 4.5).** ✓ **RESOLVED 2026-07-19.** White label on brand red `#f3182e`; button text is 15–16px bold (not "large text"), so it fails AA. **Fix applied:** filled buttons (`.btn--primary`, `.cta-band .btn--secondary`) now use `--accent-dark #c8101f` = **5.92:1** (passes AA); added `--accent-darker #a50d19` for hover; killed the stray `#c8101f` hex. Verified live on spiralguard.co.za.
 - **O2 — Brand name.** Title, OG and hero say "SpiralGuard"; the recorded full name is **Helix SpiralGuard** (only the About body currently says "SpiralGuard (Helix Spiral Guard)"). Decide whether Helix should surface in the title/hero.
 - **O3 — Sticky mobile CTA is dead.** `.sticky-cta` is `display:none` at base **and** re-set to none ≤768 — it never appears anywhere. Enable on mobile or delete the markup. (Header CTA stays visible on mobile, so nothing is currently broken.)
 - **O4 — ~250 lines of unused CSS** (`.image-banner`, `.steps-grid`, `.industries-grid`, `.specs-list`, `.contact-grid/-info/-details`, `.values-grid`, `.placeholder-img`, `.hero-eyebrow`, `.btn--ghost-*`, `.hero-visual`, `.section--tight`). Cleanup only; touches shared CSS so I left it.

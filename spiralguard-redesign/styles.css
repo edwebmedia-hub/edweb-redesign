@@ -12,8 +12,9 @@
   --paper: #f7f8f9;         /* primary background, off-white */
   --paper-dim: #eef1f4;     /* secondary/alt section background, steel tint */
   --steel: #5b6b78;         /* soft steel grey accents */
-  --accent: #f3182e;        /* Helix red — brand accent: links, icons, borders, CTAs */
-  --accent-dark: #c8101f;   /* accent hover/active state */
+  --accent: #f3182e;        /* Helix red — brand accent: links, icons, borders */
+  --accent-dark: #c8101f;   /* AA-safe accent for filled button labels (white on this = 5.9:1) */
+  --accent-darker: #a50d19; /* hover/active state for filled accent buttons */
   --accent-light: #fde8ea;  /* tinted accent background for badges */
   --text: #232a30;          /* body text on light */
   --text-muted: #5f6b76;    /* secondary text */
@@ -213,11 +214,11 @@ summary:focus-visible {
 .btn:active { transform: scale(0.98); }
 
 .btn--primary {
-  background: var(--accent);
+  background: var(--accent-dark);
   color: #fff;
 }
 .btn--primary:hover {
-  background: var(--accent-dark);
+  background: var(--accent-darker);
   box-shadow: var(--shadow-md);
 }
 
@@ -898,8 +899,8 @@ summary:focus-visible {
   font-size: var(--fs-lg);
 }
 .cta-band .hero-actions { justify-content: center; margin-top: var(--sp-6); }
-.cta-band .btn--secondary { background: var(--accent); color: #fff; border: none; }
-.cta-band .btn--secondary:hover { background: #c8101f; }
+.cta-band .btn--secondary { background: var(--accent-dark); color: #fff; border: none; }
+.cta-band .btn--secondary:hover { background: var(--accent-darker); }
 
 /* ==========================================================================
    PAGE HERO (subpages)
