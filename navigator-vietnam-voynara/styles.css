@@ -48,7 +48,7 @@
      olive on hover (mixed from the same two tokens, so it's always in-family).
      Cream label throughout — contrast holds at both ends (9.7:1 / 5.6:1). */
   --btn:          #373E02;
-  --btn-hover:    color-mix(in srgb, var(--btn) 55%, var(--olive) 45%);
+  --btn-hover:    color-mix(in srgb, var(--btn) 70%, var(--deep-2) 30%);
   --btn-ink:      var(--paper);
   --btn-ink-hover: var(--paper);
 
@@ -580,9 +580,9 @@ html:not(.js) .reveal-stagger > * { opacity: 1 !important; transform: none !impo
 .region-arrow.prev { left: max(10px, calc(var(--gutter) - var(--arrow-size) / 2)); }
 .region-arrow.next { right: max(10px, calc(var(--gutter) - var(--arrow-size) / 2)); }
 .region-arrow.prev,
-.region-arrow.next { background: var(--deep); color: var(--paper); }
+.region-arrow.next { background: var(--btn); color: var(--btn-ink); }
 .region-arrow.prev:hover,
-.region-arrow.next:hover { background: var(--deep-2); transform: translateY(-50%) scale(1.06); }
+.region-arrow.next:hover { background: var(--btn-hover); color: var(--btn-ink-hover); transform: translateY(-50%) scale(1.06); }
 .region-slide {
   scroll-snap-align: start;
   display: flex;
@@ -859,7 +859,7 @@ html:not(.js) .reveal-stagger > * { opacity: 1 !important; transform: none !impo
   justify-content: center;
   flex-shrink: 0;
 }
-.feature-icon svg { width: 28px; height: 28px; color: var(--accent-soft); }
+.feature-icon svg { width: 28px; height: 28px; color: var(--paper); }
 .feature-card h3 { margin-top: 24px; font-size: 1.5rem; }
 .feature-card p { margin-top: 12px; }
 
@@ -1149,8 +1149,8 @@ html:not(.js) .reveal-stagger > * { opacity: 1 !important; transform: none !impo
   top: 16px; left: 16px;
   width: 46px; height: 46px;
   border-radius: 50%;
-  background: var(--accent-soft);
-  color: var(--deep-2);
+  background: var(--btn);
+  color: var(--btn-ink);
   display: inline-flex; align-items: center; justify-content: center;
   font-family: var(--font-display); font-weight: 700; font-size: 1.2rem;
   box-shadow: 0 10px 22px -8px color-mix(in srgb, var(--deep) 50%, transparent);
