@@ -53,6 +53,11 @@
   --btn-hover:    color-mix(in srgb, var(--btn) 70%, var(--deep-2) 30%);
   --btn-ink:      var(--paper);
   --btn-ink-hover: var(--paper);
+  /* Charcoal black, derived from Forest darkened toward black (stays in the
+     warm family instead of a cold neutral grey). Footer and similar deep
+     backgrounds — kept separate from --deep-2 so it doesn't ripple into
+     shadows/hover-mixing that already use that token. */
+  --charcoal:     color-mix(in srgb, var(--btn) 45%, black 55%);
 
   --ink:          #14271B;
   --ink-deep:     color-mix(in srgb, #14271B 55%, #000);
@@ -630,8 +635,8 @@ html:not(.js) .reveal-stagger > * { opacity: 1 !important; transform: none !impo
   color: var(--ink);
   transition: transform 0.3s var(--ease), color 0.3s var(--ease);
 }
-.region-slide:hover .region-slide-title strong { color: var(--accent); }
-.region-slide:hover .region-slide-arrow { transform: translateX(4px); color: var(--accent); }
+.region-slide:hover .region-slide-title strong { color: var(--btn); }
+.region-slide:hover .region-slide-arrow { transform: translateX(4px); color: var(--btn); }
 .region-slide-body small {
   color: var(--body);
   font-size: 0.92rem;
@@ -1376,7 +1381,7 @@ a.contact-card:hover { background: rgba(255, 255, 255, 0.12); transform: transla
 /* ============================================================
    FOOTER
 ============================================================ */
-.site-footer { background: var(--deep-2); color: rgba(255, 255, 255, 0.75); padding-block: clamp(50px, 7vw, 84px) 30px; }
+.site-footer { background: var(--charcoal); color: rgba(255, 255, 255, 0.75); padding-block: clamp(50px, 7vw, 84px) 30px; }
 .footer-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -1397,14 +1402,14 @@ a.contact-card:hover { background: rgba(255, 255, 255, 0.12); transform: transla
   justify-content: center;
   transition: background 0.3s var(--ease), color 0.3s var(--ease), transform 0.3s var(--ease);
 }
-.footer-social a:hover { background: var(--accent-soft); color: var(--deep-2); border-color: var(--accent-soft); transform: translateY(-3px); }
+.footer-social a:hover { background: var(--btn-fill); color: var(--btn-fill-ink); border-color: var(--btn-fill); transform: translateY(-3px); }
 .footer-social svg { width: 20px; height: 20px; }
 .footer-col h3 { color: var(--paper); font-size: 1rem; margin-bottom: 18px; font-family: var(--font-display); }
 .footer-col ul { display: flex; flex-direction: column; gap: 12px; }
 .footer-col a { font-size: 0.95rem; transition: color 0.3s var(--ease); }
-.footer-col a:hover { color: var(--accent-soft); }
+.footer-col a:hover { color: var(--btn-fill); }
 .footer-contact li { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 14px; font-size: 0.94rem; }
-.footer-contact svg { width: 20px; height: 20px; color: var(--accent-soft); flex-shrink: 0; margin-top: 2px; }
+.footer-contact svg { width: 20px; height: 20px; color: var(--btn-fill); flex-shrink: 0; margin-top: 2px; }
 .footer-bottom {
   display: flex;
   flex-wrap: wrap;
@@ -1415,7 +1420,7 @@ a.contact-card:hover { background: rgba(255, 255, 255, 0.12); transform: transla
   color: rgba(255, 255, 255, 0.55);
 }
 .footer-bottom a { color: var(--paper); font-weight: 600; text-decoration: none; transition: color 0.3s var(--ease); }
-.footer-bottom a:hover { color: var(--accent-soft); text-decoration: underline; text-underline-offset: 3px; }
+.footer-bottom a:hover { color: var(--btn-fill); text-decoration: underline; text-underline-offset: 3px; }
 @media (min-width: 640px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
 @media (min-width: 980px) { .footer-grid { grid-template-columns: 1.6fr 1fr 1fr 1.3fr; gap: 30px; } }
 
