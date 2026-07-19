@@ -44,10 +44,10 @@
   /* Logo sun orange — reserved for the highlight badge only, not buttons. */
   --orange:       #FC7C0C;
 
-  /* One button language across the whole site: dark olive at rest, a lighter
-     olive on hover (mixed from the same two tokens, so it's always in-family).
-     Cream label throughout — contrast holds at both ends (9.7:1 / 5.6:1). */
-  --btn:          #373E02;
+  /* One button language across the whole site: Edgar's Forest swatch at rest,
+     darkens on hover (mixed toward --deep-2, so it's always in-family).
+     Cream label throughout. */
+  --btn:          #4D4738;
   --btn-hover:    color-mix(in srgb, var(--btn) 70%, var(--deep-2) 30%);
   --btn-ink:      var(--paper);
   --btn-ink-hover: var(--paper);
