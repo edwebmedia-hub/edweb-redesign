@@ -44,11 +44,13 @@
   /* Logo sun orange — reserved for the highlight badge only, not buttons. */
   --orange:       #FC7C0C;
 
-  /* Solid buttons/badges (Olive swatch) darken to Forest on hover; outline
-     buttons stay Forest throughout since they show as text on a light page,
-     where Olive wouldn't read. Both from Edgar's palette, no invented hex. */
-  --btn-fill:      #BAB9A7;
-  --btn-fill-ink:  var(--ink);
+  /* Solid buttons/badges (Aloe swatch) darken to Forest on hover; outline
+     buttons stay Forest throughout since they show as text on a light page.
+     Olive (#BAB9A7) was tried here first but washed out against cream/photo
+     backgrounds at button size — Aloe has real presence. Both from Edgar's
+     palette, no invented hex. */
+  --btn-fill:      #755F4A;
+  --btn-fill-ink:  var(--paper);
   --btn:          #4D4738;
   --btn-hover:    color-mix(in srgb, var(--btn) 70%, var(--deep-2) 30%);
   --btn-ink:      var(--paper);
