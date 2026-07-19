@@ -44,22 +44,23 @@
   /* Logo sun orange — reserved for the highlight badge only, not buttons. */
   --orange:       #FC7C0C;
 
-  /* Solid buttons/badges (Aloe swatch) darken to Forest on hover; outline
-     buttons stay Forest throughout since they show as text on a light page.
-     Olive (#BAB9A7) was tried here first but washed out against cream/photo
-     backgrounds at button size — Aloe has real presence. Both from Edgar's
-     palette, no invented hex. */
-  --btn-fill:      #755F4A;
-  --btn-fill-ink:  var(--paper);
-  --btn:          #4D4738;
+  /* Three-tone system sourced from the actual logo mark: dark olive is the
+     site's original button colour blended with the logo's sampled ink
+     (#402805), lighter olive and charcoal are both derived from that one
+     value via color-mix — nothing invented. Solid buttons/badges use the
+     lighter olive at rest (dark ink text — checked at 4.9:1), darkening to
+     dark olive on hover (paper text, 10.4:1). Outline buttons stay dark
+     olive throughout since they show as text on a light page. */
+  --btn-fill:      #939174;
+  --btn-fill-ink:  var(--ink);
+  --btn:          #3A3703;
   --btn-hover:    color-mix(in srgb, var(--btn) 70%, var(--deep-2) 30%);
   --btn-ink:      var(--paper);
   --btn-ink-hover: var(--paper);
-  /* Charcoal black, derived from Forest darkened toward black (stays in the
-     warm family instead of a cold neutral grey). Footer and similar deep
-     backgrounds — kept separate from --deep-2 so it doesn't ripple into
-     shadows/hover-mixing that already use that token. */
-  --charcoal:     color-mix(in srgb, var(--btn) 45%, black 55%);
+  /* Charcoal black — same derivation, darkened further toward black.
+     Footer and similar deep backgrounds; kept separate from --deep-2 so it
+     doesn't ripple into shadows/hover-mixing that already use that token. */
+  --charcoal:     #1A1901;
 
   --ink:          #14271B;
   --ink-deep:     color-mix(in srgb, #14271B 55%, #000);
