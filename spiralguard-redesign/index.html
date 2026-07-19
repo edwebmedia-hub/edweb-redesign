@@ -1,8 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Reveal fail-safe: swap no-js→js before paint so CSS never hides content when JS is off -->
+  <script>document.documentElement.classList.remove('no-js');document.documentElement.classList.add('js');</script>
   <title>Spiral Guard Hose Protection South Africa | SpiralGuard</title>
   <meta name="description" content="Locally manufactured spiral guard hose protection for hydraulic, pneumatic and industrial hoses. Abrasion and crush resistant. Supplied across South Africa. Request a quote." />
   <meta name="keywords" content="spiral guard, spiral wrap, hose protection South Africa, hydraulic hose protection, cable protection, abrasion protection, SpiralGuard, Cape Town" />
@@ -45,9 +47,11 @@
       "name": "South Africa"
     },
     "email": "info@spiralguard.co.za",
+    "telephone": "+27846204583",
     "contactPoint": {
       "@type": "ContactPoint",
       "contactType": "sales",
+      "telephone": "+27846204583",
       "email": "info@spiralguard.co.za",
       "availableLanguage": "English"
     },
@@ -199,7 +203,7 @@
           <div class="benefit-card reveal" style="--reveal-delay:160ms">
             <div class="benefit-icon"><span class="material-symbols-outlined" aria-hidden="true">wb_sunny</span></div>
             <h3>Environmental durability</h3>
-            <p>UV resistant and rated for -40°C to +100°C — built for outdoor and harsh conditions.</p>
+            <p>UV resistant and rated for -40°C to +100°C, built for outdoor and harsh conditions.</p>
           </div>
           <div class="benefit-card reveal" style="--reveal-delay:240ms">
             <div class="benefit-icon"><span class="material-symbols-outlined" aria-hidden="true">trending_down</span></div>
@@ -214,12 +218,12 @@
     <section class="section" id="in-action">
       <div class="container feature-split">
         <div class="feature-media reveal" style="--reveal-delay:0ms">
-          <img src="assets/feature-action.jpg" alt="SpiralGuard spiral wrap fitted to hydraulic hoses on an excavator" onerror="this.parentElement.classList.add('is-empty')" />
+          <img src="assets/feature-action.jpg" alt="SpiralGuard spiral wrap fitted to hydraulic hoses on an excavator" loading="lazy" decoding="async" onerror="this.parentElement.classList.add('is-empty')" />
         </div>
         <div class="feature-content reveal" style="--reveal-delay:80ms">
           <h2>Built for the job site, not the showroom</h2>
           <p>
-            SpiralGuard is designed to handle the conditions hoses actually face — dragging across
+            SpiralGuard is designed to handle the conditions hoses actually face: dragging across
             steel, rubbing against moving parts, and sitting in the sun and dirt day after day.
           </p>
           <ul class="feature-list">
@@ -245,7 +249,7 @@
             <div class="icon"><span class="material-symbols-outlined" aria-hidden="true">water_drop</span></div>
             <div>
               <h3>Hydraulic hose protection</h3>
-              <p>Essential for hydraulic systems operating under high pressure. Prevents abrasion from contact with machinery, protects against cuts from sharp edges, and shields hoses from environmental damage — extending hose life and reducing the risk of costly failures.</p>
+              <p>Essential for hydraulic systems operating under high pressure. Prevents abrasion from contact with machinery, protects against cuts from sharp edges, and shields hoses from environmental damage, extending hose life and reducing the risk of costly failures.</p>
             </div>
           </div>
           <div class="why-card reveal" style="--reveal-delay:60ms">
@@ -372,7 +376,7 @@
           <a href="#contact" class="btn btn--primary" style="margin-top: var(--sp-6);" data-modal-open="contact">Request a Quote</a>
         </div>
         <div class="feature-media reveal" style="--reveal-delay:120ms; aspect-ratio: 4/3;">
-          <img src="assets/about-product.jpg" alt="SpiralGuard spiral wrap coiled on hydraulic hoses on a tractor" onerror="this.parentElement.classList.add('is-empty')" />
+          <img src="assets/about-product.jpg" alt="SpiralGuard spiral wrap coiled on hydraulic hoses on a tractor" loading="lazy" decoding="async" onerror="this.parentElement.classList.add('is-empty')" />
         </div>
       </div>
     </section>
@@ -473,14 +477,14 @@
       </button>
       <div class="contact-form">
         <h2 id="contact-modal-title">Request a Quote</h2>
-        <p>Fill in the form and we'll get back to you with pricing and availability — usually within 24 hours.</p>
+        <p>Fill in the form and we'll get back to you with pricing and availability, usually within 24 hours.</p>
 
         <!--
-          NOTE FOR SITE OWNER: This form currently has no backend.
-          Connect it to a form service (e.g. Formspree, Getform) or your
-          own endpoint by setting the `action` attribute and `method="POST"` below.
+          Submits via JS (script.js) as JSON to the Vercel serverless function
+          at /api/send-mail (nodemailer → Hostinger SMTP), with honeypot + rate
+          limiting server-side. The action below is a no-JS fallback target.
         -->
-        <form action="#" method="POST">
+        <form action="/api/send-mail" method="POST">
           <div class="hp-field" aria-hidden="true">
             <label for="website">Website (leave this field empty)</label>
             <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" />

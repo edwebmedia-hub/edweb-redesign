@@ -187,6 +187,11 @@ summary:focus-visible {
   opacity: 1;
   transform: translateY(0);
 }
+/* Fail-safe: if JS is disabled, no-js is never stripped — show content, never hide it */
+.no-js .reveal {
+  opacity: 1;
+  transform: none;
+}
 
 /* ==========================================================================
    BUTTONS
@@ -337,6 +342,7 @@ summary:focus-visible {
 .hero {
   position: relative;
   min-height: 100vh;
+  min-height: 100dvh; /* iOS Safari: dynamic viewport so the hero doesn't overflow under the address bar */
   display: flex;
   align-items: center;
   color: var(--text-inverse);
