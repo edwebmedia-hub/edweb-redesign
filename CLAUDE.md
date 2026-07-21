@@ -1,7 +1,7 @@
 # client-cms — Edgar's multi-client website workspace
 
 ## What this repo actually is
-Despite the name and `package.json` ("AI-native client CMS", Express/Mongo), the active work here is **static client websites**, one per subfolder. The Node app (`server.js`, `src/`, `data/`) is **deprecated — ignore it entirely**. Never run `npm start`, never edit it, never treat its dependencies as available to the sites.
+Despite the repo name, this is a workspace of **static client websites**, one per subfolder. The old Node "AI-native client CMS" app (`server.js`, `src/`, `public/`, root `package.json`) was **removed 2026-07-21** (recoverable from git history if ever needed). There is no root Node project: no `npm install`, no `npm start`, no shared root dependencies. Each site with a serverless form carries its own `package.json` inside its folder.
 
 Active site folders (each is an independent static HTML/CSS/vanilla-JS site):
 - `redesign/` — **Edweb Media's own site** (live at https://edwebmedia.com/ — the old edweb-redesign.vercel.app alias is dead). The flagship.
