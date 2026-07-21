@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cinematic Hero Preview | Edweb Media</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=block" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #2b2b2b;
+      --paper: #fafafa;
+      --coral: #e0474c;
+      --teal: #7acfd6;
+      --ink-light: color-mix(in srgb, var(--ink) 85%, white);
+      --ink-lighter: color-mix(in srgb, var(--ink) 65%, white);
+      --font: "Manrope", -apple-system, "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: var(--font);
+      background: var(--paper);
+      color: var(--ink);
+    }
+    .note {
+      padding: 1rem 1.5rem;
+      font-size: 0.85rem;
+      color: #888;
+      text-align: center;
+    }
+    .spacer { height: 40vh; display: flex; align-items: center; justify-content: center; color: #aaa; font-size: 0.9rem; }
+
+    /* ---- Pinned cinematic section ---- */
+    .cine-section {
+      position: relative;
+      height: 360vh;
+    }
+    .cine-sticky {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--paper);
+    }
+    .cine-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(to right, rgba(43,43,43,0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(43,43,43,0.05) 1px, transparent 1px);
+      background-size: 48px 48px;
+      -webkit-mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);
+      mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .cine-text {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 1.25rem;
+      will-change: transform, opacity, filter;
+    }
+    .cine-text h1 {
+      font-size: clamp(1.6rem, 0.9rem + 2.8vw, 3.2rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin: 0;
+      line-height: 1.15;
+    }
+    .cine-text h1 .line2 {
+      background: linear-gradient(180deg, var(--ink) 0%, var(--ink-lighter) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .cine-text .cursor {
+      display: inline-block;
+      width: 0.06em;
+      background: var(--coral);
+      margin-left: 0.06em;
+      animation: blink 1s step-end infinite;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+    .cine-text h1 .line2::after {
+      content: "";
+    }
+
+    .cine-card {
+      position: relative;
+      width: 92vw;
+      max-width: 1180px;
+      height: 78vh;
+      max-height: 640px;
+      border-radius: 40px;
+      background:
+        radial-gradient(80% 60% at 85% 15%, rgba(224,71,76,0.125), transparent 60%),
+        radial-gradient(60% 50% at 10% 90%, rgba(122,207,214,0.09), transparent 60%),
+        linear-gradient(160deg, #1a1a1a 0%, #2b2b2b 55%, #1a1a1a 100%);
+      box-shadow:
+        0 40px 100px -20px rgba(43,43,43,0.55),
+        0 20px 40px -20px rgba(43,43,43,0.4),
+        inset 0 1px 1px rgba(255,255,255,0.08);
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr 1.1fr 1fr;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 0 3rem;
+      will-change: transform, opacity;
+    }
+    .cine-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(rgba(245,243,238,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(245,243,238,0.1) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(ellipse 70% 70% at 50% 40%, black, transparent);
+      -webkit-mask-image: radial-gradient(ellipse 70% 70% at 50% 40%, black, transparent);
+      pointer-events: none;
+    }
+
+    .card-copy {
+      position: relative;
+      z-index: 1;
+      color: rgba(245,249,251,0.85);
+    }
+    .card-copy h3 {
+      font-size: clamp(1.1rem, 0.9rem + 1vw, 1.6rem);
+      font-weight: 700;
+      color: #fff;
+      margin: 0 0 0.75rem;
+    }
+    .card-copy p {
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin: 0;
+      color: rgba(245,249,251,0.6);
+    }
+
+    .card-services {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.6rem;
+    }
+    .services-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(245,249,251,0.4);
+      margin-bottom: 0.2rem;
+      align-self: flex-end;
+    }
+
+    .mockup {
+      position: relative;
+      z-index: 1;
+      justify-self: center;
+      width: 220px;
+      height: 460px;
+      border-radius: 2.4rem;
+      background: #050505;
+      box-shadow: inset 0 0 0 2px #4b4b4b, inset 0 0 0 6px #000, 0 30px 60px -15px rgba(0,0,0,0.8);
+      padding: 6px;
+    }
+    .mockup-screen {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 2rem;
+      background: #101010;
+      overflow: hidden;
+      padding: 2.2rem 1rem 1rem;
+      color: #fff;
+    }
+    .mockup-notch {
+      position: absolute;
+      top: 6px; left: 50%; transform: translateX(-50%);
+      width: 70px; height: 18px; background: #000; border-radius: 999px;
+    }
+    .mockup-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.4rem; }
+    .mockup-row .label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.4); }
+    .mockup-row .title { font-size: 15px; font-weight: 700; }
+    .mockup-avatar { width: 26px; height: 26px; border-radius: 50%; background: var(--coral); }
+    .mockup-ring { width: 120px; height: 120px; margin: 0 auto 1.4rem; position: relative; }
+    .mockup-ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+    .mockup-ring-track { fill: none; stroke: rgba(255,255,255,0.08); stroke-width: 10; }
+    .mockup-ring-progress {
+      fill: none; stroke: var(--teal); stroke-width: 10; stroke-linecap: round;
+      stroke-dasharray: 289; stroke-dashoffset: 289;
+      transition: stroke-dashoffset 0.1s linear;
+    }
+    .mockup-ring-center {
+      position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    }
+    .mockup-ring-center .val { font-size: 22px; font-weight: 800; }
+    .mockup-ring-center .lbl { font-size: 8px; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.08em; }
+    .mockup-widget {
+      display: flex; align-items: center; gap: 0.6rem;
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 14px; padding: 0.6rem 0.7rem; margin-bottom: 0.6rem;
+      opacity: 0; transform: translateY(10px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+    .mockup-widget.is-in { opacity: 1; transform: none; }
+    .mockup-widget .icon {
+      width: 28px; height: 28px; border-radius: 9px; display: flex; align-items: center; justify-content: center;
+      font-size: 15px; flex: none;
+    }
+    .mockup-widget .icon.coral { background: rgba(224,71,76,0.18); color: var(--coral); }
+    .mockup-widget .icon.teal { background: rgba(122,207,214,0.18); color: var(--teal); }
+    .mockup-widget .bars .bar1 { height: 6px; width: 70px; background: rgba(255,255,255,0.7); border-radius: 4px; margin-bottom: 4px; }
+    .mockup-widget .bars .bar2 { height: 5px; width: 44px; background: rgba(255,255,255,0.3); border-radius: 4px; }
+
+    .badge {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 0.7rem;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.08), 0 20px 40px -15px rgba(0,0,0,0.6);
+      color: #fff;
+      z-index: 2;
+      opacity: 0;
+      transform: translateY(16px) scale(0.9);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      will-change: opacity, transform;
+    }
+    .badge.is-in { opacity: 1; transform: none; }
+    .card-left {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+      justify-content: center;
+      height: 100%;
+    }
+    .badge-stack {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.55rem;
+    }
+    .badge-stack .badge {
+      position: relative;
+      top: auto; left: auto; bottom: auto; right: auto;
+      min-width: 0;
+      width: fit-content;
+    }
+    .badge .icon {
+      width: 26px; height: 26px; border-radius: 50%;
+      background: var(--paper);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; flex: none;
+    }
+    .badge:nth-of-type(odd) .icon { color: var(--coral); }
+    .badge:nth-of-type(even) .icon { color: var(--teal); }
+    .badge .t1 { font-size: 11px; font-weight: 700; }
+    .badge .t2 { font-size: 9px; color: rgba(255,255,255,0.5); }
+
+    .service-badge {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.5rem 0.75rem;
+      border-radius: 13px;
+      background: rgba(255,255,255,0.06);
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.08);
+      color: #fff;
+      opacity: 0;
+      transform: translateX(18px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      width: 210px;
+    }
+    .service-badge.is-in { opacity: 1; transform: none; }
+    .service-badge .icon {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: var(--paper);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; flex: none;
+    }
+    .service-badge:nth-child(odd) .icon { color: var(--coral); }
+    .service-badge:nth-child(even) .icon { color: var(--teal); }
+    .service-badge .t1 { font-size: 11.5px; font-weight: 700; }
+    .service-badge .t2 { font-size: 9.5px; color: rgba(255,255,255,0.5); margin-top: 1px; }
+
+    @media (max-width: 900px) {
+      .cine-card { grid-template-columns: 1fr; grid-template-rows: auto auto auto; height: auto; max-height: none; padding: 2rem 1.5rem; gap: 1.25rem; text-align: center; }
+      .card-copy { align-self: auto; padding-bottom: 0; }
+      .mockup { width: 180px; height: 370px; }
+      .badge { position: static; opacity: 1; transform: none; margin: 0 auto; }
+      .service-badge { opacity: 1; transform: none; }
+      .card-services { align-items: center; }
+      .cine-section { height: auto; }
+      .cine-sticky { position: relative; height: auto; padding: 4rem 0; }
+      .cine-text { position: relative; padding: 2rem 1.25rem; }
+    }
+
+    .no-js .cine-text,
+    .no-js .cine-card,
+    .no-js .badge,
+    .no-js .mockup-widget {
+      opacity: 1 !important;
+      transform: none !important;
+      filter: none !important;
+    }
+  </style>
+</head>
+<body class="no-js">
+  <div class="note">Preview only — not linked from the live site. Scroll to see the cinematic reveal.</div>
+  <div class="spacer">scroll down ↓</div>
+
+  <section class="cine-section" id="cineSection">
+    <div class="cine-sticky">
+      <div class="cine-grid" aria-hidden="true"></div>
+
+      <div class="cine-text" id="cineText">
+        <h1>Websites that get you found,<br /><span class="line2" id="typeLine"></span><span class="cursor">&nbsp;</span></h1>
+      </div>
+
+      <div class="cine-card" id="cineCard">
+        <div class="card-left">
+          <div class="card-copy">
+            <h3>Built to convert.</h3>
+            <p>Custom design, real performance and ongoing support, so your site keeps working long after launch.</p>
+          </div>
+          <div class="badge-stack">
+            <div class="badge" data-badge>
+              <div class="icon material-symbols-outlined" aria-hidden="true">rocket_launch</div>
+              <div><div class="t1">Fast turnaround</div><div class="t2">Live in 2–3 weeks</div></div>
+            </div>
+            <div class="badge" data-badge>
+              <div class="icon material-symbols-outlined" aria-hidden="true">search</div>
+              <div><div class="t1">Built to rank</div><div class="t2">SEO from day one</div></div>
+            </div>
+            <div class="badge" data-badge>
+              <div class="icon material-symbols-outlined" aria-hidden="true">verified</div>
+              <div><div class="t1">Management handled</div><div class="t2">Hosting, updates, support</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mockup">
+          <div class="mockup-screen">
+            <div class="mockup-notch"></div>
+            <div class="mockup-row">
+              <div>
+                <div class="label">Overview</div>
+                <div class="title">Growth</div>
+              </div>
+              <div class="mockup-avatar"></div>
+            </div>
+            <div class="mockup-ring">
+              <svg viewBox="0 0 110 110">
+                <circle class="mockup-ring-track" cx="55" cy="55" r="46" />
+                <circle class="mockup-ring-progress" id="ringProgress" cx="55" cy="55" r="46" />
+              </svg>
+              <div class="mockup-ring-center">
+                <span class="val" id="ringVal">0%</span>
+                <span class="lbl">Conversion up</span>
+              </div>
+            </div>
+            <div class="mockup-widget" data-widget>
+              <div class="icon coral material-symbols-outlined" aria-hidden="true">trending_up</div>
+              <div class="bars"><div class="bar1"></div><div class="bar2"></div></div>
+            </div>
+            <div class="mockup-widget" data-widget>
+              <div class="icon teal material-symbols-outlined" aria-hidden="true">bolt</div>
+              <div class="bars"><div class="bar1"></div><div class="bar2"></div></div>
+            </div>
+            <div class="mockup-widget" data-widget>
+              <div class="icon coral material-symbols-outlined" aria-hidden="true">favorite</div>
+              <div class="bars"><div class="bar1"></div><div class="bar2"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-services">
+          <div class="services-label">More services</div>
+          <div class="service-badge" data-service>
+            <div class="icon material-symbols-outlined" aria-hidden="true">palette</div>
+            <div><div class="t1">Branding</div><div class="t2">Identity that sticks</div></div>
+          </div>
+          <div class="service-badge" data-service>
+            <div class="icon material-symbols-outlined" aria-hidden="true">campaign</div>
+            <div><div class="t1">Digital Marketing</div><div class="t2">Reach the right people</div></div>
+          </div>
+          <div class="service-badge" data-service>
+            <div class="icon material-symbols-outlined" aria-hidden="true">ads_click</div>
+            <div><div class="t1">Google Ads</div><div class="t2">Leads that convert</div></div>
+          </div>
+          <div class="service-badge" data-service>
+            <div class="icon material-symbols-outlined" aria-hidden="true">photo_camera</div>
+            <div><div class="t1">Photography</div><div class="t2">Show it at its best</div></div>
+          </div>
+          <div class="service-badge" data-service>
+            <div class="icon material-symbols-outlined" aria-hidden="true">videocam</div>
+            <div><div class="t1">Videography</div><div class="t2">Bring the brand to life</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="spacer">back to the rest of the page</div>
+
+  <script>
+    document.body.classList.remove('no-js');
+
+    (function () {
+      var section = document.getElementById('cineSection');
+      var text = document.getElementById('cineText');
+      var card = document.getElementById('cineCard');
+      var ring = document.getElementById('ringProgress');
+      var ringVal = document.getElementById('ringVal');
+      var widgets = document.querySelectorAll('[data-widget]');
+      var badges = document.querySelectorAll('[data-badge]');
+      var services = document.querySelectorAll('[data-service]');
+      var typeLine = document.getElementById('typeLine');
+      var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      var RING_CIRC = 289;
+      var FULL_TEXT = 'not just seen.';
+      if (reduceMotion) { typeLine.textContent = FULL_TEXT; }
+
+      function clamp01(n) { return Math.max(0, Math.min(1, n)); }
+
+      function update() {
+        var rect = section.getBoundingClientRect();
+        var total = rect.height - window.innerHeight;
+        var progress = clamp01(total > 0 ? -rect.top / total : 0);
+
+        if (reduceMotion) {
+          text.style.opacity = 1;
+          text.style.transform = 'translateY(-20vh)';
+          card.style.opacity = 1;
+          card.style.transform = 'none';
+        } else {
+          // Phase 0 (0 -> 0.12): type out line 2
+          var typeP = clamp01(progress / 0.12);
+          var chars = Math.round(typeP * FULL_TEXT.length);
+          typeLine.textContent = FULL_TEXT.slice(0, chars);
+
+          // Hold (0.12 -> 0.22): typed text just sits there, nothing moves
+
+          // Phase 1 (0.22 -> 0.32): text fades/scales out, only after the hold
+          var textP = clamp01((progress - 0.22) / 0.1);
+          text.style.opacity = String(1 - textP);
+          text.style.transform = 'translateY(-20vh) scale(' + (1 - textP * 0.12) + ') translateY(' + (-textP * 30) + 'px)';
+          text.style.filter = 'blur(' + (textP * 10) + 'px)';
+
+          // Phase 2 (0.28 -> 0.45): card rises + scales in
+          var cardP = clamp01((progress - 0.28) / 0.17);
+          var eased = 1 - Math.pow(1 - cardP, 3);
+          // Phase 5 (0.88 -> 0.98): card fades/shrinks back out before the section unpins
+          card.style.opacity = String(cardP > 0 ? 1 : 0);
+          card.style.transform = 'translateY(' + ((1 - eased) * 60) + 'px) scale(' + (0.88 + eased * 0.12) + ')';
+        }
+
+        // Phase 3 (0.45 -> 0.55): ring fills
+        var fillP = clamp01((progress - 0.45) / 0.1);
+        var offset = RING_CIRC - fillP * RING_CIRC * 0.82;
+        ring.style.strokeDashoffset = String(offset);
+        ringVal.textContent = Math.round(fillP * 82) + '%';
+
+        // Phase 4 (0.46 -> ~0.72): widgets/badges/services stagger in, then a long hold with everything visible
+        widgets.forEach(function (w, i) {
+          var wp = clamp01((progress - (0.46 + i * 0.05)) / 0.09);
+          w.classList.toggle('is-in', wp > 0.15);
+        });
+        badges.forEach(function (b, i) {
+          var bp = clamp01((progress - (0.46 + i * 0.06)) / 0.09);
+          b.classList.toggle('is-in', bp > 0.15);
+        });
+        services.forEach(function (s, i) {
+          var svp = clamp01((progress - (0.5 + i * 0.06)) / 0.09);
+          s.classList.toggle('is-in', svp > 0.15);
+        });
+      }
+
+      var ticking = false;
+      function onScroll() {
+        if (!ticking) {
+          window.requestAnimationFrame(function () { update(); ticking = false; });
+          ticking = true;
+        }
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll);
+      update();
+    })();
+  </script>
+</body>
+</html>

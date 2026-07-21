@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dashboard Card Preview | Edweb Media</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=block" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #2b2b2b;
+      --paper: #fafafa;
+      --coral: #e0474c;
+      --teal: #7acfd6;
+      --font: "Manrope", -apple-system, "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      font-family: var(--font);
+      background: linear-gradient(155deg, #f4f6f5 0%, #eef2f2 100%);
+      transition: background 0.5s ease;
+    }
+    body.dark {
+      background: linear-gradient(155deg, #1c1c1c 0%, #141414 100%);
+    }
+    .note {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      padding: 0.75rem 1.5rem;
+      font-size: 0.8rem;
+      color: #888;
+      text-align: center;
+      background: #fff;
+      z-index: 10;
+    }
+
+    .dcard {
+      width: 100%;
+      max-width: 520px;
+      border-radius: 20px;
+      padding: 2rem;
+      background: #fff;
+      box-shadow: 0 1px 3px rgba(43,43,43,0.05), 0 10px 40px rgba(43,43,43,0.08);
+      transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), box-shadow 0.3s ease, background 0.4s ease;
+      transform-style: preserve-3d;
+    }
+    .dcard.is-hovered {
+      box-shadow: 0 1px 3px rgba(43,43,43,0.05), 0 20px 60px rgba(43,43,43,0.15);
+    }
+    body.dark .dcard {
+      background: rgba(38,38,38,0.9);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.3), 0 10px 40px rgba(0,0,0,0.4);
+    }
+    body.dark .dcard.is-hovered {
+      box-shadow: 0 1px 3px rgba(0,0,0,0.3), 0 20px 60px rgba(0,0,0,0.6);
+    }
+
+    .dcard-head { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 2rem; }
+    .dcard-head h1 { font-size: 1.4rem; font-weight: 700; margin: 0 0 0.2rem; color: var(--ink); transition: color 0.4s; }
+    .dcard-head p { font-size: 0.85rem; color: #767676; margin: 0; transition: color 0.4s; }
+    body.dark .dcard-head h1 { color: #f1f1f1; }
+    body.dark .dcard-head p { color: #999; }
+
+    .dcard-head-right { display: flex; align-items: center; gap: 1rem; }
+
+    .dtoggle {
+      position: relative; width: 52px; height: 28px; border-radius: 999px;
+      background: #d8d8d8; border: none; cursor: pointer; transition: background 0.3s;
+      padding: 0; flex: none;
+    }
+    body.dark .dtoggle { background: #4a4a4a; }
+    .dtoggle-knob {
+      position: absolute; top: 2px; left: 2px; width: 24px; height: 24px; border-radius: 50%;
+      background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+      display: flex; align-items: center; justify-content: center;
+      transition: transform 0.3s cubic-bezier(0.16,1,0.3,1);
+      font-size: 14px;
+    }
+    body.dark .dtoggle-knob { transform: translateX(24px); }
+    .dtoggle-knob .material-symbols-outlined { font-size: 14px; color: #f0b429; }
+    body.dark .dtoggle-knob .material-symbols-outlined { color: #767676; }
+
+    .dring { position: relative; width: 56px; height: 56px; }
+    .dring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+    .dring-track { fill: none; stroke: #e5e5e5; stroke-width: 4; }
+    body.dark .dring-track { stroke: #444; }
+    .dring-progress {
+      fill: none; stroke: url(#dgrad); stroke-width: 4; stroke-linecap: round;
+      stroke-dasharray: 125.6; stroke-dashoffset: 31.4;
+      transition: stroke-dashoffset 0.5s ease;
+    }
+    .dring-val {
+      position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+      font-size: 0.75rem; font-weight: 700; color: #555;
+    }
+    body.dark .dring-val { color: #ccc; }
+
+    .dtabs { display: flex; gap: 0.25rem; border-bottom: 1px solid #eee; position: relative; margin-bottom: 1.5rem; }
+    body.dark .dtabs { border-color: #3a3a3a; }
+    .dtabs button {
+      background: none; border: none; cursor: pointer; padding: 0.6rem 1rem;
+      font-family: inherit; font-size: 0.85rem; font-weight: 600; color: #888;
+      text-transform: capitalize; position: relative; z-index: 1; transition: color 0.2s;
+    }
+    .dtabs button.is-active { color: var(--coral); }
+    body.dark .dtabs button { color: #999; }
+    body.dark .dtabs button.is-active { color: var(--teal); }
+    .dtabs-indicator {
+      position: absolute; bottom: -1px; height: 2px; width: 96px;
+      background: linear-gradient(90deg, var(--coral), var(--teal));
+      transition: left 0.3s cubic-bezier(0.16,1,0.3,1);
+    }
+
+    .dpanel { display: none; }
+    .dpanel.is-active { display: block; animation: dfade 0.35s ease; }
+    @keyframes dfade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+    .drevenue {
+      border-radius: 12px; padding: 1rem; border: 1px solid #f0f0f0; background: #fafafa;
+      margin-bottom: 1rem; transition: background 0.4s, border-color 0.4s;
+    }
+    body.dark .drevenue { background: rgba(255,255,255,0.03); border-color: #3a3a3a; }
+    .drevenue-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
+    .drevenue-top span:first-child { font-size: 0.85rem; color: #767676; }
+    body.dark .drevenue-top span:first-child { color: #999; }
+    .dpill {
+      font-size: 0.7rem; font-weight: 700; padding: 0.2rem 0.55rem; border-radius: 999px;
+      color: #1f8a4c; background: #e8f8ee;
+    }
+    body.dark .dpill { color: #6cd48f; background: rgba(31,138,76,0.18); }
+    .drevenue-val { font-size: 1.6rem; font-weight: 700; color: var(--ink); margin: 0 0 0.75rem; }
+    body.dark .drevenue-val { color: #f1f1f1; }
+    .drevenue-bar { height: 6px; border-radius: 999px; background: #e5e5e5; overflow: hidden; }
+    body.dark .drevenue-bar { background: #3a3a3a; }
+    .drevenue-bar-fill {
+      height: 100%; border-radius: 999px; width: 78%;
+      background: linear-gradient(90deg, var(--coral), var(--teal));
+      transition: width 0.5s ease;
+    }
+    .dcard.is-hovered .drevenue-bar-fill { width: 85%; }
+
+    .dstats { display: grid; grid-template-columns: repeat(3,1fr); gap: 0.75rem; margin-bottom: 1.5rem; }
+    .dstat {
+      border-radius: 12px; padding: 0.75rem; border: 1px solid #f0f0f0; background: #fafafa;
+      transition: background 0.4s, border-color 0.4s;
+    }
+    body.dark .dstat { background: rgba(255,255,255,0.03); border-color: #3a3a3a; }
+    .dstat p:first-child { font-size: 0.72rem; color: #999; margin: 0 0 0.2rem; }
+    .dstat p:last-child { font-size: 1.05rem; font-weight: 700; color: var(--ink); margin: 0; }
+    body.dark .dstat p:last-child { color: #eee; }
+
+    .danalytics-row { display: flex; align-items: center; justify-content: space-between; padding: 0.75rem 0; border-bottom: 1px solid #f2f2f2; }
+    body.dark .danalytics-row { border-color: #333; }
+    .danalytics-row:last-child { border-bottom: none; }
+    .danalytics-left { display: flex; align-items: center; gap: 0.6rem; }
+    .ddot { width: 8px; height: 8px; border-radius: 50%; flex: none; }
+    .danalytics-left span { font-size: 0.85rem; color: #555; }
+    body.dark .danalytics-left span { color: #ccc; }
+    .danalytics-row strong { font-size: 0.85rem; color: var(--ink); }
+    body.dark .danalytics-row strong { color: #f1f1f1; }
+
+    .dreport-box { border-radius: 12px; padding: 1rem; margin-bottom: 0.75rem; border: 1px solid #f0f0f0; }
+    .dreport-box.is-accent { background: linear-gradient(135deg, rgba(224,71,76,0.06), rgba(122,207,214,0.08)); }
+    .dreport-box:not(.is-accent) { background: #fafafa; }
+    body.dark .dreport-box { border-color: #3a3a3a; }
+    body.dark .dreport-box.is-accent { background: linear-gradient(135deg, rgba(224,71,76,0.1), rgba(122,207,214,0.1)); }
+    body.dark .dreport-box:not(.is-accent) { background: rgba(255,255,255,0.03); }
+    .dreport-box h3 { font-size: 0.85rem; font-weight: 700; margin: 0 0 0.4rem; color: var(--ink); }
+    body.dark .dreport-box h3 { color: #f1f1f1; }
+    .dreport-box p { font-size: 0.78rem; line-height: 1.6; color: #767676; margin: 0; }
+    body.dark .dreport-box p { color: #999; }
+    .dreport-box ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.4rem; }
+    .dreport-box li { font-size: 0.78rem; color: #767676; display: flex; gap: 0.4rem; }
+    body.dark .dreport-box li { color: #999; }
+
+    .dfooter { display: flex; gap: 0.75rem; margin-top: 1rem; }
+    .dbtn {
+      flex: 1; padding: 0.7rem 1rem; border-radius: 10px; font-family: inherit;
+      font-size: 0.85rem; font-weight: 700; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;
+      border: 1px solid transparent;
+    }
+    .dbtn:active { transform: scale(0.97); }
+    .dbtn--primary { background: linear-gradient(90deg, var(--coral), var(--teal)); color: #fff; box-shadow: 0 1px 2px rgba(0,0,0,0.08); }
+    .dbtn--primary:hover { box-shadow: 0 6px 16px -4px rgba(224,71,76,0.4); }
+    .dbtn--ghost { background: #fff; color: #555; border-color: #e5e5e5; }
+    .dbtn--ghost:hover { background: #fafafa; }
+    body.dark .dbtn--ghost { background: #2b2b2b; color: #ccc; border-color: #4a4a4a; }
+    body.dark .dbtn--ghost:hover { background: #333; }
+  </style>
+</head>
+<body>
+  <div class="note">Preview only — not linked from the live site.</div>
+
+  <div class="dcard" id="dcard">
+    <div class="dcard-head">
+      <div>
+        <h1>Analytics Dashboard</h1>
+        <p>Performance metrics at a glance</p>
+      </div>
+      <div class="dcard-head-right">
+        <button class="dtoggle" id="dtoggle" aria-label="Toggle dark mode">
+          <span class="dtoggle-knob"><span class="material-symbols-outlined" id="dtoggleIcon" aria-hidden="true">light_mode</span></span>
+        </button>
+        <div class="dring">
+          <svg viewBox="0 0 56 56">
+            <defs>
+              <linearGradient id="dgrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#e0474c" />
+                <stop offset="100%" stop-color="#7acfd6" />
+              </linearGradient>
+            </defs>
+            <circle class="dring-track" cx="28" cy="28" r="20" />
+            <circle class="dring-progress" cx="28" cy="28" r="20" />
+          </svg>
+          <span class="dring-val">75%</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="dtabs" id="dtabs">
+      <button class="is-active" data-tab="overview">Overview</button>
+      <button data-tab="analytics">Analytics</button>
+      <button data-tab="reports">Reports</button>
+      <span class="dtabs-indicator" id="dtabsIndicator" style="left:0"></span>
+    </div>
+
+    <div class="dpanel is-active" data-panel="overview">
+      <div class="drevenue">
+        <div class="drevenue-top">
+          <span>Monthly Revenue</span>
+          <span class="dpill">+12.5%</span>
+        </div>
+        <p class="drevenue-val">$24,780</p>
+        <div class="drevenue-bar"><div class="drevenue-bar-fill"></div></div>
+      </div>
+      <div class="dstats">
+        <div class="dstat"><p>Users</p><p>1,428</p></div>
+        <div class="dstat"><p>Sessions</p><p>3,942</p></div>
+        <div class="dstat"><p>Conversion</p><p>4.2%</p></div>
+      </div>
+    </div>
+
+    <div class="dpanel" data-panel="analytics">
+      <div class="danalytics-row"><div class="danalytics-left"><span class="ddot" style="background:var(--coral)"></span><span>Page Views</span></div><strong>45,293</strong></div>
+      <div class="danalytics-row"><div class="danalytics-left"><span class="ddot" style="background:var(--teal)"></span><span>Unique Visitors</span></div><strong>12,847</strong></div>
+      <div class="danalytics-row"><div class="danalytics-left"><span class="ddot" style="background:#4caf82"></span><span>Bounce Rate</span></div><strong>32.4%</strong></div>
+      <div class="danalytics-row"><div class="danalytics-left"><span class="ddot" style="background:#e0a747"></span><span>Avg. Session</span></div><strong>3m 42s</strong></div>
+    </div>
+
+    <div class="dpanel" data-panel="reports">
+      <div class="dreport-box is-accent">
+        <h3>Weekly Summary</h3>
+        <p>Performance increased by 23% compared to last week. User engagement metrics show positive trends across all channels.</p>
+      </div>
+      <div class="dreport-box">
+        <h3>Key Insights</h3>
+        <ul>
+          <li>• Mobile traffic up 18%</li>
+          <li>• Peak hours: 2–4 PM SAST</li>
+          <li>• Top source: Organic search</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="dfooter">
+      <button class="dbtn dbtn--primary">View Details</button>
+      <button class="dbtn dbtn--ghost">Export</button>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var card = document.getElementById('dcard');
+      var toggle = document.getElementById('dtoggle');
+      var toggleIcon = document.getElementById('dtoggleIcon');
+      var tabs = document.querySelectorAll('#dtabs button');
+      var indicator = document.getElementById('dtabsIndicator');
+      var panels = document.querySelectorAll('.dpanel');
+
+      // Dark mode toggle
+      toggle.addEventListener('click', function () {
+        document.body.classList.toggle('dark');
+        var isDark = document.body.classList.contains('dark');
+        toggleIcon.textContent = isDark ? 'dark_mode' : 'light_mode';
+      });
+
+      // Tabs
+      var tabWidth = 96;
+      tabs.forEach(function (tab, i) {
+        tab.addEventListener('click', function () {
+          tabs.forEach(function (t) { t.classList.remove('is-active'); });
+          tab.classList.add('is-active');
+          indicator.style.left = (i * tabWidth) + 'px';
+          panels.forEach(function (p) {
+            p.classList.toggle('is-active', p.dataset.panel === tab.dataset.tab);
+          });
+        });
+      });
+
+      // 3D tilt on mousemove
+      var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!reduceMotion) {
+        card.addEventListener('mousemove', function (e) {
+          var rect = card.getBoundingClientRect();
+          var x = e.clientX - rect.left;
+          var y = e.clientY - rect.top;
+          var cx = rect.width / 2;
+          var cy = rect.height / 2;
+          var rotateY = (x - cx) / cx * 6;
+          var rotateX = (y - cy) / cy * -6;
+          card.style.transform = 'perspective(1000px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg)';
+        });
+        card.addEventListener('mouseenter', function () { card.classList.add('is-hovered'); });
+        card.addEventListener('mouseleave', function () {
+          card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
+          card.classList.remove('is-hovered');
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
