@@ -758,7 +758,7 @@ html:not(.js) .reveal-stagger > * { opacity: 1 !important; transform: none !impo
 .adv-card-meta { display: flex; align-items: center; gap: 18px; margin-top: 16px; flex-wrap: wrap; }
 .adv-card-meta span { display: inline-flex; align-items: center; gap: 6px; font-size: 0.9rem; color: var(--body); }
 .adv-card-meta svg { width: 17px; height: 17px; color: var(--accent); }
-.adv-card-diff {
+span.adv-card-diff {
   margin-left: auto;
   background: var(--btn);
   color: var(--paper);
