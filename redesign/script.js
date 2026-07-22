@@ -43,6 +43,29 @@
     }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
 
     revealEls.forEach((el) => observer.observe(el));
+
+    // Never leave content invisible if the observer doesn't fire — e.g. a stalled
+    // scroll, an in-view element that never crosses the threshold, or an environment
+    // where scroll events don't reach the observer.
+    const revealInView = () => {
+      revealEls.forEach((el) => {
+        if (el.classList.contains('is-visible')) return;
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+          el.classList.add('is-visible');
+          observer.unobserve(el);
+        }
+      });
+    };
+    window.addEventListener('scroll', revealInView, { passive: true });
+    window.addEventListener('resize', revealInView, { passive: true });
+    revealInView();
+    // Safety sweep: guarantee nothing stays hidden even if scrolling never fires.
+    window.addEventListener('load', () => {
+      window.setTimeout(() => {
+        revealEls.forEach((el) => el.classList.add('is-visible'));
+      }, 2000);
+    });
   } else {
     // Fallback: show everything immediately if IntersectionObserver isn't supported
     revealEls.forEach((el) => el.classList.add('is-visible'));
@@ -342,10 +365,6 @@
         });
         const json = await res.json();
         if (!res.ok || !json.success) throw new Error(json.message || 'Failed');
-        // Google Ads conversion — enquiry form submitted
-        if (typeof gtag === 'function') {
-          gtag('event', 'conversion', { send_to: 'AW-16948063813/tpRLCIWp79QcEMXcu5E_' });
-        }
         form.hidden = true;
         msf.querySelector('.msf-steps').hidden = true;
         document.getElementById('msf-success').removeAttribute('hidden');
@@ -548,10 +567,6 @@
         const json = await res.json();
         if (!res.ok || !json.success) throw new Error(json.message || 'Failed');
 
-        // Google Ads conversion — booking request submitted
-        if (typeof gtag === 'function') {
-          gtag('event', 'conversion', { send_to: 'AW-16948063813/tpRLCIWp79QcEMXcu5E_' });
-        }
         document.getElementById('booking-form').hidden = true;
         document.getElementById('booking-success').hidden = false;
         document.getElementById('booking-success-msg').textContent =
