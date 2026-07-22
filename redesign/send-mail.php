@@ -105,7 +105,7 @@ try {
     $mail->Host       = 'smtp.hostinger.com';
     $mail->SMTPAuth   = true;
     $mail->Username   = 'info@edwebmedia.com';
-    $mail->Password   = 'Wellington1997!!';
+    $mail->Password   = getenv('SMTP_PASS') ?: ''; // never hardcode; the 2026-07 hardcoded password was exposed in the public repo and must be treated as rotated
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
     $mail->Port       = 465;
     $mail->CharSet    = 'UTF-8';
