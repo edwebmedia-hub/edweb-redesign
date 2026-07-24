@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <title>Pay Edweb Media | Website &amp; Monthly Billing</title>
+  <meta name="description" content="Pay for your website design and set up your recurring monthly hosting and management with Edweb Media." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=block" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css?v=20260758" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ============================== HEADER / NAV ============================== -->
+  <header class="site-header" id="site-header">
+    <div class="container nav" id="nav">
+      <a href="index.html" class="logo">
+        <img class="logo-img logo-img--light" src="assets/edweb-logo-light.png" alt="Edweb Media">
+        <img class="logo-img logo-img--dark" src="assets/edweb-logo-dark.png" alt="Edweb Media">
+      </a>
+
+      <nav class="nav-links" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="about-us.html">About Us</a>
+        <a href="projects.html">Projects</a>
+        <a href="packages.html">Pricing</a>
+        <a href="contact.html">Contact</a>
+        <a href="pay.html" aria-current="page">Payments</a>
+      </nav>
+
+      <div class="nav-cta">
+        <a href="contact.html" class="btn btn--primary">Get In Touch</a>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="section">
+      <div class="container" style="max-width:860px">
+        <div class="section-head section-head--center reveal" style="margin-inline:auto">
+          <div class="eyebrow" style="justify-content:center">Payments</div>
+          <h2>Pay Edweb Media</h2>
+          <p>Set up a monthly plan for a website you already have, or book a new website and pay the design fee plus start your monthly plan in one go. You enter your card once and it renews automatically. Cancel anytime.</p>
+        </div>
+
+        <!-- ===== TRUST STRIP ===== -->
+        <div class="pf-trust reveal" style="--reveal-delay:40ms">
+          <span class="pf-trust-secure">
+            <svg class="pf-lock" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.8a5 5 0 0 0-5 5V10H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V6.8a5 5 0 0 0-5-5zm-3 8.2V6.8a3 3 0 1 1 6 0V10H9z"/></svg>
+            Secured by Payfast
+          </span>
+          <span class="pf-pays">
+            <svg class="pf-mc" viewBox="4 2 24 16" aria-hidden="true"><circle cx="12" cy="10" r="8" fill="#EB001B"/><circle cx="20" cy="10" r="8" fill="#F79E1B"/><path d="M16 4.3a8 8 0 0 0 0 11.4 8 8 0 0 0 0-11.4z" fill="#FF5F00"/></svg>
+            <span class="pf-visa">VISA</span>
+            <span class="pf-eft">Instant EFT</span>
+          </span>
+        </div>
+        <p class="reveal pf-trust-note">
+          Your card details are entered on Payfast's secure checkout, never on this site. Cancel anytime.
+        </p>
+
+        <!-- ===== STEP 1: choose journey ===== -->
+        <div id="pf-journey" class="reveal" style="--reveal-delay:80ms;display:grid;grid-template-columns:1fr;gap:var(--sp-4)">
+          <button type="button" class="pf-card" data-journey="new">
+            <span class="material-symbols-outlined pf-card-ico" aria-hidden="true">rocket_launch</span>
+            <span class="pf-card-txt">
+              <strong>Book a new website</strong>
+              <span>Pay my website design fee now and start hosting monthly, all in one go.</span>
+            </span>
+            <span class="material-symbols-outlined pf-card-arrow" aria-hidden="true">arrow_forward</span>
+          </button>
+          <button type="button" class="pf-card" data-journey="existing">
+            <span class="material-symbols-outlined pf-card-ico" aria-hidden="true">autorenew</span>
+            <span class="pf-card-txt">
+              <strong>Set up a monthly plan</strong>
+              <span>I already have a website. Start my hosting or management billing.</span>
+            </span>
+            <span class="material-symbols-outlined pf-card-arrow" aria-hidden="true">arrow_forward</span>
+          </button>
+        </div>
+
+        <!-- ===== JOURNEY A: existing site, monthly only ===== -->
+        <div id="pf-existing" hidden style="margin-top:var(--sp-6)">
+          <button type="button" class="pf-back" data-back>&larr; Change</button>
+          <p style="font-weight:700;color:var(--ink);margin:var(--sp-4) 0 var(--sp-4)">Which one is you?</p>
+          <div id="pf-options" role="radiogroup" aria-label="Choose your monthly plan" style="display:flex;flex-direction:column;gap:var(--sp-3)">
+            <button type="button" class="pf-opt" data-plan="hosting" role="radio" aria-checked="false">
+              <span class="material-symbols-outlined pf-opt-ico" aria-hidden="true">dns</span>
+              <span><strong style="display:block;font-size:1.1rem">Just hosting</strong><span style="color:var(--text-muted)">Keep my website live, secure and online. No monthly changes needed.</span></span>
+            </button>
+            <button type="button" class="pf-opt" data-plan="management" role="radio" aria-checked="false">
+              <span class="material-symbols-outlined pf-opt-ico" aria-hidden="true">build</span>
+              <span><strong style="display:block;font-size:1.1rem">Standard website + management</strong><span style="color:var(--text-muted)">A normal business website you want kept updated, edited and supported.</span></span>
+            </button>
+            <button type="button" class="pf-opt" data-plan="store" role="radio" aria-checked="false">
+              <span class="material-symbols-outlined pf-opt-ico" aria-hidden="true">storefront</span>
+              <span><strong style="display:block;font-size:1.1rem">Online store or directory + management</strong><span style="color:var(--text-muted)">An e-commerce store or a directory-style website you want kept updated.</span></span>
+            </button>
+          </div>
+        </div>
+
+        <!-- ===== JOURNEY B: new website, design fee + monthly ===== -->
+        <div id="pf-new" hidden style="margin-top:var(--sp-6)">
+          <button type="button" class="pf-back" data-back>&larr; Change</button>
+
+          <div style="margin-top:var(--sp-4)">
+            <span style="font-weight:700;color:var(--ink);display:block;margin-bottom:var(--sp-3)">1. Choose your website</span>
+            <div id="pf-website-list" role="radiogroup" aria-label="Choose your website" style="display:flex;flex-direction:column;gap:var(--sp-5)"></div>
+            <p style="color:var(--text-muted);font-size:var(--fs-sm);margin-top:var(--sp-3)">Bigger or custom project? <a href="contact.html">Get a quote</a> and we'll send you a payment link.</p>
+          </div>
+
+          <div class="field" id="pf-monthly-field" hidden style="margin-top:var(--sp-5)">
+            <span style="font-weight:700;color:var(--ink);display:block;margin-bottom:var(--sp-2)">2. Add a monthly plan</span>
+            <div id="pf-monthly" role="radiogroup" aria-label="Monthly plan" style="display:flex;flex-direction:column;gap:var(--sp-2)"></div>
+          </div>
+        </div>
+
+        <!-- ===== SHARED RESULT ===== -->
+        <div id="pf-result" hidden style="margin-top:var(--sp-8)">
+          <div style="background:var(--paper);border:2px solid var(--gold);border-radius:var(--radius-lg);box-shadow:0 18px 40px -18px rgba(43,43,43,.28);padding:var(--sp-8)">
+            <h3 id="pf-name" style="font-size:var(--fs-xl);text-align:center;margin:0"></h3>
+
+            <!-- once-off + recurring breakdown -->
+            <div id="pf-breakdown" style="margin:var(--sp-5) 0 0">
+              <div id="pf-line-today" hidden style="display:flex;justify-content:space-between;align-items:baseline;gap:var(--sp-4);padding:var(--sp-3) 0;border-bottom:1px solid var(--border)">
+                <span><strong style="display:block">Pay today</strong><span style="color:var(--text-muted);font-size:var(--fs-sm)" id="pf-today-desc">Website design (once-off)</span></span>
+                <strong id="pf-today-amt" style="font-size:var(--fs-xl);white-space:nowrap"></strong>
+              </div>
+              <div id="pf-line-monthly" hidden style="display:flex;justify-content:space-between;align-items:baseline;gap:var(--sp-4);padding:var(--sp-3) 0">
+                <span><strong style="display:block" id="pf-monthly-title">Then every month</strong><span style="color:var(--text-muted);font-size:var(--fs-sm)" id="pf-monthly-desc"></span></span>
+                <strong id="pf-monthly-amt" style="font-size:var(--fs-xl);white-space:nowrap"></strong>
+              </div>
+            </div>
+
+            <div id="pf-freebie" hidden style="display:flex;align-items:center;gap:var(--sp-3);margin-top:var(--sp-4);padding:var(--sp-3) var(--sp-4);background:color-mix(in srgb,var(--gold-light) 18%,var(--paper));border:1px solid color-mix(in srgb,var(--gold-light) 45%,transparent);border-radius:var(--radius-md)">
+              <span class="material-symbols-outlined" aria-hidden="true" style="color:var(--ink);font-size:24px;flex:none">redeem</span>
+              <span id="pf-freebie-text" style="font-size:var(--fs-sm);color:var(--ink);font-weight:600"></span>
+            </div>
+
+            <div style="text-align:center;margin-top:var(--sp-6)">
+              <a id="pf-go" href="#" class="btn btn--primary" style="min-width:240px">Continue</a>
+              <p style="color:var(--text-muted);margin-top:var(--sp-4);font-size:0.9rem">Secure payment by Payfast. <span id="pf-cancel-note">Cancel anytime.</span></p>
+            </div>
+          </div>
+        </div>
+
+        <p class="reveal" style="text-align:center;color:var(--text-muted);margin-top:var(--sp-8);font-size:0.95rem">
+          Questions before you pay? <a href="contact.html">Get in touch</a>.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============================== FOOTER ============================== -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">
+          <img class="logo-img" src="assets/edweb-logo-light.png" alt="Edweb Media">
+        </a>
+        <p>Follow Edweb Media for updates, tips and our latest work. Contact us for any enquiries and we'll get back to you as soon as possible.</p>
+        <div class="contact-socials" style="margin-top:1.5rem">
+          <a href="https://www.facebook.com/edwebmediasolutions" target="_blank" rel="noopener" aria-label="Edweb Media on Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7h2.4l.4-2.8h-2.8v-1.6c0-.8.2-1.4 1.4-1.4h1.5V5.7c-.3 0-1.2-.1-2.2-.1-2.3 0-3.8 1.4-3.8 3.9v1.7H8v2.8h2.4V21h3.1z"/></svg></a>
+          <a href="https://www.instagram.com/edwebmedia/" target="_blank" rel="noopener" aria-label="Edweb Media on Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="3.5"/><circle cx="17.2" cy="6.8" r="0.8" fill="currentColor" stroke="none"/></svg></a>
+          <a href="https://wa.me/27846204583" target="_blank" rel="noopener" aria-label="Edweb Media on WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-1.2-.6-2-1-2.8-2.3-.2-.3 0-.5.2-.7.2-.2.4-.5.6-.7.1-.2.1-.4 0-.6-.1-.2-.6-1.5-.8-2-.1-.4-.3-.4-.5-.4h-.4c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.1s.9 2.5 1.1 2.7c.1.2 1.6 2.5 4 3.4 2 .8 2.4.7 2.8.6.4-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2 0-.1-.2-.2-.4-.3z"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Important Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about-us.html">About</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="packages.html">Pricing</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="pay.html">Payments</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Policies</h4>
+        <ul>
+          <li><a href="terms-conditions.html">Terms &amp; Conditions</a></li>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:+27846204583">+27 84 620 4583</a></li>
+          <li><a href="mailto:info@edwebmedia.com">info@edwebmedia.com</a></li>
+          <li>Cape Town, South Africa</li>
+        </ul>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <span>© 2026 Edweb Media. <span class="footer-tagline">Designed for Success.</span> All rights reserved.</span>
+      <span class="footer-credit">Built with care in Cape Town.</span>
+    </div>
+  </footer>
+
+  <a class="whatsapp-float" href="https://wa.me/27846204583" target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-1.2-.6-2-1-2.8-2.3-.2-.3 0-.5.2-.7.2-.2.4-.5.6-.7.1-.2.1-.4 0-.6-.1-.2-.6-1.5-.8-2-.1-.4-.3-.4-.5-.4h-.4c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.1s.9 2.5 1.1 2.7c.1.2 1.6 2.5 4 3.4 2 .8 2.4.7 2.8.6.4-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2 0-.1-.2-.2-.4-.3z"/></svg>
+  </a>
+
+  <!-- Payment picker styling (scoped, uses brand tokens only) -->
+  <style>
+    [hidden]{display:none!important}
+    .pf-card{display:flex;align-items:center;gap:var(--sp-4);text-align:left;width:100%;padding:var(--sp-5);border:2px solid color-mix(in srgb,var(--ink) 12%,transparent);border-radius:var(--radius-lg);background:var(--paper);cursor:pointer;font:inherit;color:var(--ink);transition:border-color .2s,box-shadow .2s,transform .2s}
+    .pf-card:hover{border-color:var(--gold);transform:translateY(-2px);box-shadow:0 14px 30px -16px rgba(43,43,43,.3)}
+    .pf-card-ico{font-size:34px;color:var(--gold);flex:none}
+    .pf-card-txt{flex:1}
+    .pf-card-txt strong{display:block;font-size:1.15rem}
+    .pf-card-txt span{color:var(--text-muted)}
+    .pf-card-arrow{color:var(--text-muted);flex:none;transition:transform .2s}
+    .pf-card:hover .pf-card-arrow{transform:translateX(4px);color:var(--gold)}
+    .pf-opt{display:flex;align-items:center;gap:var(--sp-4);text-align:left;width:100%;padding:var(--sp-5);border:2px solid color-mix(in srgb,var(--ink) 12%,transparent);border-radius:var(--radius-lg);background:var(--paper);cursor:pointer;font:inherit;color:var(--ink);transition:border-color .2s,box-shadow .2s}
+    .pf-opt:hover{border-color:color-mix(in srgb,var(--gold) 55%,transparent)}
+    .pf-opt[aria-checked="true"]{border-color:var(--gold);box-shadow:0 14px 30px -18px rgba(43,43,43,.32)}
+    .pf-opt-ico{font-size:32px;color:var(--gold);flex:none}
+    .pf-back{background:none;border:0;color:var(--text-muted);font:inherit;font-weight:600;cursor:pointer;padding:0}
+    .pf-back:hover{color:var(--gold)}
+    .pf-radio{display:flex;align-items:center;gap:var(--sp-4);padding:var(--sp-4) var(--sp-5);border:1.5px solid var(--border);border-radius:var(--radius-md);background:var(--paper);cursor:pointer;font:inherit;color:var(--ink);text-align:left;width:100%;transition:border-color .18s,box-shadow .18s,background .18s}
+    .pf-radio::before{content:"";width:20px;height:20px;border:2px solid color-mix(in srgb,var(--ink) 24%,transparent);border-radius:50%;flex:none;transition:border-color .18s,background .18s,box-shadow .18s}
+    .pf-radio:hover{border-color:color-mix(in srgb,var(--gold) 50%,transparent)}
+    .pf-radio:hover::before{border-color:color-mix(in srgb,var(--gold) 60%,transparent)}
+    .pf-radio[aria-checked="true"]{border-color:var(--gold);background:color-mix(in srgb,var(--gold) 6%,var(--paper));box-shadow:0 8px 22px -12px color-mix(in srgb,var(--gold) 65%,transparent)}
+    .pf-radio[aria-checked="true"]::before{border-color:var(--gold);background:var(--gold);box-shadow:inset 0 0 0 3px var(--paper)}
+    .pf-radio-amt{margin-left:auto;font-size:var(--fs-lg);font-weight:800;color:var(--ink);white-space:nowrap}
+    .pf-per{font-size:.58em;font-weight:600;color:var(--text-muted)}
+    .pf-trust{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:var(--sp-3) var(--sp-6);background:var(--paper);border:1px solid var(--border);border-radius:var(--radius-pill);padding:var(--sp-3) var(--sp-6);max-width:max-content;margin:var(--sp-8) auto var(--sp-3)}
+    .pf-trust-secure{display:inline-flex;align-items:center;gap:var(--sp-2);font-weight:700;font-size:var(--fs-sm);color:var(--ink);white-space:nowrap}
+    .pf-lock{width:16px;height:16px;fill:var(--gold);flex:none}
+    .pf-pays{display:inline-flex;align-items:center;gap:var(--sp-4)}
+    .pf-mc{width:30px;height:20px;flex:none}
+    .pf-visa{font-weight:800;font-style:italic;font-size:17px;letter-spacing:.5px;color:#1434CB;line-height:1}
+    .pf-eft{font-weight:700;font-size:11px;color:var(--ink);border:1px solid var(--border);border-radius:5px;padding:3px 7px;background:var(--paper-dim);white-space:nowrap}
+    .pf-trust-note{text-align:center;color:var(--text-muted);font-size:var(--fs-sm);margin:0 auto var(--sp-12);max-width:44ch}
+  </style>
+
+  <script>
+    (function () {
+      var journeyWrap = document.getElementById('pf-journey');
+      var existing = document.getElementById('pf-existing');
+      var newWrap  = document.getElementById('pf-new');
+      var result   = document.getElementById('pf-result');
+
+      // Test mode: /pay?test=1 sends every checkout to the Payfast sandbox.
+      var TESTMODE = (function () { var p = new URLSearchParams(location.search); return p.has('test') || p.get('sandbox') === '1'; })();
+      var SB = TESTMODE ? '&sandbox=1' : '';
+      if (TESTMODE) {
+        var tb = document.createElement('div');
+        tb.textContent = 'TEST MODE: Payfast sandbox. No real money is charged.';
+        tb.style.cssText = 'position:sticky;top:0;z-index:60;background:var(--gold);color:#fff;text-align:center;font-weight:700;padding:var(--sp-2) var(--sp-4);font-size:var(--fs-sm)';
+        document.body.insertBefore(tb, document.body.firstChild);
+      }
+
+      function rand(n){ return 'R' + Number(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','); }
+      function hide(el){ el.hidden = true; }
+      function show(el){ el.hidden = false; }
+      function resetResult(){ hide(result); }
+
+      // ---- journey selection ----
+      journeyWrap.querySelectorAll('[data-journey]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var j = btn.getAttribute('data-journey');
+          hide(journeyWrap); resetResult();
+          if (j === 'existing') { hide(newWrap); show(existing); }
+          else { hide(existing); show(newWrap); }
+        });
+      });
+      document.querySelectorAll('[data-back]').forEach(function (b) {
+        b.addEventListener('click', function () {
+          hide(existing); hide(newWrap); resetResult(); show(journeyWrap);
+          journeyWrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+      });
+
+      // ---- shared result renderer ----
+      // spec = { name, todayAmt (num|0), todayDesc, monthlyAmt (num|0), monthlyDesc, href }
+      function renderResult(spec) {
+        document.getElementById('pf-name').textContent = spec.name;
+
+        var todayLine = document.getElementById('pf-line-today');
+        var monthlyLine = document.getElementById('pf-line-monthly');
+        var monthlyTitle = document.getElementById('pf-monthly-title');
+        var cancelNote = document.getElementById('pf-cancel-note');
+
+        if (spec.todayAmt > 0) {
+          show(todayLine);
+          document.getElementById('pf-today-amt').textContent = rand(spec.todayAmt);
+          document.getElementById('pf-today-desc').textContent = spec.todayDesc || 'Once-off';
+          monthlyTitle.textContent = 'Then every month';
+        } else {
+          hide(todayLine);
+          monthlyTitle.textContent = 'Every month';
+        }
+
+        if (spec.monthlyAmt > 0) {
+          show(monthlyLine);
+          document.getElementById('pf-monthly-amt').innerHTML = rand(spec.monthlyAmt) + '<span class="pf-per">/month</span>';
+          document.getElementById('pf-monthly-desc').textContent = spec.monthlyDesc || '';
+          cancelNote.textContent = 'Cancel anytime.';
+        } else {
+          hide(monthlyLine);
+          cancelNote.textContent = 'One-time payment.';
+        }
+
+        var freebie = document.getElementById('pf-freebie');
+        if (spec.freebie) {
+          document.getElementById('pf-freebie-text').textContent = spec.freebie;
+          show(freebie);
+        } else {
+          hide(freebie);
+        }
+
+        var go = document.getElementById('pf-go');
+        go.setAttribute('href', spec.href);
+        go.textContent = spec.todayAmt > 0
+          ? (spec.monthlyAmt > 0 ? 'Pay ' + rand(spec.todayAmt) + ' now' : 'Pay ' + rand(spec.todayAmt))
+          : 'Subscribe ' + rand(spec.monthlyAmt) + '/month';
+
+        show(result);
+        result.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+
+      // ---- JOURNEY A: existing site, monthly only ----
+      var MONTHLY_PLANS = {
+        hosting:    { name: 'Hosting', amt: 200, desc: 'Hosting, SSL, domain and a professional email, kept live and secure.' },
+        management: { name: 'Hosting + Management', amt: 400, desc: 'Hosting plus updates, content edits and support for a standard website.' },
+        store:      { name: 'Hosting + Store / Directory Management', amt: 450, desc: 'Hosting plus management for an online store or directory site.' }
+      };
+      existing.querySelectorAll('.pf-opt').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var plan = btn.getAttribute('data-plan');
+          var p = MONTHLY_PLANS[plan];
+          if (!p) return;
+          existing.querySelectorAll('.pf-opt').forEach(function (o) {
+            o.setAttribute('aria-checked', o === btn ? 'true' : 'false');
+          });
+          renderResult({
+            name: p.name,
+            todayAmt: 0,
+            monthlyAmt: p.amt,
+            monthlyDesc: p.desc,
+            href: '/api/payfast?plan=' + plan + SB
+          });
+        });
+      });
+
+      // ---- JOURNEY B: new website, design fee then monthly ----
+      var monthlyField = document.getElementById('pf-monthly-field');
+      var monthlyWrap = document.getElementById('pf-monthly');
+      var monthlyChoice = null;         // nothing preselected — client must choose
+      var selectedWebsite = null;
+
+      var WEBSITES = [
+        { group: 'Business Website', items: [
+          { key: 'business-silver',   fee: 3999,  plan: 'Silver',   sub: '5 pages',  type: 'business' },
+          { key: 'business-gold',     fee: 4999,  plan: 'Gold',     sub: '10 pages', type: 'business' },
+          { key: 'business-platinum', fee: 6499,  plan: 'Platinum', sub: '20 pages', type: 'business' }
+        ]},
+        { group: 'E-commerce Website', items: [
+          { key: 'ecommerce-silver',   fee: 5999, plan: 'Silver',   sub: 'up to 10 products', type: 'store' },
+          { key: 'ecommerce-gold',     fee: 7499, plan: 'Gold',     sub: 'up to 25 products', type: 'store' },
+          { key: 'ecommerce-platinum', fee: 9499, plan: 'Platinum', sub: 'up to 50 products', type: 'store' }
+        ]},
+        { group: 'Directory Website', items: [
+          { key: 'directory-silver', fee: 8999,  plan: 'Silver', sub: 'up to 25 listings', type: 'store' },
+          { key: 'directory-gold',   fee: 11999, plan: 'Gold',   sub: 'up to 50 listings', type: 'store' }
+        ]}
+      ];
+
+      function monthlyOptionsFor(type) {
+        var mgmtKey = type === 'store' ? 'mgmt-store' : 'mgmt-standard';
+        var mgmtAmt = type === 'store' ? 450 : 400;
+        return [
+          { key: 'hosting', amt: 200, label: 'Hosting', desc: 'Hosting, SSL, domain and professional email' },
+          { key: mgmtKey,   amt: mgmtAmt, label: 'Hosting + Management', desc: 'Hosting plus updates and support' },
+          { key: 'none',    amt: 0, label: 'No monthly plan', desc: "I'll arrange hosting elsewhere" }
+        ];
+      }
+
+      // Build the monthly options for the chosen website (none preselected).
+      function buildMonthly() {
+        var opts = monthlyOptionsFor(selectedWebsite.type);
+        monthlyWrap.innerHTML = '';
+        opts.forEach(function (o) {
+          var b = document.createElement('button');
+          b.type = 'button';
+          b.className = 'pf-radio';
+          b.setAttribute('role', 'radio');
+          b.setAttribute('aria-checked', o.key === monthlyChoice ? 'true' : 'false');
+          b.innerHTML = '<span><strong style="display:block">' + o.label + '</strong>' +
+            '<span style="color:var(--text-muted);font-size:var(--fs-sm)">' + o.desc + '</span></span>' +
+            '<span class="pf-radio-amt">' + (o.amt > 0 ? rand(o.amt) + '<span class="pf-per">/month</span>' : 'R0') + '</span>';
+          b.addEventListener('click', function () {
+            monthlyChoice = o.key;
+            monthlyWrap.querySelectorAll('.pf-radio').forEach(function (x) {
+              x.setAttribute('aria-checked', x === b ? 'true' : 'false');
+            });
+            showNewResult();
+          });
+          monthlyWrap.appendChild(b);
+        });
+      }
+
+      // Show the price card once a monthly option is chosen.
+      function showNewResult() {
+        var it = selectedWebsite;
+        var chosen = monthlyOptionsFor(it.type).filter(function (o) { return o.key === monthlyChoice; })[0];
+        if (!chosen) return;
+        renderResult({
+          name: it.groupLabel + ' · ' + it.plan,
+          todayAmt: it.fee,
+          todayDesc: 'Website design (once-off)',
+          monthlyAmt: chosen.amt,
+          monthlyDesc: chosen.amt > 0 ? chosen.label + ', from next month' : '',
+          freebie: chosen.amt > 0 ? ('First month of ' + chosen.label.toLowerCase() + ' is on us. Your ' + rand(chosen.amt) + '/month only starts next month.') : null,
+          href: '/api/payfast?website=' + it.key + '&monthly=' + monthlyChoice + SB
+        });
+      }
+
+      // Build the website cards.
+      var listWrap = document.getElementById('pf-website-list');
+      WEBSITES.forEach(function (g) {
+        var grp = document.createElement('div');
+        grp.style.cssText = 'display:flex;flex-direction:column;gap:var(--sp-2)';
+        var h = document.createElement('div');
+        h.textContent = g.group;
+        h.style.cssText = 'font-size:var(--fs-xs);text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted);font-weight:700';
+        grp.appendChild(h);
+        g.items.forEach(function (it) {
+          it.groupLabel = g.group;
+          var b = document.createElement('button');
+          b.type = 'button';
+          b.className = 'pf-radio';
+          b.setAttribute('role', 'radio');
+          b.setAttribute('aria-checked', 'false');
+          b.innerHTML = '<span><strong style="display:block">' + it.plan + '</strong>' +
+            '<span style="color:var(--text-muted);font-size:var(--fs-sm)">' + it.sub + '</span></span>' +
+            '<span class="pf-radio-amt">' + rand(it.fee) + '</span>';
+          b.addEventListener('click', function () {
+            selectedWebsite = it;
+            listWrap.querySelectorAll('.pf-radio').forEach(function (x) {
+              x.setAttribute('aria-checked', x === b ? 'true' : 'false');
+            });
+            monthlyChoice = null;   // force an explicit monthly choice
+            buildMonthly();
+            show(monthlyField);
+            resetResult();          // hide price until a monthly option is picked
+            monthlyField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          });
+          grp.appendChild(b);
+        });
+        listWrap.appendChild(grp);
+      });
+    })();
+  </script>
+  <script src="script.js?v=20260724"></script>
+</body>
+</html>

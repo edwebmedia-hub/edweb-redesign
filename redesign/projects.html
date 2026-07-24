@@ -3,6 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Google Ads conversion tracking. 2026-07-23: replace AW-16948063813 with the
+       real Conversion ID from Google Ads (Tools > Conversions). Until then this
+       loader is a harmless no-op (gtag() calls just queue and go nowhere). -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16948063813"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-16948063813');
+  </script>
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
@@ -34,6 +45,7 @@
         <a href="projects.html">Projects</a>
         <a href="packages.html">Pricing</a>
         <a href="contact.html">Contact</a>
+        <a href="pay.html">Payments</a>
       </nav>
 
       <div class="nav-cta">
@@ -137,6 +149,7 @@
           <li><a href="projects.html">Projects</a></li>
           <li><a href="packages.html">Pricing</a></li>
           <li><a href="contact.html">Contact</a></li>
+          <li><a href="pay.html">Payments</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -165,6 +178,6 @@
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-1.2-.6-2-1-2.8-2.3-.2-.3 0-.5.2-.7.2-.2.4-.5.6-.7.1-.2.1-.4 0-.6-.1-.2-.6-1.5-.8-2-.1-.4-.3-.4-.5-.4h-.4c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.1s.9 2.5 1.1 2.7c.1.2 1.6 2.5 4 3.4 2 .8 2.4.7 2.8.6.4-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2 0-.1-.2-.2-.4-.3z"/></svg>
   </a>
 
-  <script src="script.js?v=20260722"></script>
+  <script src="script.js?v=20260724"></script>
 </body>
 </html>

@@ -7,6 +7,21 @@
    ========================================================================== */
 
 (() => {
+  // --- Google Ads conversion tracking -------------------------------------------
+  // Fires once, only after a form genuinely sends (json.success true), never on
+  // page load or a failed submit. Requires the gtag.js loader in <head> (added
+  // site-wide) PLUS the real ID below from Edgar's Google Ads account.
+  // 2026-07-23: edwebmedia.com Google Ads was running with zero conversion
+  // tracking — clicks were measured, leads were not. This closes that gap.
+  const GOOGLE_ADS_CONVERSION = {
+    id: 'AW-16948063813',        // "Submit lead form" conversion action, Edweb Media Google Ads
+    label: 'tpRLCIWp79QcEMXcu5E_',
+  };
+  function fireAdsConversion() {
+    if (typeof gtag !== 'function') return; // gtag.js blocked/not loaded — fail silent, never break the form
+    gtag('event', 'conversion', { send_to: `${GOOGLE_ADS_CONVERSION.id}/${GOOGLE_ADS_CONVERSION.label}` });
+  }
+
   // --- Sticky header background -------------------------------------------------
   const header = document.getElementById('site-header');
   const onScroll = () => {
@@ -96,18 +111,9 @@
     });
   });
 
-  // --- Pre-fill MSF with selected package from URL ?package= ------------------
-  (function () {
-    const params = new URLSearchParams(window.location.search);
-    const selectedPackage = params.get('package');
-    if (!selectedPackage) return;
-    const pkgInput = document.getElementById('msf-package');
-    if (pkgInput) pkgInput.value = selectedPackage;
-    const msgEl = document.getElementById('msf-message');
-    if (msgEl && !msgEl.value) {
-      msgEl.value = `Hi, I'm interested in the ${selectedPackage} package. Please let me know the next steps.`;
-    }
-  })();
+  // Package pre-fill from ?package= is handled inside the MSF block below,
+  // where it can pre-select the service, website type and plan, then jump
+  // the visitor straight to the details step.
 
   // --- Multi-step form (MSF) ---------------------------------------------------
   (function () {
@@ -120,7 +126,7 @@
     const panels = msf.querySelectorAll('.msf-panel');
     let current = 1;
 
-    function goTo(next) {
+    function goTo(next, skipScroll) {
       panels.forEach((p) => p.classList.remove('is-active'));
       msf.querySelector(`[data-panel="${next}"]`).classList.add('is-active');
 
@@ -134,7 +140,7 @@
       });
 
       current = next;
-      msf.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      if (!skipScroll) msf.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
 
     // Show/hide Web Design sub-options
@@ -365,6 +371,7 @@
         });
         const json = await res.json();
         if (!res.ok || !json.success) throw new Error(json.message || 'Failed');
+        fireAdsConversion();
         form.hidden = true;
         msf.querySelector('.msf-steps').hidden = true;
         document.getElementById('msf-success').removeAttribute('hidden');
@@ -374,6 +381,55 @@
         submit.disabled = false;
       }
     });
+
+    // --- Deep pre-fill from ?package= (Get Started buttons on Pricing) ---------
+    (function prefillFromPackage() {
+      const selected = new URLSearchParams(window.location.search).get('package');
+      if (!selected) return;
+
+      // Clean display label — no em-dash in visible copy
+      const pretty = selected.replace(/\s+[—–-]\s+/g, ' · ');
+
+      // Carry the exact plan through to the email + pre-write the message
+      const pkgInput = document.getElementById('msf-package');
+      if (pkgInput) pkgInput.value = selected;
+      const msgEl = document.getElementById('msf-message');
+      if (msgEl && !msgEl.value) {
+        msgEl.value = `Hi, I'm interested in the ${pretty} package. Please let me know the next steps.`;
+      }
+
+      // Confirmation banner at the top of the form
+      const banner = document.createElement('div');
+      banner.setAttribute('role', 'status');
+      banner.style.cssText = 'display:flex;align-items:center;gap:.85rem;padding:.85rem 1.05rem;margin-bottom:var(--sp-6);border:1px solid var(--border);background:var(--paper-dim);border-radius:var(--radius-md)';
+      banner.innerHTML =
+        '<span class="material-symbols-outlined" aria-hidden="true" style="color:var(--gold);font-size:1.55rem;flex:none">check_circle</span>' +
+        '<div style="flex:1;line-height:1.35;min-width:0">' +
+          '<div style="font-size:var(--fs-xs);text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted);font-weight:700">You\'re enquiring about</div>' +
+          '<strong class="msf-prefill-name" style="font-size:var(--fs-base);color:var(--ink)"></strong>' +
+        '</div>' +
+        '<a href="packages.html" style="font-size:var(--fs-sm);color:var(--gold);text-decoration:underline;white-space:nowrap;flex:none">Change</a>';
+      banner.querySelector('.msf-prefill-name').textContent = pretty; // textContent = no HTML injection
+      msf.insertBefore(banner, msf.firstChild);
+
+      // If it's a full website plan, pre-select service + type + plan and skip to details
+      const TYPE_MAP = [
+        ['Business Website',   'Business Website'],
+        ['E-commerce Website', 'E-Commerce Website'],
+        ['Directory Website',  'Directory Website'],
+      ];
+      const match = TYPE_MAP.find(([prefix]) => selected.startsWith(prefix));
+      if (match && /Plan/.test(selected)) {
+        if (webDesignChk)  webDesignChk.checked = true;
+        if (webDesignOpts) webDesignOpts.hidden = false;
+        const radio = form.querySelector('input[name="website-type"][value="' + match[1] + '"]');
+        if (radio) radio.checked = true;
+        buildBudgetOptions();
+        const budgetSel = document.getElementById('msf-budget');
+        if (budgetSel) budgetSel.value = selected;
+        goTo(2, true); // land on the details step, already filled in
+      }
+    })();
   })();
 
 
@@ -566,6 +622,7 @@
         });
         const json = await res.json();
         if (!res.ok || !json.success) throw new Error(json.message || 'Failed');
+        fireAdsConversion();
 
         document.getElementById('booking-form').hidden = true;
         document.getElementById('booking-success').hidden = false;

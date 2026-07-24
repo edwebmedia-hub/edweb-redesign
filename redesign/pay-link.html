@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <title>Payment Link Generator | Edweb Media (private)</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css?v=20260758" />
+</head>
+<body>
+  <main id="main">
+    <section class="section">
+      <div class="container" style="max-width:640px">
+        <div style="margin-bottom:var(--sp-6)">
+          <h1 style="font-size:var(--fs-2xl)">Payment link generator</h1>
+          <p style="color:var(--text-muted)">Private tool. Enter the once-off design fee and the monthly amount, then copy the link and send it to the client. Leave "monthly" at 0 for a once-off-only payment.</p>
+        </div>
+
+        <div class="field">
+          <label for="pl-label">What is this for? (shown to the client)</label>
+          <input type="text" id="pl-label" value="Edweb Website Project" maxlength="100" style="width:100%" />
+        </div>
+
+        <div class="form-row" style="display:flex;gap:var(--sp-4);flex-wrap:wrap">
+          <div class="field" style="flex:1;min-width:180px">
+            <label for="pl-design">Once-off design fee (R)</label>
+            <input type="number" id="pl-design" value="3999" min="0" max="100000" step="1" style="width:100%" />
+          </div>
+          <div class="field" style="flex:1;min-width:180px">
+            <label for="pl-monthly">Monthly amount (R)</label>
+            <input type="number" id="pl-monthly" value="200" min="0" max="20000" step="1" style="width:100%" />
+          </div>
+        </div>
+
+        <label style="display:flex;align-items:center;gap:var(--sp-2);margin-top:var(--sp-4);cursor:pointer;font-weight:600">
+          <input type="checkbox" id="pl-sandbox" />
+          <span>Test mode (Payfast sandbox, no real money moves)</span>
+        </label>
+
+        <div style="background:var(--paper-dim);border:1px solid var(--border);border-radius:var(--radius-md);padding:var(--sp-5);margin-top:var(--sp-4)">
+          <p style="font-weight:700;margin-bottom:var(--sp-2)">The client will pay</p>
+          <p id="pl-preview" style="color:var(--ink)"></p>
+        </div>
+
+        <div class="field" style="margin-top:var(--sp-5)">
+          <label for="pl-url">Payment link</label>
+          <input type="text" id="pl-url" readonly style="width:100%;font-family:monospace;font-size:var(--fs-sm)" onclick="this.select()" />
+        </div>
+
+        <div style="display:flex;gap:var(--sp-3);flex-wrap:wrap;margin-top:var(--sp-2)">
+          <button type="button" id="pl-copy" class="btn btn--primary">Copy link</button>
+          <a id="pl-open" href="#" target="_blank" rel="noopener" class="btn btn--ghost">Open / test</a>
+        </div>
+        <p id="pl-copied" style="color:var(--gold);font-weight:600;margin-top:var(--sp-3);height:1.2em"></p>
+
+        <p style="color:var(--text-muted);font-size:var(--fs-sm);margin-top:var(--sp-6)">
+          The design fee is charged first. If a monthly amount is set, it becomes a subscription that renews every month from the following month. Client enters their card on Payfast.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      var base = 'https://edwebmedia.com/api/payfast';
+      var labelEl = document.getElementById('pl-label');
+      var designEl = document.getElementById('pl-design');
+      var monthlyEl = document.getElementById('pl-monthly');
+      var urlEl = document.getElementById('pl-url');
+      var openEl = document.getElementById('pl-open');
+      var previewEl = document.getElementById('pl-preview');
+      var copiedEl = document.getElementById('pl-copied');
+
+      function rand(n){ return 'R' + Number(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','); }
+      function clampInt(v, min, max){ var n = Math.round(Number(v)); return (!isFinite(n) || n < min) ? min : (n > max ? max : n); }
+
+      function update() {
+        var design = clampInt(designEl.value, 0, 100000);
+        var monthly = clampInt(monthlyEl.value, 0, 20000);
+        var label = (labelEl.value || 'Edweb Media').trim();
+        var sandbox = document.getElementById('pl-sandbox').checked;
+
+        var url = base + '?custom=1&design=' + design + '&monthly=' + monthly +
+                  '&label=' + encodeURIComponent(label) + (sandbox ? '&sandbox=1' : '');
+        urlEl.value = url;
+        openEl.setAttribute('href', url);
+
+        if (design === 0 && monthly === 0) {
+          previewEl.textContent = 'Nothing yet. Set an amount above.';
+        } else if (monthly === 0) {
+          previewEl.innerHTML = '<strong>' + rand(design) + '</strong> once-off.';
+        } else if (design === 0) {
+          previewEl.innerHTML = '<strong>' + rand(monthly) + '/month</strong>, renewing until cancelled.';
+        } else {
+          previewEl.innerHTML = '<strong>' + rand(design) + '</strong> today, then <strong>' + rand(monthly) + '/month</strong> from next month.';
+        }
+        if (sandbox) {
+          previewEl.innerHTML = '<span style="color:var(--gold);font-weight:700">TEST MODE. </span>' + previewEl.innerHTML;
+        }
+      }
+
+      labelEl.addEventListener('input', update);
+      designEl.addEventListener('input', update);
+      monthlyEl.addEventListener('input', update);
+      document.getElementById('pl-sandbox').addEventListener('change', update);
+
+      document.getElementById('pl-copy').addEventListener('click', function () {
+        urlEl.select();
+        navigator.clipboard.writeText(urlEl.value).then(function () {
+          copiedEl.textContent = 'Copied to clipboard.';
+          setTimeout(function () { copiedEl.textContent = ''; }, 2500);
+        }, function () {
+          document.execCommand('copy');
+          copiedEl.textContent = 'Copied.';
+          setTimeout(function () { copiedEl.textContent = ''; }, 2500);
+        });
+      });
+
+      update();
+    })();
+  </script>
+</body>
+</html>
