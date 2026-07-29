@@ -2754,16 +2754,16 @@ summary:focus-visible {
 
   /* Phones: lift the hero block up the screen and hold the headline to three
      lines instead of four (Edgar, 2026-07-29) */
-  .hero-inner { padding-top: 2.4rem; }
-  /* Narrower gutter buys the headline enough width to stay on three lines at a
-     much larger size; 10vw keeps "Websites designed" unwrapped down to 320px */
+  .hero-inner { padding-top: 1rem; }
   .hero .container { padding-inline: var(--sp-3); }
-  /* Looser leading drops "your business" clear of the swoosh under "grow";
-     the flex gap shrinks so the first two lines keep their old spacing */
-  .hero .hero-heading-line { font-size: clamp(1.95rem, 10vw, 3rem); line-height: 1.48; }
+  /* Big display type on phones: each half of the headline breaks over two lines
+     (four in total), which reads better than three squeezed ones */
+  .hero .hero-heading-line { font-size: clamp(2.5rem, 13.5vw, 4rem); line-height: 1.38; }
   .hero .hero-heading { gap: 0; }
-  .hero-inner .hero-lead { margin-top: 2.6rem; font-size: 1.15rem; max-width: 23rem; }
-  .hero-inner .hero-actions { margin-top: 3.4rem; }
+  /* swoosh tucks closer to "grow" so the line below it stays clear */
+  .hero .grow-swoosh { bottom: -0.1em; }
+  .hero-inner .hero-lead { margin-top: 2rem; font-size: 1.1rem; max-width: 23rem; }
+  .hero-inner .hero-actions { margin-top: 2.6rem; }
   /* full screen on landing — dvh follows the browser chrome so no strip of the
      next section peeks in at the bottom */
   .hero { min-height: 100vh; min-height: 100dvh; }
