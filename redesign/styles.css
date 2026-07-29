@@ -2758,10 +2758,12 @@ summary:focus-visible {
   .hero .container { padding-inline: var(--sp-3); }
   /* Big display type on phones: each half of the headline breaks over two lines
      (four in total), which reads better than three squeezed ones */
-  .hero .hero-heading-line { font-size: clamp(2.5rem, 13.5vw, 4rem); line-height: 1.38; }
+  .hero .hero-heading-line { font-size: clamp(2.5rem, 13.5vw, 4rem); line-height: 1.06; }
+  /* only the half carrying "to grow / your business" keeps extra leading, so the
+     swoosh can hang under "grow" without touching the line beneath it */
+  .hero .hero-heading-line:last-child { line-height: 1.34; }
   .hero .hero-heading { gap: 0; }
-  /* swoosh tucks closer to "grow" so the line below it stays clear */
-  .hero .grow-swoosh { bottom: -0.1em; }
+  .hero .grow-swoosh { bottom: -0.04em; height: 0.2em; }
   .hero-inner .hero-lead { margin-top: 2rem; font-size: 1.1rem; max-width: 23rem; }
   .hero-inner .hero-actions { margin-top: 2.6rem; }
   /* full screen on landing — dvh follows the browser chrome so no strip of the
