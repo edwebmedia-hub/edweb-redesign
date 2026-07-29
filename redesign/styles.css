@@ -193,16 +193,13 @@ summary:focus-visible {
   color: var(--gold);
   margin-bottom: var(--sp-4);
 }
-.eyebrow::before {
-  content: '';
-  display: inline-block;
-  width: 24px;
-  height: 2px;
-  background: var(--gold);
-  flex-shrink: 0;
-}
+/* dash removed site-wide (Edgar, 2026-07-29) */
+.eyebrow::before { content: none; }
 
 .section-head h2 { font-size: var(--fs-3xl); }
+/* FAQ headings sit outside .section-head — match the same scale so headings
+   stay consistent across the site (Edgar, 2026-07-29) */
+.faq-layout > div > h2 { font-size: var(--fs-3xl); }
 .section-head p {
   margin-top: var(--sp-4);
   color: var(--text-muted);
@@ -424,19 +421,79 @@ summary:focus-visible {
   content: "";
   position: absolute;
   inset: 0;
-  background-image: linear-gradient(rgba(245,243,238,0.12) 1px, transparent 1px), linear-gradient(90deg, rgba(245,243,238,0.12) 1px, transparent 1px);
-  background-size: 64px 64px;
+  background-image: radial-gradient(rgba(245,249,251,0.26) 1.1px, transparent 1.3px);
+  background-size: 24px 24px;
   mask-image: radial-gradient(ellipse 70% 70% at 50% 40%, black, transparent);
   z-index: 0;
 }
 
+/* --- hero atmosphere: drifting colour washes, interactive circuit, vignette --- */
+.hero-wash {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  pointer-events: none;
+  z-index: 0;
+}
+.hero-wash--teal {
+  left: -12%; top: 8%; width: 58%; height: 80%;
+  background: radial-gradient(50% 50% at 50% 50%, rgba(122, 207, 214, 0.17), transparent 100%);
+  animation: hero-wash-a 26s ease-in-out infinite alternate;
+}
+.hero-wash--coral {
+  right: -10%; top: -14%; width: 52%; height: 70%;
+  background: radial-gradient(50% 50% at 50% 50%, rgba(224, 71, 76, 0.13), transparent 100%);
+  animation: hero-wash-b 32s ease-in-out infinite alternate;
+}
+@keyframes hero-wash-a { from { transform: translate(0, 0); } to { transform: translate(6%, 4%); } }
+@keyframes hero-wash-b { from { transform: translate(0, 0); } to { transform: translate(-5%, 6%); } }
+
+#hero-net { position: absolute; inset: 0; z-index: 0; }
+
+.hero-vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(ellipse 90% 75% at 50% 38%, transparent 55%, rgba(0, 0, 0, 0.38) 100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-wash { animation: none; }
+}
+
+/* --- "grow" flourish: italic word with a coral swoosh that draws itself --- */
+.hero-grow { position: relative; font-style: italic; display: inline-block; padding: 0 0.04em; }
+.grow-swoosh { position: absolute; left: -3%; bottom: -0.16em; width: 106%; height: 0.24em; overflow: visible; }
+.grow-swoosh path {
+  stroke: var(--gold);
+  stroke-width: 7;
+  fill: none;
+  stroke-linecap: round;
+  stroke-dasharray: 130;
+  stroke-dashoffset: 130;
+  animation: grow-swoosh-in 700ms cubic-bezier(0.16, 1, 0.3, 1) 900ms forwards;
+}
+@keyframes grow-swoosh-in { to { stroke-dashoffset: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .grow-swoosh path { animation: none; stroke-dashoffset: 0; }
+}
+
 .hero-inner {
   position: relative;
-  z-index: 1;
-  padding-top: calc(var(--sp-16) + var(--sp-8));
-  padding-bottom: calc(var(--sp-12) + var(--sp-8));
-  max-width: 880px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-top: 9.5rem;
+  padding-bottom: 0;
+  max-width: 1100px;
+  width: 100%;
 }
+.hero-inner .hero-lead { margin-left: auto; margin-right: auto; margin-top: 2.6rem; }
+.hero-inner .hero-actions { justify-content: center; }
 
 .hero h1 {
   font-size: var(--fs-4xl);
@@ -448,18 +505,27 @@ summary:focus-visible {
 }
 
 /* ==========================================================================
-   HERO HEADING — line-by-line layout with a big cycling focal word
+   HERO HEADING — two centred lines, all words the same weight
    ========================================================================== */
 .hero-heading {
   display: flex;
   flex-direction: column;
-  gap: var(--sp-1);
+  align-items: center;
+  gap: 0.12em;
 }
 .hero-heading-line,
 .hero-cycle-wrap {
   opacity: 0;
   transform: translateY(24px);
   animation: hero-line-in 700ms var(--ease) forwards;
+}
+.hero .hero-heading-line {
+  font-size: clamp(2.9rem, 2rem + 4.6vw, 5.6rem);
+  font-weight: 800;
+  color: var(--text-inverse);
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  text-wrap: balance;
 }
 .hero-heading-line:first-child { animation-delay: 80ms; }
 .hero-cycle-wrap { animation-delay: 220ms; }
@@ -577,8 +643,8 @@ summary:focus-visible {
   content: "";
   position: absolute;
   inset: 0;
-  background-image: linear-gradient(rgba(245,243,238,0.12) 1px, transparent 1px), linear-gradient(90deg, rgba(245,243,238,0.12) 1px, transparent 1px);
-  background-size: 64px 64px;
+  background-image: radial-gradient(rgba(245,249,251,0.26) 1.1px, transparent 1.3px);
+  background-size: 24px 24px;
   mask-image: radial-gradient(ellipse 70% 70% at 50% 40%, black, transparent);
   z-index: 0;
   pointer-events: none;
@@ -1505,6 +1571,120 @@ summary:focus-visible {
 .review-nav-btn:hover { background: var(--gold); border-color: var(--gold); color: #fff; }
 
 /* ==========================================================================
+   TESTIMONIAL MARQUEE — columns of client reviews on a slow vertical loop.
+   Motion comes from script.js, which adds .is-live; without JS (or with
+   reduced motion) the columns stay put and every card is fully readable.
+   ========================================================================== */
+.tm-proof {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-8);
+}
+.tm-proof svg { width: 22px; height: 22px; flex-shrink: 0; }
+.tm-proof p { color: var(--text-muted); font-size: var(--fs-sm); }
+.tm-proof strong { color: var(--text); font-weight: 800; }
+.tm-stars { color: var(--gold); letter-spacing: 2px; font-size: var(--fs-sm); line-height: 1; }
+
+.tm-marquee {
+  --tm-fade: 12%;
+  max-width: 68rem;
+  margin-inline: auto;
+  display: flex;
+  justify-content: center;
+  gap: var(--sp-5);
+}
+.tm-marquee.is-live {
+  max-height: 34rem;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 var(--tm-fade), #000 calc(100% - var(--tm-fade)), transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 var(--tm-fade), #000 calc(100% - var(--tm-fade)), transparent);
+}
+.tm-col {
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 22rem;
+}
+.tm-col--2, .tm-col--3 { display: none; }
+.tm-track {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+}
+.tm-marquee.is-live .tm-track { will-change: transform; }
+
+.tm-card {
+  margin: 0; /* figure/blockquote carry a 40px UA margin */
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-6);
+  box-shadow: 0 10px 30px rgba(17, 21, 28, 0.07);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+.tm-card:hover {
+  border-color: color-mix(in srgb, var(--gold) 32%, var(--border));
+  box-shadow: 0 18px 44px rgba(17, 21, 28, 0.12);
+}
+.tm-card blockquote {
+  margin: 0;
+  font-size: var(--fs-base);
+  line-height: 1.65;
+  color: var(--text);
+}
+.tm-card figcaption {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+.tm-avatar {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(in srgb, var(--gold-light) 30%, #fff);
+  color: color-mix(in srgb, var(--gold-light) 55%, var(--ink));
+  font-family: var(--font-display);
+  font-size: var(--fs-xs);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+.tm-card:nth-child(even) .tm-avatar {
+  background: color-mix(in srgb, var(--gold) 16%, #fff);
+  color: var(--gold);
+}
+.tm-who { display: flex; flex-direction: column; min-width: 0; }
+.tm-who cite {
+  font-family: var(--font-display);
+  font-style: normal;
+  font-weight: 800;
+  line-height: 1.3;
+}
+.tm-who > span {
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+  line-height: 1.3;
+}
+
+.tm-more { text-align: center; margin-top: var(--sp-8); }
+
+@media (min-width: 768px) {
+  .tm-col--2 { display: block; }
+}
+@media (min-width: 1024px) {
+  .tm-col--3 { display: block; }
+  .tm-marquee.is-live { max-height: 40rem; }
+}
+
+/* ==========================================================================
    FAQ (accordion)
    ========================================================================== */
 .faq-layout {
@@ -1981,8 +2161,8 @@ summary:focus-visible {
   content: "";
   position: absolute;
   inset: 0;
-  background-image: linear-gradient(rgba(245,243,238,0.12) 1px, transparent 1px), linear-gradient(90deg, rgba(245,243,238,0.12) 1px, transparent 1px);
-  background-size: 64px 64px;
+  background-image: radial-gradient(rgba(245,249,251,0.26) 1.1px, transparent 1.3px);
+  background-size: 24px 24px;
   mask-image: radial-gradient(ellipse 70% 70% at 50% 40%, black, transparent);
   z-index: 0;
 }
@@ -2379,8 +2559,8 @@ summary:focus-visible {
   content: "";
   position: absolute;
   inset: 0;
-  background-image: linear-gradient(rgba(245,243,238,0.12) 1px, transparent 1px), linear-gradient(90deg, rgba(245,243,238,0.12) 1px, transparent 1px);
-  background-size: 64px 64px;
+  background-image: radial-gradient(rgba(245,249,251,0.26) 1.1px, transparent 1.3px);
+  background-size: 24px 24px;
   mask-image: radial-gradient(ellipse 70% 70% at 50% 40%, black, transparent);
   z-index: 0;
   pointer-events: none;
@@ -2567,8 +2747,6 @@ summary:focus-visible {
   .whatsapp-float { width: 52px; height: 52px; bottom: var(--sp-4); right: var(--sp-4); }
   .whatsapp-float svg { width: 26px; height: 26px; }
 
-  .footer-credit { display: none; }
-  .footer-tagline { display: none; }
 
   /* MSF mobile */
   .msf { padding: var(--sp-6); }

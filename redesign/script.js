@@ -721,3 +721,235 @@
   }
 
 })();
+
+
+/* --- hero dot-grid circuit ---------------------------------------------------
+   Draws connecting lines through the hero's dot grid around the cursor, plus two
+   slow idle pulses so the hero is alive before anyone touches it. Self-contained:
+   bails out silently if the hero canvas isn't on this page. The base dots are CSS
+   (.hero::after), so the pattern still shows with JS disabled. */
+(function () {
+  var hero = document.querySelector('.hero');
+  var cv = document.getElementById('hero-net');
+  if (!hero || !cv || !cv.getContext) return;
+
+  var ctx = cv.getContext('2d');
+  var DPR = Math.min(window.devicePixelRatio || 1, 2);
+  var GAP = 24;            // must match .hero::after background-size
+  var REACH = 150;         // cursor influence radius
+  var W = 0, H = 0;
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function size() {
+    W = hero.clientWidth;
+    H = hero.clientHeight;
+    cv.width = W * DPR;
+    cv.height = H * DPR;
+    cv.style.width = W + 'px';
+    cv.style.height = H + 'px';
+  }
+  size();
+  window.addEventListener('resize', size);
+
+  var mx = -9999, my = -9999;
+  hero.addEventListener('mousemove', function (e) {
+    var r = cv.getBoundingClientRect();
+    mx = e.clientX - r.left;
+    my = e.clientY - r.top;
+  });
+  hero.addEventListener('mouseleave', function () { mx = my = -9999; });
+
+  var pulses = [
+    { bx: 0.18, by: 0.34, a: 0.0, spd: 0.010, col: '122,207,214' },
+    { bx: 0.80, by: 0.62, a: 2.1, spd: 0.008, col: '224,71,76' }
+  ];
+
+  function glow(px, py, col) {
+    var g = ctx.createRadialGradient(px, py, 0, px, py, 70);
+    g.addColorStop(0, 'rgba(' + col + ',0.20)');
+    g.addColorStop(1, 'rgba(' + col + ',0)');
+    ctx.fillStyle = g;
+    ctx.beginPath(); ctx.arc(px, py, 70, 0, 6.2832); ctx.fill();
+    ctx.fillStyle = 'rgba(' + col + ',0.85)';
+    ctx.beginPath(); ctx.arc(px, py, 2.4, 0, 6.2832); ctx.fill();
+  }
+
+  function mesh(cx, cy, radius, strength) {
+    var gx0 = Math.max(0, Math.floor((cx - radius - GAP / 2) / GAP));
+    var gy0 = Math.max(0, Math.floor((cy - radius - GAP / 2) / GAP));
+    var gx1 = Math.floor((cx + radius - GAP / 2) / GAP) + 1;
+    var gy1 = Math.floor((cy + radius - GAP / 2) / GAP) + 1;
+
+    function pt(ix, iy) { return [GAP / 2 + ix * GAP, GAP / 2 + iy * GAP]; }
+    function falloff(ix, iy) {
+      var p = pt(ix, iy);
+      var d = Math.sqrt((p[0] - cx) * (p[0] - cx) + (p[1] - cy) * (p[1] - cy));
+      return d > radius ? 0 : (1 - d / radius);
+    }
+
+    for (var iy = gy0; iy <= gy1; iy++) {
+      for (var ix = gx0; ix <= gx1; ix++) {
+        var k0 = falloff(ix, iy);
+        if (k0 <= 0) continue;
+        var p0 = pt(ix, iy);
+        var neigh = [[ix + 1, iy], [ix, iy + 1], [ix + 1, iy + 1]];
+        for (var n = 0; n < neigh.length; n++) {
+          var k1 = falloff(neigh[n][0], neigh[n][1]);
+          if (k1 <= 0) continue;
+          var p1 = pt(neigh[n][0], neigh[n][1]);
+          var a = Math.min(k0, k1) * 0.38 * strength;
+          ctx.strokeStyle = 'rgba(122,207,214,' + a.toFixed(3) + ')';
+          ctx.lineWidth = 1;
+          ctx.beginPath(); ctx.moveTo(p0[0], p0[1]); ctx.lineTo(p1[0], p1[1]); ctx.stroke();
+        }
+        ctx.fillStyle = 'rgba(122,207,214,' + (0.65 * k0 * strength).toFixed(3) + ')';
+        ctx.beginPath(); ctx.arc(p0[0], p0[1], 1.6, 0, 6.2832); ctx.fill();
+      }
+    }
+  }
+
+  function frame() {
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.clearRect(0, 0, cv.width, cv.height);
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+
+    for (var i = 0; i < pulses.length; i++) {
+      var p = pulses[i];
+      p.a += p.spd;
+      var px = (p.bx + Math.cos(p.a) * 0.06) * W;
+      var py = (p.by + Math.sin(p.a * 0.8) * 0.05) * H;
+      glow(px, py, p.col);
+      mesh(px, py, 90, 0.5);
+    }
+    if (mx > -999) mesh(mx, my, REACH, 1);
+
+    requestAnimationFrame(frame);
+  }
+
+  if (!reduced) requestAnimationFrame(frame);
+})();
+
+/* --- testimonial marquee: columns of reviews on a slow vertical loop -------- */
+(function () {
+  var marquees = document.querySelectorAll('.tm-marquee');
+  if (!marquees.length) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var MOBILE = 768;
+
+  Array.prototype.forEach.call(marquees, function (marquee) {
+    var cols = Array.prototype.slice.call(marquee.querySelectorAll('.tm-col'));
+    if (!cols.length) return;
+
+    // keep a pristine copy of every card so rebuilds never compound clones
+    var source = cols.map(function (col) {
+      var track = col.querySelector('.tm-track');
+      return Array.prototype.slice.call(track.children).map(function (card) {
+        return card.cloneNode(true);
+      });
+    });
+
+    var lanes = [];
+    var narrow = null;
+    var running = false;
+    var visible = true;
+    var last = 0;
+
+    function build() {
+      narrow = window.innerWidth < MOBILE;
+      lanes = [];
+      // clip the column window first so the copy count below is measured
+      // against the visible height, not the full natural stack
+      marquee.classList.add('is-live');
+
+      cols.forEach(function (col, i) {
+        var track = col.querySelector('.tm-track');
+        // on phones only the first column shows, so it carries every review
+        var cards = narrow ? (i === 0 ? [].concat.apply([], source) : []) : source[i];
+        track.innerHTML = '';
+        if (!cards.length) return;
+
+        cards.forEach(function (card) { track.appendChild(card.cloneNode(true)); });
+        var n = cards.length;
+
+        // repeat the set until it comfortably overfills the viewport window,
+        // then loop back by exactly one set for a seamless join
+        var setEnd = track.children[n - 1].offsetTop + track.children[n - 1].offsetHeight;
+        var copies = Math.max(2, Math.ceil((marquee.clientHeight * 2) / Math.max(setEnd, 1)) + 1);
+        for (var c = 1; c < copies; c++) {
+          cards.forEach(function (card) { track.appendChild(card.cloneNode(true)); });
+        }
+
+        var loop = track.children[n].offsetTop - track.children[0].offsetTop;
+        if (loop <= 0) return;
+
+        var base = parseFloat(col.dataset.speed) || 30;
+        lanes.push({
+          track: track,
+          loop: loop,
+          base: base,
+          speed: base,
+          target: base,
+          offset: Math.random() * loop
+        });
+      });
+
+      if (!lanes.length) marquee.classList.remove('is-live');
+    }
+
+    function frame(now) {
+      if (!running) return;
+      var dt = Math.min((now - last) / 1000, 0.05);
+      last = now;
+
+      lanes.forEach(function (lane) {
+        lane.speed += (lane.target - lane.speed) * 0.06;
+        lane.offset = (lane.offset + lane.speed * dt) % lane.loop;
+        lane.track.style.transform = 'translate3d(0,' + -lane.offset.toFixed(2) + 'px,0)';
+      });
+
+      requestAnimationFrame(frame);
+    }
+
+    function start() {
+      if (running || !lanes.length) return;
+      running = true;
+      last = performance.now();
+      requestAnimationFrame(frame);
+    }
+
+    function stop() { running = false; }
+
+    marquee.addEventListener('pointerenter', function () {
+      lanes.forEach(function (lane) { lane.target = lane.base * 0.35; });
+    });
+    marquee.addEventListener('pointerleave', function () {
+      lanes.forEach(function (lane) { lane.target = lane.base; });
+    });
+
+    // idle while the section is off screen
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        visible = entries[0].isIntersecting;
+        if (visible) start(); else stop();
+      }, { rootMargin: '200px 0px' }).observe(marquee);
+    } else {
+      visible = true;
+    }
+
+    var resizeTimer;
+    window.addEventListener('resize', function () {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function () {
+        if (narrow !== (window.innerWidth < MOBILE)) {
+          stop();
+          build();
+          if (visible) start();
+        }
+      }, 200);
+    });
+
+    build();
+    if (visible) start();
+  });
+})();
