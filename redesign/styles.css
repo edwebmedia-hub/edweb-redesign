@@ -2744,6 +2744,23 @@ summary:focus-visible {
   .hero-actions .btn,
   .hero-actions .hero-badge { flex: 1 1 0; min-width: 0; }
 
+  /* Phones: lift the hero block up the screen and hold the headline to three
+     lines instead of four (Edgar, 2026-07-29) */
+  .hero-inner { padding-top: 0; }
+  /* 9vw keeps "Websites designed" on one line and wraps the second line, so the
+     headline reads as three lines on every phone width */
+  .hero .hero-heading-line { font-size: clamp(1.85rem, 9vw, 2.7rem); }
+  .hero-inner .hero-lead { margin-top: 1.9rem; }
+
+  /* Footer bar: tagline is desktop-only, copyright fills the width */
+  .footer-tagline { display: none; }
+  /* copyright scales to fill the width of the bar without wrapping; the extra
+     bottom padding keeps it clear of the floating WhatsApp button */
+  .footer-bottom {
+    font-size: clamp(0.9rem, 4.4vw, 1.15rem);
+    padding-bottom: calc(var(--sp-6) + 56px);
+  }
+
   .whatsapp-float { width: 52px; height: 52px; bottom: var(--sp-4); right: var(--sp-4); }
   .whatsapp-float svg { width: 26px; height: 26px; }
 
@@ -3174,9 +3191,10 @@ summary:focus-visible {
   .contact-info > p { font-size: var(--fs-base); }
 }
 
-/* Wider dashboard card on small phones — placed last to win the cascade */
+/* Dashboard card on small phones — placed last to win the cascade.
+   The About container keeps the standard .container gutter so its left/right
+   spacing matches every other section (Edgar, 2026-07-29). */
 @media (max-width: 480px) {
-  #about .container { padding: 0 var(--sp-3); }
   .av3-panel { padding: 0; }
   .dcard { padding: var(--sp-4); }
   .dstats { grid-template-columns: repeat(3, 1fr); gap: 6px; }
