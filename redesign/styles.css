@@ -2754,15 +2754,19 @@ summary:focus-visible {
 
   /* Phones: lift the hero block up the screen and hold the headline to three
      lines instead of four (Edgar, 2026-07-29) */
-  .hero-inner { padding-top: 0; }
+  .hero-inner { padding-top: 2.4rem; }
   /* Narrower gutter buys the headline enough width to stay on three lines at a
      much larger size; 10vw keeps "Websites designed" unwrapped down to 320px */
   .hero .container { padding-inline: var(--sp-3); }
-  .hero .hero-heading-line { font-size: clamp(1.95rem, 10vw, 3rem); line-height: 1.2; }
+  /* Looser leading drops "your business" clear of the swoosh under "grow";
+     the flex gap shrinks so the first two lines keep their old spacing */
+  .hero .hero-heading-line { font-size: clamp(1.95rem, 10vw, 3rem); line-height: 1.48; }
+  .hero .hero-heading { gap: 0; }
   .hero-inner .hero-lead { margin-top: 2.6rem; font-size: 1.15rem; max-width: 23rem; }
   .hero-inner .hero-actions { margin-top: 3.4rem; }
-  /* trim the dead space above and below the hero block on phones */
-  .hero { min-height: 90vh; }
+  /* full screen on landing — dvh follows the browser chrome so no strip of the
+     next section peeks in at the bottom */
+  .hero { min-height: 100vh; min-height: 100dvh; }
 
   /* Footer bar: tagline is desktop-only, copyright fills the width */
   .footer-tagline { display: none; }
