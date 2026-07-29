@@ -953,3 +953,14 @@
     if (visible) start();
   });
 })();
+
+/* --- hide the WhatsApp float once the footer bar is on screen -------------- */
+(function () {
+  var float = document.querySelector('.whatsapp-float');
+  var bar = document.querySelector('.footer-bottom');
+  if (!float || !bar || !('IntersectionObserver' in window)) return;
+
+  new IntersectionObserver(function (entries) {
+    float.classList.toggle('is-tucked', entries[0].isIntersecting);
+  }, { rootMargin: '0px 0px -8px 0px' }).observe(bar);
+})();

@@ -2676,6 +2676,14 @@ summary:focus-visible {
 }
 .whatsapp-float svg { width: 30px; height: 30px; }
 .whatsapp-float:hover { transform: scale(1.08); }
+/* tucks away once the footer bar is on screen so it never sits on the
+   copyright line (script.js toggles this) */
+.whatsapp-float.is-tucked {
+  opacity: 0;
+  transform: scale(0.8);
+  pointer-events: none;
+}
+.whatsapp-float { transition: transform var(--transition), opacity 300ms var(--ease); }
 
 /* ==========================================================================
    RESPONSIVE
@@ -2747,19 +2755,19 @@ summary:focus-visible {
   /* Phones: lift the hero block up the screen and hold the headline to three
      lines instead of four (Edgar, 2026-07-29) */
   .hero-inner { padding-top: 0; }
-  /* 9vw keeps "Websites designed" on one line and wraps the second line, so the
-     headline reads as three lines on every phone width */
-  .hero .hero-heading-line { font-size: clamp(1.85rem, 9vw, 2.7rem); }
-  .hero-inner .hero-lead { margin-top: 1.9rem; }
+  /* Narrower gutter buys the headline enough width to stay on three lines at a
+     much larger size; 10vw keeps "Websites designed" unwrapped down to 320px */
+  .hero .container { padding-inline: var(--sp-3); }
+  .hero .hero-heading-line { font-size: clamp(1.95rem, 10vw, 3rem); line-height: 1.2; }
+  .hero-inner .hero-lead { margin-top: 2.6rem; font-size: 1.15rem; max-width: 23rem; }
+  .hero-inner .hero-actions { margin-top: 3.4rem; }
+  /* trim the dead space above and below the hero block on phones */
+  .hero { min-height: 90vh; }
 
   /* Footer bar: tagline is desktop-only, copyright fills the width */
   .footer-tagline { display: none; }
-  /* copyright scales to fill the width of the bar without wrapping; the extra
-     bottom padding keeps it clear of the floating WhatsApp button */
-  .footer-bottom {
-    font-size: clamp(0.9rem, 4.4vw, 1.15rem);
-    padding-bottom: calc(var(--sp-6) + 56px);
-  }
+  /* copyright scales to fill the width of the bar without wrapping */
+  .footer-bottom { font-size: clamp(0.9rem, 4.4vw, 1.15rem); }
 
   .whatsapp-float { width: 52px; height: 52px; bottom: var(--sp-4); right: var(--sp-4); }
   .whatsapp-float svg { width: 26px; height: 26px; }
