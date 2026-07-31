@@ -2482,6 +2482,13 @@ summary:focus-visible {
   border-radius: var(--radius-md);
   background: #fff;
   box-shadow: 0 10px 30px rgba(17, 21, 28, 0.05);
+  scroll-behavior: smooth;
+}
+/* while a column is still off screen, fade the trailing edge so it is obvious
+   there is more to swipe (script.js toggles .has-more) */
+.plan-table-wrap.has-more {
+  -webkit-mask-image: linear-gradient(to right, #000 86%, rgba(0, 0, 0, 0.25));
+  mask-image: linear-gradient(to right, #000 86%, rgba(0, 0, 0, 0.25));
 }
 .plan-table {
   width: 100%;

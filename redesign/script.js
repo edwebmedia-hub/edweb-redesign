@@ -980,7 +980,7 @@
   var n = cards.length;
   if (!n) return;
 
-  var BASE = 26;                     // px per second
+  var BASE = 44;                     // px per second
   var speed = BASE, target = BASE, offset = 0, loop = 0, running = false, visible = false, last = 0;
 
   function build() {
@@ -1011,6 +1011,13 @@
 
   rail.addEventListener('pointerenter', function () { target = BASE * 0.25; });
   rail.addEventListener('pointerleave', function () { target = BASE; });
+  // a finger (or a held mouse button) on the rail stops it dead
+  rail.addEventListener('pointerdown', function () { target = 0; speed = 0; });
+  ['pointerup', 'pointercancel'].forEach(function (evt) {
+    rail.addEventListener(evt, function (e) { target = e.pointerType === 'touch' ? BASE : BASE * 0.25; });
+  });
+  rail.addEventListener('touchstart', function () { target = 0; speed = 0; }, { passive: true });
+  rail.addEventListener('touchend', function () { target = BASE; }, { passive: true });
   // never slide a tile out from under someone tabbing to it
   rail.addEventListener('focusin', function () { target = 0; });
   rail.addEventListener('focusout', function () { target = BASE; });
@@ -1032,4 +1039,21 @@
 
   build();
   if (visible) start();
+})();
+
+/* --- pricing tables: fade the trailing edge while there is more to swipe ---- */
+(function () {
+  var wraps = document.querySelectorAll('.plan-table-wrap');
+  if (!wraps.length) return;
+
+  Array.prototype.forEach.call(wraps, function (wrap) {
+    function sync() {
+      var scrollable = wrap.scrollWidth > wrap.clientWidth + 2;
+      var atEnd = wrap.scrollLeft + wrap.clientWidth >= wrap.scrollWidth - 2;
+      wrap.classList.toggle('has-more', scrollable && !atEnd);
+    }
+    wrap.addEventListener('scroll', sync, { passive: true });
+    window.addEventListener('resize', sync);
+    sync();
+  });
 })();
