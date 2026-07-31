@@ -1336,7 +1336,17 @@ summary:focus-visible {
   .svc-intro { grid-template-columns: 1fr; gap: var(--sp-6); align-items: start; }
   .svc-intro h2 { max-width: none; }
   .svc-intro-copy p { font-size: var(--fs-base); }
-  .svc-tile { flex-basis: 16.5rem; min-height: 15.5rem; }
+  /* tiles hug their content on phones instead of leaving a tall empty block
+     under the copy */
+  .svc-tile {
+    flex-basis: 15.5rem;
+    min-height: 0;
+    padding: var(--sp-5);
+  }
+  .svc-tile h3 { font-size: var(--fs-lg); }
+  .svc-tile p { margin-top: var(--sp-3); }
+  .svc-tile-arrow { padding-top: var(--sp-4); font-size: 21px; }
+  .svc-tile-icon { top: var(--sp-5); right: var(--sp-5); font-size: 22px; }
 }
 
 .svc-depth-grid {
