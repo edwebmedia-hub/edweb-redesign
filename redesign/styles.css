@@ -1249,6 +1249,96 @@ summary:focus-visible {
 /* ==========================================================================
    SERVICES — elevated depth cards (3 x 2)
    ========================================================================== */
+/* ==========================================================================
+   SERVICES RAIL — split intro (heading left, copy + CTA right) above a row of
+   service tiles that drifts sideways on its own (script.js drives the motion)
+   ========================================================================== */
+.svc-intro {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: var(--sp-10);
+  align-items: end;
+  margin-bottom: var(--sp-10);
+}
+.svc-intro h2 { font-size: var(--fs-3xl); max-width: 15ch; }
+.svc-intro-copy p {
+  color: var(--text-muted);
+  font-size: var(--fs-lg);
+  line-height: 1.65;
+  max-width: 52ch;
+}
+.svc-intro-copy .btn { margin-top: var(--sp-6); }
+
+.svc-rail { overflow: hidden; }
+/* fade only the trailing edge, so tiles look like they run off the page */
+.svc-rail.is-live {
+  -webkit-mask-image: linear-gradient(to right, #000 88%, transparent);
+  mask-image: linear-gradient(to right, #000 88%, transparent);
+}
+.svc-rail-track {
+  display: flex;
+  gap: var(--sp-5);
+  align-items: stretch;
+}
+.svc-rail.is-live .svc-rail-track { will-change: transform; }
+
+.svc-tile {
+  position: relative;
+  flex: 0 0 20rem;
+  min-height: 17rem;
+  display: flex;
+  flex-direction: column;
+  padding: var(--sp-6);
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  color: var(--text);
+  transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
+}
+.svc-tile:hover {
+  border-color: color-mix(in srgb, var(--gold) 35%, var(--border));
+  box-shadow: 0 16px 40px rgba(17, 21, 28, 0.1);
+  transform: translateY(-3px);
+}
+.svc-tile h3 {
+  font-family: var(--font-display);
+  font-size: var(--fs-xl);
+  font-weight: 800;
+  line-height: 1.15;
+  color: var(--ink);
+  padding-right: 2.5rem;
+}
+.svc-tile p {
+  margin-top: var(--sp-4);
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+.svc-tile-icon {
+  position: absolute;
+  top: var(--sp-6);
+  right: var(--sp-6);
+  font-size: 26px;
+  color: var(--gold);
+}
+.svc-tile-arrow {
+  margin-top: auto;
+  align-self: flex-end;
+  padding-top: var(--sp-5);
+  font-size: 24px;
+  color: var(--ink);
+  transition: transform var(--transition), color var(--transition);
+}
+.svc-tile:hover .svc-tile-arrow { transform: translateX(5px); color: var(--gold); }
+
+@media (max-width: 900px) {
+  .svc-intro { grid-template-columns: 1fr; gap: var(--sp-6); align-items: start; }
+  .svc-intro h2 { max-width: none; }
+  .svc-intro-copy p { font-size: var(--fs-base); }
+  .svc-tile { flex-basis: 16.5rem; min-height: 15.5rem; }
+}
+
 .svc-depth-grid {
   margin-top: var(--sp-10);
   display: grid;
@@ -2369,6 +2459,203 @@ summary:focus-visible {
   color: var(--text-muted);
   max-width: 72ch;
   line-height: 1.6;
+}
+
+/* ==========================================================================
+   PLAN COMPARISON TABLE — packages page: one row per feature, one column per
+   plan, so the differences read at a glance instead of three stacked cards
+   ========================================================================== */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.plan-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: #fff;
+  box-shadow: 0 10px 30px rgba(17, 21, 28, 0.05);
+}
+.plan-table {
+  width: 100%;
+  min-width: 760px;
+  border-collapse: collapse;
+  text-align: center;
+}
+.plan-table th,
+.plan-table td {
+  padding: var(--sp-4) var(--sp-5);
+  border-bottom: 1px solid var(--border);
+}
+.plan-table tbody tr:last-child th,
+.plan-table tbody tr:last-child td { border-bottom: 0; }
+/* hairline between plan columns, like a real spec sheet */
+.plan-table th + th,
+.plan-table td + td { border-left: 1px solid var(--border); }
+
+/* header row: plan name, price, call to action */
+.plan-table thead th {
+  vertical-align: top;
+  padding: var(--sp-6) var(--sp-5);
+  border-bottom: 1px solid var(--border);
+}
+/* the corner cell carries a line of copy so it reads as a proper panel rather
+   than a label floating in an empty box */
+.plan-corner {
+  text-align: left;
+  vertical-align: middle !important;
+  width: 30%;
+}
+.plan-corner-title {
+  display: block;
+  font-family: var(--font-display);
+  font-size: var(--fs-xl);
+  font-weight: 800;
+  line-height: 1.15;
+  color: var(--ink);
+}
+.plan-corner-note {
+  display: block;
+  margin-top: var(--sp-3);
+  max-width: 24ch;
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+/* every plan column reserves the badge's height so the names line up */
+.plan-head {
+  position: relative;
+  padding-top: calc(var(--sp-6) + 1.9rem) !important;
+}
+.plan-flag {
+  position: absolute;
+  top: var(--sp-6);
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.25rem 0.7rem;
+  border-radius: var(--radius-pill);
+  background: var(--gold);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.plan-name {
+  display: block;
+  font-family: var(--font-display);
+  font-size: var(--fs-lg);
+  font-weight: 800;
+  color: var(--ink);
+}
+.plan-price {
+  display: block;
+  margin-top: 2px;
+  font-size: var(--fs-base);
+  font-weight: 700;
+  color: var(--ink);
+}
+.plan-price em {
+  font-style: normal;
+  font-weight: 500;
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+}
+.plan-cta { width: 100%; margin-top: var(--sp-4); }
+
+/* body rows */
+.plan-table th[scope="row"] {
+  text-align: left;
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--ink);
+}
+.plan-table td {
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--text);
+}
+.plan-soft { color: var(--text-muted); font-size: var(--fs-xs); font-weight: 500; }
+/* plain drawn check, like a spec sheet — no filled badge */
+.plan-tick {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  position: relative;
+}
+.plan-tick::after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 1px;
+  width: 6px;
+  height: 12px;
+  border: solid var(--gold);
+  border-width: 0 2.5px 2.5px 0;
+  border-radius: 1px;
+  transform: rotate(45deg);
+}
+.plan-dash { color: var(--text-muted); }
+
+/* the recommended column stays tinted the whole way down */
+.plan-table .is-featured { background: var(--paper-dim); }
+.plan-table tbody tr:hover th[scope="row"],
+.plan-table tbody tr:hover td { background: color-mix(in srgb, var(--paper-dim) 45%, #fff); }
+.plan-table tbody tr:hover td.is-featured { background: color-mix(in srgb, var(--paper-dim) 80%, var(--gold-light) 6%); }
+
+/* the feature column stays put while the plans scroll sideways */
+.plan-corner,
+.plan-table th[scope="row"] {
+  position: sticky;
+  left: 0;
+  z-index: 2;
+}
+.plan-table th[scope="row"] { background: #fff; }
+/* lighter than the recommended column so the two don't read as one block */
+.plan-corner { background: color-mix(in srgb, var(--paper-dim) 45%, #fff); }
+
+.plan-scroll-hint {
+  display: none;
+  margin-top: var(--sp-3);
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+  text-align: center;
+}
+.plan-note {
+  margin-top: var(--sp-5);
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+  text-align: center;
+  max-width: 68ch;
+  margin-inline: auto;
+  line-height: 1.6;
+}
+
+@media (max-width: 900px) {
+  .plan-scroll-hint { display: block; }
+  .plan-table {
+    min-width: 600px;
+    table-layout: fixed;
+  }
+  .plan-table th,
+  .plan-table td { padding: var(--sp-3); }
+  /* keep the sticky label column narrow enough to leave room for the plans */
+  .plan-corner,
+  .plan-table th[scope="row"] { width: 150px; font-size: var(--fs-xs); }
+  .plan-corner { font-size: var(--fs-base); }
+  .plan-name { font-size: var(--fs-base); }
+  .plan-price { font-size: var(--fs-sm); }
+  .plan-cta { padding-inline: 0.5rem; }
+  .plan-head { padding-top: calc(var(--sp-5) + 1.7rem) !important; }
+  .plan-flag { top: var(--sp-4); font-size: 0.6rem; padding: 0.2rem 0.5rem; }
 }
 .pricing-teaser-cta {
   margin-top: var(--sp-10);

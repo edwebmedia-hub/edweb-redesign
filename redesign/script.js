@@ -964,3 +964,72 @@
     float.classList.toggle('is-tucked', entries[0].isIntersecting);
   }, { rootMargin: '0px 0px -8px 0px' }).observe(bar);
 })();
+
+/* --- services rail: tiles drift sideways, slow on hover -------------------- */
+(function () {
+  var rail = document.querySelector('[data-svc-rail]');
+  if (!rail) return;
+  var track = rail.querySelector('.svc-rail-track');
+  if (!track) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    rail.style.overflowX = 'auto';   // no motion: let people swipe it themselves
+    return;
+  }
+
+  var cards = Array.prototype.slice.call(track.children).map(function (c) { return c.cloneNode(true); });
+  var n = cards.length;
+  if (!n) return;
+
+  var BASE = 26;                     // px per second
+  var speed = BASE, target = BASE, offset = 0, loop = 0, running = false, visible = false, last = 0;
+
+  function build() {
+    track.innerHTML = '';
+    cards.forEach(function (c) { track.appendChild(c.cloneNode(true)); });
+
+    var setEnd = track.children[n - 1].offsetLeft + track.children[n - 1].offsetWidth;
+    var copies = Math.max(2, Math.ceil((rail.clientWidth * 2) / Math.max(setEnd, 1)) + 1);
+    for (var i = 1; i < copies; i++) {
+      cards.forEach(function (c) { track.appendChild(c.cloneNode(true)); });
+    }
+    loop = track.children[n].offsetLeft - track.children[0].offsetLeft;
+    rail.classList.toggle('is-live', loop > 0);
+  }
+
+  function frame(now) {
+    if (!running) return;
+    var dt = Math.min((now - last) / 1000, 0.05);
+    last = now;
+    speed += (target - speed) * 0.06;
+    offset = (offset + speed * dt) % loop;
+    track.style.transform = 'translate3d(' + -offset.toFixed(2) + 'px,0,0)';
+    requestAnimationFrame(frame);
+  }
+
+  function start() { if (running || !loop) return; running = true; last = performance.now(); requestAnimationFrame(frame); }
+  function stop() { running = false; }
+
+  rail.addEventListener('pointerenter', function () { target = BASE * 0.25; });
+  rail.addEventListener('pointerleave', function () { target = BASE; });
+  // never slide a tile out from under someone tabbing to it
+  rail.addEventListener('focusin', function () { target = 0; });
+  rail.addEventListener('focusout', function () { target = BASE; });
+
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (entries) {
+      visible = entries[0].isIntersecting;
+      if (visible) start(); else stop();
+    }, { rootMargin: '150px 0px' }).observe(rail);
+  } else {
+    visible = true;
+  }
+
+  var resizeTimer;
+  window.addEventListener('resize', function () {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function () { stop(); offset = 0; build(); if (visible) start(); }, 200);
+  });
+
+  build();
+  if (visible) start();
+})();
