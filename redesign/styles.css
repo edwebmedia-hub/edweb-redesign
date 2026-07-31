@@ -2656,28 +2656,8 @@ summary:focus-visible {
   line-height: 1.6;
 }
 
-/* Phones: let the table run to both screen edges instead of sitting as a boxed
-   card inside the container gutter — buys ~48px of column width (Edgar's call,
-   mobile only; desktop keeps the card) */
-@media (max-width: 768px) {
-  .plan-table-wrap {
-    margin-inline: calc(-1 * var(--sp-5));
-    width: calc(100% + var(--sp-5) * 2);
-    border-left: 0;
-    border-right: 0;
-    border-radius: 0;
-    box-shadow: none;
-  }
-  /* feature labels keep the same left gutter as every other section */
-  .plan-table .plan-corner,
-  .plan-table th[scope="row"] {
-    padding-left: var(--sp-5);
-    width: 162px;
-  }
-  .plan-table thead th:last-child,
-  .plan-table tbody td:last-child { padding-right: var(--sp-5); }
-}
-
+/* Full-bleed mobile tables were trialled 2026-07-31 and reverted — the boxed
+   card reads better on a phone. */
 @media (max-width: 900px) {
   .plan-scroll-hint { display: block; }
   .plan-table {
