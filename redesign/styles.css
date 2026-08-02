@@ -142,6 +142,9 @@ summary:focus-visible {
 .section--tight { padding: var(--sp-12) 0; }
 .section--alt { background: var(--paper-dim); }
 
+/* A dark pricing band was trialled 2026-08-02 and reverted — Edgar prefers the
+   light section. */
+
 .section-head {
   max-width: 640px;
   margin: 0 0 var(--sp-10);
@@ -2517,11 +2520,13 @@ summary:focus-visible {
 .plan-table th + th,
 .plan-table td + td { border-left: 1px solid var(--border); }
 
-/* header row: plan name, price, call to action */
+/* header row: plan name, price, call to action — sits on its own band so it
+   reads as the header of the sheet, not just another row */
 .plan-table thead th {
   vertical-align: top;
   padding: var(--sp-6) var(--sp-5);
   border-bottom: 1px solid var(--border);
+  background: color-mix(in srgb, var(--ink) 5%, #fff);
 }
 /* the corner cell carries a line of copy so it reads as a proper panel rather
    than a label floating in an empty box */
@@ -2547,25 +2552,7 @@ summary:focus-visible {
   line-height: 1.6;
   color: var(--text-muted);
 }
-/* every plan column reserves the badge's height so the names line up */
-.plan-head {
-  position: relative;
-  padding-top: calc(var(--sp-6) + 1.9rem) !important;
-}
-.plan-flag {
-  position: absolute;
-  top: var(--sp-6);
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 0.25rem 0.7rem;
-  border-radius: var(--radius-pill);
-  background: var(--gold);
-  color: #fff;
-  font-size: 0.7rem;
-  font-weight: 800;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
+.plan-head { position: relative; }
 .plan-name {
   display: block;
   font-family: var(--font-display);
@@ -2622,11 +2609,15 @@ summary:focus-visible {
 }
 .plan-dash { color: var(--text-muted); }
 
-/* the recommended column stays tinted the whole way down */
-.plan-table .is-featured { background: var(--paper-dim); }
+/* The recommended column keeps a teal-leaning tint of its own — deliberately
+   not --paper-dim, so it never matches the tinted section behind the card. */
+.plan-table .is-featured { background: color-mix(in srgb, var(--gold-light) 14%, #fff); }
+.plan-table thead th.is-featured {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--gold-light) 26%, #fff), color-mix(in srgb, var(--gold-light) 14%, #fff));
+}
 .plan-table tbody tr:hover th[scope="row"],
 .plan-table tbody tr:hover td { background: color-mix(in srgb, var(--paper-dim) 45%, #fff); }
-.plan-table tbody tr:hover td.is-featured { background: color-mix(in srgb, var(--paper-dim) 80%, var(--gold-light) 6%); }
+.plan-table tbody tr:hover td.is-featured { background: color-mix(in srgb, var(--gold-light) 20%, #fff); }
 
 /* the feature column stays put while the plans scroll sideways */
 .plan-corner,
@@ -2636,8 +2627,80 @@ summary:focus-visible {
   z-index: 2;
 }
 .plan-table th[scope="row"] { background: #fff; }
-/* lighter than the recommended column so the two don't read as one block */
-.plan-corner { background: color-mix(in srgb, var(--paper-dim) 45%, #fff); }
+
+/* ---- modern pass: sticky plan headers, column focus, entrance motion ------ */
+
+/* Desktop: the table fits, so the wrapper stops being a scrollport and the plan
+   row can pin under the site header while you read down a long spec sheet. */
+@media (min-width: 901px) {
+  .plan-table-wrap { overflow: visible; }
+  .plan-table thead th {
+    position: sticky;
+    top: 84px; /* clears the scrolled site header with room to spare */
+    z-index: 3;
+    box-shadow: inset 0 -1px 0 var(--border);
+  }
+  .plan-table thead th.plan-head { background: color-mix(in srgb, var(--ink) 5%, #fff); }
+  .plan-table thead th.plan-head.is-featured {
+    background: linear-gradient(180deg, color-mix(in srgb, var(--gold-light) 26%, #fff), color-mix(in srgb, var(--gold-light) 14%, #fff));
+  }
+}
+
+/* Hovering anywhere in a column lifts that whole column — pure CSS, no JS */
+@supports selector(:has(*)) {
+  .plan-table tbody tr:hover td { transition: background 160ms var(--ease); }
+  .plan-table:has(tbody td:nth-child(2):hover) tbody td:nth-child(2),
+  .plan-table:has(tbody td:nth-child(3):hover) tbody td:nth-child(3),
+  .plan-table:has(tbody td:nth-child(4):hover) tbody td:nth-child(4) {
+    background: color-mix(in srgb, var(--gold-light) 9%, #fff);
+  }
+  .plan-table:has(tbody td:nth-child(2):hover) tbody td:nth-child(2).is-featured,
+  .plan-table:has(tbody td:nth-child(3):hover) tbody td:nth-child(3).is-featured,
+  .plan-table:has(tbody td:nth-child(4):hover) tbody td:nth-child(4).is-featured {
+    background: color-mix(in srgb, var(--gold-light) 16%, var(--paper-dim));
+  }
+}
+
+/* Row hover gets a coral edge rather than a flat wash */
+.plan-table tbody tr:hover th[scope="row"] {
+  box-shadow: inset 3px 0 0 var(--gold);
+}
+
+/* Rows rise as the table scrolls into view and fade out as they slide up under
+   the pinned plan header, instead of being cut off by it. No JS, no jank. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .plan-table tbody tr {
+      animation: plan-row-rise linear both, plan-row-dim linear both;
+      /* the second timeline's scrollport is inset by the pinned header height,
+         so "exit" starts as the row reaches the header rather than the screen */
+      animation-timeline: view(), view(block 150px auto);
+      animation-range: entry 0% entry 42%, exit 0% exit 85%;
+    }
+    @keyframes plan-row-rise {
+      from { transform: translateY(14px); }
+    }
+    @keyframes plan-row-dim {
+      to { opacity: 0.06; }
+    }
+  }
+}
+
+/* Ticks settle in rather than appearing flat */
+@media (prefers-reduced-motion: no-preference) {
+  .plan-tick::after { transition: transform 260ms var(--ease); }
+  .plan-table tbody tr:hover .plan-tick::after { transform: rotate(45deg) scale(1.15); }
+}
+
+/* Numbers line up like a spec sheet */
+.plan-table td,
+.plan-price { font-variant-numeric: tabular-nums; }
+.plan-name { letter-spacing: -0.015em; }
+
+.plan-cta:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--gold) 55%, #fff);
+  outline-offset: 3px;
+}
 
 .plan-scroll-hint {
   display: none;
@@ -2660,6 +2723,10 @@ summary:focus-visible {
    card reads better on a phone. */
 @media (max-width: 900px) {
   .plan-scroll-hint { display: block; }
+  /* each plan lands squarely instead of stopping half way */
+  .plan-table-wrap { scroll-snap-type: x proximity; }
+  .plan-table thead th,
+  .plan-table tbody td { scroll-snap-align: end; }
   .plan-table {
     min-width: 600px;
     table-layout: fixed;
@@ -2673,8 +2740,6 @@ summary:focus-visible {
   .plan-name { font-size: var(--fs-base); }
   .plan-price { font-size: var(--fs-sm); }
   .plan-cta { padding-inline: 0.5rem; }
-  .plan-head { padding-top: calc(var(--sp-5) + 1.7rem) !important; }
-  .plan-flag { top: var(--sp-4); font-size: 0.6rem; padding: 0.2rem 0.5rem; }
 }
 .pricing-teaser-cta {
   margin-top: var(--sp-10);
