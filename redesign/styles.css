@@ -30,8 +30,8 @@
   --fs-lg: 1.125rem;
   --fs-xl: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);
   --fs-2xl: clamp(1.75rem, 1.4rem + 1.4vw, 2.5rem);
-  --fs-3xl: clamp(2.25rem, 1.7rem + 2.4vw, 3.5rem);
-  --fs-4xl: clamp(2.5rem, 1.9rem + 3vw, 4.25rem);
+  --fs-3xl: clamp(2.4rem, 1.7rem + 3vw, 4rem);
+  --fs-4xl: clamp(2.7rem, 1.9rem + 3.5vw, 4.6rem);
 
   /* Spacing scale (4px base) */
   --sp-1: 0.25rem;
@@ -47,15 +47,15 @@
   --sp-20: 6rem;
 
   /* Shape, motion, elevation */
-  --radius-sm: 8px;
-  --radius-md: 16px;
-  --radius-lg: 28px;
+  --radius-sm: 10px;
+  --radius-md: 20px;
+  --radius-lg: 30px;
   --radius-pill: 999px;
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
   --transition: 450ms var(--ease);
-  --shadow-sm: 0 1px 2px rgba(17, 21, 28, 0.06);
-  --shadow-md: 0 12px 32px rgba(17, 21, 28, 0.08);
-  --shadow-lg: 0 30px 80px rgba(17, 21, 28, 0.16);
+  --shadow-sm: 0 2px 6px rgba(17, 21, 28, 0.05);
+  --shadow-md: 0 20px 55px rgba(17, 21, 28, 0.07);
+  --shadow-lg: 0 35px 90px rgba(17, 21, 28, 0.14);
 
   --container: 1200px;
 }
@@ -233,8 +233,8 @@ summary:focus-visible {
   align-items: center;
   justify-content: center;
   gap: var(--sp-2);
-  padding: 0.75rem 1.6rem;
-  font-size: var(--fs-sm);
+  padding: 0.95rem 2.1rem;
+  font-size: var(--fs-base);
   font-weight: 600;
   letter-spacing: 0.02em;
   border-radius: var(--radius-pill);
@@ -424,8 +424,8 @@ summary:focus-visible {
   content: "";
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(rgba(245,249,251,0.26) 1.1px, transparent 1.3px);
-  background-size: 24px 24px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.055 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"), radial-gradient(rgba(245,249,251,0.26) 1.1px, transparent 1.3px);
+  background-size: 160px 160px, 24px 24px;
   mask-image: radial-gradient(ellipse 70% 70% at 50% 40%, black, transparent);
   z-index: 0;
 }
@@ -490,8 +490,8 @@ summary:focus-visible {
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding-top: 9.5rem;
-  padding-bottom: 0;
+  padding-top: 6.5rem;
+  padding-bottom: 7.5rem;
   max-width: 1100px;
   width: 100%;
 }
@@ -646,8 +646,8 @@ summary:focus-visible {
   content: "";
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(rgba(245,249,251,0.26) 1.1px, transparent 1.3px);
-  background-size: 24px 24px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.055 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"), radial-gradient(rgba(245,249,251,0.26) 1.1px, transparent 1.3px);
+  background-size: 160px 160px, 24px 24px;
   mask-image: radial-gradient(ellipse 70% 70% at 50% 40%, black, transparent);
   z-index: 0;
   pointer-events: none;
@@ -1271,6 +1271,7 @@ summary:focus-visible {
   max-width: 52ch;
 }
 .svc-intro-copy .btn { margin-top: var(--sp-6); }
+.svc-intro { margin-bottom: var(--sp-12); }
 
 .svc-rail { overflow: hidden; }
 /* fade only the trailing edge, so tiles look like they run off the page */
@@ -2264,8 +2265,8 @@ summary:focus-visible {
   content: "";
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(rgba(245,249,251,0.26) 1.1px, transparent 1.3px);
-  background-size: 24px 24px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.055 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"), radial-gradient(rgba(245,249,251,0.26) 1.1px, transparent 1.3px);
+  background-size: 160px 160px, 24px 24px;
   mask-image: radial-gradient(ellipse 70% 70% at 50% 40%, black, transparent);
   z-index: 0;
 }
@@ -2930,8 +2931,8 @@ summary:focus-visible {
   content: "";
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(rgba(245,249,251,0.26) 1.1px, transparent 1.3px);
-  background-size: 24px 24px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.055 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"), radial-gradient(rgba(245,249,251,0.26) 1.1px, transparent 1.3px);
+  background-size: 160px 160px, 24px 24px;
   mask-image: radial-gradient(ellipse 70% 70% at 50% 40%, black, transparent);
   z-index: 0;
   pointer-events: none;
@@ -3125,7 +3126,7 @@ summary:focus-visible {
 
   /* Phones: lift the hero block up the screen and hold the headline to three
      lines instead of four (Edgar, 2026-07-29) */
-  .hero-inner { padding-top: 1rem; }
+  .hero-inner { padding-top: 0.5rem; padding-bottom: 3.5rem; }
   .hero .container { padding-inline: var(--sp-3); }
   /* Big display type on phones: each half of the headline breaks over two lines
      (four in total), which reads better than three squeezed ones */
@@ -3584,4 +3585,803 @@ summary:focus-visible {
   .dcard { padding: var(--sp-4); }
   .dstats { grid-template-columns: repeat(3, 1fr); gap: 6px; }
   .dstat { padding: var(--sp-2); }
+}
+
+/* ==========================================================================
+   2030 PASS, WAVE 1 — cross-page transitions, depth, selection, focus
+   All additive: guarded by @supports / prefers-reduced-motion, no layout shifts
+   ========================================================================== */
+
+/* Soft cross-fade when navigating between pages. Browsers without support
+   simply navigate as before. */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition { navigation: auto; }
+  ::view-transition-old(root) { animation-duration: 180ms; }
+  ::view-transition-new(root) { animation-duration: 220ms; }
+}
+
+/* Brand text selection */
+::selection { background: var(--gold); color: #fff; }
+
+/* Visible keyboard focus on every button, not just the plan CTAs */
+.btn:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--gold) 55%, #fff);
+  outline-offset: 3px;
+}
+
+/* Hero depth: the circuit canvas sinks slightly as you scroll away, so the
+   dot field, mesh and headline separate into layers */
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    #hero-net {
+      animation: hero-net-sink linear both;
+      animation-timeline: scroll();
+      animation-range: 0 700px;
+    }
+    @keyframes hero-net-sink {
+      to { transform: translateY(52px); }
+    }
+  }
+}
+
+/* Quote band: words cascade in (script.js wraps them; without JS the plain
+   text renders untouched) */
+.quote-split .qword {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(0.45em);
+  transition: opacity 600ms var(--ease) var(--qd, 0ms), transform 600ms var(--ease) var(--qd, 0ms);
+}
+.quote-split.is-qon .qword { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .quote-split .qword { opacity: 1; transform: none; transition: none; }
+}
+
+/* ==========================================================================
+   2030 PASS, WAVE 2 — visible layer: pathway timeline, endcap, progress bar,
+   bigger display type, button sheen, industry hovers
+   ========================================================================== */
+
+/* Section headings step up a class: bigger, tighter, balanced */
+.section-head h2 {
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  text-wrap: balance;
+}
+
+/* Reading progress bar: thin coral line across the very top of every page */
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light));
+      transform-origin: left;
+      transform: scaleX(0);
+      z-index: 300;
+      animation: page-progress linear both;
+      animation-timeline: scroll();
+      pointer-events: none;
+    }
+    @keyframes page-progress { to { transform: scaleX(1); } }
+  }
+}
+
+/* --- PATHWAY: the process as a timeline that draws itself ------------------ */
+.pathway { position: relative; max-width: 860px; }
+.pathway-steps { list-style: none; margin: 0; padding: 0; }
+.pathway-line {
+  position: absolute;
+  left: 11px; top: 14px; bottom: 44px;
+  width: 2px;
+  background: var(--border);
+  border-radius: 2px;
+}
+.pathway-line-fill {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, var(--gold), var(--gold-light));
+  transform-origin: top;
+  border-radius: 2px;
+}
+.pathway-step {
+  position: relative;
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  padding: var(--sp-8) 0;
+}
+.pathway-step:first-child { padding-top: 0; }
+.pathway-dot {
+  width: 24px;
+  height: 24px;
+  margin-top: 8px;
+  border-radius: 50%;
+  border: 2px solid var(--gold);
+  background: var(--gold);
+  box-shadow: 0 0 0 6px color-mix(in srgb, var(--gold) 14%, transparent);
+}
+.pathway-step:first-child .pathway-dot { margin-top: 14px; }
+.pathway-body h3 {
+  font-family: var(--font-display);
+  font-size: var(--fs-2xl);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+.pathway-body p {
+  margin-top: var(--sp-3);
+  color: var(--text-muted);
+  max-width: 54ch;
+  line-height: 1.7;
+}
+
+/* scroll-driven: the line draws and each dot ignites as it enters the screen */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .pathway-line-fill {
+      animation: pathway-draw linear both;
+      animation-timeline: view();
+      animation-range: entry 25% exit 80%;
+    }
+    @keyframes pathway-draw { from { transform: scaleY(0); } }
+
+    .pathway-dot {
+      animation: pathway-ignite linear both;
+      animation-timeline: view();
+      animation-range: entry 30% entry 55%;
+    }
+    @keyframes pathway-ignite {
+      from {
+        background: var(--paper);
+        border-color: var(--border);
+        box-shadow: 0 0 0 0 transparent;
+      }
+    }
+  }
+}
+
+@media (max-width: 620px) {
+  .pathway-step { grid-template-columns: 44px 1fr; padding: var(--sp-6) 0; }
+  .pathway-line { left: 10px; }
+  .pathway-dot { width: 22px; height: 22px; }
+}
+
+/* --- ENDCAP v3: quiet, confident closing band ------------------------------- */
+.endcap {
+  position: relative;
+  overflow: hidden;
+  background: var(--paper-dim);
+}
+/* faint ink dot field: the light-side echo of the dark bands' pattern */
+.endcap::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(43, 43, 43, 0.06) 1.1px, transparent 1.3px);
+  background-size: 24px 24px;
+  mask-image: radial-gradient(ellipse 80% 90% at 50% 50%, black, transparent);
+  pointer-events: none;
+}
+/* soft glow that follows the cursor (script.js feeds --egx/--egy) */
+.endcap::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(420px circle at var(--egx, 80%) var(--egy, 40%), color-mix(in srgb, var(--gold) 9%, transparent), transparent 70%),
+    radial-gradient(520px circle at 10% 95%, color-mix(in srgb, var(--gold-light) 8%, transparent), transparent 70%);
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .endcap::after { display: none; }
+}
+.endcap .container { position: relative; z-index: 1; }
+.endcap-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: var(--sp-10);
+  align-items: end;
+}
+.endcap-kicker {
+  font-size: var(--fs-lg);
+  color: var(--text-muted);
+  margin-bottom: var(--sp-3);
+}
+.endcap-title {
+  font-size: var(--fs-3xl);
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  text-wrap: balance;
+}
+.endcap-side p {
+  color: var(--text-muted);
+  font-size: var(--fs-lg);
+  line-height: 1.65;
+  max-width: 46ch;
+}
+.endcap-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-4);
+  margin-top: var(--sp-6);
+}
+@media (max-width: 900px) {
+  .endcap-grid { grid-template-columns: 1fr; gap: var(--sp-6); align-items: start; }
+  .endcap-side p { font-size: var(--fs-base); }
+}
+.endcap--plain { background: var(--paper); }
+
+/* --- Primary buttons: light sweep on hover ---------------------------------- */
+@media (prefers-reduced-motion: no-preference) {
+  .btn--primary,
+  .btn--accent {
+    background-image: linear-gradient(105deg, transparent 42%, rgba(255, 255, 255, 0.32) 50%, transparent 58%);
+    background-size: 240% 100%;
+    background-position: 190% 0;
+    background-repeat: no-repeat;
+    transition: transform var(--transition), background-color var(--transition), color var(--transition), border-color var(--transition), box-shadow var(--transition), background-position 900ms var(--ease);
+  }
+  .btn--primary:hover,
+  .btn--accent:hover { background-position: -90% 0; }
+}
+
+/* --- Industry cards: alive on hover ------------------------------------------ */
+.industry-card {
+  transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+}
+.industry-card:hover {
+  transform: translateY(-5px);
+  border-color: color-mix(in srgb, var(--gold) 38%, var(--border));
+  box-shadow: 0 14px 34px rgba(17, 21, 28, 0.1);
+}
+
+/* ==========================================================================
+   2030 PASS, WAVE 3 (revised after Edgar review)
+   ========================================================================== */
+
+/* Process: intro pinned on the left, timeline running on the right */
+.process-split {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: var(--sp-12);
+  align-items: start;
+}
+.process-split .section-head { margin-bottom: 0; }
+.process-split .process-intro {
+  position: sticky;
+  top: 130px;
+}
+.process-split .pathway { max-width: none; }
+@media (max-width: 900px) {
+  .process-split { grid-template-columns: 1fr; gap: var(--sp-8); }
+  .process-split .process-intro { position: static; }
+}
+
+/* Services rail: tiles run off the screen edge, not the container edge */
+.svc-rail-track {
+  padding-inline-start: calc(max(var(--sp-5), (100% - var(--container)) / 2 + var(--sp-5)) + var(--sp-8));
+}
+.svc-rail.is-live {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 4%, #000 94%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 4%, #000 94%, transparent);
+}
+
+/* Industries marquee: the old motion with new manners — fades at the screen
+   edges, pauses under the cursor, cards lift (hover styles in wave 2) */
+.industries-row {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+}
+@media (prefers-reduced-motion: reduce) {
+  .industries-track { animation: none; flex-wrap: wrap; width: auto; justify-content: center; }
+  .industries-track .industry-card[aria-hidden="true"] { display: none; }
+}
+
+/* ==========================================================================
+   CLIENT LOGO STRIP — real launches sliding quietly under the hero, every
+   mark reduced to the same ink silhouette
+   ========================================================================== */
+.logo-strip {
+  overflow: hidden;
+  margin-bottom: var(--sp-16);
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
+}
+.logo-strip-track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  animation: industries-scroll 38s linear infinite;
+}
+.logo-strip-track img {
+  height: 34px;
+  width: auto;
+  margin-right: clamp(3rem, 6vw, 5.5rem);
+  filter: brightness(0);
+  opacity: 0.45;
+  transition: opacity var(--transition);
+}
+.logo-strip-track img:hover { opacity: 0.85; }
+@media (max-width: 620px) {
+  .logo-strip-track img { height: 26px; margin-right: 2.2rem; }
+  .logo-strip { margin-bottom: var(--sp-10); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .logo-strip-track { animation: none; flex-wrap: wrap; width: auto; justify-content: center; gap: var(--sp-6); }
+  .logo-strip-track img[aria-hidden="true"] { display: none; }
+}
+
+/* --- logo strip in the hero: white marks, mixed weights, content lifted ----- */
+.logo-strip--hero {
+  position: absolute;
+  left: 0; right: 0;
+  bottom: clamp(1.2rem, 3.2vh, 2.6rem);
+  margin-bottom: 0;
+  z-index: 2;
+}
+.logo-strip--hero img {
+  filter: brightness(0) invert(1);
+  opacity: 0.55;
+}
+.logo-strip--hero img:hover { opacity: 0.95; }
+/* mixed sizes so square marks and wide wordmarks carry the same weight */
+.logo-strip img.l-xl { height: 68px; }
+.logo-strip img.l-lg { height: 54px; }
+.logo-strip img.l-md { height: 44px; }
+.logo-strip img.l-sm { height: 32px; }
+@media (max-width: 620px) {
+  .logo-strip img.l-xl { height: 42px; }
+  .logo-strip img.l-lg { height: 34px; }
+  .logo-strip img.l-md { height: 28px; }
+  .logo-strip img.l-sm { height: 20px; }
+  .logo-strip--hero { bottom: 1rem; }
+}
+
+/* ==========================================================================
+   CLIENT DIAL — one client in the spotlight between two rulers; the ticks
+   slide like a scale when it turns
+   ========================================================================== */
+.dial { max-width: 880px; margin-inline: auto; text-align: center; }
+.dial-rule {
+  position: relative;
+  height: 30px;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+}
+.dial-rule::before,
+.dial-rule::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-repeat: repeat-x;
+  transition: background-position 550ms var(--ease);
+  background-position-x: var(--dial-shift, 0px);
+}
+/* minor ticks */
+.dial-rule::before {
+  background-image: repeating-linear-gradient(90deg, color-mix(in srgb, var(--ink) 55%, transparent) 0 2px, transparent 2px 11px);
+  top: 25%; bottom: 25%;
+}
+/* major ticks every fifth */
+.dial-rule::after {
+  background-image: repeating-linear-gradient(90deg, var(--ink) 0 2px, transparent 2px 55px);
+}
+.dial-marker {
+  position: absolute;
+  left: 50%;
+  top: -8px; bottom: -8px;
+  width: 3px;
+  transform: translateX(-50%);
+  background: var(--gold);
+  border-radius: 2px;
+  z-index: 1;
+}
+.dial-stage { padding: var(--sp-8) var(--sp-4); }
+.dial-name {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 1.2rem + 4vw, 3.9rem);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+  color: var(--ink);
+  transition: opacity 260ms var(--ease), transform 260ms var(--ease);
+}
+.dial-tag {
+  margin-top: var(--sp-3);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  transition: opacity 260ms var(--ease), transform 260ms var(--ease);
+}
+.dial.is-turning .dial-name,
+.dial.is-turning .dial-tag { opacity: 0; transform: translateY(10px); }
+.dial-nav {
+  margin-top: var(--sp-6);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-5);
+}
+.dial-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--ink);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background var(--transition), border-color var(--transition), color var(--transition), transform var(--transition);
+}
+.dial-btn .material-symbols-outlined { font-size: 20px; }
+.dial-btn:hover,
+.dial-btn:focus-visible {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: #fff;
+  transform: translateY(-2px);
+}
+.dial-count {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+  min-width: 3.2em;
+  font-variant-numeric: tabular-nums;
+}
+@media (prefers-reduced-motion: reduce) {
+  .dial-rule::before, .dial-rule::after { transition: none; }
+  .dial-name, .dial-tag { transition: none; }
+}
+
+/* dial, full-bleed industries version: rulers run the whole screen, the
+   neighbouring industries ghost in from the sides */
+.dial--wide { max-width: none; margin-inline: 0; }
+.dial--wide .dial-rule {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+}
+.dial--wide .dial-stage {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 7.5rem;
+}
+.dial--wide .dial-name {
+  font-size: clamp(2.2rem, 1.3rem + 4.6vw, 5rem);
+}
+.dial-side {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(1.1rem, 0.8rem + 1.4vw, 1.8rem);
+  letter-spacing: -0.01em;
+  color: color-mix(in srgb, var(--ink) 22%, transparent);
+  white-space: nowrap;
+  transition: opacity 260ms var(--ease);
+}
+[data-dial-side-prev] { left: clamp(1rem, 5vw, 6rem); }
+[data-dial-side-next] { right: clamp(1rem, 5vw, 6rem); }
+.dial.is-turning .dial-side { opacity: 0; }
+@media (max-width: 900px) {
+  .dial-side { display: none; }
+}
+
+/* ==========================================================================
+   INDUSTRY ROWS — flat editorial list, Edgar's pick (2026-08-03)
+   ========================================================================== */
+.ind-rows {
+  list-style: none;
+  margin: 0 auto;
+  max-width: 1000px;
+  columns: 2;
+  column-gap: var(--sp-12);
+  padding: 0;
+}
+.ind-rows li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  padding: var(--sp-5) 0;
+  border-bottom: 1px solid var(--border);
+  break-inside: avoid;
+}
+.ind-rows .nm {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--fs-xl);
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  transition: transform 300ms var(--ease), color 300ms var(--ease);
+}
+.ind-rows .material-symbols-outlined {
+  color: var(--gold);
+  font-size: 22px;
+  transition: transform 300ms var(--ease);
+}
+.ind-rows li:hover .nm { transform: translateX(12px); color: var(--gold); }
+.ind-rows li:hover .material-symbols-outlined { transform: translateX(-4px); }
+@media (max-width: 720px) {
+  .ind-rows { columns: 1; }
+  .ind-rows li { padding: var(--sp-4) 0; }
+}
+
+/* ==========================================================================
+   QUOTE SCRUB — the band pins while the statement lights up word by word
+   under your scroll (script.js drives .lit; without JS the text just shows)
+   ========================================================================== */
+.quote-band--scrub .container { position: relative; }
+.quote-band--scrub.quote-ready .qword {
+  opacity: 0.16;
+  transition: opacity 240ms var(--ease);
+}
+.quote-band--scrub.quote-ready .qword.lit { opacity: 1; }
+.quote-band--scrub.quote-ready cite {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 500ms var(--ease), transform 500ms var(--ease);
+}
+.quote-band--scrub.quote-ready.quote-done cite {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .quote-band--scrub .qword, .quote-band--scrub cite { opacity: 1 !important; transform: none !important; transition: none !important; }
+}
+}
+
+/* --- services rail, manual mode: native scroll + arrows --------------------- */
+.svc-rail.is-manual {
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+}
+.svc-rail.is-manual::-webkit-scrollbar { display: none; }
+.svc-rail.is-manual .svc-tile { scroll-snap-align: start; }
+/* fade only the side that still has content */
+.svc-rail.is-manual { -webkit-mask-image: none; mask-image: none; }
+.svc-rail.is-manual.has-right {
+  -webkit-mask-image: linear-gradient(to right, #000 92%, transparent);
+  mask-image: linear-gradient(to right, #000 92%, transparent);
+}
+.svc-rail.is-manual.has-left.has-right {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 5%, #000 92%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 5%, #000 92%, transparent);
+}
+.svc-rail.is-manual.has-left:not(.has-right) {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 5%);
+  mask-image: linear-gradient(to right, transparent, #000 5%);
+}
+.svc-rail-nav {
+  display: flex;
+  gap: var(--sp-4);
+  margin-top: var(--sp-6);
+}
+.dial-btn:disabled {
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   FINANEX-INSPIRED PLUSH PASS — depth on the primary buttons, glow on the
+   pathway dots. Brand palette untouched: their navy and purple stay theirs.
+   ========================================================================== */
+.btn--primary {
+  background-image:
+    linear-gradient(135deg, color-mix(in srgb, var(--gold) 82%, #fff) 0%, var(--gold) 45%, color-mix(in srgb, var(--gold) 82%, var(--ink)) 100%);
+  box-shadow: 0 10px 26px color-mix(in srgb, var(--gold) 26%, transparent);
+}
+.btn--primary:hover {
+  box-shadow: 0 16px 38px color-mix(in srgb, var(--gold) 38%, transparent);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .btn--primary {
+    background-image:
+      linear-gradient(105deg, transparent 42%, rgba(255, 255, 255, 0.32) 50%, transparent 58%),
+      linear-gradient(135deg, color-mix(in srgb, var(--gold) 82%, #fff) 0%, var(--gold) 45%, color-mix(in srgb, var(--gold) 82%, var(--ink)) 100%);
+    background-size: 240% 100%, 100% 100%;
+    background-position: 190% 0, 0 0;
+    background-repeat: no-repeat;
+  }
+  .btn--primary:hover { background-position: -90% 0, 0 0; }
+}
+
+/* pathway dots pick up the coral-to-teal energy of the line they sit on */
+.pathway-dot {
+  background: linear-gradient(135deg, var(--gold), color-mix(in srgb, var(--gold) 45%, var(--gold-light)));
+  border-color: transparent;
+  box-shadow: 0 0 0 6px color-mix(in srgb, var(--gold) 16%, transparent), 0 6px 18px color-mix(in srgb, var(--gold) 30%, transparent);
+}
+
+/* ==========================================================================
+   PATHWAY v2 — finanex-style step cards on the drawn line, Edweb colours
+   ========================================================================== */
+.pathway-dot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--fs-xs);
+}
+.pathway-line { left: 14px; }
+.pathway-card {
+  background:
+    linear-gradient(#fff, #fff) padding-box,
+    linear-gradient(135deg, color-mix(in srgb, var(--gold) 55%, transparent), color-mix(in srgb, var(--gold-light) 55%, transparent)) border-box;
+  border: 1.5px solid transparent;
+  border-radius: var(--radius-lg);
+  padding: var(--sp-6) var(--sp-8);
+  box-shadow: var(--shadow-md);
+}
+.step-pill {
+  display: inline-flex;
+  padding: 0.32rem 0.85rem;
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--gold) 10%, #fff);
+  color: var(--gold);
+  font-size: var(--fs-xs);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: var(--sp-3);
+}
+.pathway-card h3 { margin-top: 0; }
+.process-cta { margin-top: var(--sp-6); }
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    @keyframes pathway-ignite {
+      from {
+        background: var(--paper);
+        border-color: var(--border);
+        color: transparent;
+        box-shadow: 0 0 0 0 transparent;
+      }
+    }
+  }
+}
+@media (max-width: 620px) {
+  .pathway-card { padding: var(--sp-5); }
+  .pathway-dot { width: 26px; height: 26px; }
+  .pathway-line { left: 12px; }
+}
+
+/* pathway cards: tighter (Edgar 2026-08-03) */
+.pathway-card { padding: var(--sp-5) var(--sp-6); }
+.pathway-card h3 { font-size: var(--fs-xl); }
+.pathway-body p { margin-top: var(--sp-2); font-size: var(--fs-sm); max-width: 58ch; }
+.pathway-step { padding: var(--sp-6) 0; }
+
+/* quote band: big statement type so the band carries weight without the
+   full-screen pin */
+.quote-band--scrub { padding: calc(var(--sp-20) + 1.5rem) 0; }
+.quote-band--scrub blockquote {
+  font-size: clamp(1.8rem, 1.1rem + 3vw, 3.6rem);
+  line-height: 1.22;
+  letter-spacing: -0.02em;
+  max-width: 26ch;
+  margin-inline: auto;
+}
+.quote-band--scrub cite { margin-top: var(--sp-6); display: inline-block; }
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .quote-band--scrub blockquote {
+      animation: quote-swell linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 90%;
+    }
+    @keyframes quote-swell {
+      from { transform: scale(0.94); opacity: 0.7; }
+    }
+  }
+}
+
+/* --- services rail v3: contained, paged, whole cards only ------------------- */
+.svc-rail.is-manual,
+.svc-rail.is-manual.has-left,
+.svc-rail.is-manual.has-right,
+.svc-rail.is-manual.has-left.has-right,
+.svc-rail.is-manual.has-left:not(.has-right) {
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+.svc-rail.is-manual { scroll-snap-type: x mandatory; }
+.svc-rail-track { padding-inline-start: 0; }
+.svc-rail .svc-tile {
+  flex: 0 0 calc((100% - 2 * var(--sp-5)) / 3);
+  max-width: none;
+}
+@media (max-width: 900px) {
+  .svc-rail .svc-tile { flex-basis: calc((100% - var(--sp-5)) / 2); }
+}
+@media (max-width: 620px) {
+  .svc-rail .svc-tile { flex-basis: 100%; }
+}
+.svc-rail-nav { margin-top: var(--sp-8); }
+
+/* ==========================================================================
+   PRICING CARDS v5 — the clean component Edgar picked: white card, name up
+   top, big price, ink button, flat feature list with circled checks
+   ========================================================================== */
+.pcard {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--sp-6);
+  box-shadow: var(--shadow-md);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.pcard:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+.pcard-name {
+  font-size: var(--fs-base);
+  font-weight: 700;
+  color: var(--ink);
+}
+.pcard-price {
+  margin-top: var(--sp-4);
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 1.5rem + 1vw, 2.4rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.pcard-price span {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0;
+}
+.pcard-desc {
+  margin-top: var(--sp-3);
+  color: var(--text-muted);
+  font-size: var(--fs-sm);
+  line-height: 1.6;
+  min-height: 2.6em;
+}
+.pcard .btn { margin-top: var(--sp-5); width: 100%; }
+.btn--ink {
+  background: var(--ink);
+  color: #fff;
+}
+.btn--ink:hover {
+  background: var(--ink-soft);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(17, 21, 28, 0.22);
+}
+.pcard-feats { margin-top: var(--sp-6); flex-grow: 1; }
+.pcard-feats > p {
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: var(--sp-2);
+}
+.pcard-feats ul { list-style: none; margin: 0; padding: 0; }
+.pcard-feats li {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-2) 0;
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+}
+.pcard-check {
+  flex-shrink: 0;
+  font-size: 22px !important;
+  color: var(--ink);
+}
+@media (max-width: 1024px) {
+  .pricing-grid { grid-template-columns: 1fr; max-width: 480px; margin-inline: auto; }
 }

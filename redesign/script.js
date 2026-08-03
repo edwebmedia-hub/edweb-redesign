@@ -371,7 +371,9 @@
         });
         const json = await res.json();
         if (!res.ok || !json.success) throw new Error(json.message || 'Failed');
-        fireAdsConversion();
+        // json.sent is only true when a real email went out — honeypot-trapped
+        // bot submits get success without it, and must not count as conversions
+        if (json.sent) fireAdsConversion();
         form.hidden = true;
         msf.querySelector('.msf-steps').hidden = true;
         document.getElementById('msf-success').removeAttribute('hidden');
@@ -622,7 +624,7 @@
         });
         const json = await res.json();
         if (!res.ok || !json.success) throw new Error(json.message || 'Failed');
-        fireAdsConversion();
+        if (json.sent) fireAdsConversion();
 
         document.getElementById('booking-form').hidden = true;
         document.getElementById('booking-success').hidden = false;
@@ -965,80 +967,41 @@
   }, { rootMargin: '0px 0px -8px 0px' }).observe(bar);
 })();
 
-/* --- services rail: tiles drift sideways, slow on hover -------------------- */
+/* --- services rail: manual scroller with arrows (auto-drift retired) -------- */
 (function () {
   var rail = document.querySelector('[data-svc-rail]');
   if (!rail) return;
   var track = rail.querySelector('.svc-rail-track');
+  var prev = document.querySelector('[data-svc-prev]');
+  var next = document.querySelector('[data-svc-next]');
   if (!track) return;
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    rail.style.overflowX = 'auto';   // no motion: let people swipe it themselves
-    return;
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  rail.classList.add('is-manual');
+
+  function step() {
+    // page by the full visible set so cards swap in and out whole
+    var gap = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap) || 24;
+    return rail.clientWidth + gap;
   }
 
-  var cards = Array.prototype.slice.call(track.children).map(function (c) { return c.cloneNode(true); });
-  var n = cards.length;
-  if (!n) return;
-
-  var BASE = 44;                     // px per second
-  var speed = BASE, target = BASE, offset = 0, loop = 0, running = false, visible = false, last = 0;
-
-  function build() {
-    track.innerHTML = '';
-    cards.forEach(function (c) { track.appendChild(c.cloneNode(true)); });
-
-    var setEnd = track.children[n - 1].offsetLeft + track.children[n - 1].offsetWidth;
-    var copies = Math.max(2, Math.ceil((rail.clientWidth * 2) / Math.max(setEnd, 1)) + 1);
-    for (var i = 1; i < copies; i++) {
-      cards.forEach(function (c) { track.appendChild(c.cloneNode(true)); });
-    }
-    loop = track.children[n].offsetLeft - track.children[0].offsetLeft;
-    rail.classList.toggle('is-live', loop > 0);
+  function sync() {
+    var max = rail.scrollWidth - rail.clientWidth;
+    rail.classList.toggle('has-left', rail.scrollLeft > 4);
+    rail.classList.toggle('has-right', rail.scrollLeft < max - 4);
+    if (prev) prev.disabled = rail.scrollLeft <= 4;
+    if (next) next.disabled = rail.scrollLeft >= max - 4;
   }
 
-  function frame(now) {
-    if (!running) return;
-    var dt = Math.min((now - last) / 1000, 0.05);
-    last = now;
-    speed += (target - speed) * 0.06;
-    offset = (offset + speed * dt) % loop;
-    track.style.transform = 'translate3d(' + -offset.toFixed(2) + 'px,0,0)';
-    requestAnimationFrame(frame);
+  function go(dir) {
+    rail.scrollBy({ left: dir * step(), behavior: reduced ? 'auto' : 'smooth' });
   }
 
-  function start() { if (running || !loop) return; running = true; last = performance.now(); requestAnimationFrame(frame); }
-  function stop() { running = false; }
-
-  rail.addEventListener('pointerenter', function () { target = BASE * 0.25; });
-  rail.addEventListener('pointerleave', function () { target = BASE; });
-  // a finger (or a held mouse button) on the rail stops it dead
-  rail.addEventListener('pointerdown', function () { target = 0; speed = 0; });
-  ['pointerup', 'pointercancel'].forEach(function (evt) {
-    rail.addEventListener(evt, function (e) { target = e.pointerType === 'touch' ? BASE : BASE * 0.25; });
-  });
-  rail.addEventListener('touchstart', function () { target = 0; speed = 0; }, { passive: true });
-  rail.addEventListener('touchend', function () { target = BASE; }, { passive: true });
-  // never slide a tile out from under someone tabbing to it
-  rail.addEventListener('focusin', function () { target = 0; });
-  rail.addEventListener('focusout', function () { target = BASE; });
-
-  if ('IntersectionObserver' in window) {
-    new IntersectionObserver(function (entries) {
-      visible = entries[0].isIntersecting;
-      if (visible) start(); else stop();
-    }, { rootMargin: '150px 0px' }).observe(rail);
-  } else {
-    visible = true;
-  }
-
-  var resizeTimer;
-  window.addEventListener('resize', function () {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(function () { stop(); offset = 0; build(); if (visible) start(); }, 200);
-  });
-
-  build();
-  if (visible) start();
+  if (prev) prev.addEventListener('click', function () { go(-1); });
+  if (next) next.addEventListener('click', function () { go(1); });
+  rail.addEventListener('scroll', sync, { passive: true });
+  window.addEventListener('resize', sync);
+  sync();
 })();
 
 /* --- pricing tables: fade the trailing edge while there is more to swipe ---- */
@@ -1056,4 +1019,166 @@
     window.addEventListener('resize', sync);
     sync();
   });
+})();
+
+/* --- 2030 pass: dashboard card tilts toward the cursor ---------------------- */
+(function () {
+  var card = document.getElementById('dcard');
+  if (!card) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (window.matchMedia('(hover: none)').matches) return; // touch devices: skip
+
+  var MAX = 3; // degrees
+  card.addEventListener('pointermove', function (e) {
+    var r = card.getBoundingClientRect();
+    var x = (e.clientX - r.left) / r.width - 0.5;
+    var y = (e.clientY - r.top) / r.height - 0.5;
+    card.style.transform =
+      'perspective(900px) rotateX(' + (-y * MAX).toFixed(2) + 'deg) rotateY(' + (x * MAX).toFixed(2) + 'deg)';
+  });
+  card.addEventListener('pointerleave', function () {
+    card.style.transform = '';
+  });
+})();
+
+/* --- quote band: words light up under your scroll ---------------------------- */
+(function () {
+  var band = document.querySelector('.quote-band--scrub');
+  if (!band) return;
+  var quote = band.querySelector('blockquote');
+  if (!quote) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  // wrap every word
+  var words = [];
+  Array.prototype.slice.call(quote.childNodes).forEach(function (node) {
+    if (node.nodeType !== 3 || !node.textContent.trim()) return;
+    var frag = document.createDocumentFragment();
+    node.textContent.split(/(\s+)/).forEach(function (part) {
+      if (!part) return;
+      if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); return; }
+      var sp = document.createElement('span');
+      sp.className = 'qword';
+      sp.textContent = part;
+      words.push(sp);
+      frag.appendChild(sp);
+    });
+    node.parentNode.replaceChild(frag, node);
+  });
+  if (!words.length) return;
+  band.classList.add('quote-ready');
+
+  var ticking = false;
+  function update() {
+    ticking = false;
+    var rect = band.getBoundingClientRect();
+    // normal-height band: words light as it climbs the viewport, fully lit by
+    // the time the quote sits in the upper half of the screen
+    var vh = window.innerHeight;
+    var progress = Math.min(1, Math.max(0, (vh * 0.92 - rect.top) / (vh * 0.72)));
+    var lit = Math.floor(progress * (words.length + 2));
+    for (var i = 0; i < words.length; i++) {
+      words[i].classList.toggle('lit', i < lit);
+    }
+    band.classList.toggle('quote-done', progress > 0.92);
+  }
+  window.addEventListener('scroll', function () {
+    if (!ticking) { ticking = true; requestAnimationFrame(update); }
+  }, { passive: true });
+  window.addEventListener('resize', update);
+  update();
+  // fail-safe: if scroll never fires (or maths goes wrong), light everything
+  setTimeout(function () {
+    var anyLit = words.some(function (w) { return w.classList.contains('lit'); });
+    var rect = band.getBoundingClientRect();
+    if (!anyLit && rect.top < window.innerHeight && rect.bottom > 0) {
+      words.forEach(function (w) { w.classList.add('lit'); });
+      band.classList.add('quote-done');
+    }
+  }, 5000);
+})();
+
+/* --- endcap: glow follows the cursor ----------------------------------------- */
+(function () {
+  var caps = document.querySelectorAll('.endcap');
+  if (!caps.length) return;
+  if (window.matchMedia('(hover: none)').matches) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  Array.prototype.forEach.call(caps, function (cap) {
+    cap.addEventListener('pointermove', function (e) {
+      var r = cap.getBoundingClientRect();
+      cap.style.setProperty('--egx', (e.clientX - r.left) + 'px');
+      cap.style.setProperty('--egy', (e.clientY - r.top) + 'px');
+    });
+  });
+})();
+
+/* --- industry dial: full-width scale that turns through the industries ----- */
+(function () {
+  var dial = document.querySelector('[data-dial]');
+  if (!dial) return;
+  var items;
+  try { items = JSON.parse(dial.getAttribute('data-dial')); } catch (e) { return; }
+  if (!items || items.length < 2) return;
+
+  var nameEl = dial.querySelector('.dial-name');
+  var prevEl = dial.querySelector('[data-dial-side-prev]');
+  var nextEl = dial.querySelector('[data-dial-side-next]');
+  var countEl = dial.querySelector('[data-dial-current]');
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var index = 0;
+  var shift = 0;
+  var busy = false;
+
+  function label(i) {
+    var item = items[(i + items.length) % items.length];
+    return item.name || item;
+  }
+
+  function render() {
+    nameEl.textContent = label(index);
+    if (prevEl) prevEl.textContent = label(index - 1);
+    if (nextEl) nextEl.textContent = label(index + 1);
+    if (countEl) countEl.textContent = index + 1;
+  }
+
+  function go(dir) {
+    if (busy) return;
+    index = (index + dir + items.length) % items.length;
+    shift -= dir * 55; // one major tick per step
+    dial.style.setProperty('--dial-shift', shift + 'px');
+    if (reduced) { render(); return; }
+    busy = true;
+    dial.classList.add('is-turning');
+    setTimeout(function () {
+      render();
+      dial.classList.remove('is-turning');
+      busy = false;
+    }, 270);
+  }
+
+  dial.querySelector('[data-dial-prev]').addEventListener('click', function () { go(-1); restart(); });
+  dial.querySelector('[data-dial-next]').addEventListener('click', function () { go(1); restart(); });
+
+  var timer = null;
+  function start() {
+    if (reduced || timer) return;
+    timer = setInterval(function () { go(1); }, 3600);
+  }
+  function stop() { clearInterval(timer); timer = null; }
+  function restart() { stop(); start(); }
+  dial.addEventListener('pointerenter', stop);
+  dial.addEventListener('pointerleave', start);
+  dial.addEventListener('focusin', stop);
+  dial.addEventListener('focusout', start);
+
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (entries) {
+      if (entries[0].isIntersecting) start(); else stop();
+    }, { rootMargin: '80px 0px' }).observe(dial);
+  } else {
+    start();
+  }
+
+  render();
 })();
