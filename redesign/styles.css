@@ -4385,3 +4385,17 @@ summary:focus-visible {
 @media (max-width: 1024px) {
   .pricing-grid { grid-template-columns: 1fr; max-width: 480px; margin-inline: auto; }
 }
+
+/* solid white button — replaces every transparent/ghost button (Edgar rule:
+   no transparent buttons anywhere, 2026-08-04) */
+.btn--white {
+  background: #fff;
+  color: var(--ink);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.18);
+}
+.btn--white:hover {
+  background: #fff;
+  color: var(--gold);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.24);
+}
