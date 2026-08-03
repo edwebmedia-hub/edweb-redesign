@@ -3126,7 +3126,7 @@ summary:focus-visible {
 
   /* Phones: lift the hero block up the screen and hold the headline to three
      lines instead of four (Edgar, 2026-07-29) */
-  .hero-inner { padding-top: 0.5rem; padding-bottom: 3.5rem; }
+  .hero-inner { padding-top: 0.5rem; padding-bottom: 2.25rem; }
   .hero .container { padding-inline: var(--sp-3); }
   /* Big display type on phones: each half of the headline breaks over two lines
      (four in total), which reads better than three squeezed ones */
@@ -3936,7 +3936,7 @@ summary:focus-visible {
   .logo-strip img.l-lg { height: 34px; }
   .logo-strip img.l-md { height: 28px; }
   .logo-strip img.l-sm { height: 20px; }
-  .logo-strip--hero { bottom: 1rem; }
+  .logo-strip--hero { bottom: 2.4rem; }
 }
 
 /* ==========================================================================
