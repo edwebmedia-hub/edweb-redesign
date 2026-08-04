@@ -696,8 +696,8 @@ summary:focus-visible {
    ========================================================================== */
 .about-grid {
   display: grid;
-  grid-template-columns: 1fr 1.1fr;
-  gap: var(--sp-12);
+  grid-template-columns: 1.12fr 1fr;
+  gap: clamp(2.5rem, 1rem + 4vw, 5rem);
   align-items: center;
 }
 .about-copy h2 { font-size: var(--fs-3xl); }
@@ -814,9 +814,9 @@ summary:focus-visible {
    ========================================================================== */
 .dcard {
   width: 100%;
-  max-width: 480px;
+  max-width: 100%;
   border-radius: var(--radius-lg);
-  padding: var(--sp-6);
+  padding: clamp(2rem, 1.2rem + 1.4vw, 2.75rem);
   background: #fff;
   box-shadow: 0 1px 3px rgba(43,43,43,0.05), 0 10px 40px rgba(43,43,43,0.08);
   transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), box-shadow 0.3s ease, background 0.4s ease;
@@ -951,9 +951,10 @@ summary:focus-visible {
   padding: var(--sp-5) 0;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: stretch;
   min-height: 560px;
 }
+.av3-panel > .dcard { flex: 1 1 auto; }
 .av3-chart-card {
   position: relative;
   width: 100%;
@@ -4514,3 +4515,35 @@ summary:focus-visible {
 .section--ink .pathway-card p { color: var(--text-muted); }
 .section--ink .pcard-price span { color: var(--text-muted); }
 .section--ink .pcard-check { color: var(--ink); }
+
+/* ---- dashboard card: interior scales with the wider desktop card ---- */
+@media (min-width: 1024px) {
+  .dcard { box-shadow: 0 1px 3px rgba(43,43,43,0.05), 0 26px 60px rgba(43,43,43,0.10); }
+  .dcard-head h3 { font-size: var(--fs-lg); }
+  .dtabs { margin-bottom: var(--sp-6); }
+  .dtabs button { font-size: var(--fs-base); padding: var(--sp-3) var(--sp-4); }
+  .drevenue { padding: var(--sp-5); margin-bottom: var(--sp-5); }
+  .drevenue-val { font-size: var(--fs-2xl); }
+  .drevenue-top span:first-child { font-size: var(--fs-base); }
+  .drevenue-bar { height: 8px; }
+  .dstats { gap: var(--sp-4); }
+  .dstat { padding: var(--sp-4); }
+  .dstat p:first-child { font-size: var(--fs-sm); margin-bottom: 4px; }
+  .dstat p:last-child { font-size: var(--fs-base); }
+  .danalytics-row { padding: var(--sp-4) 0; }
+  .danalytics-left span, .danalytics-row strong { font-size: var(--fs-base); }
+  .ddot { width: 10px; height: 10px; }
+  .dreport-box { padding: var(--sp-5); margin-bottom: var(--sp-4); }
+  .dreport-box h4 { font-size: var(--fs-base); }
+  .dreport-box p, .dreport-box li { font-size: var(--fs-sm); }
+  .dfooter { margin-top: var(--sp-6); gap: var(--sp-4); }
+  .dbtn { padding: var(--sp-4) var(--sp-5); font-size: var(--fs-base); }
+}
+
+/* right column carries its weight next to the taller card */
+@media (min-width: 1024px) {
+  .about-copy p { margin-top: var(--sp-5); max-width: 46ch; }
+  .av3-checklist { margin-top: var(--sp-8); gap: var(--sp-5) var(--sp-6); }
+  .av3-checklist > div { font-size: var(--fs-base); gap: var(--sp-3); }
+  .av3-checklist .material-symbols-outlined { font-size: 24px; }
+}
