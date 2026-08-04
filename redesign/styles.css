@@ -1807,6 +1807,9 @@ summary:focus-visible {
   display: grid;
   grid-template-columns: 1fr 1.2fr;
   gap: var(--sp-12);
+  /* the info column is much shorter than the form; centring it stops the
+     bottom-left of the section reading as dead space */
+  align-items: center;
 }
 .contact-info h2 { color: var(--ink); font-size: var(--fs-3xl); }
 .contact-info > p { margin-top: var(--sp-4); color: var(--text-muted); font-size: var(--fs-lg); max-width: 440px; }
@@ -3109,12 +3112,16 @@ summary:focus-visible {
 .msf {
   background: var(--ink);
   color: var(--text-inverse);
-  border-radius: var(--radius-lg);
-  padding: var(--sp-10);
+  border-radius: var(--radius-md);
+  padding: clamp(1.5rem, 1rem + 1.6vw, 2.25rem);
   display: flex;
   flex-direction: column;
-  gap: var(--sp-8);
+  gap: var(--sp-5);
 }
+/* the flex gap owns the spacing between these; their own margins were
+   stacking on top of it and doubling every gap in the form */
+.msf > .btn,
+.msf > p { margin-bottom: 0; }
 
 /* Step indicator */
 .msf-steps {
@@ -3129,8 +3136,8 @@ summary:focus-visible {
   gap: var(--sp-2);
 }
 .msf-step-dot {
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   border: 2px solid rgba(255,255,255,0.2);
   display: flex;
@@ -3185,7 +3192,7 @@ summary:focus-visible {
 }
 .msf-sub {
   color: rgba(255,255,255,0.55);
-  margin-bottom: var(--sp-6);
+  margin-bottom: var(--sp-4);
   font-size: var(--fs-sm);
 }
 
@@ -3194,15 +3201,17 @@ summary:focus-visible {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: var(--sp-3);
-  margin-bottom: var(--sp-4);
+  margin-bottom: var(--sp-3);
 }
+/* the error line reserved its height on every step even when empty */
+.msf-error:empty { display: none; margin: 0; }
 .msf-service-card {
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: var(--sp-2);
-  padding: var(--sp-5) var(--sp-3);
+  padding: var(--sp-4) var(--sp-3);
   border: 1.5px solid rgba(255,255,255,0.12);
   border-radius: var(--radius-sm);
   cursor: pointer;
@@ -3417,7 +3426,7 @@ summary:focus-visible {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: var(--sp-6);
+  margin-top: var(--sp-5);
   gap: var(--sp-3);
 }
 .msf-nav .btn .material-symbols-outlined {

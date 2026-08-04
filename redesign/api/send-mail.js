@@ -84,21 +84,21 @@ module.exports = async function handler(req, res) {
     return res.status(400).json({ success: false, message: 'Message is too long.' });
   }
 
-  const subject = pkg ? `New Enquiry from ${fullName} — ${pkg}` : `New Enquiry from ${fullName}`;
+  const subject = pkg ? `New Enquiry from ${fullName} - ${pkg}` : `New Enquiry from ${fullName}`;
   const text = [
     'New enquiry from edwebmedia.com',
     '',
     `Name:      ${fullName}`,
     `Email:     ${email}`,
-    `Phone:     ${phone || '—'}`,
-    `Package:   ${pkg || '—'}`,
-    `Services:  ${services || '—'}`,
-    `Add-ons:   ${addons || '—'}`,
-    `Budget:    ${budget || '—'}`,
-    `Timeline:  ${timeline || '—'}`,
+    `Phone:     ${phone || '-'}`,
+    `Package:   ${pkg || '-'}`,
+    `Services:  ${services || '-'}`,
+    `Add-ons:   ${addons || '-'}`,
+    `Budget:    ${budget || '-'}`,
+    `Timeline:  ${timeline || '-'}`,
     '',
     'Message:',
-    message || '—',
+    message || '-',
   ].join('\n');
 
   try {

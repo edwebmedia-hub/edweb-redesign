@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Edweb Media — redesign interactions
+   Edweb Media - redesign interactions
    - Header: switches to a solid/blurred background after scrolling past hero
    - Mobile nav: simple toggle
    - Scroll reveal: IntersectionObserver adds .is-visible to .reveal elements
@@ -18,7 +18,7 @@
     label: 'tpRLCIWp79QcEMXcu5E_',
   };
   function fireAdsConversion() {
-    if (typeof gtag !== 'function') return; // gtag.js blocked/not loaded — fail silent, never break the form
+    if (typeof gtag !== 'function') return; // gtag.js blocked/not loaded - fail silent, never break the form
     gtag('event', 'conversion', { send_to: `${GOOGLE_ADS_CONVERSION.id}/${GOOGLE_ADS_CONVERSION.label}` });
   }
 
@@ -184,43 +184,43 @@
           budgetNote.textContent = 'Once-off design fee. Basic SEO included in all plans.';
           [
             ['', 'Select a plan…'],
-            ['Business Website — Silver Plan (R3,999)',   'Silver Plan — R3,999 once-off · 5 pages'],
-            ['Business Website — Gold Plan (R4,999)',     'Gold Plan — R4,999 once-off · 10 pages'],
-            ['Business Website — Platinum Plan (R6,499)', 'Platinum Plan — R6,499 once-off · 20 pages'],
-            ['Not sure', "Not sure yet — let's discuss"],
+            ['Business Website - Silver Plan (R3,999)',   'Silver Plan - R3,999 once-off · 5 pages'],
+            ['Business Website - Gold Plan (R4,999)',     'Gold Plan - R4,999 once-off · 10 pages'],
+            ['Business Website - Platinum Plan (R6,499)', 'Platinum Plan - R6,499 once-off · 20 pages'],
+            ['Not sure', "Not sure yet - let's discuss"],
           ].forEach(([v, t]) => { const o = new Option(t, v); budgetSel.add(o); });
         } else if (websiteType === 'E-Commerce Website') {
           budgetNote.textContent = 'Once-off design fee. Basic SEO included in all plans.';
           [
             ['', 'Select a plan…'],
-            ['E-commerce Website — Silver Plan (R5,999)',   'Silver Plan — R5,999 once-off · up to 10 products'],
-            ['E-commerce Website — Gold Plan (R7,499)',     'Gold Plan — R7,499 once-off · up to 25 products'],
-            ['E-commerce Website — Platinum Plan (R9,499)', 'Platinum Plan — R9,499 once-off · up to 50 products'],
-            ['Not sure', "Not sure yet — let's discuss"],
+            ['E-commerce Website - Silver Plan (R5,999)',   'Silver Plan - R5,999 once-off · up to 10 products'],
+            ['E-commerce Website - Gold Plan (R7,499)',     'Gold Plan - R7,499 once-off · up to 25 products'],
+            ['E-commerce Website - Platinum Plan (R9,499)', 'Platinum Plan - R9,499 once-off · up to 50 products'],
+            ['Not sure', "Not sure yet - let's discuss"],
           ].forEach(([v, t]) => { const o = new Option(t, v); budgetSel.add(o); });
         } else if (websiteType === 'Directory Website') {
           budgetNote.textContent = 'Once-off design fee. Final price may vary based on features and requirements.';
           [
             ['', 'Select a plan…'],
-            ['Directory Website — Silver Plan (R8,999)',        'Silver Plan — R8,999 once-off · up to 25 listings'],
-            ['Directory Website — Gold Plan (R11,999)',         'Gold Plan — R11,999 once-off · up to 50 listings'],
-            ['Directory Website — Platinum Plan (from R14,999)', 'Platinum Plan — from R14,999 once-off · unlimited listings'],
-            ['Not sure', "Not sure yet — let's discuss"],
+            ['Directory Website - Silver Plan (R8,999)',        'Silver Plan - R8,999 once-off · up to 25 listings'],
+            ['Directory Website - Gold Plan (R11,999)',         'Gold Plan - R11,999 once-off · up to 50 listings'],
+            ['Directory Website - Platinum Plan (from R14,999)', 'Platinum Plan - from R14,999 once-off · unlimited listings'],
+            ['Not sure', "Not sure yet - let's discuss"],
           ].forEach(([v, t]) => { const o = new Option(t, v); budgetSel.add(o); });
         } else {
           budgetNote.textContent = 'Business from R3,999 · E-commerce from R5,999 · Directory from R8,999.';
           [
             ['', 'Select a plan…'],
-            ['Business Website — Silver Plan (R3,999)',        'Business Silver — R3,999 once-off'],
-            ['Business Website — Gold Plan (R4,999)',          'Business Gold — R4,999 once-off'],
-            ['Business Website — Platinum Plan (R6,499)',      'Business Platinum — R6,499 once-off'],
-            ['E-commerce Website — Silver Plan (R5,999)',      'E-commerce Silver — R5,999 once-off'],
-            ['E-commerce Website — Gold Plan (R7,499)',        'E-commerce Gold — R7,499 once-off'],
-            ['E-commerce Website — Platinum Plan (R9,499)',    'E-commerce Platinum — R9,499 once-off'],
-            ['Directory Website — Silver Plan (R8,999)',       'Directory Silver — R8,999 once-off'],
-            ['Directory Website — Gold Plan (R11,999)',        'Directory Gold — R11,999 once-off'],
-            ['Directory Website — Platinum Plan (from R14,999)', 'Directory Platinum — from R14,999 once-off'],
-            ['Not sure', "Not sure yet — let's discuss"],
+            ['Business Website - Silver Plan (R3,999)',        'Business Silver - R3,999 once-off'],
+            ['Business Website - Gold Plan (R4,999)',          'Business Gold - R4,999 once-off'],
+            ['Business Website - Platinum Plan (R6,499)',      'Business Platinum - R6,499 once-off'],
+            ['E-commerce Website - Silver Plan (R5,999)',      'E-commerce Silver - R5,999 once-off'],
+            ['E-commerce Website - Gold Plan (R7,499)',        'E-commerce Gold - R7,499 once-off'],
+            ['E-commerce Website - Platinum Plan (R9,499)',    'E-commerce Platinum - R9,499 once-off'],
+            ['Directory Website - Silver Plan (R8,999)',       'Directory Silver - R8,999 once-off'],
+            ['Directory Website - Gold Plan (R11,999)',        'Directory Gold - R11,999 once-off'],
+            ['Directory Website - Platinum Plan (from R14,999)', 'Directory Platinum - from R14,999 once-off'],
+            ['Not sure', "Not sure yet - let's discuss"],
           ].forEach(([v, t]) => { const o = new Option(t, v); budgetSel.add(o); });
         }
         if (hasBranding || hasVisual) {
@@ -239,11 +239,11 @@
             ['R6,000–R10,000', 'R6,000 – R10,000'],
             ['R10,000–R15,000', 'R10,000 – R15,000'],
             ['R15,000+', 'R15,000+'],
-            ['Not sure', 'Not sure yet — let\'s discuss'],
+            ['Not sure', 'Not sure yet - let\'s discuss'],
           ].forEach(([v, t]) => { const o = new Option(t, v); budgetSel.add(o); });
         } else if (hasBranding) {
           budgetLbl.innerHTML = 'Branding budget (once-off) <span aria-hidden="true">*</span>';
-          budgetNote.textContent = 'Logo, identity and brand assets — paid once, yours to keep.';
+          budgetNote.textContent = 'Logo, identity and brand assets - paid once, yours to keep.';
           [
             ['', 'Select a range…'],
             ['Under R500', 'Under R500'],
@@ -251,18 +251,18 @@
             ['R1,000–R2,000', 'R1,000 – R2,000'],
             ['R2,000–R5,000', 'R2,000 – R5,000'],
             ['R5,000+', 'R5,000+'],
-            ['Not sure', 'Not sure yet — let\'s discuss'],
+            ['Not sure', 'Not sure yet - let\'s discuss'],
           ].forEach(([v, t]) => { const o = new Option(t, v); budgetSel.add(o); });
         } else {
           budgetLbl.innerHTML = 'Visual content budget (once-off) <span aria-hidden="true">*</span>';
-          budgetNote.textContent = 'Professional photography and video — priced per project.';
+          budgetNote.textContent = 'Professional photography and video - priced per project.';
           [
             ['', 'Select a range…'],
             ['R4,000–R6,000', 'R4,000 – R6,000'],
             ['R6,000–R8,000', 'R6,000 – R8,000'],
             ['R8,000–R12,000', 'R8,000 – R12,000'],
             ['R12,000+', 'R12,000+'],
-            ['Not sure', 'Not sure yet — let\'s discuss'],
+            ['Not sure', 'Not sure yet - let\'s discuss'],
           ].forEach(([v, t]) => { const o = new Option(t, v); budgetSel.add(o); });
         }
 
@@ -280,7 +280,7 @@
           ['R1,000–R2,000/mo', 'R1,000 – R2,000 / month'],
           ['R2,000–R3,500/mo', 'R2,000 – R3,500 / month'],
           ['R3,500+/mo', 'R3,500+ / month'],
-          ['Not sure/mo', 'Not sure yet — let\'s discuss'],
+          ['Not sure/mo', 'Not sure yet - let\'s discuss'],
         ].forEach(([v, t]) => { const o = new Option(t, v); budgetSel.add(o); });
       }
     }
@@ -296,7 +296,7 @@
           const webChecked = form.querySelector('#chk-webdesign:checked');
           if (webChecked) {
             const typeSelected = form.querySelector('input[name="website-type"]:checked');
-            if (!typeSelected) { err.textContent = 'Please choose a website type — Business, E-Commerce or Directory.'; return; }
+            if (!typeSelected) { err.textContent = 'Please choose a website type - Business, E-Commerce or Directory.'; return; }
           }
           err.textContent = '';
           buildBudgetOptions();
@@ -390,7 +390,7 @@
       if (!selected) return;
 
       // Clean display label — no em-dash in visible copy
-      const pretty = selected.replace(/\s+[—–-]\s+/g, ' · ');
+      const pretty = selected.replace(/\s+[-–—]\s+/g, ' - ');
 
       // Carry the exact plan through to the email + pre-write the message
       const pkgInput = document.getElementById('msf-package');
@@ -509,7 +509,7 @@
       }
       const dateLabel = selectedDate.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' });
       if (!selectedTime) {
-        summary.textContent = `${dateLabel} — now pick a time.`;
+        summary.textContent = `${dateLabel} - now pick a time.`;
         requestBtn.classList.add('is-disabled');
         return;
       }
