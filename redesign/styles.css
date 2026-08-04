@@ -140,8 +140,8 @@ summary:focus-visible {
 
 /* one fluid rhythm for every section: roomier on desktop, tight on phones,
    no breakpoint jumps (2026-08-04 consistency pass) */
-.section { padding: clamp(4rem, 2.6rem + 4.6vw, 7.5rem) 0; }
-.section--tight { padding: clamp(3rem, 2rem + 3vw, 5rem) 0; }
+.section { padding: clamp(3.5rem, 2.3rem + 3.9vw, 6.25rem) 0; }
+.section--tight { padding: clamp(2.5rem, 1.7rem + 2.6vw, 4.25rem) 0; }
 .section--alt { background: var(--paper-dim); }
 
 /* A dark pricing band was trialled 2026-08-02 and reverted — Edgar prefers the
@@ -3759,7 +3759,7 @@ summary:focus-visible {
   overflow: hidden;
   background: var(--gold);
   color: #fff;
-  padding: clamp(4rem, 2.6rem + 4.6vw, 7.5rem) 0;
+  padding: clamp(3.5rem, 2.3rem + 3.9vw, 6.25rem) 0;
   text-align: center;
 }
 .endcap::after {
@@ -4437,7 +4437,7 @@ summary:focus-visible {
 
 /* first section after the dark hero gets a touch more air, so the page opens
    rather than starting cramped */
-.hero + .section { padding-top: clamp(4.5rem, 3rem + 5vw, 8.5rem); }
+.hero + .section { padding-top: clamp(3.9rem, 2.6rem + 4.2vw, 7rem); }
 
 /* ==========================================================================
    TWO-TONE SECTION RHYTHM (2026-08-04) — the faded-white middle tone is gone.
