@@ -4428,18 +4428,11 @@ summary:focus-visible {
   grid-template-columns: repeat(3, 1fr);
   gap: var(--sp-5);
 }
-/* the colour lives in the cards, not the band: keeps the section light while
-   still reading as its own block against the white sections around it */
 .svc-card {
   display: flex;
   flex-direction: column;
-  background: var(--paper-dim);
-  border: 1px solid transparent;
-  border-radius: var(--radius-md);
   padding: var(--sp-6);
-  box-shadow: none;
   text-decoration: none;
-  transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
 }
 .svc-card-icon {
   width: 48px; height: 48px;
@@ -4471,11 +4464,7 @@ summary:focus-visible {
   line-height: 1.65;
   color: var(--text-muted);
 }
-.svc-card:hover {
-  transform: translateY(-4px);
-  background: color-mix(in srgb, var(--gold-light) 18%, var(--paper));
-  box-shadow: var(--shadow-md);
-}
+.svc-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
 .svc-card:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
 
 /* the intro sits on the dark band now */
@@ -4487,4 +4476,60 @@ summary:focus-visible {
 @media (max-width: 600px) {
   .svc-grid { grid-template-columns: 1fr; }
   .svc-card { padding: var(--sp-5); }
+}
+
+/* ==========================================================================
+   CARD SYSTEM (2026-08-04)
+   Every block on the site shares one treatment: white fill, hairline border,
+   20px radius, the same soft shadow. Before this the site carried seven
+   variants (radii of 10/20/30px, three shadow recipes, some cards fully
+   transparent), which is what made the blocks feel unrelated.
+   Flat rows (.faq-item) and pill controls (.plan-chooser-item) are deliberately
+   NOT cards and stay flat.
+   ========================================================================== */
+.pcard,
+.pathway-card,
+.svc-card,
+.tm-card,
+.dcard,
+.pf-card,
+.work-item-img,
+.team-portrait-wrap {
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-md);
+}
+.pcard,
+.pathway-card,
+.svc-card,
+.tm-card,
+.dcard,
+.pf-card { background: #fff; }
+
+/* the dashboard card keeps its own dark-preview fill when toggled */
+.dcard.dark { background: rgba(38, 38, 38, 0.94); border-color: #3a3a3a; }
+
+/* hover lift, one recipe */
+.pcard:hover,
+.svc-card:hover,
+.tm-card:hover,
+.pf-card:hover { box-shadow: var(--shadow-lg); }
+
+/* form choice cards sit on the dark panel: solid fill, never transparent,
+   same radius and border weight as every other card */
+.msf-service-card,
+.msf-radio-card,
+.msf-addon-card {
+  background: #242424;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: var(--radius-md);
+}
+.msf-service-card:hover,
+.msf-radio-card:hover,
+.msf-addon-card:hover { background: #2e2e2e; border-color: rgba(255, 255, 255, 0.28); }
+.msf-service-card:has(input:checked),
+.msf-radio-card:has(input:checked),
+.msf-addon-card:has(input:checked) {
+  background: color-mix(in srgb, var(--gold) 22%, #242424);
+  border-color: var(--gold);
 }
