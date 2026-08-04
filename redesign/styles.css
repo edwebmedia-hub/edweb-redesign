@@ -630,7 +630,9 @@ summary:focus-visible {
    ========================================================================== */
 .quote-band {
   position: relative;
-  padding: var(--sp-16) 0;
+  /* same rhythm as every other section, so the band does not sit at its own
+     spacing while the pages around it use the shared scale */
+  padding: clamp(3.5rem, 2.3rem + 3.9vw, 6.25rem) 0;
   text-align: center;
   background: #1a1a1a;
   overflow: hidden;
@@ -1245,10 +1247,12 @@ summary:focus-visible {
   height: 48px;
   margin-bottom: var(--sp-5);
   border-radius: var(--radius-sm);
-  background: var(--gold);
+  background: var(--ink);
   font-size: 24px;
   color: #fff;
+  transition: background var(--transition);
 }
+.process-step:hover .process-index { background: var(--gold); }
 
 .service-card h3 { font-size: var(--fs-xl); }
 .service-card p { margin-top: var(--sp-3); color: var(--text-muted); }
@@ -1275,7 +1279,7 @@ summary:focus-visible {
   max-width: 52ch;
 }
 .svc-intro-copy .btn { margin-top: var(--sp-6); }
-.svc-intro { margin-bottom: var(--sp-12); }
+.svc-intro { margin-bottom: clamp(2.5rem, 1.8rem + 2.4vw, 4rem); }
 
 @media (max-width: 900px) {
   .svc-intro { grid-template-columns: 1fr; gap: var(--sp-6); align-items: start; }
@@ -1323,14 +1327,23 @@ summary:focus-visible {
    ========================================================================== */
 .process-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  /* auto-fit so the row always fills: 3 steps make 3 columns, 4 make 4.
+     A fixed 4-column track left a dead column on about-us. */
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
   gap: var(--sp-6);
 }
+/* was a hairline-divider block, which read as its own thing next to every
+   card on the site (and is on the banned-pattern list) */
 .process-step {
   position: relative;
-  padding-top: var(--sp-6);
-  border-top: 1px solid var(--border);
+  background: #fff;
+  padding: var(--sp-6);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  transition: transform var(--transition), box-shadow var(--transition);
 }
+.process-step:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
 .process-index {
   display: inline-flex;
   align-items: center;
@@ -1339,10 +1352,12 @@ summary:focus-visible {
   height: 48px;
   margin-bottom: var(--sp-5);
   border-radius: var(--radius-sm);
-  background: var(--gold);
+  background: var(--ink);
   font-size: 24px;
   color: #fff;
+  transition: background var(--transition);
 }
+.process-step:hover .process-index { background: var(--gold); }
 .process-step h3 { font-size: var(--fs-lg); }
 .process-step p { margin-top: var(--sp-2); color: var(--text-muted); font-size: var(--fs-sm); }
 
@@ -2046,7 +2061,7 @@ summary:focus-visible {
   margin-top: var(--sp-10);
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: var(--sp-8) var(--sp-6);
+  gap: var(--sp-6);
 }
 .work-grid--3col { grid-template-columns: repeat(3, 1fr); }
 .work-item {
@@ -4149,7 +4164,7 @@ summary:focus-visible {
 
 /* quote band: big statement type so the band carries weight without the
    full-screen pin */
-.quote-band--scrub { padding: calc(var(--sp-20) + 1.5rem) 0; }
+.quote-band--scrub { padding: clamp(3.5rem, 2.3rem + 3.9vw, 6.25rem) 0; }
 .quote-band--scrub blockquote {
   font-size: clamp(1.8rem, 1.1rem + 3vw, 3.6rem);
   line-height: 1.22;
@@ -4426,7 +4441,7 @@ summary:focus-visible {
   margin-top: clamp(2.5rem, 1.8rem + 2.2vw, 3.75rem);
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: var(--sp-5);
+  gap: var(--sp-6);
 }
 .svc-card {
   display: flex;
@@ -4471,7 +4486,7 @@ summary:focus-visible {
 
 
 @media (max-width: 900px) {
-  .svc-grid { grid-template-columns: repeat(2, 1fr); gap: var(--sp-4); }
+  .svc-grid { grid-template-columns: repeat(2, 1fr); gap: var(--sp-5); }
 }
 @media (max-width: 600px) {
   .svc-grid { grid-template-columns: 1fr; }
