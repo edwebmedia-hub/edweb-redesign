@@ -1277,84 +1277,10 @@ summary:focus-visible {
 .svc-intro-copy .btn { margin-top: var(--sp-6); }
 .svc-intro { margin-bottom: var(--sp-12); }
 
-.svc-rail { overflow: hidden; }
-/* fade only the trailing edge, so tiles look like they run off the page */
-.svc-rail.is-live {
-  -webkit-mask-image: linear-gradient(to right, #000 88%, transparent);
-  mask-image: linear-gradient(to right, #000 88%, transparent);
-}
-.svc-rail-track {
-  display: flex;
-  gap: var(--sp-5);
-  align-items: stretch;
-}
-.svc-rail.is-live .svc-rail-track { will-change: transform; }
-
-.svc-tile {
-  position: relative;
-  flex: 0 0 20rem;
-  min-height: 17rem;
-  display: flex;
-  flex-direction: column;
-  padding: var(--sp-6);
-  background: #fff;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  text-decoration: none;
-  color: var(--text);
-  transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
-}
-.svc-tile:hover {
-  border-color: color-mix(in srgb, var(--gold) 35%, var(--border));
-  box-shadow: 0 16px 40px rgba(17, 21, 28, 0.1);
-  transform: translateY(-3px);
-}
-.svc-tile h3 {
-  font-family: var(--font-display);
-  font-size: var(--fs-xl);
-  font-weight: 800;
-  line-height: 1.15;
-  color: var(--ink);
-  padding-right: 2.5rem;
-}
-.svc-tile p {
-  margin-top: var(--sp-4);
-  font-size: var(--fs-sm);
-  color: var(--text-muted);
-  line-height: 1.65;
-}
-.svc-tile-icon {
-  position: absolute;
-  top: var(--sp-6);
-  right: var(--sp-6);
-  font-size: 26px;
-  color: var(--gold);
-}
-.svc-tile-arrow {
-  margin-top: auto;
-  align-self: flex-end;
-  padding-top: var(--sp-5);
-  font-size: 24px;
-  color: var(--ink);
-  transition: transform var(--transition), color var(--transition);
-}
-.svc-tile:hover .svc-tile-arrow { transform: translateX(5px); color: var(--gold); }
-
 @media (max-width: 900px) {
   .svc-intro { grid-template-columns: 1fr; gap: var(--sp-6); align-items: start; }
   .svc-intro h2 { max-width: none; }
   .svc-intro-copy p { font-size: var(--fs-base); }
-  /* tiles hug their content on phones instead of leaving a tall empty block
-     under the copy */
-  .svc-tile {
-    flex-basis: 15.5rem;
-    min-height: 0;
-    padding: var(--sp-5);
-  }
-  .svc-tile h3 { font-size: var(--fs-lg); }
-  .svc-tile p { margin-top: var(--sp-3); }
-  .svc-tile-arrow { padding-top: var(--sp-4); font-size: 21px; }
-  .svc-tile-icon { top: var(--sp-5); right: var(--sp-5); font-size: 22px; }
 }
 
 .svc-depth-grid {
@@ -3855,15 +3781,6 @@ summary:focus-visible {
   .process-split .process-intro { position: static; }
 }
 
-/* Services rail: tiles run off the screen edge, not the container edge */
-.svc-rail-track {
-  padding-inline-start: calc(max(var(--sp-5), (100% - var(--container)) / 2 + var(--sp-5)) + var(--sp-8));
-}
-.svc-rail.is-live {
-  -webkit-mask-image: linear-gradient(to right, transparent, #000 4%, #000 94%, transparent);
-  mask-image: linear-gradient(to right, transparent, #000 4%, #000 94%, transparent);
-}
-
 /* Industries marquee: the old motion with new manners — fades at the screen
    edges, pauses under the cursor, cards lift (hover styles in wave 2) */
 .industries-row {
@@ -4134,35 +4051,6 @@ summary:focus-visible {
 @media (prefers-reduced-motion: reduce) {
   .quote-band--scrub .qword, .quote-band--scrub cite { opacity: 1 !important; transform: none !important; transition: none !important; }
 }
-}
-
-/* --- services rail, manual mode: native scroll + arrows --------------------- */
-.svc-rail.is-manual {
-  overflow-x: auto;
-  scroll-snap-type: x proximity;
-  scrollbar-width: none;
-}
-.svc-rail.is-manual::-webkit-scrollbar { display: none; }
-.svc-rail.is-manual .svc-tile { scroll-snap-align: start; }
-/* fade only the side that still has content */
-.svc-rail.is-manual { -webkit-mask-image: none; mask-image: none; }
-.svc-rail.is-manual.has-right {
-  -webkit-mask-image: linear-gradient(to right, #000 92%, transparent);
-  mask-image: linear-gradient(to right, #000 92%, transparent);
-}
-.svc-rail.is-manual.has-left.has-right {
-  -webkit-mask-image: linear-gradient(to right, transparent, #000 5%, #000 92%, transparent);
-  mask-image: linear-gradient(to right, transparent, #000 5%, #000 92%, transparent);
-}
-.svc-rail.is-manual.has-left:not(.has-right) {
-  -webkit-mask-image: linear-gradient(to right, transparent, #000 5%);
-  mask-image: linear-gradient(to right, transparent, #000 5%);
-}
-.svc-rail-nav {
-  display: flex;
-  gap: var(--sp-4);
-  margin-top: var(--sp-6);
-}
 .dial-btn:disabled {
   opacity: 0.35;
   pointer-events: none;
@@ -4283,29 +4171,6 @@ summary:focus-visible {
   }
 }
 
-/* --- services rail v3: contained, paged, whole cards only ------------------- */
-.svc-rail.is-manual,
-.svc-rail.is-manual.has-left,
-.svc-rail.is-manual.has-right,
-.svc-rail.is-manual.has-left.has-right,
-.svc-rail.is-manual.has-left:not(.has-right) {
-  -webkit-mask-image: none;
-  mask-image: none;
-}
-.svc-rail.is-manual { scroll-snap-type: x mandatory; }
-.svc-rail-track { padding-inline-start: 0; }
-.svc-rail .svc-tile {
-  flex: 0 0 calc((100% - 2 * var(--sp-5)) / 3);
-  max-width: none;
-}
-@media (max-width: 900px) {
-  .svc-rail .svc-tile { flex-basis: calc((100% - var(--sp-5)) / 2); }
-}
-@media (max-width: 620px) {
-  .svc-rail .svc-tile { flex-basis: 100%; }
-}
-.svc-rail-nav { margin-top: var(--sp-8); }
-
 /* ==========================================================================
    PRICING CARDS v5 — the clean component Edgar picked: white card, name up
    top, big price, ink button, flat feature list with circled checks
@@ -4421,12 +4286,6 @@ summary:focus-visible {
   background: var(--gold);
   color: #fff;
   transform: translateX(-4px);
-}
-
-/* service tiles inherit the shared card language (border + radius + shadow) */
-.svc-tile {
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-md);
 }
 
 /* portfolio tiles: same rounding, softer lift */
@@ -4558,4 +4417,65 @@ summary:focus-visible {
     /* the scroll timeline owns this motion, not the one-shot IO reveal */
     .pathway-step.reveal { transition: none; }
   }
+}
+
+/* ============================== SERVICES GRID ==============================
+   Six services shown at once instead of paged behind arrows. Card treatment
+   matches .pcard and .pathway-card so every card on the site reads the same. */
+.svc-grid {
+  margin-top: clamp(2.5rem, 1.8rem + 2.2vw, 3.75rem);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-5);
+}
+.svc-card {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--sp-6);
+  box-shadow: var(--shadow-md);
+  text-decoration: none;
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+}
+.svc-card-icon {
+  width: 46px; height: 46px;
+  display: grid; place-items: center;
+  margin-bottom: var(--sp-4);
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--gold) 10%, #fff);
+  border: 1px solid color-mix(in srgb, var(--gold) 22%, transparent);
+  color: var(--gold);
+}
+.svc-card-icon .material-symbols-outlined { font-size: 24px; }
+.svc-card h3 {
+  font-family: var(--font-display);
+  font-size: var(--fs-xl);
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0;
+}
+.svc-card p {
+  margin: var(--sp-2) 0 0;
+  font-size: var(--fs-sm);
+  line-height: 1.65;
+  color: var(--text-muted);
+}
+.svc-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: color-mix(in srgb, var(--gold) 35%, transparent);
+}
+.svc-card:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+
+/* the intro sits on the dark band now */
+.section--ink .svc-intro-copy p { color: var(--text-inverse-muted); }
+
+@media (max-width: 900px) {
+  .svc-grid { grid-template-columns: repeat(2, 1fr); gap: var(--sp-4); }
+}
+@media (max-width: 600px) {
+  .svc-grid { grid-template-columns: 1fr; }
+  .svc-card { padding: var(--sp-5); }
 }
