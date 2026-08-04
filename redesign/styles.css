@@ -3752,49 +3752,60 @@ summary:focus-visible {
   .pathway-dot { width: 22px; height: 22px; }
 }
 
-/* --- ENDCAP v4: one card, same language as the pricing/step cards --------- */
-.endcap { background: var(--paper-dim); }
-.endcap--plain { background: var(--paper); }
-.endcap-card {
-  display: grid;
-  grid-template-columns: 1.3fr auto;
-  gap: var(--sp-10);
-  align-items: center;
-  background: #fff;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  padding: var(--sp-10);
-  box-shadow: var(--shadow-md);
+/* --- ENDCAP v5: coral brand band (Edgar's pick from three comps) ----------- */
+.endcap {
+  position: relative;
+  overflow: hidden;
+  background: var(--gold);
+  color: #fff;
+  padding: clamp(4rem, 2.6rem + 4.6vw, 7.5rem) 0;
+  text-align: center;
 }
+.endcap::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.22) 1.1px, transparent 1.3px);
+  background-size: 26px 26px;
+  mask-image: radial-gradient(ellipse 70% 75% at 50% 50%, black, transparent);
+  pointer-events: none;
+}
+.endcap .container { position: relative; z-index: 1; }
 .endcap-kicker {
   font-size: var(--fs-sm);
   font-weight: 700;
-  color: var(--gold);
-  margin-bottom: var(--sp-3);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.82);
 }
 .endcap-title {
-  font-size: var(--fs-3xl);
-  letter-spacing: -0.02em;
+  margin-top: var(--sp-4);
+  font-size: clamp(2.3rem, 1.5rem + 3.2vw, 4rem);
   line-height: 1.05;
-  color: var(--ink);
+  letter-spacing: -0.03em;
+  color: #fff;
+  max-width: 20ch;
+  margin-inline: auto;
 }
 .endcap-sub {
-  margin-top: var(--sp-4);
-  color: var(--text-muted);
-  font-size: var(--fs-base);
-  line-height: 1.65;
-  max-width: 44ch;
+  margin-top: var(--sp-5);
+  color: rgba(255, 255, 255, 0.88);
+  font-size: var(--fs-lg);
+  max-width: 52ch;
+  margin-inline: auto;
 }
 .endcap-actions {
+  margin-top: var(--sp-8);
   display: flex;
-  flex-direction: column;
   gap: var(--sp-3);
-  min-width: 15rem;
+  justify-content: center;
+  flex-wrap: wrap;
 }
-.endcap-actions .btn { width: 100%; }
-@media (max-width: 900px) {
-  .endcap-card { grid-template-columns: 1fr; gap: var(--sp-6); padding: var(--sp-6); align-items: start; }
-  .endcap-actions { min-width: 0; }
+/* on coral, the ink button is the loud one and white is the quiet one */
+.endcap .btn--ink { background: var(--ink); color: #fff; }
+.endcap .btn--ink:hover { background: #1a1a1a; }
+@media (max-width: 620px) {
+  .endcap-actions .btn { width: 100%; }
 }
 
 /* --- Primary buttons: light sweep on hover ---------------------------------- */
