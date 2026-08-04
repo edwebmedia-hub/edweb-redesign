@@ -4437,3 +4437,80 @@ summary:focus-visible {
 /* first section after the dark hero gets a touch more air, so the page opens
    rather than starting cramped */
 .hero + .section { padding-top: clamp(4.5rem, 3rem + 5vw, 8.5rem); }
+
+/* ==========================================================================
+   TWO-TONE SECTION RHYTHM (2026-08-04) — the faded-white middle tone is gone.
+   Every band is either paper-white or ink-dark, in blocks, like the reference.
+   ========================================================================== */
+.section--ink {
+  position: relative;
+  overflow: hidden;
+  background: #1a1a1a;
+  color: var(--text-inverse-muted);
+}
+.section--ink::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(60% 50% at 88% 6%, rgba(224, 71, 76, 0.10), transparent 62%),
+    radial-gradient(55% 45% at 6% 96%, rgba(122, 207, 214, 0.08), transparent 62%),
+    linear-gradient(165deg, #1a1a1a 0%, #242424 55%, #1a1a1a 100%);
+  pointer-events: none;
+}
+.section--ink::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+    radial-gradient(rgba(245, 249, 251, 0.22) 1.1px, transparent 1.3px);
+  background-size: 160px 160px, 26px 26px;
+  mask-image: radial-gradient(ellipse 80% 75% at 50% 45%, black, transparent);
+  pointer-events: none;
+}
+.section--ink > * { position: relative; z-index: 1; }
+.section--ink h2,
+.section--ink h3 { color: var(--text-inverse); }
+.section--ink .section-head p,
+.section--ink .pathway-body p { color: var(--text-inverse-muted); }
+
+/* the drawn line reads against dark */
+.section--ink .pathway-line { background: rgba(245, 249, 251, 0.16); }
+
+/* white step cards on the dark band: the reference's exact move */
+.section--ink .pathway-card {
+  background: #fff;
+  border-color: transparent;
+  box-shadow: 0 26px 60px rgba(0, 0, 0, 0.4);
+}
+.section--ink .pathway-card h3 { color: var(--ink); }
+.section--ink .pathway-card p { color: var(--text-muted); }
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .section--ink .pathway-dot {
+      animation-name: pathway-ignite-dark;
+    }
+    @keyframes pathway-ignite-dark {
+      from {
+        background: rgba(245, 249, 251, 0.18);
+        color: transparent;
+        box-shadow: 0 0 0 0 transparent;
+      }
+    }
+  }
+}
+
+/* white cards sitting on an ink band keep their own ink typography — the
+   band's inverse colours must not leak inside them */
+.section--ink .pcard h3,
+.section--ink .pcard .pcard-name,
+.section--ink .pcard .pcard-price,
+.section--ink .pcard-feats > p,
+.section--ink .pathway-card h3 { color: var(--ink); }
+.section--ink .pcard-desc,
+.section--ink .pcard-feats li,
+.section--ink .pathway-card p { color: var(--text-muted); }
+.section--ink .pcard-price span { color: var(--text-muted); }
+.section--ink .pcard-check { color: var(--ink); }
