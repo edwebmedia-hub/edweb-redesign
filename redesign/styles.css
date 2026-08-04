@@ -138,8 +138,10 @@ summary:focus-visible {
   padding: 0 var(--sp-5);
 }
 
-.section { padding: var(--sp-16) 0; }
-.section--tight { padding: var(--sp-12) 0; }
+/* one fluid rhythm for every section: roomier on desktop, tight on phones,
+   no breakpoint jumps (2026-08-04 consistency pass) */
+.section { padding: clamp(4rem, 2.6rem + 4.6vw, 7.5rem) 0; }
+.section--tight { padding: clamp(3rem, 2rem + 3vw, 5rem) 0; }
 .section--alt { background: var(--paper-dim); }
 
 /* A dark pricing band was trialled 2026-08-02 and reverted — Edgar prefers the
@@ -147,7 +149,7 @@ summary:focus-visible {
 
 .section-head {
   max-width: 640px;
-  margin: 0 0 var(--sp-10);
+  margin: 0 0 clamp(2.5rem, 1.8rem + 2.4vw, 4rem);
 }
 .section-head--center { margin-inline: auto; text-align: center; }
 .section-head--center h2::after { content: none; }
@@ -216,9 +218,10 @@ summary:focus-visible {
    ========================================================================== */
 .reveal {
   opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 900ms var(--ease), transform 900ms var(--ease);
+  transform: translateY(18px);
+  transition: opacity 620ms var(--ease), transform 620ms var(--ease);
   transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
 }
 .reveal.is-visible {
   opacity: 1;
@@ -3480,9 +3483,10 @@ summary:focus-visible {
   vertical-align: middle;
 }
 .btn--ghost {
-  background: transparent;
-  border: 1.5px solid rgba(255,255,255,0.2);
-  color: rgba(255,255,255,0.7);
+  background: #fff;
+  border: none;
+  color: var(--ink);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.18);
   padding: var(--sp-3) var(--sp-5);
   border-radius: var(--radius-pill);
   font-family: inherit;
@@ -3748,70 +3752,50 @@ summary:focus-visible {
   .pathway-dot { width: 22px; height: 22px; }
 }
 
-/* --- ENDCAP v3: quiet, confident closing band ------------------------------- */
-.endcap {
-  position: relative;
-  overflow: hidden;
-  background: var(--paper-dim);
-}
-/* faint ink dot field: the light-side echo of the dark bands' pattern */
-.endcap::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: radial-gradient(rgba(43, 43, 43, 0.06) 1.1px, transparent 1.3px);
-  background-size: 24px 24px;
-  mask-image: radial-gradient(ellipse 80% 90% at 50% 50%, black, transparent);
-  pointer-events: none;
-}
-/* soft glow that follows the cursor (script.js feeds --egx/--egy) */
-.endcap::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(420px circle at var(--egx, 80%) var(--egy, 40%), color-mix(in srgb, var(--gold) 9%, transparent), transparent 70%),
-    radial-gradient(520px circle at 10% 95%, color-mix(in srgb, var(--gold-light) 8%, transparent), transparent 70%);
-  pointer-events: none;
-}
-@media (prefers-reduced-motion: reduce) {
-  .endcap::after { display: none; }
-}
-.endcap .container { position: relative; z-index: 1; }
-.endcap-grid {
+/* --- ENDCAP v4: one card, same language as the pricing/step cards --------- */
+.endcap { background: var(--paper-dim); }
+.endcap--plain { background: var(--paper); }
+.endcap-card {
   display: grid;
-  grid-template-columns: 1.05fr 1fr;
+  grid-template-columns: 1.3fr auto;
   gap: var(--sp-10);
-  align-items: end;
+  align-items: center;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--sp-10);
+  box-shadow: var(--shadow-md);
 }
 .endcap-kicker {
-  font-size: var(--fs-lg);
-  color: var(--text-muted);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--gold);
   margin-bottom: var(--sp-3);
 }
 .endcap-title {
   font-size: var(--fs-3xl);
   letter-spacing: -0.02em;
   line-height: 1.05;
-  text-wrap: balance;
+  color: var(--ink);
 }
-.endcap-side p {
+.endcap-sub {
+  margin-top: var(--sp-4);
   color: var(--text-muted);
-  font-size: var(--fs-lg);
+  font-size: var(--fs-base);
   line-height: 1.65;
-  max-width: 46ch;
+  max-width: 44ch;
 }
 .endcap-actions {
   display: flex;
-  flex-wrap: wrap;
-  gap: var(--sp-4);
-  margin-top: var(--sp-6);
+  flex-direction: column;
+  gap: var(--sp-3);
+  min-width: 15rem;
 }
+.endcap-actions .btn { width: 100%; }
 @media (max-width: 900px) {
-  .endcap-grid { grid-template-columns: 1fr; gap: var(--sp-6); align-items: start; }
-  .endcap-side p { font-size: var(--fs-base); }
+  .endcap-card { grid-template-columns: 1fr; gap: var(--sp-6); padding: var(--sp-6); align-items: start; }
+  .endcap-actions { min-width: 0; }
 }
-.endcap--plain { background: var(--paper); }
 
 /* --- Primary buttons: light sweep on hover ---------------------------------- */
 @media (prefers-reduced-motion: no-preference) {
@@ -3927,15 +3911,16 @@ summary:focus-visible {
 }
 .logo-strip--hero img:hover { opacity: 0.95; }
 /* mixed sizes so square marks and wide wordmarks carry the same weight */
-.logo-strip img.l-xl { height: 68px; }
-.logo-strip img.l-lg { height: 54px; }
-.logo-strip img.l-md { height: 44px; }
-.logo-strip img.l-sm { height: 32px; }
+/* one height for every mark — strict consistency (Edgar, 2026-08-04) */
+.logo-strip img.l-xl,
+.logo-strip img.l-lg,
+.logo-strip img.l-md,
+.logo-strip img.l-sm { height: 42px; }
 @media (max-width: 620px) {
-  .logo-strip img.l-xl { height: 42px; }
-  .logo-strip img.l-lg { height: 34px; }
-  .logo-strip img.l-md { height: 28px; }
-  .logo-strip img.l-sm { height: 20px; }
+  .logo-strip img.l-xl,
+  .logo-strip img.l-lg,
+  .logo-strip img.l-md,
+  .logo-strip img.l-sm { height: 26px; }
   .logo-strip--hero { bottom: 2.4rem; }
 }
 
@@ -4197,9 +4182,9 @@ summary:focus-visible {
 
 /* pathway dots pick up the coral-to-teal energy of the line they sit on */
 .pathway-dot {
-  background: linear-gradient(135deg, var(--gold), color-mix(in srgb, var(--gold) 45%, var(--gold-light)));
+  background: var(--gold);
   border-color: transparent;
-  box-shadow: 0 0 0 6px color-mix(in srgb, var(--gold) 16%, transparent), 0 6px 18px color-mix(in srgb, var(--gold) 30%, transparent);
+  box-shadow: 0 0 0 5px color-mix(in srgb, var(--gold) 12%, transparent);
 }
 
 /* ==========================================================================
@@ -4218,12 +4203,10 @@ summary:focus-visible {
 }
 .pathway-line { left: 14px; }
 .pathway-card {
-  background:
-    linear-gradient(#fff, #fff) padding-box,
-    linear-gradient(135deg, color-mix(in srgb, var(--gold) 55%, transparent), color-mix(in srgb, var(--gold-light) 55%, transparent)) border-box;
-  border: 1.5px solid transparent;
-  border-radius: var(--radius-lg);
-  padding: var(--sp-6) var(--sp-8);
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--sp-6);
   box-shadow: var(--shadow-md);
 }
 .step-pill {
@@ -4399,3 +4382,47 @@ summary:focus-visible {
   transform: translateY(-2px);
   box-shadow: 0 14px 30px rgba(0, 0, 0, 0.24);
 }
+
+/* ==========================================================================
+   CONSISTENCY PASS (2026-08-04) — one icon language, one head rhythm, one
+   card language across every section
+   ========================================================================== */
+
+/* section paragraphs share one measure everywhere */
+.section-head p { max-width: 56ch; }
+.section-head--center p { margin-inline: auto; }
+
+/* industry icons get the same soft-tinted circle as the rest of the site's
+   icon treatments, instead of floating glyphs */
+.ind-rows li .material-symbols-outlined {
+  width: 38px;
+  height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--gold) 9%, #fff);
+  font-size: 20px;
+  transition: background var(--transition), transform var(--transition), color var(--transition);
+}
+.ind-rows li:hover .material-symbols-outlined {
+  background: var(--gold);
+  color: #fff;
+  transform: translateX(-4px);
+}
+
+/* service tiles inherit the shared card language (border + radius + shadow) */
+.svc-tile {
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+}
+
+/* portfolio tiles: same rounding, softer lift */
+.laptop-mockup { border-radius: var(--radius-md); }
+
+/* testimonial cards join the same language */
+.tm-card { border-radius: var(--radius-md); }
+
+/* first section after the dark hero gets a touch more air, so the page opens
+   rather than starting cramped */
+.hero + .section { padding-top: clamp(4.5rem, 3rem + 5vw, 8.5rem); }
