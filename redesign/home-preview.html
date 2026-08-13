@@ -1,0 +1,610 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Google Ads conversion tracking. 2026-07-23: replace AW-16948063813 with the
+       real Conversion ID from Google Ads (Tools > Conversions). Until then this
+       loader is a harmless no-op (gtag() calls just queue and go nowhere). -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16948063813"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-16948063813');
+  </script>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <title>Homepage preview (services accordion)</title>
+  <meta name="description" content="Edweb Media is a Cape Town web designer and developer building premium websites for businesses across South Africa and worldwide. Get a website that looks great and ranks on Google." />
+  <meta name="keywords" content="web designer Cape Town, web developer South Africa, website design Cape Town, affordable website design, SEO web design, Edweb Media" />
+  <link rel="canonical" href="https://edwebmedia.com/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://edwebmedia.com/" />
+  <meta property="og:title" content="Web Designer Cape Town | Edweb Media" />
+  <meta property="og:description" content="Premium websites for businesses across South Africa and worldwide. Design, development, branding and marketing — all in one place." />
+  <meta property="og:image" content="https://edwebmedia.com/assets/edweb-logo-dark.png" />
+  <meta property="og:locale" content="en_ZA" />
+  <meta property="og:site_name" content="Edweb Media" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Web Designer Cape Town | Edweb Media" />
+  <meta name="twitter:description" content="Premium websites for businesses across South Africa and worldwide." />
+  <meta name="twitter:image" content="https://edwebmedia.com/assets/edweb-logo-dark.png" />
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Edweb Media",
+    "description": "Web design and development agency based in Cape Town, South Africa. Building premium websites for businesses locally and worldwide.",
+    "url": "https://edwebmedia.com",
+    "logo": "https://edwebmedia.com/favicon.svg",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Cape Town",
+      "addressRegion": "Western Cape",
+      "addressCountry": "ZA"
+    },
+    "areaServed": [
+      { "@type": "Country", "name": "South Africa" },
+      { "@type": "Country", "name": "Worldwide" }
+    ],
+    "email": "info@edwebmedia.com",
+    "telephone": "+27846204583",
+    "priceRange": "$$",
+    "serviceType": ["Web Design", "Web Development", "Branding", "Digital Marketing", "SEO"],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+27846204583",
+      "contactType": "customer service",
+      "availableLanguage": "English"
+    },
+    "sameAs": []
+  }
+  </script>
+
+  <!-- Preconnect speeds up the first font request -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=block" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css?v=2026073011" />
+<meta name="robots" content="noindex">
+<style>
+  .sacc{border-top:1px solid var(--border)}
+  .sacc-item{border-bottom:1px solid var(--border)}
+  .sacc-head{display:flex;align-items:center;gap:16px;width:100%;padding:1.6rem 0.5rem;background:none;border:0;font:inherit;text-align:left;color:var(--ink);cursor:pointer;transition:padding-left .3s cubic-bezier(.16,1,.3,1)}
+  .sacc-head:hover{padding-left:1rem}
+  .sacc-ico{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;color:#fff;flex:none;transition:transform .35s cubic-bezier(.16,1,.3,1)}
+  .sacc-ico .material-symbols-outlined{font-size:23px;color:#fff}
+  .sacc-ico.coral{background:linear-gradient(145deg,#ec6166,#c8101f)}
+  .sacc-ico.teal{background:linear-gradient(145deg,#8ad9df,#369aa4)}
+  .sacc-item.is-open .sacc-ico{transform:scale(1.05)}
+  .sacc-title{font-size:1.35rem;font-weight:700;flex:1;letter-spacing:-.01em}
+  .sacc-plus{margin-left:auto;color:var(--gold);font-size:26px;transition:transform .4s cubic-bezier(.16,1,.3,1);flex:none}
+  .sacc-item.is-open .sacc-plus{transform:rotate(135deg)}
+  .sacc-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s cubic-bezier(.16,1,.3,1)}
+  .sacc-item.is-open .sacc-body{grid-template-rows:1fr}
+  .sacc-body-inner{overflow:hidden}
+  .sacc-content{padding:0 0.5rem 1.9rem 60px}
+  .sacc-desc{color:var(--text-muted);font-size:1.08rem;line-height:1.6;margin:0 0 var(--sp-5);max-width:60ch}
+  .sacc-checks{display:grid;grid-template-columns:1fr 1fr;gap:.9rem 2rem;margin-bottom:var(--sp-6);max-width:640px}
+  .sacc-check{display:flex;align-items:center;gap:11px;font-size:1rem;color:var(--text)}
+  .sacc-check .material-symbols-outlined{font-size:21px;flex:none}
+  .sacc-cta{display:inline-flex;align-items:center;gap:7px;color:var(--gold);font-weight:700;font-size:1rem;text-decoration:none}
+  .sacc-cta .material-symbols-outlined{font-size:20px;transition:transform .25s}
+  .sacc-cta:hover .material-symbols-outlined{transform:translateX(4px)}
+  @media(max-width:640px){.sacc-content{padding-left:0.5rem}.sacc-checks{grid-template-columns:1fr;gap:.8rem}.sacc-title{font-size:1.15rem}}
+</style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ============================== HEADER / NAV ============================== -->
+  <header class="site-header" id="site-header">
+    <div class="container nav" id="nav">
+      <a href="index.html" class="logo">
+        <img class="logo-img logo-img--light" src="assets/edweb-logo-light.png" alt="Edweb Media">
+        <img class="logo-img logo-img--dark" src="assets/edweb-logo-dark.png" alt="Edweb Media">
+      </a>
+
+      <nav class="nav-links" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="projects.html">Projects</a>
+        <a href="packages.html">Pricing</a>
+        <a href="pay.html">Payments</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <div class="nav-cta">
+        <a href="contact.html" class="btn btn--primary">Get In Touch</a>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- ============================== HERO ============================== -->
+    <section class="hero" id="top">
+      <div class="container hero-inner">
+        <div class="eyebrow reveal" style="visibility:hidden" aria-hidden="true">Web Design &amp; Growth Studio, Cape Town</div>
+        <h1 class="hero-heading reveal" style="--reveal-delay:80ms">
+          <span class="hero-heading-line">Websites</span>
+          <span class="hero-cycle-wrap"><em class="text-cycle" data-words="crafted, designed, built, managed, optimised, supported">crafted</em></span>
+          <span class="hero-heading-line">to grow your business</span>
+        </h1>
+        <p class="hero-lead reveal" style="--reveal-delay:160ms">
+          We design and manage premium websites, then back them with marketing,
+          branding and content, so your business looks as sharp online as it
+          performs offline.
+        </p>
+        <div class="hero-actions reveal" style="--reveal-delay:240ms">
+          <a href="packages.html" class="btn btn--primary">View Packages</a>
+          <a href="https://www.google.com/search?q=Edweb+Media+reviews" class="about-badge hero-badge" target="_blank" rel="noopener" style="--reveal-delay:240ms">
+            <svg class="about-badge-icon" viewBox="0 0 48 48" aria-hidden="true">
+              <path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"/>
+              <path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"/>
+              <path fill="#FBBC05" d="M11.69 28.18c-.43-1.29-.68-2.67-.68-4.18s.25-2.89.68-4.18v-5.7H4.34A21.96 21.96 0 0 0 2 24c0 3.56.86 6.93 2.34 9.88l7.35-5.7z"/>
+              <path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z"/>
+            </svg>
+            <div class="about-badge-body">
+              <div class="about-badge-rating">
+                <span class="about-badge-figure">5.0</span>
+                <span class="stars" aria-hidden="true">★★★★★</span>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+      
+    </section>
+
+    <!-- ============================== ABOUT ============================== -->
+    <section class="section" id="about">
+      <div class="container about-grid">
+        <div class="av3-panel reveal">
+          <div class="dcard" id="dcard">
+            <div class="dcard-head">
+              <div>
+                <h3>Built To Perform</h3>
+                <p>What every project includes</p>
+              </div>
+              <div class="dcard-head-right">
+                <button class="dtoggle" id="dtoggle" aria-label="Toggle dark preview">
+                  <span class="dtoggle-knob"><span class="material-symbols-outlined" id="dtoggleIcon" aria-hidden="true">light_mode</span></span>
+                </button>
+                <div class="dring">
+                  <svg viewBox="0 0 56 56">
+                    <defs>
+                      <linearGradient id="dgrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="var(--gold)" />
+                        <stop offset="100%" stop-color="var(--gold-light)" />
+                      </linearGradient>
+                    </defs>
+                    <circle class="dring-track" cx="28" cy="28" r="20" />
+                    <circle class="dring-progress" cx="28" cy="28" r="20" />
+                  </svg>
+                  <span class="dring-val">100%</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="dtabs" id="dtabs">
+              <button class="is-active" data-tab="overview">Overview</button>
+              <button data-tab="included">Included</button>
+              <button data-tab="why">Why Us</button>
+              <span class="dtabs-indicator" id="dtabsIndicator" style="left:0"></span>
+            </div>
+
+            <div class="dpanel is-active" data-panel="overview">
+              <div class="drevenue">
+                <div class="drevenue-top">
+                  <span>Average Launch Time</span>
+                  <span class="dpill">On track</span>
+                </div>
+                <p class="drevenue-val">2–3 Weeks</p>
+                <div class="drevenue-bar"><div class="drevenue-bar-fill"></div></div>
+              </div>
+              <div class="dstats">
+                <div class="dstat"><p>Build</p><p>100% Custom</p></div>
+                <div class="dstat"><p>Support</p><p>Included</p></div>
+                <div class="dstat"><p>Ready For</p><p>SEO</p></div>
+              </div>
+            </div>
+
+            <div class="dpanel" data-panel="included">
+              <div class="danalytics-row"><div class="danalytics-left"><span class="ddot" style="background:var(--gold)"></span><span>Custom Website Design</span></div><strong>Included</strong></div>
+              <div class="danalytics-row"><div class="danalytics-left"><span class="ddot" style="background:var(--gold-light)"></span><span>Mobile Responsive Build</span></div><strong>Included</strong></div>
+              <div class="danalytics-row"><div class="danalytics-left"><span class="ddot" style="background:var(--gold)"></span><span>SEO Foundations</span></div><strong>Included</strong></div>
+              <div class="danalytics-row"><div class="danalytics-left"><span class="ddot" style="background:var(--gold-light)"></span><span>Hosting &amp; Ongoing Support</span></div><strong>Included</strong></div>
+            </div>
+
+            <div class="dpanel" data-panel="why">
+              <div class="dreport-box is-accent">
+                <h4>Why clients choose us</h4>
+                <p>Every site is designed and coded from scratch around your brand, then backed by hosting, support and marketing that keeps it working long after launch.</p>
+              </div>
+              <div class="dreport-box">
+                <h4>What you get</h4>
+                <ul>
+                  <li>Direct communication, no account managers</li>
+                  <li>2–3 week average turnaround</li>
+                  <li>Hosting and support included</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="dfooter">
+              <a href="contact.html" class="dbtn dbtn--primary">Get In Touch</a>
+              <a href="packages.html" class="dbtn dbtn--ghost">View Packages</a>
+            </div>
+          </div>
+        </div>
+        <div class="about-copy reveal" style="--reveal-delay:120ms">
+          <div class="eyebrow">Built To Perform</div>
+          <h2>Performing on<br />every device</h2>
+          <p>
+            Custom websites that make your business look sharp online, backed by
+            marketing, branding and support that keeps it working long after launch.
+          </p>
+          <div class="av3-checklist">
+            <div><span class="material-symbols-outlined" aria-hidden="true">check_circle</span>Fast load times</div>
+            <div><span class="material-symbols-outlined" aria-hidden="true">check_circle</span>Mobile responsive</div>
+            <div><span class="material-symbols-outlined" aria-hidden="true">check_circle</span>SEO optimised</div>
+            <div><span class="material-symbols-outlined" aria-hidden="true">check_circle</span>Ongoing support</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+        <!-- ============================== SERVICES ============================== -->
+    <section class="section section--alt" id="services">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2>Our Services</h2>
+          <p>Everything your business needs to look great and grow online, under one roof. Tap a service to see what is included.</p>
+        </div>
+        <div class="sacc reveal" id="sacc"></div>
+      </div>
+    </section>
+
+    <!-- ============================== PROCESS ============================== -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow">How We Work</div>
+          <h2>A clear path from idea to launch</h2>
+          <p>No jargon, no surprises, just a straightforward process and a website that's managed for you long after launch.</p>
+        </div>
+        <div class="process-grid">
+          <div class="process-step reveal">
+            <span class="process-index">01</span>
+            <h3>Discover</h3>
+            <p>We learn about your business, your customers and what success looks like for your website.</p>
+          </div>
+          <div class="process-step reveal" style="--reveal-delay:80ms">
+            <span class="process-index">02</span>
+            <h3>Design</h3>
+            <p>A clean, on-brand design tailored to your industry, built to convert visitors into customers.</p>
+          </div>
+          <div class="process-step reveal" style="--reveal-delay:160ms">
+            <span class="process-index">03</span>
+            <h3>Build &amp; Launch</h3>
+            <p>Your site goes live, fully responsive, fast-loading and ready across mobile, tablet and desktop.</p>
+          </div>
+          <div class="process-step reveal" style="--reveal-delay:240ms">
+            <span class="process-index">04</span>
+            <h3>Grow</h3>
+            <p>Ongoing support, updates and marketing keep your site working hard for your business.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== PRICING TEASER ============================== -->
+    <section class="section section--alt">
+      <div class="container">
+        <div class="section-head section-head--center reveal">
+          <h2>Clear, once-off website pricing</h2>
+          <p>Your website design is a once-off fee. Hosting and management are optional monthly add-ons. No hidden costs.</p>
+        </div>
+        <div class="pricing-teaser-grid">
+          <article class="pricing-card is-featured reveal">
+            <span class="pricing-badge">Most Popular</span>
+            <h3>Silver Plan</h3>
+            <div class="pricing-price">R3,999<span> once-off</span></div>
+            <ul class="pricing-features">
+              <li>5 Page Custom Design</li>
+              <li>SSL Certificate</li>
+              <li>Contact Form</li>
+              <li>Social Media Integration</li>
+              <li>Basic SEO</li>
+              <li>Blog Section</li>
+              <li>WhatsApp Button</li>
+              <li>Mobile Responsive</li>
+            </ul>
+          </article>
+          <article class="pricing-card reveal" style="--reveal-delay:80ms">
+            <h3>Gold Plan</h3>
+            <div class="pricing-price">R4,999<span> once-off</span></div>
+            <ul class="pricing-features">
+              <li>10 Page Custom Design</li>
+              <li>SSL Certificate</li>
+              <li>Contact Form</li>
+              <li>Social Media Integration</li>
+              <li>Basic SEO</li>
+              <li>Blog Section</li>
+              <li>WhatsApp Button</li>
+              <li>Mobile Responsive</li>
+            </ul>
+          </article>
+          <article class="pricing-card reveal" style="--reveal-delay:160ms">
+            <h3>Platinum Plan</h3>
+            <div class="pricing-price">R6,499<span> once-off</span></div>
+            <ul class="pricing-features">
+              <li>20 Page Custom Design</li>
+              <li>SSL Certificate</li>
+              <li>Contact Form</li>
+              <li>Social Media Integration</li>
+              <li>Advanced SEO</li>
+              <li>Blog Section</li>
+              <li>WhatsApp Button</li>
+              <li>Mobile Responsive</li>
+            </ul>
+          </article>
+        </div>
+        <div class="pricing-teaser-cta reveal">
+          <a href="packages.html" class="btn btn--primary">View All Packages</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== INDUSTRIES ============================== -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow">Who We Work With</div>
+          <h2>Industries we know well</h2>
+        </div>
+      </div>
+      <div class="industries-row">
+          <div class="industries-track">
+            <div class="industry-card"><span class="icon material-symbols-outlined" aria-hidden="true">construction</span>Construction</div>
+            <div class="industry-card"><span class="icon material-symbols-outlined" aria-hidden="true">flight</span>Travel</div>
+            <div class="industry-card"><span class="icon material-symbols-outlined" aria-hidden="true">bakery_dining</span>Bakery</div>
+            <div class="industry-card"><span class="icon material-symbols-outlined" aria-hidden="true">plumbing</span>Plumbers</div>
+            <div class="industry-card"><span class="icon material-symbols-outlined" aria-hidden="true">bolt</span>Electricians</div>
+            <div class="industry-card"><span class="icon material-symbols-outlined" aria-hidden="true">yard</span>Landscaping</div>
+            <div class="industry-card"><span class="icon material-symbols-outlined" aria-hidden="true">roofing</span>Roofing</div>
+            <div class="industry-card"><span class="icon material-symbols-outlined" aria-hidden="true">home_work</span>Real Estate</div>
+            <div class="industry-card"><span class="icon material-symbols-outlined" aria-hidden="true">chair</span>Interior Design</div>
+            <div class="industry-card"><span class="icon material-symbols-outlined" aria-hidden="true">content_cut</span>Hair Salons</div>
+            <div class="industry-card"><span class="icon material-symbols-outlined" aria-hidden="true">restaurant</span>Restaurants</div>
+            <div class="industry-card"><span class="icon material-symbols-outlined" aria-hidden="true">storefront</span>Online Stores</div>
+            <!-- duplicated for seamless loop -->
+            <div class="industry-card" aria-hidden="true"><span class="icon material-symbols-outlined" aria-hidden="true">construction</span>Construction</div>
+            <div class="industry-card" aria-hidden="true"><span class="icon material-symbols-outlined" aria-hidden="true">flight</span>Travel</div>
+            <div class="industry-card" aria-hidden="true"><span class="icon material-symbols-outlined" aria-hidden="true">bakery_dining</span>Bakery</div>
+            <div class="industry-card" aria-hidden="true"><span class="icon material-symbols-outlined" aria-hidden="true">plumbing</span>Plumbers</div>
+            <div class="industry-card" aria-hidden="true"><span class="icon material-symbols-outlined" aria-hidden="true">bolt</span>Electricians</div>
+            <div class="industry-card" aria-hidden="true"><span class="icon material-symbols-outlined" aria-hidden="true">yard</span>Landscaping</div>
+            <div class="industry-card" aria-hidden="true"><span class="icon material-symbols-outlined" aria-hidden="true">roofing</span>Roofing</div>
+            <div class="industry-card" aria-hidden="true"><span class="icon material-symbols-outlined" aria-hidden="true">home_work</span>Real Estate</div>
+            <div class="industry-card" aria-hidden="true"><span class="icon material-symbols-outlined" aria-hidden="true">chair</span>Interior Design</div>
+            <div class="industry-card" aria-hidden="true"><span class="icon material-symbols-outlined" aria-hidden="true">content_cut</span>Hair Salons</div>
+            <div class="industry-card" aria-hidden="true"><span class="icon material-symbols-outlined" aria-hidden="true">restaurant</span>Restaurants</div>
+            <div class="industry-card" aria-hidden="true"><span class="icon material-symbols-outlined" aria-hidden="true">storefront</span>Online Stores</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== QUOTE BAND ============================== -->
+    <section class="quote-band">
+      <div class="container reveal">
+        <blockquote>
+          "The key to a business that grows is a brand that's honest, clear and
+          built to last. That's what we build, every time."
+        </blockquote>
+        <cite>The Edweb Media Team</cite>
+      </div>
+    </section>
+
+    <!-- ============================== PORTFOLIO ============================== -->
+    <section class="section" id="work">
+      <div class="container">
+        <div class="section-head section-head--center reveal">
+          <div class="eyebrow" style="justify-content:center">Selected Work</div>
+          <h2>Recent Website Designs</h2>
+          <p>A look at recent projects across construction, travel, real estate and more.</p>
+        </div>
+
+        <div class="work-grid">
+          <a class="work-item reveal" href="projects/navigator.html">
+            <div class="work-item-img"><img src="assets/projects/navigator/navigator-home.jpg?v=20260721c" alt="Navigator Vietnam travel website design by Edweb Media" loading="lazy" /></div>
+            <span class="work-item-badge material-symbols-outlined" aria-hidden="true">travel_explore</span>
+            <h3>Navigator Vietnam</h3>
+            <p>Travel &amp; Tourism</p>
+          </a>
+          <a class="work-item reveal" style="--reveal-delay:80ms" href="projects/crazydaizy.html">
+            <div class="work-item-img"><img src="assets/projects/crazydaizy/crazydaizy-home.jpg?v=20260722" alt="Crazy Daizy bakery website design by Edweb Media" loading="lazy" /></div>
+            <span class="work-item-badge material-symbols-outlined" aria-hidden="true">cake</span>
+            <h3>Crazy Daizy</h3>
+            <p>Bakery &amp; E-commerce</p>
+          </a>
+          <a class="work-item reveal" style="--reveal-delay:160ms" href="projects/tee-to-trail.html">
+            <div class="work-item-img"><img src="assets/slider/2.png?v=20260719" alt="Tee to Trail Africa golf tourism website design by Edweb Media" loading="lazy" /></div>
+            <span class="work-item-badge material-symbols-outlined" aria-hidden="true">flight_takeoff</span>
+            <h3>Tee to Trail Africa</h3>
+            <p>Travel &amp; Golf Tourism</p>
+          </a>
+          <a class="work-item reveal" style="--reveal-delay:240ms" href="projects/spiralguard.html">
+            <div class="work-item-img"><img src="assets/slider/1.png?v=20260719" alt="SpiralGuard hose protection website design by Edweb Media" loading="lazy" /></div>
+            <span class="work-item-badge material-symbols-outlined" aria-hidden="true">shield</span>
+            <h3>Helix SpiralGuard</h3>
+            <p>Industrial &amp; Manufacturing</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== CTA BAND ============================== -->
+    <section class="cta-band">
+      <div class="container reveal">
+        <div class="eyebrow" style="justify-content:center">Ready When You Are</div>
+        <h2>Let's build something great together</h2>
+        <p>Tell us a little about your business and what you need and we'll get back to you quickly with next steps and a package to match.</p>
+        <div class="hero-actions">
+          <a href="packages.html" class="btn btn--accent">View Packages</a>
+          <a href="contact.html" class="btn btn--primary">Get In Touch</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== TESTIMONIALS ============================== -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head section-head--center reveal">
+          <div class="eyebrow" style="justify-content:center">Client Reviews</div>
+          <h2>What our clients say</h2>
+          <p>Verified reviews from Trustindex / Google.</p>
+        </div>
+        <div class="review-card reveal" data-reviews='[{"name":"Werner Loubser","quote":"Amazing to work with Edgar. His vision and passion made our journey so enjoyable. Highly recommended!"},{"name":"Morne Wijne","quote":"Today, I&#39;m proud to have a brand-new website that&#39;s modern, functional and aligned with today&#39;s marketing needs. Great value for what we got."},{"name":"Jurgie Schoeman","quote":"Edgar and his team made a website for our travel company and we are over the moon. They handled the whole process perfectly. I couldn&#39;t recommend them more."},{"name":"Navigator Vietnam","quote":"Thank you so much to the Edweb Media team for doing our website. They did such a good job in making our dream become a reality. I can really recommend them to anyone looking for a neat and beautiful website."},{"name":"Al-Mari Bruwer","quote":"Thank you for your excellent service. Will make use of you again! Recommend!"},{"name":"Julia Joubert","quote":"Amazing work Ed, our website looks beautiful. Would highly recommend!!"},{"name":"Tristan Maske","quote":"Exceptional. Cannot think of anyone else to take on this responsibility. Thanks Ed!"},{"name":"Tiennie Macfarlane","quote":"I am more than satisfied with the service we got from Edweb Media. Really very impressed with them."},{"name":"Nelson De Nobrega","quote":"Very happy with the design of our new website. We would definitely recommend their services!"}]'>
+          <div class="review-summary">
+            <div class="review-header">
+              <svg viewBox="0 0 48 48" aria-hidden="true">
+                <path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"/>
+                <path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"/>
+                <path fill="#FBBC05" d="M11.69 28.18c-.43-1.29-.68-2.67-.68-4.18s.25-2.89.68-4.18v-5.7H4.34A21.96 21.96 0 0 0 2 24c0 3.56.86 6.93 2.34 9.88l7.35-5.7z"/>
+                <path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z"/>
+              </svg>
+              <span>Google Reviews</span>
+            </div>
+            <div class="review-overall">
+              <span class="stars" aria-hidden="true">★★★★★</span>
+              <p><strong>5.0</strong> from 10 verified reviews</p>
+            </div>
+            <ul class="review-features">
+              <li>Custom-built, mobile-friendly websites</li>
+              <li>Hosting, domain &amp; SSL included</li>
+              <li>Real human support, always</li>
+            </ul>
+            <a class="btn btn--primary" href="https://www.google.com/search?q=Edweb+Media+reviews" target="_blank" rel="noopener">See all reviews on Google</a>
+          </div>
+          <div class="review-slider">
+            <div class="review-slide">
+              <span class="stars" aria-hidden="true">★★★★★</span>
+              <p class="review-name">Werner Loubser</p>
+              <p class="review-quote">"Amazing to work with Edgar. His vision and passion made our journey so enjoyable. Highly recommended!"</p>
+            </div>
+            <div class="review-nav">
+              <button type="button" class="review-nav-btn review-prev" aria-label="Previous review">‹</button>
+              <button type="button" class="review-nav-btn review-next" aria-label="Next review">›</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================== FOOTER ============================== -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">
+          <img class="logo-img" src="assets/edweb-logo-light.png" alt="Edweb Media">
+        </a>
+        <p>Follow Edweb Media for updates, tips and our latest work. Contact us for any enquiries and we'll get back to you as soon as possible.</p>
+        <div class="contact-socials" style="margin-top:1.5rem">
+          <a href="https://www.facebook.com/edwebmediasolutions" target="_blank" rel="noopener" aria-label="Edweb Media on Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7h2.4l.4-2.8h-2.8v-1.6c0-.8.2-1.4 1.4-1.4h1.5V5.7c-.3 0-1.2-.1-2.2-.1-2.3 0-3.8 1.4-3.8 3.9v1.7H8v2.8h2.4V21h3.1z"/></svg></a>
+          <a href="https://www.instagram.com/edwebmedia/" target="_blank" rel="noopener" aria-label="Edweb Media on Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="3.5"/><circle cx="17.2" cy="6.8" r="0.8" fill="currentColor" stroke="none"/></svg></a>
+          <a href="https://wa.me/27846204583" target="_blank" rel="noopener" aria-label="Edweb Media on WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-1.2-.6-2-1-2.8-2.3-.2-.3 0-.5.2-.7.2-.2.4-.5.6-.7.1-.2.1-.4 0-.6-.1-.2-.6-1.5-.8-2-.1-.4-.3-.4-.5-.4h-.4c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.1s.9 2.5 1.1 2.7c.1.2 1.6 2.5 4 3.4 2 .8 2.4.7 2.8.6.4-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2 0-.1-.2-.2-.4-.3z"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Important Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="packages.html">Pricing</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="pay.html">Payments</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Policies</h4>
+        <ul>
+          <li><a href="terms-conditions.html">Terms &amp; Conditions</a></li>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:+27846204583">+27 84 620 4583</a></li>
+          <li><a href="mailto:info@edwebmedia.com">info@edwebmedia.com</a></li>
+          <li>Cape Town, South Africa</li>
+        </ul>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <span>© 2026 Edweb Media. All rights reserved.</span>
+      <span class="footer-tagline">Designed for Success.</span>
+    </div>
+  </footer>
+
+  <a class="whatsapp-float" href="https://wa.me/27846204583" target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-1.2-.6-2-1-2.8-2.3-.2-.3 0-.5.2-.7.2-.2.4-.5.6-.7.1-.2.1-.4 0-.6-.1-.2-.6-1.5-.8-2-.1-.4-.3-.4-.5-.4h-.4c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.1s.9 2.5 1.1 2.7c.1.2 1.6 2.5 4 3.4 2 .8 2.4.7 2.8.6.4-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2 0-.1-.2-.2-.4-.3z"/></svg>
+  </a>
+
+  <script src="script.js?v=2026073011"></script>
+<script>
+(function(){
+  var data=[
+    {ico:'language',clr:'coral',t:'Website Design',desc:'Custom websites coded from scratch, fast to load and built to turn visitors into customers.',list:['5 to 20 custom pages','Mobile responsive and SSL','Basic SEO and contact form','Blog and WhatsApp button'],cta:'See website packages',href:'packages.html'},
+    {ico:'smartphone',clr:'teal',t:'App Development',desc:'Web apps built around how your business actually runs, day to day.',list:['Custom features and flows','Secure user login','Fast, reliable performance','One clean experience everywhere'],cta:'Get a quote',href:'contact.html'},
+    {ico:'campaign',clr:'coral',t:'Digital Marketing',desc:'Get in front of the right people and turn views into real enquiries.',list:['Audience targeting','Content and social posts','Performance tracking','Clear monthly reporting'],cta:'Get a quote',href:'contact.html'},
+    {ico:'ads_click',clr:'teal',t:'Google Ads',desc:'Targeted ad campaigns that bring in real enquiries, not just clicks.',list:['Keyword research','Written ad campaigns','Conversion tracking','Full budget control'],cta:'Get a quote',href:'contact.html'},
+    {ico:'palette',clr:'coral',t:'Branding',desc:'A complete brand identity that reads as one clear, confident business.',list:['Custom logo design','Colour palette','Typography system','Simple brand guide'],cta:'Get a quote',href:'contact.html'},
+    {ico:'dns',clr:'teal',t:'Hosting & Management',desc:'We keep your site fast, safe and up to date, so you never have to think about it.',list:['Secure, fast hosting','Daily backups','SSL and domain included','Ongoing updates and support'],cta:'See hosting plans',href:'packages.html'}
+  ];
+  var wrap=document.getElementById('sacc');
+  if(!wrap) return;
+  data.forEach(function(d,i){
+    var checks=d.list.map(function(x,k){var col=k%2===0?'var(--gold)':'var(--gold-light)';return '<div class="sacc-check"><span class="material-symbols-outlined" style="color:'+col+'">check_circle</span>'+x+'</div>';}).join('');
+    var item=document.createElement('div');
+    item.className='sacc-item'+(i===0?' is-open':'');
+    item.innerHTML=
+      '<button class="sacc-head" aria-expanded="'+(i===0?'true':'false')+'">'+
+        '<span class="sacc-ico '+d.clr+'"><span class="material-symbols-outlined">'+d.ico+'</span></span>'+
+        '<span class="sacc-title">'+d.t+'</span>'+
+        '<span class="sacc-plus material-symbols-outlined" aria-hidden="true">add</span>'+
+      '</button>'+
+      '<div class="sacc-body"><div class="sacc-body-inner"><div class="sacc-content">'+
+        '<p class="sacc-desc">'+d.desc+'</p>'+
+        '<div class="sacc-checks">'+checks+'</div>'+
+        '<a class="sacc-cta" href="'+d.href+'">'+d.cta+' <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></a>'+
+      '</div></div></div>';
+    wrap.appendChild(item);
+    item.querySelector('.sacc-head').addEventListener('click',function(){
+      var open=item.classList.contains('is-open');
+      wrap.querySelectorAll('.sacc-item').forEach(function(it){it.classList.remove('is-open');it.querySelector('.sacc-head').setAttribute('aria-expanded','false');});
+      if(!open){item.classList.add('is-open');this.setAttribute('aria-expanded','true');}
+    });
+  });
+})();
+</script>
+</body>
+</html>
+

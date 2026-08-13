@@ -34,6 +34,8 @@ module.exports = async function handler(req, res) {
           name, meeting_date, note, company } = req.body;
 
   // Honeypot: bots fill the hidden field; drop silently with a fake success.
+  // Note: no `sent` flag here — the client only fires the Ads conversion when
+  // sent === true, so trapped bots can't inflate conversion counts.
   if (company) return res.status(200).json({ success: true });
   const ip = (req.headers['x-forwarded-for'] || '').split(',')[0].trim() || 'unknown';
   if (rateLimited(ip)) {
@@ -67,7 +69,7 @@ module.exports = async function handler(req, res) {
         subject,
         text,
       });
-      return res.status(200).json({ success: true, message: 'Email sent' });
+      return res.status(200).json({ success: true, sent: true, message: 'Email sent' });
     } catch (err) {
       return res.status(500).json({ success: false, message: err.message || 'Unknown error' });
     }
@@ -82,21 +84,21 @@ module.exports = async function handler(req, res) {
     return res.status(400).json({ success: false, message: 'Message is too long.' });
   }
 
-  const subject = pkg ? `New Enquiry from ${fullName} — ${pkg}` : `New Enquiry from ${fullName}`;
+  const subject = pkg ? `New Enquiry from ${fullName} - ${pkg}` : `New Enquiry from ${fullName}`;
   const text = [
     'New enquiry from edwebmedia.com',
     '',
     `Name:      ${fullName}`,
     `Email:     ${email}`,
-    `Phone:     ${phone || '—'}`,
-    `Package:   ${pkg || '—'}`,
-    `Services:  ${services || '—'}`,
-    `Add-ons:   ${addons || '—'}`,
-    `Budget:    ${budget || '—'}`,
-    `Timeline:  ${timeline || '—'}`,
+    `Phone:     ${phone || '-'}`,
+    `Package:   ${pkg || '-'}`,
+    `Services:  ${services || '-'}`,
+    `Add-ons:   ${addons || '-'}`,
+    `Budget:    ${budget || '-'}`,
+    `Timeline:  ${timeline || '-'}`,
     '',
     'Message:',
-    message || '—',
+    message || '-',
   ].join('\n');
 
   try {
@@ -107,7 +109,7 @@ module.exports = async function handler(req, res) {
       subject,
       text,
     });
-    return res.status(200).json({ success: true, message: 'Email sent' });
+    return res.status(200).json({ success: true, sent: true, message: 'Email sent' });
   } catch (err) {
     return res.status(500).json({ success: false, message: err.message || 'Unknown error' });
   }

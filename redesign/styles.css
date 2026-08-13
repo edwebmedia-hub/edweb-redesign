@@ -30,8 +30,8 @@
   --fs-lg: 1.125rem;
   --fs-xl: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);
   --fs-2xl: clamp(1.75rem, 1.4rem + 1.4vw, 2.5rem);
-  --fs-3xl: clamp(2.25rem, 1.7rem + 2.4vw, 3.5rem);
-  --fs-4xl: clamp(2.5rem, 1.9rem + 3vw, 4.25rem);
+  --fs-3xl: clamp(2.4rem, 1.7rem + 3vw, 4rem);
+  --fs-4xl: clamp(2.7rem, 1.9rem + 3.5vw, 4.6rem);
 
   /* Spacing scale (4px base) */
   --sp-1: 0.25rem;
@@ -47,15 +47,15 @@
   --sp-20: 6rem;
 
   /* Shape, motion, elevation */
-  --radius-sm: 8px;
-  --radius-md: 16px;
-  --radius-lg: 28px;
+  --radius-sm: 10px;
+  --radius-md: 20px;
+  --radius-lg: 30px;
   --radius-pill: 999px;
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
   --transition: 450ms var(--ease);
-  --shadow-sm: 0 1px 2px rgba(17, 21, 28, 0.06);
-  --shadow-md: 0 12px 32px rgba(17, 21, 28, 0.08);
-  --shadow-lg: 0 30px 80px rgba(17, 21, 28, 0.16);
+  --shadow-sm: 0 2px 6px rgba(17, 21, 28, 0.05);
+  --shadow-md: 0 20px 55px rgba(17, 21, 28, 0.07);
+  --shadow-lg: 0 35px 90px rgba(17, 21, 28, 0.14);
 
   --container: 1200px;
 }
@@ -138,13 +138,18 @@ summary:focus-visible {
   padding: 0 var(--sp-5);
 }
 
-.section { padding: var(--sp-16) 0; }
-.section--tight { padding: var(--sp-12) 0; }
+/* one fluid rhythm for every section: roomier on desktop, tight on phones,
+   no breakpoint jumps (2026-08-04 consistency pass) */
+.section { padding: clamp(3.5rem, 2.3rem + 3.9vw, 6.25rem) 0; }
+.section--tight { padding: clamp(2.5rem, 1.7rem + 2.6vw, 4.25rem) 0; }
 .section--alt { background: var(--paper-dim); }
+
+/* A dark pricing band was trialled 2026-08-02 and reverted — Edgar prefers the
+   light section. */
 
 .section-head {
   max-width: 640px;
-  margin: 0 0 var(--sp-10);
+  margin: 0 0 clamp(2.5rem, 1.8rem + 2.4vw, 4rem);
 }
 .section-head--center { margin-inline: auto; text-align: center; }
 .section-head--center h2::after { content: none; }
@@ -193,16 +198,13 @@ summary:focus-visible {
   color: var(--gold);
   margin-bottom: var(--sp-4);
 }
-.eyebrow::before {
-  content: '';
-  display: inline-block;
-  width: 24px;
-  height: 2px;
-  background: var(--gold);
-  flex-shrink: 0;
-}
+/* dash removed site-wide (Edgar, 2026-07-29) */
+.eyebrow::before { content: none; }
 
 .section-head h2 { font-size: var(--fs-3xl); }
+/* FAQ headings sit outside .section-head — match the same scale so headings
+   stay consistent across the site (Edgar, 2026-07-29) */
+.faq-layout > div > h2 { font-size: var(--fs-3xl); }
 .section-head p {
   margin-top: var(--sp-4);
   color: var(--text-muted);
@@ -216,9 +218,10 @@ summary:focus-visible {
    ========================================================================== */
 .reveal {
   opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 900ms var(--ease), transform 900ms var(--ease);
+  transform: translateY(18px);
+  transition: opacity 620ms var(--ease), transform 620ms var(--ease);
   transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
 }
 .reveal.is-visible {
   opacity: 1;
@@ -233,8 +236,8 @@ summary:focus-visible {
   align-items: center;
   justify-content: center;
   gap: var(--sp-2);
-  padding: 0.75rem 1.6rem;
-  font-size: var(--fs-sm);
+  padding: 0.95rem 2.1rem;
+  font-size: var(--fs-base);
   font-weight: 600;
   letter-spacing: 0.02em;
   border-radius: var(--radius-pill);
@@ -424,19 +427,79 @@ summary:focus-visible {
   content: "";
   position: absolute;
   inset: 0;
-  background-image: linear-gradient(rgba(245,243,238,0.12) 1px, transparent 1px), linear-gradient(90deg, rgba(245,243,238,0.12) 1px, transparent 1px);
-  background-size: 64px 64px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.055 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"), radial-gradient(rgba(245,249,251,0.26) 1.1px, transparent 1.3px);
+  background-size: 160px 160px, 24px 24px;
   mask-image: radial-gradient(ellipse 70% 70% at 50% 40%, black, transparent);
   z-index: 0;
 }
 
+/* --- hero atmosphere: drifting colour washes, interactive circuit, vignette --- */
+.hero-wash {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  pointer-events: none;
+  z-index: 0;
+}
+.hero-wash--teal {
+  left: -12%; top: 8%; width: 58%; height: 80%;
+  background: radial-gradient(50% 50% at 50% 50%, rgba(122, 207, 214, 0.17), transparent 100%);
+  animation: hero-wash-a 26s ease-in-out infinite alternate;
+}
+.hero-wash--coral {
+  right: -10%; top: -14%; width: 52%; height: 70%;
+  background: radial-gradient(50% 50% at 50% 50%, rgba(224, 71, 76, 0.13), transparent 100%);
+  animation: hero-wash-b 32s ease-in-out infinite alternate;
+}
+@keyframes hero-wash-a { from { transform: translate(0, 0); } to { transform: translate(6%, 4%); } }
+@keyframes hero-wash-b { from { transform: translate(0, 0); } to { transform: translate(-5%, 6%); } }
+
+#hero-net { position: absolute; inset: 0; z-index: 0; }
+
+.hero-vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(ellipse 90% 75% at 50% 38%, transparent 55%, rgba(0, 0, 0, 0.38) 100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-wash { animation: none; }
+}
+
+/* --- "grow" flourish: italic word with a coral swoosh that draws itself --- */
+.hero-grow { position: relative; font-style: italic; display: inline-block; padding: 0 0.04em; }
+.grow-swoosh { position: absolute; left: -3%; bottom: -0.16em; width: 106%; height: 0.24em; overflow: visible; }
+.grow-swoosh path {
+  stroke: var(--gold);
+  stroke-width: 7;
+  fill: none;
+  stroke-linecap: round;
+  stroke-dasharray: 130;
+  stroke-dashoffset: 130;
+  animation: grow-swoosh-in 700ms cubic-bezier(0.16, 1, 0.3, 1) 900ms forwards;
+}
+@keyframes grow-swoosh-in { to { stroke-dashoffset: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .grow-swoosh path { animation: none; stroke-dashoffset: 0; }
+}
+
 .hero-inner {
   position: relative;
-  z-index: 1;
-  padding-top: calc(var(--sp-16) + var(--sp-8));
-  padding-bottom: calc(var(--sp-12) + var(--sp-8));
-  max-width: 880px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-top: 6.5rem;
+  padding-bottom: 7.5rem;
+  max-width: 1100px;
+  width: 100%;
 }
+.hero-inner .hero-lead { margin-left: auto; margin-right: auto; margin-top: 2.6rem; }
+.hero-inner .hero-actions { justify-content: center; }
 
 .hero h1 {
   font-size: var(--fs-4xl);
@@ -448,18 +511,27 @@ summary:focus-visible {
 }
 
 /* ==========================================================================
-   HERO HEADING — line-by-line layout with a big cycling focal word
+   HERO HEADING — two centred lines, all words the same weight
    ========================================================================== */
 .hero-heading {
   display: flex;
   flex-direction: column;
-  gap: var(--sp-1);
+  align-items: center;
+  gap: 0.12em;
 }
 .hero-heading-line,
 .hero-cycle-wrap {
   opacity: 0;
   transform: translateY(24px);
   animation: hero-line-in 700ms var(--ease) forwards;
+}
+.hero .hero-heading-line {
+  font-size: clamp(2.9rem, 2rem + 4.6vw, 5.6rem);
+  font-weight: 800;
+  color: var(--text-inverse);
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  text-wrap: balance;
 }
 .hero-heading-line:first-child { animation-delay: 80ms; }
 .hero-cycle-wrap { animation-delay: 220ms; }
@@ -558,7 +630,9 @@ summary:focus-visible {
    ========================================================================== */
 .quote-band {
   position: relative;
-  padding: var(--sp-16) 0;
+  /* same rhythm as every other section, so the band does not sit at its own
+     spacing while the pages around it use the shared scale */
+  padding: clamp(3.5rem, 2.3rem + 3.9vw, 6.25rem) 0;
   text-align: center;
   background: #1a1a1a;
   overflow: hidden;
@@ -577,8 +651,8 @@ summary:focus-visible {
   content: "";
   position: absolute;
   inset: 0;
-  background-image: linear-gradient(rgba(245,243,238,0.12) 1px, transparent 1px), linear-gradient(90deg, rgba(245,243,238,0.12) 1px, transparent 1px);
-  background-size: 64px 64px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.055 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"), radial-gradient(rgba(245,249,251,0.26) 1.1px, transparent 1.3px);
+  background-size: 160px 160px, 24px 24px;
   mask-image: radial-gradient(ellipse 70% 70% at 50% 40%, black, transparent);
   z-index: 0;
   pointer-events: none;
@@ -624,8 +698,8 @@ summary:focus-visible {
    ========================================================================== */
 .about-grid {
   display: grid;
-  grid-template-columns: 1fr 1.1fr;
-  gap: var(--sp-12);
+  grid-template-columns: 0.95fr 1fr;
+  gap: clamp(2.5rem, 1rem + 4vw, 5rem);
   align-items: center;
 }
 .about-copy h2 { font-size: var(--fs-3xl); }
@@ -742,9 +816,9 @@ summary:focus-visible {
    ========================================================================== */
 .dcard {
   width: 100%;
-  max-width: 480px;
+  max-width: 100%;
   border-radius: var(--radius-lg);
-  padding: var(--sp-6);
+  padding: clamp(1.75rem, 1.2rem + 0.9vw, 2.25rem);
   background: #fff;
   box-shadow: 0 1px 3px rgba(43,43,43,0.05), 0 10px 40px rgba(43,43,43,0.08);
   transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), box-shadow 0.3s ease, background 0.4s ease;
@@ -879,9 +953,10 @@ summary:focus-visible {
   padding: var(--sp-5) 0;
   display: flex;
   align-items: center;
-  justify-content: center;
-  min-height: 560px;
+  justify-content: stretch;
+  min-height: 0;
 }
+.av3-panel > .dcard { flex: 1 1 auto; }
 .av3-chart-card {
   position: relative;
   width: 100%;
@@ -1172,10 +1247,12 @@ summary:focus-visible {
   height: 48px;
   margin-bottom: var(--sp-5);
   border-radius: var(--radius-sm);
-  background: var(--gold);
+  background: var(--ink);
   font-size: 24px;
   color: #fff;
+  transition: background var(--transition);
 }
+.process-step:hover .process-index { background: var(--gold); }
 
 .service-card h3 { font-size: var(--fs-xl); }
 .service-card p { margin-top: var(--sp-3); color: var(--text-muted); }
@@ -1183,6 +1260,33 @@ summary:focus-visible {
 /* ==========================================================================
    SERVICES — elevated depth cards (3 x 2)
    ========================================================================== */
+/* ==========================================================================
+   SERVICES RAIL — split intro (heading left, copy + CTA right) above a row of
+   service tiles that drifts sideways on its own (script.js drives the motion)
+   ========================================================================== */
+.svc-intro {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: var(--sp-10);
+  align-items: end;
+  margin-bottom: var(--sp-10);
+}
+.svc-intro h2 { font-size: var(--fs-3xl); max-width: 15ch; }
+.svc-intro-copy p {
+  color: var(--text-muted);
+  font-size: var(--fs-lg);
+  line-height: 1.65;
+  max-width: 52ch;
+}
+.svc-intro-copy .btn { margin-top: var(--sp-6); }
+.svc-intro { margin-bottom: clamp(2.5rem, 1.8rem + 2.4vw, 4rem); }
+
+@media (max-width: 900px) {
+  .svc-intro { grid-template-columns: 1fr; gap: var(--sp-6); align-items: start; }
+  .svc-intro h2 { max-width: none; }
+  .svc-intro-copy p { font-size: var(--fs-base); }
+}
+
 .svc-depth-grid {
   margin-top: var(--sp-10);
   display: grid;
@@ -1223,14 +1327,23 @@ summary:focus-visible {
    ========================================================================== */
 .process-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  /* auto-fit so the row always fills: 3 steps make 3 columns, 4 make 4.
+     A fixed 4-column track left a dead column on about-us. */
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
   gap: var(--sp-6);
 }
+/* was a hairline-divider block, which read as its own thing next to every
+   card on the site (and is on the banned-pattern list) */
 .process-step {
   position: relative;
-  padding-top: var(--sp-6);
-  border-top: 1px solid var(--border);
+  background: #fff;
+  padding: var(--sp-6);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  transition: transform var(--transition), box-shadow var(--transition);
 }
+.process-step:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
 .process-index {
   display: inline-flex;
   align-items: center;
@@ -1239,10 +1352,12 @@ summary:focus-visible {
   height: 48px;
   margin-bottom: var(--sp-5);
   border-radius: var(--radius-sm);
-  background: var(--gold);
+  background: var(--ink);
   font-size: 24px;
   color: #fff;
+  transition: background var(--transition);
 }
+.process-step:hover .process-index { background: var(--gold); }
 .process-step h3 { font-size: var(--fs-lg); }
 .process-step p { margin-top: var(--sp-2); color: var(--text-muted); font-size: var(--fs-sm); }
 
@@ -1505,6 +1620,120 @@ summary:focus-visible {
 .review-nav-btn:hover { background: var(--gold); border-color: var(--gold); color: #fff; }
 
 /* ==========================================================================
+   TESTIMONIAL MARQUEE — columns of client reviews on a slow vertical loop.
+   Motion comes from script.js, which adds .is-live; without JS (or with
+   reduced motion) the columns stay put and every card is fully readable.
+   ========================================================================== */
+.tm-proof {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-8);
+}
+.tm-proof svg { width: 22px; height: 22px; flex-shrink: 0; }
+.tm-proof p { color: var(--text-muted); font-size: var(--fs-sm); }
+.tm-proof strong { color: var(--text); font-weight: 800; }
+.tm-stars { color: var(--gold); letter-spacing: 2px; font-size: var(--fs-sm); line-height: 1; }
+
+.tm-marquee {
+  --tm-fade: 12%;
+  max-width: 68rem;
+  margin-inline: auto;
+  display: flex;
+  justify-content: center;
+  gap: var(--sp-5);
+}
+.tm-marquee.is-live {
+  max-height: 34rem;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 var(--tm-fade), #000 calc(100% - var(--tm-fade)), transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 var(--tm-fade), #000 calc(100% - var(--tm-fade)), transparent);
+}
+.tm-col {
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 22rem;
+}
+.tm-col--2, .tm-col--3 { display: none; }
+.tm-track {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+}
+.tm-marquee.is-live .tm-track { will-change: transform; }
+
+.tm-card {
+  margin: 0; /* figure/blockquote carry a 40px UA margin */
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-6);
+  box-shadow: 0 10px 30px rgba(17, 21, 28, 0.07);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+.tm-card:hover {
+  border-color: color-mix(in srgb, var(--gold) 32%, var(--border));
+  box-shadow: 0 18px 44px rgba(17, 21, 28, 0.12);
+}
+.tm-card blockquote {
+  margin: 0;
+  font-size: var(--fs-base);
+  line-height: 1.65;
+  color: var(--text);
+}
+.tm-card figcaption {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+.tm-avatar {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(in srgb, var(--gold-light) 30%, #fff);
+  color: color-mix(in srgb, var(--gold-light) 55%, var(--ink));
+  font-family: var(--font-display);
+  font-size: var(--fs-xs);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+.tm-card:nth-child(even) .tm-avatar {
+  background: color-mix(in srgb, var(--gold) 16%, #fff);
+  color: var(--gold);
+}
+.tm-who { display: flex; flex-direction: column; min-width: 0; }
+.tm-who cite {
+  font-family: var(--font-display);
+  font-style: normal;
+  font-weight: 800;
+  line-height: 1.3;
+}
+.tm-who > span {
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+  line-height: 1.3;
+}
+
+.tm-more { text-align: center; margin-top: var(--sp-8); }
+
+@media (min-width: 768px) {
+  .tm-col--2 { display: block; }
+}
+@media (min-width: 1024px) {
+  .tm-col--3 { display: block; }
+  .tm-marquee.is-live { max-height: 40rem; }
+}
+
+/* ==========================================================================
    FAQ (accordion)
    ========================================================================== */
 .faq-layout {
@@ -1578,6 +1807,9 @@ summary:focus-visible {
   display: grid;
   grid-template-columns: 1fr 1.2fr;
   gap: var(--sp-12);
+  /* the info column is much shorter than the form; centring it stops the
+     bottom-left of the section reading as dead space */
+  align-items: center;
 }
 .contact-info h2 { color: var(--ink); font-size: var(--fs-3xl); }
 .contact-info > p { margin-top: var(--sp-4); color: var(--text-muted); font-size: var(--fs-lg); max-width: 440px; }
@@ -1832,7 +2064,7 @@ summary:focus-visible {
   margin-top: var(--sp-10);
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: var(--sp-8) var(--sp-6);
+  gap: var(--sp-6);
 }
 .work-grid--3col { grid-template-columns: repeat(3, 1fr); }
 .work-item {
@@ -1981,8 +2213,8 @@ summary:focus-visible {
   content: "";
   position: absolute;
   inset: 0;
-  background-image: linear-gradient(rgba(245,243,238,0.12) 1px, transparent 1px), linear-gradient(90deg, rgba(245,243,238,0.12) 1px, transparent 1px);
-  background-size: 64px 64px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.055 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"), radial-gradient(rgba(245,249,251,0.26) 1.1px, transparent 1.3px);
+  background-size: 160px 160px, 24px 24px;
   mask-image: radial-gradient(ellipse 70% 70% at 50% 40%, black, transparent);
   z-index: 0;
 }
@@ -2190,6 +2422,274 @@ summary:focus-visible {
   max-width: 72ch;
   line-height: 1.6;
 }
+
+/* ==========================================================================
+   PLAN COMPARISON TABLE — packages page: one row per feature, one column per
+   plan, so the differences read at a glance instead of three stacked cards
+   ========================================================================== */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.plan-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: #fff;
+  box-shadow: 0 10px 30px rgba(17, 21, 28, 0.05);
+  scroll-behavior: smooth;
+}
+/* while a column is still off screen, fade the trailing edge so it is obvious
+   there is more to swipe (script.js toggles .has-more) */
+.plan-table-wrap.has-more {
+  -webkit-mask-image: linear-gradient(to right, #000 86%, rgba(0, 0, 0, 0.25));
+  mask-image: linear-gradient(to right, #000 86%, rgba(0, 0, 0, 0.25));
+}
+.plan-table {
+  width: 100%;
+  min-width: 760px;
+  border-collapse: collapse;
+  text-align: center;
+}
+.plan-table th,
+.plan-table td {
+  padding: var(--sp-4) var(--sp-5);
+  border-bottom: 1px solid var(--border);
+}
+.plan-table tbody tr:last-child th,
+.plan-table tbody tr:last-child td { border-bottom: 0; }
+/* hairline between plan columns, like a real spec sheet */
+.plan-table th + th,
+.plan-table td + td { border-left: 1px solid var(--border); }
+
+/* header row: plan name, price, call to action — sits on its own band so it
+   reads as the header of the sheet, not just another row */
+.plan-table thead th {
+  vertical-align: top;
+  padding: var(--sp-6) var(--sp-5);
+  border-bottom: 1px solid var(--border);
+  background: color-mix(in srgb, var(--ink) 5%, #fff);
+}
+/* the corner cell carries a line of copy so it reads as a proper panel rather
+   than a label floating in an empty box */
+.plan-corner {
+  text-align: left;
+  vertical-align: middle !important;
+  width: 30%;
+}
+.plan-corner-title {
+  display: block;
+  font-family: var(--font-display);
+  font-size: var(--fs-xl);
+  font-weight: 800;
+  line-height: 1.15;
+  color: var(--ink);
+}
+.plan-corner-note {
+  display: block;
+  margin-top: var(--sp-3);
+  max-width: 24ch;
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+.plan-head { position: relative; }
+.plan-name {
+  display: block;
+  font-family: var(--font-display);
+  font-size: var(--fs-lg);
+  font-weight: 800;
+  color: var(--ink);
+}
+.plan-price {
+  display: block;
+  margin-top: 2px;
+  font-size: var(--fs-base);
+  font-weight: 700;
+  color: var(--ink);
+}
+.plan-price em {
+  font-style: normal;
+  font-weight: 500;
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+}
+.plan-cta { width: 100%; margin-top: var(--sp-4); }
+
+/* body rows */
+.plan-table th[scope="row"] {
+  text-align: left;
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--ink);
+}
+.plan-table td {
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--text);
+}
+.plan-soft { color: var(--text-muted); font-size: var(--fs-xs); font-weight: 500; }
+/* plain drawn check, like a spec sheet — no filled badge */
+.plan-tick {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  position: relative;
+}
+.plan-tick::after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 1px;
+  width: 6px;
+  height: 12px;
+  border: solid var(--gold);
+  border-width: 0 2.5px 2.5px 0;
+  border-radius: 1px;
+  transform: rotate(45deg);
+}
+.plan-dash { color: var(--text-muted); }
+
+/* The recommended column keeps a teal-leaning tint of its own — deliberately
+   not --paper-dim, so it never matches the tinted section behind the card. */
+.plan-table .is-featured { background: color-mix(in srgb, var(--gold-light) 14%, #fff); }
+.plan-table thead th.is-featured {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--gold-light) 26%, #fff), color-mix(in srgb, var(--gold-light) 14%, #fff));
+}
+.plan-table tbody tr:hover th[scope="row"],
+.plan-table tbody tr:hover td { background: color-mix(in srgb, var(--paper-dim) 45%, #fff); }
+.plan-table tbody tr:hover td.is-featured { background: color-mix(in srgb, var(--gold-light) 20%, #fff); }
+
+/* the feature column stays put while the plans scroll sideways */
+.plan-corner,
+.plan-table th[scope="row"] {
+  position: sticky;
+  left: 0;
+  z-index: 2;
+}
+.plan-table th[scope="row"] { background: #fff; }
+
+/* ---- modern pass: sticky plan headers, column focus, entrance motion ------ */
+
+/* Desktop: the table fits, so the wrapper stops being a scrollport and the plan
+   row can pin under the site header while you read down a long spec sheet. */
+@media (min-width: 901px) {
+  .plan-table-wrap { overflow: visible; }
+  .plan-table thead th {
+    position: sticky;
+    top: 84px; /* clears the scrolled site header with room to spare */
+    z-index: 3;
+    box-shadow: inset 0 -1px 0 var(--border);
+  }
+  .plan-table thead th.plan-head { background: color-mix(in srgb, var(--ink) 5%, #fff); }
+  .plan-table thead th.plan-head.is-featured {
+    background: linear-gradient(180deg, color-mix(in srgb, var(--gold-light) 26%, #fff), color-mix(in srgb, var(--gold-light) 14%, #fff));
+  }
+}
+
+/* Hovering anywhere in a column lifts that whole column — pure CSS, no JS */
+@supports selector(:has(*)) {
+  .plan-table tbody tr:hover td { transition: background 160ms var(--ease); }
+  .plan-table:has(tbody td:nth-child(2):hover) tbody td:nth-child(2),
+  .plan-table:has(tbody td:nth-child(3):hover) tbody td:nth-child(3),
+  .plan-table:has(tbody td:nth-child(4):hover) tbody td:nth-child(4) {
+    background: color-mix(in srgb, var(--gold-light) 9%, #fff);
+  }
+  .plan-table:has(tbody td:nth-child(2):hover) tbody td:nth-child(2).is-featured,
+  .plan-table:has(tbody td:nth-child(3):hover) tbody td:nth-child(3).is-featured,
+  .plan-table:has(tbody td:nth-child(4):hover) tbody td:nth-child(4).is-featured {
+    background: color-mix(in srgb, var(--gold-light) 16%, var(--paper-dim));
+  }
+}
+
+/* Row hover gets a coral edge rather than a flat wash */
+.plan-table tbody tr:hover th[scope="row"] {
+  box-shadow: inset 3px 0 0 var(--gold);
+}
+
+/* Rows rise as the table scrolls into view and fade out as they slide up under
+   the pinned plan header, instead of being cut off by it. No JS, no jank. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .plan-table tbody tr {
+      animation: plan-row-rise linear both, plan-row-dim linear both;
+      /* the second timeline's scrollport is inset by the pinned header height,
+         so "exit" starts as the row reaches the header rather than the screen */
+      animation-timeline: view(), view(block 150px auto);
+      animation-range: entry 0% entry 42%, exit 0% exit 85%;
+    }
+    @keyframes plan-row-rise {
+      from { transform: translateY(14px); }
+    }
+    @keyframes plan-row-dim {
+      to { opacity: 0.06; }
+    }
+  }
+}
+
+/* Ticks settle in rather than appearing flat */
+@media (prefers-reduced-motion: no-preference) {
+  .plan-tick::after { transition: transform 260ms var(--ease); }
+  .plan-table tbody tr:hover .plan-tick::after { transform: rotate(45deg) scale(1.15); }
+}
+
+/* Numbers line up like a spec sheet */
+.plan-table td,
+.plan-price { font-variant-numeric: tabular-nums; }
+.plan-name { letter-spacing: -0.015em; }
+
+.plan-cta:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--gold) 55%, #fff);
+  outline-offset: 3px;
+}
+
+.plan-scroll-hint {
+  display: none;
+  margin-top: var(--sp-3);
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+  text-align: center;
+}
+.plan-note {
+  margin-top: var(--sp-5);
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+  text-align: center;
+  max-width: 68ch;
+  margin-inline: auto;
+  line-height: 1.6;
+}
+
+/* Full-bleed mobile tables were trialled 2026-07-31 and reverted — the boxed
+   card reads better on a phone. */
+@media (max-width: 900px) {
+  .plan-scroll-hint { display: block; }
+  /* each plan lands squarely instead of stopping half way */
+  .plan-table-wrap { scroll-snap-type: x proximity; }
+  .plan-table thead th,
+  .plan-table tbody td { scroll-snap-align: end; }
+  .plan-table {
+    min-width: 600px;
+    table-layout: fixed;
+  }
+  .plan-table th,
+  .plan-table td { padding: var(--sp-3); }
+  /* keep the sticky label column narrow enough to leave room for the plans */
+  .plan-corner,
+  .plan-table th[scope="row"] { width: 150px; font-size: var(--fs-xs); }
+  .plan-corner { font-size: var(--fs-base); }
+  .plan-name { font-size: var(--fs-base); }
+  .plan-price { font-size: var(--fs-sm); }
+  .plan-cta { padding-inline: 0.5rem; }
+}
 .pricing-teaser-cta {
   margin-top: var(--sp-10);
   text-align: center;
@@ -2379,8 +2879,8 @@ summary:focus-visible {
   content: "";
   position: absolute;
   inset: 0;
-  background-image: linear-gradient(rgba(245,243,238,0.12) 1px, transparent 1px), linear-gradient(90deg, rgba(245,243,238,0.12) 1px, transparent 1px);
-  background-size: 64px 64px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.055 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"), radial-gradient(rgba(245,249,251,0.26) 1.1px, transparent 1.3px);
+  background-size: 160px 160px, 24px 24px;
   mask-image: radial-gradient(ellipse 70% 70% at 50% 40%, black, transparent);
   z-index: 0;
   pointer-events: none;
@@ -2496,6 +2996,14 @@ summary:focus-visible {
 }
 .whatsapp-float svg { width: 30px; height: 30px; }
 .whatsapp-float:hover { transform: scale(1.08); }
+/* tucks away once the footer bar is on screen so it never sits on the
+   copyright line (script.js toggles this) */
+.whatsapp-float.is-tucked {
+  opacity: 0;
+  transform: scale(0.8);
+  pointer-events: none;
+}
+.whatsapp-float { transition: transform var(--transition), opacity 300ms var(--ease); }
 
 /* ==========================================================================
    RESPONSIVE
@@ -2564,11 +3072,32 @@ summary:focus-visible {
   .hero-actions .btn,
   .hero-actions .hero-badge { flex: 1 1 0; min-width: 0; }
 
+  /* Phones: lift the hero block up the screen and hold the headline to three
+     lines instead of four (Edgar, 2026-07-29) */
+  .hero-inner { padding-top: 0.5rem; padding-bottom: 2.25rem; }
+  .hero .container { padding-inline: var(--sp-3); }
+  /* Big display type on phones: each half of the headline breaks over two lines
+     (four in total), which reads better than three squeezed ones */
+  .hero .hero-heading-line { font-size: clamp(2.5rem, 13.5vw, 4rem); line-height: 1.06; }
+  /* only the half carrying "to grow / your business" keeps extra leading, so the
+     swoosh can hang under "grow" without touching the line beneath it */
+  .hero .hero-heading-line:last-child { line-height: 1.34; }
+  .hero .hero-heading { gap: 0; }
+  .hero .grow-swoosh { bottom: -0.04em; height: 0.2em; }
+  .hero-inner .hero-lead { margin-top: 2rem; font-size: 1.1rem; max-width: 23rem; }
+  .hero-inner .hero-actions { margin-top: 2.6rem; }
+  /* full screen on landing — dvh follows the browser chrome so no strip of the
+     next section peeks in at the bottom */
+  .hero { min-height: 100vh; min-height: 100dvh; }
+
+  /* Footer bar: tagline is desktop-only, copyright fills the width */
+  .footer-tagline { display: none; }
+  /* copyright scales to fill the width of the bar without wrapping */
+  .footer-bottom { font-size: clamp(0.9rem, 4.4vw, 1.15rem); }
+
   .whatsapp-float { width: 52px; height: 52px; bottom: var(--sp-4); right: var(--sp-4); }
   .whatsapp-float svg { width: 26px; height: 26px; }
 
-  .footer-credit { display: none; }
-  .footer-tagline { display: none; }
 
   /* MSF mobile */
   .msf { padding: var(--sp-6); }
@@ -2583,12 +3112,16 @@ summary:focus-visible {
 .msf {
   background: var(--ink);
   color: var(--text-inverse);
-  border-radius: var(--radius-lg);
-  padding: var(--sp-10);
+  border-radius: var(--radius-md);
+  padding: clamp(1.5rem, 1rem + 1.6vw, 2.25rem);
   display: flex;
   flex-direction: column;
-  gap: var(--sp-8);
+  gap: var(--sp-5);
 }
+/* the flex gap owns the spacing between these; their own margins were
+   stacking on top of it and doubling every gap in the form */
+.msf > .btn,
+.msf > p { margin-bottom: 0; }
 
 /* Step indicator */
 .msf-steps {
@@ -2603,8 +3136,8 @@ summary:focus-visible {
   gap: var(--sp-2);
 }
 .msf-step-dot {
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   border: 2px solid rgba(255,255,255,0.2);
   display: flex;
@@ -2659,7 +3192,7 @@ summary:focus-visible {
 }
 .msf-sub {
   color: rgba(255,255,255,0.55);
-  margin-bottom: var(--sp-6);
+  margin-bottom: var(--sp-4);
   font-size: var(--fs-sm);
 }
 
@@ -2668,15 +3201,17 @@ summary:focus-visible {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: var(--sp-3);
-  margin-bottom: var(--sp-4);
+  margin-bottom: var(--sp-3);
 }
+/* the error line reserved its height on every step even when empty */
+.msf-error:empty { display: none; margin: 0; }
 .msf-service-card {
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: var(--sp-2);
-  padding: var(--sp-5) var(--sp-3);
+  padding: var(--sp-4) var(--sp-3);
   border: 1.5px solid rgba(255,255,255,0.12);
   border-radius: var(--radius-sm);
   cursor: pointer;
@@ -2891,7 +3426,7 @@ summary:focus-visible {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: var(--sp-6);
+  margin-top: var(--sp-5);
   gap: var(--sp-3);
 }
 .msf-nav .btn .material-symbols-outlined {
@@ -2899,9 +3434,10 @@ summary:focus-visible {
   vertical-align: middle;
 }
 .btn--ghost {
-  background: transparent;
-  border: 1.5px solid rgba(255,255,255,0.2);
-  color: rgba(255,255,255,0.7);
+  background: #fff;
+  border: none;
+  color: var(--ink);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.18);
   padding: var(--sp-3) var(--sp-5);
   border-radius: var(--radius-pill);
   font-family: inherit;
@@ -2996,11 +3532,1028 @@ summary:focus-visible {
   .contact-info > p { font-size: var(--fs-base); }
 }
 
-/* Wider dashboard card on small phones — placed last to win the cascade */
+/* Dashboard card on small phones — placed last to win the cascade.
+   The About container keeps the standard .container gutter so its left/right
+   spacing matches every other section (Edgar, 2026-07-29). */
 @media (max-width: 480px) {
-  #about .container { padding: 0 var(--sp-3); }
   .av3-panel { padding: 0; }
   .dcard { padding: var(--sp-4); }
   .dstats { grid-template-columns: repeat(3, 1fr); gap: 6px; }
   .dstat { padding: var(--sp-2); }
+}
+
+/* ==========================================================================
+   2030 PASS, WAVE 1 — cross-page transitions, depth, selection, focus
+   All additive: guarded by @supports / prefers-reduced-motion, no layout shifts
+   ========================================================================== */
+
+/* Soft cross-fade when navigating between pages. Browsers without support
+   simply navigate as before. */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition { navigation: auto; }
+  ::view-transition-old(root) { animation-duration: 180ms; }
+  ::view-transition-new(root) { animation-duration: 220ms; }
+}
+
+/* Brand text selection */
+::selection { background: var(--gold); color: #fff; }
+
+/* Visible keyboard focus on every button, not just the plan CTAs */
+.btn:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--gold) 55%, #fff);
+  outline-offset: 3px;
+}
+
+/* Hero depth: the circuit canvas sinks slightly as you scroll away, so the
+   dot field, mesh and headline separate into layers */
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    #hero-net {
+      animation: hero-net-sink linear both;
+      animation-timeline: scroll();
+      animation-range: 0 700px;
+    }
+    @keyframes hero-net-sink {
+      to { transform: translateY(52px); }
+    }
+  }
+}
+
+/* Quote band: words cascade in (script.js wraps them; without JS the plain
+   text renders untouched) */
+.quote-split .qword {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(0.45em);
+  transition: opacity 600ms var(--ease) var(--qd, 0ms), transform 600ms var(--ease) var(--qd, 0ms);
+}
+.quote-split.is-qon .qword { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .quote-split .qword { opacity: 1; transform: none; transition: none; }
+}
+
+/* ==========================================================================
+   2030 PASS, WAVE 2 — visible layer: pathway timeline, endcap, progress bar,
+   bigger display type, button sheen, industry hovers
+   ========================================================================== */
+
+/* Section headings step up a class: bigger, tighter, balanced */
+.section-head h2 {
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  text-wrap: balance;
+}
+
+/* Reading progress bar: thin coral line across the very top of every page */
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light));
+      transform-origin: left;
+      transform: scaleX(0);
+      z-index: 300;
+      animation: page-progress linear both;
+      animation-timeline: scroll();
+      pointer-events: none;
+    }
+    @keyframes page-progress { to { transform: scaleX(1); } }
+  }
+}
+
+/* --- PATHWAY: the process as a timeline that draws itself ------------------ */
+.pathway { position: relative; max-width: 860px; }
+.pathway-steps { list-style: none; margin: 0; padding: 0; }
+.pathway-line {
+  position: absolute;
+  left: 11px; top: 14px; bottom: 44px;
+  width: 2px;
+  background: var(--border);
+  border-radius: 2px;
+}
+.pathway-line-fill {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, var(--gold), var(--gold-light));
+  transform-origin: top;
+  border-radius: 2px;
+}
+.pathway-step {
+  position: relative;
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  padding: var(--sp-8) 0;
+}
+.pathway-step:first-child { padding-top: 0; }
+.pathway-dot {
+  width: 24px;
+  height: 24px;
+  margin-top: 8px;
+  border-radius: 50%;
+  border: 2px solid var(--gold);
+  background: var(--gold);
+  box-shadow: 0 0 0 6px color-mix(in srgb, var(--gold) 14%, transparent);
+}
+.pathway-step:first-child .pathway-dot { margin-top: 14px; }
+.pathway-body h3 {
+  font-family: var(--font-display);
+  font-size: var(--fs-2xl);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+.pathway-body p {
+  margin-top: var(--sp-3);
+  color: var(--text-muted);
+  max-width: 54ch;
+  line-height: 1.7;
+}
+
+/* scroll-driven: the line draws and each dot ignites as it enters the screen */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .pathway-line-fill {
+      animation: pathway-draw linear both;
+      animation-timeline: view();
+      animation-range: entry 25% exit 80%;
+    }
+    @keyframes pathway-draw { from { transform: scaleY(0); } }
+
+    .pathway-dot {
+      animation: pathway-ignite linear both;
+      animation-timeline: view();
+      animation-range: entry 30% entry 55%;
+    }
+    @keyframes pathway-ignite {
+      from {
+        background: var(--paper);
+        border-color: var(--border);
+        box-shadow: 0 0 0 0 transparent;
+      }
+    }
+  }
+}
+
+@media (max-width: 620px) {
+  .pathway-step { grid-template-columns: 44px 1fr; padding: var(--sp-6) 0; }
+  .pathway-line { left: 10px; }
+  .pathway-dot { width: 22px; height: 22px; }
+}
+
+/* --- ENDCAP v5: coral brand band (Edgar's pick from three comps) ----------- */
+.endcap {
+  position: relative;
+  overflow: hidden;
+  background: var(--gold);
+  color: #fff;
+  padding: clamp(3.5rem, 2.3rem + 3.9vw, 6.25rem) 0;
+  text-align: center;
+}
+.endcap::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.22) 1.1px, transparent 1.3px);
+  background-size: 26px 26px;
+  mask-image: radial-gradient(ellipse 70% 75% at 50% 50%, black, transparent);
+  pointer-events: none;
+}
+.endcap .container { position: relative; z-index: 1; }
+.endcap-kicker {
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.82);
+}
+.endcap-title {
+  margin-top: var(--sp-4);
+  font-size: clamp(2.3rem, 1.5rem + 3.2vw, 4rem);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: #fff;
+  max-width: 20ch;
+  margin-inline: auto;
+}
+.endcap-sub {
+  margin-top: var(--sp-5);
+  color: rgba(255, 255, 255, 0.88);
+  font-size: var(--fs-lg);
+  max-width: 52ch;
+  margin-inline: auto;
+}
+.endcap-actions {
+  margin-top: var(--sp-8);
+  display: flex;
+  gap: var(--sp-3);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+/* on coral, the ink button is the loud one and white is the quiet one */
+.endcap .btn--ink { background: var(--ink); color: #fff; }
+.endcap .btn--ink:hover { background: #1a1a1a; }
+@media (max-width: 620px) {
+  .endcap-actions .btn { width: 100%; }
+}
+
+/* --- Primary buttons: light sweep on hover ---------------------------------- */
+@media (prefers-reduced-motion: no-preference) {
+  .btn--primary,
+  .btn--accent {
+    background-image: linear-gradient(105deg, transparent 42%, rgba(255, 255, 255, 0.32) 50%, transparent 58%);
+    background-size: 240% 100%;
+    background-position: 190% 0;
+    background-repeat: no-repeat;
+    transition: transform var(--transition), background-color var(--transition), color var(--transition), border-color var(--transition), box-shadow var(--transition), background-position 900ms var(--ease);
+  }
+  .btn--primary:hover,
+  .btn--accent:hover { background-position: -90% 0; }
+}
+
+/* --- Industry cards: alive on hover ------------------------------------------ */
+.industry-card {
+  transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+}
+.industry-card:hover {
+  transform: translateY(-5px);
+  border-color: color-mix(in srgb, var(--gold) 38%, var(--border));
+  box-shadow: 0 14px 34px rgba(17, 21, 28, 0.1);
+}
+
+/* ==========================================================================
+   2030 PASS, WAVE 3 (revised after Edgar review)
+   ========================================================================== */
+
+/* Process: intro pinned on the left, timeline running on the right */
+.process-split {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: var(--sp-12);
+  align-items: start;
+}
+.process-split .section-head { margin-bottom: 0; }
+.process-split .process-intro {
+  position: sticky;
+  top: 130px;
+}
+.process-split .pathway { max-width: none; }
+@media (max-width: 900px) {
+  .process-split { grid-template-columns: 1fr; gap: var(--sp-8); }
+  .process-split .process-intro { position: static; }
+}
+
+/* Industries marquee: the old motion with new manners — fades at the screen
+   edges, pauses under the cursor, cards lift (hover styles in wave 2) */
+.industries-row {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+}
+@media (prefers-reduced-motion: reduce) {
+  .industries-track { animation: none; flex-wrap: wrap; width: auto; justify-content: center; }
+  .industries-track .industry-card[aria-hidden="true"] { display: none; }
+}
+
+/* ==========================================================================
+   CLIENT LOGO STRIP — real launches sliding quietly under the hero, every
+   mark reduced to the same ink silhouette
+   ========================================================================== */
+.logo-strip {
+  overflow: hidden;
+  margin-bottom: var(--sp-16);
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
+}
+.logo-strip-track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  animation: industries-scroll 38s linear infinite;
+}
+.logo-strip-track img {
+  height: 34px;
+  width: auto;
+  margin-right: clamp(3rem, 6vw, 5.5rem);
+  filter: brightness(0);
+  opacity: 0.45;
+  transition: opacity var(--transition);
+}
+.logo-strip-track img:hover { opacity: 0.85; }
+@media (max-width: 620px) {
+  .logo-strip-track img { height: 26px; margin-right: 2.2rem; }
+  .logo-strip { margin-bottom: var(--sp-10); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .logo-strip-track { animation: none; flex-wrap: wrap; width: auto; justify-content: center; gap: var(--sp-6); }
+  .logo-strip-track img[aria-hidden="true"] { display: none; }
+}
+
+/* --- logo strip in the hero: white marks, mixed weights, content lifted ----- */
+.logo-strip--hero {
+  position: absolute;
+  left: 0; right: 0;
+  bottom: clamp(1.2rem, 3.2vh, 2.6rem);
+  margin-bottom: 0;
+  z-index: 2;
+}
+.logo-strip--hero img {
+  filter: brightness(0) invert(1);
+  opacity: 0.55;
+}
+.logo-strip--hero img:hover { opacity: 0.95; }
+/* mixed sizes so square marks and wide wordmarks carry the same weight */
+/* one height for every mark — strict consistency (Edgar, 2026-08-04) */
+.logo-strip img.l-xl,
+.logo-strip img.l-lg,
+.logo-strip img.l-md,
+.logo-strip img.l-sm { height: 42px; }
+@media (max-width: 620px) {
+  .logo-strip img.l-xl,
+  .logo-strip img.l-lg,
+  .logo-strip img.l-md,
+  .logo-strip img.l-sm { height: 26px; }
+  .logo-strip--hero { bottom: 2.4rem; }
+}
+
+/* ==========================================================================
+   CLIENT DIAL — one client in the spotlight between two rulers; the ticks
+   slide like a scale when it turns
+   ========================================================================== */
+.dial { max-width: 880px; margin-inline: auto; text-align: center; }
+.dial-rule {
+  position: relative;
+  height: 30px;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+}
+.dial-rule::before,
+.dial-rule::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-repeat: repeat-x;
+  transition: background-position 550ms var(--ease);
+  background-position-x: var(--dial-shift, 0px);
+}
+/* minor ticks */
+.dial-rule::before {
+  background-image: repeating-linear-gradient(90deg, color-mix(in srgb, var(--ink) 55%, transparent) 0 2px, transparent 2px 11px);
+  top: 25%; bottom: 25%;
+}
+/* major ticks every fifth */
+.dial-rule::after {
+  background-image: repeating-linear-gradient(90deg, var(--ink) 0 2px, transparent 2px 55px);
+}
+.dial-marker {
+  position: absolute;
+  left: 50%;
+  top: -8px; bottom: -8px;
+  width: 3px;
+  transform: translateX(-50%);
+  background: var(--gold);
+  border-radius: 2px;
+  z-index: 1;
+}
+.dial-stage { padding: var(--sp-8) var(--sp-4); }
+.dial-name {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 1.2rem + 4vw, 3.9rem);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+  color: var(--ink);
+  transition: opacity 260ms var(--ease), transform 260ms var(--ease);
+}
+.dial-tag {
+  margin-top: var(--sp-3);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  transition: opacity 260ms var(--ease), transform 260ms var(--ease);
+}
+.dial.is-turning .dial-name,
+.dial.is-turning .dial-tag { opacity: 0; transform: translateY(10px); }
+.dial-nav {
+  margin-top: var(--sp-6);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-5);
+}
+.dial-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--ink);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background var(--transition), border-color var(--transition), color var(--transition), transform var(--transition);
+}
+.dial-btn .material-symbols-outlined { font-size: 20px; }
+.dial-btn:hover,
+.dial-btn:focus-visible {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: #fff;
+  transform: translateY(-2px);
+}
+.dial-count {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+  min-width: 3.2em;
+  font-variant-numeric: tabular-nums;
+}
+@media (prefers-reduced-motion: reduce) {
+  .dial-rule::before, .dial-rule::after { transition: none; }
+  .dial-name, .dial-tag { transition: none; }
+}
+
+/* dial, full-bleed industries version: rulers run the whole screen, the
+   neighbouring industries ghost in from the sides */
+.dial--wide { max-width: none; margin-inline: 0; }
+.dial--wide .dial-rule {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+}
+.dial--wide .dial-stage {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 7.5rem;
+}
+.dial--wide .dial-name {
+  font-size: clamp(2.2rem, 1.3rem + 4.6vw, 5rem);
+}
+.dial-side {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(1.1rem, 0.8rem + 1.4vw, 1.8rem);
+  letter-spacing: -0.01em;
+  color: color-mix(in srgb, var(--ink) 22%, transparent);
+  white-space: nowrap;
+  transition: opacity 260ms var(--ease);
+}
+[data-dial-side-prev] { left: clamp(1rem, 5vw, 6rem); }
+[data-dial-side-next] { right: clamp(1rem, 5vw, 6rem); }
+.dial.is-turning .dial-side { opacity: 0; }
+@media (max-width: 900px) {
+  .dial-side { display: none; }
+}
+
+/* ==========================================================================
+   INDUSTRY ROWS — flat editorial list, Edgar's pick (2026-08-03)
+   ========================================================================== */
+.ind-rows {
+  list-style: none;
+  margin: 0 auto;
+  max-width: 1000px;
+  columns: 2;
+  column-gap: var(--sp-12);
+  padding: 0;
+}
+.ind-rows li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  padding: var(--sp-5) 0;
+  border-bottom: 1px solid var(--border);
+  break-inside: avoid;
+}
+.ind-rows .nm {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--fs-xl);
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  transition: transform 300ms var(--ease), color 300ms var(--ease);
+}
+.ind-rows .material-symbols-outlined {
+  color: var(--gold);
+  font-size: 22px;
+  transition: transform 300ms var(--ease);
+}
+.ind-rows li:hover .nm { transform: translateX(12px); color: var(--gold); }
+.ind-rows li:hover .material-symbols-outlined { transform: translateX(-4px); }
+@media (max-width: 720px) {
+  .ind-rows { columns: 1; }
+  .ind-rows li { padding: var(--sp-4) 0; }
+}
+
+/* ==========================================================================
+   QUOTE SCRUB — the band pins while the statement lights up word by word
+   under your scroll (script.js drives .lit; without JS the text just shows)
+   ========================================================================== */
+.quote-band--scrub .container { position: relative; }
+.quote-band--scrub.quote-ready .qword {
+  opacity: 0.16;
+  transition: opacity 240ms var(--ease);
+}
+.quote-band--scrub.quote-ready .qword.lit { opacity: 1; }
+.quote-band--scrub.quote-ready cite {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 500ms var(--ease), transform 500ms var(--ease);
+}
+.quote-band--scrub.quote-ready.quote-done cite {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .quote-band--scrub .qword, .quote-band--scrub cite { opacity: 1 !important; transform: none !important; transition: none !important; }
+}
+.dial-btn:disabled {
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   FINANEX-INSPIRED PLUSH PASS — depth on the primary buttons, glow on the
+   pathway dots. Brand palette untouched: their navy and purple stay theirs.
+   ========================================================================== */
+.btn--primary {
+  background-image:
+    linear-gradient(135deg, color-mix(in srgb, var(--gold) 82%, #fff) 0%, var(--gold) 45%, color-mix(in srgb, var(--gold) 82%, var(--ink)) 100%);
+  box-shadow: 0 10px 26px color-mix(in srgb, var(--gold) 26%, transparent);
+}
+.btn--primary:hover {
+  box-shadow: 0 16px 38px color-mix(in srgb, var(--gold) 38%, transparent);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .btn--primary {
+    background-image:
+      linear-gradient(105deg, transparent 42%, rgba(255, 255, 255, 0.32) 50%, transparent 58%),
+      linear-gradient(135deg, color-mix(in srgb, var(--gold) 82%, #fff) 0%, var(--gold) 45%, color-mix(in srgb, var(--gold) 82%, var(--ink)) 100%);
+    background-size: 240% 100%, 100% 100%;
+    background-position: 190% 0, 0 0;
+    background-repeat: no-repeat;
+  }
+  .btn--primary:hover { background-position: -90% 0, 0 0; }
+}
+
+/* pathway dots pick up the coral-to-teal energy of the line they sit on */
+.pathway-dot {
+  background: var(--gold);
+  border-color: transparent;
+  box-shadow: 0 0 0 5px color-mix(in srgb, var(--gold) 12%, transparent);
+}
+
+/* ==========================================================================
+   PATHWAY v2 — finanex-style step cards on the drawn line, Edweb colours
+   ========================================================================== */
+.pathway-dot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--fs-xs);
+}
+.pathway-line { left: 14px; }
+.pathway-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--sp-6);
+  box-shadow: var(--shadow-md);
+}
+.step-pill {
+  display: inline-flex;
+  padding: 0.32rem 0.85rem;
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--gold) 10%, #fff);
+  color: var(--gold);
+  font-size: var(--fs-xs);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: var(--sp-3);
+}
+.pathway-card h3 { margin-top: 0; }
+.process-cta { margin-top: var(--sp-6); }
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    @keyframes pathway-ignite {
+      from {
+        background: var(--paper);
+        border-color: var(--border);
+        color: transparent;
+        box-shadow: 0 0 0 0 transparent;
+      }
+    }
+  }
+}
+@media (max-width: 620px) {
+  .pathway-card { padding: var(--sp-5); }
+  .pathway-dot { width: 26px; height: 26px; }
+  .pathway-line { left: 12px; }
+}
+
+/* pathway cards: tighter (Edgar 2026-08-03) */
+.pathway-card { padding: var(--sp-5) var(--sp-6); }
+.pathway-card h3 { font-size: var(--fs-xl); }
+.pathway-body p { margin-top: var(--sp-2); font-size: var(--fs-sm); max-width: 58ch; }
+.pathway-step { padding: var(--sp-6) 0; }
+
+/* quote band: big statement type so the band carries weight without the
+   full-screen pin */
+.quote-band--scrub { padding: clamp(3.5rem, 2.3rem + 3.9vw, 6.25rem) 0; }
+.quote-band--scrub blockquote {
+  font-size: clamp(1.8rem, 1.1rem + 3vw, 3.6rem);
+  line-height: 1.22;
+  letter-spacing: -0.02em;
+  max-width: 26ch;
+  margin-inline: auto;
+}
+.quote-band--scrub cite { margin-top: var(--sp-6); display: inline-block; }
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .quote-band--scrub blockquote {
+      animation: quote-swell linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 90%;
+    }
+    @keyframes quote-swell {
+      from { transform: scale(0.94); opacity: 0.7; }
+    }
+  }
+}
+
+/* ==========================================================================
+   PRICING CARDS v5 — the clean component Edgar picked: white card, name up
+   top, big price, ink button, flat feature list with circled checks
+   ========================================================================== */
+.pcard {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--sp-6);
+  box-shadow: var(--shadow-md);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.pcard:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+.pcard-name {
+  font-size: var(--fs-base);
+  font-weight: 700;
+  color: var(--ink);
+}
+.pcard-price {
+  margin-top: var(--sp-4);
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 1.5rem + 1vw, 2.4rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.pcard-price span {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0;
+}
+.pcard-desc {
+  margin-top: var(--sp-3);
+  color: var(--text-muted);
+  font-size: var(--fs-sm);
+  line-height: 1.6;
+  min-height: 2.6em;
+}
+.pcard .btn { margin-top: var(--sp-5); width: 100%; }
+.btn--ink {
+  background: var(--ink);
+  color: #fff;
+}
+.btn--ink:hover {
+  background: var(--ink-soft);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(17, 21, 28, 0.22);
+}
+.pcard-feats { margin-top: var(--sp-6); flex-grow: 1; }
+.pcard-feats > p {
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: var(--sp-2);
+}
+.pcard-feats ul { list-style: none; margin: 0; padding: 0; }
+.pcard-feats li {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-2) 0;
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+}
+.pcard-check {
+  flex-shrink: 0;
+  font-size: 22px !important;
+  color: var(--ink);
+}
+@media (max-width: 1024px) {
+  .pricing-grid { grid-template-columns: 1fr; max-width: 480px; margin-inline: auto; }
+}
+
+/* solid white button — replaces every transparent/ghost button (Edgar rule:
+   no transparent buttons anywhere, 2026-08-04) */
+.btn--white {
+  background: #fff;
+  color: var(--ink);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.18);
+}
+.btn--white:hover {
+  background: #fff;
+  color: var(--gold);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.24);
+}
+
+/* ==========================================================================
+   CONSISTENCY PASS (2026-08-04) — one icon language, one head rhythm, one
+   card language across every section
+   ========================================================================== */
+
+/* section paragraphs share one measure everywhere */
+.section-head p { max-width: 56ch; }
+.section-head--center p { margin-inline: auto; }
+
+/* industry icons get the same soft-tinted circle as the rest of the site's
+   icon treatments, instead of floating glyphs */
+.ind-rows li .material-symbols-outlined {
+  width: 38px;
+  height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--gold) 9%, #fff);
+  font-size: 20px;
+  transition: background var(--transition), transform var(--transition), color var(--transition);
+}
+.ind-rows li:hover .material-symbols-outlined {
+  background: var(--gold);
+  color: #fff;
+  transform: translateX(-4px);
+}
+
+/* portfolio tiles: same rounding, softer lift */
+.laptop-mockup { border-radius: var(--radius-md); }
+
+/* testimonial cards join the same language */
+.tm-card { border-radius: var(--radius-md); }
+
+/* first section after the dark hero gets a touch more air, so the page opens
+   rather than starting cramped */
+.hero + .section { padding-top: clamp(3.9rem, 2.6rem + 4.2vw, 7rem); }
+
+/* ==========================================================================
+   TWO-TONE SECTION RHYTHM (2026-08-04) — the faded-white middle tone is gone.
+   Every band is either paper-white or ink-dark, in blocks, like the reference.
+   ========================================================================== */
+.section--ink {
+  position: relative;
+  /* clip, not hidden: `hidden` makes this a scroll container and the steps'
+     view() timeline would track this box instead of the page */
+  overflow: clip;
+  background: #1a1a1a;
+  color: var(--text-inverse-muted);
+}
+.section--ink::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(60% 50% at 88% 6%, rgba(224, 71, 76, 0.10), transparent 62%),
+    radial-gradient(55% 45% at 6% 96%, rgba(122, 207, 214, 0.08), transparent 62%),
+    linear-gradient(165deg, #1a1a1a 0%, #242424 55%, #1a1a1a 100%);
+  pointer-events: none;
+}
+.section--ink::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+    radial-gradient(rgba(245, 249, 251, 0.22) 1.1px, transparent 1.3px);
+  background-size: 160px 160px, 26px 26px;
+  mask-image: radial-gradient(ellipse 80% 75% at 50% 45%, black, transparent);
+  pointer-events: none;
+}
+.section--ink > * { position: relative; z-index: 1; }
+.section--ink h2,
+.section--ink h3 { color: var(--text-inverse); }
+.section--ink .section-head p,
+.section--ink .pathway-body p { color: var(--text-inverse-muted); }
+
+/* the drawn line reads against dark */
+.section--ink .pathway-line { background: rgba(245, 249, 251, 0.16); }
+
+/* white step cards on the dark band: the reference's exact move */
+.section--ink .pathway-card {
+  background: #fff;
+  border-color: transparent;
+  box-shadow: 0 26px 60px rgba(0, 0, 0, 0.4);
+}
+.section--ink .pathway-card h3 { color: var(--ink); }
+.section--ink .pathway-card p { color: var(--text-muted); }
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .section--ink .pathway-dot {
+      animation-name: pathway-ignite-dark;
+    }
+    @keyframes pathway-ignite-dark {
+      from {
+        background: rgba(245, 249, 251, 0.18);
+        color: transparent;
+        box-shadow: 0 0 0 0 transparent;
+      }
+    }
+  }
+}
+
+/* white cards sitting on an ink band keep their own ink typography — the
+   band's inverse colours must not leak inside them */
+.section--ink .pcard h3,
+.section--ink .pcard .pcard-name,
+.section--ink .pcard .pcard-price,
+.section--ink .pcard-feats > p,
+.section--ink .pathway-card h3 { color: var(--ink); }
+.section--ink .pcard-desc,
+.section--ink .pcard-feats li,
+.section--ink .pathway-card p { color: var(--text-muted); }
+.section--ink .pcard-price span { color: var(--text-muted); }
+.section--ink .pcard-check { color: var(--ink); }
+
+/* ---- dashboard card: interior scales with the wider desktop card ---- */
+@media (min-width: 1024px) {
+  .dcard { box-shadow: 0 1px 3px rgba(43,43,43,0.05), 0 24px 55px rgba(43,43,43,0.09); }
+  .dtabs { margin-bottom: var(--sp-4); }
+  .dtabs button { padding: var(--sp-2) var(--sp-3); }
+  .drevenue { padding: var(--sp-4); margin-bottom: var(--sp-3); }
+  .drevenue-top span:first-child { font-size: var(--fs-sm); }
+  .dstats { gap: var(--sp-3); }
+  .dstat { padding: var(--sp-3); }
+  .dstat p:first-child { margin-bottom: 3px; }
+  .danalytics-row { padding: var(--sp-3) 0; }
+  .dreport-box { padding: var(--sp-4); margin-bottom: var(--sp-3); }
+  .dfooter { margin-top: var(--sp-4); gap: var(--sp-3); }
+  .dbtn { padding: var(--sp-3) var(--sp-5); }
+}
+
+/* right column carries its weight next to the taller card */
+@media (min-width: 1024px) {
+  .about-copy p { margin-top: var(--sp-5); max-width: 46ch; }
+  .av3-checklist { margin-top: var(--sp-8); gap: var(--sp-5) var(--sp-6); }
+  .av3-checklist > div { font-size: var(--fs-base); gap: var(--sp-3); }
+  .av3-checklist .material-symbols-outlined { font-size: 24px; }
+}
+
+/* ---- process steps rise from below, tied to scroll position ---- */
+@keyframes pathway-rise {
+  from { opacity: 0; transform: translateY(72px) scale(0.965); }
+  to   { opacity: 1; transform: none; }
+}
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) and (min-width: 641px) {
+    .pathway-step {
+      animation: pathway-rise linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 32%;
+      will-change: transform, opacity;
+    }
+    /* the scroll timeline owns this motion, not the one-shot IO reveal */
+    .pathway-step.reveal { transition: none; }
+  }
+}
+
+/* ============================== SERVICES GRID ==============================
+   Six services shown at once instead of paged behind arrows. Card treatment
+   matches .pcard and .pathway-card so every card on the site reads the same. */
+.svc-grid {
+  margin-top: clamp(2.5rem, 1.8rem + 2.2vw, 3.75rem);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-6);
+}
+.svc-card {
+  display: flex;
+  flex-direction: column;
+  padding: var(--sp-6);
+  text-decoration: none;
+}
+.svc-card-icon {
+  width: 48px; height: 48px;
+  display: grid; place-items: center;
+  margin-bottom: var(--sp-4);
+  border-radius: var(--radius-sm);
+  background: var(--ink);
+  border: 1px solid var(--ink);
+  color: #fff;
+  transition: background var(--transition), border-color var(--transition);
+}
+/* the chip picks up brand colour when the card is engaged */
+.svc-card:hover .svc-card-icon,
+.svc-card:focus-visible .svc-card-icon {
+  background: var(--gold);
+  border-color: var(--gold);
+}
+.svc-card-icon .material-symbols-outlined { font-size: 24px; }
+.svc-card h3 {
+  font-family: var(--font-display);
+  font-size: var(--fs-xl);
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0;
+}
+.svc-card p {
+  margin: var(--sp-2) 0 0;
+  font-size: var(--fs-sm);
+  line-height: 1.65;
+  color: var(--text-muted);
+}
+.svc-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.svc-card:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+
+/* the intro sits on the dark band now */
+
+
+@media (max-width: 900px) {
+  .svc-grid { grid-template-columns: repeat(2, 1fr); gap: var(--sp-5); }
+}
+@media (max-width: 600px) {
+  .svc-grid { grid-template-columns: 1fr; }
+  .svc-card { padding: var(--sp-5); }
+}
+
+/* ==========================================================================
+   CARD SYSTEM (2026-08-04)
+   Every block on the site shares one treatment: white fill, hairline border,
+   20px radius, the same soft shadow. Before this the site carried seven
+   variants (radii of 10/20/30px, three shadow recipes, some cards fully
+   transparent), which is what made the blocks feel unrelated.
+   Flat rows (.faq-item) and pill controls (.plan-chooser-item) are deliberately
+   NOT cards and stay flat.
+   ========================================================================== */
+.pcard,
+.pathway-card,
+.svc-card,
+.tm-card,
+.dcard,
+.pf-card,
+.work-item-img,
+.team-portrait-wrap {
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-md);
+}
+.pcard,
+.pathway-card,
+.svc-card,
+.tm-card,
+.dcard,
+.pf-card { background: #fff; }
+
+/* the dashboard card keeps its own dark-preview fill when toggled */
+.dcard.dark { background: rgba(38, 38, 38, 0.94); border-color: #3a3a3a; }
+
+/* hover lift, one recipe */
+.pcard:hover,
+.svc-card:hover,
+.tm-card:hover,
+.pf-card:hover { box-shadow: var(--shadow-lg); }
+
+/* form choice cards sit on the dark panel: solid fill, never transparent,
+   same radius and border weight as every other card */
+.msf-service-card,
+.msf-radio-card,
+.msf-addon-card {
+  background: #242424;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: var(--radius-md);
+}
+.msf-service-card:hover,
+.msf-radio-card:hover,
+.msf-addon-card:hover { background: #2e2e2e; border-color: rgba(255, 255, 255, 0.28); }
+.msf-service-card:has(input:checked),
+.msf-radio-card:has(input:checked),
+.msf-addon-card:has(input:checked) {
+  background: color-mix(in srgb, var(--gold) 22%, #242424);
+  border-color: var(--gold);
 }

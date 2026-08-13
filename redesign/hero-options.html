@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex" />
+  <title>Hero dot pattern</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css?v=2026073011" />
+  <style>
+    .opt-label{max-width:1200px;margin:0 auto;padding:0 clamp(1.25rem,4vw,2.5rem)}
+    .opt-label span{display:inline-block;margin:2.5rem 0 -1rem;font-size:.8rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:#e0474c;padding:6px 14px;border-radius:999px;position:relative;z-index:5}
+    .demo-hero{position:relative;min-height:88vh;display:flex;align-items:center;background:var(--ink);color:var(--text-inverse);overflow:hidden}
+    .demo-hero-inner{position:relative;z-index:2;max-width:640px;padding:4rem clamp(1.25rem,4vw,2.5rem)}
+    .demo-hero h1{font-size:clamp(2.4rem,1.8rem+3vw,4rem);line-height:1.05;margin:0;color:var(--text-inverse)}
+    .demo-hero .accent{color:var(--gold-light)}
+    .demo-hero p{margin-top:1.25rem;color:var(--text-inverse-muted);font-size:1.15rem;max-width:44ch}
+    .demo-actions{margin-top:2rem;display:flex;gap:1rem;flex-wrap:wrap}
+
+    /* dot pattern hero: dark base + soft colour wash + light dot grid, faded at the edges */
+    .hero-dots::before{content:"";position:absolute;inset:0;z-index:0;
+      background:
+        radial-gradient(60% 50% at 12% 90%, rgba(122,207,214,.08), transparent 60%),
+        linear-gradient(160deg,#1a1a1a 0%,#2b2b2b 55%,#1a1a1a 100%)}
+    .hero-dots::after{content:"";position:absolute;inset:0;z-index:1;
+      background-image: radial-gradient(rgba(245,249,251,.35) 1.4px, transparent 1.6px);
+      background-size: 24px 24px;
+      mask-image: radial-gradient(ellipse 75% 70% at 50% 40%, black, transparent);
+      -webkit-mask-image: radial-gradient(ellipse 75% 70% at 50% 40%, black, transparent);
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header" id="site-header" style="position:static">
+    <div class="container nav" id="nav">
+      <a href="index.html" class="logo"><img class="logo-img logo-img--light" src="assets/edweb-logo-light.png" alt="Edweb Media"><img class="logo-img logo-img--dark" src="assets/edweb-logo-dark.png" alt="Edweb Media"></a>
+      <nav class="nav-links" aria-label="Primary"><a href="index.html">Home</a><a href="projects.html">Projects</a><a href="packages.html">Pricing</a><a href="pay.html">Payments</a><a href="contact.html">Contact</a></nav>
+      <div class="nav-cta"><a href="contact.html" class="btn btn--primary">Get In Touch</a></div>
+    </div>
+  </header>
+
+  <div class="opt-label"><span>Dot pattern &middot; dark background, light dots</span></div>
+  <section class="demo-hero hero-dots">
+    <div class="demo-hero-inner">
+      <h1>Websites <span class="accent">crafted</span><br>to grow your business</h1>
+      <p>We design and manage premium websites, then back them with marketing, branding and content.</p>
+      <div class="demo-actions"><a href="#" class="btn btn--primary">View Packages</a></div>
+    </div>
+  </section>
+
+</body>
+</html>

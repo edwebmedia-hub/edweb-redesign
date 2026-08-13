@@ -3,11 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Google Ads conversion tracking. 2026-07-23: replace AW-16948063813 with the
+       real Conversion ID from Google Ads (Tools > Conversions). Until then this
+       loader is a harmless no-op (gtag() calls just queue and go nowhere). -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16948063813"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-16948063813');
+  </script>
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   <title>Contact Edweb Media | Web Designer Cape Town</title>
-  <meta name="description" content="Get in touch with Edweb Media, Cape Town web designer and developer. Call, email or send a message — we'll get back to you within one business day." />
+  <meta name="description" content="Get in touch with Edweb Media, Cape Town web designer and developer. Call, email or send a message and we'll get back to you within one business day." />
   <link rel="canonical" href="https://edwebmedia.com/contact.html" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://edwebmedia.com/contact.html" />
@@ -25,7 +36,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=block" rel="stylesheet" />
 
-  <link rel="stylesheet" href="styles.css?v=20260758" />
+  <link rel="stylesheet" href="styles.css?v=2026073011" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -40,9 +51,9 @@
 
       <nav class="nav-links" aria-label="Primary">
         <a href="index.html">Home</a>
-        <a href="about-us.html">About Us</a>
         <a href="projects.html">Projects</a>
         <a href="packages.html">Pricing</a>
+        <a href="pay.html">Payments</a>
         <a href="contact.html">Contact</a>
       </nav>
 
@@ -110,6 +121,13 @@
         <!-- ====== MULTI-STEP CONTACT FORM ====== -->
         <div class="msf reveal" style="--reveal-delay:100ms" id="msf" role="region" aria-label="Contact form">
 
+          <!-- WhatsApp fast lane for mobile ad visitors: a message is as good a
+               lead as a form submit, so give the low-friction option first -->
+          <a class="btn btn--accent btn--block" href="https://wa.me/27846204583?text=Hi%20Edweb%2C%20I%27m%20looking%20for%20a%20website.%20Can%20we%20chat%3F" target="_blank" rel="noopener">
+            In a hurry? WhatsApp us now
+          </a>
+          <p style="text-align:center;margin:0;font-size:var(--fs-sm);color:var(--text-muted)">or fill in the form below</p>
+
           <!-- Step indicator -->
           <div class="msf-steps" aria-label="Form progress" role="list">
             <div class="msf-step is-active" data-step="1" role="listitem">
@@ -139,7 +157,7 @@
             <div class="msf-panel is-active" data-panel="1">
               <div class="eyebrow" style="margin-bottom:var(--sp-2)">Step 1 of 3</div>
               <h2 class="msf-title">What do you need?</h2>
-              <p class="msf-sub">Select everything that applies "" we'll tailor the right package for you.</p>
+              <p class="msf-sub">Select everything that applies and we'll tailor the right package for you.</p>
               <div class="msf-services" role="group" aria-label="Select services">
                 <label class="msf-service-card">
                   <input type="checkbox" name="services" value="Website Design" id="chk-webdesign" />
@@ -207,7 +225,7 @@
                   <input type="checkbox" name="addons" value="Hosting (R199/month)" id="chk-hosting" />
                   <span class="material-symbols-outlined" aria-hidden="true">dns</span>
                   <div>
-                    <span class="msf-addon-name">Hosting — R199/month</span>
+                    <span class="msf-addon-name">Hosting, R199/month</span>
                     <span class="msf-addon-desc">Website hosting and professional email</span>
                   </div>
                   <span class="msf-addon-check material-symbols-outlined" aria-hidden="true">check_circle</span>
@@ -216,7 +234,7 @@
                   <input type="checkbox" name="addons" value="Website Management" id="chk-management" />
                   <span class="material-symbols-outlined" aria-hidden="true">build</span>
                   <div>
-                    <span class="msf-addon-name">Management — from R199/month</span>
+                    <span class="msf-addon-name">Management, from R199/month</span>
                     <span class="msf-addon-desc">Updates, maintenance and 1 hour of monthly support</span>
                   </div>
                   <span class="msf-addon-check material-symbols-outlined" aria-hidden="true">check_circle</span>
@@ -465,10 +483,10 @@
         <h4>Important Links</h4>
         <ul>
           <li><a href="index.html">Home</a></li>
-          <li><a href="about-us.html">About</a></li>
           <li><a href="projects.html">Projects</a></li>
           <li><a href="packages.html">Pricing</a></li>
           <li><a href="contact.html">Contact</a></li>
+          <li><a href="pay.html">Payments</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -488,8 +506,8 @@
       </div>
     </div>
     <div class="container footer-bottom">
-      <span>© 2026 Edweb Media. <span class="footer-tagline">Designed for Success.</span> All rights reserved.</span>
-      <span class="footer-credit">Built with care in Cape Town.</span>
+      <span>© 2026 Edweb Media. All rights reserved.</span>
+      <span class="footer-tagline">Designed for Success.</span>
     </div>
   </footer>
 
@@ -497,7 +515,7 @@
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-1.2-.6-2-1-2.8-2.3-.2-.3 0-.5.2-.7.2-.2.4-.5.6-.7.1-.2.1-.4 0-.6-.1-.2-.6-1.5-.8-2-.1-.4-.3-.4-.5-.4h-.4c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.1s.9 2.5 1.1 2.7c.1.2 1.6 2.5 4 3.4 2 .8 2.4.7 2.8.6.4-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2 0-.1-.2-.2-.4-.3z"/></svg>
   </a>
 
-  <script src="script.js?v=20260758"></script>
+  <script src="script.js?v=2026073011"></script>
 </body>
 </html>
 

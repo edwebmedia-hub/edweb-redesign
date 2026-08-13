@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Edweb Media — redesign interactions
+   Edweb Media - redesign interactions
    - Header: switches to a solid/blurred background after scrolling past hero
    - Mobile nav: simple toggle
    - Scroll reveal: IntersectionObserver adds .is-visible to .reveal elements
@@ -7,6 +7,21 @@
    ========================================================================== */
 
 (() => {
+  // --- Google Ads conversion tracking -------------------------------------------
+  // Fires once, only after a form genuinely sends (json.success true), never on
+  // page load or a failed submit. Requires the gtag.js loader in <head> (added
+  // site-wide) PLUS the real ID below from Edgar's Google Ads account.
+  // 2026-07-23: edwebmedia.com Google Ads was running with zero conversion
+  // tracking — clicks were measured, leads were not. This closes that gap.
+  const GOOGLE_ADS_CONVERSION = {
+    id: 'AW-16948063813',        // "Submit lead form" conversion action, Edweb Media Google Ads
+    label: 'tpRLCIWp79QcEMXcu5E_',
+  };
+  function fireAdsConversion() {
+    if (typeof gtag !== 'function') return; // gtag.js blocked/not loaded - fail silent, never break the form
+    gtag('event', 'conversion', { send_to: `${GOOGLE_ADS_CONVERSION.id}/${GOOGLE_ADS_CONVERSION.label}` });
+  }
+
   // --- Sticky header background -------------------------------------------------
   const header = document.getElementById('site-header');
   const onScroll = () => {
@@ -43,6 +58,29 @@
     }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
 
     revealEls.forEach((el) => observer.observe(el));
+
+    // Never leave content invisible if the observer doesn't fire — e.g. a stalled
+    // scroll, an in-view element that never crosses the threshold, or an environment
+    // where scroll events don't reach the observer.
+    const revealInView = () => {
+      revealEls.forEach((el) => {
+        if (el.classList.contains('is-visible')) return;
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+          el.classList.add('is-visible');
+          observer.unobserve(el);
+        }
+      });
+    };
+    window.addEventListener('scroll', revealInView, { passive: true });
+    window.addEventListener('resize', revealInView, { passive: true });
+    revealInView();
+    // Safety sweep: guarantee nothing stays hidden even if scrolling never fires.
+    window.addEventListener('load', () => {
+      window.setTimeout(() => {
+        revealEls.forEach((el) => el.classList.add('is-visible'));
+      }, 2000);
+    });
   } else {
     // Fallback: show everything immediately if IntersectionObserver isn't supported
     revealEls.forEach((el) => el.classList.add('is-visible'));
@@ -73,18 +111,9 @@
     });
   });
 
-  // --- Pre-fill MSF with selected package from URL ?package= ------------------
-  (function () {
-    const params = new URLSearchParams(window.location.search);
-    const selectedPackage = params.get('package');
-    if (!selectedPackage) return;
-    const pkgInput = document.getElementById('msf-package');
-    if (pkgInput) pkgInput.value = selectedPackage;
-    const msgEl = document.getElementById('msf-message');
-    if (msgEl && !msgEl.value) {
-      msgEl.value = `Hi, I'm interested in the ${selectedPackage} package. Please let me know the next steps.`;
-    }
-  })();
+  // Package pre-fill from ?package= is handled inside the MSF block below,
+  // where it can pre-select the service, website type and plan, then jump
+  // the visitor straight to the details step.
 
   // --- Multi-step form (MSF) ---------------------------------------------------
   (function () {
@@ -97,7 +126,7 @@
     const panels = msf.querySelectorAll('.msf-panel');
     let current = 1;
 
-    function goTo(next) {
+    function goTo(next, skipScroll) {
       panels.forEach((p) => p.classList.remove('is-active'));
       msf.querySelector(`[data-panel="${next}"]`).classList.add('is-active');
 
@@ -111,7 +140,7 @@
       });
 
       current = next;
-      msf.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      if (!skipScroll) msf.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
 
     // Show/hide Web Design sub-options
@@ -155,43 +184,43 @@
           budgetNote.textContent = 'Once-off design fee. Basic SEO included in all plans.';
           [
             ['', 'Select a plan…'],
-            ['Business Website — Silver Plan (R3,999)',   'Silver Plan — R3,999 once-off · 5 pages'],
-            ['Business Website — Gold Plan (R4,999)',     'Gold Plan — R4,999 once-off · 10 pages'],
-            ['Business Website — Platinum Plan (R6,499)', 'Platinum Plan — R6,499 once-off · 20 pages'],
-            ['Not sure', "Not sure yet — let's discuss"],
+            ['Business Website - Silver Plan (R3,999)',   'Silver Plan - R3,999 once-off · 5 pages'],
+            ['Business Website - Gold Plan (R4,999)',     'Gold Plan - R4,999 once-off · 10 pages'],
+            ['Business Website - Platinum Plan (R6,499)', 'Platinum Plan - R6,499 once-off · 20 pages'],
+            ['Not sure', "Not sure yet - let's discuss"],
           ].forEach(([v, t]) => { const o = new Option(t, v); budgetSel.add(o); });
         } else if (websiteType === 'E-Commerce Website') {
           budgetNote.textContent = 'Once-off design fee. Basic SEO included in all plans.';
           [
             ['', 'Select a plan…'],
-            ['E-commerce Website — Silver Plan (R5,999)',   'Silver Plan — R5,999 once-off · up to 10 products'],
-            ['E-commerce Website — Gold Plan (R7,499)',     'Gold Plan — R7,499 once-off · up to 25 products'],
-            ['E-commerce Website — Platinum Plan (R9,499)', 'Platinum Plan — R9,499 once-off · up to 50 products'],
-            ['Not sure', "Not sure yet — let's discuss"],
+            ['E-commerce Website - Silver Plan (R5,999)',   'Silver Plan - R5,999 once-off · up to 10 products'],
+            ['E-commerce Website - Gold Plan (R7,499)',     'Gold Plan - R7,499 once-off · up to 25 products'],
+            ['E-commerce Website - Platinum Plan (R9,499)', 'Platinum Plan - R9,499 once-off · up to 50 products'],
+            ['Not sure', "Not sure yet - let's discuss"],
           ].forEach(([v, t]) => { const o = new Option(t, v); budgetSel.add(o); });
         } else if (websiteType === 'Directory Website') {
           budgetNote.textContent = 'Once-off design fee. Final price may vary based on features and requirements.';
           [
             ['', 'Select a plan…'],
-            ['Directory Website — Silver Plan (R8,999)',        'Silver Plan — R8,999 once-off · up to 25 listings'],
-            ['Directory Website — Gold Plan (R11,999)',         'Gold Plan — R11,999 once-off · up to 50 listings'],
-            ['Directory Website — Platinum Plan (from R14,999)', 'Platinum Plan — from R14,999 once-off · unlimited listings'],
-            ['Not sure', "Not sure yet — let's discuss"],
+            ['Directory Website - Silver Plan (R8,999)',        'Silver Plan - R8,999 once-off · up to 25 listings'],
+            ['Directory Website - Gold Plan (R11,999)',         'Gold Plan - R11,999 once-off · up to 50 listings'],
+            ['Directory Website - Platinum Plan (from R14,999)', 'Platinum Plan - from R14,999 once-off · unlimited listings'],
+            ['Not sure', "Not sure yet - let's discuss"],
           ].forEach(([v, t]) => { const o = new Option(t, v); budgetSel.add(o); });
         } else {
           budgetNote.textContent = 'Business from R3,999 · E-commerce from R5,999 · Directory from R8,999.';
           [
             ['', 'Select a plan…'],
-            ['Business Website — Silver Plan (R3,999)',        'Business Silver — R3,999 once-off'],
-            ['Business Website — Gold Plan (R4,999)',          'Business Gold — R4,999 once-off'],
-            ['Business Website — Platinum Plan (R6,499)',      'Business Platinum — R6,499 once-off'],
-            ['E-commerce Website — Silver Plan (R5,999)',      'E-commerce Silver — R5,999 once-off'],
-            ['E-commerce Website — Gold Plan (R7,499)',        'E-commerce Gold — R7,499 once-off'],
-            ['E-commerce Website — Platinum Plan (R9,499)',    'E-commerce Platinum — R9,499 once-off'],
-            ['Directory Website — Silver Plan (R8,999)',       'Directory Silver — R8,999 once-off'],
-            ['Directory Website — Gold Plan (R11,999)',        'Directory Gold — R11,999 once-off'],
-            ['Directory Website — Platinum Plan (from R14,999)', 'Directory Platinum — from R14,999 once-off'],
-            ['Not sure', "Not sure yet — let's discuss"],
+            ['Business Website - Silver Plan (R3,999)',        'Business Silver - R3,999 once-off'],
+            ['Business Website - Gold Plan (R4,999)',          'Business Gold - R4,999 once-off'],
+            ['Business Website - Platinum Plan (R6,499)',      'Business Platinum - R6,499 once-off'],
+            ['E-commerce Website - Silver Plan (R5,999)',      'E-commerce Silver - R5,999 once-off'],
+            ['E-commerce Website - Gold Plan (R7,499)',        'E-commerce Gold - R7,499 once-off'],
+            ['E-commerce Website - Platinum Plan (R9,499)',    'E-commerce Platinum - R9,499 once-off'],
+            ['Directory Website - Silver Plan (R8,999)',       'Directory Silver - R8,999 once-off'],
+            ['Directory Website - Gold Plan (R11,999)',        'Directory Gold - R11,999 once-off'],
+            ['Directory Website - Platinum Plan (from R14,999)', 'Directory Platinum - from R14,999 once-off'],
+            ['Not sure', "Not sure yet - let's discuss"],
           ].forEach(([v, t]) => { const o = new Option(t, v); budgetSel.add(o); });
         }
         if (hasBranding || hasVisual) {
@@ -210,11 +239,11 @@
             ['R6,000–R10,000', 'R6,000 – R10,000'],
             ['R10,000–R15,000', 'R10,000 – R15,000'],
             ['R15,000+', 'R15,000+'],
-            ['Not sure', 'Not sure yet — let\'s discuss'],
+            ['Not sure', 'Not sure yet - let\'s discuss'],
           ].forEach(([v, t]) => { const o = new Option(t, v); budgetSel.add(o); });
         } else if (hasBranding) {
           budgetLbl.innerHTML = 'Branding budget (once-off) <span aria-hidden="true">*</span>';
-          budgetNote.textContent = 'Logo, identity and brand assets — paid once, yours to keep.';
+          budgetNote.textContent = 'Logo, identity and brand assets - paid once, yours to keep.';
           [
             ['', 'Select a range…'],
             ['Under R500', 'Under R500'],
@@ -222,18 +251,18 @@
             ['R1,000–R2,000', 'R1,000 – R2,000'],
             ['R2,000–R5,000', 'R2,000 – R5,000'],
             ['R5,000+', 'R5,000+'],
-            ['Not sure', 'Not sure yet — let\'s discuss'],
+            ['Not sure', 'Not sure yet - let\'s discuss'],
           ].forEach(([v, t]) => { const o = new Option(t, v); budgetSel.add(o); });
         } else {
           budgetLbl.innerHTML = 'Visual content budget (once-off) <span aria-hidden="true">*</span>';
-          budgetNote.textContent = 'Professional photography and video — priced per project.';
+          budgetNote.textContent = 'Professional photography and video - priced per project.';
           [
             ['', 'Select a range…'],
             ['R4,000–R6,000', 'R4,000 – R6,000'],
             ['R6,000–R8,000', 'R6,000 – R8,000'],
             ['R8,000–R12,000', 'R8,000 – R12,000'],
             ['R12,000+', 'R12,000+'],
-            ['Not sure', 'Not sure yet — let\'s discuss'],
+            ['Not sure', 'Not sure yet - let\'s discuss'],
           ].forEach(([v, t]) => { const o = new Option(t, v); budgetSel.add(o); });
         }
 
@@ -251,7 +280,7 @@
           ['R1,000–R2,000/mo', 'R1,000 – R2,000 / month'],
           ['R2,000–R3,500/mo', 'R2,000 – R3,500 / month'],
           ['R3,500+/mo', 'R3,500+ / month'],
-          ['Not sure/mo', 'Not sure yet — let\'s discuss'],
+          ['Not sure/mo', 'Not sure yet - let\'s discuss'],
         ].forEach(([v, t]) => { const o = new Option(t, v); budgetSel.add(o); });
       }
     }
@@ -267,7 +296,7 @@
           const webChecked = form.querySelector('#chk-webdesign:checked');
           if (webChecked) {
             const typeSelected = form.querySelector('input[name="website-type"]:checked');
-            if (!typeSelected) { err.textContent = 'Please choose a website type — Business, E-Commerce or Directory.'; return; }
+            if (!typeSelected) { err.textContent = 'Please choose a website type - Business, E-Commerce or Directory.'; return; }
           }
           err.textContent = '';
           buildBudgetOptions();
@@ -342,6 +371,9 @@
         });
         const json = await res.json();
         if (!res.ok || !json.success) throw new Error(json.message || 'Failed');
+        // json.sent is only true when a real email went out — honeypot-trapped
+        // bot submits get success without it, and must not count as conversions
+        if (json.sent) fireAdsConversion();
         form.hidden = true;
         msf.querySelector('.msf-steps').hidden = true;
         document.getElementById('msf-success').removeAttribute('hidden');
@@ -351,6 +383,55 @@
         submit.disabled = false;
       }
     });
+
+    // --- Deep pre-fill from ?package= (Get Started buttons on Pricing) ---------
+    (function prefillFromPackage() {
+      const selected = new URLSearchParams(window.location.search).get('package');
+      if (!selected) return;
+
+      // Clean display label — no em-dash in visible copy
+      const pretty = selected.replace(/\s+[-–—]\s+/g, ' - ');
+
+      // Carry the exact plan through to the email + pre-write the message
+      const pkgInput = document.getElementById('msf-package');
+      if (pkgInput) pkgInput.value = selected;
+      const msgEl = document.getElementById('msf-message');
+      if (msgEl && !msgEl.value) {
+        msgEl.value = `Hi, I'm interested in the ${pretty} package. Please let me know the next steps.`;
+      }
+
+      // Confirmation banner at the top of the form
+      const banner = document.createElement('div');
+      banner.setAttribute('role', 'status');
+      banner.style.cssText = 'display:flex;align-items:center;gap:.85rem;padding:.85rem 1.05rem;margin-bottom:var(--sp-6);border:1px solid var(--border);background:var(--paper-dim);border-radius:var(--radius-md)';
+      banner.innerHTML =
+        '<span class="material-symbols-outlined" aria-hidden="true" style="color:var(--gold);font-size:1.55rem;flex:none">check_circle</span>' +
+        '<div style="flex:1;line-height:1.35;min-width:0">' +
+          '<div style="font-size:var(--fs-xs);text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted);font-weight:700">You\'re enquiring about</div>' +
+          '<strong class="msf-prefill-name" style="font-size:var(--fs-base);color:var(--ink)"></strong>' +
+        '</div>' +
+        '<a href="packages.html" style="font-size:var(--fs-sm);color:var(--gold);text-decoration:underline;white-space:nowrap;flex:none">Change</a>';
+      banner.querySelector('.msf-prefill-name').textContent = pretty; // textContent = no HTML injection
+      msf.insertBefore(banner, msf.firstChild);
+
+      // If it's a full website plan, pre-select service + type + plan and skip to details
+      const TYPE_MAP = [
+        ['Business Website',   'Business Website'],
+        ['E-commerce Website', 'E-Commerce Website'],
+        ['Directory Website',  'Directory Website'],
+      ];
+      const match = TYPE_MAP.find(([prefix]) => selected.startsWith(prefix));
+      if (match && /Plan/.test(selected)) {
+        if (webDesignChk)  webDesignChk.checked = true;
+        if (webDesignOpts) webDesignOpts.hidden = false;
+        const radio = form.querySelector('input[name="website-type"][value="' + match[1] + '"]');
+        if (radio) radio.checked = true;
+        buildBudgetOptions();
+        const budgetSel = document.getElementById('msf-budget');
+        if (budgetSel) budgetSel.value = selected;
+        goTo(2, true); // land on the details step, already filled in
+      }
+    })();
   })();
 
 
@@ -428,7 +509,7 @@
       }
       const dateLabel = selectedDate.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' });
       if (!selectedTime) {
-        summary.textContent = `${dateLabel} — now pick a time.`;
+        summary.textContent = `${dateLabel} - now pick a time.`;
         requestBtn.classList.add('is-disabled');
         return;
       }
@@ -543,6 +624,7 @@
         });
         const json = await res.json();
         if (!res.ok || !json.success) throw new Error(json.message || 'Failed');
+        if (json.sent) fireAdsConversion();
 
         document.getElementById('booking-form').hidden = true;
         document.getElementById('booking-success').hidden = false;
@@ -640,4 +722,463 @@
     }
   }
 
+})();
+
+
+/* --- hero dot-grid circuit ---------------------------------------------------
+   Draws connecting lines through the hero's dot grid around the cursor, plus two
+   slow idle pulses so the hero is alive before anyone touches it. Self-contained:
+   bails out silently if the hero canvas isn't on this page. The base dots are CSS
+   (.hero::after), so the pattern still shows with JS disabled. */
+(function () {
+  var hero = document.querySelector('.hero');
+  var cv = document.getElementById('hero-net');
+  if (!hero || !cv || !cv.getContext) return;
+
+  var ctx = cv.getContext('2d');
+  var DPR = Math.min(window.devicePixelRatio || 1, 2);
+  var GAP = 24;            // must match .hero::after background-size
+  var REACH = 150;         // cursor influence radius
+  var W = 0, H = 0;
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function size() {
+    W = hero.clientWidth;
+    H = hero.clientHeight;
+    cv.width = W * DPR;
+    cv.height = H * DPR;
+    cv.style.width = W + 'px';
+    cv.style.height = H + 'px';
+  }
+  size();
+  window.addEventListener('resize', size);
+
+  var mx = -9999, my = -9999;
+  hero.addEventListener('mousemove', function (e) {
+    var r = cv.getBoundingClientRect();
+    mx = e.clientX - r.left;
+    my = e.clientY - r.top;
+  });
+  hero.addEventListener('mouseleave', function () { mx = my = -9999; });
+
+  var pulses = [
+    { bx: 0.18, by: 0.34, a: 0.0, spd: 0.010, col: '122,207,214' },
+    { bx: 0.80, by: 0.62, a: 2.1, spd: 0.008, col: '224,71,76' }
+  ];
+
+  function glow(px, py, col) {
+    var g = ctx.createRadialGradient(px, py, 0, px, py, 70);
+    g.addColorStop(0, 'rgba(' + col + ',0.20)');
+    g.addColorStop(1, 'rgba(' + col + ',0)');
+    ctx.fillStyle = g;
+    ctx.beginPath(); ctx.arc(px, py, 70, 0, 6.2832); ctx.fill();
+    ctx.fillStyle = 'rgba(' + col + ',0.85)';
+    ctx.beginPath(); ctx.arc(px, py, 2.4, 0, 6.2832); ctx.fill();
+  }
+
+  function mesh(cx, cy, radius, strength) {
+    var gx0 = Math.max(0, Math.floor((cx - radius - GAP / 2) / GAP));
+    var gy0 = Math.max(0, Math.floor((cy - radius - GAP / 2) / GAP));
+    var gx1 = Math.floor((cx + radius - GAP / 2) / GAP) + 1;
+    var gy1 = Math.floor((cy + radius - GAP / 2) / GAP) + 1;
+
+    function pt(ix, iy) { return [GAP / 2 + ix * GAP, GAP / 2 + iy * GAP]; }
+    function falloff(ix, iy) {
+      var p = pt(ix, iy);
+      var d = Math.sqrt((p[0] - cx) * (p[0] - cx) + (p[1] - cy) * (p[1] - cy));
+      return d > radius ? 0 : (1 - d / radius);
+    }
+
+    for (var iy = gy0; iy <= gy1; iy++) {
+      for (var ix = gx0; ix <= gx1; ix++) {
+        var k0 = falloff(ix, iy);
+        if (k0 <= 0) continue;
+        var p0 = pt(ix, iy);
+        var neigh = [[ix + 1, iy], [ix, iy + 1], [ix + 1, iy + 1]];
+        for (var n = 0; n < neigh.length; n++) {
+          var k1 = falloff(neigh[n][0], neigh[n][1]);
+          if (k1 <= 0) continue;
+          var p1 = pt(neigh[n][0], neigh[n][1]);
+          var a = Math.min(k0, k1) * 0.38 * strength;
+          ctx.strokeStyle = 'rgba(122,207,214,' + a.toFixed(3) + ')';
+          ctx.lineWidth = 1;
+          ctx.beginPath(); ctx.moveTo(p0[0], p0[1]); ctx.lineTo(p1[0], p1[1]); ctx.stroke();
+        }
+        ctx.fillStyle = 'rgba(122,207,214,' + (0.65 * k0 * strength).toFixed(3) + ')';
+        ctx.beginPath(); ctx.arc(p0[0], p0[1], 1.6, 0, 6.2832); ctx.fill();
+      }
+    }
+  }
+
+  function frame() {
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.clearRect(0, 0, cv.width, cv.height);
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+
+    for (var i = 0; i < pulses.length; i++) {
+      var p = pulses[i];
+      p.a += p.spd;
+      var px = (p.bx + Math.cos(p.a) * 0.06) * W;
+      var py = (p.by + Math.sin(p.a * 0.8) * 0.05) * H;
+      glow(px, py, p.col);
+      mesh(px, py, 90, 0.5);
+    }
+    if (mx > -999) mesh(mx, my, REACH, 1);
+
+    requestAnimationFrame(frame);
+  }
+
+  if (!reduced) requestAnimationFrame(frame);
+})();
+
+/* --- testimonial marquee: columns of reviews on a slow vertical loop -------- */
+(function () {
+  var marquees = document.querySelectorAll('.tm-marquee');
+  if (!marquees.length) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var MOBILE = 768;
+
+  Array.prototype.forEach.call(marquees, function (marquee) {
+    var cols = Array.prototype.slice.call(marquee.querySelectorAll('.tm-col'));
+    if (!cols.length) return;
+
+    // keep a pristine copy of every card so rebuilds never compound clones
+    var source = cols.map(function (col) {
+      var track = col.querySelector('.tm-track');
+      return Array.prototype.slice.call(track.children).map(function (card) {
+        return card.cloneNode(true);
+      });
+    });
+
+    var lanes = [];
+    var narrow = null;
+    var running = false;
+    var visible = true;
+    var last = 0;
+
+    function build() {
+      narrow = window.innerWidth < MOBILE;
+      lanes = [];
+      // clip the column window first so the copy count below is measured
+      // against the visible height, not the full natural stack
+      marquee.classList.add('is-live');
+
+      cols.forEach(function (col, i) {
+        var track = col.querySelector('.tm-track');
+        // on phones only the first column shows, so it carries every review
+        var cards = narrow ? (i === 0 ? [].concat.apply([], source) : []) : source[i];
+        track.innerHTML = '';
+        if (!cards.length) return;
+
+        cards.forEach(function (card) { track.appendChild(card.cloneNode(true)); });
+        var n = cards.length;
+
+        // repeat the set until it comfortably overfills the viewport window,
+        // then loop back by exactly one set for a seamless join
+        var setEnd = track.children[n - 1].offsetTop + track.children[n - 1].offsetHeight;
+        var copies = Math.max(2, Math.ceil((marquee.clientHeight * 2) / Math.max(setEnd, 1)) + 1);
+        for (var c = 1; c < copies; c++) {
+          cards.forEach(function (card) { track.appendChild(card.cloneNode(true)); });
+        }
+
+        var loop = track.children[n].offsetTop - track.children[0].offsetTop;
+        if (loop <= 0) return;
+
+        var base = parseFloat(col.dataset.speed) || 30;
+        lanes.push({
+          track: track,
+          loop: loop,
+          base: base,
+          speed: base,
+          target: base,
+          offset: Math.random() * loop
+        });
+      });
+
+      if (!lanes.length) marquee.classList.remove('is-live');
+    }
+
+    function frame(now) {
+      if (!running) return;
+      var dt = Math.min((now - last) / 1000, 0.05);
+      last = now;
+
+      lanes.forEach(function (lane) {
+        lane.speed += (lane.target - lane.speed) * 0.06;
+        lane.offset = (lane.offset + lane.speed * dt) % lane.loop;
+        lane.track.style.transform = 'translate3d(0,' + -lane.offset.toFixed(2) + 'px,0)';
+      });
+
+      requestAnimationFrame(frame);
+    }
+
+    function start() {
+      if (running || !lanes.length) return;
+      running = true;
+      last = performance.now();
+      requestAnimationFrame(frame);
+    }
+
+    function stop() { running = false; }
+
+    marquee.addEventListener('pointerenter', function () {
+      lanes.forEach(function (lane) { lane.target = lane.base * 0.35; });
+    });
+    marquee.addEventListener('pointerleave', function () {
+      lanes.forEach(function (lane) { lane.target = lane.base; });
+    });
+
+    // idle while the section is off screen
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        visible = entries[0].isIntersecting;
+        if (visible) start(); else stop();
+      }, { rootMargin: '200px 0px' }).observe(marquee);
+    } else {
+      visible = true;
+    }
+
+    var resizeTimer;
+    window.addEventListener('resize', function () {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function () {
+        if (narrow !== (window.innerWidth < MOBILE)) {
+          stop();
+          build();
+          if (visible) start();
+        }
+      }, 200);
+    });
+
+    build();
+    if (visible) start();
+  });
+})();
+
+/* --- hide the WhatsApp float once the footer bar is on screen -------------- */
+(function () {
+  var float = document.querySelector('.whatsapp-float');
+  var bar = document.querySelector('.footer-bottom');
+  if (!float || !bar || !('IntersectionObserver' in window)) return;
+
+  new IntersectionObserver(function (entries) {
+    float.classList.toggle('is-tucked', entries[0].isIntersecting);
+  }, { rootMargin: '0px 0px -8px 0px' }).observe(bar);
+})();
+
+/* --- services rail: manual scroller with arrows (auto-drift retired) -------- */
+(function () {
+  var rail = document.querySelector('[data-svc-rail]');
+  if (!rail) return;
+  var track = rail.querySelector('.svc-rail-track');
+  var prev = document.querySelector('[data-svc-prev]');
+  var next = document.querySelector('[data-svc-next]');
+  if (!track) return;
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  rail.classList.add('is-manual');
+
+  function step() {
+    // page by the full visible set so cards swap in and out whole
+    var gap = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap) || 24;
+    return rail.clientWidth + gap;
+  }
+
+  function sync() {
+    var max = rail.scrollWidth - rail.clientWidth;
+    rail.classList.toggle('has-left', rail.scrollLeft > 4);
+    rail.classList.toggle('has-right', rail.scrollLeft < max - 4);
+    if (prev) prev.disabled = rail.scrollLeft <= 4;
+    if (next) next.disabled = rail.scrollLeft >= max - 4;
+  }
+
+  function go(dir) {
+    rail.scrollBy({ left: dir * step(), behavior: reduced ? 'auto' : 'smooth' });
+  }
+
+  if (prev) prev.addEventListener('click', function () { go(-1); });
+  if (next) next.addEventListener('click', function () { go(1); });
+  rail.addEventListener('scroll', sync, { passive: true });
+  window.addEventListener('resize', sync);
+  sync();
+})();
+
+/* --- pricing tables: fade the trailing edge while there is more to swipe ---- */
+(function () {
+  var wraps = document.querySelectorAll('.plan-table-wrap');
+  if (!wraps.length) return;
+
+  Array.prototype.forEach.call(wraps, function (wrap) {
+    function sync() {
+      var scrollable = wrap.scrollWidth > wrap.clientWidth + 2;
+      var atEnd = wrap.scrollLeft + wrap.clientWidth >= wrap.scrollWidth - 2;
+      wrap.classList.toggle('has-more', scrollable && !atEnd);
+    }
+    wrap.addEventListener('scroll', sync, { passive: true });
+    window.addEventListener('resize', sync);
+    sync();
+  });
+})();
+
+/* --- 2030 pass: dashboard card tilts toward the cursor ---------------------- */
+(function () {
+  var card = document.getElementById('dcard');
+  if (!card) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (window.matchMedia('(hover: none)').matches) return; // touch devices: skip
+
+  var MAX = 3; // degrees
+  card.addEventListener('pointermove', function (e) {
+    var r = card.getBoundingClientRect();
+    var x = (e.clientX - r.left) / r.width - 0.5;
+    var y = (e.clientY - r.top) / r.height - 0.5;
+    card.style.transform =
+      'perspective(900px) rotateX(' + (-y * MAX).toFixed(2) + 'deg) rotateY(' + (x * MAX).toFixed(2) + 'deg)';
+  });
+  card.addEventListener('pointerleave', function () {
+    card.style.transform = '';
+  });
+})();
+
+/* --- quote band: words light up under your scroll ---------------------------- */
+(function () {
+  var band = document.querySelector('.quote-band--scrub');
+  if (!band) return;
+  var quote = band.querySelector('blockquote');
+  if (!quote) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  // wrap every word
+  var words = [];
+  Array.prototype.slice.call(quote.childNodes).forEach(function (node) {
+    if (node.nodeType !== 3 || !node.textContent.trim()) return;
+    var frag = document.createDocumentFragment();
+    node.textContent.split(/(\s+)/).forEach(function (part) {
+      if (!part) return;
+      if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); return; }
+      var sp = document.createElement('span');
+      sp.className = 'qword';
+      sp.textContent = part;
+      words.push(sp);
+      frag.appendChild(sp);
+    });
+    node.parentNode.replaceChild(frag, node);
+  });
+  if (!words.length) return;
+  band.classList.add('quote-ready');
+
+  var ticking = false;
+  function update() {
+    ticking = false;
+    var rect = band.getBoundingClientRect();
+    // normal-height band: words light as it climbs the viewport, fully lit by
+    // the time the quote sits in the upper half of the screen
+    var vh = window.innerHeight;
+    var progress = Math.min(1, Math.max(0, (vh * 0.92 - rect.top) / (vh * 0.72)));
+    var lit = Math.floor(progress * (words.length + 2));
+    for (var i = 0; i < words.length; i++) {
+      words[i].classList.toggle('lit', i < lit);
+    }
+    band.classList.toggle('quote-done', progress > 0.92);
+  }
+  window.addEventListener('scroll', function () {
+    if (!ticking) { ticking = true; requestAnimationFrame(update); }
+  }, { passive: true });
+  window.addEventListener('resize', update);
+  update();
+  // fail-safe: if scroll never fires (or maths goes wrong), light everything
+  setTimeout(function () {
+    var anyLit = words.some(function (w) { return w.classList.contains('lit'); });
+    var rect = band.getBoundingClientRect();
+    if (!anyLit && rect.top < window.innerHeight && rect.bottom > 0) {
+      words.forEach(function (w) { w.classList.add('lit'); });
+      band.classList.add('quote-done');
+    }
+  }, 5000);
+})();
+
+/* --- endcap: glow follows the cursor ----------------------------------------- */
+(function () {
+  var caps = document.querySelectorAll('.endcap');
+  if (!caps.length) return;
+  if (window.matchMedia('(hover: none)').matches) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  Array.prototype.forEach.call(caps, function (cap) {
+    cap.addEventListener('pointermove', function (e) {
+      var r = cap.getBoundingClientRect();
+      cap.style.setProperty('--egx', (e.clientX - r.left) + 'px');
+      cap.style.setProperty('--egy', (e.clientY - r.top) + 'px');
+    });
+  });
+})();
+
+/* --- industry dial: full-width scale that turns through the industries ----- */
+(function () {
+  var dial = document.querySelector('[data-dial]');
+  if (!dial) return;
+  var items;
+  try { items = JSON.parse(dial.getAttribute('data-dial')); } catch (e) { return; }
+  if (!items || items.length < 2) return;
+
+  var nameEl = dial.querySelector('.dial-name');
+  var prevEl = dial.querySelector('[data-dial-side-prev]');
+  var nextEl = dial.querySelector('[data-dial-side-next]');
+  var countEl = dial.querySelector('[data-dial-current]');
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var index = 0;
+  var shift = 0;
+  var busy = false;
+
+  function label(i) {
+    var item = items[(i + items.length) % items.length];
+    return item.name || item;
+  }
+
+  function render() {
+    nameEl.textContent = label(index);
+    if (prevEl) prevEl.textContent = label(index - 1);
+    if (nextEl) nextEl.textContent = label(index + 1);
+    if (countEl) countEl.textContent = index + 1;
+  }
+
+  function go(dir) {
+    if (busy) return;
+    index = (index + dir + items.length) % items.length;
+    shift -= dir * 55; // one major tick per step
+    dial.style.setProperty('--dial-shift', shift + 'px');
+    if (reduced) { render(); return; }
+    busy = true;
+    dial.classList.add('is-turning');
+    setTimeout(function () {
+      render();
+      dial.classList.remove('is-turning');
+      busy = false;
+    }, 270);
+  }
+
+  dial.querySelector('[data-dial-prev]').addEventListener('click', function () { go(-1); restart(); });
+  dial.querySelector('[data-dial-next]').addEventListener('click', function () { go(1); restart(); });
+
+  var timer = null;
+  function start() {
+    if (reduced || timer) return;
+    timer = setInterval(function () { go(1); }, 3600);
+  }
+  function stop() { clearInterval(timer); timer = null; }
+  function restart() { stop(); start(); }
+  dial.addEventListener('pointerenter', stop);
+  dial.addEventListener('pointerleave', start);
+  dial.addEventListener('focusin', stop);
+  dial.addEventListener('focusout', start);
+
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (entries) {
+      if (entries[0].isIntersecting) start(); else stop();
+    }, { rootMargin: '80px 0px' }).observe(dial);
+  } else {
+    start();
+  }
+
+  render();
 })();

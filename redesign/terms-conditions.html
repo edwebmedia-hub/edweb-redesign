@@ -3,6 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Google Ads conversion tracking. 2026-07-23: replace AW-16948063813 with the
+       real Conversion ID from Google Ads (Tools > Conversions). Until then this
+       loader is a harmless no-op (gtag() calls just queue and go nowhere). -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16948063813"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-16948063813');
+  </script>
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
@@ -15,7 +26,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=block" rel="stylesheet" />
 
-  <link rel="stylesheet" href="styles.css?v=20260758" />
+  <link rel="stylesheet" href="styles.css?v=2026073011" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -30,9 +41,9 @@
 
       <nav class="nav-links" aria-label="Primary">
         <a href="index.html">Home</a>
-        <a href="about-us.html">About Us</a>
         <a href="projects.html">Projects</a>
         <a href="packages.html">Pricing</a>
+        <a href="pay.html">Payments</a>
         <a href="contact.html">Contact</a>
       </nav>
 
@@ -61,7 +72,7 @@
     <section class="section">
       <div class="container">
         <div class="legal-content">
-          <p class="legal-updated">Last Updated: 06 July 2026</p>
+          <p class="legal-updated">Last Updated: 27 July 2026</p>
 
           <h2>1. Acceptance of Terms</h2>
           <h3>1.1 Binding Agreement</h3>
@@ -149,6 +160,24 @@
           <h2>6b. Directory Website Pricing</h2>
           <p>Directory website pricing shown on our packages page is a guide. Final pricing may vary depending on the number of listings, features required, filters, booking functionality, user accounts, third-party integrations and any custom requirements specific to your project. A finalised quote will be provided before work begins.</p>
 
+          <h2>6c. Online Payments and Card Transactions</h2>
+          <h3>6c.1 Payment Processor</h3>
+          <p>Online payments to Edweb Media are processed through Payfast (Pty) Ltd, a registered South African payment gateway. When you pay online you are redirected to Payfast's secure checkout to complete the transaction. For more information about Payfast, visit <a href="https://www.payfast.io" target="_blank" rel="noopener" style="text-decoration:underline">payfast.io</a>.</p>
+          <h3>6c.2 Accepted Payment Methods</h3>
+          <p>We accept Visa and Mastercard credit and cheque (debit) cards, and Instant EFT, through Payfast.</p>
+          <h3>6c.3 Card Security</h3>
+          <p>Card details are entered on Payfast's secure, encrypted checkout and are handled by Payfast, a PCI DSS compliant payment service provider. Your customer details are kept by Edweb Media separately from your card details, which are entered by you on Payfast's secure site. Edweb Media does not see, handle or store your full card details at any time.</p>
+          <h3>6c.4 Merchant Outlet Country and Currency</h3>
+          <p>The merchant outlet country at the time of presenting payment options to the cardholder is South Africa. All prices are shown and charged in South African Rand (ZAR).</p>
+          <h3>6c.5 Recurring (Subscription) Payments</h3>
+          <p>Monthly hosting and website management are billed as recurring subscriptions through Payfast. By setting up a monthly plan you authorise Edweb Media, through Payfast, to automatically debit your chosen card each month for the agreed amount until you cancel. Where a plan includes a once-off website design fee, the design fee is charged first and the monthly amount begins from the following month. The recurring amount and the billing date are shown to you before you confirm.</p>
+          <h3>6c.6 Cancelling a Subscription</h3>
+          <p>You may cancel a monthly subscription at any time by notifying us in writing at <a href="mailto:info@edwebmedia.com" style="text-decoration:underline">info@edwebmedia.com</a> before your next billing date. Cancellation stops all future debits. Amounts already charged for the current or previous billing periods are not refunded.</p>
+          <h3>6c.7 Failed or Declined Payments</h3>
+          <p>If a recurring payment fails or is declined, we may reattempt the payment and may suspend the related service until payment is received, in line with the non-payment terms in this agreement.</p>
+          <h3>6c.8 Refunds</h3>
+          <p>Website design fees, deposits and monthly hosting and management fees are non-refundable, as set out elsewhere in these Terms. Where a refund is agreed by Edweb Media in writing in exceptional circumstances, it will be processed through Payfast to the original payment method used.</p>
+
           <h2>7. Non-Payment and Service Control</h2>
           <p>In the event of non-payment of any outstanding fee, Edweb Media reserves the right to suspend or restrict services, including taking the website offline, disabling hosting, suspending email access and restricting administrative access to systems.</p>
           <p>Services will only be restored once all outstanding balances are paid in full.</p>
@@ -181,8 +210,8 @@
           <h2>13. Indemnification</h2>
           <p>You agree to indemnify and hold Edweb Media harmless from any claims arising from your use of our services or violation of these Terms.</p>
 
-          <h2>14. Governing Law</h2>
-          <p>These Terms are governed by the laws of the Western Cape, South Africa.</p>
+          <h2>14. Governing Law and Country of Domicile</h2>
+          <p>These Terms are governed by the laws of the Western Cape, South Africa. Edweb Media chooses South Africa as its country of domicile for the purposes of these Terms. Edweb Media is a business based in Cape Town, Western Cape, South Africa.</p>
 
           <h2>15. Termination</h2>
           <p>We may terminate services immediately if these Terms are breached or if termination is required to protect our business.</p>
@@ -215,10 +244,10 @@
         <h4>Important Links</h4>
         <ul>
           <li><a href="index.html">Home</a></li>
-          <li><a href="about-us.html">About</a></li>
           <li><a href="projects.html">Projects</a></li>
           <li><a href="packages.html">Pricing</a></li>
           <li><a href="contact.html">Contact</a></li>
+          <li><a href="pay.html">Payments</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -238,8 +267,8 @@
       </div>
     </div>
     <div class="container footer-bottom">
-      <span>© 2026 Edweb Media. <span class="footer-tagline">Designed for Success.</span> All rights reserved.</span>
-      <span class="footer-credit">Built with care in Cape Town.</span>
+      <span>© 2026 Edweb Media. All rights reserved.</span>
+      <span class="footer-tagline">Designed for Success.</span>
     </div>
   </footer>
 
@@ -247,6 +276,6 @@
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-1.2-.6-2-1-2.8-2.3-.2-.3 0-.5.2-.7.2-.2.4-.5.6-.7.1-.2.1-.4 0-.6-.1-.2-.6-1.5-.8-2-.1-.4-.3-.4-.5-.4h-.4c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.1s.9 2.5 1.1 2.7c.1.2 1.6 2.5 4 3.4 2 .8 2.4.7 2.8.6.4-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2 0-.1-.2-.2-.4-.3z"/></svg>
   </a>
 
-  <script src="script.js?v=20260758"></script>
+  <script src="script.js?v=2026073011"></script>
 </body>
 </html>

@@ -3,6 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Google Ads conversion tracking. 2026-07-23: replace AW-16948063813 with the
+       real Conversion ID from Google Ads (Tools > Conversions). Until then this
+       loader is a harmless no-op (gtag() calls just queue and go nowhere). -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16948063813"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-16948063813');
+  </script>
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
@@ -25,7 +36,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=block" rel="stylesheet" />
 
-  <link rel="stylesheet" href="styles.css?v=20260758" />
+  <link rel="stylesheet" href="styles.css?v=2026073011" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -40,9 +51,9 @@
 
       <nav class="nav-links" aria-label="Primary">
         <a href="index.html">Home</a>
-        <a href="about-us.html">About Us</a>
         <a href="projects.html">Projects</a>
         <a href="packages.html">Pricing</a>
+        <a href="pay.html">Payments</a>
         <a href="contact.html">Contact</a>
       </nav>
 
@@ -62,8 +73,12 @@
         <div class="eyebrow reveal">Packages</div>
         <h1 class="reveal" style="--reveal-delay:80ms">Clear, once-off website pricing</h1>
         <p class="reveal" style="--reveal-delay:160ms">
-          Your website design is a once-off fee. Hosting and management are optional monthly add-ons — no hidden costs, no lock-in.
+          Websites from R3,999 once-off. Hosting and management are optional monthly add-ons. No hidden costs, no lock-in.
         </p>
+        <div class="hero-actions reveal" style="--reveal-delay:240ms">
+          <a class="btn btn--accent" href="https://wa.me/27846204583?text=Hi%20Edweb%2C%20I%20saw%20your%20website%20packages%20and%20I%27d%20like%20more%20info." target="_blank" rel="noopener">Chat on WhatsApp</a>
+          <a class="btn btn--white" href="#business">See packages</a>
+        </div>
       </div>
     </section>
 
@@ -88,57 +103,70 @@
     <section class="section pricing-panel" id="business" role="tabpanel">
       <div class="container">
         <div class="section-head section-head--center reveal">
+          <div class="eyebrow" style="justify-content:center">For Your Business</div>
           <h2>Business Websites</h2>
           <p>A professionally designed website for your business. Once-off design fee. Hosting and email are available as a separate monthly add-on.</p>
         </div>
         <div class="pricing-grid">
-          <article class="pricing-card is-featured reveal">
-            <span class="pricing-badge">Most Popular</span>
-            <h3>Silver Plan</h3>
-            <div class="pricing-price">R3,999<span> once-off</span></div>
-            <ul class="pricing-features">
-              <li>5 Page Custom Design</li>
-              <li>SSL Certificate</li>
-              <li>Contact Form</li>
-              <li>Social Media Integration</li>
-              <li>Basic SEO</li>
-              <li>Blog Section</li>
-              <li>WhatsApp Button</li>
-              <li>Mobile Responsive</li>
-            </ul>
-            <a href="contact.html?package=Business+Website+%E2%80%94+Silver+Plan+%28R3%2C999%29" class="btn btn--primary btn--block" rel="nofollow">Get Started</a>
+          <article class="pcard reveal">
+            <h3 class="pcard-name">Silver Plan</h3>
+            <p class="pcard-price">R3,999<span> once-off</span></p>
+            <p class="pcard-desc">Our most popular plan for a professional business website.</p>
+            <a class="btn btn--ink btn--block" href="contact.html?package=Business+Website+-+Silver+Plan+%28R3%2C999%29" rel="nofollow">Get Started</a>
+            <div class="pcard-feats">
+              <p>Features</p>
+              <ul>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>5 Page Custom Design</li>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>SSL Certificate</li>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>Contact Form</li>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>Social Media Integration</li>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>Basic SEO</li>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>Blog Section</li>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>WhatsApp Button</li>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>Mobile Responsive</li>
+              </ul>
+            </div>
           </article>
-          <article class="pricing-card reveal" style="--reveal-delay:80ms">
-            <h3>Gold Plan</h3>
-            <div class="pricing-price">R4,999<span> once-off</span></div>
-            <ul class="pricing-features">
-              <li>10 Page Custom Design</li>
-              <li>SSL Certificate</li>
-              <li>Contact Form</li>
-              <li>Social Media Integration</li>
-              <li>Basic SEO</li>
-              <li>Blog Section</li>
-              <li>WhatsApp Button</li>
-              <li>Mobile Responsive</li>
-            </ul>
-            <a href="contact.html?package=Business+Website+%E2%80%94+Gold+Plan+%28R4%2C999%29" class="btn btn--primary btn--block" rel="nofollow">Get Started</a>
+          <article class="pcard reveal" style="--reveal-delay:80ms">
+            <h3 class="pcard-name">Gold Plan</h3>
+            <p class="pcard-price">R4,999<span> once-off</span></p>
+            <p class="pcard-desc">More room to grow with double the pages.</p>
+            <a class="btn btn--ink btn--block" href="contact.html?package=Business+Website+-+Gold+Plan+%28R4%2C999%29" rel="nofollow">Get Started</a>
+            <div class="pcard-feats">
+              <p>Features</p>
+              <ul>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>10 Page Custom Design</li>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>SSL Certificate</li>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>Contact Form</li>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>Social Media Integration</li>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>Basic SEO</li>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>Blog Section</li>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>WhatsApp Button</li>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>Mobile Responsive</li>
+              </ul>
+            </div>
           </article>
-          <article class="pricing-card reveal" style="--reveal-delay:160ms">
-            <h3>Platinum Plan</h3>
-            <div class="pricing-price">R6,499<span> once-off</span></div>
-            <ul class="pricing-features">
-              <li>20 Page Custom Design</li>
-              <li>SSL Certificate</li>
-              <li>Contact Form</li>
-              <li>Social Media Integration</li>
-              <li>Advanced SEO</li>
-              <li>Blog Section</li>
-              <li>WhatsApp Button</li>
-              <li>Mobile Responsive</li>
-            </ul>
-            <a href="contact.html?package=Business+Website+%E2%80%94+Platinum+Plan+%28R6%2C499%29" class="btn btn--primary btn--block" rel="nofollow">Get Started</a>
+          <article class="pcard reveal" style="--reveal-delay:160ms">
+            <h3 class="pcard-name">Platinum Plan</h3>
+            <p class="pcard-price">R6,499<span> once-off</span></p>
+            <p class="pcard-desc">The full build with advanced SEO from day one.</p>
+            <a class="btn btn--ink btn--block" href="contact.html?package=Business+Website+-+Platinum+Plan+%28R6%2C499%29" rel="nofollow">Get Started</a>
+            <div class="pcard-feats">
+              <p>Features</p>
+              <ul>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>20 Page Custom Design</li>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>SSL Certificate</li>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>Contact Form</li>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>Social Media Integration</li>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>Advanced SEO</li>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>Blog Section</li>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>WhatsApp Button</li>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>Mobile Responsive</li>
+              </ul>
+            </div>
           </article>
         </div>
+        <p class="plan-note">Prices are once-off for the website build. Hosting and management are separate monthly add-ons you can take or leave.</p>
       </div>
     </section>
 
@@ -146,55 +174,67 @@
     <section class="section pricing-panel" id="ecommerce" role="tabpanel" hidden>
       <div class="container">
         <div class="section-head section-head--center reveal">
+          <div class="eyebrow" style="justify-content:center">Sell Online</div>
           <h2>E-commerce Websites</h2>
           <p>A fully functional online store, built and ready to take orders. Once-off design fee. Hosting and email are available as a separate monthly add-on.</p>
         </div>
         <div class="pricing-grid">
-          <article class="pricing-card reveal">
-            <h3>Silver Plan</h3>
-            <div class="pricing-price">R5,999<span> once-off</span></div>
-            <ul class="pricing-features">
-              <li>Up to 10 Products</li>
-              <li>Secure Online Payments</li>
-              <li>SSL Certificate</li>
-              <li>Cart &amp; Checkout Pages</li>
-              <li>Discount Codes</li>
-              <li>Basic SEO</li>
-              <li>Mobile Responsive</li>
-            </ul>
-            <a href="contact.html?package=E-commerce+Website+%E2%80%94+Silver+Plan+%28R5%2C999%29" class="btn btn--primary btn--block" rel="nofollow">Get Started</a>
+          <article class="pcard reveal">
+            <h3 class="pcard-name">Silver Plan</h3>
+            <p class="pcard-price">R5,999<span> once-off</span></p>
+            <p class="pcard-desc">A complete store, ready to take orders.</p>
+            <a class="btn btn--ink btn--block" href="contact.html?package=E-commerce+Website+-+Silver+Plan+%28R5%2C999%29" rel="nofollow">Get Started</a>
+            <div class="pcard-feats">
+              <p>Features</p>
+              <ul>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>Up to 10 Products</li>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>Secure Online Payments</li>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>SSL Certificate</li>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>Cart &amp; Checkout Pages</li>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>Discount Codes</li>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>Basic SEO</li>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>Mobile Responsive</li>
+              </ul>
+            </div>
           </article>
-          <article class="pricing-card is-featured reveal" style="--reveal-delay:80ms">
-            <span class="pricing-badge">Most Popular</span>
-            <h3>Gold Plan</h3>
-            <div class="pricing-price">R7,499<span> once-off</span></div>
-            <ul class="pricing-features">
-              <li>Up to 25 Products</li>
-              <li>Secure Online Payments</li>
-              <li>SSL Certificate</li>
-              <li>Cart &amp; Checkout Pages</li>
-              <li>Discount Codes</li>
-              <li>Basic SEO</li>
-              <li>Mobile Responsive</li>
-            </ul>
-            <a href="contact.html?package=E-commerce+Website+%E2%80%94+Gold+Plan+%28R7%2C499%29" class="btn btn--primary btn--block" rel="nofollow">Get Started</a>
+          <article class="pcard reveal" style="--reveal-delay:80ms">
+            <h3 class="pcard-name">Gold Plan</h3>
+            <p class="pcard-price">R7,499<span> once-off</span></p>
+            <p class="pcard-desc">Our most popular store size.</p>
+            <a class="btn btn--ink btn--block" href="contact.html?package=E-commerce+Website+-+Gold+Plan+%28R7%2C499%29" rel="nofollow">Get Started</a>
+            <div class="pcard-feats">
+              <p>Features</p>
+              <ul>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>Up to 25 Products</li>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>Secure Online Payments</li>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>SSL Certificate</li>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>Cart &amp; Checkout Pages</li>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>Discount Codes</li>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>Basic SEO</li>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>Mobile Responsive</li>
+              </ul>
+            </div>
           </article>
-          <article class="pricing-card reveal" style="--reveal-delay:160ms">
-            <h3>Platinum Plan</h3>
-            <div class="pricing-price">R9,499<span> once-off</span></div>
-            <ul class="pricing-features">
-              <li>Up to 50 Products</li>
-              <li>Secure Online Payments</li>
-              <li>SSL Certificate</li>
-              <li>Cart &amp; Checkout Pages</li>
-              <li>Discount Codes</li>
-              <li>Basic SEO</li>
-              <li>Mobile Responsive</li>
-            </ul>
-            <a href="contact.html?package=E-commerce+Website+%E2%80%94+Platinum+Plan+%28R9%2C499%29" class="btn btn--primary btn--block" rel="nofollow">Get Started</a>
+          <article class="pcard reveal" style="--reveal-delay:160ms">
+            <h3 class="pcard-name">Platinum Plan</h3>
+            <p class="pcard-price">R9,499<span> once-off</span></p>
+            <p class="pcard-desc">For bigger catalogues and busy stores.</p>
+            <a class="btn btn--ink btn--block" href="contact.html?package=E-commerce+Website+-+Platinum+Plan+%28R9%2C499%29" rel="nofollow">Get Started</a>
+            <div class="pcard-feats">
+              <p>Features</p>
+              <ul>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>Up to 50 Products</li>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>Secure Online Payments</li>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>SSL Certificate</li>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>Cart &amp; Checkout Pages</li>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>Discount Codes</li>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>Basic SEO</li>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>Mobile Responsive</li>
+              </ul>
+            </div>
           </article>
         </div>
-        <p class="pricing-disclaimer reveal">The e-commerce package price is for the once-off website build only. It does not include ongoing monthly store management, product updates, sales support, content changes or regular website changes. Ongoing management is available as a separate monthly add-on.</p>
+        <p class="plan-note">Prices are once-off for the store build. Ongoing product loading, sales support and content changes are not included &mdash; those fall under the monthly management add-on.</p>
       </div>
     </section>
 
@@ -202,54 +242,67 @@
     <section class="section pricing-panel" id="directory" role="tabpanel" hidden>
       <div class="container">
         <div class="section-head section-head--center reveal">
+          <div class="eyebrow" style="justify-content:center">Listings &amp; Portals</div>
           <h2>Directory Websites</h2>
-          <p>A searchable, filterable directory to list businesses, services or properties — think a local business directory or property listings portal. Once-off design fee. Hosting and email are available as a separate monthly add-on.</p>
+          <p>A searchable, filterable directory to list businesses, services or properties, think a local business directory or property listings portal. Once-off design fee. Hosting and email are available as a separate monthly add-on.</p>
         </div>
         <div class="pricing-grid">
-          <article class="pricing-card reveal">
-            <h3>Silver Plan</h3>
-            <div class="pricing-price">R8,999<span> once-off</span></div>
-            <ul class="pricing-features">
-              <li>Up to 25 Listings</li>
-              <li>Search &amp; Filter</li>
-              <li>User Registration</li>
-              <li>Listing Management</li>
-              <li>SSL Certificate</li>
-              <li>Basic SEO</li>
-              <li>Mobile Responsive</li>
-            </ul>
-            <a href="contact.html?package=Directory+Website+%E2%80%94+Silver+Plan+%28R8%2C999%29" class="btn btn--primary btn--block" rel="nofollow">Get Started</a>
+          <article class="pcard reveal">
+            <h3 class="pcard-name">Silver Plan</h3>
+            <p class="pcard-price">R8,999<span> once-off</span></p>
+            <p class="pcard-desc">A searchable directory, ready to list.</p>
+            <a class="btn btn--ink btn--block" href="contact.html?package=Directory+Website+-+Silver+Plan+%28R8%2C999%29" rel="nofollow">Get Started</a>
+            <div class="pcard-feats">
+              <p>Features</p>
+              <ul>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>Up to 25 Listings</li>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>Search &amp; Filter</li>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>User Registration</li>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>Listing Management</li>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>SSL Certificate</li>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>Basic SEO</li>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>Mobile Responsive</li>
+              </ul>
+            </div>
           </article>
-          <article class="pricing-card is-featured reveal" style="--reveal-delay:80ms">
-            <span class="pricing-badge">Most Popular</span>
-            <h3>Gold Plan</h3>
-            <div class="pricing-price">R11,999<span> once-off</span></div>
-            <ul class="pricing-features">
-              <li>Up to 50 Listings</li>
-              <li>Search &amp; Filter</li>
-              <li>User Registration</li>
-              <li>Listing Management</li>
-              <li>SSL Certificate</li>
-              <li>Basic SEO</li>
-              <li>Mobile Responsive</li>
-            </ul>
-            <a href="contact.html?package=Directory+Website+%E2%80%94+Gold+Plan+%28R11%2C999%29" class="btn btn--primary btn--block" rel="nofollow">Get Started</a>
+          <article class="pcard reveal" style="--reveal-delay:80ms">
+            <h3 class="pcard-name">Gold Plan</h3>
+            <p class="pcard-price">R11,999<span> once-off</span></p>
+            <p class="pcard-desc">Our most popular directory size.</p>
+            <a class="btn btn--ink btn--block" href="contact.html?package=Directory+Website+-+Gold+Plan+%28R11%2C999%29" rel="nofollow">Get Started</a>
+            <div class="pcard-feats">
+              <p>Features</p>
+              <ul>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>Up to 50 Listings</li>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>Search &amp; Filter</li>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>User Registration</li>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>Listing Management</li>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>SSL Certificate</li>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>Basic SEO</li>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>Mobile Responsive</li>
+              </ul>
+            </div>
           </article>
-          <article class="pricing-card reveal" style="--reveal-delay:160ms">
-            <h3>Platinum Plan</h3>
-            <div class="pricing-price"><span style="font-size:var(--fs-base);font-weight:500;color:var(--text-muted)">From </span>R14,999</div>
-            <ul class="pricing-features">
-              <li>Unlimited Listings</li>
-              <li>Search &amp; Filter</li>
-              <li>User Registration</li>
-              <li>Listing Management</li>
-              <li>SSL Certificate</li>
-              <li>Basic SEO</li>
-              <li>Mobile Responsive</li>
-            </ul>
-            <a href="contact.html?package=Directory+Website+%E2%80%94+Platinum+Plan+%28from+R14%2C999%29" class="btn btn--primary btn--block" rel="nofollow">Get Started</a>
+          <article class="pcard reveal" style="--reveal-delay:160ms">
+            <h3 class="pcard-name">Platinum Plan</h3>
+            <p class="pcard-price">From R14,999<span> once-off</span></p>
+            <p class="pcard-desc">Unlimited listings for full-scale portals.</p>
+            <a class="btn btn--ink btn--block" href="contact.html?package=Directory+Website+-+Platinum+Plan+%28from+R14%2C999%29" rel="nofollow">Get Started</a>
+            <div class="pcard-feats">
+              <p>Features</p>
+              <ul>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>Unlimited Listings</li>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>Search &amp; Filter</li>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>User Registration</li>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>Listing Management</li>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>SSL Certificate</li>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>Basic SEO</li>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>Mobile Responsive</li>
+              </ul>
+            </div>
           </article>
         </div>
+        <p class="plan-note">Prices are once-off for the directory build. Hosting and management are separate monthly add-ons.</p>
       </div>
     </section>
 
@@ -257,84 +310,68 @@
     <section class="section section--alt" id="addons">
       <div class="container">
         <div class="section-head section-head--center reveal">
+          <div class="eyebrow" style="justify-content:center">Ongoing Support</div>
           <h2>Optional Monthly Add-ons</h2>
-          <p>Your website design is paid once. Hosting and management are separate monthly services — take both, one, or neither.</p>
+          <p>Your website design is paid once. Hosting and management are separate monthly services, take both, one, or neither.</p>
         </div>
 
-        <div class="addon-grid">
-          <!-- Hosting -->
-          <article class="addon-card reveal">
-            <h3>Hosting</h3>
-            <div class="pricing-price" style="font-size:var(--fs-xl);margin:var(--sp-3) 0">R199<span style="font-size:var(--fs-md);font-weight:500;color:var(--text-muted)">/month</span></div>
-            <p>Available for all website packages.</p>
-            <ul class="pricing-features" style="margin-top:var(--sp-4)">
-              <li>Website Hosting</li>
-              <li>Professional Email</li>
-            </ul>
-            <a href="contact.html?package=Hosting+Add-on+%28R199%2Fmonth%29" class="btn btn--primary btn--block" style="margin-top:var(--sp-6)" rel="nofollow">Add to Package</a>
-          </article>
-
-          <!-- Management -->
-          <article class="addon-card reveal" style="--reveal-delay:80ms">
-            <h3>Website Management</h3>
-            <div style="margin:var(--sp-3) 0 var(--sp-4)">
-              <div style="display:flex;justify-content:space-between;align-items:center;padding:var(--sp-2) 0;border-bottom:1px solid var(--border)">
-                <span>Business Website</span>
-                <strong>R199/month</strong>
-              </div>
-              <div style="display:flex;justify-content:space-between;align-items:center;padding:var(--sp-2) 0;border-bottom:1px solid var(--border)">
-                <span>E-commerce Website</span>
-                <strong>R249/month</strong>
-              </div>
-              <div style="display:flex;justify-content:space-between;align-items:center;padding:var(--sp-2) 0">
-                <span>Directory Website</span>
-                <strong>R249/month</strong>
-              </div>
+        <div class="pricing-grid">
+          <article class="pcard reveal">
+            <h3 class="pcard-name">Hosting</h3>
+            <p class="pcard-price">R199<span> /month</span></p>
+            <p class="pcard-desc">Available for all website packages.</p>
+            <a class="btn btn--ink btn--block" href="contact.html?package=Hosting+Add-on+%28R199%2Fmonth%29" rel="nofollow">Get Started</a>
+            <div class="pcard-feats">
+              <p>Features</p>
+              <ul>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>Website Hosting</li>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>Professional Email</li>
+              </ul>
             </div>
-            <p style="font-size:var(--fs-sm);color:var(--text-muted)">All plans include 1 hour of monthly management. Any work beyond the included hour must be quoted separately or billed as additional work.</p>
-            <ul class="pricing-features" style="margin-top:var(--sp-4)">
-              <li>Website Updates</li>
-              <li>Plugin Updates</li>
-              <li>Theme Updates</li>
-              <li>Basic Content Updates</li>
-              <li>General Maintenance</li>
-            </ul>
-            <a href="contact.html?package=Website+Management+Add-on" class="btn btn--primary btn--block" style="margin-top:var(--sp-6)" rel="nofollow">Add to Package</a>
           </article>
-
-          <!-- Extra services -->
-          <article class="addon-card reveal" style="--reveal-delay:160ms">
-            <h3>Extra Services</h3>
-            <p>Round out your online presence with additional services tailored to your business.</p>
-            <ul class="pricing-features" style="margin-top:var(--sp-4)">
-              <li>Professional Videography</li>
-              <li>Professional Photography</li>
-              <li>Logo &amp; Branding</li>
-              <li>Social Media Management</li>
-              <li>Google Ads</li>
-              <li>SEO Optimisation</li>
-            </ul>
-            <a href="contact.html" class="btn btn--primary btn--block" style="margin-top:var(--sp-6)">Enquire</a>
+          <article class="pcard reveal" style="--reveal-delay:80ms">
+            <h3 class="pcard-name">Website Management</h3>
+            <p class="pcard-price">From R199<span> /month</span></p>
+            <p class="pcard-desc">R199/month business sites, R249/month stores and directories. Includes 1 hour of monthly work.</p>
+            <a class="btn btn--ink btn--block" href="contact.html?package=Website+Management+Add-on" rel="nofollow">Get Started</a>
+            <div class="pcard-feats">
+              <p>Features</p>
+              <ul>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>Website Updates</li>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>Plugin Updates</li>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>Theme Updates</li>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>Basic Content Updates</li>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>General Maintenance</li>
+              </ul>
+            </div>
+          </article>
+          <article class="pcard reveal" style="--reveal-delay:160ms">
+            <h3 class="pcard-name">Extra Services</h3>
+            <p class="pcard-price">Quoted<span> per job</span></p>
+            <p class="pcard-desc">Round out your online presence.</p>
+            <a class="btn btn--ink btn--block" href="contact.html">Get Started</a>
+            <div class="pcard-feats">
+              <p>Features</p>
+              <ul>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>Photography &amp; Videography</li>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>Logo &amp; Branding</li>
+              <li><span class="material-symbols-outlined pcard-check" aria-hidden="true">verified</span>Social Media, Google Ads &amp; SEO</li>
+              </ul>
+            </div>
           </article>
         </div>
+        <p class="plan-note">Management covers routine upkeep and one hour of work a month. Anything bigger is quoted first, never billed by surprise.</p>
       </div>
     </section>
 
-    <!-- ============================== CTA BAND ============================== -->
-    <section class="cta-band">
-      <div class="container reveal">
-        <h2>Not sure which package suits you?</h2>
-        <p>Tell us about your business and we'll recommend the right option — no pressure, no jargon.</p>
-        <div class="hero-actions">
-          <a href="contact.html" class="btn btn--primary">Contact Us</a>
-        </div>
-      </div>
-    </section>
+        
+
 
     <!-- ============================== FAQ ============================== -->
-    <section class="section section--alt" id="faq">
+    <section class="section" id="faq">
       <div class="container faq-layout">
         <div class="reveal">
+          <div class="eyebrow">FAQ</div>
           <h2>Pricing Questions</h2>
           <p style="margin-top:1rem;color:var(--text-muted)">Everything you need to know about how our pricing works. Can't find your answer? <a href="contact.html" style="text-decoration:underline">Get in touch</a>.</p>
         </div>
@@ -428,10 +465,10 @@
         <h4>Important Links</h4>
         <ul>
           <li><a href="index.html">Home</a></li>
-          <li><a href="about-us.html">About</a></li>
           <li><a href="projects.html">Projects</a></li>
           <li><a href="packages.html">Pricing</a></li>
           <li><a href="contact.html">Contact</a></li>
+          <li><a href="pay.html">Payments</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -451,8 +488,8 @@
       </div>
     </div>
     <div class="container footer-bottom">
-      <span>© 2026 Edweb Media. <span class="footer-tagline">Designed for Success.</span> All rights reserved.</span>
-      <span class="footer-credit">Built with care in Cape Town.</span>
+      <span>© 2026 Edweb Media. All rights reserved.</span>
+      <span class="footer-tagline">Designed for Success.</span>
     </div>
   </footer>
 
@@ -460,6 +497,6 @@
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-1.2-.6-2-1-2.8-2.3-.2-.3 0-.5.2-.7.2-.2.4-.5.6-.7.1-.2.1-.4 0-.6-.1-.2-.6-1.5-.8-2-.1-.4-.3-.4-.5-.4h-.4c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.1s.9 2.5 1.1 2.7c.1.2 1.6 2.5 4 3.4 2 .8 2.4.7 2.8.6.4-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2 0-.1-.2-.2-.4-.3z"/></svg>
   </a>
 
-  <script src="script.js?v=20260758"></script>
+  <script src="script.js?v=2026073011"></script>
 </body>
 </html>

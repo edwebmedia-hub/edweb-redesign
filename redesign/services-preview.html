@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex" />
+  <title>Services section concept (preview)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=block" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css?v=2026073011" />
+  <style>
+    .sp-sec{padding:clamp(4rem,3rem+5vw,7.5rem) 0;background:var(--paper-dim)}
+    .sp-in{max-width:1400px;margin:0 auto;padding:0 clamp(1.5rem,4vw,3.5rem)}
+    .sp-head{max-width:56ch;margin:0 0 clamp(2.75rem,4vw,4.5rem)}
+    .sp-head h2{font-size:clamp(2.4rem,1.8rem+2.8vw,4rem);font-weight:800;letter-spacing:-.02em;margin:0}
+    .sp-head p{color:var(--text-muted);margin:.7rem 0 0;font-size:var(--fs-lg)}
+    .sp-sh{display:grid;grid-template-columns:0.75fr 1.25fr;gap:clamp(24px,3vw,48px);align-items:stretch}
+    .sp-sh-list{display:flex;flex-direction:column;gap:8px}
+    .sp-sh-item{display:flex;align-items:center;gap:14px;padding:1.15rem 1.35rem;border-radius:14px;cursor:pointer;background:transparent;border:1px solid transparent;font:inherit;text-align:left;color:var(--ink);transition:background .25s,box-shadow .25s,border-color .25s}
+    .sp-sh-item .material-symbols-outlined{font-size:24px;color:#9fb0b8;transition:color .25s}
+    .sp-sh-item h4{font-size:1.1rem;font-weight:600;margin:0}
+    .sp-sh-item:hover{background:var(--paper)}
+    .sp-sh-item.active{background:var(--paper);box-shadow:0 14px 32px -18px rgba(43,43,43,.4);border-color:color-mix(in srgb,var(--ink) 7%,transparent)}
+    .sp-sh-item.active .material-symbols-outlined{color:#e0474c}
+    .sp-go{margin-left:auto;color:#e0474c;opacity:0;transform:translateX(-5px);transition:.25s}
+    .sp-sh-item.active .sp-go{opacity:1;transform:translateX(0)}
+
+    .sp-cardwrap{display:flex}
+    .sp-cardwrap .dcard{margin:0;width:100%;align-self:stretch;transition:opacity .28s ease}
+    .dcard-head h3{font-size:1.45rem}
+    .sp-cardico{width:46px;height:46px;border-radius:13px;display:grid;place-items:center;color:#fff;flex:none}
+    .sp-cardico .material-symbols-outlined{font-size:24px;color:#fff}
+    .sp-cardico.coral{background:linear-gradient(145deg,#ec6166,#c8101f);box-shadow:0 12px 22px -10px rgba(224,71,76,.55)}
+    .sp-cardico.teal{background:linear-gradient(145deg,#8ad9df,#369aa4);box-shadow:0 12px 22px -10px rgba(122,207,214,.6)}
+    .dstats{margin-top:var(--sp-4)}
+    .dstats .dstat{opacity:0;transform:translateY(12px);transition:opacity .45s cubic-bezier(.16,1,.3,1),transform .45s cubic-bezier(.16,1,.3,1)}
+    .dstats.in .dstat{opacity:1;transform:none}
+    @media(max-width:680px){.sp-sh{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <header class="site-header" id="site-header" style="position:static">
+    <div class="container nav" id="nav">
+      <a href="index.html" class="logo"><img class="logo-img logo-img--light" src="assets/edweb-logo-light.png" alt="Edweb Media"><img class="logo-img logo-img--dark" src="assets/edweb-logo-dark.png" alt="Edweb Media"></a>
+      <nav class="nav-links" aria-label="Primary"><a href="index.html">Home</a><a href="projects.html">Projects</a><a href="packages.html">Pricing</a><a href="contact.html">Contact</a></nav>
+      <div class="nav-cta"><a href="contact.html" class="btn btn--primary">Get In Touch</a></div>
+    </div>
+  </header>
+
+  <section class="sp-sec">
+    <div class="sp-in">
+      <div class="sp-head"><h2>Our Services</h2><p>Everything your business needs to look great and grow online, under one roof. Hover a service to see what is included.</p></div>
+      <div class="sp-sh">
+        <div class="sp-sh-list" id="spList"></div>
+        <div class="sp-cardwrap">
+          <div class="dcard" id="dcard">
+            <div class="dcard-head">
+              <div style="display:flex;align-items:center;gap:13px">
+                <span class="sp-cardico coral" id="cIcoWrap"><span class="material-symbols-outlined" id="cIco">language</span></span>
+                <div><h3 id="cT">Website Design</h3><p id="cS">What you get</p></div>
+              </div>
+              <span class="dpill" id="cP">Most popular</span>
+            </div>
+            <div class="drevenue">
+              <div class="drevenue-top"><span id="cRL">Average launch time</span><span class="dpill" id="cRP">On track</span></div>
+              <p class="drevenue-val" id="cRV">2 to 3 weeks</p>
+              <div class="drevenue-bar"><div class="drevenue-bar-fill" id="cBar" style="width:0"></div></div>
+            </div>
+            <div class="dstats" id="cStats"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    (function(){
+      var data=[
+        {ico:'language',clr:'coral',t:'Website Design',pill:'Most popular',rl:'Average launch time',rp:'On track',rv:'2 to 3 weeks',bar:85,stats:[['Pages','5 to 20'],['Build','Custom'],['Ready for','SEO']]},
+        {ico:'smartphone',clr:'teal',t:'App Development',pill:'Custom built',rl:'Built for',rp:'Fast',rv:'Any device',bar:92,stats:[['Speed','Fast'],['Type','Web app'],['Support','Included']]},
+        {ico:'campaign',clr:'coral',t:'Digital Marketing',pill:'Growth',rl:'Focused on',rp:'Targeted',rv:'Real growth',bar:76,stats:[['Audience','Right'],['Reach','Wider'],['Leads','More']]},
+        {ico:'ads_click',clr:'teal',t:'Google Ads',pill:'Trackable',rl:'Brings in',rp:'Measured',rv:'Quality leads',bar:88,stats:[['Targeting','Precise'],['Results','Tracked'],['Budget','In control']]},
+        {ico:'palette',clr:'coral',t:'Branding',pill:'Custom',rl:'Builds',rp:'Consistent',rv:'Real trust',bar:80,stats:[['Logo','Custom'],['Identity','Full'],['Assets','Yours']]},
+        {ico:'dns',clr:'teal',t:'Hosting & Management',pill:'Managed',rl:'Uptime',rp:'Operational',rv:'99.9%',bar:99,stats:[['Backups','Daily'],['SSL','Included'],['Support','Ongoing']]}
+      ];
+      var list=document.getElementById('spList'), card=document.getElementById('dcard');
+      var bar=document.getElementById('cBar'), stats=document.getElementById('cStats');
+      function set(i){
+        var d=data[i];
+        document.querySelectorAll('.sp-sh-item').forEach(function(el,j){el.classList.toggle('active',j===i);});
+        card.style.opacity=0; stats.classList.remove('in'); bar.style.width='0';
+        setTimeout(function(){
+          var iw=document.getElementById('cIcoWrap'); iw.className='sp-cardico '+d.clr;
+          document.getElementById('cIco').textContent=d.ico;
+          document.getElementById('cT').textContent=d.t;
+          document.getElementById('cP').textContent=d.pill;
+          document.getElementById('cRL').textContent=d.rl;
+          document.getElementById('cRP').textContent=d.rp;
+          document.getElementById('cRV').textContent=d.rv;
+          stats.innerHTML=d.stats.map(function(s,k){return '<div class="dstat" style="transition-delay:'+(k*70)+'ms"><p>'+s[0]+'</p><p>'+s[1]+'</p></div>';}).join('');
+          card.style.opacity=1;
+          requestAnimationFrame(function(){ bar.style.width=d.bar+'%'; stats.classList.add('in'); });
+        },150);
+      }
+      data.forEach(function(d,i){
+        var b=document.createElement('button');b.className='sp-sh-item'+(i===0?' active':'');
+        b.innerHTML='<span class="material-symbols-outlined">'+d.ico+'</span><h4>'+d.t+'</h4><span class="material-symbols-outlined sp-go">arrow_forward</span>';
+        b.addEventListener('mouseenter',function(){set(i);});
+        b.addEventListener('click',function(){set(i);});
+        list.appendChild(b);
+      });
+      set(0);
+    })();
+  </script>
+</body>
+</html>

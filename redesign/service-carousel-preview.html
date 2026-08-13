@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Service Carousel Preview | Edweb Media</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=block" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #2b2b2b;
+      --paper: #fafafa;
+      --paper-dim: #eef6fa;
+      --coral: #e0474c;
+      --teal: #7acfd6;
+      --text-inverse: #f5f9fb;
+      --text-inverse-muted: rgba(245, 249, 251, 0.7);
+      --font: "Manrope", -apple-system, "Segoe UI", sans-serif;
+      --radius: 28px;
+      --card-w: 240px;
+      --card-gap: 20px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: var(--font);
+      background: var(--paper);
+      color: var(--ink);
+      padding: 4rem 0;
+    }
+    .note {
+      max-width: 900px;
+      margin: 0 auto 2.5rem;
+      padding: 0 1.5rem;
+      font-size: 0.85rem;
+      color: #888;
+    }
+    .section-head {
+      max-width: 900px;
+      margin: 0 auto 2.5rem;
+      padding: 0 1.5rem;
+    }
+    .eyebrow {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--coral);
+    }
+    h2 {
+      font-size: clamp(1.75rem, 1.4rem + 1.6vw, 2.5rem);
+      margin: 0.5rem 0 0;
+      font-weight: 800;
+    }
+    .carousel-outer {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    .carousel-wrap {
+      position: relative;
+      overflow: hidden;
+      margin: 0 auto;
+    }
+    .carousel-track {
+      display: flex;
+      gap: var(--card-gap);
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .carousel-track::-webkit-scrollbar { display: none; }
+
+    .service-card {
+      flex: 0 0 var(--card-w);
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+      position: relative;
+      height: 320px;
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      color: var(--text-inverse);
+      opacity: 0;
+      transform: translateY(32px);
+      cursor: default;
+      box-shadow: 0 12px 24px -16px rgba(43,43,43,0.35);
+      transition: opacity 700ms cubic-bezier(0.16,1,0.3,1), transform 700ms cubic-bezier(0.16,1,0.3,1), box-shadow 300ms ease;
+      transition-delay: var(--reveal-delay, 0ms);
+    }
+    .service-card.is-visible { opacity: 1; transform: none; }
+    .service-card.is-visible:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 22px 34px -18px rgba(43,43,43,0.45);
+    }
+    .service-card.is-visible:hover .card-icon { transform: scale(1.08); }
+    .service-card.is-visible:hover .card-arrow { opacity: 1; transform: translate(0, 0); }
+
+    .service-card--coral { background: var(--coral); }
+    .service-card--teal { background: var(--teal); }
+    .service-card--ink { background: var(--ink); }
+
+    .service-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(120% 60% at 100% 0%, rgba(255,255,255,0.14), transparent 55%);
+      pointer-events: none;
+    }
+
+    .card-top {
+      position: relative;
+      z-index: 1;
+      margin-top: 0.75rem;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+    .card-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 15px;
+      background: var(--paper);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      transition: transform 300ms cubic-bezier(0.16,1,0.3,1);
+    }
+    .service-card--coral .card-icon { color: var(--coral); }
+    .service-card--teal .card-icon { color: var(--ink); }
+    .service-card--ink .card-icon { color: var(--ink); }
+
+    .card-arrow {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid rgba(245,249,251,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      opacity: 0;
+      transform: translate(-4px, 4px);
+      transition: opacity 300ms ease, transform 300ms cubic-bezier(0.16,1,0.3,1);
+    }
+    .service-card--teal .card-arrow { border-color: rgba(43,43,43,0.35); }
+
+    .service-card--teal { color: var(--ink); }
+    .service-card--teal .card-bottom p { color: rgba(43, 43, 43, 0.7); }
+
+    .card-bottom { position: relative; z-index: 1; margin-bottom: 0.75rem; }
+    .card-bottom h3 {
+      font-size: 1.2rem;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      margin: 0 0 0.5rem;
+    }
+    .card-bottom p {
+      font-size: 0.85rem;
+      line-height: 1.55;
+      color: var(--text-inverse-muted);
+      margin: 0;
+    }
+
+    .carousel-nav {
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.75rem;
+      max-width: 1200px;
+      margin: 1.5rem auto 0;
+      padding: 0 1.5rem;
+    }
+    .carousel-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid #ddd;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 200ms, border-color 200ms, transform 200ms;
+      color: var(--ink);
+    }
+    .carousel-btn:hover { background: var(--ink); border-color: var(--ink); color: #fff; transform: translateY(-2px); }
+    .carousel-btn:disabled { opacity: 0.35; cursor: default; transform: none; }
+    .carousel-btn:disabled:hover { background: #fff; border-color: #ddd; color: var(--ink); }
+
+    @media (max-width: 640px) {
+      :root { --card-w: 84vw; }
+      .service-card { height: 380px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="note">Preview only — not linked from the live site. Eight services, solid brand colours, exact card-by-card paging (no partial card visible at rest).</div>
+
+  <div class="section-head">
+    <div class="eyebrow">What We Do</div>
+    <h2>Our Services</h2>
+  </div>
+
+  <div class="carousel-outer">
+    <div class="carousel-wrap" id="wrap">
+      <div class="carousel-track" id="track">
+        <article class="service-card service-card--coral" data-reveal>
+          <div class="card-top">
+            <div class="card-icon material-symbols-outlined" aria-hidden="true">language</div>
+            <div class="card-arrow material-symbols-outlined" aria-hidden="true">arrow_outward</div>
+          </div>
+          <div class="card-bottom">
+            <h3>Website Design</h3>
+            <p>Custom websites designed to look professional, perform smoothly and help attract more customers online.</p>
+          </div>
+        </article>
+
+        <article class="service-card service-card--ink" data-reveal>
+          <div class="card-top">
+            <div class="card-icon material-symbols-outlined" aria-hidden="true">dns</div>
+            <div class="card-arrow material-symbols-outlined" aria-hidden="true">arrow_outward</div>
+          </div>
+          <div class="card-bottom">
+            <h3>Hosting</h3>
+            <p>Reliable hosting, security and ongoing management, so your site stays fast, safe and up to date.</p>
+          </div>
+        </article>
+
+        <article class="service-card service-card--teal" data-reveal>
+          <div class="card-top">
+            <div class="card-icon material-symbols-outlined" aria-hidden="true">smartphone</div>
+            <div class="card-arrow material-symbols-outlined" aria-hidden="true">arrow_outward</div>
+          </div>
+          <div class="card-bottom">
+            <h3>App Development</h3>
+            <p>User-friendly apps designed for performance, reliability and a smooth experience across all devices.</p>
+          </div>
+        </article>
+
+        <article class="service-card service-card--coral" data-reveal>
+          <div class="card-top">
+            <div class="card-icon material-symbols-outlined" aria-hidden="true">campaign</div>
+            <div class="card-arrow material-symbols-outlined" aria-hidden="true">arrow_outward</div>
+          </div>
+          <div class="card-bottom">
+            <h3>Digital Marketing</h3>
+            <p>Digital marketing that helps your business reach the right audience, improve visibility and grow online.</p>
+          </div>
+        </article>
+
+        <article class="service-card service-card--ink" data-reveal>
+          <div class="card-top">
+            <div class="card-icon material-symbols-outlined" aria-hidden="true">ads_click</div>
+            <div class="card-arrow material-symbols-outlined" aria-hidden="true">arrow_outward</div>
+          </div>
+          <div class="card-bottom">
+            <h3>Google Ads</h3>
+            <p>Targeted ad campaigns that drive traffic, increase visibility and bring in quality leads for your business.</p>
+          </div>
+        </article>
+
+        <article class="service-card service-card--teal" data-reveal>
+          <div class="card-top">
+            <div class="card-icon material-symbols-outlined" aria-hidden="true">palette</div>
+            <div class="card-arrow material-symbols-outlined" aria-hidden="true">arrow_outward</div>
+          </div>
+          <div class="card-bottom">
+            <h3>Branding</h3>
+            <p>Professional branding that builds trust, creates a strong identity and connects with your audience.</p>
+          </div>
+        </article>
+
+        <article class="service-card service-card--coral" data-reveal>
+          <div class="card-top">
+            <div class="card-icon material-symbols-outlined" aria-hidden="true">photo_camera</div>
+            <div class="card-arrow material-symbols-outlined" aria-hidden="true">arrow_outward</div>
+          </div>
+          <div class="card-bottom">
+            <h3>Photography</h3>
+            <p>Professional, high-quality photos that show your business, products or space at their best.</p>
+          </div>
+        </article>
+
+        <article class="service-card service-card--ink" data-reveal>
+          <div class="card-top">
+            <div class="card-icon material-symbols-outlined" aria-hidden="true">videocam</div>
+            <div class="card-arrow material-symbols-outlined" aria-hidden="true">arrow_outward</div>
+          </div>
+          <div class="card-bottom">
+            <h3>Videography</h3>
+            <p>Professional, polished video content that brings your brand to life across web and social.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+
+  <div class="carousel-nav">
+    <button class="carousel-btn" id="prevBtn" aria-label="Previous service">
+      <span class="material-symbols-outlined" aria-hidden="true">arrow_back</span>
+    </button>
+    <button class="carousel-btn" id="nextBtn" aria-label="Next service">
+      <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+    </button>
+  </div>
+
+  <script>
+    (function () {
+      var outer = document.querySelector('.carousel-outer');
+      var wrap = document.getElementById('wrap');
+      var track = document.getElementById('track');
+      var prevBtn = document.getElementById('prevBtn');
+      var nextBtn = document.getElementById('nextBtn');
+      var cards = track.querySelectorAll('.service-card');
+
+      function unit() {
+        var cardW = cards[0].getBoundingClientRect().width;
+        var gap = parseFloat(getComputedStyle(track).gap) || 0;
+        return cardW + gap;
+      }
+
+      function fitWrap() {
+        var u = unit();
+        var available = outer.clientWidth;
+        var visibleCount = Math.max(1, Math.floor((available + parseFloat(getComputedStyle(track).gap)) / u));
+        var gap = parseFloat(getComputedStyle(track).gap) || 0;
+        wrap.style.width = (visibleCount * u - gap) + 'px';
+      }
+
+      function updateButtons() {}
+      function scrollByCard(dir) {
+        var atEnd = track.scrollLeft >= track.scrollWidth - track.clientWidth - 4;
+        var atStart = track.scrollLeft <= 4;
+        if (dir > 0 && atEnd) {
+          track.scrollTo({ left: 0, behavior: 'smooth' });
+        } else if (dir < 0 && atStart) {
+          track.scrollTo({ left: track.scrollWidth - track.clientWidth, behavior: 'smooth' });
+        } else {
+          track.scrollBy({ left: dir * unit(), behavior: 'smooth' });
+        }
+      }
+      prevBtn.addEventListener('click', function () { scrollByCard(-1); });
+      nextBtn.addEventListener('click', function () { scrollByCard(1); });
+      window.addEventListener('resize', function () { fitWrap(); });
+
+      fitWrap();
+
+      var stagger = 0;
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.style.setProperty('--reveal-delay', stagger + 'ms');
+            entry.target.classList.add('is-visible');
+            stagger += 80;
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.2 });
+      cards.forEach(function (c) { io.observe(c); });
+    })();
+  </script>
+</body>
+</html>
