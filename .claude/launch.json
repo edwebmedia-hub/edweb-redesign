@@ -3,9 +3,135 @@
   "configurations": [
     {
       "name": "redesign-static",
-      "runtimeExecutable": "python",
-      "runtimeArgs": ["-m", "http.server", "4173", "--directory", "redesign", "--bind", "127.0.0.1"],
+      "runtimeExecutable": "node",
+      "runtimeArgs": [".claude/static-server.mjs", "4173", "redesign"],
       "port": 4173
+    }
+  ,{
+      "name": "tee-to-trail",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "4202", "--directory", "tee-to-trail", "--bind", "127.0.0.1"],
+      "port": 4202
+    }
+  ,{
+      "name": "spiralguard-redesign",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "4203", "--directory", "spiralguard-redesign", "--bind", "127.0.0.1"],
+      "port": 4203
+    }
+  ,{
+      "name": "mockup-generator",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "4205", "--bind", "127.0.0.1"],
+      "port": 4205
+    }
+  ,{
+      "name": "navigator-vietnam-voynara",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "4207", "--directory", "navigator-vietnam-voynara", "--bind", "127.0.0.1"],
+      "port": 4207
+    }
+  ,{
+      "name": "clipie-redesign",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "4208", "--directory", "C:/Users/edgar/OneDrive/Desktop/Companies/Clipie", "--bind", "127.0.0.1"],
+      "port": 4208
+    }
+  ,{
+      "name": "icon-fruit-redesign",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [".claude/static-server.mjs", "4209", "icon-fruit-redesign"],
+      "port": 4209
+    }
+  ,{
+      "name": "die-lekker-doos",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "4210", "--directory", "die-lekker-doos/prototype", "--bind", "127.0.0.1"],
+      "port": 4210
+    }
+  ,{
+      "name": "numberplate-signs",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "4211", "--directory", "numberplate-signs", "--bind", "127.0.0.1"],
+      "port": 4211
+    }
+  ,{
+      "name": "paintco",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [".claude/static-server.mjs", "4217", "paintco"],
+      "port": 4217
+    }
+  ,{
+      "name": "brightline-electrical",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [".claude/static-server.mjs", "4213", "_scratch/brightline-electrical"],
+      "port": 4213
+    }
+  ,{
+      "name": "clipie-hiring-poster",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [".claude/static-server.mjs", "4214", "_scratch/clipie-hiring-poster"],
+      "port": 4214
+    }
+  ,{
+      "name": "skeleton-bildium",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [".claude/static-server.mjs", "4215", "C:/Users/edgar/Edweb-Claude-Website-OS/taste/skeletons/bildium-construction-cinematic/scaffold"],
+      "port": 4215
+    }
+  ,{
+      "name": "skeleton-homy-motion",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [".claude/static-server.mjs", "4216", "C:/Users/edgar/Edweb-Claude-Website-OS/taste/references/homy-scroll-cinema/scaffold"],
+      "port": 4216
+    }
+  ,{
+      "name": "construction-demo",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [".claude/static-server.mjs", "4212", "C:/Users/edgar/Edweb-Media-Sales/extras/mockup-templates/construction"],
+      "port": 4212
+    }
+  ,{
+      "name": "dr-roof",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [".claude/static-server.mjs", "4218", "dr-roof"],
+      "port": 4218
+    }
+  ,{
+      "name": "wa-taps",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [".claude/static-server.mjs", "4311", "C:/Users/edgar/Edweb-Media-Sales"],
+      "port": 4311
+    }
+  ,{
+      "name": "plumbing-demo",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [".claude/static-server.mjs", "4302", "C:/Users/edgar/Edweb-Media-Sales/extras/mockup-templates/plumbing"],
+      "port": 4302
+    }
+  ,{
+      "name": "electrical-demo",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [".claude/static-server.mjs", "4303", "C:/Users/edgar/Edweb-Media-Sales/extras/mockup-templates/electrical"],
+      "port": 4303
+    }
+  ,{
+      "name": "hydraulics-demo",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [".claude/static-server.mjs", "4304", "C:/Users/edgar/Edweb-Media-Sales/extras/mockup-templates/hydraulics"],
+      "port": 4304
+    }
+  ,{
+      "name": "solar-demo",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [".claude/static-server.mjs", "4305", "C:/Users/edgar/Edweb-Media-Sales/extras/mockup-templates/solar"],
+      "port": 4305
+    }
+  ,{
+      "name": "roofing-demo",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [".claude/static-server.mjs", "4306", "C:/Users/edgar/Edweb-Media-Sales/extras/mockup-templates/roofing"],
+      "port": 4306
     }
   ]
 }
