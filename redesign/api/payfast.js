@@ -48,11 +48,12 @@ const DESIGN = {
 };
 
 // Monthly add-ons that can ride along with a design fee.
+// Aligned to the advertised pricing page 2026-08-18 (second structure, same fix as PLANS above)
 const MONTHLY = {
   none:            { amount: 0,   label: '' },
-  hosting:         { amount: 200, label: 'Hosting' },
-  'mgmt-standard': { amount: 400, label: 'Hosting and Management' },
-  'mgmt-store':    { amount: 450, label: 'Hosting and Store Management' },
+  hosting:         { amount: 199, label: 'Hosting' },
+  'mgmt-standard': { amount: 398, label: 'Hosting and Management' },
+  'mgmt-store':    { amount: 448, label: 'Hosting and Store Management' },
 };
 
 // Match PHP urlencode: spaces -> '+', uppercase %XX, and encode the extra

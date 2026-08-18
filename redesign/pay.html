@@ -386,9 +386,9 @@
 
       function monthlyOptionsFor(type) {
         var mgmtKey = type === 'store' ? 'mgmt-store' : 'mgmt-standard';
-        var mgmtAmt = type === 'store' ? 450 : 400;
+        var mgmtAmt = type === 'store' ? 448 : 398;
         return [
-          { key: 'hosting', amt: 200, label: 'Hosting', desc: 'Hosting, SSL, domain and professional email' },
+          { key: 'hosting', amt: 199, label: 'Hosting', desc: 'Hosting, SSL, domain and professional email' },
           { key: mgmtKey,   amt: mgmtAmt, label: 'Hosting + Management', desc: 'Hosting plus updates and support' },
           { key: 'none',    amt: 0, label: 'No monthly plan', desc: "I'll arrange hosting elsewhere" }
         ];
