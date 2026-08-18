@@ -29,9 +29,10 @@ const SANDBOX = {
 
 // Monthly-only plans for existing sites. First charge = the monthly amount.
 const PLANS = {
-  hosting:    { monthly: 200, item: 'Edweb Hosting Monthly' },
-  management: { monthly: 400, item: 'Edweb Hosting and Management Monthly' },
-  store:      { monthly: 450, item: 'Edweb Hosting and Store Management Monthly' },
+  // Aligned to the advertised pricing page 2026-08-17 (was 200/400/450, page promises 199/199+199/199+249)
+  hosting:    { monthly: 199, item: 'Edweb Hosting Monthly' },
+  management: { monthly: 398, item: 'Edweb Hosting and Management Monthly' },
+  store:      { monthly: 448, item: 'Edweb Hosting and Store Management Monthly' },
 };
 
 // Fixed once-off website design fees (self-serve, matches the Pricing page).

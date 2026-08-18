@@ -14,9 +14,10 @@ Active site folders (each is an independent static HTML/CSS/vanilla-JS site):
 ## Stack — hard facts
 - Pure static: HTML + CSS + vanilla JS. **No frameworks, no build step, no bundler.** Don't introduce one.
 - Fonts: Manrope (Google Fonts) for display + body on Edweb pages; Material Symbols Outlined icon font for icons. Serif display fonts (e.g. Fraunces) are a per-project choice — ask before switching an existing site's type.
-- Previews: `.claude/launch.json` has a Python http.server config per site (redesign=4173, tee-to-trail=4202, spiralguard=4203, mockup-generator=4205, navigator-vietnam=4207). Use Preview MCP (`preview_start` by name), never ad-hoc servers.
+- Previews: `.claude/launch.json` has a config per site (redesign=4173, tee-to-trail=4202, spiralguard=4203, mockup-generator=4205, navigator-vietnam=4207). Use Preview MCP (`preview_start` by name), never ad-hoc servers. Server engine must be `node .claude/static-server.mjs <port> <dir>`, NEVER `python -m http.server`: python drops files over ~100KB on this machine and blanks photos in QA shots (recorded lesson). Several launch.json entries still carry python; switch each to static-server.mjs when you touch that site.
 - Contact forms — **Vercel serverless is canonical**: `api/send-mail.js` + `vercel.json` (`cleanUrls: true`). Edgar's stack = Hostinger domain/email + Vercel hosting. The `send-mail.php` + `phpmailer/` copies are legacy fallbacks for PHP hosts — edit the `.js` version unless the site is confirmed PHP-hosted.
-- Deploy (edwebmedia.com / `redesign/`): run `vercel --prod --yes` **from inside `redesign/`**, then the deployment is aliased to edwebmedia.com. Needs a **fresh Vercel token each session** (Edgar pastes it; never store it; remind him to revoke after). This repo's git `origin` is `github.com/edwebmedia-hub/edweb-redesign` and source is pushed there separately — but the git push is *not* the deploy trigger; the `vercel --prod` CLI run is. (Contrast: `tee-to-trail/` auto-deploys on git push with no token.) The old `edweb-redesign.vercel.app` alias is dead.
+- Deploy (edwebmedia.com / `redesign/`): run `vercel --prod --yes` **from inside `redesign/`**, then the deployment is aliased to edwebmedia.com. Needs a **fresh Vercel token each session** (Edgar pastes it; never store it; remind him to revoke after). This repo's git `origin` is `github.com/edwebmedia-hub/edweb-redesign` and source is pushed there separately — but the git push is *not* the deploy trigger; the `vercel --prod` CLI run is. (Contrast: `tee-to-trail/` auto-deploys on git push with no token. `navigator-vietnam-voynara/` is live at navigator-vietnam.com but its deploy trigger is undocumented and the live site was found BEHIND committed source on 2026-08-17: confirm and document its trigger on the next deploy.) The old `edweb-redesign.vercel.app` alias is dead.
+- **Deploy parity (hard rule, 2026-08-17):** a commit is not a deploy. After any content fix on a token-deploy site, fetch the LIVE URL and confirm the change is visible before calling it done. Two live sites were found stale against committed source (navigator missing hero CTAs, spiralguard selling a removed product option).
 
 ## Edweb Media brand — exactly 4 colors, no others
 - `#2b2b2b` faded black (ink — headings, dark section backgrounds)
@@ -39,13 +40,18 @@ Active site folders (each is an independent static HTML/CSS/vanilla-JS site):
 - No inline styles except genuine one-offs (existing code uses `style="--reveal-delay:80ms"` — that pattern is fine).
 - No new dependencies. If tempted, stop and ask.
 
+## Website OS (applies to every site task in this repo)
+Every client-website task here runs on the Edweb Website OS: invoke the `website-os` skill at the start of any build, redesign, audit or launch task. The bits sessions here most often skipped (audit 2026-08-17): the first-render look loop runs BEFORE Edgar sees any new page (evidence line in QA-REPORT.md), substantial work passes the **site-reviewer** agent before it is called complete, deploys run the gate block in `/deploy-client-site` (reviewer verdict, look-loop line, em-dash sweep, impeccable cache), and every launch closes with the vault + CLIENTS.md registrations. Full standards: OS repo `policies/QUALITY-STANDARDS.md`.
+
 ## Definition of done — run before saying "done"
 1. Page loads on its preview server with **zero console errors** (`preview_console_logs level:error`).
-2. Layout verified at mobile + desktop widths (screenshot or `preview_inspect` computed styles as proof).
+2. Layout verified at 375, 768 and 1280 (OS minimum; the consistency sweep uses 390), screenshot or computed styles as proof.
 3. All images load (no 404s in `preview_network`).
 4. Interactive pieces actually exercised (click slider next, open FAQ, toggle nav) — not assumed.
 5. No placeholder text (Lorem ipsum) anywhere.
 6. Only the 4 brand colors (or `color-mix` of them) in any Edweb-branded page.
+7. Reveal/scroll-animated elements assert `getComputedStyle(el).opacity === '1'` after scrolling into view (class presence is not proof; an unresolved `animation-timeline` held a live section invisible on edwebmedia.com until 2026-08-17).
+8. Substantial work: site-reviewer verdict + look-loop line exist in QA-REPORT.md (OS gates).
 
 ## Workflow per site task
 1. Read the folder's existing HTML/CSS first — match its conventions (token names, spacing scale, comment style, class naming).
