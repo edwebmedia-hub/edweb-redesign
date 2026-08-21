@@ -34,7 +34,7 @@
   /* Type */
   --font: "Manrope", "Helvetica Neue", Arial, sans-serif;
   --fs-h1: clamp(2.4rem, 5.1vw, 4.25rem);
-  --fs-h2: clamp(1.95rem, 4vw, 3.6rem);
+  --fs-h2: clamp(2.25rem, 4vw, 3.6rem);
   --fs-h3: clamp(1.35rem, 1.9vw, 1.75rem);
   --fs-h4: clamp(1.05rem, 1.25vw, 1.2rem);
   --fs-lead: clamp(1.06rem, 1.28vw, 1.42rem);
@@ -43,8 +43,9 @@
   --fs-micro: 0.8125rem;
 
   /* Rhythm: 8px scale. s3 12, s4 16, s5 24, s6 32, s7 48, s8 64, s9 96, s10 128 */
-  --container: min(92vw, 1320px);
-  --band: clamp(4.5rem, 8.5vw, 8rem);        /* section padding, 128 max */
+  --gutter: clamp(1.75rem, 4vw, 3rem);       /* page edge to content, 28 min */
+  --container: min(100% - var(--gutter) * 2, 1320px);
+  --band: clamp(3.5rem, 8.5vw, 8rem);        /* section padding, 128 max */
   --band-tight: clamp(3rem, 5vw, 5rem);      /* compact bands, 80 max */
   --gap-split: clamp(2rem, 4.5vw, 4rem);     /* two-column section splits, 64 */
   --gap-grid: clamp(1.25rem, 2vw, 2rem);     /* card and tile grids, 32 */
@@ -148,7 +149,7 @@ p { margin: 0; text-wrap: pretty; }
   grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
   gap: var(--gap);
   align-items: end;
-  margin-bottom: clamp(4rem, 6.5vw, 6.75rem);
+  margin-bottom: clamp(2.75rem, 6.5vw, 6.75rem);
 }
 .head h2 { max-width: 18ch; }
 .head .lead { max-width: 42ch; }
@@ -534,9 +535,53 @@ p { margin: 0; text-wrap: pretty; }
 }
 
 @media (max-width: 860px) {
-  .tabs { grid-template-columns: 1fr; }
-  .tab-list { position: static; flex-direction: row; flex-wrap: wrap; gap: 0.25rem 1.25rem; }
-  .tab { font-size: 1.15rem; }
+  .tabs { grid-template-columns: 1fr; gap: 1.75rem; }
+  /* The column dissolves so list, panel and aside order independently. */
+  .tab-col { display: contents; }
+  .tab-list:not(.tab-list--row) {
+    order: 1;
+    position: static;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    border-top: 1px solid var(--line);
+  }
+  .tab-panels { order: 2; }
+  .tab-aside { order: 3; margin-top: 0; }
+  .tab-list:not(.tab-list--row) .tab {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    width: 100%;
+    min-height: 56px;
+    padding-block: 0.9rem;
+    font-size: 1.15rem;
+    font-weight: 600;
+    border-bottom: 1px solid var(--line);
+  }
+  .tab-list:not(.tab-list--row) .tab:hover { transform: none; }
+  /* A sweeping underline is a pointer affordance. A row list wants a marker. */
+  .tab-list:not(.tab-list--row) .tab::after { display: none; }
+  .tab-list:not(.tab-list--row) .tab::before {
+    content: "";
+    order: 2;
+    flex: none;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--coral);
+    opacity: 0;
+    transition: opacity var(--speed) var(--ease);
+  }
+  .tab-list:not(.tab-list--row) .tab[aria-selected="true"] {
+    color: var(--coral);
+    /* 19.2px at 700 is large text, where coral on paper passes at 3.89. */
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+  .tab-list:not(.tab-list--row) .tab[aria-selected="true"]::before { opacity: 1; }
+  .tab-panel.is-active { gap: 1.15rem; }
 }
 
 /* ------------------------------- Proof band ------------------------------- */
@@ -654,13 +699,28 @@ p { margin: 0; text-wrap: pretty; }
 }
 .pcard-name { font-size: var(--fs-small); font-weight: 500; color: var(--text-muted); }
 .pcard-price {
-  font-size: clamp(2.2rem, 3.4vw, 3rem);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 0.6rem;
+  font-size: clamp(2.4rem, 3.4vw, 3rem);
   line-height: 1;
-  letter-spacing: -0.035em;
+  letter-spacing: -0.04em;
   color: var(--text);
   font-weight: 700;
 }
-.pcard-period { font-size: var(--fs-small); color: var(--text-meta); margin-left: 0.5rem; }
+.pcard-period {
+  font-size: var(--fs-small);
+  font-weight: 500;
+  letter-spacing: 0;
+  color: var(--text-meta);
+}
+.pcard-head {
+  display: grid;
+  gap: 0.5rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--line);
+}
 .pcard-desc { font-size: var(--fs-small); }
 .pcard ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.7rem; }
 .pcard li { display: flex; gap: 0.7rem; align-items: flex-start; font-size: var(--fs-small); }
@@ -676,7 +736,7 @@ p { margin: 0; text-wrap: pretty; }
 .reviews-rail {
   width: 100vw;
   margin-left: calc(50% - 50vw);
-  padding-inline: 4vw;
+  padding-inline: var(--gutter);
   padding-bottom: 0.5rem;
   overflow: clip;
 }
@@ -2003,7 +2063,10 @@ p a:not(.ulink):not(.btn):hover,
      indenting that row''s text past every other row. */
   select option::checkmark { display: none; }
   select::picker-icon {
+    width: 16px;
+    height: 16px;
     color: var(--text-meta);
+    content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23636363' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3.5 6l4.5 4.5L12.5 6'/%3E%3C/svg%3E");
     transition: transform var(--speed) var(--ease);
   }
   select:open::picker-icon { transform: rotate(180deg); }
@@ -2105,18 +2168,21 @@ textarea[aria-invalid="true"] {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 38px;
-  height: 38px;
-  border: 1px solid var(--line-on-ink);
+  width: 42px;
+  height: 42px;
+  /* Edgar's call: the icons carry the brand red rather than sitting as three
+     grey outlines. Paper on coral is 4.6:1, so the glyphs stay legible. */
+  background: var(--coral);
+  border: 1px solid var(--coral);
   border-radius: var(--radius);
-  color: var(--text-on-ink-muted);
-  transition: color var(--speed) var(--ease), border-color var(--speed) var(--ease),
+  color: var(--paper);
+  transition: background var(--speed) var(--ease), border-color var(--speed) var(--ease),
     transform var(--speed) var(--ease);
 }
 .footer-socials svg { width: 18px; height: 18px; }
 .footer-socials a:hover {
-  color: var(--paper);
-  border-color: var(--paper);
+  background: color-mix(in srgb, var(--coral) 82%, var(--ink));
+  border-color: color-mix(in srgb, var(--coral) 82%, var(--ink));
   transform: translateY(-2px);
 }
 
@@ -2406,7 +2472,7 @@ textarea[aria-invalid="true"] {
   border-top: 1px solid var(--line);
   width: 100vw;
   margin-left: calc(50% - 50vw);
-  padding-inline: 4vw;
+  padding-inline: var(--gutter);
   overflow: clip;
 }
 .opt-c .thumb-track {
@@ -2455,7 +2521,6 @@ textarea[aria-invalid="true"] {
 
 @media (max-width: 860px) {
   .opt-c .tab-panel.is-active { grid-template-columns: 1fr; }
-  .opt-c .thumb { flex-basis: 62vw; }
 }
 
 /* -------------------------- Demo builds on the work rail ------------------- */
@@ -2484,18 +2549,19 @@ textarea[aria-invalid="true"] {
 /* The list price stays visible and struck through so the saving is legible,
    rather than the price just quietly being lower. */
 .pcard-was {
-  display: block;
+  flex-basis: 100%;
   font-size: var(--fs-small);
-  font-weight: 400;
+  font-weight: 500;
+  letter-spacing: 0;
   color: var(--text-meta);
   text-decoration-line: line-through;
   text-decoration-thickness: 1px;
   text-decoration-color: color-mix(in srgb, var(--coral) 70%, transparent);
-  margin-bottom: 0.1rem;
+  margin-bottom: 0.35rem;
 }
 /* Coral at 13px is 3.49:1 on paper, under the 4.5 body-text bar. Mixed with
    ink it still reads as the accent and clears AA. */
-.pcard-price .pcard-period { color: color-mix(in srgb, var(--coral) 62%, var(--ink)); }
+.pcard-price .pcard-period { color: var(--text-meta); }
 
 /* -------------------- Mobile stacking, declared last ---------------------- */
 @media (max-width: 860px) {
@@ -2515,7 +2581,7 @@ textarea[aria-invalid="true"] {
     overflow-x: auto;
     scrollbar-width: none;
     margin-inline: calc(50% - 50vw);
-    padding-inline: 4vw;
+    padding-inline: var(--gutter);
   }
   .tab-list--row::-webkit-scrollbar { display: none; }
   .tab-list--row .tab { white-space: nowrap; }
@@ -2615,8 +2681,7 @@ textarea[aria-invalid="true"] {
    24px minimum WCAG 2.5.8 asks of a touch target. Padding grows the tappable
    box without moving the text, and the list gap shrinks by the same amount so
    the footer keeps its rhythm. */
-.site-footer li a,
-.footer-socials a {
+.site-footer li a {
   display: inline-flex;
   align-items: center;
   min-height: 24px;
@@ -2634,4 +2699,93 @@ textarea[aria-invalid="true"] {
   display: inline-flex;
   align-items: center;
   min-height: 24px;
+}
+
+
+/* ============================ Phone pass, 2026-08-21 =======================
+   Edgar reviewed the live site on a handset. Everything below answers a
+   specific thing he pointed at, and every rule is scoped to phone widths so
+   the desktop layout he already approved does not move. */
+
+/* The work masthead lost its index card, so it runs as one editorial column
+   rather than a column and a hole. */
+.page-hero-inner--solo { grid-template-columns: minmax(0, 1fr); }
+.page-hero-inner--solo > div { max-width: 34ch; }
+.page-hero-inner--solo .lead { max-width: 46ch; }
+
+@media (max-width: 860px) {
+  /* The work heading and its filters stayed side by side on a phone: the
+     :has() rule outranked the collapse rule, so the heading was squeezed into
+     a third of the screen with the filters stacked beside it. */
+  .head,
+  .head:has(.work-sub) {
+    grid-template-columns: 1fr;
+    align-items: start;
+    gap: 1.25rem;
+  }
+  .page-hero-inner--solo > div,
+  .page-hero-inner--solo .lead { max-width: none; }
+
+  /* Filters read as a control strip rather than four loose words. */
+  .filters {
+    gap: 0 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .filter { min-height: 40px; padding-block: 0.5rem; justify-self: start; }
+}
+
+@media (max-width: 620px) {
+  /* Four filters wrap to three-and-one on a phone, which leaves Travel
+     stranded on a line of its own. Two by two reads as a set. */
+  .filters {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.1rem 1rem;
+  }
+  .work-sub { margin-top: 0; }
+
+}
+
+@media (max-width: 860px) {
+  /* The project strip slid on its own, which makes every thumbnail a moving
+     target on a touch screen. On a phone it stops, sits above the panel it
+     controls, and becomes something you swipe: two and a bit visible, snapping
+     as you go, the chosen one marked. The duplicate set exists only to make
+     the desktop loop seamless, so it is dropped here. */
+  .opt-c { display: grid; }
+  .opt-c .thumb-rail {
+    order: -1;
+    margin-top: 0;
+    margin-bottom: clamp(1.75rem, 5vw, 2.5rem);
+    padding-top: 0;
+    padding-bottom: 0.9rem;
+    border-top: 0;
+    border-bottom: 1px solid var(--line);
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    /* Snapping aligns to the padding box, so without this the first thumbnail
+       parks itself hard against the screen edge and loses its gutter. */
+    scroll-padding-inline: var(--gutter);
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .opt-c .thumb-rail::-webkit-scrollbar { display: none; }
+  .opt-c .thumb-track {
+    animation: none;
+    width: max-content;
+    gap: 0.85rem;
+  }
+  .opt-c .thumb-track .thumb[aria-hidden="true"] { display: none; }
+  .opt-c .thumb {
+    flex: 0 0 42vw;
+    scroll-snap-align: start;
+    opacity: 0.55;
+    transition: opacity var(--speed) var(--ease);
+  }
+  .opt-c .thumb[aria-selected="true"] { opacity: 1; }
+  .opt-c .thumb[aria-selected="true"] img { outline: 2px solid var(--coral); outline-offset: 2px; }
+  .opt-c .thumb span { font-size: var(--fs-micro); }
+  .opt-c .tab-panel.is-active { grid-template-columns: 1fr; gap: 1.5rem; }
 }

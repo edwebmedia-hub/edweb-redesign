@@ -74,7 +74,9 @@
   var tabs = $$('.tab, .thumb');
   var panels = $$('.tab-panel');
 
+  var userPicked = false;
   var selectTab = function (tab) {
+    var shown = null;
     tabs.forEach(function (t) {
       var active = t === tab;
       t.setAttribute('aria-selected', String(active));
@@ -88,12 +90,35 @@
          at opacity 0 the moment the panel is shown. Resolve them on reveal. */
       if (active) {
         $$('.reveal', p).forEach(function (el) { el.classList.add('is-visible'); });
+        shown = p;
       }
     });
+
+    /* On a phone the panel opens below the list, so a tap near the top of the
+       list can change content the reader cannot see. Bring it into view, but
+       only when the tap moved it off screen and only once the reader has
+       actually chosen something. */
+    /* The project strip scrolls by hand on a phone, so keyboard and deep-link
+       selections have to bring their own thumbnail back into view. */
+    var rail = tab.parentElement && tab.parentElement.parentElement;
+    if (rail && rail.classList.contains('thumb-rail') && rail.scrollWidth > rail.clientWidth) {
+      var t = tab.getBoundingClientRect();
+      var r = rail.getBoundingClientRect();
+      if (t.left < r.left || t.right > r.right) {
+        rail.scrollTo({ left: rail.scrollLeft + (t.left - r.left) - 16, behavior: 'smooth' });
+      }
+    }
+
+    if (shown && userPicked && window.matchMedia('(max-width: 860px)').matches) {
+      var box = shown.getBoundingClientRect();
+      if (box.top < 0 || box.top > window.innerHeight * 0.75) {
+        shown.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
   };
 
   tabs.forEach(function (tab, i) {
-    tab.addEventListener('click', function () { selectTab(tab); });
+    tab.addEventListener('click', function () { userPicked = true; selectTab(tab); });
     tab.addEventListener('keydown', function (e) {
       var next = null;
       if (e.key === 'ArrowDown' || e.key === 'ArrowRight') next = tabs[(i + 1) % tabs.length];
