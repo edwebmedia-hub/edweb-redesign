@@ -95,5 +95,7 @@ demos/plumbing/assets/_raw/p-8486978.jpg
 
 # The previous site's stylesheet and script. Only the rollback copies in
 # _pre-launch-backup/ reference them, and that folder does not deploy either.
-styles.css
-script.js
+# Leading slash matters: unanchored these would also match the five demo
+# sites' own styles.css and script.js and ship them unstyled.
+/styles.css
+/script.js
