@@ -1,43 +1,63 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="robots" content="noindex" />
+  <title>Pay Edweb Media | Secure Payfast Checkout</title>
+  <meta name="description" content="Pay your Edweb Media website design fee and start a monthly hosting or management plan. Secure checkout by Payfast, cancel any time." />
+  <link rel="canonical" href="https://edwebmedia.com/pay" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://edwebmedia.com/pay" />
+  <meta property="og:title" content="Pay Edweb Media | Secure Payfast Checkout" />
+  <meta property="og:description" content="Pay a website design fee or start a monthly plan. Secure checkout by Payfast." />
+  <meta property="og:image" content="https://edwebmedia.com/assets/edweb-logo-dark.png" />
+  <meta property="og:locale" content="en_ZA" />
+  <meta property="og:site_name" content="Edweb Media" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Pay Edweb Media | Secure Payfast Checkout" />
+  <meta name="twitter:description" content="Pay a website design fee or start a monthly plan. Secure checkout by Payfast." />
+  <meta name="twitter:image" content="https://edwebmedia.com/assets/edweb-logo-dark.png" />
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16948063813"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-16948063813');
+  </script>
+
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
-  <title>Pay Edweb Media | Website &amp; Monthly Billing</title>
-  <meta name="description" content="Pay for your website design and set up your recurring monthly hosting and management with Edweb Media." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=block" rel="stylesheet" />
+  <link rel="stylesheet" href="new-styles.css" />
 
-  <link rel="stylesheet" href="styles.css?v=2026073011" />
+  <script>document.documentElement.classList.replace('no-js', 'js');</script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <!-- ============================== HEADER / NAV ============================== -->
+  <!-- ================================ HEADER ================================ -->
   <header class="site-header" id="site-header">
-    <div class="container nav" id="nav">
-      <a href="index.html" class="logo">
-        <img class="logo-img logo-img--light" src="assets/edweb-logo-light.png" alt="Edweb Media">
-        <img class="logo-img logo-img--dark" src="assets/edweb-logo-dark.png" alt="Edweb Media">
+    <div class="nav" id="nav">
+      <a href="/" class="logo" aria-label="Edweb Media home">
+        <img src="assets/work/logo-edweb-dark.webp" alt="Edweb Media" width="264" height="48" />
       </a>
 
       <nav class="nav-links" aria-label="Primary">
-        <a href="index.html">Home</a>
-        <a href="projects.html">Projects</a>
-        <a href="packages.html">Pricing</a>
-        <a href="pay.html" aria-current="page">Payments</a>
-        <a href="contact.html">Contact</a>
+        <a href="/#services">Services</a>
+        <a href="/projects">Work</a>
+        <a href="/packages">Pricing</a>
+        <a href="/pay" aria-current="page">Payments</a>
+        <a href="/contact">Contact</a>
       </nav>
 
-      <div class="nav-cta">
-        <a href="contact.html" class="btn btn--primary">Get In Touch</a>
+      <div class="nav-end">
+        <a href="/contact" class="ulink">Start a project</a>
         <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav">
           <span></span><span></span><span></span>
         </button>
@@ -46,263 +66,254 @@
   </header>
 
   <main id="main">
-    <!-- ============================== PAGE HERO ============================== -->
-    <section class="page-hero">
+    <!-- =============================== MASTHEAD =============================== -->
+    <section class="page-hero band--alt" id="top">
       <div class="container page-hero-inner">
-        <div class="eyebrow reveal">Payments</div>
-        <h1 class="reveal" style="--reveal-delay:80ms">Pay Edweb Media</h1>
-        <p class="reveal" style="--reveal-delay:160ms">Set up a monthly plan for a website you already have, or book a new website and pay the design fee plus start hosting in one go. One card, renews automatically, cancel anytime.</p>
+        <div>
+          <h1><span class="hl">Pay</span> Edweb Media.</h1>
+          <p class="lead">
+            Book a new website and pay the design fee, or start a monthly plan for a site
+            you already have. One card, renews automatically, cancel any time.
+          </p>
+          <div class="hero-actions">
+            <a href="#checkout" class="btn">Choose what to pay</a>
+            <a href="/contact" class="ulink">Questions first <span class="arrow" aria-hidden="true">&raquo;</span></a>
+          </div>
+        </div>
+
+        <div class="hero-card reveal" style="--reveal-delay:120ms">
+          <h2>What you can pay here</h2>
+          <p class="hero-card-sub">Choose below and the exact amount appears before any card details.</p>
+          <div class="hero-rows">
+            <div><span class="row-name">Website design fee</span><span class="row-meta">From R3,499 once-off</span></div>
+            <div><span class="row-name">Hosting</span><span class="row-meta">R199 a month</span></div>
+            <div><span class="row-name">Hosting and management</span><span class="row-meta">R398 a month</span></div>
+            <div><span class="row-name">Store or directory management</span><span class="row-meta">R448 a month</span></div>
+          </div>
+          <p class="hero-card-foot">Processed by Payfast on its own secure checkout. Card details never touch this site.</p>
+        </div>
       </div>
     </section>
 
-    <section class="section">
-      <div class="container" style="max-width:860px">
-
-        <!-- ===== TRUST STRIP ===== -->
-        <div class="pf-trust reveal" style="--reveal-delay:40ms">
-          <span class="pf-trust-secure">
-            <svg class="pf-lock" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.8a5 5 0 0 0-5 5V10H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V6.8a5 5 0 0 0-5-5zm-3 8.2V6.8a3 3 0 1 1 6 0V10H9z"/></svg>
-            Secured by Payfast
-          </span>
-          <span class="pf-pays">
-            <svg class="pf-mc" viewBox="4 2 24 16" aria-hidden="true"><circle cx="12" cy="10" r="8" fill="#EB001B"/><circle cx="20" cy="10" r="8" fill="#F79E1B"/><path d="M16 4.3a8 8 0 0 0 0 11.4 8 8 0 0 0 0-11.4z" fill="#FF5F00"/></svg>
-            <span class="pf-visa">VISA</span>
-            <span class="pf-eft">Instant EFT</span>
-          </span>
+    <!-- =============================== CHECKOUT =============================== -->
+    <section class="band band--ink" id="checkout">
+      <div class="container split split--lead">
+        <div class="reveal">
+          <h2>Two ways to <span class="hl">pay</span>.</h2>
+          <p>
+            Pick the one that describes you and the exact amount appears before you go
+            anywhere near a card. Nothing is charged on this page.
+          </p>
+          <ul class="facts">
+            <li>You choose, then you see the full amount and what recurs</li>
+            <li>Payfast takes the card details on its own secure checkout</li>
+            <li>Monthly plans start the month after a new website is paid for</li>
+            <li>Cancel a monthly plan in writing before the next billing date</li>
+          </ul>
+          <p class="pay-note">
+            Every price here matches the <a href="/packages" class="ulink">pricing page <span class="arrow" aria-hidden="true">&raquo;</span></a>
+          </p>
         </div>
-        <p class="reveal pf-trust-note">
-          Your card details are entered on Payfast's secure checkout, never on this site. Cancel anytime.
-        </p>
 
-        <!-- ===== STEP 1: choose journey ===== -->
-        <div id="pf-journey" class="reveal" style="--reveal-delay:80ms;display:grid;grid-template-columns:1fr;gap:var(--sp-4)">
-          <button type="button" class="pf-card" data-journey="new">
-            <span class="material-symbols-outlined pf-card-ico" aria-hidden="true">rocket_launch</span>
-            <span class="pf-card-txt">
-              <strong>Book a new website</strong>
-              <span>Pay my website design fee now and start hosting monthly, all in one go.</span>
+        <div class="pay-wrap reveal" style="--reveal-delay:100ms">
+          <div class="paycards">
+            <span class="pay-secure"><b>Secured by Payfast</b></span>
+            <span class="pay-mark pay-mc" aria-hidden="true">
+              <svg viewBox="4 2 24 16"><circle cx="12" cy="10" r="8" fill="#EB001B"/><circle cx="20" cy="10" r="8" fill="#F79E1B"/><path d="M16 4.3a8 8 0 0 0 0 11.4 8 8 0 0 0 0-11.4z" fill="#FF5F00"/></svg>
             </span>
-            <span class="material-symbols-outlined pf-card-arrow" aria-hidden="true">arrow_forward</span>
-          </button>
-          <button type="button" class="pf-card" data-journey="existing">
-            <span class="material-symbols-outlined pf-card-ico" aria-hidden="true">autorenew</span>
-            <span class="pf-card-txt">
-              <strong>Set up a monthly plan</strong>
-              <span>I already have a website. Start my hosting or management billing.</span>
-            </span>
-            <span class="material-symbols-outlined pf-card-arrow" aria-hidden="true">arrow_forward</span>
-          </button>
-        </div>
+            <span class="pay-mark pay-visa" aria-hidden="true">VISA</span>
+            <span class="pay-mark pay-eft">Instant EFT</span>
+            <span class="visually-hidden">Visa, Mastercard and Instant EFT accepted</span>
+          </div>
+          <p class="pay-note">Card details are entered on Payfast's secure checkout, never on this site.</p>
 
-        <!-- ===== JOURNEY A: existing site, monthly only ===== -->
-        <div id="pf-existing" hidden style="margin-top:var(--sp-6)">
-          <button type="button" class="pf-back" data-back>&larr; Change</button>
-          <p style="font-weight:700;color:var(--ink);margin:var(--sp-4) 0 var(--sp-4)">Which one is you?</p>
-          <div id="pf-options" role="radiogroup" aria-label="Choose your monthly plan" style="display:flex;flex-direction:column;gap:var(--sp-3)">
-            <button type="button" class="pf-opt" data-plan="hosting" role="radio" aria-checked="false">
-              <span class="material-symbols-outlined pf-opt-ico" aria-hidden="true">dns</span>
-              <span><strong style="display:block;font-size:1.1rem">Just hosting</strong><span style="color:var(--text-muted)">Keep my website live, secure and online. No monthly changes needed.</span></span>
+          <!-- Step 1: which kind of payment -->
+          <div id="pay-journey" class="opts reveal">
+            <button type="button" class="opt" data-journey="new">
+              <span>
+                <strong>Book a new website</strong>
+                <span>Pay my website design fee now and start a monthly plan, all in one go.</span>
+              </span>
+              <span class="opt-amt" aria-hidden="true">&raquo;</span>
             </button>
-            <button type="button" class="pf-opt" data-plan="management" role="radio" aria-checked="false">
-              <span class="material-symbols-outlined pf-opt-ico" aria-hidden="true">build</span>
-              <span><strong style="display:block;font-size:1.1rem">Standard website + management</strong><span style="color:var(--text-muted)">A normal business website you want kept updated, edited and supported.</span></span>
-            </button>
-            <button type="button" class="pf-opt" data-plan="store" role="radio" aria-checked="false">
-              <span class="material-symbols-outlined pf-opt-ico" aria-hidden="true">storefront</span>
-              <span><strong style="display:block;font-size:1.1rem">Online store or directory + management</strong><span style="color:var(--text-muted)">An e-commerce store or a directory-style website you want kept updated.</span></span>
+            <button type="button" class="opt" data-journey="existing">
+              <span>
+                <strong>Start a monthly plan</strong>
+                <span>I already have a website. Start my hosting or management billing.</span>
+              </span>
+              <span class="opt-amt" aria-hidden="true">&raquo;</span>
             </button>
           </div>
-        </div>
 
-        <!-- ===== JOURNEY B: new website, design fee + monthly ===== -->
-        <div id="pf-new" hidden style="margin-top:var(--sp-6)">
-          <button type="button" class="pf-back" data-back>&larr; Change</button>
-
-          <div style="margin-top:var(--sp-4)">
-            <span style="font-weight:700;color:var(--ink);display:block;margin-bottom:var(--sp-3)">1. Choose your website</span>
-            <div id="pf-website-list" role="radiogroup" aria-label="Choose your website" style="display:flex;flex-direction:column;gap:var(--sp-5)"></div>
-            <p style="color:var(--text-muted);font-size:var(--fs-sm);margin-top:var(--sp-3)">Bigger or custom project? <a href="contact.html">Get a quote</a> and we'll send you a payment link.</p>
+          <!-- Journey A: monthly only -->
+          <div id="pay-existing" class="pay-step" hidden>
+            <button type="button" class="back-link" data-back>&larr; Change</button>
+            <p class="step-label">Which one is you?</p>
+            <div class="opts" id="pay-plans" role="radiogroup" aria-label="Choose a monthly plan"></div>
           </div>
 
-          <div class="field" id="pf-monthly-field" hidden style="margin-top:var(--sp-5)">
-            <span style="font-weight:700;color:var(--ink);display:block;margin-bottom:var(--sp-2)">2. Add a monthly plan</span>
-            <div id="pf-monthly" role="radiogroup" aria-label="Monthly plan" style="display:flex;flex-direction:column;gap:var(--sp-2)"></div>
+          <!-- Journey B: design fee plus monthly -->
+          <div id="pay-new" class="pay-step" hidden>
+            <button type="button" class="back-link" data-back>&larr; Change</button>
+            <p class="step-label">1. Choose your website</p>
+            <div id="pay-websites" role="radiogroup" aria-label="Choose your website"></div>
+            <p class="pay-note">
+              Bigger or custom project? <a href="/contact" class="ulink">Get a quote <span class="arrow" aria-hidden="true">&raquo;</span></a> and we will send a payment link.
+            </p>
+
+            <div id="pay-monthly-step" hidden>
+              <p class="step-label">2. Add a monthly plan</p>
+              <div class="opts" id="pay-monthly" role="radiogroup" aria-label="Choose a monthly plan"></div>
+            </div>
           </div>
-        </div>
 
-        <!-- ===== SHARED RESULT ===== -->
-        <div id="pf-result" hidden style="margin-top:var(--sp-8)">
-          <div style="background:var(--paper);border:2px solid var(--gold);border-radius:var(--radius-lg);box-shadow:0 18px 40px -18px rgba(43,43,43,.28);padding:var(--sp-8)">
-            <h3 id="pf-name" style="font-size:var(--fs-xl);text-align:center;margin:0"></h3>
-
-            <!-- once-off + recurring breakdown -->
-            <div id="pf-breakdown" style="margin:var(--sp-5) 0 0">
-              <div id="pf-line-today" hidden style="display:flex;justify-content:space-between;align-items:baseline;gap:var(--sp-4);padding:var(--sp-3) 0;border-bottom:1px solid var(--border)">
-                <span><strong style="display:block">Pay today</strong><span style="color:var(--text-muted);font-size:var(--fs-sm)" id="pf-today-desc">Website design (once-off)</span></span>
-                <strong id="pf-today-amt" style="font-size:var(--fs-xl);white-space:nowrap"></strong>
+          <!-- Shared result -->
+          <div class="paysum" id="pay-result" hidden>
+            <h3 id="pay-name"></h3>
+            <div>
+              <div class="payline" id="pay-line-today" hidden>
+                <span><strong>Pay today</strong><small id="pay-today-desc">Website design, once-off</small></span>
+                <strong id="pay-today-amt"></strong>
               </div>
-              <div id="pf-line-monthly" hidden style="display:flex;justify-content:space-between;align-items:baseline;gap:var(--sp-4);padding:var(--sp-3) 0">
-                <span><strong style="display:block" id="pf-monthly-title">Then every month</strong><span style="color:var(--text-muted);font-size:var(--fs-sm)" id="pf-monthly-desc"></span></span>
-                <strong id="pf-monthly-amt" style="font-size:var(--fs-xl);white-space:nowrap"></strong>
+              <div class="payline" id="pay-line-monthly" hidden>
+                <span><strong id="pay-monthly-title">Then every month</strong><small id="pay-monthly-desc"></small></span>
+                <strong id="pay-monthly-amt"></strong>
               </div>
             </div>
+            <p class="pay-note" id="pay-freebie" hidden></p>
+            <a class="btn" id="pay-go" href="#">Continue</a>
+            <p class="pay-note">Secure payment by Payfast. <span id="pay-cancel-note">Cancel any time.</span></p>
+          </div>
 
-            <div id="pf-freebie" hidden style="display:flex;align-items:center;gap:var(--sp-3);margin-top:var(--sp-4);padding:var(--sp-3) var(--sp-4);background:color-mix(in srgb,var(--gold-light) 18%,var(--paper));border:1px solid color-mix(in srgb,var(--gold-light) 45%,transparent);border-radius:var(--radius-md)">
-              <span class="material-symbols-outlined" aria-hidden="true" style="color:var(--ink);font-size:24px;flex:none">redeem</span>
-              <span id="pf-freebie-text" style="font-size:var(--fs-sm);color:var(--ink);font-weight:600"></span>
-            </div>
+          <p class="pay-note">Questions before you pay? <a href="/contact" class="ulink">Get in touch <span class="arrow" aria-hidden="true">&raquo;</span></a></p>
+        </div>
+      </div>
+    </section>
 
-            <div style="text-align:center;margin-top:var(--sp-6)">
-              <a id="pf-go" href="#" class="btn btn--primary" style="min-width:240px">Continue</a>
-              <p style="color:var(--text-muted);margin-top:var(--sp-4);font-size:0.9rem">Secure payment by Payfast. <span id="pf-cancel-note">Cancel anytime.</span></p>
-            </div>
+    <!-- ================================ ENDCAP ================================ -->
+    <section class="band band--alt" id="help">
+      <div class="container split split--lead">
+        <div class="reveal">
+          <h2>What happens after you <span class="hl">pay</span>.</h2>
+          <p>Every price on this page is the same one published on the pricing page. If a number here does not match what you were quoted, stop and ask before paying.</p>
+          <div class="hero-actions">
+            <a href="/contact" class="btn">Ask first</a>
+            <a href="/packages" class="ulink">See the pricing page <span class="arrow" aria-hidden="true">&raquo;</span></a>
           </div>
         </div>
-
-        <p class="reveal" style="text-align:center;color:var(--text-muted);margin-top:var(--sp-8);font-size:0.95rem">
-          Questions before you pay? <a href="contact.html">Get in touch</a>.
-        </p>
+        <div class="reveal" style="--reveal-delay:100ms">
+          <h3>The next three steps</h3>
+          <ul class="facts">
+            <li>Payfast emails you the receipt, and we get the notification</li>
+            <li>We reply within one working day to book the kickoff call</li>
+            <li>The build clock starts the day your content and access arrive</li>
+          </ul>
+        </div>
       </div>
     </section>
   </main>
 
-  <!-- ============================== FOOTER ============================== -->
+  <!-- ================================ FOOTER ================================ -->
   <footer class="site-footer">
-    <div class="container footer-grid">
-      <div class="footer-brand">
-        <a href="index.html" class="logo">
-          <img class="logo-img" src="assets/edweb-logo-light.png" alt="Edweb Media">
-        </a>
-        <p>Follow Edweb Media for updates, tips and our latest work. Contact us for any enquiries and we'll get back to you as soon as possible.</p>
-        <div class="contact-socials" style="margin-top:1.5rem">
-          <a href="https://www.facebook.com/edwebmediasolutions" target="_blank" rel="noopener" aria-label="Edweb Media on Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7h2.4l.4-2.8h-2.8v-1.6c0-.8.2-1.4 1.4-1.4h1.5V5.7c-.3 0-1.2-.1-2.2-.1-2.3 0-3.8 1.4-3.8 3.9v1.7H8v2.8h2.4V21h3.1z"/></svg></a>
-          <a href="https://www.instagram.com/edwebmedia/" target="_blank" rel="noopener" aria-label="Edweb Media on Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="3.5"/><circle cx="17.2" cy="6.8" r="0.8" fill="currentColor" stroke="none"/></svg></a>
-          <a href="https://wa.me/27846204583" target="_blank" rel="noopener" aria-label="Edweb Media on WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-1.2-.6-2-1-2.8-2.3-.2-.3 0-.5.2-.7.2-.2.4-.5.6-.7.1-.2.1-.4 0-.6-.1-.2-.6-1.5-.8-2-.1-.4-.3-.4-.5-.4h-.4c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.1s.9 2.5 1.1 2.7c.1.2 1.6 2.5 4 3.4 2 .8 2.4.7 2.8.6.4-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2 0-.1-.2-.2-.4-.3z"/></svg></a>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo">
+            <img src="assets/work/logo-edweb-light.webp" alt="Edweb Media" width="296" height="54" loading="lazy" />
+          </div>
+          <p class="footer-blurb">
+            Custom websites for South African businesses, hosted, updated and marketed by
+            the people who built them.
+          </p>
+          <div class="footer-socials">
+            <a href="https://www.facebook.com/edwebmediasolutions" target="_blank" rel="noopener" aria-label="Edweb Media on Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7h2.4l.4-2.8h-2.8v-1.6c0-.8.2-1.4 1.4-1.4h1.5V5.7c-.3 0-1.2-.1-2.2-.1-2.3 0-3.8 1.4-3.8 3.9v1.7H8v2.8h2.4V21h3.1z"/></svg></a>
+            <a href="https://www.instagram.com/edwebmedia/" target="_blank" rel="noopener" aria-label="Edweb Media on Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="3.5"/><circle cx="17.2" cy="6.8" r="0.8" fill="currentColor" stroke="none"/></svg></a>
+            <a href="https://wa.me/27846204583" target="_blank" rel="noopener" aria-label="Message Edweb Media"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-1.2-.6-2-1-2.8-2.3-.2-.3 0-.5.2-.7.2-.2.4-.5.6-.7.1-.2.1-.4 0-.6-.1-.2-.6-1.5-.8-2-.1-.4-.3-.4-.5-.4h-.4c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.1s.9 2.5 1.1 2.7c.1.2 1.6 2.5 4 3.4 2 .8 2.4.7 2.8.6.4-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2 0-.1-.2-.2-.4-.3z"/></svg></a>
+          </div>
+        </div>
+
+        <div>
+          <h2>Company</h2>
+          <ul>
+            <li><a href="/#services">Services</a></li>
+            <li><a href="/projects">Work</a></li>
+            <li><a href="/packages">Pricing</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a href="/pay">Payments</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h2>Policies</h2>
+          <ul>
+            <li><a href="/terms-conditions">Terms and conditions</a></li>
+            <li><a href="/privacy-policy">Privacy policy</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h2>Contact</h2>
+          <ul>
+            <li><a href="tel:+27846204583">+27 84 620 4583</a></li>
+            <li><a href="mailto:info@edwebmedia.com">info@edwebmedia.com</a></li>
+            <li>Cape Town, South Africa</li>
+          </ul>
         </div>
       </div>
-      <div class="footer-col">
-        <h4>Important Links</h4>
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="projects.html">Projects</a></li>
-          <li><a href="packages.html">Pricing</a></li>
-          <li><a href="contact.html">Contact</a></li>
-          <li><a href="pay.html">Payments</a></li>
-        </ul>
+
+      <div class="footer-base">
+        <span>&copy; <span id="year">2026</span> Edweb Media. All rights reserved.</span>
+        <span>Cape Town, South Africa.</span>
       </div>
-      <div class="footer-col">
-        <h4>Policies</h4>
-        <ul>
-          <li><a href="terms-conditions.html">Terms &amp; Conditions</a></li>
-          <li><a href="privacy-policy.html">Privacy Policy</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Contact</h4>
-        <ul>
-          <li><a href="tel:+27846204583">+27 84 620 4583</a></li>
-          <li><a href="mailto:info@edwebmedia.com">info@edwebmedia.com</a></li>
-          <li>Cape Town, South Africa</li>
-        </ul>
-      </div>
-    </div>
-    <div class="container footer-bottom">
-      <span>© 2026 Edweb Media. All rights reserved.</span>
-      <span class="footer-tagline">Designed for Success.</span>
     </div>
   </footer>
 
-  <a class="whatsapp-float" href="https://wa.me/27846204583" target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">
+  <a class="chat-float" href="https://wa.me/27846204583?text=Hi%20Edweb%2C%20I%27m%20looking%20for%20a%20website.%20Can%20we%20chat%3F" target="_blank" rel="noopener" aria-label="Message us about a website">
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-1.2-.6-2-1-2.8-2.3-.2-.3 0-.5.2-.7.2-.2.4-.5.6-.7.1-.2.1-.4 0-.6-.1-.2-.6-1.5-.8-2-.1-.4-.3-.4-.5-.4h-.4c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.1s.9 2.5 1.1 2.7c.1.2 1.6 2.5 4 3.4 2 .8 2.4.7 2.8.6.4-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2 0-.1-.2-.2-.4-.3z"/></svg>
+    <span>Chat to us</span>
   </a>
 
-  <!-- Payment picker styling (scoped, uses brand tokens only) -->
-  <style>
-    [hidden]{display:none!important}
-    .pf-card{display:flex;align-items:center;gap:var(--sp-4);text-align:left;width:100%;padding:var(--sp-5);border:2px solid color-mix(in srgb,var(--ink) 12%,transparent);border-radius:var(--radius-lg);background:var(--paper);cursor:pointer;font:inherit;color:var(--ink);transition:border-color .2s,box-shadow .2s,transform .2s}
-    .pf-card:hover{border-color:var(--gold);transform:translateY(-2px);box-shadow:0 14px 30px -16px rgba(43,43,43,.3)}
-    .pf-card-ico{font-size:34px;color:var(--gold);flex:none}
-    .pf-card-txt{flex:1}
-    .pf-card-txt strong{display:block;font-size:1.15rem}
-    .pf-card-txt span{color:var(--text-muted)}
-    .pf-card-arrow{color:var(--text-muted);flex:none;transition:transform .2s}
-    .pf-card:hover .pf-card-arrow{transform:translateX(4px);color:var(--gold)}
-    .pf-opt{display:flex;align-items:center;gap:var(--sp-4);text-align:left;width:100%;padding:var(--sp-5);border:2px solid color-mix(in srgb,var(--ink) 12%,transparent);border-radius:var(--radius-lg);background:var(--paper);cursor:pointer;font:inherit;color:var(--ink);transition:border-color .2s,box-shadow .2s}
-    .pf-opt:hover{border-color:color-mix(in srgb,var(--gold) 55%,transparent)}
-    .pf-opt[aria-checked="true"]{border-color:var(--gold);box-shadow:0 14px 30px -18px rgba(43,43,43,.32)}
-    .pf-opt-ico{font-size:32px;color:var(--gold);flex:none}
-    .pf-back{background:none;border:0;color:var(--text-muted);font:inherit;font-weight:600;cursor:pointer;padding:0}
-    .pf-back:hover{color:var(--gold)}
-    .pf-radio{display:flex;align-items:center;gap:var(--sp-4);padding:var(--sp-4) var(--sp-5);border:1.5px solid var(--border);border-radius:var(--radius-md);background:var(--paper);cursor:pointer;font:inherit;color:var(--ink);text-align:left;width:100%;transition:border-color .18s,box-shadow .18s,background .18s}
-    .pf-radio::before{content:"";width:20px;height:20px;border:2px solid color-mix(in srgb,var(--ink) 24%,transparent);border-radius:50%;flex:none;transition:border-color .18s,background .18s,box-shadow .18s}
-    .pf-radio:hover{border-color:color-mix(in srgb,var(--gold) 50%,transparent)}
-    .pf-radio:hover::before{border-color:color-mix(in srgb,var(--gold) 60%,transparent)}
-    .pf-radio[aria-checked="true"]{border-color:var(--gold);background:color-mix(in srgb,var(--gold) 6%,var(--paper));box-shadow:0 8px 22px -12px color-mix(in srgb,var(--gold) 65%,transparent)}
-    .pf-radio[aria-checked="true"]::before{border-color:var(--gold);background:var(--gold);box-shadow:inset 0 0 0 3px var(--paper)}
-    .pf-radio-amt{margin-left:auto;font-size:var(--fs-lg);font-weight:800;color:var(--ink);white-space:nowrap}
-    .pf-per{font-size:.58em;font-weight:600;color:var(--text-muted)}
-    .pf-trust{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:var(--sp-3) var(--sp-6);background:var(--paper);border:1px solid var(--border);border-radius:var(--radius-pill);padding:var(--sp-3) var(--sp-6);max-width:max-content;margin:0 auto var(--sp-3)}
-    .pf-trust-secure{display:inline-flex;align-items:center;gap:var(--sp-2);font-weight:700;font-size:var(--fs-sm);color:var(--ink);white-space:nowrap}
-    .pf-lock{width:16px;height:16px;fill:var(--gold);flex:none}
-    .pf-pays{display:inline-flex;align-items:center;gap:var(--sp-4)}
-    .pf-mc{width:30px;height:20px;flex:none}
-    .pf-visa{font-weight:800;font-style:italic;font-size:17px;letter-spacing:.5px;color:#1434CB;line-height:1}
-    .pf-eft{font-weight:700;font-size:11px;color:var(--ink);border:1px solid var(--border);border-radius:5px;padding:3px 7px;background:var(--paper-dim);white-space:nowrap}
-    .pf-trust-note{text-align:center;color:var(--text-muted);font-size:var(--fs-sm);margin:0 auto var(--sp-12);max-width:44ch}
-  </style>
-
+  <script src="new-script.js"></script>
   <script>
+    /* Payfast picker. Prices, plan keys and endpoints are carried over from
+       pay.html unchanged: this file only changes how they are presented. */
     (function () {
-      var journeyWrap = document.getElementById('pf-journey');
-      var existing = document.getElementById('pf-existing');
-      var newWrap  = document.getElementById('pf-new');
-      var result   = document.getElementById('pf-result');
+      var journey = document.getElementById('pay-journey');
+      var existing = document.getElementById('pay-existing');
+      var fresh = document.getElementById('pay-new');
+      var result = document.getElementById('pay-result');
 
-      // Test mode: /pay?test=1 sends every checkout to the Payfast sandbox.
-      var TESTMODE = (function () { var p = new URLSearchParams(location.search); return p.has('test') || p.get('sandbox') === '1'; })();
+      /* /pay?test=1 sends every checkout to the Payfast sandbox. */
+      var params = new URLSearchParams(location.search);
+      var TESTMODE = params.has('test') || params.get('sandbox') === '1';
       var SB = TESTMODE ? '&sandbox=1' : '';
       if (TESTMODE) {
-        var tb = document.createElement('div');
-        tb.textContent = 'TEST MODE: Payfast sandbox. No real money is charged.';
-        tb.style.cssText = 'position:sticky;top:0;z-index:60;background:var(--gold);color:#fff;text-align:center;font-weight:700;padding:var(--sp-2) var(--sp-4);font-size:var(--fs-sm)';
-        document.body.insertBefore(tb, document.body.firstChild);
+        var flag = document.createElement('p');
+        flag.className = 'pay-note';
+        flag.textContent = 'Test mode: Payfast sandbox. No real money is charged.';
+        flag.style.color = 'var(--coral)';
+        document.querySelector('.pay-wrap').prepend(flag);
       }
 
-      function rand(n){ return 'R' + Number(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','); }
-      function hide(el){ el.hidden = true; }
-      function show(el){ el.hidden = false; }
-      function resetResult(){ hide(result); }
+      var rand = function (n) {
+        return 'R' + Number(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+      };
+      var show = function (el) { el.hidden = false; };
+      var hide = function (el) { el.hidden = true; };
 
-      // ---- journey selection ----
-      journeyWrap.querySelectorAll('[data-journey]').forEach(function (btn) {
-        btn.addEventListener('click', function () {
-          var j = btn.getAttribute('data-journey');
-          hide(journeyWrap); resetResult();
-          if (j === 'existing') { hide(newWrap); show(existing); }
-          else { hide(existing); show(newWrap); }
-        });
-      });
-      document.querySelectorAll('[data-back]').forEach(function (b) {
-        b.addEventListener('click', function () {
-          hide(existing); hide(newWrap); resetResult(); show(journeyWrap);
-          journeyWrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        });
-      });
-
-      // ---- shared result renderer ----
-      // spec = { name, todayAmt (num|0), todayDesc, monthlyAmt (num|0), monthlyDesc, href }
+      /* ---------------------------- Result card ---------------------------- */
       function renderResult(spec) {
-        document.getElementById('pf-name').textContent = spec.name;
+        document.getElementById('pay-name').textContent = spec.name;
 
-        var todayLine = document.getElementById('pf-line-today');
-        var monthlyLine = document.getElementById('pf-line-monthly');
-        var monthlyTitle = document.getElementById('pf-monthly-title');
-        var cancelNote = document.getElementById('pf-cancel-note');
+        var todayLine = document.getElementById('pay-line-today');
+        var monthlyLine = document.getElementById('pay-line-monthly');
+        var monthlyTitle = document.getElementById('pay-monthly-title');
+        var cancelNote = document.getElementById('pay-cancel-note');
 
         if (spec.todayAmt > 0) {
           show(todayLine);
-          document.getElementById('pf-today-amt').textContent = rand(spec.todayAmt);
-          document.getElementById('pf-today-desc').textContent = spec.todayDesc || 'Once-off';
+          document.getElementById('pay-today-amt').textContent = rand(spec.todayAmt);
+          document.getElementById('pay-today-desc').textContent = spec.todayDesc || 'Once-off';
           monthlyTitle.textContent = 'Then every month';
         } else {
           hide(todayLine);
@@ -311,165 +322,200 @@
 
         if (spec.monthlyAmt > 0) {
           show(monthlyLine);
-          document.getElementById('pf-monthly-amt').innerHTML = rand(spec.monthlyAmt) + '<span class="pf-per">/month</span>';
-          document.getElementById('pf-monthly-desc').textContent = spec.monthlyDesc || '';
-          cancelNote.textContent = 'Cancel anytime.';
+          document.getElementById('pay-monthly-amt').innerHTML = rand(spec.monthlyAmt) + '<small>a month</small>';
+          document.getElementById('pay-monthly-desc').textContent = spec.monthlyDesc || '';
+          cancelNote.textContent = 'Cancel any time.';
         } else {
           hide(monthlyLine);
           cancelNote.textContent = 'One-time payment.';
         }
 
-        var freebie = document.getElementById('pf-freebie');
+        var freebie = document.getElementById('pay-freebie');
         if (spec.freebie) {
-          document.getElementById('pf-freebie-text').textContent = spec.freebie;
+          freebie.textContent = spec.freebie;
           show(freebie);
         } else {
           hide(freebie);
         }
 
-        var go = document.getElementById('pf-go');
+        var go = document.getElementById('pay-go');
         go.setAttribute('href', spec.href);
         go.textContent = spec.todayAmt > 0
-          ? (spec.monthlyAmt > 0 ? 'Pay ' + rand(spec.todayAmt) + ' now' : 'Pay ' + rand(spec.todayAmt))
-          : 'Subscribe ' + rand(spec.monthlyAmt) + '/month';
+          ? 'Pay ' + rand(spec.todayAmt) + ' now'
+          : 'Subscribe ' + rand(spec.monthlyAmt) + ' a month';
 
         show(result);
         result.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
 
-      // ---- JOURNEY A: existing site, monthly only ----
-      var MONTHLY_PLANS = {
-        hosting:    { name: 'Hosting', amt: 199, desc: 'Hosting, SSL, domain and a professional email, kept live and secure.' },
-        management: { name: 'Hosting + Management', amt: 398, desc: 'Hosting plus updates, content edits and support for a standard website.' },
-        store:      { name: 'Hosting + Store / Directory Management', amt: 448, desc: 'Hosting plus management for an online store or directory site.' }
-      };
-      existing.querySelectorAll('.pf-opt').forEach(function (btn) {
+      /* ------------------------- Journey selection ------------------------- */
+      journey.querySelectorAll('[data-journey]').forEach(function (btn) {
         btn.addEventListener('click', function () {
-          var plan = btn.getAttribute('data-plan');
-          var p = MONTHLY_PLANS[plan];
-          if (!p) return;
-          existing.querySelectorAll('.pf-opt').forEach(function (o) {
-            o.setAttribute('aria-checked', o === btn ? 'true' : 'false');
+          hide(journey);
+          hide(result);
+          if (btn.getAttribute('data-journey') === 'existing') { hide(fresh); show(existing); }
+          else { hide(existing); show(fresh); }
+        });
+      });
+      document.querySelectorAll('[data-back]').forEach(function (b) {
+        b.addEventListener('click', function () {
+          hide(existing); hide(fresh); hide(result); show(journey);
+          journey.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+      });
+
+      /* --------------------- Journey A: monthly only ----------------------- */
+      var MONTHLY_PLANS = [
+        { key: 'hosting', name: 'Hosting', amt: 199, desc: 'Hosting, SSL, domain and a professional email, kept live and secure.' },
+        { key: 'management', name: 'Hosting and management', amt: 398, desc: 'Hosting plus updates, content edits and support for a standard website.' },
+        { key: 'store', name: 'Hosting and store or directory management', amt: 448, desc: 'Hosting plus management for an online store or a directory site.' }
+      ];
+
+      var plansWrap = document.getElementById('pay-plans');
+      MONTHLY_PLANS.forEach(function (p) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'opt';
+        b.setAttribute('role', 'radio');
+        b.setAttribute('aria-checked', 'false');
+        b.innerHTML = '<span><strong></strong><span></span></span>' +
+          '<span class="opt-amt">' + rand(p.amt) + '<small> a month</small></span>';
+        b.querySelector('strong').textContent = p.name;
+        b.querySelector('span > span').textContent = p.desc;
+        b.addEventListener('click', function () {
+          plansWrap.querySelectorAll('.opt').forEach(function (o) {
+            o.setAttribute('aria-checked', String(o === b));
           });
           renderResult({
             name: p.name,
             todayAmt: 0,
             monthlyAmt: p.amt,
             monthlyDesc: p.desc,
-            href: '/api/payfast?plan=' + plan + SB
+            href: '/api/payfast?plan=' + p.key + SB
           });
         });
+        plansWrap.appendChild(b);
       });
 
-      // ---- JOURNEY B: new website, design fee then monthly ----
-      var monthlyField = document.getElementById('pf-monthly-field');
-      var monthlyWrap = document.getElementById('pf-monthly');
-      var monthlyChoice = null;         // nothing preselected — client must choose
-      var selectedWebsite = null;
-
+      /* ------------------ Journey B: design fee plus monthly --------------- */
+      /* These must equal the fees in api/payfast.js. R500 off every list price
+         since 2026-08-21; change both files together or the page quotes one
+         number and the card is charged another. */
       var WEBSITES = [
-        { group: 'Business Website', items: [
-          { key: 'business-silver',   fee: 3999,  plan: 'Silver',   sub: '5 pages',  type: 'business' },
-          { key: 'business-gold',     fee: 4999,  plan: 'Gold',     sub: '10 pages', type: 'business' },
-          { key: 'business-platinum', fee: 6499,  plan: 'Platinum', sub: '20 pages', type: 'business' }
+        { group: 'Business websites', items: [
+          { key: 'business-silver', fee: 3499, plan: 'Silver', sub: '5 pages', type: 'business' },
+          { key: 'business-gold', fee: 4499, plan: 'Gold', sub: '10 pages', type: 'business' },
+          { key: 'business-platinum', fee: 5999, plan: 'Platinum', sub: '20 pages', type: 'business' }
         ]},
-        { group: 'E-commerce Website', items: [
-          { key: 'ecommerce-silver',   fee: 5999, plan: 'Silver',   sub: 'up to 10 products', type: 'store' },
-          { key: 'ecommerce-gold',     fee: 7499, plan: 'Gold',     sub: 'up to 25 products', type: 'store' },
-          { key: 'ecommerce-platinum', fee: 9499, plan: 'Platinum', sub: 'up to 50 products', type: 'store' }
+        { group: 'Online stores', items: [
+          { key: 'ecommerce-silver', fee: 5499, plan: 'Silver', sub: 'up to 10 products', type: 'store' },
+          { key: 'ecommerce-gold', fee: 6999, plan: 'Gold', sub: 'up to 25 products', type: 'store' },
+          { key: 'ecommerce-platinum', fee: 8999, plan: 'Platinum', sub: 'up to 50 products', type: 'store' }
         ]},
-        { group: 'Directory Website', items: [
-          { key: 'directory-silver', fee: 8999,  plan: 'Silver', sub: 'up to 25 listings', type: 'store' },
-          { key: 'directory-gold',   fee: 11999, plan: 'Gold',   sub: 'up to 50 listings', type: 'store' }
+        { group: 'Directory sites', items: [
+          { key: 'directory-silver', fee: 8499, plan: 'Silver', sub: 'up to 25 listings', type: 'store' },
+          { key: 'directory-gold', fee: 11499, plan: 'Gold', sub: 'up to 50 listings', type: 'store' }
         ]}
       ];
 
+      var monthlyStep = document.getElementById('pay-monthly-step');
+      var monthlyWrap = document.getElementById('pay-monthly');
+      var chosenSite = null;
+      var chosenMonthly = null;
+
       function monthlyOptionsFor(type) {
-        var mgmtKey = type === 'store' ? 'mgmt-store' : 'mgmt-standard';
-        var mgmtAmt = type === 'store' ? 448 : 398;
         return [
           { key: 'hosting', amt: 199, label: 'Hosting', desc: 'Hosting, SSL, domain and professional email' },
-          { key: mgmtKey,   amt: mgmtAmt, label: 'Hosting + Management', desc: 'Hosting plus updates and support' },
-          { key: 'none',    amt: 0, label: 'No monthly plan', desc: "I'll arrange hosting elsewhere" }
+          {
+            key: type === 'store' ? 'mgmt-store' : 'mgmt-standard',
+            amt: type === 'store' ? 448 : 398,
+            label: 'Hosting and management',
+            desc: 'Hosting plus updates and support'
+          },
+          { key: 'none', amt: 0, label: 'No monthly plan', desc: 'I will arrange hosting elsewhere' }
         ];
       }
 
-      // Build the monthly options for the chosen website (none preselected).
       function buildMonthly() {
-        var opts = monthlyOptionsFor(selectedWebsite.type);
         monthlyWrap.innerHTML = '';
-        opts.forEach(function (o) {
+        monthlyOptionsFor(chosenSite.type).forEach(function (o) {
           var b = document.createElement('button');
           b.type = 'button';
-          b.className = 'pf-radio';
+          b.className = 'opt';
           b.setAttribute('role', 'radio');
-          b.setAttribute('aria-checked', o.key === monthlyChoice ? 'true' : 'false');
-          b.innerHTML = '<span><strong style="display:block">' + o.label + '</strong>' +
-            '<span style="color:var(--text-muted);font-size:var(--fs-sm)">' + o.desc + '</span></span>' +
-            '<span class="pf-radio-amt">' + (o.amt > 0 ? rand(o.amt) + '<span class="pf-per">/month</span>' : 'R0') + '</span>';
+          b.setAttribute('aria-checked', 'false');
+          b.innerHTML = '<span><strong></strong><span></span></span>' +
+            '<span class="opt-amt">' + (o.amt > 0 ? rand(o.amt) + '<small> a month</small>' : 'R0') + '</span>';
+          b.querySelector('strong').textContent = o.label;
+          b.querySelector('span > span').textContent = o.desc;
           b.addEventListener('click', function () {
-            monthlyChoice = o.key;
-            monthlyWrap.querySelectorAll('.pf-radio').forEach(function (x) {
-              x.setAttribute('aria-checked', x === b ? 'true' : 'false');
+            chosenMonthly = o.key;
+            monthlyWrap.querySelectorAll('.opt').forEach(function (x) {
+              x.setAttribute('aria-checked', String(x === b));
             });
-            showNewResult();
+            showFreshResult();
           });
           monthlyWrap.appendChild(b);
         });
       }
 
-      // Show the price card once a monthly option is chosen.
-      function showNewResult() {
-        var it = selectedWebsite;
-        var chosen = monthlyOptionsFor(it.type).filter(function (o) { return o.key === monthlyChoice; })[0];
+      function showFreshResult() {
+        var chosen = monthlyOptionsFor(chosenSite.type).filter(function (o) {
+          return o.key === chosenMonthly;
+        })[0];
         if (!chosen) return;
         renderResult({
-          name: it.groupLabel + ' · ' + it.plan,
-          todayAmt: it.fee,
-          todayDesc: 'Website design (once-off)',
+          name: chosenSite.groupLabel + ', ' + chosenSite.plan,
+          todayAmt: chosenSite.fee,
+          todayDesc: 'Website design, once-off',
           monthlyAmt: chosen.amt,
           monthlyDesc: chosen.amt > 0 ? chosen.label + ', from next month' : '',
-          freebie: chosen.amt > 0 ? ('First month of ' + chosen.label.toLowerCase() + ' is on us. Your ' + rand(chosen.amt) + '/month only starts next month.') : null,
-          href: '/api/payfast?website=' + it.key + '&monthly=' + monthlyChoice + SB
+          freebie: chosen.amt > 0
+            ? 'First month of ' + chosen.label.toLowerCase() + ' is on us. The ' + rand(chosen.amt) + ' a month only starts next month.'
+            : null,
+          href: '/api/payfast?website=' + chosenSite.key + '&monthly=' + chosenMonthly + SB
         });
       }
 
-      // Build the website cards.
-      var listWrap = document.getElementById('pf-website-list');
+      var siteWrap = document.getElementById('pay-websites');
       WEBSITES.forEach(function (g) {
-        var grp = document.createElement('div');
-        grp.style.cssText = 'display:flex;flex-direction:column;gap:var(--sp-2)';
-        var h = document.createElement('div');
-        h.textContent = g.group;
-        h.style.cssText = 'font-size:var(--fs-xs);text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted);font-weight:700';
-        grp.appendChild(h);
+        var group = document.createElement('div');
+        group.className = 'pay-group';
+        var label = document.createElement('p');
+        label.className = 'pay-group-label';
+        label.textContent = g.group;
+        group.appendChild(label);
+
+        var list = document.createElement('div');
+        list.className = 'opts';
         g.items.forEach(function (it) {
           it.groupLabel = g.group;
           var b = document.createElement('button');
           b.type = 'button';
-          b.className = 'pf-radio';
+          b.className = 'opt';
           b.setAttribute('role', 'radio');
           b.setAttribute('aria-checked', 'false');
-          b.innerHTML = '<span><strong style="display:block">' + it.plan + '</strong>' +
-            '<span style="color:var(--text-muted);font-size:var(--fs-sm)">' + it.sub + '</span></span>' +
-            '<span class="pf-radio-amt">' + rand(it.fee) + '</span>';
+          b.innerHTML = '<span><strong></strong><span></span></span>' +
+            '<span class="opt-amt">' + rand(it.fee) + '</span>';
+          b.querySelector('strong').textContent = it.plan;
+          b.querySelector('span > span').textContent = it.sub;
           b.addEventListener('click', function () {
-            selectedWebsite = it;
-            listWrap.querySelectorAll('.pf-radio').forEach(function (x) {
-              x.setAttribute('aria-checked', x === b ? 'true' : 'false');
+            chosenSite = it;
+            siteWrap.querySelectorAll('.opt').forEach(function (x) {
+              x.setAttribute('aria-checked', String(x === b));
             });
-            monthlyChoice = null;   // force an explicit monthly choice
+            chosenMonthly = null;
             buildMonthly();
-            show(monthlyField);
-            resetResult();          // hide price until a monthly option is picked
-            monthlyField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            show(monthlyStep);
+            hide(result);
+            monthlyStep.scrollIntoView({ behavior: 'smooth', block: 'center' });
           });
-          grp.appendChild(b);
+          list.appendChild(b);
         });
-        listWrap.appendChild(grp);
+        group.appendChild(list);
+        siteWrap.appendChild(group);
       });
     })();
   </script>
-  <script src="script.js?v=2026073011"></script>
 </body>
 </html>

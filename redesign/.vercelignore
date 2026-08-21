@@ -1,0 +1,21 @@
+# The drafts stay on disk as the working copies; promote.mjs copies them onto
+# the live filenames. Shipping both would put every page at two URLs.
+new-*.html
+_pre-launch-backup/
+
+# Working files and the legacy PHP mailer, none of which the site serves.
+*.md
+prod-log.txt
+assets.zip
+phpmailer/
+send-mail.php
+hero-preview.html
+hero-options.html
+home-preview.html
+landing.html
+pay-link.html
+cinematic-hero-preview.html
+dashboard-card-preview.html
+service-carousel-preview.html
+services-preview.html
+work-option-*.html
