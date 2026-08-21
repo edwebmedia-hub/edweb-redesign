@@ -2849,6 +2849,10 @@ textarea[aria-invalid="true"] {
   /* Nothing moves on its own any more, so there is nothing to pause, and the
      button was sitting alone in a full-width row. */
   #rev-toggle { display: none; }
+  /* The duplicate set exists only to make the desktop loop seamless. With the
+     loop stopped they would be six extra cards to swipe past, every review
+     twice. */
+  .reviews-track .review[aria-hidden="true"] { display: none; }
 
   /* M6. Edgar's ruling on this strip was "make all of them normal", no wash.
      Dimming the unselected thumbnails put the wash back by another name; the
