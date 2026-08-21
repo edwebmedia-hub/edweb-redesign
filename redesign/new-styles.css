@@ -38,6 +38,7 @@
   --fs-h3: clamp(1.35rem, 1.9vw, 1.75rem);
   --fs-h4: clamp(1.05rem, 1.25vw, 1.2rem);
   --fs-lead: clamp(1.06rem, 1.28vw, 1.42rem);
+  --lh-lead: 1.6;               /* one value for both lead roles */
   --fs-body: 1rem;
   --fs-small: 1rem; /* alias of body; kept for existing rules */
   --fs-micro: 0.8125rem;
@@ -56,6 +57,7 @@
   --radius: 4px;
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
   --speed: 0.55s;
+  --speed-tap: 0.2s;            /* anything that answers a click */
 
   --header-h: 82px;
   --stick-top: calc(var(--header-h) + 3rem);
@@ -697,7 +699,7 @@ p { margin: 0; text-wrap: pretty; }
   transform: translateY(-3px);
   box-shadow: 0 18px 40px color-mix(in srgb, var(--ink) 10%, transparent);
 }
-.pcard-name { font-size: var(--fs-small); font-weight: 500; color: var(--text-muted); }
+.pcard-name { font-size: var(--fs-small); font-weight: 600; color: var(--text-muted); }
 .pcard-price {
   display: flex;
   flex-wrap: wrap;
@@ -2864,3 +2866,24 @@ textarea[aria-invalid="true"] {
    smaller than the ordinary headings around it, which inverts the hierarchy on
    the screen it was raised for. It leads again at every width. */
 .wordstack { font-size: clamp(2.5rem, 4.3vw, 3.9rem); }
+
+/* Anchor targets clear the sticky header. Without this every nav link, the
+   skip link and every jump link land their heading underneath it. */
+section[id],
+main[id] {
+  scroll-margin-top: calc(var(--header-h) + 0.75rem);
+}
+
+/* One value per role, corrected after measurement rather than reading. */
+.lead,
+.cta-sub { line-height: var(--lh-lead); }
+/* The long-form pages set their own reading line-height; every other paragraph
+   on the site sits at the body value, so the policy pages were the odd ones. */
+.prose p,
+.prose li { line-height: 1.72; }
+/* Buttons answer a tap; they should not take half a second to say so. */
+.btn { transition: background var(--speed-tap) var(--ease), color var(--speed-tap) var(--ease), border-color var(--speed-tap) var(--ease), transform var(--speed-tap) var(--ease); }
+
+/* The display heading was raised to clear the section heading, but 40 against
+   36 is neither the same role nor a step. It leads properly now. */
+.wordstack { font-size: clamp(2.9rem, 4.8vw, 4.3rem); }

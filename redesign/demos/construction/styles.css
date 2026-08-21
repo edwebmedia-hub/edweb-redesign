@@ -1,5 +1,5 @@
 /* ==========================================================================
-   IRONSTONE CONSTRUCTION — master demo template
+   IRONSTONE CONSTRUCTION, master demo template
    Direction: "load-bearing". Concrete, rust and dust. Everything derived from
    three OKLCH anchors; motion is scroll-driven and dies under reduced-motion.
    ========================================================================== */
@@ -148,7 +148,7 @@ p { text-wrap: pretty; }
 @view-transition { navigation: auto; }
 
 /* ==========================================================================
-   ATMOSPHERE — grain + scroll rail
+   ATMOSPHERE, grain + scroll rail
    ========================================================================== */
 .grain {
   position: fixed;
@@ -185,7 +185,7 @@ p { text-wrap: pretty; }
 @keyframes rail { to { transform: scaleY(1); } }
 
 /* ==========================================================================
-   CONTROLS — pills, magnetic
+   CONTROLS, pills, magnetic
    ========================================================================== */
 .pill {
   display: inline-flex;
@@ -242,7 +242,7 @@ p { text-wrap: pretty; }
    and one hover, not two. */
 
 /* ==========================================================================
-   MASTHEAD — glass, condenses on scroll
+   MASTHEAD, glass, condenses on scroll
    ========================================================================== */
 .masthead {
   position: fixed;
@@ -583,7 +583,7 @@ p { text-wrap: pretty; }
 /* Reviews: Edgar wants the actual rust/red-orange, not a black section with
    a hint of colour in it. Solid rust fill, same accent as the stat numbers
    and the services strip. */
-/* Real scaffolding photo, barely visible under the rust fill — a texture,
+/* Real scaffolding photo, barely visible under the rust fill, a texture,
    not a second image competing with the review content. */
 #reviews.band--ink {
   position: relative;
@@ -615,7 +615,7 @@ p { text-wrap: pretty; }
 .lede { font-size: var(--t-lg); color: var(--tx-soft); }
 
 /* ==========================================================================
-   BENTO — deliberately uneven cells
+   BENTO, deliberately uneven cells
    ========================================================================== */
 .bento {
   display: grid;
@@ -691,7 +691,7 @@ p { text-wrap: pretty; }
 }
 
 /* ==========================================================================
-   SPLIT — asymmetric, sticky media, counters
+   SPLIT, asymmetric, sticky media, counters
    ========================================================================== */
 .split { display: grid; gap: var(--s8); align-items: start; }
 @media (min-width: 940px) {
@@ -798,7 +798,7 @@ p { text-wrap: pretty; }
 }
 
 /* ==========================================================================
-   APPROACH — sticky anchor, stepped list
+   APPROACH, sticky anchor, stepped list
    ========================================================================== */
 /* Blueprint backdrop. Lives on the closing contact band, which holds still.
    Behind the approach section it sat under a pinned heading and a stepping
@@ -911,7 +911,7 @@ html.js .step.in { opacity: 1; transform: none; }
 .step p { color: var(--tx-soft); max-width: 56ch; }
 
 /* ==========================================================================
-   WORK RAIL — horizontal scroll-snap + pointer tilt
+   WORK RAIL, horizontal scroll-snap + pointer tilt
    ========================================================================== */
 .rail {
   display: flex;
@@ -982,7 +982,7 @@ html.js .step.in { opacity: 1; transform: none; }
 }
 
 /* ==========================================================================
-   STATEMENT — words unmask on scroll
+   STATEMENT, words unmask on scroll
    ========================================================================== */
 .statement {
   position: relative;
@@ -1076,7 +1076,7 @@ html.js .step.in { opacity: 1; transform: none; }
    ========================================================================== */
 /* One review at a time, swapped in place. A grid of three read as filler;
    a single large quote gets actually read. The quote sits on a solid paper
-   panel with a hard offset slab — a poured plate on the scaffold, so the
+   panel with a hard offset slab, a poured plate on the scaffold, so the
    rust field and photo texture stay visible around it. */
 .voicebox {
   display: grid;
@@ -1369,7 +1369,7 @@ html.js .step.in { opacity: 1; transform: none; }
 .foot-base small { font-size: var(--t-xs); color: color-mix(in oklch, var(--paper) 62%, var(--ink)); }
 
 /* ==========================================================================
-   REVEAL — IntersectionObserver fallback for everything not scroll-driven.
+   REVEAL, IntersectionObserver fallback for everything not scroll-driven.
    Without .js on <html>, content is simply visible. A JS failure can never
    leave the page blank.
    ========================================================================== */
@@ -1383,7 +1383,7 @@ html.js .rise {
 html.js .rise.seen { opacity: 1; transform: none; }
 
 /* ==========================================================================
-   REDUCED MOTION — everything above becomes static, nothing disappears.
+   REDUCED MOTION, everything above becomes static, nothing disappears.
    ========================================================================== */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
@@ -1465,7 +1465,7 @@ html.js .rise.seen { opacity: 1; transform: none; }
 .drawer-nav a.is-current { color: var(--rust-hot); }
 
 /* ==========================================================================
-   SERVICE DETAIL — alternating full rows, never a card grid
+   SERVICE DETAIL, alternating full rows, never a card grid
    ========================================================================== */
 .svc {
   display: grid;
@@ -1568,7 +1568,7 @@ html.js .rise.seen { opacity: 1; transform: none; }
 }
 
 /* ==========================================================================
-   ABOUT — timeline, team, values
+   ABOUT, timeline, team, values
    ========================================================================== */
 .timeline { display: grid; }
 .tl {

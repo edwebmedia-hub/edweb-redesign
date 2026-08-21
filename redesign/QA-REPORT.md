@@ -701,3 +701,53 @@ WordPress builds run custom child themes.
 **Still not provable without a deploy:** clean URLs (`vercel.json` sets
 `cleanUrls`, and the local server does not implement it, which is what hid B1),
 Lighthouse, and real iOS Safari.
+
+### Second independent review, same night
+
+Returned again with three blockers. One of them, unanchored `.vercelignore`
+patterns, had already been caught and fixed an hour earlier; the reviewer read
+the file before that commit landed. The other two were real and are fixed.
+
+**Blocker: in-page navigation cut its own headings in half.** Every anchor
+landed its target at viewport top under an 82px sticky header, so tapping
+Services on a phone arrived with the heading's first line sliced. The service
+rows had been given a header offset in JS; the navigation every visitor
+actually uses had not. `scroll-margin-top` now handles it declaratively for
+anchors, the skip link and `:target` alike. Verified clear on all four nav
+targets at 390 and 1280.
+
+**Blocker: the demo builds asserted real regulatory credentials with nothing
+visible saying they are demos.** PIRB registration, SACPCMP supervision, COIDA
+cover, certificates of compliance, workmanship guarantees, company registration
+forms and an invented street address, all in the first person, for five
+businesses that do not exist. `noindex`, the robots disallow and the work page
+labels cover the visitor who arrives through the site; they do not cover the
+shared link, which is how these are distributed. Every one of the 22 demo pages
+now carries a fixed strip naming it a demonstration build for a business that
+is not real. Verified at 390 and 1280 on all 22, visible without scrolling.
+The five construction pages had no closing `</body>` or `</html>` at all; both
+went in with the marker.
+
+**Also corrected:** the figure band promised "nothing rounded up" two lines
+above a delivery figure that rounded up, against packages quoting five working
+days; the reply-time promise was made at two strengths on one page; nine struck
+prices had no reference date behind them, which the Consumer Protection Act
+asks for; the 404 page's footer had drifted from the other thirteen because
+promote handles it on a separate path; four one-value-per-role breaks measured
+from computed styles, including the only 500-weight headings on the site and a
+display heading sitting 4px from an ordinary one; a 550ms hover on buttons;
+sixteen em-dashes in a demo's CSS and JS; two TODO markers; stock adjectives;
+a promote check that reported "leftover references: NONE" while 28 remained.
+
+**Raised and deliberately not actioned, for Edgar:**
+
+- The privacy policy cites GDPR and never mentions POPIA, which is the statute
+  that actually gives South African readers those rights. That is legal copy
+  carried across from the live site and his call, not mine.
+- The lower half of the home page runs roughly 7,900px of continuous light
+  ground with no dark anchor. The obvious fix is flipping a band to ink, and he
+  has rejected exactly that change before, so it stays as it is until he says
+  otherwise.
+- The logo strip shows nine businesses while the work page says six client
+  builds. Compatible (the strip is not limited to featured case studies) but
+  worth a look.

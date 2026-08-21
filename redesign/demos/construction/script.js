@@ -1,5 +1,5 @@
 /* ==========================================================================
-   IRONSTONE CONSTRUCTION — behaviour
+   IRONSTONE CONSTRUCTION, behaviour
    Every enhancement here is optional. Without JS the page is fully readable:
    .rise elements stay visible, the drawer is never needed (nav duplicates in
    the footer), and all counters/statements already carry their final text.

@@ -31,7 +31,7 @@ Prepared 2026-08-21. Everything below that can be done without touching the live
 2. **Eight pages had no social cards.** Both policy pages and all six project write-ups. A link shared to a chat rendered as a bare URL. Fixed.
 3. **There was no 404 page.** A mistyped URL got the host's default error screen. `404.html` now matches the site, carries `noindex`, and offers the four pages people actually want.
 4. **The sitemap was wrong.** It listed `.html` paths on a site that runs clean URLs, and knew nothing about the six project write-ups. Rebuilt: 13 clean URLs with `lastmod`.
-5. **The demo sites would have been indexed.** Five fictional businesses competing with the real client pages in search. All 16 demo pages now carry `noindex`, `robots.txt` disallows `/demos/`, and they are excluded from the sitemap.
+5. **The demo sites would have been indexed.** Five fictional businesses competing with the real client pages in search. All 22 demo pages now carry `noindex`, `robots.txt` disallows `/demos/`, and they are excluded from the sitemap.
 6. **The discount label failed contrast.** Coral at 13px is 3.49:1 on paper. Mixed with ink it is 6.44:1 and still reads as the accent.
 7. **Card marks restored on the checkout.** Real Visa and Mastercard marks, which are the only colours on the site outside the four brand tokens. Deliberate: a recognised card mark is a trust signal at the exact moment someone is about to type a card number, and redrawn in brand colours it stops being recognisable. Screen readers get a text equivalent.
 
