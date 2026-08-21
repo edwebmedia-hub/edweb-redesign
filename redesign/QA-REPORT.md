@@ -600,3 +600,47 @@ Six stacked case rows became the services tab spine: the six client names listed
 Reusing `.tab` and `.tab-panel` means the existing keyboard and aria handling applies with no new script. Verified: all six tabs switch, exactly one panel visible each time, every screenshot loads, panels resolve to opacity 1, arrow keys move between tabs and change the panel. Page height dropped from 6421px to 4470px.
 
 The masthead card used to list the same six names and told the reader to "jump straight to one", which nothing did. It now carries what is true of the set: industries, typical build time, design approach, hosting.
+
+---
+
+## Phone pass, 2026-08-21 (after first live deploy)
+
+Edgar opened the deployed site on his handset and sent nine corrections. All
+nine are implemented, plus one defect found while checking his point 7.
+
+**Look loop.** Section-by-section captures at 390 before and after every change,
+in the session scratchpad under `sweep/` and `sweep2/`. Each fix was measured,
+not assumed: the numbers below are computed styles read from Chrome, not values
+read off the stylesheet.
+
+| # | Edgar's words | Before | After |
+|---|---|---|---|
+| 1 | Sections too close to the edges | 16px gutter at 390 | 28px; 31 at 768 and 48 at 1280, within a pixel of before |
+| 2 | Pricing not modern, "R500 off" redundant | struck price, live price and label in one run of text, on all 11 cards | old price on its own line, live price below, qualifier trailing, hairline under; promotion announced once |
+| 3 | Work heading and filters awkward | two columns at 390, heading in a third of the screen | one column; filters 2x2, 44px targets |
+| 4 | Too much space above the heading, heading too small | 72px above, h2 31px | 56px above, h2 36px |
+| 5 | Services list sloppy | wrapping row of six long labels | six rows, hairline between, coral dot on the selected one, panel opens directly beneath |
+| 6 | Footer icons red | grey outlines | coral fill, paper glyphs, 42x42 |
+| 7 | Email and links must work | unproven | real enquiry sent through the live endpoint and delivered; honeypot returns success without sending; 42 internal and 18 external targets resolve |
+| 8 | Remove the index block | five-row card in the work masthead | removed; masthead runs as one column |
+| 9 | Slider not mobile friendly | auto-sliding rail below the panel | static, above the panel, swipe with snap, clones hidden, selected thumb marked |
+
+**Defect found while checking point 7.** `dielekkerdoos.co.za` is a parked
+Hostinger domain: no site, and https does not resolve. Three places on the work
+page and the write-up called it live and linked to it. The build is finished and
+running on the host's temporary address, so the screenshots and write-up stay
+and only the false claim was removed. Pointing the domain reverses three edits.
+
+**Regression at 390, 768, 1280 across 13 pages:** no overflow, no broken images,
+no console errors, no reveal element left invisible, all internal links resolve.
+
+**Contrast.** The new coral selected-row style matched every `.tab`, so the
+pricing strip picked it up at 18px where coral on paper is 3.89:1 against a 4.5
+bar. Scoped to the services list and set at 19.2px/700, where 3.89 is the
+correct threshold. What still reports is 32 disabled calendar days and the Visa
+mark, both exempt under WCAG 1.4.3.
+
+**Touch targets:** none under 24x24 on any page.
+
+**Not yet done:** this build is committed but not deployed. The live domain
+still serves the pre-pass version.

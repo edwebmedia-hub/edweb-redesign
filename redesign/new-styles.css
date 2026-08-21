@@ -829,7 +829,7 @@ textarea {
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  padding: 0.95rem 1rem;
+  padding: 0.8rem 0.9rem;
   transition: border-color var(--speed) var(--ease), box-shadow var(--speed) var(--ease);
 }
 input:focus,
@@ -1660,7 +1660,7 @@ select {
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  padding: 0.95rem 1rem;
+  padding: 0.8rem 0.9rem;
   transition: border-color var(--speed) var(--ease), box-shadow var(--speed) var(--ease);
 }
 select:focus {
@@ -2007,8 +2007,6 @@ p a:not(.ulink):not(.btn):hover,
 .page-hero-inner--form .hero-card textarea { min-height: 84px; }
 .page-hero-inner--form .chips { gap: 0.45rem; }
 .page-hero-inner--form .chip span { padding: 0.5rem 0.8rem; }
-.page-hero-inner--form input,
-.page-hero-inner--form select { padding: 0.8rem 0.9rem; }
 .page-hero-inner--form label { margin-bottom: 0.35rem; }
 
 /* Facts sit under the contact CTAs so the left column fills the same height as
@@ -2211,7 +2209,7 @@ textarea[aria-invalid="true"] {
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  padding: 0.95rem 1rem;
+  padding: 0.8rem 0.9rem;
   cursor: pointer;
   transition: border-color var(--speed) var(--ease), box-shadow var(--speed) var(--ease);
 }
@@ -2276,9 +2274,6 @@ textarea[aria-invalid="true"] {
 .no-js .multi-panel { position: static; box-shadow: none; }
 .no-js .multi-btn { display: none; }
 
-/* The compact form variant tightens the selects; the picker button has to match
-   or it stands 5px taller than the controls directly under it. */
-.page-hero-inner--form .multi-btn { padding: 0.8rem 0.9rem; }
 .page-hero-inner--form .multi-label { margin-bottom: 0.35rem; }
 
 /* ------------------------------ Legal pages ------------------------------- */
@@ -2788,4 +2783,13 @@ textarea[aria-invalid="true"] {
   .opt-c .thumb[aria-selected="true"] img { outline: 2px solid var(--coral); outline-offset: 2px; }
   .opt-c .thumb span { font-size: var(--fs-micro); }
   .opt-c .tab-panel.is-active { grid-template-columns: 1fr; gap: 1.5rem; }
+}
+
+
+/* Declared last so no later unconditional rule can outrank them. Both of these
+   were already written once higher up and both were being overridden. */
+@media (max-width: 860px) {
+  .booking { grid-template-columns: 1fr; }
+  .booking-side { min-width: 0; }
+  .booking-side form .btn { width: 100%; }
 }
