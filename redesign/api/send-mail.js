@@ -31,7 +31,7 @@ module.exports = async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ success: false, message: 'Method not allowed' });
 
   const { type, first_name, last_name, email, phone, services, addons, budget, timeline, message, package: pkg,
-          name, meeting_date, note, company } = req.body;
+          name, meeting_date, note, company, website_type } = req.body;
 
   // Honeypot: bots fill the hidden field; drop silently with a fake success.
   // Note: no `sent` flag here — the client only fires the Ads conversion when
@@ -93,6 +93,8 @@ module.exports = async function handler(req, res) {
     `Phone:     ${phone || '-'}`,
     `Package:   ${pkg || '-'}`,
     `Services:  ${services || '-'}`,
+    // website_type is load-bearing: it is the answer that routes the enquiry.
+    `Website:   ${website_type || '-'}`,
     `Add-ons:   ${addons || '-'}`,
     `Budget:    ${budget || '-'}`,
     `Timeline:  ${timeline || '-'}`,

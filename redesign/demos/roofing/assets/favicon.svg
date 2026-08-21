@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Ridgeworks Roofing">
+  <rect width="64" height="64" rx="10" fill="#232830"/>
+  <path d="M10 48 32 16l22 32" fill="none" stroke="#b8562f" stroke-width="8" stroke-linecap="square"/>
+</svg>

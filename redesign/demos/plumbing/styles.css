@@ -1,0 +1,1772 @@
+/* ==========================================================================
+   WATERLINE PLUMBING - master demo template (plumbing trade)
+   Skeleton: Plumfix bold trade poster + Plumbzo conversion patterns.
+   One condensed display face carries the brand; petrol ink + water blue.
+   Every colour is mixed from three anchors. No eyebrow pills anywhere.
+   ========================================================================== */
+
+:root {
+  /* ---- Anchors. Every other colour is mixed from these three. ---- */
+  --ink:   oklch(0.21 0.02 232);   /* petrol near-black, wet slate      */
+  --paper: oklch(0.965 0.006 210); /* cool porcelain off-white          */
+  --blue:  oklch(0.56 0.155 244);  /* mains-water blue, the one accent  */
+
+  /* ---- Derived surfaces ---- */
+  --ink-2:   color-mix(in oklch, var(--ink) 86%, var(--blue));
+  --ink-3:   color-mix(in oklch, var(--ink) 93%, var(--paper));
+  --paper-2: color-mix(in oklch, var(--paper) 94%, var(--ink));
+  --paper-3: color-mix(in oklch, var(--paper) 87%, var(--ink));
+  --blue-deep: color-mix(in oklch, var(--blue) 72%, var(--ink));
+  /* Solid blue carrying white text. The raw accent measures 4.14:1 against
+     paper, under the 4.5 body text needs; this is the smallest step that
+     clears it (4.65) and is visually indistinguishable from --blue. */
+  --blue-btn: color-mix(in oklch, var(--blue) 92%, var(--ink));
+  --blue-wash: color-mix(in oklch, var(--blue) 12%, var(--paper));
+  /* Brighter but still saturated, for accents sitting on ink. */
+  --blue-hot: color-mix(in oklch, var(--blue) 72%, oklch(0.85 0.09 230));
+
+  /* ---- Text ---- */
+  --tx:          var(--ink);
+  --tx-soft:     color-mix(in oklch, var(--ink) 64%, var(--paper));
+  --tx-inv:      var(--paper);
+  --tx-inv-soft: color-mix(in oklch, var(--paper) 66%, var(--ink));
+
+  --line:     color-mix(in oklch, var(--ink) 13%, transparent);
+  --line-inv: color-mix(in oklch, var(--paper) 15%, transparent);
+
+  /* ---- Scrims ---- */
+  --veil:      color-mix(in oklch, var(--ink) 58%, transparent);
+  --veil-deep: color-mix(in oklch, var(--ink) 90%, transparent);
+
+  /* ---- Type. One condensed poster face + one quiet grotesque. ---- */
+  --display: "Bebas Neue", "Arial Narrow", "Impact", sans-serif;
+  --body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --t-xs:  clamp(0.72rem, 0.70rem + 0.12vw, 0.80rem);
+  --t-sm:  clamp(0.84rem, 0.81rem + 0.16vw, 0.94rem);
+  --t-md:  clamp(0.98rem, 0.94rem + 0.20vw, 1.10rem);
+  --t-lg:  clamp(1.12rem, 1.04rem + 0.38vw, 1.36rem);
+  --t-xl:  clamp(1.45rem, 1.24rem + 0.90vw, 2.10rem);
+  /* Display sizes run condensed, so they can go far larger than usual. */
+  --d-md:  clamp(1.9rem, 1.5rem + 1.8vw, 3.1rem);
+  --d-lg:  clamp(2.6rem, 1.9rem + 3.2vw, 4.6rem);
+  --d-xl:  clamp(3.4rem, 2.3rem + 5.2vw, 6.6rem);
+  --d-hero: clamp(3.9rem, 2.4rem + 7vw, 8.2rem);
+  --d-ghost: clamp(9rem, 30vw, 27rem);
+
+  /* ---- Space ---- */
+  --s1: 0.25rem; --s2: 0.5rem;  --s3: 0.75rem; --s4: 1rem;
+  --s5: 1.5rem;  --s6: 2rem;    --s7: 2.75rem; --s8: 3.5rem;
+  --s9: 5rem;    --s10: 7rem;
+  --band-y: clamp(3.75rem, 2.6rem + 4.4vw, 7rem);
+  --gutter: clamp(1.25rem, 0.6rem + 2.6vw, 3.5rem);
+  --shell: 1240px;
+
+  /* Floating pill nav inset, reused by its scrolled backdrop. */
+  --mast-top: clamp(0.6rem, 1.4vw, 1.1rem);
+  /* Height of the snapped full-width bar: where sticky things park. */
+  --mast-h: 3.95rem;
+
+  --r-sm: 6px;
+  --r-md: 14px;
+  --r-pill: 999px;
+
+  --shadow-md: 0 10px 30px -12px color-mix(in oklch, var(--ink) 28%, transparent);
+  --shadow-lg: 0 24px 60px -24px color-mix(in oklch, var(--ink) 38%, transparent);
+
+  /* ---- Motion ---- */
+  --expo:   cubic-bezier(0.16, 1, 0.3, 1);
+  --smooth: cubic-bezier(0.33, 1, 0.68, 1);
+  --quick:  180ms var(--smooth);
+  --base:   420ms var(--expo);
+}
+
+/* ==========================================================================
+   RESET + BASE
+   ========================================================================== */
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  font-family: var(--body);
+  font-size: var(--t-md);
+  line-height: 1.65;
+  color: var(--tx);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+img { display: block; max-width: 100%; height: auto; }
+a { color: inherit; text-decoration: none; }
+ul, ol { list-style: none; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+
+h1, h2, h3 {
+  font-family: var(--display);
+  font-weight: 400;
+  text-transform: uppercase;
+  line-height: 0.94;
+  letter-spacing: 0.01em;
+  text-wrap: balance;
+}
+
+.shell { max-width: var(--shell); margin-inline: auto; padding-inline: var(--gutter); }
+
+::selection { background: var(--blue); color: var(--paper); }
+
+:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.skip-link {
+  position: fixed;
+  top: -100px;
+  left: var(--s4);
+  z-index: 200;
+  padding: var(--s3) var(--s5);
+  background: var(--ink);
+  color: var(--tx-inv);
+  border-radius: var(--r-sm);
+  transition: top var(--quick);
+}
+.skip-link:focus { top: var(--s4); }
+
+/* Accent word inside a heading. Never an eyebrow above it. */
+.hl { color: var(--blue); }
+.on-dark .hl, .is-dark .hl { color: var(--blue-hot); }
+
+/* Section lead-ins: heading + optional standfirst, no labels above. */
+.kicker-rule {
+  display: block;
+  width: 64px;
+  height: 4px;
+  margin-bottom: var(--s5);
+  background: var(--blue);
+  border-radius: 2px;
+}
+
+/* ==========================================================================
+   REVEAL
+   ========================================================================== */
+.rise { opacity: 1; transform: none; }
+html.js .rise {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 600ms var(--expo) var(--d, 0ms), transform 700ms var(--expo) var(--d, 0ms);
+}
+html.js .rise.seen { opacity: 1; transform: none; }
+
+/* ==========================================================================
+   BUTTONS - every button solid. No ghosts, no outlines-only.
+   ========================================================================== */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  padding: 0.95em 1.9em;
+  border-radius: var(--r-pill);
+  font-size: var(--t-sm);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  line-height: 1;
+  transition: transform var(--quick), box-shadow var(--quick), background-color var(--quick);
+  will-change: transform;
+}
+.pill svg { width: 1.05em; height: 1.05em; flex: none; }
+.pill:hover { transform: translateY(-2px); }
+.pill:active { transform: translateY(0); }
+
+.pill--blue { background: var(--blue-btn); color: var(--paper); box-shadow: var(--shadow-md); }
+.pill--blue:hover { background: var(--blue-deep); }
+.pill--paper { background: var(--paper); color: var(--ink); box-shadow: var(--shadow-md); }
+.pill--paper:hover { background: var(--paper-3); }
+.pill--ink { background: var(--ink); color: var(--tx-inv); }
+.pill--ink:hover { background: var(--ink-2); }
+
+/* Every pill is already one height, one radius and one type size. What was
+   not matched was width: a pill sizes to its own label, so "24/7 emergency
+   line" sat 51px wider than "Get a fixed quote" beside it and the pair read
+   as two different buttons. A shared floor squares up any pair, and the
+   label centres inside it instead of hugging the left edge.
+
+   Deliberately not applied to .nav-cta (the header pill must stay compact) or
+   to pills sitting inline inside a card, where 15rem would overflow. */
+.hero-ctas .pill,
+.cta-ctas .pill,
+.svc-head .pill,
+.drawer-foot .pill,
+.qform-foot .pill { min-width: 15rem; justify-content: center; }
+
+/* ==========================================================================
+   FLOATING PILL NAV
+   ========================================================================== */
+.masthead {
+  position: fixed;
+  top: var(--mast-top);
+  /* Centred with auto margins, not translate: a transformed ancestor becomes
+     the containing block for fixed children, which broke the backdrop below. */
+  left: 0;
+  right: 0;
+  margin-inline: auto;
+  z-index: 100;
+  width: min(var(--shell), 100% - 2 * var(--gutter));
+  border-radius: var(--r-pill);
+  /* Solid, never translucent (Edgar, 2026-08-11). Blurred glass let headings
+     and photos ghost through the bar as the page scrolled under it, which
+     looked broken rather than layered. */
+  background: var(--paper);
+  box-shadow: 0 1px 0 var(--line) inset, var(--shadow-md);
+  transition: box-shadow var(--quick), top var(--quick), width var(--quick), border-radius var(--quick);
+}
+/* Scrolled: the floating pill snaps out to a full-width solid bar. A pill with
+   transparent margins can never stop content sliding through the gaps beside
+   it, and half-seen headings behind the nav looked broken (Edgar, 2026-08-11).
+   Edge to edge, nothing passes. */
+.masthead.stuck {
+  top: 0;
+  width: 100%;
+  border-radius: 0;
+  box-shadow: 0 1px 0 var(--line) inset, var(--shadow-lg);
+}
+.masthead.stuck .masthead-inner {
+  max-width: var(--shell);
+  margin-inline: auto;
+  padding-inline: var(--gutter) 0.6rem;
+}
+
+
+
+.masthead-inner {
+  display: flex;
+  align-items: center;
+  gap: var(--s6);
+  padding: 0.55rem 0.6rem 0.55rem 1.4rem;
+}
+
+.wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: var(--display);
+  font-size: 1.55rem;
+  line-height: 1;
+  letter-spacing: 0.02em;
+}
+.wordmark-drop {
+  width: 1.05rem;
+  height: 1.3rem;
+  flex: none;
+  color: var(--blue);
+}
+.wordmark em { font-style: normal; color: var(--blue); }
+
+.nav-desktop { display: flex; gap: clamp(1rem, 2.4vw, 2.1rem); margin-left: auto; }
+.nav-desktop a {
+  position: relative;
+  font-size: var(--t-sm);
+  font-weight: 500;
+  color: var(--tx-soft);
+  padding: 0.4rem 0;
+  transition: color var(--quick);
+}
+.nav-desktop a::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 100%; bottom: 0.1rem;
+  height: 2px;
+  background: var(--blue);
+  transition: right 260ms var(--expo);
+}
+.nav-desktop a:hover, .nav-desktop a.is-current { color: var(--tx); }
+.nav-desktop a:hover::after, .nav-desktop a.is-current::after { right: 0; }
+
+.nav-cta { flex: none; }
+
+.burger {
+  display: none;
+  position: relative;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: var(--ink);
+  flex: none;
+}
+.burger span {
+  position: absolute;
+  left: 13px; right: 13px;
+  height: 2px;
+  background: var(--paper);
+  transition: transform var(--base), top var(--base);
+}
+.burger span:first-child { top: 18px; }
+.burger span:last-child { top: 26px; }
+.burger[aria-expanded="true"] span:first-child { top: 22px; transform: rotate(45deg); }
+.burger[aria-expanded="true"] span:last-child { top: 22px; transform: rotate(-45deg); }
+
+.drawer[hidden] { display: none; }
+.drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--s7);
+  padding: var(--s8) var(--gutter);
+  background: var(--ink);
+}
+.drawer-nav { display: grid; gap: var(--s2); }
+.drawer-nav a {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s4);
+  font-family: var(--display);
+  font-size: clamp(2.4rem, 9vw, 3.6rem);
+  text-transform: uppercase;
+  color: var(--tx-inv);
+  line-height: 1.1;
+}
+.drawer-nav a span { font-size: var(--t-sm); font-family: var(--body); color: var(--blue-hot); font-weight: 600; }
+.drawer-nav a.is-current { color: var(--blue-hot); }
+.drawer-foot { display: grid; gap: var(--s3); justify-items: start; }
+
+/* ==========================================================================
+   HERO - ghost wordmark behind the subject, glow between.
+   ========================================================================== */
+.hero {
+  position: relative;
+  min-height: min(100svh, 940px);
+  display: flex;
+  align-items: flex-end;
+  background: var(--ink);
+  color: var(--tx-inv);
+  overflow: clip;
+}
+
+/* Subtle plumbing-schematic texture so the ink is never flat. */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(color-mix(in oklch, var(--paper) 4%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in oklch, var(--paper) 4%, transparent) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(120% 90% at 70% 40%, black 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-ghost {
+  position: absolute;
+  right: -0.04em;
+  top: 48%;
+  translate: 0 -50%;
+  font-family: var(--display);
+  font-size: var(--d-ghost);
+  line-height: 1;
+  letter-spacing: -0.005em;
+  color: color-mix(in oklch, var(--paper) 9%, transparent);
+  user-select: none;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.hero-glow {
+  position: absolute;
+  right: clamp(4%, 12vw, 16%);
+  top: 16%;
+  width: clamp(220px, 34vw, 480px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in oklch, var(--blue) 52%, transparent) 0%, transparent 62%);
+  filter: blur(28px);
+  pointer-events: none;
+}
+
+.hero-subject {
+  position: absolute;
+  right: clamp(-2rem, 6vw, 10rem);
+  bottom: 0;
+  height: min(86%, 780px);
+  width: auto;
+  /* The photo's near-black studio ground melts into the ink section ground,
+     so the subject reads as a cut-out without one. */
+  mix-blend-mode: lighten;
+  mask-image:
+    linear-gradient(black 78%, transparent 99%),
+    radial-gradient(120% 100% at 50% 40%, black 58%, transparent 92%);
+  mask-composite: intersect;
+  -webkit-mask-image:
+    linear-gradient(black 78%, transparent 99%),
+    radial-gradient(120% 100% at 50% 40%, black 58%, transparent 92%);
+  -webkit-mask-composite: source-in;
+  pointer-events: none;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding-block: clamp(7rem, 16vh, 9rem) clamp(3.2rem, 7vh, 5rem);
+}
+
+.hero-copy { max-width: 620px; }
+.hero-copy h1 {
+  font-size: var(--d-hero);
+  margin-bottom: var(--s5);
+}
+.hero-lede {
+  max-width: 44ch;
+  font-size: var(--t-lg);
+  line-height: 1.55;
+  color: var(--tx-inv-soft);
+  margin-bottom: var(--s6);
+}
+.hero-ctas { display: flex; flex-wrap: wrap; gap: var(--s4); align-items: center; }
+
+.hero-card {
+  position: absolute;
+  right: var(--gutter);
+  bottom: clamp(2.4rem, 6vh, 4rem);
+  z-index: 3;
+  width: min(300px, 78vw);
+  padding: var(--s5) var(--s6);
+  background: var(--paper);
+  color: var(--tx);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-lg);
+}
+.hero-card strong {
+  display: block;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 2.6rem;
+  line-height: 1;
+  color: var(--blue);
+}
+.hero-card span { display: block; font-size: var(--t-sm); color: var(--tx-soft); margin-top: var(--s2); line-height: 1.5; }
+
+/* ==========================================================================
+   ASSURANCE MARQUEE - real trust marks, not fake logos.
+   ========================================================================== */
+.assure {
+  /* One step off plain paper so the strip reads as its own rib between the
+     dark hero and the intro, rather than merging into the section below it. */
+  background: var(--paper-2);
+  border-block: 1px solid var(--line);
+  padding-block: var(--s5);
+  overflow: hidden;
+}
+.assure-track {
+  display: flex;
+  gap: var(--s8);
+  width: max-content;
+  animation: marquee 36s linear infinite;
+}
+.assure:hover .assure-track { animation-play-state: paused; }
+@keyframes marquee { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) {
+  .assure-track { animation: none; flex-wrap: wrap; width: auto; justify-content: center; }
+}
+.assure-item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s3);
+  font-family: var(--display);
+  font-size: var(--t-xl);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--tx-soft);
+  white-space: nowrap;
+}
+.assure-item::before {
+  content: "";
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: var(--blue);
+}
+
+/* ==========================================================================
+   INTRO - statement + photo + counters
+   ========================================================================== */
+.intro { padding-block: var(--band-y); background: var(--paper); }
+.intro-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: stretch;
+}
+.intro-copy h2 { font-size: var(--d-lg); margin-bottom: var(--s5); }
+.intro-copy p { max-width: 56ch; color: var(--tx-soft); }
+.intro-copy p + p { margin-top: var(--s4); }
+
+.intro-photo {
+  position: relative;
+  border-radius: var(--r-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+/* Absolute fill: the copy column sets the row height, and the photo runs
+   exactly from the heading's top to the last line, never past it. */
+.intro-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.intro-photo::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 34%;
+  background: linear-gradient(transparent, var(--veil));
+}
+.intro-photo figcaption {
+  position: absolute;
+  left: var(--s5); right: var(--s5); bottom: var(--s4);
+  z-index: 1;
+  color: var(--tx-inv);
+  font-size: var(--t-sm);
+}
+
+.figures {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s6);
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+  padding-top: clamp(1.8rem, 3vw, 2.6rem);
+  border-top: 1px solid var(--line);
+}
+.figures div { display: grid; gap: var(--s1); }
+.figures dt {
+  font-family: var(--display);
+  font-size: var(--d-md);
+  line-height: 1;
+  color: var(--ink);
+}
+.figures dt em { font-style: normal; color: var(--blue); }
+.figures dd { font-size: var(--t-sm); color: var(--tx-soft); }
+
+/* ==========================================================================
+   SERVICES - 3 cards on the home page
+   ========================================================================== */
+/* Dark chapter. This sat in the middle of a four-section light run, which is
+   what made that stretch of the page read as one undifferentiated block. The
+   white service cards carry the section now instead of competing with a light
+   ground. Schematic grid rather than a photo, so it stays distinct from the
+   reviews band further down. */
+.svc {
+  position: relative;
+  padding-block: var(--band-y);
+  background:
+    linear-gradient(
+      color-mix(in oklch, var(--ink) 80%, transparent),
+      color-mix(in oklch, var(--ink) 90%, transparent)),
+    url('assets/detail-valve.jpg') center 40% / cover no-repeat;
+  color: var(--tx-inv);
+}
+.svc > .shell { position: relative; z-index: 1; }
+.svc .svc-head h2 { color: var(--tx-inv); }
+.svc .svc-head h2 .hl { color: var(--blue-hot); }
+/* Full strength, not the softened tone: over a photograph the soft tone only
+   reached 4.1:1 at this size, under the 4.5 required. */
+.svc .svc-head-side p { color: var(--paper); }
+.svc-head {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  gap: var(--s6);
+  margin-bottom: clamp(2rem, 4vw, 3.4rem);
+}
+.svc-head h2 { font-size: var(--d-lg); }
+.svc-head-side { display: grid; gap: var(--s4); justify-items: start; max-width: 40ch; }
+.svc-head-side p { color: var(--tx-soft); font-size: var(--t-sm); }
+
+.svc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+  gap: var(--s6);
+}
+.svc-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--paper);
+  border-radius: var(--r-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  transition: transform var(--base), box-shadow var(--base);
+}
+.svc-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+.svc-card-media { position: relative; aspect-ratio: 16 / 10; overflow: hidden; }
+.svc-card-media img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 900ms var(--expo);
+}
+.svc-card:hover .svc-card-media img { transform: scale(1.05); }
+/* No decorative rule above the heading. A short coloured dash sitting over a
+   title is the stock card ornament and the thing that dates this shape; the
+   heading carries itself. */
+.svc-card-body { display: grid; gap: var(--s3); padding: var(--s6); flex: 1; align-content: start; }
+
+/* The card is paper regardless of the band behind it, so its contents opt out
+   of the section's inverse colour. Without this the headings inherited white
+   from the dark band and vanished against the white card. */
+.svc-card { color: var(--tx); }
+.svc-card h3 { font-size: var(--d-md); line-height: 0.92; letter-spacing: 0.01em; color: var(--tx); }
+.svc-card p { font-size: var(--t-sm); color: var(--tx-soft); }
+
+/* The link reads as one control: label plus a round arrow chip that fills on
+   hover, rather than a text link with a floating arrow beside it. */
+.svc-card-go {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s3);
+  margin-top: auto;
+  padding-top: var(--s5);
+  font-size: var(--t-sm);
+  font-weight: 600;
+  color: var(--tx);
+}
+.svc-card-go svg {
+  width: 2rem;
+  height: 2rem;
+  padding: 0.5rem;
+  border-radius: 50%;
+  background: color-mix(in oklch, var(--blue) 14%, var(--paper));
+  color: var(--blue-deep);
+  transition: background-color var(--quick), color var(--quick), transform var(--quick);
+}
+.svc-card:hover .svc-card-go svg {
+  background: var(--blue-btn);
+  color: var(--paper);
+  transform: translateX(4px);
+}
+
+/* ==========================================================================
+   WHY - sticky title left, stacking cards right (pure position:sticky)
+   ========================================================================== */
+.why { padding-block: var(--band-y); background: var(--paper); }
+.why-grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: start;
+}
+/* Parks at exactly the same height as the card stack beside it, so the two
+   columns hold one line while the cards pass behind. */
+.why-title { position: sticky; top: clamp(8rem, 18vh, 11rem); }
+.why-title h2 { font-size: var(--d-lg); margin-bottom: var(--s5); }
+.why-title p { max-width: 40ch; color: var(--tx-soft); }
+
+.why-stack { display: grid; gap: var(--s6); }
+.why-card {
+  position: sticky;
+  top: clamp(8rem, 18vh, 11rem);
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  min-height: 300px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+.why-card:nth-child(2) { top: calc(clamp(8rem, 18vh, 11rem) + 1.6rem); }
+.why-card:nth-child(3) { top: calc(clamp(8rem, 18vh, 11rem) + 3.2rem); }
+.why-card-body { display: grid; gap: var(--s3); align-content: center; padding: clamp(1.6rem, 3vw, 2.6rem); }
+.why-card-ic {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: var(--r-sm);
+  background: var(--ink);
+  color: var(--paper);
+}
+.why-card-ic svg { width: 26px; height: 26px; }
+.why-card h3 { font-size: var(--d-md); }
+.why-card p { font-size: var(--t-sm); color: var(--tx-soft); max-width: 34ch; }
+.why-card-media { overflow: hidden; }
+.why-card-media img { width: 100%; height: 100%; object-fit: cover; }
+
+/* ==========================================================================
+   FLOW - the pipe-path process. The trade's own object is the timeline.
+   ========================================================================== */
+.flow {
+  padding-block: var(--band-y);
+  background: var(--ink);
+  color: var(--tx-inv);
+  position: relative;
+  overflow: clip;
+}
+/* Heading only. It used to share this row with a lede and a stat trio; with
+   those gone a two-column grid would leave the right half dead, so the
+   heading runs wide on its own instead of sitting as a narrow block above a
+   full-width pipe. */
+.flow-head { display: block; }
+.flow h2 { font-size: var(--d-lg); max-width: 22ch; }
+
+.flow-pipe { margin-top: clamp(2rem, 5vw, 3.6rem); }
+.flow-pipe svg { width: 100%; height: auto; display: block; }
+.pipe-line {
+  fill: none;
+  stroke: color-mix(in oklch, var(--paper) 26%, var(--ink));
+  stroke-width: 14;
+  stroke-linecap: round;
+}
+.pipe-water {
+  fill: none;
+  stroke: var(--blue-hot);
+  stroke-width: 6;
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 2400ms var(--smooth);
+}
+html.js .flow.seen .pipe-water, html.no-js .pipe-water { stroke-dashoffset: 0; }
+.pipe-joint { fill: var(--ink); stroke: var(--blue-hot); stroke-width: 3; }
+.pipe-metal { fill: color-mix(in oklch, var(--paper) 30%, var(--ink)); }
+.pipe-drip { fill: var(--blue-hot); opacity: 0; }
+html.js .flow.seen .pipe-drip { animation: drip 2.2s ease-in 2s infinite; }
+html.no-js .pipe-drip { opacity: 1; }
+@keyframes drip {
+  0% { opacity: 0; transform: translateY(0); }
+  12% { opacity: 1; }
+  55% { opacity: 1; transform: translateY(26px); }
+  70% { opacity: 0; transform: translateY(34px); }
+  100% { opacity: 0; transform: translateY(0); }
+}
+
+.flow-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--s6);
+  margin-top: var(--s2);
+}
+.flow-step { display: grid; gap: var(--s2); align-content: start; padding-right: var(--s4); }
+.flow-step h3 { font-size: var(--t-xl); letter-spacing: 0.03em; }
+.flow-step p { font-size: var(--t-sm); color: var(--tx-inv-soft); max-width: 26ch; }
+
+/* .flow-rail only changes anything under 920px, where the pipe SVG hides
+   and a vertical rail takes over. On desktop it is inert. */
+
+/* ==========================================================================
+   ZONE - service-area panel with radiating suburbs
+   ========================================================================== */
+.zone { padding-block: var(--band-y); background: var(--paper-2); }
+.zone-grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: center;
+}
+.zone-copy h2 { font-size: var(--d-lg); margin-bottom: var(--s4); }
+.zone-copy > p { color: var(--tx-soft); max-width: 44ch; margin-bottom: var(--s6); }
+
+.zone-list { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s3) var(--s6); margin-bottom: var(--s7); }
+.zone-list li {
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+  font-weight: 500;
+  font-size: var(--t-sm);
+}
+.zone-list svg { width: 1.05rem; height: 1.05rem; color: var(--blue); flex: none; }
+
+.zone-ask {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s4);
+  padding: var(--s5);
+  background: var(--paper);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-md);
+}
+.zone-ask p { font-size: var(--t-sm); color: var(--tx-soft); flex: 1; min-width: 22ch; }
+
+.zone-map {
+  position: relative;
+  aspect-ratio: 1 / 1.06;
+  border-radius: var(--r-md);
+  border: 1px solid var(--line);
+  overflow: clip;
+  box-shadow: var(--shadow-md);
+}
+.zone-geo { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.geo-sea { fill: color-mix(in oklch, var(--blue) 14%, var(--paper)); }
+.geo-land { fill: color-mix(in oklch, var(--paper) 97%, var(--ink)); }
+.geo-ridge { fill: color-mix(in oklch, var(--ink) 4.5%, var(--paper)); }
+.geo-coast {
+  fill: none;
+  stroke: color-mix(in oklch, var(--blue) 55%, var(--paper));
+  stroke-width: 1.6;
+  stroke-linecap: round;
+}
+.geo-label {
+  font-family: var(--body);
+  font-size: 3.2px;
+  font-weight: 600;
+  letter-spacing: 0.35em;
+  fill: color-mix(in oklch, var(--blue) 45%, var(--ink));
+  opacity: 0.55;
+}
+.geo-shallow {
+  fill: none;
+  stroke: color-mix(in oklch, var(--blue) 24%, transparent);
+  stroke-width: 5;
+  stroke-linecap: round;
+}
+.geo-vlei { fill: color-mix(in oklch, var(--blue) 26%, var(--paper)); }
+.geo-ridge-2 { fill: color-mix(in oklch, var(--ink) 7.5%, var(--paper)); }
+.geo-roads path {
+  fill: none;
+  stroke: color-mix(in oklch, var(--ink) 14%, transparent);
+  stroke-width: 0.55;
+  stroke-linecap: round;
+}
+.geo-label--sm { font-size: 2.4px; opacity: 0.4; }
+.geo-compass path, .geo-scale path {
+  fill: none;
+  stroke: color-mix(in oklch, var(--ink) 42%, transparent);
+  stroke-width: 0.6;
+}
+.geo-compass path { fill: color-mix(in oklch, var(--ink) 42%, transparent); }
+.geo-compass text, .geo-scale text {
+  font-family: var(--body);
+  font-size: 2.6px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-anchor: middle;
+  fill: color-mix(in oklch, var(--ink) 55%, transparent);
+}
+.geo-links line {
+  stroke: color-mix(in oklch, var(--ink) 38%, transparent);
+  stroke-width: 0.7;
+  stroke-dasharray: 1.6 3;
+  stroke-linecap: round;
+}
+/* Marker sits exactly on the chip's point, 16px below the chip's bottom edge. */
+.zone-pin:not(.zone-pin--hq)::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: calc(100% + 16px);
+  translate: -50% -50%;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--blue);
+  border: 2px solid var(--paper);
+  box-shadow: var(--shadow-md);
+}
+
+/* The base label sits beside the hub marker, so it keeps plain centring and
+   draws no marker of its own. */
+.zone-pin.zone-pin--hq {
+  translate: -50% -50%;
+  background: var(--blue-btn);
+  color: var(--paper);
+  border-color: var(--blue-deep);
+}
+.zone-hub {
+  position: absolute;
+  left: 58%; top: 36.4%;
+  translate: -50% -50%;
+  display: grid;
+  place-items: center;
+  width: clamp(64px, 9vw, 84px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--blue);
+  color: var(--paper);
+  box-shadow: 0 0 0 10px color-mix(in oklch, var(--blue) 18%, transparent), var(--shadow-lg);
+}
+.zone-hub svg { width: 45%; height: 45%; }
+.zone-hub::after {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 2px solid color-mix(in oklch, var(--blue) 55%, transparent);
+  animation: hub-pulse 2.6s var(--smooth) infinite;
+}
+@keyframes hub-pulse {
+  0% { transform: scale(0.82); opacity: 0.9; }
+  70% { transform: scale(1.28); opacity: 0; }
+  100% { transform: scale(1.28); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .zone-hub::after { animation: none; opacity: 0.5; }
+}
+.zone-pin {
+  position: absolute;
+  /* Chip sits above its point; the marker below is its own ::after, so label
+     and marker share one coordinate and cannot drift apart. */
+  translate: -50% calc(-100% - 16px);
+  padding: 0.45em 0.95em;
+  background: var(--paper);
+  border-radius: var(--r-pill);
+  font-size: var(--t-xs);
+  font-weight: 600;
+  white-space: nowrap;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--line);
+}
+
+/* ==========================================================================
+   VOICES - six review cards, static 3x2, all visible
+   ========================================================================== */
+/* A coloured chapter break, not another white block. The page was reading as
+   one long light run with a single dark band in it; this gives the reviews
+   their own moment and splits the page into chapters the way the approved
+   construction demo does. Texture photo at low opacity so it is a surface,
+   not a picture. */
+/* Photo band. The image is pinned to the viewport, so the section reads as a
+   window you travel past rather than a panel that scrolls with you. Subject is
+   pipework, big shapes only: at this scrim depth fine detail turns to mud, so
+   the photo has to read as plumbing from its silhouette alone. Scrim runs
+   deeper than the services band because this wall is bright. */
+.voices {
+  position: relative;
+  padding-block: calc(var(--band-y) * 1.15);
+  background:
+    linear-gradient(
+      color-mix(in oklch, var(--ink) 88%, transparent) 0%,
+      color-mix(in oklch, var(--ink) 88%, transparent) 32%,
+      color-mix(in oklch, var(--ink) 72%, transparent) 100%),
+    url('assets/voices-pipes.jpg') center 45% / cover no-repeat;
+  color: var(--tx-inv);
+}
+/* Not on touch: iOS ignores fixed attachment and Android repaints the whole
+   band on every scroll frame. Those get the same photo, held still. */
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .voices,
+  .svc { background-attachment: scroll, fixed; }
+}
+.voices > .shell { position: relative; z-index: 1; }
+.voices-head { margin-bottom: clamp(2rem, 4vw, 3.4rem); max-width: 62ch; }
+.voices-head h2 { font-size: var(--d-lg); color: var(--tx-inv); }
+.voices-head .hl { color: var(--paper); text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: 6px; }
+.voices-head p { margin-top: var(--s4); color: var(--paper); }
+.voices-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(310px, 100%), 1fr));
+  gap: var(--s6);
+}
+.voice {
+  display: grid;
+  gap: var(--s4);
+  align-content: start;
+  padding: var(--s6);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-md);
+}
+.voice-stars { display: flex; gap: 3px; color: var(--blue); }
+.voice-stars svg { width: 1rem; height: 1rem; }
+.voice blockquote { font-size: var(--t-sm); line-height: 1.6; color: var(--tx); }
+.voice figcaption { font-size: var(--t-xs); color: var(--tx-soft); }
+.voice figcaption strong { display: block; font-size: var(--t-sm); color: var(--tx); font-weight: 600; }
+
+/* ==========================================================================
+   FAQ - title left, native details pills right
+   ========================================================================== */
+.faq { padding-block: var(--band-y); background: var(--paper-2); }
+.faq-grid {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  /* Stretch so the photo can finish level with the last question. Safe here
+     only because the image below is absolutely positioned and adds no
+     intrinsic height, so the row is sized by the accordion list alone. */
+  align-items: stretch;
+}
+/* Not sticky. It works in the Why section because the cards move behind a
+   fixed title; here the accordions barely move, so a travelling heading just
+   drifts against a static list. This column stands still and carries a photo
+   instead of leaving half the row empty. */
+.faq-intro h2 { font-size: var(--d-lg); margin-bottom: var(--s4); }
+
+/* Heading takes its natural height; the photo takes exactly what is left, so
+   it finishes level with the last question. The image is absolutely
+   positioned on purpose: if it contributed intrinsic height the row would size
+   itself from the photo, and the accordion rows would stretch to match it. */
+.faq-intro { display: grid; grid-template-rows: auto minmax(200px, 1fr); }
+
+.faq-photo {
+  position: relative;
+  margin-top: var(--s6);
+  min-height: 200px;
+  border-radius: var(--r-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+.faq-photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 900ms var(--expo);
+}
+.faq-photo:hover img { transform: scale(1.04); }
+
+.faq-list { display: grid; gap: var(--s3); }
+.faq-card {
+  background: var(--paper);
+  border-radius: var(--r-md);
+  border: 1px solid var(--line);
+  overflow: hidden;
+  transition: box-shadow var(--quick);
+}
+.faq-card[open] { box-shadow: var(--shadow-md); }
+.faq-card summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s4);
+  padding: var(--s5) var(--s6);
+  font-weight: 600;
+  font-size: var(--t-sm);
+  cursor: pointer;
+  list-style: none;
+}
+.faq-card summary::-webkit-details-marker { display: none; }
+.faq-card summary::after {
+  content: "";
+  flex: none;
+  width: 12px; height: 12px;
+  border-right: 2px solid var(--blue);
+  border-bottom: 2px solid var(--blue);
+  transform: rotate(45deg);
+  transition: transform var(--base);
+}
+.faq-card[open] summary::after { transform: rotate(-135deg); }
+.faq-card-body { padding: 0 var(--s6) var(--s5); font-size: var(--t-sm); color: var(--tx-soft); max-width: 62ch; }
+
+/* ==========================================================================
+   CTA - full-bleed photo interrupt
+   ========================================================================== */
+.cta {
+  position: relative;
+  /* The deeper bottom is not empty space: the footer is pulled up over it and
+     the photo keeps showing through, so this is the run the fade happens in. */
+  padding-block: clamp(5rem, 12vw, 9rem) clamp(8rem, 16vw, 13rem);
+  background: var(--ink);
+  color: var(--tx-inv);
+  overflow: clip;
+}
+.cta-bg { position: absolute; inset: 0; }
+.cta-bg img { width: 100%; height: 100%; object-fit: cover; }
+.cta-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    /* A long eased ramp rather than a late dive to black. It starts faint
+       around two thirds up and thickens gradually, so the photo reads as
+       sinking into the footer over the whole run instead of cutting out.
+       Many stops because an even two-stop gradient bands visibly at this
+       length and reads as a hard edge. */
+    linear-gradient(to top,
+      color-mix(in oklch, var(--ink) 62%, transparent) 0%,
+      color-mix(in oklch, var(--ink) 56%, transparent) 6%,
+      color-mix(in oklch, var(--ink) 49%, transparent) 13%,
+      color-mix(in oklch, var(--ink) 41%, transparent) 21%,
+      color-mix(in oklch, var(--ink) 33%, transparent) 29%,
+      color-mix(in oklch, var(--ink) 25%, transparent) 38%,
+      color-mix(in oklch, var(--ink) 18%, transparent) 47%,
+      color-mix(in oklch, var(--ink) 12%, transparent) 56%,
+      color-mix(in oklch, var(--ink) 7%, transparent) 64%,
+      color-mix(in oklch, var(--ink) 3%, transparent) 71%,
+      transparent 78%),
+    linear-gradient(color-mix(in oklch, var(--ink) 42%, transparent), color-mix(in oklch, var(--ink) 48%, transparent));
+}
+.cta-inner { position: relative; z-index: 1; text-align: center; display: grid; justify-items: center; gap: var(--s6); }
+/* The scrim over this photo is deliberately light, so the copy carries its
+   own contrast rather than relying on the overlay. */
+.cta h2 {
+  font-size: var(--d-xl);
+  max-width: 16ch;
+  text-shadow: 0 2px 24px color-mix(in oklch, var(--ink) 45%, transparent);
+}
+.cta p {
+  color: var(--tx-inv);
+  max-width: 44ch;
+  text-shadow: 0 1px 12px color-mix(in oklch, var(--ink) 60%, transparent);
+}
+.cta-ctas { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s4); }
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+/* No border-top: the CTA photo above already fades to ink, and a rule here
+   would redraw the exact seam that fade exists to remove. */
+.footer {
+  background: var(--ink);
+  color: var(--tx-inv);
+  padding-block: clamp(2.5rem, 5vw, 4rem) var(--s6);
+}
+
+/* Pages ending on a photo CTA: the footer is pulled up over the picture and
+   its own ground starts transparent, so the photo stays faintly readable
+   behind the wordmark instead of stopping dead at the section boundary.
+   Contact has no CTA and keeps the plain footer above. */
+.footer--overlap {
+  --overlap: clamp(115px, 15vw, 180px);
+  position: relative;
+  z-index: 1;
+  margin-top: calc(-1 * var(--overlap));
+  /* Wordmark deliberately lands about two thirds into the overlap, which is
+     still over the picture, so it reads against a last trace of photo. */
+  padding-top: calc(var(--overlap) * 0.62 + clamp(1rem, 2vw, 1.75rem));
+  /* Must reach solid ink exactly at the overlap depth: past that there is no
+     CTA behind the footer, and any remaining transparency shows the page. */
+  background: linear-gradient(
+    to bottom,
+    transparent 0,
+    color-mix(in oklch, var(--ink) 26%, transparent) calc(var(--overlap) * 0.40),
+    color-mix(in oklch, var(--ink) 55%, transparent) calc(var(--overlap) * 0.66),
+    color-mix(in oklch, var(--ink) 84%, transparent) calc(var(--overlap) * 0.87),
+    var(--ink) var(--overlap)
+  );
+}
+.footer-mark {
+  font-family: var(--display);
+  font-size: clamp(3rem, 9vw, 6.5rem);
+  line-height: 0.95;
+  letter-spacing: 0.01em;
+  color: color-mix(in oklch, var(--paper) 22%, var(--ink));
+  margin-bottom: clamp(2rem, 5vw, 3.5rem);
+  user-select: none;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr 1fr 1fr;
+  gap: var(--s7);
+  padding-bottom: var(--s8);
+  border-bottom: 1px solid var(--line-inv);
+}
+.footer-brand p { color: var(--tx-inv-soft); font-size: var(--t-sm); max-width: 30ch; margin-top: var(--s3); }
+.footer h3 {
+  font-size: var(--t-lg);
+  letter-spacing: 0.06em;
+  margin-bottom: var(--s4);
+  color: var(--tx-inv);
+}
+.footer-col ul { display: grid; gap: var(--s2); }
+.footer-col a, .footer-col li { font-size: var(--t-sm); color: var(--tx-inv-soft); }
+.footer-col a { transition: color var(--quick); }
+.footer-col a:hover { color: var(--blue-hot); }
+.footer-foot {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--s3);
+  padding-top: var(--s5);
+  /* Was --t-xs, which is caption size. This is the signature line and the only
+     credit on the page, so it reads at body size. */
+  font-size: var(--t-sm);
+  color: var(--tx-inv-soft);
+}
+.footer-foot a { color: var(--tx-inv); }
+
+/* ==========================================================================
+   INNER PAGES
+   ========================================================================== */
+.page-hero {
+  background: var(--ink);
+  color: var(--tx-inv);
+  padding-block: clamp(8rem, 18vh, 11rem) clamp(2.6rem, 6vw, 4.5rem);
+  position: relative;
+  overflow: clip;
+}
+.page-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(color-mix(in oklch, var(--paper) 4%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in oklch, var(--paper) 4%, transparent) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(100% 100% at 80% 0%, black 0%, transparent 75%);
+  pointer-events: none;
+}
+.page-hero .shell { position: relative; }
+.page-hero h1 { font-size: var(--d-xl); margin-bottom: var(--s4); }
+.page-hero p { max-width: 52ch; color: var(--tx-inv-soft); }
+
+/* --- Services page: one tab strip, one panel visible at a time --- */
+/* The six panels used to run down the page on rotating grounds. They are now
+   tabbed (Edgar, 2026-08-11): you choose the service and only that panel
+   shows, so every panel gets the same ground and the same layout. Alternating
+   grounds and the flipped photo side made sense in a stacked run; with one
+   panel on screen at a time they would just read as random. */
+/* Folder tabs (Edgar picked option A, 2026-08-11). A dark band carries the
+   six services; the chosen one turns paper-white and joins onto the panel
+   below it, so the strip and the content read as one object rather than a row
+   of buttons floating above unrelated text. Parks directly under the snapped
+   header bar, whose height JS measures into --mast-h. */
+.svctabs {
+  position: sticky;
+  top: var(--mast-h);
+  z-index: 60;
+  background: var(--ink);
+  padding-top: var(--s3);
+}
+.svctabs-bar {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  scroll-snap-type: x proximity;
+}
+.svctabs-bar::-webkit-scrollbar { display: none; }
+
+/* Solid fills only. No faded greys, no glass, no outline-only ghosts. */
+.svctab {
+  flex: none;
+  scroll-snap-align: start;
+  padding: 0.7rem 1.15rem 0.65rem;
+  border-radius: 8px 8px 0 0;
+  background: var(--ink-2);
+  /* Plain white, not a faded tint. The chosen tab is told apart by its paper
+     fill and blue cap, so the others do not need dimming to make the point. */
+  color: var(--paper);
+  font-family: var(--display);
+  font-size: clamp(1.02rem, 0.96rem + 0.28vw, 1.2rem);
+  letter-spacing: 0.045em;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color var(--quick), color var(--quick), padding var(--quick);
+}
+.svctab:hover { color: var(--paper); }
+.svctab.is-active {
+  /* Same paper as the panel underneath, so the two become one shape. */
+  background: var(--paper);
+  color: var(--ink);
+  padding: 0.9rem 1.3rem 0.85rem;
+  box-shadow: inset 0 4px 0 var(--blue);
+}
+.svctab.is-active:hover { color: var(--ink); }
+
+@media (max-width: 640px) {
+  /* Edge to edge so the band can be swiped without the gutter eating a tab. */
+  .svctabs .shell { padding-inline: 0; }
+  .svctabs-bar { padding-inline: var(--gutter); }
+  .svctab { font-size: 1.05rem; }
+}
+
+/* No JS: the strip is useless, so it goes and all six panels stay stacked. */
+html:not(.js) .svctabs { display: none; }
+html.js .svcpanel:not(.is-active) { display: none; }
+
+.svcpanel { padding-block: clamp(2.4rem, 5vw, 4.2rem) clamp(3rem, 6vw, 5rem); background: var(--paper); }
+
+/* Switching tabs settles the new panel in rather than snapping it. */
+@media (prefers-reduced-motion: no-preference) {
+  html.js .svcpanel.is-active.is-entering { animation: svcpanel-in 420ms var(--expo) both; }
+}
+@keyframes svcpanel-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* Headline and its one photo share the top row; the detail runs full width
+   underneath, so no column is ever left standing empty beside the other. */
+.svcpanel-top {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: clamp(1.8rem, 4vw, 3.5rem);
+  align-items: center;
+  margin-bottom: clamp(2rem, 4vw, 3.2rem);
+}
+/* Flip the photo to the left on alternating panels so the page never
+   settles into one repeated rhythm. */
+
+.svcpanel-head h2 { font-size: var(--d-lg); margin-bottom: var(--s4); }
+.svcpanel-lead { color: var(--tx-soft); }
+
+.svcpanel-figure {
+  position: relative;
+  border-radius: var(--r-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+.svcpanel-figure img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  transition: transform 900ms var(--expo);
+}
+.svcpanel-figure:hover img { transform: scale(1.04); }
+.svcpanel-figure figcaption {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: var(--s7) var(--s5) var(--s4);
+  background: linear-gradient(transparent, var(--veil-deep));
+  color: var(--tx-inv);
+  font-size: var(--t-sm);
+}
+
+.svcpanel-detail {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(1.8rem, 4vw, 3.5rem);
+  align-items: start;
+  padding-top: clamp(1.4rem, 2.6vw, 2rem);
+  border-top: 1px solid var(--line);
+}
+.svcpanel-detail h3 {
+  font-size: var(--t-lg);
+  letter-spacing: 0.05em;
+  margin-bottom: var(--s4);
+}
+
+.ticks { display: grid; gap: var(--s3); }
+.ticks li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--s3);
+  font-size: var(--t-sm);
+  color: var(--tx-soft);
+}
+.ticks svg { width: 1.1rem; height: 1.1rem; color: var(--blue); flex: none; margin-top: 0.22em; }
+
+.specs { display: grid; }
+.spec-row {
+  display: grid;
+  grid-template-columns: minmax(9ch, 13ch) 1fr;
+  gap: var(--s4);
+  padding-block: var(--s3);
+  border-top: 1px solid var(--line);
+  font-size: var(--t-sm);
+}
+.spec-row:last-of-type { border-bottom: 1px solid var(--line); }
+.spec-row dt { font-weight: 600; }
+.spec-row dd { color: var(--tx-soft); }
+
+.svcpanel-signs {
+  margin-top: clamp(1.8rem, 3.5vw, 2.6rem);
+  padding-top: clamp(1.4rem, 2.6vw, 2rem);
+  border-top: 1px solid var(--line);
+}
+.svcpanel-signs h3 { font-size: var(--t-lg); letter-spacing: 0.05em; margin-bottom: var(--s5); }
+.signs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(230px, 100%), 1fr));
+  gap: var(--s5);
+}
+/* Flat rows with an accent rule, never boxed cards. */
+.sign {
+  display: flex;
+  gap: var(--s4);
+  font-size: var(--t-sm);
+  color: var(--tx-soft);
+}
+.sign::before {
+  content: "";
+  flex: none;
+  width: 3px;
+  border-radius: 2px;
+  background: var(--blue);
+}
+
+.svcpanel-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s5);
+  margin-top: clamp(1.6rem, 3vw, 2.2rem);
+}
+.svcpanel-foot p { font-size: var(--t-sm); color: var(--tx-soft); max-width: 44ch; }
+
+/* --- Projects page: mosaic + case rows --- */
+.mosaic { padding-block: var(--band-y); background: var(--paper); }
+.mosaic-grid {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr 1fr;
+  grid-template-rows: repeat(2, minmax(220px, 30vw));
+  gap: var(--s4);
+}
+.mosaic-tile { position: relative; border-radius: var(--r-md); overflow: hidden; box-shadow: var(--shadow-md); }
+.mosaic-tile:first-child { grid-row: 1 / 3; }
+.mosaic-tile img { width: 100%; height: 100%; object-fit: cover; transition: transform 900ms var(--expo); }
+.mosaic-tile:hover img { transform: scale(1.04); }
+.mosaic-tile figcaption {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: var(--s6) var(--s5) var(--s4);
+  background: linear-gradient(transparent, var(--veil-deep));
+  color: var(--tx-inv);
+  font-size: var(--t-sm);
+  font-weight: 500;
+}
+
+.cases { padding-block: var(--band-y); background: var(--paper-2); }
+.cases-head { margin-bottom: clamp(2rem, 4vw, 3rem); }
+.cases-head h2 { font-size: var(--d-lg); }
+.case {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(1.6rem, 4vw, 4rem);
+  align-items: center;
+  padding-block: clamp(2rem, 4.5vw, 3.4rem);
+  border-top: 1px solid var(--line);
+}
+.case:last-child { border-bottom: 1px solid var(--line); }
+.case-media { border-radius: var(--r-md); overflow: hidden; box-shadow: var(--shadow-md); aspect-ratio: 16/11; }
+.case-media img { width: 100%; height: 100%; object-fit: cover; }
+.case:nth-child(even) .case-media { order: 2; }
+.case-body { display: grid; gap: var(--s3); }
+.case-body h3 { font-size: var(--d-md); }
+.case-body p { color: var(--tx-soft); font-size: var(--t-sm); max-width: 50ch; }
+.case-facts { display: flex; flex-wrap: wrap; gap: var(--s5); margin-top: var(--s2); }
+.case-facts div strong { display: block; font-family: var(--display); font-size: var(--t-xl); color: var(--blue-deep); line-height: 1.1; }
+.case-facts div span { font-size: var(--t-xs); color: var(--tx-soft); }
+
+/* --- About page --- */
+.story { padding-block: var(--band-y); background: var(--paper); }
+.story-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: clamp(2rem, 5vw, 4.5rem);
+}
+.story-copy h2 { font-size: var(--d-lg); margin-bottom: var(--s5); }
+.story-copy p { color: var(--tx-soft); max-width: 58ch; }
+.story-copy p + p { margin-top: var(--s4); }
+.story-aside { display: grid; gap: var(--s4); align-content: start; }
+.story-aside figure { border-radius: var(--r-md); overflow: hidden; box-shadow: var(--shadow-md); }
+/* Capped aspect keeps the photo column level with the copy instead of
+   towering past it and leaving the text side hanging in white space. */
+.story-aside img { width: 100%; height: 100%; aspect-ratio: 16 / 10; object-fit: cover; }
+
+.values { padding-block: var(--band-y); background: var(--paper-2); }
+.values-head { margin-bottom: clamp(2rem, 4vw, 3rem); max-width: 60ch; }
+.values-head h2 { font-size: var(--d-lg); margin-bottom: var(--s3); }
+.values-head p { color: var(--tx-soft); }
+/* minmax 240 keeps all four habits on one row at desktop; auto-fit collapses
+   2x2 then 1-col below, so no row ever strands a single orphan card. */
+.values-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: var(--s6); }
+.value {
+  padding: var(--s6);
+  background: var(--paper);
+  border-radius: var(--r-md);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-md);
+  display: grid;
+  gap: var(--s3);
+  align-content: start;
+}
+.value-ic {
+  display: grid;
+  place-items: center;
+  width: 52px; height: 52px;
+  border-radius: var(--r-sm);
+  background: var(--ink);
+  color: var(--paper);
+}
+.value-ic svg { width: 24px; height: 24px; }
+.value h3 { font-size: var(--t-xl); letter-spacing: 0.03em; }
+.value p { font-size: var(--t-sm); color: var(--tx-soft); }
+
+/* --- Contact page --- */
+.contact { padding-block: var(--band-y); background: var(--paper); }
+.contact-grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: start;
+}
+.contact-info { display: grid; gap: var(--s6); align-content: start; }
+.contact-info h2 { font-size: var(--d-lg); }
+.contact-info > p { color: var(--tx-soft); max-width: 44ch; }
+.contact-rows { display: grid; gap: var(--s4); }
+.contact-row {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--s4);
+  padding: var(--s5);
+  background: var(--paper-2);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+}
+.contact-row svg { width: 22px; height: 22px; color: var(--blue); flex: none; margin-top: 2px; }
+.contact-row strong { display: block; font-size: var(--t-sm); }
+.contact-row span, .contact-row a { font-size: var(--t-sm); color: var(--tx-soft); }
+.contact-row a:hover { color: var(--blue-deep); }
+
+.qform {
+  padding: clamp(1.6rem, 3.5vw, 2.8rem);
+  background: var(--ink);
+  color: var(--tx-inv);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-lg);
+}
+.qform h2 { font-size: var(--d-md); margin-bottom: var(--s2); }
+.qform > p { color: var(--tx-inv-soft); font-size: var(--t-sm); margin-bottom: var(--s6); }
+.qform-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s4); }
+.field { display: grid; gap: var(--s2); }
+.field--full { grid-column: 1 / -1; }
+.field label { font-size: var(--t-xs); font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--tx-inv-soft); }
+.field input, .field select, .field textarea {
+  font: inherit;
+  font-size: var(--t-sm);
+  color: var(--tx-inv);
+  background: var(--ink-3);
+  border: 1px solid var(--line-inv);
+  border-radius: var(--r-sm);
+  padding: 0.85em 1em;
+  transition: border-color var(--quick), background-color var(--quick);
+  width: 100%;
+}
+.field select { appearance: none; background-image: linear-gradient(45deg, transparent 50%, var(--paper) 50%), linear-gradient(135deg, var(--paper) 50%, transparent 50%); background-position: calc(100% - 20px) 55%, calc(100% - 14px) 55%; background-size: 6px 6px; background-repeat: no-repeat; }
+.field textarea { min-height: 130px; resize: vertical; }
+.field input:focus-visible, .field select:focus-visible, .field textarea:focus-visible {
+  outline: none;
+  border-color: var(--blue-hot);
+  background: color-mix(in oklch, var(--ink-3) 80%, var(--blue));
+}
+.field input::placeholder, .field textarea::placeholder { color: color-mix(in oklch, var(--paper) 38%, var(--ink)); }
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.qform-foot { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s4); margin-top: var(--s5); }
+.qform-note { font-size: var(--t-xs); color: var(--tx-inv-soft); max-width: 30ch; }
+.form-status {
+  grid-column: 1 / -1;
+  margin-top: var(--s4);
+  padding: var(--s4) var(--s5);
+  background: color-mix(in oklch, var(--blue) 20%, var(--ink));
+  border: 1px solid var(--blue-hot);
+  border-radius: var(--r-sm);
+  font-size: var(--t-sm);
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+/* Below this the hero copy and the subject can no longer share a row without
+   the text landing on his face, so the photo stops being a side element: it
+   anchors bottom-right at reduced size, the copy runs full width above it,
+   and the stat card drops into flow instead of floating over the buttons. */
+@media (max-width: 1100px) {
+  /* align-items on the base rule is flex-end, which in column direction pushes
+     children to the right edge and left the stat card floating out of the
+     gutter. Stretch puts it back on the page's left margin. */
+  .hero { flex-direction: column; justify-content: flex-end; align-items: stretch; }
+  .hero-subject {
+    height: min(64%, 540px);
+    right: clamp(-7rem, -4vw, -1rem);
+    opacity: 0.55;
+  }
+  /* Keeps the lede legible where it still crosses the photo. */
+  .hero-copy { position: relative; z-index: 1; }
+  .hero-copy::before {
+    content: "";
+    position: absolute;
+    inset: -1.5rem -2.5rem;
+    z-index: -1;
+    background: radial-gradient(
+      118% 92% at 14% 46%,
+      color-mix(in oklch, var(--ink) 92%, transparent) 42%,
+      transparent 78%);
+    pointer-events: none;
+  }
+  .hero-card {
+    position: static;
+    order: 2;
+    margin: 0 var(--gutter) var(--s6);
+    width: calc(100% - 2 * var(--gutter));
+    max-width: 540px;
+    display: flex;
+    align-items: center;
+    gap: var(--s5);
+  }
+  .hero-card strong { font-size: 2.2rem; }
+  .hero-card span { margin-top: 0; }
+
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+
+/* Tablet band only. Three cards over two columns leaves a dead half, so the
+   third spans the full row and reads as a deliberate wide card rather than a
+   leftover. Phones stack to one column and need none of this. */
+@media (max-width: 1100px) and (min-width: 761px) {
+  .svc-grid { grid-template-columns: 1fr 1fr; }
+  .svc-card:last-child { grid-column: 1 / -1; }
+  .svc-card:last-child .svc-card-media { aspect-ratio: 21 / 9; }
+}
+
+@media (max-width: 920px) {
+  .nav-desktop { display: none; }
+  .burger { display: block; margin-left: auto; }
+  .nav-cta { display: none; }
+
+  .intro-grid, .zone-grid, .faq-grid, .story-grid, .contact-grid { grid-template-columns: 1fr; }
+  /* Stacked: the absolute-filled photo needs its own height. */
+  .intro-photo { aspect-ratio: 4 / 3; }
+  .why-grid { grid-template-columns: 1fr; }
+  .why-title { position: static; }
+  .why-card, .why-card:nth-child(2), .why-card:nth-child(3) { position: static; grid-template-columns: 1fr; min-height: 0; }
+  .why-card-media { order: -1; aspect-ratio: 16 / 8; }
+  /* Stacked: the photo would push the whole list below the fold, so it goes.
+     Its grid row has to go with it, otherwise the reserved 200px stays behind
+     as a blank gap between the heading and the first question. */
+  .faq-photo { display: none; }
+  .faq-intro { grid-template-rows: auto; }
+
+  .svc-head { grid-template-columns: 1fr; align-items: start; }
+
+  .svcpanel-top, .svcpanel-detail { grid-template-columns: 1fr; }
+  /* Stacked: photos lead every panel, so there is nothing left to flip. */
+  .svcpanel-figure { order: -1; }
+
+  .flow-steps { grid-template-columns: 1fr; gap: 0; }
+  .flow-pipe { display: none; }
+  .flow-rail {
+    display: block;
+    position: relative;
+    /* The hidden pipe SVG was carrying the gap under the header on desktop.
+       Without it the rail starts 8px under the lede, so it takes over the
+       same rhythm here. */
+    margin-top: clamp(2rem, 5vw, 3.6rem);
+  }
+  .flow-rail .flow-step {
+    position: relative;
+    padding: 0 0 var(--s7) clamp(3.2rem, 9vw, 4rem);
+  }
+  .flow-rail .flow-step::before {
+    content: "";
+    position: absolute;
+    left: 13px;
+    top: 8px;
+    bottom: -8px;
+    width: 10px;
+    background: color-mix(in oklch, var(--paper) 26%, var(--ink));
+    border-radius: 5px;
+  }
+  .flow-rail .flow-step:last-child::before { bottom: auto; height: 100%; }
+  .flow-rail .flow-step::after {
+    content: "";
+    position: absolute;
+    left: 6px;
+    top: 4px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--ink);
+    border: 3px solid color-mix(in oklch, var(--paper) 26%, var(--ink));
+    transition: border-color 420ms var(--smooth), background-color 420ms var(--smooth);
+  }
+
+  /* Water runs down the empty pipe as each stage is reached: the joint fills
+     first, then the run below it. Driven by the .wet class from script.js, so
+     without JS every joint simply sits filled and nothing is hidden. */
+  .flow-rail .flow-step > span.pipe-fill {
+    position: absolute;
+    left: 13px;
+    top: 8px;
+    width: 10px;
+    height: 0;
+    background: var(--blue-hot);
+    border-radius: 5px;
+    transition: height 700ms var(--smooth);
+    pointer-events: none;
+  }
+  .flow-rail .flow-step.wet > span.pipe-fill { height: calc(100% - 8px); }
+  .flow-rail .flow-step:last-child.wet > span.pipe-fill { height: 28px; }
+  .flow-rail .flow-step.wet::after {
+    border-color: var(--blue-hot);
+    background: var(--blue-hot);
+    box-shadow: 0 0 0 6px color-mix(in oklch, var(--blue-hot) 22%, transparent);
+  }
+  html:not(.js) .flow-rail .flow-step::after { border-color: var(--blue-hot); }
+
+  .case, .case:nth-child(even) { grid-template-columns: 1fr; }
+  .case:nth-child(even) .case-media { order: 0; }
+
+  .mosaic-grid { grid-template-columns: 1fr 1fr; grid-template-rows: repeat(3, minmax(180px, 36vw)); }
+  .mosaic-tile:first-child { grid-row: 1 / 2; grid-column: 1 / 3; }
+}
+
+@media (max-width: 920px) and (prefers-reduced-motion: reduce) {
+  /* No travelling water: the joints just arrive filled. */
+  .flow-rail .flow-step > span.pipe-fill,
+  .flow-rail .flow-step::after { transition: none; }
+}
+
+@media (max-width: 760px) {
+  .hero { min-height: 100svh; }
+  .hero-ghost { font-size: clamp(7rem, 26vw, 12rem); top: 30%; }
+  .hero-glow { top: 8%; right: -10%; }
+  /* Sits low and right on a phone, behind the buttons rather than behind the
+     paragraph, so the lede never runs across his face. */
+  .hero-subject { height: 46%; right: -18%; opacity: 0.42; }
+  .hero-copy { max-width: 100%; }
+  .hero-inner { padding-top: clamp(6rem, 14vh, 8rem); }
+
+  .figures { grid-template-columns: 1fr; gap: var(--s5); }
+  /* Two columns of four rather than one column of eight: the single stack ran
+     most of a phone screen for a list that is really just place names.
+     Column flow so reading down the left gives 1-4 and the right 5-8. */
+  .zone-list {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(4, auto);
+    grid-auto-flow: column;
+    gap: var(--s2) var(--s4);
+  }
+  .zone-map { aspect-ratio: 1 / 1.05; }
+
+
+  .qform-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; gap: var(--s6); }
+  /* Centred on a phone: left-aligned over one column the two lines read as a
+     stray fragment rather than a sign-off. */
+  .footer-foot { justify-content: center; text-align: center; gap: var(--s2); }
+  .mosaic-grid { grid-template-columns: 1fr; grid-template-rows: none; }
+  .mosaic-tile { aspect-ratio: 16 / 10; }
+  .mosaic-tile:first-child { grid-column: auto; grid-row: auto; }
+}
+
+/* Touch devices only: buttons and tabs were landing at 38-40px, under the
+   44px a thumb wants. Scoped to coarse pointers so the desktop sizing, which
+   is already signed off, does not shift. */
+@media (pointer: coarse) {
+  .pill { min-height: 44px; }
+  .svctab { min-height: 44px; display: inline-flex; align-items: center; }
+  .faq-card summary { min-height: 44px; }
+  .drawer-nav a { min-height: 44px; align-items: center; }
+  /* Tap targets abut instead of stacking a 40px minimum on top of the list
+     gap, which was pushing the footer links a long way apart. */
+  .footer-col a, .zone-list li { min-height: 40px; display: flex; align-items: center; }
+  .footer-col ul { gap: 0; }
+}
+
+@media (max-width: 480px) {
+  .hero-ctas .pill { width: 100%; justify-content: center; }
+  .cta-ctas { width: 100%; }
+  .cta-ctas .pill { width: 100%; justify-content: center; }
+}
+
+/* ==========================================================================
+   PRINT - keep it readable, drop the theatre
+   ========================================================================== */
+@media print {
+  .masthead, .drawer, .burger, .hero-glow, .hero-ghost, .cta, .assure { display: none !important; }
+  body { background: white; color: black; }
+}

@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact Edweb Media | Web Designer Cape Town</title>
+  <!-- PROMOTION CHECKLIST (do all four when this replaces contact.html):
+       1. delete the robots noindex line below
+       2. set the canonical to https://edwebmedia.com/contact
+       3. re-add the Google Ads gtag loader from index.html
+       4. repoint the header and footer links from new-*.html to the live paths -->
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="description" content="Talk to Edweb Media about a new website. Call, WhatsApp, send the form or book a call. Cape Town based, every enquiry answered within one working day." />
+  <link rel="canonical" href="https://edwebmedia.com/contact" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://edwebmedia.com/contact" />
+  <meta property="og:title" content="Contact Edweb Media | Web Designer Cape Town" />
+  <meta property="og:description" content="Tell us what the business does and get a plan and a price before any work starts." />
+  <meta property="og:image" content="https://edwebmedia.com/assets/edweb-logo-dark.png" />
+  <meta property="og:locale" content="en_ZA" />
+  <meta property="og:site_name" content="Edweb Media" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Contact Edweb Media | Web Designer Cape Town" />
+  <meta name="twitter:description" content="Tell us what the business does and get a plan and a price before any work starts." />
+  <meta name="twitter:image" content="https://edwebmedia.com/assets/edweb-logo-dark.png" />
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16948063813"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-16948063813');
+  </script>
+
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="new-styles.css" />
+
+  <script>document.documentElement.classList.replace('no-js', 'js');</script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ================================ HEADER ================================ -->
+  <header class="site-header" id="site-header">
+    <div class="nav" id="nav">
+      <a href="new-home.html" class="logo" aria-label="Edweb Media home">
+        <img src="assets/work/logo-edweb-dark.webp" alt="Edweb Media" width="264" height="48" />
+      </a>
+
+      <nav class="nav-links" aria-label="Primary">
+        <a href="new-home.html#services">Services</a>
+        <a href="new-projects.html">Work</a>
+        <a href="new-packages.html">Pricing</a>
+        <a href="new-pay.html">Payments</a>
+        <a href="new-contact.html" aria-current="page">Contact</a>
+      </nav>
+
+      <div class="nav-end">
+        <a href="#enquiry" class="ulink">Start a project</a>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- =============================== MASTHEAD =============================== -->
+    <section class="page-hero band--alt" id="top">
+      <div class="container page-hero-inner page-hero-inner--form">
+        <div>
+          <h1>Tell us what the <span class="hl">business</span> does.</h1>
+          <p class="lead">
+            You get a plan and a price before any work starts. Call, WhatsApp, send the
+            form or book a time that suits you, whichever is easiest.
+          </p>
+          <div class="hero-actions">
+            <a href="https://wa.me/27846204583?text=Hi%20Edweb%2C%20I%27m%20looking%20for%20a%20website.%20Can%20we%20chat%3F" target="_blank" rel="noopener" class="btn">Chat on WhatsApp</a>
+            <a href="tel:+27846204583" class="ulink">Or call +27 84 620 4583 <span class="arrow" aria-hidden="true">&raquo;</span></a>
+          </div>
+
+          <dl class="page-facts hero-facts reveal" style="--reveal-delay:200ms">
+            <div><dt>Reply time</dt><dd>Within one working day</dd></div>
+            <div><dt>A quote costs</dt><dd>Nothing</dd></div>
+            <div><dt>Commitment</dt><dd>None until you say go</dd></div>
+            <div><dt>Based in</dt><dd>Cape Town, South Africa</dd></div>
+          </dl>
+        </div>
+
+        <div class="hero-card reveal" style="--reveal-delay:120ms">
+          <h2>Send us the brief</h2>
+          <p class="hero-card-sub">Answered within one working day. A quote costs nothing and commits you to nothing.</p>
+          <form id="contact-form" novalidate>
+            <div class="multi" id="services-picker">
+              <span class="multi-label" id="services-label">What do you need? Pick as many as apply.</span>
+              <button type="button" class="multi-btn" id="services-btn" aria-expanded="false" aria-controls="services-panel">
+                <span id="services-value">Choose what you need</span>
+                <svg class="multi-chev" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 6l4.5 4.5L12.5 6" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <div class="multi-panel" id="services-panel" role="group" aria-labelledby="services-label" hidden>
+                <label class="multi-opt"><input type="checkbox" name="services" value="Website design" id="want-web" /><span class="multi-face"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18M7 21h10"/></svg><span class="multi-name">Website design</span><svg class="multi-tick" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.4l3 3 6-6.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></label>
+                <label class="multi-opt"><input type="checkbox" name="services" value="Hosting and management" /><span class="multi-face"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="6" rx="1.5"/><rect x="3" y="14" width="18" height="6" rx="1.5"/><path d="M7 7h.01M7 17h.01"/></svg><span class="multi-name">Hosting and management</span><svg class="multi-tick" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.4l3 3 6-6.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></label>
+                <label class="multi-opt"><input type="checkbox" name="services" value="Google Ads" /><span class="multi-face"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9v6h3l6 4V5L7 9H4z"/><path d="M17.5 9.5a4 4 0 0 1 0 5"/></svg><span class="multi-name">Google Ads</span><svg class="multi-tick" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.4l3 3 6-6.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></label>
+                <label class="multi-opt"><input type="checkbox" name="services" value="Digital marketing" /><span class="multi-face"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A2.5 2.5 0 0 1 17.5 17H9l-4 3.5V6.5A2.5 2.5 0 0 1 7.5 4h10A2.5 2.5 0 0 1 20 6.5z"/></svg><span class="multi-name">Digital marketing</span><svg class="multi-tick" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.4l3 3 6-6.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></label>
+                <label class="multi-opt"><input type="checkbox" name="services" value="Branding" /><span class="multi-face"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="3"/></svg><span class="multi-name">Branding</span><svg class="multi-tick" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.4l3 3 6-6.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></label>
+                <label class="multi-opt"><input type="checkbox" name="services" value="App development" /><span class="multi-face"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 18.5h2"/></svg><span class="multi-name">App development</span><svg class="multi-tick" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.4l3 3 6-6.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></label>
+                <label class="multi-opt"><input type="checkbox" name="services" value="Photography and video" /><span class="multi-face"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6.5" width="18" height="13" rx="2"/><circle cx="12" cy="13" r="3.5"/><path d="M8.5 6.5 10 4h4l1.5 2.5"/></svg><span class="multi-name">Photography and video</span><svg class="multi-tick" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.4l3 3 6-6.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></label>
+              </div>
+            </div>
+
+            <!-- Revealed once website design is chosen: the follow-up questions the
+                 live site asks, without the wizard, so nobody sees them unless they
+                 are relevant. -->
+            <div class="subfield" id="web-options" hidden>
+              <fieldset class="field-group">
+                <legend>What kind of website?</legend>
+                <div class="chips">
+                  <label class="chip chip--wide"><input type="radio" name="website_type" value="Business website" data-group="business" /><span><b>Business website</b>Showcase your brand, services and contact details</span></label>
+                  <label class="chip chip--wide"><input type="radio" name="website_type" value="Online store" data-group="stores" /><span><b>Online store</b>Sell products or services online</span></label>
+                  <label class="chip chip--wide"><input type="radio" name="website_type" value="Directory site" data-group="directory" /><span><b>Directory site</b>Searchable listings for businesses, services or properties</span></label>
+                </div>
+                <p class="field-note" id="type-note">Not sure? Leave it and we will tell you which fits.</p>
+              </fieldset>
+
+              <fieldset class="field-group">
+                <legend>Add a monthly plan? Optional, and you can decide later.</legend>
+                <div class="chips">
+                  <label class="chip chip--wide"><input type="checkbox" name="addons" value="Hosting (R199 a month)" /><span><b>Hosting, R199 a month</b>Website hosting and a professional email address</span></label>
+                  <label class="chip chip--wide"><input type="checkbox" name="addons" value="Website management (from R199 a month)" /><span><b>Management, from R199 a month</b>Updates, maintenance and one hour of monthly support</span></label>
+                </div>
+              </fieldset>
+            </div>
+
+            <div>
+              <label for="package">Which package are you thinking of?</label>
+              <select id="package" name="package">
+                <option value="">Not sure yet, tell me what fits</option>
+                <option value="Business Website Silver (R3,499)" data-group="business">Business website, Silver, R3,499</option>
+                <option value="Business Website Gold (R4,499)" data-group="business">Business website, Gold, R4,499</option>
+                <option value="Business Website Platinum (R5,999)" data-group="business">Business website, Platinum, R5,999</option>
+                <option value="E-commerce Website Silver (R5,499)" data-group="stores">Online store, Silver, R5,499</option>
+                <option value="E-commerce Website Gold (R6,999)" data-group="stores">Online store, Gold, R6,999</option>
+                <option value="E-commerce Website Platinum (R8,999)" data-group="stores">Online store, Platinum, R8,999</option>
+                <option value="Directory Website Silver (R8,499)" data-group="directory">Directory site, Silver, R8,499</option>
+                <option value="Directory Website Gold (R11,499)" data-group="directory">Directory site, Gold, R11,499</option>
+                <option value="Directory Website Platinum (From R14,499)" data-group="directory">Directory site, Platinum, from R14,499</option>
+                <option value="Hosting or management only">Hosting or management only</option>
+                <option value="Something else">Something else, please quote me</option>
+              </select>
+              <p class="field-note" id="package-note"></p>
+            </div>
+
+            <div>
+              <label for="budget">What are you looking to spend?</label>
+              <select id="budget" name="budget">
+                <option value="">Not sure yet</option>
+                <option value="Under R5,000">Under R5,000</option>
+                <option value="R5,000 to R10,000">R5,000 to R10,000</option>
+                <option value="R10,000 to R15,000">R10,000 to R15,000</option>
+                <option value="Over R15,000">Over R15,000</option>
+                <option value="Tell me what it should cost">Tell me what it should cost</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="timeline">When do you want to start?</label>
+              <select id="timeline" name="timeline">
+                <option value="">No fixed date</option>
+                <option value="As soon as possible">As soon as possible</option>
+                <option value="Within the next month">Within the next month</option>
+                <option value="1 to 3 months from now">1 to 3 months from now</option>
+                <option value="Flexible">I am flexible</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="message">Tell us about your business</label>
+              <p class="field-note">Worth including: what the business does and who buys from it, whether you have a website now and what is wrong with it, any site you have seen that you like, and a rough date you want to be live by.</p>
+              <textarea id="message" name="message" placeholder="What does the business do? Who are your customers?"></textarea>
+            </div>
+
+            <div class="field-row">
+              <div>
+                <label for="first_name">First name</label>
+                <input type="text" id="first_name" name="first_name" autocomplete="given-name" required />
+              </div>
+              <div>
+                <label for="last_name">Last name</label>
+                <input type="text" id="last_name" name="last_name" autocomplete="family-name" />
+              </div>
+            </div>
+            <div class="field-row">
+              <div>
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" autocomplete="email" required />
+              </div>
+              <div>
+                <label for="phone">Phone</label>
+                <input type="tel" id="phone" name="phone" autocomplete="tel" />
+              </div>
+            </div>
+
+            <div class="hp" aria-hidden="true">
+              <label for="company">Company</label>
+              <input type="text" id="company" name="company" tabindex="-1" autocomplete="off" />
+            </div>
+
+            <button type="submit" class="btn" id="contact-submit">Send enquiry</button>
+            <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+            <p class="form-note">
+              Name and email are required. Your details are only used to answer this enquiry.
+            </p>
+          </form>
+
+          <!-- Replaces the form on a successful send, like the live site's panel. -->
+          <div class="sent-panel" id="sent-panel" hidden>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.5 2.5L16 9.5"/></svg>
+            <h3>Enquiry sent.</h3>
+            <p id="sent-msg">Thanks. We reply to every enquiry, usually within one working day.</p>
+            <p class="field-note">Need us sooner? Call <a href="tel:+27846204583">+27 84 620 4583</a>.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================== DETAILS ================================ -->
+    <section class="band band--ink" id="enquiry">
+      <div class="container">
+        <div class="head reveal">
+          <h2>Or reach us <span class="hl">directly</span>.</h2>
+          <p class="lead">
+            A message is as good as the form. Whichever way you get hold of us, you get a
+            plan and a price before any work starts.
+          </p>
+        </div>
+
+        <div class="split split--lead">
+          <div class="reveal">
+            <h3>Three ways, same answer</h3>
+            <ul class="facts">
+              <li><a href="tel:+27846204583">Call +27 84 620 4583</a>, weekdays, Cape Town time</li>
+              <li><a href="mailto:info@edwebmedia.com">Email info@edwebmedia.com</a> and attach anything you have</li>
+              <li><a href="https://wa.me/27846204583?text=Hi%20Edweb%2C%20I%27m%20looking%20for%20a%20website.%20Can%20we%20chat%3F" target="_blank" rel="noopener">Send a message</a> if typing a brief is not your thing</li>
+            </ul>
+            <p>Cape Town, South Africa. Working with clients countrywide and abroad, so distance has never been the problem.</p>
+          </div>
+
+          <div class="reveal" style="--reveal-delay:100ms">
+            <h3>What happens next, and when</h3>
+            <ul class="facts">
+              <li><b>Within one working day.</b> We read the brief and reply with what we would build.</li>
+              <li><b>With that reply.</b> A fixed price and a page count, before any work starts.</li>
+              <li><b>When you say go.</b> A start date, and the build clock begins the day your content arrives.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================== BOOK A CALL ============================ -->
+    <section class="band band--alt" id="book">
+      <div class="container">
+        <div class="head reveal">
+          <h2>Rather <span class="hl">talk</span> it through?</h2>
+          <p class="lead">
+            Pick a date and a time and we will confirm it by phone or email. Fifteen
+            minutes is usually enough to know whether we are a fit.
+          </p>
+        </div>
+
+        <div class="booking">
+          <div class="cal reveal">
+            <div class="cal-head">
+              <button type="button" class="cal-nav" id="cal-prev" aria-label="Previous month">
+                <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M10 2L4 8l6 6" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
+              </button>
+              <span class="cal-month" id="cal-month">&nbsp;</span>
+              <button type="button" class="cal-nav" id="cal-next" aria-label="Next month">
+                <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 2l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
+              </button>
+            </div>
+            <div class="cal-week" aria-hidden="true">
+              <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+            </div>
+            <div class="cal-grid" id="cal-days" role="group" aria-label="Choose a date"></div>
+
+            <div id="book-pick">
+              <h3>Pick a time</h3>
+              <div class="slots" id="cal-times" role="group" aria-label="Choose a time"></div>
+              <p class="booking-echo" id="cal-summary">Choose a weekday, then a time.</p>
+            </div>
+          </div>
+
+          <div class="booking-side reveal" style="--reveal-delay:100ms">
+            <form id="booking-form" novalidate>
+              <h3>Your details</h3>
+              <div>
+                <label for="book-name">Full name</label>
+                <input type="text" id="book-name" name="name" autocomplete="name" required />
+              </div>
+              <div class="field-row">
+                <div>
+                  <label for="book-email">Email</label>
+                  <input type="email" id="book-email" name="email" autocomplete="email" required />
+                </div>
+                <div>
+                  <label for="book-phone">Phone</label>
+                  <input type="tel" id="book-phone" name="phone" autocomplete="tel" required />
+                </div>
+              </div>
+              <div>
+                <label for="book-note">Anything we should know first?</label>
+                <textarea id="book-note" name="note" rows="2"></textarea>
+              </div>
+              <div class="hp" aria-hidden="true">
+                <label for="book-company">Company</label>
+                <input type="text" id="book-company" name="company" tabindex="-1" autocomplete="off" />
+              </div>
+              <button type="submit" class="btn" id="book-submit">Request this time</button>
+              <p class="form-status" id="book-status" role="status" aria-live="polite"></p>
+            </form>
+
+            <div id="book-done" hidden>
+              <h3>Booking requested.</h3>
+              <p id="book-done-msg"></p>
+              <p class="booking-echo">We will confirm by email or phone, usually within one working day.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================= FAQ ================================== -->
+    <section class="band" id="faq">
+      <div class="container">
+        <div class="faq-block">
+          <div class="faq-intro reveal">
+            <h2>Before you write.</h2>
+            <p>The four things people ask most often. Pricing questions are answered in full on the <a href="new-packages.html">pricing page</a>.</p>
+            <a href="tel:+27846204583" class="ulink">Call +27 84 620 4583 <span class="arrow" aria-hidden="true">&raquo;</span></a>
+          </div>
+
+          <div class="faq-list">
+            <details class="faq-card reveal" open style="--reveal-delay:0ms">
+              <summary>How long does it take to build my website?</summary>
+              <p>Most standard websites are completed within a few weeks, depending on the size and how quickly content and feedback are provided. Business builds typically take 5, 10 or 15 working days by plan, confirmed on kickoff and counted from the day content and access arrive.</p>
+            </details>
+            <details class="faq-card reveal" style="--reveal-delay:50ms">
+              <summary>Do you provide support after the website is live?</summary>
+              <p>Yes, if you want it. Website management is an optional add-on from R199 a month covering updates, maintenance, content changes and support, with one hour of work included each month. Without it the site is still yours and still live, you just handle changes yourself.</p>
+            </details>
+            <details class="faq-card reveal" style="--reveal-delay:100ms">
+              <summary>Will my website work on mobile devices?</summary>
+              <p>Yes. Every site is built mobile-first and checked at phone, tablet and desktop widths before it goes live.</p>
+            </details>
+            <details class="faq-card reveal" style="--reveal-delay:150ms">
+              <summary>Do I need to provide content for my website?</summary>
+              <p>You can provide your own content, or we can help structure and refine it to suit your website and audience. The build clock starts when content and access arrive.</p>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================ ENDCAP ================================ -->
+    <section class="band band--alt" id="start">
+      <div class="container split split--lead">
+        <div class="reveal">
+          <h2>Still <span class="hl">easier</span> to just talk?</h2>
+          <p>Send a message or pick up the phone. You will get the same answer either way, and a quote costs nothing.</p>
+          <div class="hero-actions">
+            <a href="https://wa.me/27846204583?text=Hi%20Edweb%2C%20I%27m%20looking%20for%20a%20website.%20Can%20we%20chat%3F" target="_blank" rel="noopener" class="btn">Message us</a>
+            <a href="tel:+27846204583" class="ulink">Or call +27 84 620 4583 <span class="arrow" aria-hidden="true">&raquo;</span></a>
+          </div>
+        </div>
+        <div class="reveal" style="--reveal-delay:100ms">
+          <h3>Before you get in touch</h3>
+          <ul class="facts">
+            <li>A quote costs nothing and commits you to nothing</li>
+            <li>Every enquiry gets a reply, usually within one working day</li>
+            <li>You see the full price before any work starts</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================================ FOOTER ================================ -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo">
+            <img src="assets/work/logo-edweb-light.webp" alt="Edweb Media" width="296" height="54" loading="lazy" />
+          </div>
+          <p class="footer-blurb">
+            Custom websites for South African businesses, hosted, updated and marketed by
+            the people who built them.
+          </p>
+          <div class="footer-socials">
+            <a href="https://www.facebook.com/edwebmediasolutions" target="_blank" rel="noopener" aria-label="Edweb Media on Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7h2.4l.4-2.8h-2.8v-1.6c0-.8.2-1.4 1.4-1.4h1.5V5.7c-.3 0-1.2-.1-2.2-.1-2.3 0-3.8 1.4-3.8 3.9v1.7H8v2.8h2.4V21h3.1z"/></svg></a>
+            <a href="https://www.instagram.com/edwebmedia/" target="_blank" rel="noopener" aria-label="Edweb Media on Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="3.5"/><circle cx="17.2" cy="6.8" r="0.8" fill="currentColor" stroke="none"/></svg></a>
+            <a href="https://wa.me/27846204583" target="_blank" rel="noopener" aria-label="Message Edweb Media"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-1.2-.6-2-1-2.8-2.3-.2-.3 0-.5.2-.7.2-.2.4-.5.6-.7.1-.2.1-.4 0-.6-.1-.2-.6-1.5-.8-2-.1-.4-.3-.4-.5-.4h-.4c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.1s.9 2.5 1.1 2.7c.1.2 1.6 2.5 4 3.4 2 .8 2.4.7 2.8.6.4-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2 0-.1-.2-.2-.4-.3z"/></svg></a>
+          </div>
+        </div>
+
+        <div>
+          <h2>Company</h2>
+          <ul>
+            <li><a href="new-home.html#services">Services</a></li>
+            <li><a href="new-projects.html">Work</a></li>
+            <li><a href="new-packages.html">Pricing</a></li>
+            <li><a href="new-contact.html">Contact</a></li>
+            <li><a href="new-pay.html">Payments</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h2>Policies</h2>
+          <ul>
+            <li><a href="new-terms.html">Terms and conditions</a></li>
+            <li><a href="new-privacy.html">Privacy policy</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h2>Contact</h2>
+          <ul>
+            <li><a href="tel:+27846204583">+27 84 620 4583</a></li>
+            <li><a href="mailto:info@edwebmedia.com">info@edwebmedia.com</a></li>
+            <li>Cape Town, South Africa</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-base">
+        <span>&copy; <span id="year">2026</span> Edweb Media. All rights reserved.</span>
+        <span>Cape Town, South Africa.</span>
+      </div>
+    </div>
+  </footer>
+
+  <a class="chat-float" href="https://wa.me/27846204583?text=Hi%20Edweb%2C%20I%27m%20looking%20for%20a%20website.%20Can%20we%20chat%3F" target="_blank" rel="noopener" aria-label="Message us about a website">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-1.2-.6-2-1-2.8-2.3-.2-.3 0-.5.2-.7.2-.2.4-.5.6-.7.1-.2.1-.4 0-.6-.1-.2-.6-1.5-.8-2-.1-.4-.3-.4-.5-.4h-.4c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.1s.9 2.5 1.1 2.7c.1.2 1.6 2.5 4 3.4 2 .8 2.4.7 2.8.6.4-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2 0-.1-.2-.2-.4-.3z"/></svg>
+    <span>Chat to us</span>
+  </a>
+
+  <script src="new-script.js"></script>
+</body>
+</html>

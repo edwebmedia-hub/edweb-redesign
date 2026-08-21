@@ -5,6 +5,10 @@
 //   /api/payfast?custom=1&design=<R>&monthly=<R>&label=…  -> custom link (owner-generated)
 // A subscription with a design fee charges the design fee up front, then the
 // monthly amount from the next cycle (Payfast: amount = initial, recurring_amount = monthly).
+//
+// PRICING, 2026-08-21: every once-off design fee carries R500 off the published
+// list price. These are the amounts CHARGED, so they must always match the
+// prices shown on packages and pay. Never change one without the other.
 const crypto = require('crypto');
 
 const RETURN_URL = 'https://edwebmedia.com/';
@@ -37,14 +41,14 @@ const PLANS = {
 
 // Fixed once-off website design fees (self-serve, matches the Pricing page).
 const DESIGN = {
-  'business-silver':    { fee: 3999,  item: 'Website design - Business Silver, 5 pages' },
-  'business-gold':      { fee: 4999,  item: 'Website design - Business Gold, 10 pages' },
-  'business-platinum':  { fee: 6499,  item: 'Website design - Business Platinum, 20 pages' },
-  'ecommerce-silver':   { fee: 5999,  item: 'Website design - E-commerce Silver' },
-  'ecommerce-gold':     { fee: 7499,  item: 'Website design - E-commerce Gold' },
-  'ecommerce-platinum': { fee: 9499,  item: 'Website design - E-commerce Platinum' },
-  'directory-silver':   { fee: 8999,  item: 'Website design - Directory Silver' },
-  'directory-gold':     { fee: 11999, item: 'Website design - Directory Gold' },
+  'business-silver':    { fee: 3499,  item: 'Website design - Business Silver, 5 pages' },
+  'business-gold':      { fee: 4499,  item: 'Website design - Business Gold, 10 pages' },
+  'business-platinum':  { fee: 5999,  item: 'Website design - Business Platinum, 20 pages' },
+  'ecommerce-silver':   { fee: 5499,  item: 'Website design - E-commerce Silver' },
+  'ecommerce-gold':     { fee: 6999,  item: 'Website design - E-commerce Gold' },
+  'ecommerce-platinum': { fee: 8999,  item: 'Website design - E-commerce Platinum' },
+  'directory-silver':   { fee: 8499,  item: 'Website design - Directory Silver' },
+  'directory-gold':     { fee: 11499, item: 'Website design - Directory Gold' },
 };
 
 // Monthly add-ons that can ride along with a design fee.

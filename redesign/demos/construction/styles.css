@@ -1,0 +1,1803 @@
+/* ==========================================================================
+   IRONSTONE CONSTRUCTION — master demo template
+   Direction: "load-bearing". Concrete, rust and dust. Everything derived from
+   three OKLCH anchors; motion is scroll-driven and dies under reduced-motion.
+   ========================================================================== */
+
+/* Animatable custom properties (needed for the gradient + glow transitions). */
+@property --sweep { syntax: "<percentage>"; inherits: false; initial-value: 0%; }
+
+:root {
+  /* ---- Anchors. Every other colour is mixed from these three. ---- */
+  --ink:    oklch(0.19 0.014 62);    /* warm near-black, concrete in shadow */
+  --paper:  oklch(0.96 0.009 84);    /* warm off-white, site dust           */
+  --rust:   oklch(0.585 0.152 44);   /* clay accent, the only strong colour */
+
+  /* ---- Derived surfaces ---- */
+  --ink-2:    color-mix(in oklch, var(--ink) 88%, var(--rust));
+  --ink-3:    color-mix(in oklch, var(--ink) 94%, var(--paper));
+  --paper-2:  color-mix(in oklch, var(--paper) 93%, var(--ink));
+  --paper-3:  color-mix(in oklch, var(--paper) 86%, var(--ink));
+  --rust-lift: color-mix(in oklch, var(--rust) 76%, var(--paper));
+  --rust-deep: color-mix(in oklch, var(--rust) 80%, var(--ink));
+  /* Lighter but still fully saturated, for accents sitting on dark photos
+     where a paper-mixed rust goes chalky and reads weaker than plain white. */
+  --rust-hot:  oklch(0.72 0.168 50);
+  /* Same hue and chroma as --rust, 0.035 deeper. Used wherever rust and paper
+     meet as text-and-background in either direction at label size: buttons,
+     the ticker, the timeline years. Plain --rust against paper is 3.97:1,
+     which fails AA below 18.66px bold. Display-sized rust (counters, section
+     numbers, stars, rules) keeps --rust untouched. */
+  --rust-cta:  oklch(0.55 0.152 44);
+
+  /* ---- Text ---- */
+  --tx:        var(--ink);
+  --tx-soft:   color-mix(in oklch, var(--ink) 66%, var(--paper));
+  --tx-inv:    var(--paper);
+  --tx-inv-soft: color-mix(in oklch, var(--paper) 68%, var(--ink));
+
+  --line:      color-mix(in oklch, var(--ink) 14%, transparent);
+  --line-inv:  color-mix(in oklch, var(--paper) 16%, transparent);
+
+  /* ---- Scrims ---- */
+  --veil:      color-mix(in oklch, var(--ink) 62%, transparent);
+  --veil-deep: color-mix(in oklch, var(--ink) 88%, transparent);
+
+  /* ---- Type ---- */
+  --display: "Archivo", "Arial Narrow", system-ui, sans-serif;
+  --body:    "Instrument Sans", system-ui, -apple-system, sans-serif;
+
+  /* Fluid scale. No breakpoint jumps anywhere. */
+  --t-xs:  clamp(0.72rem, 0.70rem + 0.12vw, 0.80rem);
+  --t-sm:  clamp(0.84rem, 0.81rem + 0.16vw, 0.94rem);
+  --t-md:  clamp(0.98rem, 0.94rem + 0.20vw, 1.10rem);
+  --t-lg:  clamp(1.12rem, 1.04rem + 0.38vw, 1.36rem);
+  --t-xl:  clamp(1.36rem, 1.18rem + 0.80vw, 1.95rem);
+  --t-2xl: clamp(1.70rem, 1.36rem + 1.50vw, 2.60rem);
+  --t-3xl: clamp(2.05rem, 1.58rem + 2.10vw, 3.35rem);
+  --t-hero: clamp(2.55rem, 1.75rem + 3.60vw, 5.10rem);
+
+  /* ---- Space ---- */
+  --s1: 0.25rem; --s2: 0.5rem;  --s3: 0.75rem; --s4: 1rem;
+  --s5: 1.5rem;  --s6: 2rem;    --s7: 2.75rem; --s8: 3.5rem;
+  --s9: 5rem;    --s10: 7rem;   --s11: 9.5rem;
+  /* Fixed masthead height, and the offset every sticky element parks at.
+     A sticky heading must clear the header by a readable gap, not tuck up
+     against it: pinned copy still has to be read, not just survive. */
+  --header-h: 5.95rem;
+  --stick-top: calc(var(--header-h) + var(--s7));
+
+  --band-y: clamp(3.75rem, 2.6rem + 4.4vw, 7rem);
+  --gutter: clamp(1.25rem, 0.6rem + 2.6vw, 3.5rem);
+  --shell: 1280px;
+
+  --r-sm: 3px;
+  --r-md: 6px;
+
+  /* ---- Motion ---- */
+  --expo:   cubic-bezier(0.16, 1, 0.3, 1);
+  --smooth: cubic-bezier(0.33, 1, 0.68, 1);
+  --quick:  180ms var(--smooth);
+  --base:   380ms var(--expo);
+}
+
+/* ==========================================================================
+   RESET
+   ========================================================================== */
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  scroll-padding-top: 6rem;
+}
+
+body {
+  font-family: var(--body);
+  font-size: var(--t-md);
+  line-height: 1.62;
+  color: var(--tx);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+ul, ol { list-style: none; }
+
+h1, h2, h3 {
+  font-family: var(--display);
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -0.028em;
+  text-wrap: balance;
+  font-variation-settings: "wdth" 100;
+}
+p { text-wrap: pretty; }
+
+:focus-visible {
+  outline: 2px solid var(--rust);
+  outline-offset: 3px;
+  border-radius: var(--r-sm);
+}
+
+::selection { background: var(--rust); color: var(--paper); }
+
+.skip-link {
+  position: fixed;
+  top: var(--s4); left: var(--s4);
+  z-index: 200;
+  padding: var(--s3) var(--s5);
+  background: var(--ink);
+  color: var(--paper);
+  border-radius: var(--r-sm);
+  transform: translateY(-160%);
+  transition: transform var(--base);
+}
+.skip-link:focus { transform: none; }
+
+.shell {
+  width: min(100% - var(--gutter) * 2, var(--shell));
+  margin-inline: auto;
+}
+
+/* Cross-document fades where the browser supports it. */
+@view-transition { navigation: auto; }
+
+/* ==========================================================================
+   ATMOSPHERE — grain + scroll rail
+   ========================================================================== */
+.grain {
+  position: fixed;
+  inset: -50%;
+  z-index: 90;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.scroll-rail {
+  position: fixed;
+  top: 0; left: 0;
+  width: 2px;
+  height: 100vh;
+  z-index: 95;
+  background: var(--line);
+  pointer-events: none;
+}
+.scroll-rail span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--rust);
+  transform-origin: top;
+  transform: scaleY(0);
+}
+@supports (animation-timeline: scroll()) {
+  .scroll-rail span {
+    animation: rail linear both;
+    animation-timeline: scroll(root block);
+  }
+}
+@keyframes rail { to { transform: scaleY(1); } }
+
+/* ==========================================================================
+   CONTROLS — pills, magnetic
+   ========================================================================== */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s3);
+  padding: 0.85em 1.5em;
+  font-family: var(--display);
+  font-size: var(--t-sm);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  border-radius: var(--r-sm);
+  white-space: nowrap;
+  transition: background-color var(--quick), color var(--quick),
+              border-color var(--quick), box-shadow var(--base);
+  will-change: transform;
+}
+.pill svg { width: 1.05em; height: 1.05em; flex: none; }
+.pill--lg { padding: 1.05em 2em; font-size: var(--t-md); }
+
+.pill--accent {
+  background: var(--rust-cta);
+  color: var(--paper);
+  box-shadow: 0 1px 2px color-mix(in oklch, var(--ink) 30%, transparent),
+              0 12px 30px color-mix(in oklch, var(--rust) 34%, transparent);
+}
+/* Every button lands on black under the cursor: one hover language across
+   the header CTA, the closing CTAs and the rail arrows. */
+.pill--accent:hover {
+  background: var(--ink);
+  box-shadow: 0 2px 4px color-mix(in oklch, var(--ink) 34%, transparent),
+              0 20px 44px color-mix(in oklch, var(--ink) 30%, transparent);
+}
+
+/* Same idea inverted on dark surfaces. A black hover on a black header just
+   deletes the button, so on ink the hover goes to paper with ink label and
+   icon (the icons are stroke="currentColor", so they follow). */
+.masthead .pill--accent:hover,
+.drawer .pill--accent:hover,
+.hero .pill--accent:hover,
+.statement .pill--accent:hover,
+.band--ink .pill--accent:hover {
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: 0 2px 4px color-mix(in oklch, var(--ink) 46%, transparent),
+              0 20px 44px color-mix(in oklch, var(--ink) 40%, transparent);
+}
+
+/* --glass is retired: transparent/blurred buttons are off the table, and the
+   hero holds one action rather than a primary plus a washed-out secondary. */
+
+/* --dark is retired. Every button on the site now rests on the wordmark's
+   rust and lands on black under the cursor, so there is one button colour
+   and one hover, not two. */
+
+/* ==========================================================================
+   MASTHEAD — glass, condenses on scroll
+   ========================================================================== */
+.masthead {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 100;
+  transition: background-color var(--base), border-color var(--base);
+  border-bottom: 1px solid transparent;
+}
+/* Solid once scrolled. The translucent-and-blurred bar let page content ghost
+   through behind the nav; a fixed header reads as a fixed object, not a
+   filter. */
+.masthead.stuck {
+  background: var(--ink);
+  border-bottom-color: var(--line-inv);
+}
+
+/* The bar condenses by scaling its contents, not by animating padding.
+   Transitioning padding would relayout the header on every scroll toggle. */
+.masthead-inner {
+  display: flex;
+  align-items: center;
+  gap: var(--s5);
+  padding-block: clamp(0.9rem, 0.6rem + 1vw, 1.5rem);
+  transform-origin: left center;
+  transition: transform var(--base);
+}
+.masthead.stuck .masthead-inner { transform: scale(0.94); }
+.masthead.stuck .nav-cta,
+.masthead.stuck .burger { transform-origin: right center; }
+
+.wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s3);
+  margin-right: auto;
+}
+.wordmark-mark {
+  width: 22px; height: 22px;
+  flex: none;
+  background: var(--rust);
+  clip-path: polygon(0 0, 100% 0, 100% 62%, 62% 100%, 0 100%);
+  transition: transform var(--base);
+}
+.wordmark:hover .wordmark-mark { transform: rotate(-90deg); }
+.wordmark-text {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: var(--t-md);
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: var(--paper);
+  font-variation-settings: "wdth" 92;
+}
+.wordmark-text em { font-style: normal; color: var(--rust-lift); }
+
+.nav-desktop { display: none; gap: var(--s6); }
+.nav-desktop a {
+  position: relative;
+  font-size: var(--t-sm);
+  font-weight: 500;
+  color: color-mix(in oklch, var(--paper) 78%, transparent);
+  transition: color var(--quick);
+}
+.nav-desktop a::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: -6px;
+  width: 100%; height: 1px;
+  background: var(--rust);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform var(--base);
+}
+.nav-desktop a:hover { color: var(--paper); }
+.nav-desktop a:hover::after { transform: scaleX(1); transform-origin: left; }
+
+.nav-cta { display: none; }
+
+.burger {
+  width: 44px; height: 44px;
+  display: grid;
+  place-content: center;
+  gap: 6px;
+  margin-right: -8px;
+}
+.burger span {
+  display: block;
+  width: 22px; height: 2px;
+  background: var(--paper);
+  transition: transform var(--base), opacity var(--quick);
+}
+.burger[aria-expanded="true"] span:first-child { transform: translateY(4px) rotate(45deg); }
+.burger[aria-expanded="true"] span:last-child  { transform: translateY(-4px) rotate(-45deg); }
+
+/* 940, not 900: wordmark + five nav links + the phone pill need ~925px, so
+   at 900-924 the row could not fit and the pill pushed past the shell and
+   off the right edge of the viewport. 940 is also the breakpoint the page
+   grids switch at, so the whole layout now changes on one line. */
+@media (min-width: 940px) {
+  .nav-desktop { display: flex; }
+  .nav-cta { display: inline-flex; }
+  .burger { display: none; }
+}
+
+/* ---- Mobile drawer ---- */
+.drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 99;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--s8);
+  padding: var(--s9) var(--gutter) var(--s8);
+  background: var(--ink);
+  animation: drawer-in 420ms var(--expo) both;
+}
+.drawer[hidden] { display: none; }
+@keyframes drawer-in { from { opacity: 0; transform: translateY(-2%); } }
+
+.drawer-nav { display: grid; gap: var(--s2); }
+.drawer-nav a {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s4);
+  padding-block: var(--s3);
+  font-family: var(--display);
+  font-size: var(--t-2xl);
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--paper);
+  border-bottom: 1px solid var(--line-inv);
+  transition: color var(--quick), transform var(--base);
+}
+.drawer-nav a span {
+  font-size: var(--t-xs);
+  font-weight: 500;
+  color: var(--rust-lift);
+  letter-spacing: 0.1em;
+}
+.drawer-nav a:hover { color: var(--rust-lift); transform: translateX(var(--s3)); }
+
+/* ==========================================================================
+   HERO
+   ========================================================================== */
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-top: var(--s11);
+  overflow: clip;
+  color: var(--paper);
+  background: var(--ink);
+}
+
+.hero-frame { position: absolute; inset: 0; z-index: 0; }
+
+.hero-photo {
+  position: absolute;
+  inset: 0;
+  background: var(--ink) url("assets/hero-background.jpg") center 62% / cover no-repeat;
+  transform-origin: center 40%;
+  animation: hero-settle 2.4s var(--expo) both;
+}
+@keyframes hero-settle { from { transform: scale(1.14); } to { transform: scale(1); } }
+
+/* Scroll-driven parallax lift, native, no JS, no scroll listener. */
+@supports (animation-timeline: view()) {
+  .hero-photo {
+    animation: hero-settle 2.4s var(--expo) both, hero-drift linear both;
+    animation-timeline: auto, scroll(root block);
+    animation-range: normal, 0 100vh;
+  }
+  @keyframes hero-drift { to { transform: scale(1.12) translateY(4%); } }
+}
+
+.hero-veil {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, color-mix(in oklch, var(--ink) 72%, transparent) 0%, transparent 34%),
+    linear-gradient(0deg, var(--ink) 2%, color-mix(in oklch, var(--ink) 60%, transparent) 34%, transparent 72%),
+    linear-gradient(95deg, color-mix(in oklch, var(--ink) 74%, transparent) 0%, color-mix(in oklch, var(--ink) 30%, transparent) 46%, transparent 78%);
+}
+
+.hero-body {
+  position: relative;
+  z-index: 2;
+  padding-bottom: clamp(3rem, 1rem + 6vw, 6rem);
+}
+
+.hero-title {
+  font-size: var(--t-hero);
+  font-weight: 900;
+  line-height: 0.90;
+  letter-spacing: -0.045em;
+  text-transform: uppercase;
+  margin-bottom: var(--s6);
+}
+.hero-title .line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.04em;
+}
+.hero-title .line > span {
+  display: block;
+  animation: line-up 1.15s var(--expo) both;
+  font-variation-settings: "wdth" 112;
+}
+.hero-title .line:nth-child(1) > span { animation-delay: 0.12s; }
+.hero-title .line:nth-child(2) > span { animation-delay: 0.24s; }
+/* The accent word carries the promise, so it gets the hot rust plus a rule
+   that draws itself once the headline has landed. */
+.hero-title em {
+  font-style: normal;
+  position: relative;
+  color: var(--rust-hot);
+  white-space: nowrap;
+}
+.hero-title em::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0.06em; bottom: 0.06em;
+  height: 0.075em;
+  background: var(--rust-hot);
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: underline-draw 900ms var(--expo) 1.05s both;
+}
+@keyframes underline-draw { to { transform: scaleX(1); } }
+
+@keyframes line-up {
+  from { transform: translateY(102%); }
+  to   { transform: translateY(0); }
+}
+
+.hero-lede {
+  max-width: 46ch;
+  font-size: var(--t-lg);
+  color: color-mix(in oklch, var(--paper) 84%, transparent);
+  margin-bottom: var(--s7);
+  animation: fade-up 900ms var(--expo) 0.52s both;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s4);
+  animation: fade-up 900ms var(--expo) 0.64s both;
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.hero-meta {
+  position: relative;
+  z-index: 2;
+  border-top: 1px solid var(--line-inv);
+  animation: fade-up 900ms var(--expo) 0.78s both;
+}
+.hero-meta-inner {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--s5);
+  padding-block: var(--s5);
+}
+.hero-meta-inner div { display: flex; flex-direction: column; gap: 2px; }
+.hero-meta-inner b {
+  font-family: var(--display);
+  font-size: var(--t-lg);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  font-variation-settings: "wdth" 95;
+}
+.hero-meta-inner span {
+  font-size: var(--t-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: color-mix(in oklch, var(--paper) 55%, transparent);
+}
+@media (min-width: 760px) {
+  .hero-meta-inner { grid-template-columns: repeat(4, 1fr); gap: var(--s7); }
+}
+
+/* ==========================================================================
+   TICKER
+   ========================================================================== */
+.ticker {
+  overflow: hidden;
+  background: var(--rust-cta);
+  color: var(--paper);
+  padding-block: var(--s3);
+  border-block: 1px solid color-mix(in oklch, var(--ink) 22%, transparent);
+}
+.ticker-track {
+  display: flex;
+  align-items: center;
+  gap: var(--s5);
+  width: max-content;
+  animation: slide 46s linear infinite;
+}
+.ticker:hover .ticker-track { animation-play-state: paused; }
+.ticker span {
+  font-family: var(--display);
+  font-size: var(--t-sm);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  white-space: nowrap;
+  font-variation-settings: "wdth" 88;
+}
+.ticker i {
+  width: 5px; height: 5px;
+  flex: none;
+  background: color-mix(in oklch, var(--paper) 70%, transparent);
+  transform: rotate(45deg);
+}
+@keyframes slide { to { transform: translateX(-50%); } }
+
+/* ==========================================================================
+   BANDS
+   ========================================================================== */
+.band { padding-block: var(--band-y); position: relative; }
+.band--dim { background: var(--paper-2); }
+.band--ink {
+  background: var(--ink);
+  color: var(--tx-inv);
+  --tx: var(--tx-inv);
+  --tx-soft: var(--tx-inv-soft);
+  --line: var(--line-inv);
+}
+.band--ink h2 { color: var(--paper); }
+
+/* Reviews: Edgar wants the actual rust/red-orange, not a black section with
+   a hint of colour in it. Solid rust fill, same accent as the stat numbers
+   and the services strip. */
+/* Real scaffolding photo, barely visible under the rust fill — a texture,
+   not a second image competing with the review content. */
+#reviews.band--ink {
+  position: relative;
+  background: linear-gradient(160deg, var(--rust) 0%, var(--rust-deep) 100%);
+}
+#reviews.band--ink::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url('assets/scaffold-texture.jpg') center 15% / cover no-repeat;
+  opacity: 0.16;
+  mix-blend-mode: luminosity;
+}
+#reviews.band--ink > .shell { position: relative; z-index: 1; }
+
+.band-head { max-width: 62ch; margin-bottom: clamp(2rem, 1.3rem + 2.6vw, 3.25rem); }
+.band-head h2 { font-size: var(--t-3xl); text-transform: uppercase; margin-bottom: var(--s3); }
+.band-head p { font-size: var(--t-lg); color: var(--tx-soft); }
+
+.band-head--row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--s6);
+  max-width: none;
+}
+.band-head--row > div { max-width: 58ch; }
+
+.lede { font-size: var(--t-lg); color: var(--tx-soft); }
+
+/* ==========================================================================
+   BENTO — deliberately uneven cells
+   ========================================================================== */
+.bento {
+  display: grid;
+  gap: var(--s4);
+  grid-template-columns: 1fr;
+}
+@media (min-width: 700px) and (max-width: 1039px) {
+  .bento { grid-template-columns: repeat(2, 1fr); }
+  .cell--wide { grid-column: span 2; }
+}
+/* Explicit areas on desktop. Named areas rather than span counts, so the
+   tall cell's two rows and the short cells' one row always resolve to the
+   same total height and every edge lines up. */
+@media (min-width: 1040px) {
+  .bento {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 250px);
+    grid-template-areas:
+      "tall wide wide"
+      "tall short-a short-b";
+  }
+  .cell--tall  { grid-area: tall; }
+  .cell--wide  { grid-area: wide; }
+  .cell--short-a { grid-area: short-a; }
+  .cell--short-b { grid-area: short-b; }
+  /* Rows govern height here; the mobile min-height would fight them. */
+  .bento .cell { min-height: 0; }
+}
+
+.cell {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border-radius: var(--r-md);
+  min-height: 250px;
+  display: flex;
+  align-items: flex-end;
+  padding: var(--s5);
+  color: var(--paper);
+}
+.cell-photo {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background: var(--ink-2) var(--photo) center / cover no-repeat;
+  transition: transform 900ms var(--expo), filter 600ms var(--smooth);
+}
+.cell::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(0deg,
+    color-mix(in oklch, var(--ink) 92%, transparent) 0%,
+    color-mix(in oklch, var(--ink) 48%, transparent) 46%,
+    color-mix(in oklch, var(--ink) 12%, transparent) 100%);
+  transition: opacity var(--base);
+}
+.cell:hover .cell-photo { transform: scale(1.07); filter: saturate(1.12); }
+.cell:hover::after { opacity: 0.86; }
+
+.cell-text { position: relative; }
+.cell h3 {
+  font-size: var(--t-xl);
+  text-transform: uppercase;
+  margin-bottom: var(--s2);
+  font-variation-settings: "wdth" 96;
+}
+.cell p {
+  font-size: var(--t-sm);
+  color: color-mix(in oklch, var(--paper) 80%, transparent);
+  max-width: 38ch;
+}
+
+/* ==========================================================================
+   SPLIT — asymmetric, sticky media, counters
+   ========================================================================== */
+.split { display: grid; gap: var(--s8); align-items: start; }
+@media (min-width: 940px) {
+  .split { grid-template-columns: 0.82fr 1.18fr; gap: clamp(3rem, 1rem + 5vw, 7rem); }
+  .split-media { position: sticky; top: var(--stick-top); }
+}
+
+/* Stacked, the source order puts the photo before the headline, so the
+   section opens on an image with no context. --stats dissolves the copy
+   wrapper so heading and lede come first, then the photo, then the counters.
+   Only on the variant: about.html's split is running prose, which must not
+   be broken around the photo. */
+@media (max-width: 939px) {
+  .split--stats { row-gap: var(--s6); }
+  .split--stats .split-copy { display: contents; }
+  .split--stats .split-copy h2 { order: 1; margin-bottom: 0; }
+  .split--stats .split-copy .lede { order: 2; margin-bottom: 0; }
+  .split--stats .split-media { order: 3; }
+  .split--stats .figures { order: 4; }
+}
+
+.media-frame {
+  position: relative;
+  border-radius: var(--r-md);
+  overflow: hidden;
+}
+/* Offset rust plate behind the photo: asymmetry without a border. */
+.media-frame::before {
+  content: "";
+  position: absolute;
+  inset: auto -12px -12px auto;
+  width: 62%; height: 58%;
+  background: var(--rust);
+  opacity: 0.16;
+  border-radius: var(--r-md);
+  z-index: -1;
+}
+.media-photo {
+  aspect-ratio: 4 / 5;
+  background: var(--paper-3) var(--photo) center top / cover no-repeat;
+}
+
+.split-copy h2 {
+  font-size: var(--t-3xl);
+  text-transform: uppercase;
+  margin-bottom: var(--s5);
+}
+.split-copy .lede { max-width: 56ch; margin-bottom: var(--s8); }
+
+.figures {
+  display: grid;
+  gap: var(--s6);
+  padding-top: var(--s6);
+  border-top: 1px solid var(--line);
+}
+@media (min-width: 620px) { .figures { grid-template-columns: repeat(3, 1fr); } }
+
+.figures dt {
+  font-family: var(--display);
+  font-size: var(--t-3xl);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--rust);
+  font-variation-settings: "wdth" 108;
+  font-variant-numeric: tabular-nums;
+  margin-bottom: var(--s2);
+}
+.figures dd {
+  font-size: var(--t-sm);
+  color: var(--tx-soft);
+  max-width: 22ch;
+}
+
+/* Elevation strip. The portrait runs taller than heading + lede + counters,
+   which left a dead run of column under the stats on wide screens. A hairline
+   building elevation fills it without adding another photo or a card.
+   Desktop and tablet only: stacked, there is no gap to fill. */
+.elevation { display: none; }
+@media (min-width: 940px) {
+  .split--stats .split-copy {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+  }
+  .elevation {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin-top: auto;
+    padding-top: var(--s6);
+    fill: none;
+    stroke-linecap: square;
+    stroke-linejoin: miter;
+  }
+  .elevation path { vector-effect: non-scaling-stroke; }
+  .elevation-line { stroke: color-mix(in oklch, var(--ink) 38%, transparent); stroke-width: 1; }
+  .elevation-detail { stroke: color-mix(in oklch, var(--ink) 18%, transparent); stroke-width: 1; }
+  .elevation-peak { stroke: var(--rust); stroke-width: 1.5; }
+  /* On the ink band the ink-mixed hairlines vanish, so they flip to paper. */
+  .band--ink .elevation-line { stroke: color-mix(in oklch, var(--paper) 40%, transparent); }
+  .band--ink .elevation-detail { stroke: color-mix(in oklch, var(--paper) 20%, transparent); }
+  .band--ink .elevation-peak { stroke: var(--rust-hot); }
+}
+
+/* ==========================================================================
+   APPROACH — sticky anchor, stepped list
+   ========================================================================== */
+/* Blueprint backdrop. Lives on the closing contact band, which holds still.
+   Behind the approach section it sat under a pinned heading and a stepping
+   column, so the drawing slid against the copy and read as noise rather than
+   as a drawing. Fades up and to the left, keeping the heading and lede on
+   clean paper. clip, not hidden: overflow:hidden kills the
+   animation-timeline: view() rules used elsewhere on this page. */
+.contact { position: relative; overflow: clip; }
+.blueprint {
+  position: absolute;
+  inset: auto 0 0 0;
+  width: 100%;
+  height: auto;
+  z-index: 0;
+  pointer-events: none;
+  fill: none;
+  stroke-linecap: butt;
+  stroke-linejoin: miter;
+  -webkit-mask-image: linear-gradient(to top, #000 0 46%, transparent 96%);
+  mask-image: linear-gradient(to top, #000 0 46%, transparent 96%);
+}
+.blueprint g { stroke: var(--ink); }
+/* The contact band is ink, so the drawing is scribed in paper, not ink. */
+.band--ink .blueprint g { stroke: var(--paper); }
+.bp-faint     { opacity: 0.10; stroke-width: 1; }
+.bp-centre    { opacity: 0.18; stroke-width: 1; stroke-dasharray: 22 6 3 6; }
+.bp-wall      { opacity: 0.38; stroke-width: 1.5; }
+.bp-partition { opacity: 0.32; stroke-width: 1.5; }
+.bp-open      { opacity: 0.30; stroke-width: 1; }
+.bp-door      { opacity: 0.26; stroke-width: 1; }
+.bp-fixture   { opacity: 0.24; stroke-width: 1; }
+.bp-dim       { opacity: 0.26; stroke-width: 1; }
+.bp-stair     { opacity: 0.24; stroke-width: 1; }
+/* One element carries the accent, the way a revision is marked up on a real
+   set. It sits left of the contact cards so it is never covered. */
+.bp-accent { stroke: var(--rust); opacity: 0.55; stroke-width: 1.5; }
+.band--ink .bp-accent { stroke: var(--rust-hot); opacity: 0.7; }
+@media (max-width: 939px) {
+  /* Stacked, the contact copy sits directly on the drawing, so it drops back. */
+  /* At phone width the full-width plan crops to a ~98px ribbon that reads as
+     stray lines, so it runs wider than the band and bleeds both sides. The
+     section is overflow: clip, so this never widens the page. */
+  .blueprint {
+    opacity: 0.55;
+    width: 230%;
+    max-width: none; /* the global svg reset caps this at 100% otherwise */
+    left: -65%;
+    right: auto;
+  }
+}
+
+.approach-grid { display: grid; gap: var(--s8); }
+@media (min-width: 940px) {
+  .approach-grid { grid-template-columns: 0.9fr 1.1fr; gap: clamp(3rem, 1rem + 5vw, 7rem); }
+  .approach-anchor { position: sticky; top: var(--stick-top); align-self: start; }
+}
+.approach-anchor h2 { font-size: var(--t-3xl); text-transform: uppercase; margin-bottom: var(--s4); }
+.approach-anchor p { font-size: var(--t-lg); color: var(--tx-soft); margin-bottom: var(--s6); max-width: 34ch; }
+
+.steps { display: grid; gap: var(--s5); counter-reset: step; }
+
+/* Stages enter once with a gentle lift, then the one crossing the middle of
+   the screen takes the accent. Body copy never dims: dimmed text reads as
+   broken and fails contrast, so the highlight moves instead of the contrast. */
+.step {
+  counter-increment: step;
+  position: relative;
+  padding: var(--s6) 0 var(--s6) clamp(3rem, 1.5rem + 4vw, 5rem);
+  border-top: 1px solid var(--line);
+}
+html.js .step {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 760ms var(--expo), transform 760ms var(--expo);
+  transition-delay: var(--d, 0ms);
+}
+html.js .step.in { opacity: 1; transform: none; }
+
+.step::before {
+  content: counter(step, decimal-leading-zero);
+  position: absolute;
+  left: 0; top: var(--s6);
+  font-family: var(--display);
+  font-size: var(--t-lg);
+  font-weight: 800;
+  color: color-mix(in oklch, var(--rust) 42%, var(--paper-2));
+  font-variant-numeric: tabular-nums;
+  transition: color 520ms var(--smooth), transform 520ms var(--expo);
+}
+.step.active::before {
+  color: var(--rust);
+  transform: scale(1.28);
+  transform-origin: left center;
+}
+
+/* Accent edge that fills while the stage holds the middle of the screen. */
+.step::after {
+  content: "";
+  position: absolute;
+  left: 0; top: -1px;
+  width: 100%; height: 1px;
+  background: var(--rust);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 620ms var(--expo);
+}
+.step.active::after { transform: scaleX(1); }
+
+.step h3 { font-size: var(--t-xl); text-transform: uppercase; margin-bottom: var(--s3); font-variation-settings: "wdth" 96; }
+.step p { color: var(--tx-soft); max-width: 56ch; }
+
+/* ==========================================================================
+   WORK RAIL — horizontal scroll-snap + pointer tilt
+   ========================================================================== */
+.rail {
+  display: flex;
+  gap: var(--s4);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--gutter);
+  padding-inline: var(--gutter);
+  padding-bottom: var(--s5);
+  scrollbar-width: none;
+  perspective: 1200px;
+}
+.rail::-webkit-scrollbar { display: none; }
+
+.work {
+  flex: 0 0 min(84vw, 460px);
+  scroll-snap-align: start;
+  transform-style: preserve-3d;
+  transition: transform 500ms var(--expo);
+}
+.work-photo {
+  aspect-ratio: 4 / 3;
+  border-radius: var(--r-md);
+  background: var(--paper-3) var(--photo) var(--pos, center) / cover no-repeat;
+  margin-bottom: var(--s4);
+  transition: filter 500ms var(--smooth), box-shadow 500ms var(--expo);
+  box-shadow: 0 2px 8px color-mix(in oklch, var(--ink) 12%, transparent);
+}
+.work:hover .work-photo {
+  filter: saturate(1.14) contrast(1.03);
+  box-shadow: 0 18px 44px color-mix(in oklch, var(--ink) 26%, transparent);
+}
+.work-info h3 {
+  font-size: var(--t-lg);
+  text-transform: uppercase;
+  margin-bottom: var(--s1);
+  font-variation-settings: "wdth" 96;
+}
+.work-info p { font-size: var(--t-sm); color: var(--tx-soft); }
+
+.rail-controls { display: flex; gap: var(--s2); }
+.rail-btn {
+  width: 46px; height: 46px;
+  display: grid;
+  place-content: center;
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  color: var(--tx);
+  transition: background-color var(--quick), color var(--quick),
+              border-color var(--quick), transform var(--base);
+}
+.rail-btn svg { width: 18px; height: 18px; }
+.rail-btn:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); transform: translateY(-2px); }
+@media (max-width: 739px) { .rail-controls { display: none; } }
+
+.rail-progress {
+  height: 2px;
+  background: var(--line);
+  margin-top: var(--s5);
+}
+.rail-progress span {
+  display: block;
+  height: 100%;
+  width: 25%;
+  background: var(--rust);
+  transition: transform 220ms var(--smooth);
+  transform-origin: left;
+}
+
+/* ==========================================================================
+   STATEMENT — words unmask on scroll
+   ========================================================================== */
+.statement {
+  position: relative;
+  isolation: isolate;
+  padding-block: clamp(4rem, 2.6rem + 5vw, 7rem);
+  color: var(--paper);
+  overflow: clip;
+}
+.statement-photo {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background: var(--ink) url("assets/project-midbuild.jpg") center 35% / cover no-repeat;
+}
+@media (min-width: 900px) {
+  @media (prefers-reduced-motion: no-preference) {
+    .statement-photo { background-attachment: fixed; }
+  }
+}
+.statement-veil {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(0deg, color-mix(in oklch, var(--ink) 82%, transparent) 0%, color-mix(in oklch, var(--ink) 46%, transparent) 60%, color-mix(in oklch, var(--ink) 56%, transparent) 100%),
+    linear-gradient(96deg, color-mix(in oklch, var(--ink) 78%, transparent) 0%, color-mix(in oklch, var(--ink) 34%, transparent) 52%, transparent 84%);
+}
+
+/* Centred: the band spans the full width, so left-aligned copy left a large
+   dead area on the right at desktop sizes. */
+.statement-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.statement-lines {
+  font-family: var(--display);
+  font-size: var(--t-3xl);
+  font-weight: 900;
+  line-height: 0.98;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  max-width: 18ch;
+}
+.statement-lines .w {
+  display: inline-block;
+  opacity: 0.22;
+  transition: opacity 500ms var(--smooth);
+}
+.statement-lines .w.on { opacity: 1; }
+
+/* Three proof points fill the band's width. No divider rule: a full-width
+   line under centred content cuts the composition in half.
+   The band carried a headline, a sub-paragraph and a button ABOVE these
+   three heading+text pairs, which read as two stacked page structures in
+   one section. The statement and the three hard facts are the only content
+   unique to this band, so the sub-paragraph (it restated the headline) and
+   the button (the same action already appears in the hero, the approach
+   anchor and the contact band) both came out. */
+.statement-proof {
+  display: grid;
+  gap: var(--s5);
+  width: 100%;
+  max-width: 880px;
+  margin-top: clamp(2.25rem, 1.5rem + 2vw, 3.25rem);
+}
+@media (min-width: 760px) {
+  .statement-proof { grid-template-columns: repeat(3, 1fr); gap: var(--s6); }
+}
+.statement-proof li { display: flex; flex-direction: column; gap: var(--s1); }
+.statement-proof b {
+  font-family: var(--display);
+  font-size: var(--t-md);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--paper);
+}
+.statement-proof span {
+  font-size: var(--t-sm);
+  color: color-mix(in oklch, var(--paper) 64%, transparent);
+  text-wrap: balance;      /* stops single-word orphans on the second line */
+  max-width: 30ch;
+  margin-inline: auto;
+}
+
+/* ==========================================================================
+   VOICES
+   ========================================================================== */
+/* One review at a time, swapped in place. A grid of three read as filler;
+   a single large quote gets actually read. The quote sits on a solid paper
+   panel with a hard offset slab — a poured plate on the scaffold, so the
+   rust field and photo texture stay visible around it. */
+.voicebox {
+  display: grid;
+  gap: var(--s6);
+  background: var(--paper);
+  color: var(--ink);
+  border-radius: var(--r-sm);
+  padding: clamp(1.75rem, 1.2rem + 2.4vw, 3.25rem);
+  box-shadow: 14px 14px 0 color-mix(in oklch, var(--ink) 45%, var(--rust-deep));
+  margin-inline-end: 14px;           /* keeps the slab shadow inside the shell */
+}
+@media (min-width: 860px) {
+  .voicebox {
+    grid-template-columns: minmax(12rem, 15rem) 1fr;
+    gap: clamp(2rem, 1rem + 3vw, 4rem);
+  }
+}
+
+.voice-side {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s4);
+  padding-bottom: var(--s4);
+  border-bottom: 1px solid color-mix(in oklch, var(--ink) 14%, transparent);
+}
+@media (min-width: 860px) {
+  .voice-side {
+    padding-bottom: 0;
+    padding-inline-end: var(--s6);
+    border-bottom: 0;
+    border-inline-end: 1px solid color-mix(in oklch, var(--ink) 14%, transparent);
+  }
+}
+
+.voice-tally {
+  font-size: var(--t-sm);
+  color: color-mix(in oklch, var(--ink) 62%, var(--paper));
+  max-width: 16ch;
+  text-wrap: balance;
+}
+
+.voice-slide {
+  min-height: 12rem;                 /* reserves height so swaps never jump */
+  transition: opacity 260ms var(--smooth), transform 260ms var(--smooth);
+}
+@media (min-width: 860px) { .voice-slide { min-height: 10.5rem; } }
+.voice-slide.swapping { opacity: 0; transform: translateY(10px); }
+
+.stars {
+  color: var(--rust);
+  letter-spacing: 0.22em;
+  font-size: var(--t-lg);
+}
+
+.voice-quote {
+  font-family: var(--display);
+  font-size: var(--t-xl);
+  font-weight: 500;
+  line-height: 1.34;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  margin-bottom: var(--s5);
+  max-width: 50ch;
+  text-wrap: pretty;
+}
+
+.voice-slide cite {
+  display: block;
+  font-style: normal;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: var(--t-md);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+}
+.voice-job {
+  font-size: var(--t-sm);
+  color: color-mix(in oklch, var(--ink) 62%, var(--paper));
+}
+
+.voice-dots { display: flex; gap: var(--s3); margin-top: auto; }
+/* The bar stays 4px, the target does not: padding plus content-box clipping
+   gives a 24px touch area without changing what is drawn. */
+.voice-dots button {
+  width: 34px; height: 24px;
+  padding-block: 10px;
+  background: color-mix(in oklch, var(--ink) 18%, transparent);
+  background-clip: content-box;
+  border-radius: 2px;
+  transition: background-color var(--base);
+}
+.voice-dots button[aria-selected="true"] { background: var(--rust); }
+.voice-dots button:hover { background: color-mix(in oklch, var(--ink) 45%, transparent); }
+
+.voice-arrows { display: flex; gap: var(--s2); }
+.band--ink .rail-btn { border-color: var(--line-inv); color: var(--paper); }
+.band--ink .rail-btn:hover { background: var(--paper); color: var(--ink); border-color: var(--paper); }
+
+/* ==========================================================================
+   QUESTIONS
+   ========================================================================== */
+.qa-grid { display: grid; gap: var(--s8); }
+@media (min-width: 940px) {
+  .qa-grid { grid-template-columns: 0.78fr 1.22fr; gap: clamp(3rem, 1rem + 5vw, 7rem); align-items: start; }
+  .qa-aside { position: sticky; top: var(--stick-top); }
+}
+.qa-aside h2 { font-size: var(--t-3xl); text-transform: uppercase; margin-bottom: var(--s4); }
+.qa-aside > p { color: var(--tx-soft); margin-bottom: var(--s7); max-width: 34ch; }
+
+/* Landscape photo occupying the aside's lower block. It replaced a second
+   heading + paragraph + button stack, which repeated the CTA already sitting
+   in the contact band directly above this section. */
+.qa-shot {
+  aspect-ratio: 16 / 10;
+  border-radius: var(--r-md);
+  background: var(--paper-3) var(--photo) center / cover no-repeat;
+}
+
+.qa-list { border-top: 1px solid var(--line); }
+.qa { border-bottom: 1px solid var(--line); }
+.qa summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s5);
+  padding-block: var(--s5);
+  font-family: var(--display);
+  font-size: var(--t-lg);
+  font-weight: 700;
+  cursor: pointer;
+  list-style: none;
+  transition: color var(--quick);
+}
+.qa summary::-webkit-details-marker { display: none; }
+.qa summary:hover { color: var(--rust); }
+
+.qa summary i {
+  position: relative;
+  width: 26px; height: 26px;
+  flex: none;
+}
+.qa summary i::before, .qa summary i::after {
+  content: "";
+  position: absolute;
+  top: 50%; left: 50%;
+  translate: -50% -50%;
+  background: var(--rust);
+}
+.qa summary i::before { width: 15px; height: 2px; }
+.qa summary i::after  { width: 2px; height: 15px; transition: rotate var(--base), opacity var(--quick); }
+.qa[open] summary i::after { rotate: 90deg; opacity: 0; }
+
+.qa-body {
+  padding-bottom: var(--s6);
+  max-width: 62ch;
+  animation: qa-in 340ms var(--expo) both;
+}
+.qa-body p { color: var(--tx-soft); }
+.qa-body p + p { margin-top: var(--s4); }
+@keyframes qa-in { from { opacity: 0; transform: translateY(-8px); } }
+
+/* ==========================================================================
+   CONTACT
+   ========================================================================== */
+.contact-grid { position: relative; z-index: 1; display: grid; gap: var(--s8); }
+@media (min-width: 940px) {
+  .contact-grid { grid-template-columns: 1.05fr 0.95fr; gap: clamp(3rem, 1rem + 5vw, 6rem); align-items: start; }
+}
+.contact h2 { font-size: var(--t-3xl); text-transform: uppercase; margin-bottom: var(--s4); }
+.contact .lede { max-width: 52ch; }
+
+.facts {
+  display: grid;
+  gap: var(--s6);
+  margin-top: var(--s8);
+  padding-top: var(--s6);
+  border-top: 1px solid var(--line-inv);
+}
+@media (min-width: 620px) { .facts { grid-template-columns: repeat(3, 1fr); } }
+.facts dt {
+  font-family: var(--display);
+  font-size: var(--t-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--rust-lift);
+  margin-bottom: var(--s2);
+}
+.facts dd { font-size: var(--t-sm); color: var(--tx-inv-soft); line-height: 1.55; }
+
+.contact-routes { display: grid; gap: var(--s3); }
+.route {
+  display: flex;
+  align-items: center;
+  gap: var(--s4);
+  padding: var(--s5);
+  border-radius: var(--r-md);
+  background: color-mix(in oklch, var(--paper) 5%, transparent);
+  border: 1px solid var(--line-inv);
+  transition: background-color var(--base), border-color var(--base), transform var(--base);
+  will-change: transform;
+}
+.route:hover {
+  background: color-mix(in oklch, var(--paper) 9%, transparent);
+  border-color: color-mix(in oklch, var(--rust) 55%, transparent);
+}
+.route > svg { width: 22px; height: 22px; flex: none; color: var(--rust-lift); }
+.route span { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.route b {
+  font-family: var(--display);
+  font-size: var(--t-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: color-mix(in oklch, var(--paper) 58%, transparent);
+}
+.route em {
+  font-style: normal;
+  font-size: var(--t-md);
+  color: var(--paper);
+  overflow-wrap: anywhere;
+}
+.route i {
+  margin-left: auto;
+  font-style: normal;
+  color: var(--rust-lift);
+  transition: transform var(--base);
+}
+.route:hover i { transform: translate(3px, -3px); }
+
+/* The three routes are the one action on the contact band, so they carry a
+   solid fill rather than a translucent card that dissolves into the surface.
+   Same treatment on index.html and contact.html: one value per role. */
+.band--ink .route {
+  background: var(--paper);
+  border-color: transparent;
+}
+.band--ink .route:hover {
+  background: var(--paper-2);
+  border-color: color-mix(in oklch, var(--rust) 60%, transparent);
+}
+.band--ink .route > svg,
+.band--ink .route i { color: var(--rust-deep); }
+/* Explicit, not var(--tx-soft): inside .band--ink that token is remapped to
+   the inverse soft tone, which would be light-on-light here. */
+.band--ink .route b { color: color-mix(in oklch, var(--ink) 62%, var(--paper)); }
+.band--ink .route em { color: var(--ink); }
+
+/* ==========================================================================
+   FOOT
+   ========================================================================== */
+/* Neutral ink footer, no rust in the mix. The old --ink-2 read muddy brown;
+   plain --ink is the same near-black the hero and masthead use, and it now
+   sits under a light contact band so the two never merge. */
+.foot {
+  background: var(--ink);
+  color: var(--tx-inv);
+  padding-block: var(--s8) var(--s6);
+}
+.foot-top {
+  display: grid;
+  gap: var(--s5);
+  padding-bottom: var(--s7);
+  border-bottom: 1px solid var(--line-inv);
+}
+@media (min-width: 860px) {
+  .foot-top { grid-template-columns: auto 1fr auto; align-items: center; gap: var(--s8); }
+}
+.foot-top p { font-size: var(--t-sm); color: var(--tx-inv-soft); max-width: 46ch; }
+.foot-nav { display: flex; flex-wrap: wrap; gap: var(--s5); }
+/* 24px minimum target (WCAG 2.2 SC 2.5.8); the link text alone measured 22. */
+.foot-nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  font-size: var(--t-sm);
+  color: var(--tx-inv-soft);
+  transition: color var(--quick);
+}
+.foot-nav a:hover { color: var(--rust-lift); }
+
+.foot-base {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--s3);
+  padding-top: var(--s5);
+}
+.foot-base small { font-size: var(--t-xs); color: color-mix(in oklch, var(--paper) 62%, var(--ink)); }
+
+/* ==========================================================================
+   REVEAL — IntersectionObserver fallback for everything not scroll-driven.
+   Without .js on <html>, content is simply visible. A JS failure can never
+   leave the page blank.
+   ========================================================================== */
+.rise { opacity: 1; transform: none; }
+html.js .rise {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 800ms var(--expo), transform 800ms var(--expo);
+  transition-delay: var(--d, 0ms);
+}
+html.js .rise.seen { opacity: 1; transform: none; }
+
+/* ==========================================================================
+   REDUCED MOTION — everything above becomes static, nothing disappears.
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  html.js .rise { opacity: 1; transform: none; }
+  html.js .step { opacity: 1; transform: none; }
+  .voice-slide.swapping { opacity: 1; transform: none; }
+  .hero-photo { animation: none; transform: none; }
+  .ticker-track { animation: none; }
+  .statement-lines .w { opacity: 1; }
+  .statement-photo { background-attachment: scroll; }
+}
+
+/* ==========================================================================
+   INNER PAGES
+   The home page opens on a full-height hero; inner pages open on a compact
+   band so real content starts near the fold. Same materials, less ceremony.
+   ========================================================================== */
+.page-hero {
+  position: relative;
+  isolation: isolate;
+  padding-top: calc(var(--s11) + var(--s4));
+  padding-bottom: var(--s9);
+  color: var(--paper);
+  background: var(--ink);
+  overflow: clip;
+}
+.page-hero-photo {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background: var(--ink) var(--photo) center 55% / cover no-repeat;
+  animation: hero-settle 2s var(--expo) both;
+}
+.page-hero-veil {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(180deg, color-mix(in oklch, var(--ink) 76%, transparent) 0%, transparent 42%),
+    linear-gradient(0deg, var(--ink) 0%, color-mix(in oklch, var(--ink) 52%, transparent) 52%, transparent 100%),
+    linear-gradient(96deg, color-mix(in oklch, var(--ink) 76%, transparent) 0%, color-mix(in oklch, var(--ink) 34%, transparent) 54%, transparent 86%);
+}
+
+.crumb {
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+  font-size: var(--t-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: color-mix(in oklch, var(--paper) 56%, transparent);
+  margin-bottom: var(--s4);
+}
+.crumb a { display: inline-flex; align-items: center; min-height: 24px; }
+.crumb a:hover { color: var(--rust-hot); }
+.crumb b { font-weight: 500; color: var(--rust-hot); }
+
+.page-hero h1 {
+  font-size: var(--t-3xl);
+  text-transform: uppercase;
+  font-variation-settings: "wdth" 106;
+  margin-bottom: var(--s4);
+  max-width: 20ch;
+}
+.page-hero-lede {
+  font-size: var(--t-lg);
+  color: color-mix(in oklch, var(--paper) 82%, transparent);
+  max-width: 58ch;
+}
+
+/* Current-page marker in the header. */
+.nav-desktop a.is-current { color: var(--paper); }
+.nav-desktop a.is-current::after { transform: scaleX(1); }
+.drawer-nav a.is-current { color: var(--rust-hot); }
+
+/* ==========================================================================
+   SERVICE DETAIL — alternating full rows, never a card grid
+   ========================================================================== */
+.svc {
+  display: grid;
+  gap: var(--s6);
+  padding-block: clamp(2.5rem, 1.5rem + 3vw, 4rem);
+  border-top: 1px solid var(--line);
+  align-items: center;
+}
+@media (min-width: 900px) {
+  .svc { grid-template-columns: 1fr 1fr; gap: clamp(2.5rem, 1rem + 4vw, 5rem); }
+  .svc:nth-child(even) .svc-media { order: 2; }
+}
+.svc-media {
+  aspect-ratio: 16 / 11;
+  border-radius: var(--r-md);
+  background: var(--paper-3) var(--photo) center / cover no-repeat;
+}
+/* h2, not h3: these are the top level of content under the page h1, and the
+   markup was skipping a heading level. Size is unchanged. */
+.svc h2 {
+  font-size: var(--t-2xl);
+  text-transform: uppercase;
+  margin-bottom: var(--s3);
+  font-variation-settings: "wdth" 100;
+}
+.svc-copy > p { color: var(--tx-soft); max-width: 52ch; margin-bottom: var(--s5); }
+
+.svc-list { display: grid; gap: var(--s2); }
+.svc-list li {
+  display: flex;
+  gap: var(--s3);
+  font-size: var(--t-sm);
+  color: var(--tx-soft);
+}
+.svc-list li::before {
+  content: "";
+  flex: none;
+  width: 7px; height: 7px;
+  margin-top: 0.55em;
+  background: var(--rust);
+  clip-path: polygon(0 0, 100% 0, 100% 60%, 60% 100%, 0 100%);
+}
+
+/* ==========================================================================
+   PROJECT GRID (projects page)
+   ========================================================================== */
+.grid-work { display: grid; gap: var(--s5); }
+@media (min-width: 680px)  { .grid-work { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1080px) { .grid-work { grid-template-columns: repeat(3, 1fr); } }
+
+.pcard { display: flex; flex-direction: column; }
+.pcard-media {
+  aspect-ratio: 4 / 3;
+  border-radius: var(--r-md);
+  background: var(--paper-3) var(--photo) var(--pos, center) / cover no-repeat;
+  margin-bottom: var(--s4);
+  transition: filter 480ms var(--smooth), box-shadow 480ms var(--expo), transform 480ms var(--expo);
+  box-shadow: 0 2px 8px color-mix(in oklch, var(--ink) 12%, transparent);
+}
+.pcard:hover .pcard-media {
+  filter: saturate(1.12) contrast(1.03);
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px color-mix(in oklch, var(--ink) 24%, transparent);
+}
+.pcard-tag {
+  font-size: var(--t-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--rust);
+  margin-bottom: var(--s2);
+}
+/* h2 for the same reason as .svc; size unchanged. */
+.pcard h2 {
+  font-size: var(--t-lg);
+  text-transform: uppercase;
+  margin-bottom: var(--s2);
+  font-variation-settings: "wdth" 96;
+}
+.pcard > p { font-size: var(--t-sm); color: var(--tx-soft); margin-bottom: var(--s4); }
+.pcard dl {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s1) var(--s5);
+  padding-top: var(--s3);
+  border-top: 1px solid var(--line);
+  margin-top: auto;
+}
+.pcard dl > div { display: grid; gap: 1px; }
+.pcard dt {
+  font-size: var(--t-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--tx-soft);
+}
+.pcard dd {
+  font-family: var(--display);
+  font-size: var(--t-sm);
+  font-weight: 700;
+  color: var(--tx);
+}
+
+/* ==========================================================================
+   ABOUT — timeline, team, values
+   ========================================================================== */
+.timeline { display: grid; }
+.tl {
+  position: relative;
+  display: grid;
+  gap: var(--s2);
+  padding: var(--s6) 0 var(--s6) clamp(4.5rem, 3rem + 5vw, 7.5rem);
+  border-top: 1px solid var(--line);
+}
+.tl-year {
+  position: absolute;
+  left: 0; top: var(--s6);
+  font-family: var(--display);
+  font-size: var(--t-lg);
+  font-weight: 800;
+  /* --t-lg bottoms out at 18.07px on phones, half a pixel under the large-text
+     threshold, so this label needs the full 4.5:1. */
+  color: var(--rust-cta);
+  font-variant-numeric: tabular-nums;
+}
+.tl h3 { font-size: var(--t-lg); text-transform: uppercase; font-variation-settings: "wdth" 96; }
+.tl p { color: var(--tx-soft); max-width: 60ch; }
+
+.team { display: grid; gap: var(--s6); }
+@media (min-width: 700px)  { .team { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1040px) { .team { grid-template-columns: repeat(4, 1fr); } }
+.member-photo {
+  aspect-ratio: 3 / 4;
+  border-radius: var(--r-md);
+  background: var(--paper-3) var(--photo) center top / cover no-repeat;
+  margin-bottom: var(--s4);
+  filter: grayscale(1) contrast(1.04);
+  transition: filter 520ms var(--smooth);
+}
+.member:hover .member-photo { filter: none; }
+.member h3 { font-size: var(--t-md); text-transform: uppercase; margin-bottom: 2px; }
+.member p { font-size: var(--t-sm); color: var(--tx-soft); }
+
+.values { display: grid; gap: var(--s6); }
+@media (min-width: 760px) { .values { grid-template-columns: repeat(3, 1fr); gap: var(--s7); } }
+.value { padding-top: var(--s5); border-top: 2px solid var(--rust); }
+.value h3 { font-size: var(--t-lg); text-transform: uppercase; margin-bottom: var(--s3); font-variation-settings: "wdth" 96; }
+.value p { color: var(--tx-soft); font-size: var(--t-sm); }
+
+/* ==========================================================================
+   FORM (contact page)
+   ========================================================================== */
+.form { display: grid; gap: var(--s5); }
+.field { display: grid; gap: var(--s2); }
+@media (min-width: 640px) { .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s5); } }
+
+.field label {
+  font-family: var(--display);
+  font-size: var(--t-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--tx-inv-soft);
+  transition: color var(--quick);
+}
+.field input, .field select, .field textarea {
+  font: inherit;
+  /* Never below 16px: iOS Safari zooms the whole page when a control smaller
+     than that takes focus, and --t-md bottoms out at 15.68px on phones. */
+  font-size: max(16px, var(--t-md));
+  color: var(--paper);
+  background: color-mix(in oklch, var(--paper) 6%, transparent);
+  border: 1px solid var(--line-inv);
+  border-radius: var(--r-md);
+  padding: 0.85em 1em;
+  width: 100%;
+  transition: border-color var(--quick), background-color var(--quick);
+}
+.field textarea { resize: vertical; min-height: 8rem; }
+.field input::placeholder, .field textarea::placeholder {
+  color: color-mix(in oklch, var(--paper) 36%, transparent);
+}
+.field input:focus, .field select:focus, .field textarea:focus {
+  border-color: var(--rust-hot);
+  background: color-mix(in oklch, var(--paper) 10%, transparent);
+  outline: none;
+}
+/* :has() lights the whole field while its control has focus, no JS needed. */
+.field:has(input:focus) label,
+.field:has(textarea:focus) label,
+.field:has(select:focus) label { color: var(--rust-hot); }
+
+.field select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' fill='none' stroke='%23f3ede2' stroke-width='2'%3E%3Cpath d='m1 1 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1.1em center;
+  padding-right: 3em;
+}
+.field select option { color: #17130f; background: #f3ede2; }
+
+/* Honeypot: real visitors never see it, bots fill it in. */
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+.form-note { font-size: var(--t-xs); color: color-mix(in oklch, var(--paper) 50%, transparent); }
+.form-status {
+  font-size: var(--t-sm);
+  padding: var(--s4) var(--s5);
+  border-radius: var(--r-md);
+  border: 1px solid color-mix(in oklch, var(--rust) 60%, transparent);
+  background: color-mix(in oklch, var(--rust) 12%, transparent);
+  color: var(--paper);
+}
+.form-status[hidden] { display: none; }
+
+/* ==========================================================================
+   CLOSING CTA (shared by the inner pages)
+   ========================================================================== */
+.closer { text-align: center; }
+.closer h2 { font-size: var(--t-3xl); text-transform: uppercase; margin-bottom: var(--s4); }
+/* --tx-soft, not --tx-inv-soft. This paragraph was carrying the light-on-dark
+   tone while the closer sits on a light --dim band, which measured 1.91:1 and
+   read as washed out on services, projects and about. --tx-soft also flips
+   automatically if the band ever goes ink. */
+.closer > p {
+  font-size: var(--t-lg);
+  color: var(--tx-soft);
+  max-width: 52ch;
+  margin: 0 auto var(--s7);
+}
+.closer-actions { display: flex; flex-wrap: wrap; gap: var(--s4); justify-content: center; }
+
+/* Six-up "always included" list on the services page. Left-aligned and wider
+   than the centred proof row it borrows its type from. */
+.included {
+  display: grid;
+  gap: var(--s6);
+}
+@media (min-width: 640px)  { .included { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1000px) { .included { grid-template-columns: repeat(3, 1fr); gap: var(--s7); } }
+.included li { display: flex; flex-direction: column; gap: var(--s1); }
+.included b {
+  font-family: var(--display);
+  font-size: var(--t-md);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--paper);
+}
+.included span {
+  font-size: var(--t-sm);
+  color: color-mix(in oklch, var(--paper) 64%, transparent);
+  max-width: 34ch;
+}
+
+.closer-sub { color: var(--tx-soft); }
+
+/* Team monograms. Deliberate placeholders: a real client drops their own
+   portraits in here, and stock faces would misrepresent an actual team. */
+.member-mono {
+  aspect-ratio: 3 / 4;
+  border-radius: var(--r-md);
+  margin-bottom: var(--s4);
+  display: grid;
+  place-content: center;
+  background:
+    linear-gradient(155deg, color-mix(in oklch, var(--rust) 18%, var(--paper-3)) 0%, var(--paper-3) 70%);
+  transition: background var(--base);
+}
+.member-mono span {
+  font-family: var(--display);
+  font-size: var(--t-3xl);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: color-mix(in oklch, var(--rust) 62%, var(--paper-3));
+  transition: color var(--base);
+}
+.member:hover .member-mono span { color: var(--rust); }
+
+/* Body copy inside a light band's split column. */
+.split-copy .body-p { color: var(--tx-soft); max-width: 56ch; }
+.split-copy .body-p + .body-p { margin-top: var(--s5); }
+
+/* Left-aligned action row (contact form submit). */
+.closer-actions--start { justify-content: flex-start; }
+
+/* Lede directly above a form needs a little more room beneath it. */
+.form-lede { margin-bottom: var(--s7); }
+
+/* The email address is the longest unbreakable string on the page; at 375px it
+   splits mid-domain. Dropping a step keeps it on one line on a small phone. */
+@media (max-width: 420px) {
+  .route em { font-size: var(--t-sm); }
+}
+
+/* ==========================================================================
+   ON-SITE PHOTO BAND
+   Full-bleed strip of three, uneven heights so it reads as a contact sheet
+   rather than a tidy three-card row.
+   ========================================================================== */
+.strip {
+  display: grid;
+  gap: var(--s3);
+  padding-inline: var(--gutter);
+  grid-template-columns: 1fr;
+}
+@media (min-width: 760px) {
+  .strip {
+    grid-template-columns: repeat(3, 1fr);
+    align-items: start;
+    gap: var(--s4);
+  }
+}
+
+.shot {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--r-md);
+  aspect-ratio: 4 / 3;
+  background: var(--paper-3) var(--photo) center / cover no-repeat;
+  box-shadow: 0 2px 10px color-mix(in oklch, var(--ink) 12%, transparent);
+}
+/* One taller frame breaks the row without needing a caption to carry it. */
+@media (min-width: 760px) {
+  .shot--tall { aspect-ratio: 3 / 4; margin-top: var(--s6); }
+}
+
+.shot figcaption {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: var(--s6) var(--s4) var(--s4);
+  font-size: var(--t-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--paper);
+  background: linear-gradient(0deg, color-mix(in oklch, var(--ink) 88%, transparent) 0%, transparent 100%);
+}

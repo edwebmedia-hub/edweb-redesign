@@ -1,38 +1,95 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" class="no-js">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Edweb Media | Websites Built to Grow Your Business</title>
-  <meta name="description" content="Edweb Media designs and manages premium websites with ongoing marketing, branding and content support, for businesses that want to look as good as they perform." />
+  <title>Web Designer Cape Town | Edweb Media</title>
+  <!-- PROMOTION CHECKLIST (do all four when this replaces index.html):
+       1. delete the robots noindex line below
+       2. set the canonical to https://edwebmedia.com/
+       3. re-add the Google Ads gtag loader from index.html
+       4. change the header logo href from new-home.html to /
+       Social and structured data below are already at index.html parity. -->
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="description" content="Edweb Media designs and builds custom websites for South African businesses, then hosts, updates and markets them long after launch. Cape Town based, 5.0 on Google." />
+  <link rel="canonical" href="https://edwebmedia.com/" />
 
-  <!-- Preconnect speeds up the first font request -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://edwebmedia.com/" />
+  <meta property="og:title" content="Web Designer Cape Town | Edweb Media" />
+  <meta property="og:description" content="Custom websites for South African businesses, hosted, updated and marketed by the people who built them." />
+  <meta property="og:image" content="https://edwebmedia.com/assets/edweb-logo-dark.png" />
+  <meta property="og:locale" content="en_ZA" />
+  <meta property="og:site_name" content="Edweb Media" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Web Designer Cape Town | Edweb Media" />
+  <meta name="twitter:description" content="Custom websites for South African businesses, hosted, updated and marketed by the people who built them." />
+  <meta name="twitter:image" content="https://edwebmedia.com/assets/edweb-logo-dark.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Edweb Media",
+    "description": "Web design and development studio based in Cape Town, South Africa. Custom websites, hosting, management and marketing for businesses locally and worldwide.",
+    "url": "https://edwebmedia.com",
+    "logo": "https://edwebmedia.com/favicon.svg",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Cape Town",
+      "addressRegion": "Western Cape",
+      "addressCountry": "ZA"
+    },
+    "areaServed": [
+      { "@type": "Country", "name": "South Africa" },
+      { "@type": "Country", "name": "Worldwide" }
+    ],
+    "email": "info@edwebmedia.com",
+    "telephone": "+27846204583",
+    "priceRange": "$$",
+    "serviceType": ["Web Design", "Web Development", "Branding", "Digital Marketing", "SEO"]
+  }
+  </script>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16948063813"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-16948063813');
+  </script>
+
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=block" rel="stylesheet" />
-
   <link rel="stylesheet" href="new-styles.css" />
+
+  <script>document.documentElement.classList.replace('no-js', 'js');</script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <!-- ============================== HEADER / NAV ============================== -->
+  <!-- ================================ HEADER ================================ -->
   <header class="site-header" id="site-header">
-    <div class="container nav" id="nav">
-      <a href="index.html" class="logo">
-        <img class="logo-img logo-img--light" src="assets/edweb-logo-light.png" alt="Edweb Media">
-        <img class="logo-img logo-img--dark" src="assets/edweb-logo-dark.png" alt="Edweb Media">
+    <div class="nav" id="nav">
+      <a href="new-home.html" class="logo" aria-label="Edweb Media home">
+        <img src="assets/work/logo-edweb-dark.webp" alt="Edweb Media" width="264" height="48" />
       </a>
 
       <nav class="nav-links" aria-label="Primary">
-        <a href="index.html">Home</a>
-        <a href="packages.html">Packages</a>
-        <a href="contact.html">Contact</a>
+        <a href="#services">Services</a>
+        <a href="new-projects.html">Work</a>
+        <a href="new-packages.html">Pricing</a>
+        <a href="new-pay.html">Payments</a>
+        <a href="new-contact.html">Contact</a>
       </nav>
 
-      <div class="nav-cta">
-        <a href="contact.html" class="btn btn--primary">Get In Touch</a>
+      <div class="nav-end">
+        <a href="new-contact.html" class="ulink">Start a project</a>
         <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav">
           <span></span><span></span><span></span>
         </button>
@@ -41,379 +98,803 @@
   </header>
 
   <main id="main">
-    <!-- ============================== HERO ============================== -->
-    <section class="hero" id="top">
+    <!-- ================================= HERO ================================= -->
+    <section class="hero band--alt" id="top">
       <div class="container hero-inner">
-        <div class="eyebrow reveal" style="visibility:hidden" aria-hidden="true">Web Design &amp; Growth Studio, Cape Town</div>
-        <h1 class="hero-heading reveal" style="--reveal-delay:80ms">
-          <span class="hero-heading-line">Websites</span>
-          <span class="hero-cycle-wrap"><em class="text-cycle" data-words="crafted, designed, built, managed, optimised, supported">crafted</em></span>
-          <span class="hero-heading-line">to grow your business</span>
-        </h1>
-        <p class="hero-lead reveal" style="--reveal-delay:160ms">
-          We design and manage premium websites, then back them with marketing,
-          branding and content, so your business looks as sharp online as it
-          performs offline.
-        </p>
-        <div class="hero-actions reveal" style="--reveal-delay:240ms">
-          <a href="packages.html" class="btn btn--primary">View Packages</a>
-          <a href="#work" class="btn btn--accent">See Our Work</a>
-        </div>
-      </div>
-      <div class="scroll-cue" aria-hidden="true">
-        <span class="line"></span>
-        Scroll
-      </div>
-    </section>
+        <div class="hero-copy">
+          <h1>
+            <span class="rise"><span style="--d:60ms">Websites</span></span>
+            <span class="rise"><span style="--d:140ms">designed</span></span>
+            <span class="rise"><span style="--d:220ms">to</span></span>
+            <span class="rise"><span style="--d:300ms" class="accent">grow</span></span>
+            <span class="rise"><span style="--d:380ms">your</span></span>
+            <span class="rise"><span style="--d:460ms">business.</span></span>
+          </h1>
 
-    <!-- ============================== ABOUT ============================== -->
-    <section class="section" id="about">
-      <div class="container about-grid">
-        <div class="about-copy reveal">
-          <div class="eyebrow">About Edweb Media</div>
-          <h2>Grow with us</h2>
-          <p>
-            We build websites that help your business grow, designed with clean
-            layouts, strong performance and a setup that keeps everything simple
-            and effective.
+          <p class="lead reveal" style="--reveal-delay:520ms">
+            Edweb Media is a Cape Town studio building custom websites for South African
+            businesses, then hosting, updating and marketing them long after launch.
           </p>
-          <p>
-            Beyond the website, we support your brand through digital marketing,
-            branding and visual content, so everything works together to keep
-            your business looking professional and active online.
+
+          <div class="hero-actions reveal" style="--reveal-delay:600ms">
+            <a href="#pricing" class="btn">See packages</a>
+            <a href="#work" class="ulink">View recent work <span class="arrow" aria-hidden="true">&raquo;</span></a>
+          </div>
+        </div>
+
+        <div class="quote-card reveal" style="--reveal-delay:400ms">
+          <h2>Get a price for your site</h2>
+          <p class="quote-sub">Tell us what you need. You get a plan and a price before any work starts.</p>
+
+          <form id="quote-form" novalidate>
+            <div>
+              <label for="q_name">Your name</label>
+              <input type="text" id="q_name" name="first_name" autocomplete="given-name" required />
+            </div>
+            <div>
+              <label for="q_email">Email</label>
+              <input type="email" id="q_email" name="email" autocomplete="email" required />
+            </div>
+            <div>
+              <label for="q_message">What do you need?</label>
+              <input type="text" id="q_message" name="message" placeholder="New website for a plumbing business" />
+            </div>
+
+            <div class="hp" aria-hidden="true">
+              <label for="q_company">Company</label>
+              <input type="text" id="q_company" name="company" tabindex="-1" autocomplete="off" />
+            </div>
+
+            <button type="submit" class="btn btn--block">Get my price</button>
+            <p class="form-status" role="status" aria-live="polite"></p>
+          </form>
+
+          <div class="quote-chips">
+            <span>No obligation</span>
+            <span>Usually answered within one working day</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="logo-strip" aria-label="Businesses we have built for">
+          <div class="logo-strip-track">
+            <img src="assets/work/logo-navigator.webp" width="200" height="72" alt="Navigator Vietnam" />
+            <img src="assets/work/logo-lekker-doos.webp" width="200" height="72" alt="Die Lekker Doos" />
+            <img src="assets/work/logo-crazydaizy.webp" width="200" height="72" alt="Crazy Daizy" />
+            <img src="assets/work/logo-clipie.webp" width="200" height="72" alt="CliPie Power Drives" />
+            <img src="assets/work/logo-tee-to-trail.webp" width="200" height="72" alt="Tee to Trail Africa" />
+            <img src="assets/work/logo-muire.webp" width="200" height="72" alt="Muire Maintenance" />
+            <img src="assets/work/logo-spiralguard.webp" width="200" height="72" alt="Helix SpiralGuard" />
+            <img src="assets/work/logo-erfdevco.webp" width="200" height="72" alt="Erf Dev Co" />
+            <img src="assets/work/logo-luselle.webp" width="200" height="72" alt="Luselle Golden Retrievers" />
+            <img src="assets/work/logo-navigator.webp" width="200" height="72" alt="" aria-hidden="true" />
+            <img src="assets/work/logo-lekker-doos.webp" width="200" height="72" alt="" aria-hidden="true" />
+            <img src="assets/work/logo-crazydaizy.webp" width="200" height="72" alt="" aria-hidden="true" />
+            <img src="assets/work/logo-clipie.webp" width="200" height="72" alt="" aria-hidden="true" />
+            <img src="assets/work/logo-tee-to-trail.webp" width="200" height="72" alt="" aria-hidden="true" />
+            <img src="assets/work/logo-muire.webp" width="200" height="72" alt="" aria-hidden="true" />
+            <img src="assets/work/logo-spiralguard.webp" width="200" height="72" alt="" aria-hidden="true" />
+            <img src="assets/work/logo-erfdevco.webp" width="200" height="72" alt="" aria-hidden="true" />
+            <img src="assets/work/logo-luselle.webp" width="200" height="72" alt="" aria-hidden="true" />
+        </div>
+      </div>
+
+    </section>
+
+    <!-- =============================== SERVICES =============================== -->
+    <section class="band" id="services">
+      <div class="container">
+        <div class="head reveal">
+          <h2>Everything your business needs to work <span class="hl">online</span>.</h2>
+          <p class="lead">
+            One studio for the website, the hosting, the ads and the brand. One number to
+            call when something needs changing.
           </p>
-          <a href="contact.html" class="btn btn--primary" style="margin-top:var(--sp-6)">Get In Touch</a>
         </div>
-        <div class="about-visual reveal" style="--reveal-delay:120ms">
-          <div class="about-stats">
-            <div class="about-stat">
-              <span class="about-stat-icon material-symbols-outlined" aria-hidden="true">design_services</span>
-              <span>
-                <span class="stat-number">100%</span>
-                <span class="stat-label">Custom-built sites</span>
-              </span>
+
+        <div class="tabs">
+          <div class="tab-col">
+            <div class="tab-list" role="tablist" aria-label="Services" id="tab-list">
+            <button class="tab" role="tab" id="tab-web" aria-controls="panel-web" aria-selected="true">Website design</button>
+            <button class="tab" role="tab" id="tab-host" aria-controls="panel-host" aria-selected="false" tabindex="-1">Hosting and management</button>
+            <button class="tab" role="tab" id="tab-ads" aria-controls="panel-ads" aria-selected="false" tabindex="-1">Google Ads</button>
+            <button class="tab" role="tab" id="tab-mkt" aria-controls="panel-mkt" aria-selected="false" tabindex="-1">Digital marketing</button>
+            <button class="tab" role="tab" id="tab-brand" aria-controls="panel-brand" aria-selected="false" tabindex="-1">Branding and identity</button>
+            <button class="tab" role="tab" id="tab-app" aria-controls="panel-app" aria-selected="false" tabindex="-1">App development</button>
             </div>
-            <div class="about-stat">
-              <span class="about-stat-icon material-symbols-outlined" aria-hidden="true">support_agent</span>
-              <span>
-                <span class="stat-number">24/7</span>
-                <span class="stat-label">Hosting &amp; support</span>
-              </span>
-            </div>
-            <div class="about-stat">
-              <span class="about-stat-icon material-symbols-outlined" aria-hidden="true">groups</span>
-              <span>
-                <span class="stat-number">10+</span>
-                <span class="stat-label">Happy clients</span>
-              </span>
-            </div>
-            <div class="about-stat">
-              <span class="about-stat-icon material-symbols-outlined" aria-hidden="true">payments</span>
-              <span>
-                <span class="stat-number">0</span>
-                <span class="stat-label">Hidden fees</span>
-              </span>
+
+            <div class="tab-aside">
+              <p>Not sure which of these you need? Tell us what the business does and we will say what is worth paying for.</p>
+              <a href="#contact" class="ulink">Ask us <span class="arrow" aria-hidden="true">&raquo;</span></a>
             </div>
           </div>
-          <div class="about-badge">
-            <svg class="about-badge-icon" viewBox="0 0 48 48" aria-hidden="true">
-              <path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"/>
-              <path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"/>
-              <path fill="#FBBC05" d="M11.69 28.18c-.43-1.29-.68-2.67-.68-4.18s.25-2.89.68-4.18v-5.7H4.34A21.96 21.96 0 0 0 2 24c0 3.56.86 6.93 2.34 9.88l7.35-5.7z"/>
-              <path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z"/>
-            </svg>
-            <div class="about-badge-body">
-              <div class="about-badge-rating">
-                <span class="about-badge-figure">5.0</span>
-                <span class="stars" aria-hidden="true">★★★★★</span>
-              </div>
-              <div class="about-badge-label">10 reviews on Google</div>
-              <a class="about-badge-link" href="https://www.google.com/search?q=Edweb+Media+reviews" target="_blank" rel="noopener">Read our reviews</a>
+
+          <div class="tab-panels">
+            <div class="tab-panel is-active" role="tabpanel" tabindex="0" id="panel-web" aria-labelledby="tab-web">
+              <h3>Website design</h3>
+              <p>Custom sites built around your brand, fast on mobile and easy for customers to use.</p>
+              <ul class="facts">
+                <li>Five, ten or twenty page builds, all designed from scratch</li>
+                <li>Mobile-first, checked at phone, tablet and desktop widths</li>
+                <li>SSL, contact form, WhatsApp button and blog section included</li>
+              </ul>
+              <p class="panel-price"><span>From R3,499 once-off</span> <a href="#contact" class="ulink">Ask about this <span class="arrow" aria-hidden="true">&raquo;</span></a></p>
+            </div>
+
+            <div class="tab-panel" role="tabpanel" tabindex="0" id="panel-host" aria-labelledby="tab-host" hidden>
+              <h3>Hosting and management</h3>
+              <p>Hosting, professional email, security and monthly updates, handled for you.</p>
+              <ul class="facts">
+                <li>Hosting from R199 a month, professional email on your own domain</li>
+                <li>Website management from R199 a month, one hour of work included</li>
+                <li>Cancel any time in writing before the next billing date</li>
+              </ul>
+              <p class="panel-price"><span>R199 a month, hosting or management</span> <a href="#contact" class="ulink">Ask about this <span class="arrow" aria-hidden="true">&raquo;</span></a></p>
+            </div>
+
+            <div class="tab-panel" role="tabpanel" tabindex="0" id="panel-ads" aria-labelledby="tab-ads" hidden>
+              <h3>Google Ads</h3>
+              <p>Campaigns that put your business in front of people already searching for it.</p>
+              <ul class="facts">
+                <li>Search campaigns built around the terms your customers actually use</li>
+                <li>Conversion tracking wired to real enquiries, not vanity clicks</li>
+                <li>Quoted per project once we know the market and the budget</li>
+              </ul>
+              <p class="panel-price"><span>Quoted per project</span> <a href="#contact" class="ulink">Ask about this <span class="arrow" aria-hidden="true">&raquo;</span></a></p>
+            </div>
+
+            <div class="tab-panel" role="tabpanel" tabindex="0" id="panel-mkt" aria-labelledby="tab-mkt" hidden>
+              <h3>Digital marketing</h3>
+              <p>Content and social work that keeps your business visible between enquiries.</p>
+              <ul class="facts">
+                <li>Social posts and content built from your real work, not stock filler</li>
+                <li>Written in your voice, scheduled around your busy season</li>
+                <li>Quoted per project, monthly or once-off</li>
+              </ul>
+              <p class="panel-price"><span>Quoted per project</span> <a href="#contact" class="ulink">Ask about this <span class="arrow" aria-hidden="true">&raquo;</span></a></p>
+            </div>
+
+            <div class="tab-panel" role="tabpanel" tabindex="0" id="panel-brand" aria-labelledby="tab-brand" hidden>
+              <h3>Branding and identity</h3>
+              <p>Logo, colours and the look that makes your business recognisable everywhere.</p>
+              <ul class="facts">
+                <li>Logo, colour palette and type, delivered as files you own</li>
+                <li>Applied across the website, social profiles and print</li>
+                <li>Quoted per project by scope</li>
+              </ul>
+              <p class="panel-price"><span>Quoted per project</span> <a href="#contact" class="ulink">Ask about this <span class="arrow" aria-hidden="true">&raquo;</span></a></p>
+            </div>
+
+            <div class="tab-panel" role="tabpanel" tabindex="0" id="panel-app" aria-labelledby="tab-app" hidden>
+              <h3>App development</h3>
+              <p>Apps built for real use: quick, reliable and comfortable on every device.</p>
+              <ul class="facts">
+                <li>Scoped against what your customers need to do, not a feature list</li>
+                <li>Built to run on the phones your customers already carry</li>
+                <li>Quoted per project after a scoping call</li>
+              </ul>
+              <p class="panel-price"><span>Quoted per project</span> <a href="#contact" class="ulink">Ask about this <span class="arrow" aria-hidden="true">&raquo;</span></a></p>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ============================== SERVICES ============================== -->
-    <section class="section section--alt" id="services">
+    <!-- =============================== NUMBERS ================================ -->
+    <section class="band band--ink" id="numbers">
+      <div class="container numbers-grid">
+        <div>
+          <h2>Built to be judged on <span class="hl">results</span>.</h2>
+          <p>Every number here comes off the live site or the Google listing, nothing rounded up.</p>
+          <a href="#pricing" class="btn btn--light">See what it costs</a>
+        </div>
+
+        <div class="figures reveal" style="--reveal-delay:120ms">
+          <div><div class="figure-val">5.0</div><p class="figure-lab">Google rating across 10 verified reviews</p></div>
+          <div><div class="figure-val">2 to 3</div><p class="figure-lab">Weeks from kickoff to a live website</p></div>
+          <div><div class="figure-val">100%</div><p class="figure-lab">Custom builds, no bought templates</p></div>
+          <div><div class="figure-val">R199</div><p class="figure-lab">A month for hosting, if you want us to run it</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================= WORK ================================= -->
+    <section class="band" id="work">
       <div class="container">
-        <div class="section-head section-head--center reveal">
-          <div class="eyebrow" style="justify-content:center">What We Do</div>
-          <h2>Our Services</h2>
-          <p>Everything your business needs to look great and grow online, under one roof.</p>
-        </div>
-
-        <div class="services-grid">
-          <article class="service-card reveal">
-            <div class="service-icon material-symbols-outlined" aria-hidden="true">language</div>
-            <h3>Website Design</h3>
-            <p>Custom websites designed to look professional, perform smoothly and help attract more customers online.</p>
-          </article>
-          <article class="service-card reveal" style="--reveal-delay:60ms">
-            <div class="service-icon material-symbols-outlined" aria-hidden="true">smartphone</div>
-            <h3>App Development</h3>
-            <p>User-friendly apps designed for performance, reliability and a smooth experience across all devices.</p>
-          </article>
-          <article class="service-card reveal" style="--reveal-delay:120ms">
-            <div class="service-icon material-symbols-outlined" aria-hidden="true">campaign</div>
-            <h3>Digital Marketing</h3>
-            <p>Digital marketing that helps your business reach the right audience, improve visibility and grow online.</p>
-          </article>
-          <article class="service-card reveal" style="--reveal-delay:180ms">
-            <div class="service-icon material-symbols-outlined" aria-hidden="true">ads_click</div>
-            <h3>Google Ads</h3>
-            <p>Targeted ad campaigns that drive traffic, increase visibility and bring in quality leads for your business.</p>
-          </article>
-          <article class="service-card reveal" style="--reveal-delay:240ms">
-            <div class="service-icon material-symbols-outlined" aria-hidden="true">palette</div>
-            <h3>Branding</h3>
-            <p>Professional branding that builds trust, creates a strong identity and connects with your audience.</p>
-          </article>
-          <article class="service-card reveal" style="--reveal-delay:300ms">
-            <div class="service-icon material-symbols-outlined" aria-hidden="true">photo_camera</div>
-            <h3>Visual Content</h3>
-            <p>Professional photo and video content that presents your brand clearly and keeps visuals consistent.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================== PROCESS ============================== -->
-    <section class="section">
-      <div class="container">
-        <div class="section-head reveal">
-          <div class="eyebrow">How We Work</div>
-          <h2>A clear path from idea to launch</h2>
-          <p>No jargon, no surprises, just a straightforward process and a website that's managed for you long after launch.</p>
-        </div>
-        <div class="process-grid">
-          <div class="process-step reveal">
-            <span class="process-index">01</span>
-            <h3>Discover</h3>
-            <p>We learn about your business, your customers and what success looks like for your website.</p>
+        <div class="head reveal">
+          <h2>Recent website designs.</h2>
+          <div class="filters" role="group" aria-label="Filter work">
+            <button class="filter" data-filter="all" aria-pressed="true">All work</button>
+            <button class="filter" data-filter="business" aria-pressed="false">Business sites</button>
+            <button class="filter" data-filter="store" aria-pressed="false">Online stores</button>
+            <button class="filter" data-filter="travel" aria-pressed="false">Travel</button>
           </div>
-          <div class="process-step reveal" style="--reveal-delay:80ms">
-            <span class="process-index">02</span>
-            <h3>Design</h3>
-            <p>A clean, on-brand design tailored to your industry, built to convert visitors into customers.</p>
-          </div>
-          <div class="process-step reveal" style="--reveal-delay:160ms">
-            <span class="process-index">03</span>
-            <h3>Build &amp; Launch</h3>
-            <p>Your site goes live, fully responsive, fast-loading and ready across mobile, tablet and desktop.</p>
-          </div>
-          <div class="process-step reveal" style="--reveal-delay:240ms">
-            <span class="process-index">04</span>
-            <h3>Grow</h3>
-            <p>Ongoing support, updates and marketing keep your site working hard for your business.</p>
-          </div>
+          <p class="work-sub">Travel, bakeries, wine, industrial supply and trade services. Construction, plumbing, electrical, roofing, real estate, salons and online stores all get the same build. <a href="new-projects.html" class="ulink">Read the full case write-ups <span class="arrow" aria-hidden="true">&raquo;</span></a></p>
         </div>
-      </div>
-    </section>
 
-    <!-- ============================== INDUSTRIES ============================== -->
-    <section class="section">
-      <div class="container">
-        <div class="section-head reveal">
-          <div class="eyebrow">Who We Work With</div>
-          <h2>Industries we know well</h2>
-        </div>
-        <div class="industries-grid">
-          <div class="industry-card reveal"><span class="icon material-symbols-outlined" aria-hidden="true">construction</span>Construction</div>
-          <div class="industry-card reveal" style="--reveal-delay:40ms"><span class="icon material-symbols-outlined" aria-hidden="true">flight</span>Travel</div>
-          <div class="industry-card reveal" style="--reveal-delay:80ms"><span class="icon material-symbols-outlined" aria-hidden="true">bakery_dining</span>Bakery</div>
-          <div class="industry-card reveal" style="--reveal-delay:120ms"><span class="icon material-symbols-outlined" aria-hidden="true">plumbing</span>Plumbers</div>
-          <div class="industry-card reveal" style="--reveal-delay:160ms"><span class="icon material-symbols-outlined" aria-hidden="true">bolt</span>Electricians</div>
-          <div class="industry-card reveal" style="--reveal-delay:200ms"><span class="icon material-symbols-outlined" aria-hidden="true">yard</span>Landscaping</div>
-          <div class="industry-card reveal" style="--reveal-delay:240ms"><span class="icon material-symbols-outlined" aria-hidden="true">roofing</span>Roofing</div>
-          <div class="industry-card reveal" style="--reveal-delay:280ms"><span class="icon material-symbols-outlined" aria-hidden="true">home_work</span>Real Estate</div>
-          <div class="industry-card reveal" style="--reveal-delay:320ms"><span class="icon material-symbols-outlined" aria-hidden="true">chair</span>Interior Design</div>
-          <div class="industry-card reveal" style="--reveal-delay:360ms"><span class="icon material-symbols-outlined" aria-hidden="true">content_cut</span>Hair Salons</div>
-          <div class="industry-card reveal" style="--reveal-delay:400ms"><span class="icon material-symbols-outlined" aria-hidden="true">restaurant</span>Restaurants</div>
-          <div class="industry-card reveal" style="--reveal-delay:440ms"><span class="icon material-symbols-outlined" aria-hidden="true">storefront</span>Online Stores</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================== QUOTE BAND ============================== -->
-    <section class="quote-band">
-      <div class="container reveal">
-        <blockquote>
-          "The key to a business that grows is a brand that's honest, clear and
-          built to last. That's what we build, every time."
-        </blockquote>
-        <cite>The Edweb Media Team</cite>
-      </div>
-    </section>
-
-    <!-- ============================== PORTFOLIO ============================== -->
-    <section class="section" id="work">
-      <div class="container">
-        <div class="section-head section-head--center reveal">
-          <div class="eyebrow" style="justify-content:center">Selected Work</div>
-          <h2>Recent Website Designs</h2>
-          <p>A look at recent projects across construction, travel, real estate and more.</p>
-        </div>
-        <div class="carousel-wrap">
-          <div class="carousel reveal" id="portfolio-carousel">
-            <a class="portfolio-item" href="#" aria-label="View project: Crazy Daizy bakery website">
-              <div class="laptop-mockup">
-                <div class="laptop-screen"><img src="assets/2-2.png" alt="Crazy Daizy bakery website, 'Oven Fresh' homepage" loading="lazy" /></div>
-              </div>
-            </a>
-            <a class="portfolio-item" href="#" aria-label="View project: Clipie Power Drives website">
-              <div class="laptop-mockup">
-                <div class="laptop-screen"><img src="assets/3.png" alt="Clipie Power Drives website, 'Your Family's Reliable Partner'" loading="lazy" /></div>
-              </div>
-            </a>
-            <a class="portfolio-item" href="#" aria-label="View project: Lekker Doos wine estate website">
-              <div class="laptop-mockup">
-                <div class="laptop-screen"><img src="assets/4.png" alt="Lekker Doos website, South African wine estate" loading="lazy" /></div>
-              </div>
-            </a>
-            <a class="portfolio-item" href="#" aria-label="View project: Navigator Vietnam travel website">
-              <div class="laptop-mockup">
-                <div class="laptop-screen"><img src="assets/6.png" alt="Navigator Vietnam website, 'Explore Every Corner of Vietnam'" loading="lazy" /></div>
-              </div>
-            </a>
-            <a class="portfolio-item" href="#" aria-label="View project: Refresh My Space interior design website">
-              <div class="laptop-mockup">
-                <div class="laptop-screen"><img src="assets/7.png" alt="Refresh My Space website, interior design" loading="lazy" /></div>
-              </div>
-            </a>
-            <a class="portfolio-item" href="#" aria-label="View project: Tee to Trail golf tours website">
-              <div class="laptop-mockup">
-                <div class="laptop-screen"><img src="assets/8.png" alt="Tee to Trail website, golf tours in South Africa" loading="lazy" /></div>
-              </div>
-            </a>
-            <a class="portfolio-item" href="#" aria-label="View project: Helix industrial supplies website">
-              <div class="laptop-mockup">
-                <div class="laptop-screen"><img src="assets/Untitled-design-2.png" alt="Helix website, spiral wrap protection for hoses, cables and machinery" loading="lazy" /></div>
-              </div>
-            </a>
-            <a class="portfolio-item" href="#" aria-label="View project: Muire Maintenance website">
-              <div class="laptop-mockup">
-                <div class="laptop-screen"><img src="assets/webs.png" alt="Muire Maintenance website, premium home care services" loading="lazy" /></div>
-              </div>
-            </a>
-          </div>
-          <div class="carousel-controls">
-            <button type="button" class="carousel-btn carousel-prev" aria-label="Previous project">‹</button>
-            <button type="button" class="carousel-btn carousel-next" aria-label="Next project">›</button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================== CTA BAND ============================== -->
-    <section class="cta-band">
-      <div class="container reveal">
-        <div class="eyebrow" style="justify-content:center">Ready When You Are</div>
-        <h2>Let's build something great together</h2>
-        <p>Tell us a little about your business and what you need and we'll get back to you quickly with next steps and a package to match.</p>
-        <div class="hero-actions">
-          <a href="packages.html" class="btn btn--accent">View Packages</a>
-          <a href="contact.html" class="btn btn--primary">Get In Touch</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================== TESTIMONIALS ============================== -->
-    <section class="section">
-      <div class="container">
-        <div class="section-head section-head--center reveal">
-          <div class="eyebrow" style="justify-content:center">Client Reviews</div>
-          <h2>What our clients say</h2>
-          <p>Verified reviews from Trustindex / Google.</p>
-        </div>
-        <div class="review-card reveal" data-reviews='[{"name":"Werner Loubser","quote":"Amazing to work with Edgar. His vision and passion made our journey so enjoyable. Highly recommended!"},{"name":"Morne Wijne","quote":"Today, I&#39;m proud to have a brand-new website that&#39;s modern, functional and aligned with today&#39;s marketing needs. Their flexible payment plan made it more cost-effective than I expected."},{"name":"Jurgie Schoeman","quote":"Edgar and his team made a website for our travel company and we are over the moon. They handled the whole process perfectly. I couldn&#39;t recommend them more."},{"name":"Navigator Vietnam","quote":"Thank you so much to the Edweb Media team for doing our website. They did such a good job in making our dream become a reality. I can really recommend them to anyone looking for a neat and beautiful website."},{"name":"Al-Mari Bruwer","quote":"Thank you for your excellent service. Will make use of you again! Recommend!"},{"name":"Julia Joubert","quote":"Amazing work Ed, our website looks beautiful. Would highly recommend!!"},{"name":"Tristan Maske","quote":"Exceptional. Cannot think of anyone else to take on this responsibility. Thanks Ed!"},{"name":"Tiennie Macfarlane","quote":"I am more than satisfied with the service we got from Edweb Media. Really very impressed with them."},{"name":"Nelson De Nobrega","quote":"Very happy with the design of our new website. We would definitely recommend their services!"}]'>
-          <div class="review-summary">
-            <div class="review-header">
-              <svg viewBox="0 0 48 48" aria-hidden="true">
-                <path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"/>
-                <path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"/>
-                <path fill="#FBBC05" d="M11.69 28.18c-.43-1.29-.68-2.67-.68-4.18s.25-2.89.68-4.18v-5.7H4.34A21.96 21.96 0 0 0 2 24c0 3.56.86 6.93 2.34 9.88l7.35-5.7z"/>
-                <path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z"/>
-              </svg>
-              <span>Google Reviews</span>
+        <div class="work-grid" id="work-grid">
+          <a class="work-item reveal" href="new-projects.html" data-cat="travel">
+            <div class="work-shot">
+              <img src="assets/work/navigator-home-1200w.webp" srcset="assets/work/navigator-home-800w.webp 800w, assets/work/navigator-home-1200w.webp 1200w" sizes="(max-width: 620px) 92vw, (max-width: 980px) 46vw, 30vw" width="1200" height="900" alt="Navigator Vietnam website built by Edweb Media" loading="lazy" decoding="async" />
             </div>
-            <div class="review-overall">
-              <span class="stars" aria-hidden="true">★★★★★</span>
-              <p><strong>5.0</strong> from 10 verified reviews</p>
+            <div class="work-meta">
+              <h3>Navigator Vietnam</h3>
+              <span class="work-cat">Travel and tourism</span>
             </div>
-            <ul class="review-features">
-              <li>Custom-built, mobile-friendly websites</li>
-              <li>Hosting, domain &amp; SSL included</li>
-              <li>Real human support, always</li>
+          </a>
+
+          <a class="work-item reveal" style="--reveal-delay:80ms" href="new-projects.html" data-cat="store">
+            <div class="work-shot">
+              <img src="assets/work/crazydaizy-home-1200w.webp" srcset="assets/work/crazydaizy-home-800w.webp 800w, assets/work/crazydaizy-home-1200w.webp 1200w" sizes="(max-width: 620px) 92vw, (max-width: 980px) 46vw, 30vw" width="1200" height="900" alt="Crazy Daizy website built by Edweb Media" loading="lazy" decoding="async" />
+            </div>
+            <div class="work-meta">
+              <h3>Crazy Daizy</h3>
+              <span class="work-cat">Bakery and online store</span>
+            </div>
+          </a>
+
+          <a class="work-item reveal" style="--reveal-delay:160ms" href="new-projects.html" data-cat="travel">
+            <div class="work-shot">
+              <img src="assets/work/teetotrail-home-1200w.webp" srcset="assets/work/teetotrail-home-800w.webp 800w, assets/work/teetotrail-home-1200w.webp 1200w" sizes="(max-width: 620px) 92vw, (max-width: 980px) 46vw, 30vw" width="1200" height="900" alt="Tee to Trail Africa website built by Edweb Media" loading="lazy" decoding="async" />
+            </div>
+            <div class="work-meta">
+              <h3>Tee to Trail Africa</h3>
+              <span class="work-cat">Golf tours</span>
+            </div>
+          </a>
+
+          <a class="work-item reveal" href="new-projects.html" data-cat="business">
+            <div class="work-shot">
+              <img src="assets/work/spiralguard-full-1200w.webp" srcset="assets/work/spiralguard-full-800w.webp 800w, assets/work/spiralguard-full-1200w.webp 1200w" sizes="(max-width: 620px) 92vw, (max-width: 980px) 46vw, 30vw" width="1200" height="900" alt="Helix SpiralGuard website built by Edweb Media" loading="lazy" decoding="async" />
+            </div>
+            <div class="work-meta">
+              <h3>Helix SpiralGuard</h3>
+              <span class="work-cat">Industrial</span>
+            </div>
+          </a>
+
+          <a class="work-item reveal" style="--reveal-delay:80ms" href="new-projects.html" data-cat="store">
+            <div class="work-shot">
+              <img src="assets/work/lekkerdoos-home-1200w.webp" srcset="assets/work/lekkerdoos-home-800w.webp 800w, assets/work/lekkerdoos-home-1200w.webp 1200w" sizes="(max-width: 620px) 92vw, (max-width: 980px) 46vw, 30vw" width="1200" height="900" alt="Die Lekker Doos website built by Edweb Media" loading="lazy" decoding="async" />
+            </div>
+            <div class="work-meta">
+              <h3>Die Lekker Doos</h3>
+              <span class="work-cat">Wine, online store</span>
+            </div>
+          </a>
+
+          <a class="work-item reveal" style="--reveal-delay:160ms" href="new-projects.html" data-cat="business">
+            <div class="work-shot">
+              <img src="assets/work/muire-home-1200w.webp" srcset="assets/work/muire-home-800w.webp 800w, assets/work/muire-home-1200w.webp 1200w" sizes="(max-width: 620px) 92vw, (max-width: 980px) 46vw, 30vw" width="1200" height="900" alt="Muire Maintenance website built by Edweb Media" loading="lazy" decoding="async" />
+            </div>
+            <div class="work-meta">
+              <h3>Muire Maintenance</h3>
+              <span class="work-cat">Trade services</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================ CRAFT ================================= -->
+    <section class="band band--ink" id="craft">
+      <div class="container craft-grid">
+        <div class="craft-left">
+          <h2 class="wordstack reveal">
+            <span class="w-light">We</span>
+            <span class="w-bold">build</span>
+            <span class="w-light">websites</span>
+            <span class="w-bold w-accent">that work</span>
+          </h2>
+
+          <svg class="growth reveal" viewBox="0 0 560 187" preserveAspectRatio="none" fill="none" aria-hidden="true" style="--reveal-delay:150ms">
+            <defs>
+              <linearGradient id="gwash" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" class="gwash-top"/>
+                <stop offset="100%" class="gwash-bottom"/>
+              </linearGradient>
+            </defs>
+            <path class="growth-fill" d="M0 186 L0 150 C 46 146, 70 132, 104 136 S 150 120, 186 104 S 232 108, 268 86 S 320 74, 356 52 S 420 40, 452 24 S 520 14, 560 6 L560 186 Z" fill="url(#gwash)"/>
+            <path class="growth-stroke" d="M0 150 C 46 146, 70 132, 104 136 S 150 120, 186 104 S 232 108, 268 86 S 320 74, 356 52 S 420 40, 452 24 S 520 14, 560 6" stroke-width="2.5" stroke-linecap="round" pathLength="100"/>
+            <line class="growth-base" x1="0" y1="186" x2="560" y2="186" stroke-width="1"/>
+          </svg>
+        </div>
+
+        <div class="craft-items">
+            <article class="craft-item reveal" style="--reveal-delay:0ms">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h16M6 16l9.5-9.5a2.1 2.1 0 0 1 3 3L9 19l-4 1 1-4z"/></svg>
+              <div>
+                <h3>Built from scratch</h3>
+                <p>Designed and coded around one business. No bought templates and no page builders.</p>
+              </div>
+            </article>
+            <article class="craft-item reveal" style="--reveal-delay:60ms">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 18.5h2"/></svg>
+              <div>
+                <h3>Fast on mobile</h3>
+                <p>Mobile-first, checked at phone, tablet and desktop widths before it goes live.</p>
+              </div>
+            </article>
+            <article class="craft-item reveal" style="--reveal-delay:120ms">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4 4"/></svg>
+              <div>
+                <h3>Found on Google</h3>
+                <p>SEO foundations on every build, advanced SEO on the Platinum package.</p>
+              </div>
+            </article>
+            <article class="craft-item reveal" style="--reveal-delay:180ms">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5a2.5 2.5 0 0 1-2.5 2.5H9l-4 3.5V6.5A2.5 2.5 0 0 1 7.5 4h10A2.5 2.5 0 0 1 20 6.5z"/></svg>
+              <div>
+                <h3>One person to call</h3>
+                <p>You deal with the person building the site. No account managers, no ticket queues.</p>
+              </div>
+            </article>
+            <article class="craft-item reveal" style="--reveal-delay:240ms">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5.5c0 4.4-3 8-7 9.5-4-1.5-7-5.1-7-9.5V6z"/><path d="M9 12l2 2 4-4"/></svg>
+              <div>
+                <h3>Looked after</h3>
+                <p>Hosting, professional email, security and monthly updates, if you want them.</p>
+              </div>
+            </article>
+            <article class="craft-item reveal" style="--reveal-delay:300ms">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg>
+              <div>
+                <h3>Yours to keep</h3>
+                <p>Every file and the design work belong to you once the fee is paid in full.</p>
+              </div>
+            </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================== PRICING ================================ -->
+    <section class="band band--alt" id="pricing">
+      <div class="container">
+        <div class="head reveal">
+          <h2>Clear, once-off website pricing.</h2>
+          <p class="lead">
+            The design fee is once-off and you own the files once it is paid. Hosting and
+            management are optional monthly add-ons.
+            <a href="new-packages.html" class="ulink">Stores and directory pricing <span class="arrow" aria-hidden="true">&raquo;</span></a>
+          </p>
+        </div>
+
+        <div class="price-grid">
+          <article class="pcard reveal">
+            <div>
+              <p class="pcard-name">Silver</p>
+              <p class="pcard-price"><s class="pcard-was">R3,999</s> R3,499<span class="pcard-period">once-off, R500 off</span></p>
+            </div>
+            <p class="pcard-desc">The most popular plan for a professional business website.</p>
+            <ul>
+              <li><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7.25" fill="none" stroke="currentColor" stroke-width="1"/><path d="M4.8 8.2l2.1 2.1 4.3-4.6" fill="none" stroke="currentColor" stroke-width="1.4"/></svg> 5 page custom design</li>
+              <li><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7.25" fill="none" stroke="currentColor" stroke-width="1"/><path d="M4.8 8.2l2.1 2.1 4.3-4.6" fill="none" stroke="currentColor" stroke-width="1.4"/></svg> SSL certificate and contact form</li>
+              <li><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7.25" fill="none" stroke="currentColor" stroke-width="1"/><path d="M4.8 8.2l2.1 2.1 4.3-4.6" fill="none" stroke="currentColor" stroke-width="1.4"/></svg> Social media integration</li>
+              <li><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7.25" fill="none" stroke="currentColor" stroke-width="1"/><path d="M4.8 8.2l2.1 2.1 4.3-4.6" fill="none" stroke="currentColor" stroke-width="1.4"/></svg> Basic SEO and blog section</li>
+              <li><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7.25" fill="none" stroke="currentColor" stroke-width="1"/><path d="M4.8 8.2l2.1 2.1 4.3-4.6" fill="none" stroke="currentColor" stroke-width="1.4"/></svg> WhatsApp button, mobile responsive</li>
+              <li><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7.25" fill="none" stroke="currentColor" stroke-width="1"/><path d="M4.8 8.2l2.1 2.1 4.3-4.6" fill="none" stroke="currentColor" stroke-width="1.4"/></svg> Typically 5 working days, confirmed on kickoff</li>
             </ul>
-            <a class="btn btn--primary" href="https://www.google.com/search?q=Edweb+Media+reviews" target="_blank" rel="noopener">See all reviews on Google</a>
-          </div>
-          <div class="review-slider">
-            <div class="review-slide">
-              <span class="stars" aria-hidden="true">★★★★★</span>
-              <p class="review-name">Werner Loubser</p>
-              <p class="review-quote">"Amazing to work with Edgar. His vision and passion made our journey so enjoyable. Highly recommended!"</p>
+            <a href="#contact" class="btn btn--block" data-package="Silver">Start with Silver</a>
+          </article>
+
+          <article class="pcard reveal" style="--reveal-delay:80ms">
+            <div>
+              <p class="pcard-name">Gold</p>
+              <p class="pcard-price"><s class="pcard-was">R4,999</s> R4,499<span class="pcard-period">once-off, R500 off</span></p>
             </div>
-            <div class="review-nav">
-              <button type="button" class="review-nav-btn review-prev" aria-label="Previous review">‹</button>
-              <button type="button" class="review-nav-btn review-next" aria-label="Next review">›</button>
+            <p class="pcard-desc">More room to grow, with double the pages.</p>
+            <ul>
+              <li><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7.25" fill="none" stroke="currentColor" stroke-width="1"/><path d="M4.8 8.2l2.1 2.1 4.3-4.6" fill="none" stroke="currentColor" stroke-width="1.4"/></svg> 10 page custom design</li>
+              <li><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7.25" fill="none" stroke="currentColor" stroke-width="1"/><path d="M4.8 8.2l2.1 2.1 4.3-4.6" fill="none" stroke="currentColor" stroke-width="1.4"/></svg> SSL certificate and contact form</li>
+              <li><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7.25" fill="none" stroke="currentColor" stroke-width="1"/><path d="M4.8 8.2l2.1 2.1 4.3-4.6" fill="none" stroke="currentColor" stroke-width="1.4"/></svg> Social media integration</li>
+              <li><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7.25" fill="none" stroke="currentColor" stroke-width="1"/><path d="M4.8 8.2l2.1 2.1 4.3-4.6" fill="none" stroke="currentColor" stroke-width="1.4"/></svg> Basic SEO and blog section</li>
+              <li><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7.25" fill="none" stroke="currentColor" stroke-width="1"/><path d="M4.8 8.2l2.1 2.1 4.3-4.6" fill="none" stroke="currentColor" stroke-width="1.4"/></svg> WhatsApp button, mobile responsive</li>
+              <li><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7.25" fill="none" stroke="currentColor" stroke-width="1"/><path d="M4.8 8.2l2.1 2.1 4.3-4.6" fill="none" stroke="currentColor" stroke-width="1.4"/></svg> Typically 10 working days, confirmed on kickoff</li>
+            </ul>
+            <a href="#contact" class="btn btn--block" data-package="Gold">Start with Gold</a>
+          </article>
+
+          <article class="pcard reveal" style="--reveal-delay:160ms">
+            <div>
+              <p class="pcard-name">Platinum</p>
+              <p class="pcard-price">R5,499<span class="pcard-period">once-off</span></p>
+            </div>
+            <p class="pcard-desc">The full build, with advanced SEO from day one.</p>
+            <ul>
+              <li><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7.25" fill="none" stroke="currentColor" stroke-width="1"/><path d="M4.8 8.2l2.1 2.1 4.3-4.6" fill="none" stroke="currentColor" stroke-width="1.4"/></svg> 20 page custom design</li>
+              <li><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7.25" fill="none" stroke="currentColor" stroke-width="1"/><path d="M4.8 8.2l2.1 2.1 4.3-4.6" fill="none" stroke="currentColor" stroke-width="1.4"/></svg> Advanced SEO</li>
+              <li><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7.25" fill="none" stroke="currentColor" stroke-width="1"/><path d="M4.8 8.2l2.1 2.1 4.3-4.6" fill="none" stroke="currentColor" stroke-width="1.4"/></svg> SSL certificate and contact form</li>
+              <li><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7.25" fill="none" stroke="currentColor" stroke-width="1"/><path d="M4.8 8.2l2.1 2.1 4.3-4.6" fill="none" stroke="currentColor" stroke-width="1.4"/></svg> Social media integration</li>
+              <li><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7.25" fill="none" stroke="currentColor" stroke-width="1"/><path d="M4.8 8.2l2.1 2.1 4.3-4.6" fill="none" stroke="currentColor" stroke-width="1.4"/></svg> Blog section and WhatsApp button</li>
+              <li><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7.25" fill="none" stroke="currentColor" stroke-width="1"/><path d="M4.8 8.2l2.1 2.1 4.3-4.6" fill="none" stroke="currentColor" stroke-width="1.4"/></svg> Typically 15 working days, confirmed on kickoff</li>
+            </ul>
+            <a href="#contact" class="btn btn--block" data-package="Platinum">Start with Platinum</a>
+          </article>
+        </div>
+
+        <p class="price-note reveal">
+          Online stores start at R5,499 and directory sites at R8,499. Hosting is R199 a
+          month and website management starts at R199 a month, both optional.
+          <a href="new-packages.html" class="ulink">See all packages <span class="arrow" aria-hidden="true">&raquo;</span></a>
+        </p>
+      </div>
+    </section>
+
+
+    <!-- =============================== REVIEWS ================================ -->
+    <section class="band" id="reviews">
+      <div class="container">
+        <div class="head reveal">
+          <h2>What our clients say.</h2>
+          <div class="rail-nav">
+            <button class="rail-btn" id="rev-toggle" aria-pressed="false" aria-controls="reviews-track" aria-label="Pause the reviews">
+              <svg class="icon-pause" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><rect x="4" y="3" width="3" height="10" rx="1" fill="currentColor"/><rect x="9" y="3" width="3" height="10" rx="1" fill="currentColor"/></svg>
+              <svg class="icon-play" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 3l8 5-8 5z" fill="currentColor"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="reviews-rail" id="reviews-rail">
+          <div class="reviews-track" id="reviews-track">
+            <article class="review">
+              <span class="stars" aria-label="5 out of 5">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+              <p>Amazing to work with Edgar. His vision and passion made our journey so enjoyable. Highly recommended!</p>
+              <div class="review-by">
+                <span class="avatar" aria-hidden="true">WL</span>
+                <span><span class="review-name">Werner Loubser</span><br /><span class="review-src">Verified Google review</span></span>
+              </div>
+            </article>
+            <article class="review">
+              <span class="stars" aria-label="5 out of 5">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+              <p>Today, I'm proud to have a brand-new website that's modern, functional and aligned with today's marketing needs. Great value for what we got.</p>
+              <div class="review-by">
+                <span class="avatar" aria-hidden="true">MW</span>
+                <span><span class="review-name">Morne Wijne</span><br /><span class="review-src">Verified Google review</span></span>
+              </div>
+            </article>
+            <article class="review">
+              <span class="stars" aria-label="5 out of 5">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+              <p>Edgar and his team made a website for our travel company and we are over the moon. They handled the whole process perfectly. I couldn't recommend them more.</p>
+              <div class="review-by">
+                <span class="avatar" aria-hidden="true">JS</span>
+                <span><span class="review-name">Jurgie Schoeman</span><br /><span class="review-src">Verified Google review</span></span>
+              </div>
+            </article>
+            <article class="review">
+              <span class="stars" aria-label="5 out of 5">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+              <p>Thank you so much to the Edweb Media team for doing our website. They did such a good job in making our dream become a reality. I can really recommend them to anyone looking for a neat and beautiful website.</p>
+              <div class="review-by">
+                <span class="avatar" aria-hidden="true">NV</span>
+                <span><span class="review-name">Navigator Vietnam</span><br /><span class="review-src">Verified Google review</span></span>
+              </div>
+            </article>
+            <article class="review">
+              <span class="stars" aria-label="5 out of 5">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+              <p>Exceptional. Cannot think of anyone else to take on this responsibility. Thanks Ed!</p>
+              <div class="review-by">
+                <span class="avatar" aria-hidden="true">TM</span>
+                <span><span class="review-name">Tristan Maske</span><br /><span class="review-src">Verified Google review</span></span>
+              </div>
+            </article>
+            <article class="review">
+              <span class="stars" aria-label="5 out of 5">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+              <p>Very happy with the design of our new website. We would definitely recommend their services!</p>
+              <div class="review-by">
+                <span class="avatar" aria-hidden="true">NN</span>
+                <span><span class="review-name">Nelson De Nobrega</span><br /><span class="review-src">Verified Google review</span></span>
+              </div>
+            </article>
+            <article class="review" aria-hidden="true">
+              <span class="stars" aria-label="5 out of 5">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+              <p>Amazing to work with Edgar. His vision and passion made our journey so enjoyable. Highly recommended!</p>
+              <div class="review-by">
+                <span class="avatar" aria-hidden="true">WL</span>
+                <span><span class="review-name">Werner Loubser</span><br /><span class="review-src">Verified Google review</span></span>
+              </div>
+            </article>
+            <article class="review" aria-hidden="true">
+              <span class="stars" aria-label="5 out of 5">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+              <p>Today, I'm proud to have a brand-new website that's modern, functional and aligned with today's marketing needs. Great value for what we got.</p>
+              <div class="review-by">
+                <span class="avatar" aria-hidden="true">MW</span>
+                <span><span class="review-name">Morne Wijne</span><br /><span class="review-src">Verified Google review</span></span>
+              </div>
+            </article>
+            <article class="review" aria-hidden="true">
+              <span class="stars" aria-label="5 out of 5">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+              <p>Edgar and his team made a website for our travel company and we are over the moon. They handled the whole process perfectly. I couldn't recommend them more.</p>
+              <div class="review-by">
+                <span class="avatar" aria-hidden="true">JS</span>
+                <span><span class="review-name">Jurgie Schoeman</span><br /><span class="review-src">Verified Google review</span></span>
+              </div>
+            </article>
+            <article class="review" aria-hidden="true">
+              <span class="stars" aria-label="5 out of 5">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+              <p>Thank you so much to the Edweb Media team for doing our website. They did such a good job in making our dream become a reality. I can really recommend them to anyone looking for a neat and beautiful website.</p>
+              <div class="review-by">
+                <span class="avatar" aria-hidden="true">NV</span>
+                <span><span class="review-name">Navigator Vietnam</span><br /><span class="review-src">Verified Google review</span></span>
+              </div>
+            </article>
+            <article class="review" aria-hidden="true">
+              <span class="stars" aria-label="5 out of 5">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+              <p>Exceptional. Cannot think of anyone else to take on this responsibility. Thanks Ed!</p>
+              <div class="review-by">
+                <span class="avatar" aria-hidden="true">TM</span>
+                <span><span class="review-name">Tristan Maske</span><br /><span class="review-src">Verified Google review</span></span>
+              </div>
+            </article>
+            <article class="review" aria-hidden="true">
+              <span class="stars" aria-label="5 out of 5">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+              <p>Very happy with the design of our new website. We would definitely recommend their services!</p>
+              <div class="review-by">
+                <span class="avatar" aria-hidden="true">NN</span>
+                <span><span class="review-name">Nelson De Nobrega</span><br /><span class="review-src">Verified Google review</span></span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================== PROCESS ================================ -->
+    <section class="band band--alt" id="process">
+      <div class="container">
+        <div class="process-card">
+          <div class="process-head reveal">
+            <h2>From first call to live site.</h2>
+            <p>No jargon and no surprises. Four stages, and you know what lands at the end of each one.</p>
+          </div>
+
+          <div class="stages">
+          <article class="stage reveal" style="--reveal-delay:0ms">
+            <svg class="stage-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="21" cy="21" r="12.5"/><path d="M30.5 30.5 40 40"/><path d="M16 21a5 5 0 0 1 5-5"/></svg>
+            <h3>Discover</h3>
+            <p>We learn the business, the customers and what the site has to do. The delivery clock starts when content and access arrive.</p>
+            <ul>
+              <li>Brief and sitemap</li>
+              <li>Content list</li>
+            </ul>
+          </article>
+
+          <article class="stage reveal" style="--reveal-delay:70ms">
+            <svg class="stage-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 39l3.2-9.6L33.4 8.2a3.4 3.4 0 0 1 4.8 0l1.6 1.6a3.4 3.4 0 0 1 0 4.8L18.6 35.8 9 39z"/><path d="M30 12l6 6"/><path d="M12.2 29.4l6.4 6.4"/></svg>
+            <h3>Design</h3>
+            <p>A design shaped around your industry and built to turn visitors into enquiries.</p>
+            <ul>
+              <li>Design direction</li>
+              <li>First page for approval</li>
+            </ul>
+          </article>
+
+          <article class="stage reveal" style="--reveal-delay:140ms">
+            <svg class="stage-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M24 5c7 3.5 10.5 10.5 10.5 18 0 3.2-.8 6.2-2 8.5h-17c-1.2-2.3-2-5.3-2-8.5C13.5 15.5 17 8.5 24 5z"/><circle cx="24" cy="19" r="3.6"/><path d="M15.5 27.5 10 36l7.5-2M32.5 27.5 38 36l-7.5-2M24 33.5V42"/></svg>
+            <h3>Build and launch</h3>
+            <p>Every page built, tested at phone, tablet and desktop widths, then put live.</p>
+            <ul>
+              <li>All pages and forms</li>
+              <li>SSL and tracking</li>
+            </ul>
+          </article>
+
+          <article class="stage reveal" style="--reveal-delay:210ms">
+            <svg class="stage-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M24 40V22"/><path d="M24 28c0-7-5-11-12-11 0 7 5 11 12 11z"/><path d="M24 22c0-7 5-11 12-11 0 7-5 11-12 11z"/><path d="M12 40h24"/></svg>
+            <h3>Grow</h3>
+            <p>Hosting, updates and marketing keep it working once the build is done.</p>
+            <ul>
+              <li>Hosting and updates</li>
+              <li>Monthly report on the care plan</li>
+            </ul>
+          </article>
+          </div>
+
+          <p class="process-foot reveal">You approve the design before anything is built, and nothing goes live without your sign-off. <a href="#contact" class="ulink">Start a project <span class="arrow" aria-hidden="true">&raquo;</span></a></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================= FAQ ================================== -->
+    <section class="band" id="faq">
+      <div class="container">
+        <div class="faq-block">
+          <div class="faq-intro reveal">
+            <h2>Questions people ask before they start.</h2>
+            <p>Anything not answered here, ask and you get a straight answer within one working day.</p>
+            <a href="tel:+27846204583" class="ulink">Call +27 84 620 4583 <span class="arrow" aria-hidden="true">&raquo;</span></a>
+          </div>
+
+          <div class="faq-list">
+            <details class="faq-card reveal" open style="--reveal-delay:0ms">
+              <summary>Is the website design fee a once-off payment?</summary>
+              <p>Yes. The design fee is a once-off payment. You pay it once and the website is yours. Hosting and management are separate optional monthly add-ons.</p>
+            </details>
+            <details class="faq-card reveal" style="--reveal-delay:50ms">
+              <summary>How long does it take to build my website?</summary>
+              <p>Most standard websites are completed within a few weeks, depending on the size and how quickly content and feedback are provided. Silver builds typically take 5 working days, Gold 10 and Platinum 15, confirmed on kickoff and counted from the day content and access arrive.</p>
+            </details>
+            <details class="faq-card reveal" style="--reveal-delay:100ms">
+              <summary>Do I need hosting to keep my website live?</summary>
+              <p>Yes. Every website needs hosting to stay live. Our hosting add-on is R199 a month and includes hosting and a professional email address. You can also use your own hosting provider if you prefer.</p>
+            </details>
+            <details class="faq-card reveal" style="--reveal-delay:150ms">
+              <summary>Are there any hidden costs?</summary>
+              <p>No. The once-off design fee covers the full website build. Hosting and management are clearly priced optional add-ons. No unexpected charges.</p>
+            </details>
+            <details class="faq-card reveal" style="--reveal-delay:200ms">
+              <summary>Can I cancel hosting or management at any time?</summary>
+              <p>Yes. Monthly services can be cancelled at any time by notifying us in writing before the next billing date. No long-term commitments.</p>
+            </details>
+            <details class="faq-card reveal" style="--reveal-delay:250ms">
+              <summary>Will I own the website files once it is built?</summary>
+              <p>Yes. Once the design fee is paid in full, all website files and design work belong to you. Files are handed over on request once outstanding fees are settled.</p>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== CLOSING CTA ============================= -->
+    <section class="band band--alt" id="start">
+      <div class="container cta-grid">
+        <div class="cta-copy reveal">
+          <h2>Tell us what the <span class="hl">business</span> does.</h2>
+          <p class="cta-sub">You get a plan and a price before any work starts.</p>
+          <div class="cta-actions">
+            <a href="#contact" class="btn">Start a project</a>
+            <a href="tel:+27846204583" class="ulink">Or call +27 84 620 4583 <span class="arrow" aria-hidden="true">&raquo;</span></a>
+          </div>
+        </div>
+
+        <div class="cta-cards">
+          <article class="cta-card reveal" style="--reveal-delay:0ms">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>
+            <h3>Answered fast</h3>
+            <p>Every enquiry gets a reply, usually within one working day.</p>
+          </article>
+          <article class="cta-card reveal" style="--reveal-delay:80ms">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.5 3.5H19a1.5 1.5 0 0 1 1.5 1.5v6.5L11 21 3 13l9.5-9.5z"/><circle cx="16.5" cy="7.5" r="1.3"/></svg>
+            <h3>Fixed price first</h3>
+            <p>A written plan and a fixed price before work begins.</p>
+          </article>
+          <article class="cta-card reveal" style="--reveal-delay:160ms">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 11V7.5a5 5 0 0 1 9.6-1.9"/><rect x="4.5" y="11" width="15" height="9.5" rx="2"/></svg>
+            <h3>No obligation</h3>
+            <p>Quotes are free, with no commitment until you say go.</p>
+          </article>
+          <article class="cta-card reveal" style="--reveal-delay:240ms">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h11"/><path d="M12 7.5 16.5 12 12 16.5"/><path d="M19 4.5v15"/></svg>
+            <h3>Start when you are ready</h3>
+            <p>The build starts when your content arrives, not before.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================== CONTACT ================================ -->
+    <section class="band" id="contact">
+      <div class="container">
+        <div class="contact-grid">
+          <div class="contact-details reveal">
+            <h2>Let us start your website.</h2>
+            <div>
+              <h3>Say hello</h3>
+              <p><a href="mailto:info@edwebmedia.com">info@edwebmedia.com</a></p>
+              <p><a href="tel:+27846204583">+27 84 620 4583</a></p>
+            </div>
+            <div>
+              <h3>Where we are</h3>
+              <p>Cape Town, South Africa.<br />Working with clients countrywide and abroad.</p>
+            </div>
+            <div>
+              <h3>What happens next</h3>
+              <p>We reply to every enquiry, usually within one working day, with a plan and a price before any work starts.</p>
             </div>
           </div>
+
+          <form id="contact-form" class="reveal" style="--reveal-delay:100ms" novalidate>
+            <div class="field-row">
+              <div>
+                <label for="first_name">First name</label>
+                <input type="text" id="first_name" name="first_name" autocomplete="given-name" required />
+              </div>
+              <div>
+                <label for="last_name">Last name</label>
+                <input type="text" id="last_name" name="last_name" autocomplete="family-name" />
+              </div>
+            </div>
+            <div class="field-row">
+              <div>
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" autocomplete="email" required />
+              </div>
+              <div>
+                <label for="phone">Phone</label>
+                <input type="tel" id="phone" name="phone" autocomplete="tel" />
+              </div>
+            </div>
+            <div>
+              <label for="message">What do you need?</label>
+              <textarea id="message" name="message"></textarea>
+            </div>
+
+            <div class="hp" aria-hidden="true">
+              <label for="company">Company</label>
+              <input type="text" id="company" name="company" tabindex="-1" autocomplete="off" />
+            </div>
+
+            <input type="hidden" id="package" name="package" value="" />
+
+            <button type="submit" class="btn" id="contact-submit">Send enquiry</button>
+            <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+            <p class="form-note">
+              Name and email are required. Your details are only used to answer this enquiry.
+            </p>
+          </form>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- ============================== FOOTER ============================== -->
+  <!-- ================================ FOOTER ================================ -->
   <footer class="site-footer">
-    <div class="container footer-grid">
-      <div class="footer-brand">
-        <a href="index.html" class="logo">
-          <img class="logo-img" src="assets/edweb-logo-light.png" alt="Edweb Media">
-        </a>
-        <p>Follow Edweb Media for updates, tips and our latest work. Contact us for any enquiries and we'll get back to you as soon as possible.</p>
-        <div class="contact-socials" style="margin-top:1.5rem">
-          <a href="#" aria-label="Edweb Media on Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7h2.4l.4-2.8h-2.8v-1.6c0-.8.2-1.4 1.4-1.4h1.5V5.7c-.3 0-1.2-.1-2.2-.1-2.3 0-3.8 1.4-3.8 3.9v1.7H8v2.8h2.4V21h3.1z"/></svg></a>
-          <a href="#" aria-label="Edweb Media on Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="3.5"/><circle cx="17.2" cy="6.8" r="0.8" fill="currentColor" stroke="none"/></svg></a>
-          <a href="#" aria-label="Edweb Media on WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-1.2-.6-2-1-2.8-2.3-.2-.3 0-.5.2-.7.2-.2.4-.5.6-.7.1-.2.1-.4 0-.6-.1-.2-.6-1.5-.8-2-.1-.4-.3-.4-.5-.4h-.4c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.1s.9 2.5 1.1 2.7c.1.2 1.6 2.5 4 3.4 2 .8 2.4.7 2.8.6.4-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2 0-.1-.2-.2-.4-.3z"/></svg></a>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo">
+            <img src="assets/work/logo-edweb-light.webp" alt="Edweb Media" width="296" height="54" loading="lazy" />
+          </div>
+          <p class="footer-blurb">
+            Custom websites for South African businesses, hosted, updated and marketed by
+            the people who built them.
+          </p>
+          <div class="footer-socials">
+            <a href="https://www.facebook.com/edwebmediasolutions" target="_blank" rel="noopener" aria-label="Edweb Media on Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7h2.4l.4-2.8h-2.8v-1.6c0-.8.2-1.4 1.4-1.4h1.5V5.7c-.3 0-1.2-.1-2.2-.1-2.3 0-3.8 1.4-3.8 3.9v1.7H8v2.8h2.4V21h3.1z"/></svg></a>
+            <a href="https://www.instagram.com/edwebmedia/" target="_blank" rel="noopener" aria-label="Edweb Media on Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="3.5"/><circle cx="17.2" cy="6.8" r="0.8" fill="currentColor" stroke="none"/></svg></a>
+            <a href="https://wa.me/27846204583" target="_blank" rel="noopener" aria-label="Message Edweb Media"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-1.2-.6-2-1-2.8-2.3-.2-.3 0-.5.2-.7.2-.2.4-.5.6-.7.1-.2.1-.4 0-.6-.1-.2-.6-1.5-.8-2-.1-.4-.3-.4-.5-.4h-.4c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.1s.9 2.5 1.1 2.7c.1.2 1.6 2.5 4 3.4 2 .8 2.4.7 2.8.6.4-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2 0-.1-.2-.2-.4-.3z"/></svg></a>
+          </div>
+        </div>
+
+        <div>
+          <h2>Company</h2>
+          <ul>
+            <li><a href="#services">Services</a></li>
+            <li><a href="new-projects.html">Work</a></li>
+            <li><a href="new-packages.html">Pricing</a></li>
+            <li><a href="new-contact.html">Contact</a></li>
+            <li><a href="new-pay.html">Payments</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h2>Policies</h2>
+          <ul>
+            <li><a href="new-terms.html">Terms and conditions</a></li>
+            <li><a href="new-privacy.html">Privacy policy</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h2>Contact</h2>
+          <ul>
+            <li><a href="tel:+27846204583">+27 84 620 4583</a></li>
+            <li><a href="mailto:info@edwebmedia.com">info@edwebmedia.com</a></li>
+            <li>Cape Town, South Africa</li>
+          </ul>
         </div>
       </div>
-      <div class="footer-col">
-        <h4>Important Links</h4>
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="packages.html">Pricing</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
+
+      <div class="footer-base">
+        <span>&copy; <span id="year">2026</span> Edweb Media. All rights reserved.</span>
+        <span>Cape Town, South Africa.</span>
       </div>
-      <div class="footer-col">
-        <h4>Policies</h4>
-        <ul>
-          <li><a href="terms-conditions.html">Terms &amp; Conditions</a></li>
-          <li><a href="privacy-policy.html">Privacy Policy</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Contact</h4>
-        <ul>
-          <li><a href="tel:+27846204583">+27 84 620 4583</a></li>
-          <li><a href="mailto:info@edwebmedia.com">info@edwebmedia.com</a></li>
-          <li>Cape Town, South Africa</li>
-        </ul>
-      </div>
-    </div>
-    <div class="container footer-bottom">
-      <span>© 2026 Edweb Media. All rights reserved.</span>
-      <span class="footer-tagline">Designed for Success.</span>
     </div>
   </footer>
 
-  <a class="whatsapp-float" href="https://wa.me/27846204583" target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">
+  <a class="chat-float" href="https://wa.me/27846204583?text=Hi%20Edweb%2C%20I%27m%20looking%20for%20a%20website.%20Can%20we%20chat%3F" target="_blank" rel="noopener" aria-label="Message us about a website">
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-1.2-.6-2-1-2.8-2.3-.2-.3 0-.5.2-.7.2-.2.4-.5.6-.7.1-.2.1-.4 0-.6-.1-.2-.6-1.5-.8-2-.1-.4-.3-.4-.5-.4h-.4c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.1s.9 2.5 1.1 2.7c.1.2 1.6 2.5 4 3.4 2 .8 2.4.7 2.8.6.4-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2 0-.1-.2-.2-.4-.3z"/></svg>
+    <span>Chat to us</span>
   </a>
 
-  <script src="script.js"></script>
+  <script src="new-script.js"></script>
 </body>
 </html>
-
