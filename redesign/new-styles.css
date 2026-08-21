@@ -1674,7 +1674,7 @@ select:focus {
    the details form take the rest of the row, so neither half runs empty. */
 .booking {
   display: grid;
-  grid-template-columns: minmax(0, 400px) minmax(0, 1fr);
+  /* Overridden further down to 0.55/0.45; see the note there. */
   gap: var(--gap-split);
   align-items: start;
 }
@@ -1763,9 +1763,7 @@ select:focus {
 .booking-echo { font-size: var(--fs-micro); color: var(--text-meta); }
 .btn[disabled] { opacity: 0.45; pointer-events: none; }
 
-@media (max-width: 860px) {
-  .booking { grid-template-columns: 1fr; }
-}
+
 
 /* ------------------------------- Payments ---------------------------------- */
 /* Inside a split the picker fills its own column; standalone it stays narrow. */
@@ -2057,8 +2055,8 @@ p a:not(.ulink):not(.btn):hover,
     color: var(--paper);
   }
 
-  /* The chosen row is already filled ink, so the tick is redundant and it''s
-     indenting that row''s text past every other row. */
+  /* The chosen row is already filled ink, so the tick is redundant and it is
+     indenting that that row's text past every other row. */
   select option::checkmark { display: none; }
   select::picker-icon {
     width: 16px;
@@ -2566,6 +2564,8 @@ textarea[aria-invalid="true"] {
     align-items: start;
   }
 }
+/* Kept here rather than beside .booking so every mobile collapse sits in one
+   place, after anything that could outrank it. */
 
 
 /* J. The pricing tab strip wrapped and orphaned the third tab on a phone,
@@ -2793,3 +2793,70 @@ textarea[aria-invalid="true"] {
   .booking-side { min-width: 0; }
   .booking-side form .btn { width: 100%; }
 }
+
+@media (max-width: 620px) {
+  .cta-cards {
+    grid-template-columns: 1fr;
+    gap: 0;
+    border-top: 1px solid var(--line);
+  }
+  .cta-card {
+    grid-template-columns: 26px minmax(0, 1fr);
+    column-gap: 1rem;
+    row-gap: 0.15rem;
+    align-items: start;
+    padding: 1.05rem 0;
+    background: none;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    border-radius: 0;
+    box-shadow: none;
+    text-align: left;
+    justify-items: start;
+  }
+  .cta-card svg {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    width: 26px;
+    height: 26px;
+    margin-bottom: 0;
+    margin-top: 2px;
+  }
+  .cta-card h3 { grid-column: 2; grid-row: 1; }
+  .cta-card p { grid-column: 2; grid-row: 2; max-width: none; }
+}
+
+@media (max-width: 860px) {
+  /* M1. The reviews rail glides continuously, which is right on a desktop and
+     wrong on a phone: it parks wherever it happens to stop, so the card on the
+     left is sliced mid-word and the readable one starts 74px in, breaking the
+     28px gutter every other section keeps. On a phone it stops and becomes a
+     swipe, one card at a time, snapping to the gutter. */
+  .reviews-track { animation: none; }
+  .reviews-rail {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--gutter);
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .reviews-rail::-webkit-scrollbar { display: none; }
+  .review {
+    flex: 0 0 min(84vw, 340px);
+    scroll-snap-align: start;
+  }
+  /* Nothing moves on its own any more, so there is nothing to pause, and the
+     button was sitting alone in a full-width row. */
+  #rev-toggle { display: none; }
+
+  /* M6. Edgar's ruling on this strip was "make all of them normal", no wash.
+     Dimming the unselected thumbnails put the wash back by another name; the
+     coral outline already says which one is open. */
+  .opt-c .thumb { opacity: 1; }
+}
+
+/* M8. Raising the section h2 for phones left the page's one display heading
+   smaller than the ordinary headings around it, which inverts the hierarchy on
+   the screen it was raised for. It leads again at every width. */
+.wordstack { font-size: clamp(2.5rem, 4.3vw, 3.9rem); }

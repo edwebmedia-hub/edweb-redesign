@@ -92,3 +92,8 @@ demos/plumbing/assets/_raw/p-7937300.jpg
 demos/plumbing/assets/_raw/p-8082195.jpg
 demos/plumbing/assets/_raw/p-8089092.jpg
 demos/plumbing/assets/_raw/p-8486978.jpg
+
+# The previous site's stylesheet and script. Only the rollback copies in
+# _pre-launch-backup/ reference them, and that folder does not deploy either.
+styles.css
+script.js

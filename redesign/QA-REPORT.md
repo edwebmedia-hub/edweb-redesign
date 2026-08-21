@@ -644,3 +644,60 @@ mark, both exempt under WCAG 1.4.3.
 
 **Not yet done:** this build is committed but not deployed. The live domain
 still serves the pre-pass version.
+
+### Independent review round, same night
+
+A site-reviewer with no knowledge of the work returned **five blockers**. All
+five are fixed, along with the material findings worth folding into the same
+pass.
+
+**B1. The 404 page was dead on the live domain.** Every link on it pointed at a
+`new-*.html` draft, and `.vercelignore` keeps those out of the deploy, so a
+mistyped URL landed on a page where the logo, six nav links and seven footer
+links all 404'd in turn. It read clean locally only because the preview serves
+the drafts. Root cause: `promote.mjs` only processed the 13 pages in its map,
+so `404.html` was never rewritten and its own leftover check never saw it. The
+tool now repairs it too. Verified: 8 links, none broken, zero draft references.
+
+**B2 and B3. The work page contradicted itself.** The masthead and the meta
+description both said all six client sites were online; three screens down the
+same page said one of them has nothing to open. The write-up carried shared
+boilerplate saying "everything below is live" directly under a card reading
+"Built, waiting on the domain". Both corrected, and the boilerplate is left
+alone on the five write-ups where it is true.
+
+**B4. Point 5 was only technically fixed.** Tapping a service row scrolled the
+panel to the top of the viewport, so the sticky header covered its heading and
+the row list scrolled away entirely: the reader tapped and landed mid-paragraph
+with no sign of what they had chosen. The chosen row now parks just under the
+header, verified at 80px on rows 2, 4 and 6, with the panel heading inside the
+viewport every time.
+
+**B5.** This report is the record; it exists now.
+
+**M1. Reviews at 390 was the worst section on the page.** The rail kept gliding
+on a phone and parked wherever it stopped, slicing the previous card mid-word
+and starting the readable one 74px in, against a 28px gutter everywhere else.
+It stops on phones and becomes a swipe: one card, snapping to the gutter,
+measured at left 28. The pause button went with the motion.
+
+Also fixed: the delivery promise on the work page still said "two to three
+weeks" where every other page says five to fifteen working days; the enquiry
+confirmation overwrote "within one working day" with "the same working day" at
+runtime; the endcap made handover claims covering five demo builds; arrow keys
+on the project strip selected an invisible marquee clone and jumped the panel;
+the phone strip dimmed unselected thumbnails to 55%, which is the wash Edgar
+banned; the display heading had become smaller than ordinary headings on
+phones; `.booking` was declared twice at top level with the first dead; two
+media-query blocks were byte-identical twins; the previous site's `styles.css`
+and `script.js` still shipped; the footer printed the location twice; four
+em-dashes sat in a demo's comments.
+
+**Left as is, deliberately.** The shared dropdown chevron is inside
+`@supports (appearance: base-select)`, so iOS Safari keeps its native control:
+correct engineering, worth knowing. "No bought templates" stands; the two
+WordPress builds run custom child themes.
+
+**Still not provable without a deploy:** clean URLs (`vercel.json` sets
+`cleanUrls`, and the local server does not implement it, which is what hid B1),
+Lighthouse, and real iOS Safari.

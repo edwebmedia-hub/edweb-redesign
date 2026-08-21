@@ -71,7 +71,9 @@
   /* -------------------------------- Tabs ---------------------------------- */
   /* .thumb is the gallery-strip variant of a tab on the work-page comps; it
      needs the same selection handling without inheriting the .tab styling. */
-  var tabs = $$('.tab, .thumb');
+  var tabs = $$('.tab, .thumb').filter(function (t) {
+    return t.getAttribute('aria-hidden') !== 'true';
+  });
   var panels = $$('.tab-panel');
 
   var userPicked = false;
@@ -110,9 +112,13 @@
     }
 
     if (shown && userPicked && window.matchMedia('(max-width: 860px)').matches) {
-      var box = shown.getBoundingClientRect();
-      if (box.top < 0 || box.top > window.innerHeight * 0.75) {
-        shown.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      var anchor = tab.closest('.tab-list') ? tab : shown;
+      var head = document.getElementById('site-header');
+      var offset = (head ? head.getBoundingClientRect().height : 0) + 12;
+      var top = anchor.getBoundingClientRect().top;
+      /* Already parked where it belongs, so leave it alone. */
+      if (Math.abs(top - offset) > 8) {
+        window.scrollTo({ top: window.scrollY + top - offset, behavior: 'smooth' });
       }
     }
   };
@@ -373,13 +379,13 @@
             if (panel) {
               var msg = $('#sent-msg');
               if (msg && data.first_name) {
-                msg.textContent = 'Thanks ' + data.first_name + '. We reply to every enquiry, usually the same working day.';
+                msg.textContent = 'Thanks ' + data.first_name + '. We reply to every enquiry, usually within one working day.';
               }
               form.hidden = true;
               panel.hidden = false;
               panel.scrollIntoView({ behavior: 'smooth', block: 'center' });
             } else {
-              status.textContent = 'Thank you. Your enquiry is in, we usually reply the same working day.';
+              status.textContent = 'Thank you. Your enquiry is in, we usually reply within one working day.';
               status.setAttribute('data-state', 'ok');
             }
             form.reset();

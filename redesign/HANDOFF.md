@@ -1,69 +1,85 @@
-# Edweb Media (edwebmedia.com) — state handoff
+# Edweb Media (edwebmedia.com), state handoff
 
-Written 2026-08-04 at the end of the Aug 1-4 redesign marathon, so a fresh session can pick up without the chat history.
+Rewritten 2026-08-21. The previous version of this file described the design
+that the August 2026 rebuild replaced, down to a different ink value. If
+anything below disagrees with the files, the files win.
 
-**Live:** https://edwebmedia.com at `?v=2026073011`
-**Branch:** `redesign-navigator`, head `5aff879`, pushed to `github.com/edwebmedia-hub/edweb-redesign`
-**Deploy:** `vercel --prod --yes` from inside `redesign/`. Fresh token each session, revoke after. The git push is backup, not the deploy trigger.
-
----
-
-## Rule that changed during this marathon
-
-`CLAUDE.md` still says never edit `redesign/index.html` or `redesign/styles.css`, and to work in `new-home.html` until promoted. **Edgar directed live edits to those files all marathon**, deploying to production after each change. That rule is stale in practice. Ask him before either obeying it or editing CLAUDE.md.
-
----
-
-## Design system as it now stands
-
-**Colours** — unchanged, 4 brand tokens only. Dark is `#1a1a1a`/`--ink` and appears in exactly three places: hero, quote band, footer. **No dark bands mid-page**; Edgar asked for one on services, saw it, rejected it.
-
-**Two light tones only:** `--paper` white and `--paper-dim` faded blue. No third tone.
-
-**Section rhythm** — every page alternates, no two adjacent sections share a background:
-
-| Page | Rhythm |
-|---|---|
-| home | DARK, TINT, white, TINT, white, TINT, white, DARK, white |
-| about-us | DARK, white, TINT, white, DARK, white, CORAL |
-| projects | DARK, white, TINT, CORAL |
-| packages | DARK, white, TINT, white |
-| contact | DARK, white, TINT, white |
-| pay | DARK, white |
-
-**One card treatment, everywhere.** White fill, `1px solid var(--border)`, `--radius-md`, `--shadow-md`, one hover lift. Defined in the CARD SYSTEM block at the end of `styles.css`. Covers `.pcard`, `.pathway-card`, `.svc-card`, `.tm-card`, `.dcard`, `.pf-card`, `.work-item-img`, `.team-portrait-wrap`, `.process-step`.
-Deliberately **not** cards: `.faq-item` rows and `.plan-chooser-item` pill. Leave them flat.
-
-**Spacing.** Sections `clamp(3.5rem, 2.3rem + 3.9vw, 6.25rem)` (93px at 1440, 56px at 390). All card grids `--sp-6` (32px). Head-to-content one shared clamp. The quote band uses the same section clamp, not its own.
-
-**Icon chips.** Solid ink square, white glyph, coral on hover. Site-wide.
+**Live:** https://edwebmedia.com
+**Branch:** `edweb-logo-refresh`, pushed to `github.com/edwebmedia-hub/edweb-redesign`
+**Deploy:** Edgar double-clicks `C:\Users\edgar\deploy-edweb.cmd`. It calls the
+Vercel CLI as `npx.cmd` by full path with a token read from
+`C:\Users\edgar\.deploy-token`, and logs to `C:\Users\edgar\deploy-log.txt`.
+Written as `.cmd` because his PowerShell is 5.1: no `&&`, and `.ps1` scripts are
+blocked by execution policy. **Claude cannot run it**: a PreToolUse hook denies
+any shell command containing "vercel". Prepare the build, commit, hand over the
+one click. The git push is backup, not the deploy trigger.
 
 ---
 
-## Things that will bite you
+## How the files are laid out
 
-1. **`overflow: hidden` breaks `animation-timeline: view()`.** It makes the element a scroll container so the timeline resolves against a box that never scrolls, and the animation freezes. `.section--ink` uses `overflow: clip` for exactly this reason. Do not "tidy" it back to `hidden`.
+The working copies are `new-*.html`, `new-styles.css` and `new-script.js`. The
+live filenames are produced from them:
 
-2. **The `?package=` chain.** Links in `packages.html` and `index.html` carry `?package=Business+Website+-+Silver+Plan+%28R3%2C999%29`. `script.js` matches those **exact strings** to prefill the contact form. Change one side and the prefill dies silently. Both sides use ` - ` (hyphen) since the em-dash sweep.
+```
+node C:\Users\edgar\Edweb-Claude-Website-OS\tools\promote.mjs <this folder>
+```
 
-3. **`.msf` contact form.** Flex column, the `gap` alone does the spacing. Children must not carry their own margins, and there were inline `style="margin-bottom:…"` attributes doing it invisibly. If the form looks too long again, check the markup for inline margins first.
+It renames 13 drafts onto their live names, rewrites internal links to the
+clean URLs the canonicals promise, drops `noindex`, and separately repairs the
+links on `404.html`, which is not a draft but used to point at draft filenames.
+CSS and JS are shared by drafts and live pages, so styling changes need no
+promote step; HTML changes do.
 
-4. **`script.js` FAQ handler** still crashes the whole IIFE on any `.faq-item` without a `.faq-question` child. Use `.faq-card` for native `<details>`.
+`.vercelignore` keeps the drafts, `_pre-launch-backup/`, the previous site's
+`styles.css` and `script.js`, and 69 unreferenced legacy images out of the
+upload. Deploy is roughly 40 MB.
 
-5. **The retired services rail.** Markup, CSS and arrows are deleted. Its IIFE is still in `script.js` and no-ops behind `if (!rail) return`. Harmless, but it is dead code.
+**Rollback** is a copy back from `_pre-launch-backup/`, which holds the pages
+that were live before the rebuild.
 
 ---
 
-## Deliberate decisions, do not "fix" these
+## Pages
 
-- **Home has no closing CTA band.** Edgar removed the coral endcap from the home page only; About Us and Projects keep it. Worth watching enquiry volume, but it was his call.
-- **Services shows all six cards at once**, no carousel, no arrows.
-- Process steps rise from below on scroll, >640px only, reduced-motion honoured.
+`/` `/projects` `/packages` `/contact` `/pay` `/terms-conditions`
+`/privacy-policy`, six write-ups under `/projects/`, and five demo builds under
+`/demos/`. Demos are fictional businesses, every one labelled as a demo,
+`noindex, nofollow`, and disallowed in `robots.txt`.
 
----
+## Design system
 
-## Open, not done
+Four brand tokens only: ink `#2b2b2b`, paper `#fafafa`, coral `#e0474c`, teal
+`#7acfd6`, plus `color-mix()` of those. The one exception is the Visa and
+Mastercard marks on `/pay`, which are third-party logos and are documented as
+such in the stylesheet.
 
-- `AUDIT.md` items from 2026-07-18 were never actioned: unoptimised project PNGs (~745KB), `.html` vs clean-URL canonical mismatch, stale `sitemap.xml`, homepage heading order, 21px mobile footer tap targets.
-- Em-dashes remain in ~5 `script.js` code comments. Not output, so left alone. All visible copy on all six pages is clear.
-- The dashboard card's dark toggle reads wrong via `getComputedStyle` in the devtools MCP browser but works. Verify that one visually, not by measurement.
+- `--gutter` drives the page edge: 28px on a phone, 48 on a desktop. Every
+  full-bleed rail insets by the same token so nothing runs to the screen edge.
+- `--band` is the section rhythm, 56px on a phone and 128 on a desktop, and
+  `.band--alt` / `.band--ink` alternate the tone. Each page carries one ink
+  band as its dark anchor.
+- One value per role, and it is measured rather than assumed: one h2 size, one
+  4px radius, one button height, one control height.
+- Reveals are `.reveal` plus IntersectionObserver, with a no-JS guard and two
+  fallback sweeps so nothing can be left invisible.
+
+## Traps this codebase has actually fallen into
+
+- **A flat rule declared after a media query wins.** It silently killed the
+  mobile collapse on the work heading and on the booking grid. Every mobile
+  collapse now lives at the end of the stylesheet.
+  `Edweb-Claude-Website-OS\tools\_override.mjs` detects the pattern.
+- **`$$` collapses to `$` inside a JS replacement string**, which kills the
+  whole IIFE. Use a function replacement.
+- **OneDrive locks files mid-sync.** Write, read back, retry.
+- **`python -m http.server` drops files over 100KB here.** Use
+  `.claude\static-server.mjs`, and note it does not do clean URLs, so `/packages`
+  404s locally while working in production.
+
+## Open
+
+- Pointing `dielekkerdoos.co.za` at its finished build reverses three edits on
+  `new-projects.html` and `new-project-lekkerdoos.html`.
+- The shared dropdown chevron is inside `@supports (appearance: base-select)`,
+  so iOS Safari still shows the native control.
