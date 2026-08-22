@@ -2855,3 +2855,15 @@ main[id] {
 @media (min-width: 861px) {
   .faq-block .faq-intro { align-self: start; }
 }
+
+/* Real Google reviewer photos where the reviewer has one; the styled initials
+   stay for anyone whose Google avatar is just a monogram. Same 38px circle
+   either way, so the rail's rhythm does not change. */
+img.avatar { object-fit: cover; background: var(--ground-alt); }
+.reviews-sub {
+  grid-column: 1 / -1;
+  margin-top: 0.4rem;
+  font-size: var(--fs-small);
+  color: var(--text-muted);
+}
+.reviews-sub .stars { margin-right: 0.35rem; }
