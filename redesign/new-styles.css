@@ -9,7 +9,7 @@
 /* ---------------------------------- Tokens -------------------------------- */
 :root {
   /* The only four brand colours. Everything else is a mix of these. */
-  --ink: #0d0d0d;   /* was #2b2b2b, deepened on Edgar's call 2026-08-22 */
+  --ink: #161616;   /* was #2b2b2b, deepened on Edgar's call 2026-08-22 */
   --paper: #fafafa;
   --coral: #e0474c;
   --teal: #7acfd6;
@@ -969,11 +969,7 @@ form > div:has(textarea:focus) label,
 .facts li { padding-block: 0.5rem; }
 
 /* Work: aligned grid, and the industries live under the heading now. */
-.work-sub {
-  grid-column: 2;
-  max-width: 46ch;
-  font-size: var(--fs-small);
-}
+.head-aside { align-self: end; font-size: var(--fs-small); }
 
 /* Process: one ink card. Second dark beat of the page, and the stages carry
    what actually lands at the end of each one. */
@@ -2678,7 +2674,7 @@ textarea[aria-invalid="true"] {
      :has() rule outranked the collapse rule, so the heading was squeezed into
      a third of the screen with the filters stacked beside it. */
   .head,
-  .head:has(.work-sub) {
+  .head:has(.head-aside) {
     grid-template-columns: 1fr;
     align-items: start;
     gap: 1.25rem;
@@ -2689,7 +2685,6 @@ textarea[aria-invalid="true"] {
 }
 
 @media (max-width: 620px) {
-  .work-sub { margin-top: 0; }
 
 }
 
