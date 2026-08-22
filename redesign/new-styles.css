@@ -565,16 +565,20 @@ p { margin: 0; text-wrap: pretty; }
   .tab-list:not(.tab-list--row) .tab:hover { transform: none; }
   /* A sweeping underline is a pointer affordance. A row list wants a marker. */
   .tab-list:not(.tab-list--row) .tab::after { display: none; }
+  /* Edgar's call: the chosen row carries the logo's own double chevron
+     rather than a dot. Same glyph the ulink arrows use, so the site keeps one
+     arrow language. Small on purpose. */
   .tab-list:not(.tab-list--row) .tab::before {
-    content: "";
+    content: "»";
     order: 2;
     flex: none;
-    width: 9px;
-    height: 9px;
-    border-radius: 50%;
-    background: var(--coral);
+    font-size: 1.35rem;
+    font-weight: 800;
+    line-height: 1;
+    color: var(--coral);
     opacity: 0;
-    transition: opacity var(--speed) var(--ease);
+    transform: translateX(-6px);
+    transition: opacity var(--speed) var(--ease), transform var(--speed) var(--ease);
   }
   .tab-list:not(.tab-list--row) .tab[aria-selected="true"] {
     color: var(--coral);
@@ -582,7 +586,7 @@ p { margin: 0; text-wrap: pretty; }
     font-size: 1.2rem;
     font-weight: 700;
   }
-  .tab-list:not(.tab-list--row) .tab[aria-selected="true"]::before { opacity: 1; }
+  .tab-list:not(.tab-list--row) .tab[aria-selected="true"]::before { opacity: 1; transform: none; }
   .tab-panel.is-active { gap: 1.15rem; }
 }
 
