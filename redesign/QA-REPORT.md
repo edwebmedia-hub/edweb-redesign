@@ -751,3 +751,36 @@ a promote check that reported "leftover references: NONE" while 28 remained.
 - The logo strip shows nine businesses while the work page says six client
   builds. Compatible (the strip is not limited to featured case studies) but
   worth a look.
+
+## Repetition pass, 2026-08-22
+
+Edgar, reading the deployed pay page: "it feels like we are just saying a lot
+of things." Measured, he was right, and not only there. The same promise was
+being made three to five times per page in slightly different words.
+
+Counted before and after (visible copy, scripts excluded):
+
+| page | phrase | before | after |
+|---|---|---|---|
+| pay | "you see the exact amount first" | 3 | 1, masthead card |
+| pay | Payfast security | 5 | 1, trust strip |
+| pay | prices match the pricing page | 2 | 1, closing section |
+| pay | headings containing "pay" | 4 | 2, the H1 and the two-ways H2 |
+| home | "within one working day" | 4 | 1, the Answered-fast card |
+| home | "plan and a price before any work starts" | 3 | 1, the hero form |
+| contact | "one working day" in prose | 6 | rows, sent-panel, timeline, booking: each functional |
+| contact | "a quote costs nothing" | 4 | 1, the masthead fact row |
+| packages | "separate monthly add-ons" | 6 | 1, the masthead |
+
+Every slot that lost a repeat either went entirely or now carries a fact the
+page did not have: the home form foot states the privacy line, the contact
+"Before you write" block gives actual preparation guidance instead of
+restating three promises made one screen up, the packages panel intros
+describe the product type and nothing else.
+
+Also caught: the pay masthead said "cancel any time" while the bullet below
+says "in writing before the next billing date". The loose version is gone.
+
+Verified after: picker still builds the real /api/payfast URLs, cancel-note
+still script-driven, 13 pages clean at 390, 768, 1280, all links resolve, no
+console errors.
