@@ -9,7 +9,7 @@
 /* ---------------------------------- Tokens -------------------------------- */
 :root {
   /* The only four brand colours. Everything else is a mix of these. */
-  --ink: #2b2b2b;
+  --ink: #222222;   /* was #2b2b2b; deepened on Edgar's call 2026-08-22 */
   --paper: #fafafa;
   --coral: #e0474c;
   --teal: #7acfd6;
