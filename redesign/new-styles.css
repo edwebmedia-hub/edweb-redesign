@@ -328,7 +328,9 @@ p { margin: 0; text-wrap: pretty; }
   justify-content: flex-start;
   overflow: clip;
 }
-.hero .logo-strip { margin-top: auto; }
+/* The strip stays with the content. Pinning it to the hero's bottom edge
+   opened a void between the buttons and the strip on tall windows, which is
+   what Edgar photographed; any slack now runs out quietly below the strip. */
 /* One quiet wash, derived from brand tokens, never a random gradient. */
 .hero::before {
   content: "";
