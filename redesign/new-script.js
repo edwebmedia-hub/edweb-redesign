@@ -149,22 +149,6 @@
     });
   });
 
-  /* ----------------------------- Work filter ------------------------------ */
-  var filters = $$('.filter');
-  var items = $$('.work-item');
-
-  filters.forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      var want = btn.getAttribute('data-filter');
-      filters.forEach(function (f) { f.setAttribute('aria-pressed', String(f === btn)); });
-      items.forEach(function (item) {
-        var show = want === 'all' || item.getAttribute('data-cat') === want;
-        item.hidden = !show;
-        if (show) item.classList.add('is-visible');
-      });
-    });
-  });
-
   /* --------------------------- Reviews rail ------------------------------- */
   /* The rail glides in CSS. This owns only the pause control, which WCAG 2.2.2
      requires for content that moves on its own: hover pausing is not a

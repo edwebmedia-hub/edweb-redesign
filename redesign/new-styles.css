@@ -609,38 +609,6 @@ p { margin: 0; text-wrap: pretty; }
 
 
 /* ---------------------------------- Work ---------------------------------- */
-.filters {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem 1.4rem;
-  align-items: center;
-}
-.filter {
-  background: none;
-  border: 0;
-  padding: 0.35rem 0;
-  cursor: pointer;
-  font-size: var(--fs-small);
-  font-weight: 500;
-  color: var(--text-meta);
-  position: relative;
-  transition: color var(--speed) var(--ease);
-}
-.filter::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 1px;
-  background: currentColor;
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform var(--speed) var(--ease);
-}
-.filter[aria-pressed="true"] { color: var(--text); }
-.filter[aria-pressed="true"]::after { transform: scaleX(1); }
-.filter:hover { color: var(--text); }
 
 .work-grid {
   display: grid;
@@ -1002,12 +970,10 @@ form > div:has(textarea:focus) label,
 
 /* Work: aligned grid, and the industries live under the heading now. */
 .work-sub {
-  grid-column: 1 / -1;
-  max-width: 70ch;
-  margin-top: 1rem;
+  grid-column: 2;
+  max-width: 46ch;
   font-size: var(--fs-small);
 }
-.head:has(.work-sub) { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); }
 
 /* Process: one ink card. Second dark beat of the page, and the stages carry
    what actually lands at the end of each one. */
@@ -2723,23 +2689,9 @@ textarea[aria-invalid="true"] {
   .page-hero-inner--solo > div,
   .page-hero-inner--solo .lead { max-width: none; }
 
-  /* Filters read as a control strip rather than four loose words. */
-  .filters {
-    gap: 0 1.25rem;
-    padding-bottom: 0.75rem;
-    border-bottom: 1px solid var(--line);
-  }
-  .filter { min-height: 40px; padding-block: 0.5rem; justify-self: start; }
 }
 
 @media (max-width: 620px) {
-  /* Four filters wrap to three-and-one on a phone, which leaves Travel
-     stranded on a line of its own. Two by two reads as a set. */
-  .filters {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.1rem 1rem;
-  }
   .work-sub { margin-top: 0; }
 
 }
@@ -2887,3 +2839,14 @@ main[id] {
 /* The display heading was raised to clear the section heading, but 40 against
    36 is neither the same role nor a step. It leads properly now. */
 .wordstack { font-size: clamp(2.9rem, 4.8vw, 4.3rem); }
+
+/* The chart is lifted 37px so its rising line tucks under the headline on a
+   wide screen, where the line's right end is far from the text. On a phone the
+   column is narrow and the headline is large, so that same lift runs the line
+   straight through THAT WORK. Below 860 it sits under the words with air. */
+@media (max-width: 860px) {
+  .growth {
+    bottom: 0;
+    margin-top: clamp(0.75rem, 3vw, 1.5rem);
+  }
+}
