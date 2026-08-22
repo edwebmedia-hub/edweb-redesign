@@ -153,7 +153,7 @@ p { margin: 0; text-wrap: pretty; }
   align-items: end;
   margin-bottom: clamp(2.75rem, 6.5vw, 6.75rem);
 }
-.head h2 { max-width: 18ch; }
+.head h2 { max-width: 18ch; align-self: start; }
 .head .lead { max-width: 42ch; }
 
 @media (max-width: 860px) {
@@ -1445,9 +1445,6 @@ h3, h4 { font-variation-settings: "wght" 600; }
 .band--ink .process-head h2,
 .band--ink .stage h3 { color: var(--text-on-ink); }
 
-/* The WE BUILD band carries short content, so it does not need the full
-   section rhythm above and below it. */
-#craft { padding-block: var(--band-tight); }
 
 
 /* =========================== INNER PAGES ==================================
@@ -2849,4 +2846,14 @@ main[id] {
     bottom: 0;
     margin-top: clamp(0.75rem, 3vw, 1.5rem);
   }
+}
+
+/* Every section heading starts the same distance below its band's top edge.
+   Three components were centring or bottom-aligning their heading column
+   against a taller neighbour, so the heading floated 60 to 90px lower than the
+   rest of the page: the FAQ intro, the closing CTA copy and the process head.
+   The columns beside them keep their alignment; only the heading is pinned. */
+.process-head h2 { align-self: start; }
+@media (min-width: 861px) {
+  .faq-block .faq-intro { align-self: start; }
 }
