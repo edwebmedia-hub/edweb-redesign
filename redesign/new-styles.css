@@ -1259,9 +1259,10 @@ form > div:has(textarea:focus) label,
 
 /* Hero copy sits lower than the card top, not level with it. */
 @media (min-width: 981px) {
-  /* Was pushing the headline 85px down toward the card's middle. Edgar wants
-     it up by the header. */
-  .hero-copy { padding-top: 0; }
+  /* Raising the headline was a mobile instruction. On desktop, zero offset put
+     it hard under the header, so it keeps a smaller version of its old drop:
+     roughly halfway between the crowded top and where it started. */
+  .hero-copy { padding-top: clamp(1.5rem, 5.5vh, 4.5rem); }
 }
 
 /* ====================== Section audit fixes (2026-08-19) ================== */
