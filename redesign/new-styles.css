@@ -2668,9 +2668,7 @@ textarea[aria-invalid="true"] {
 
 /* The work masthead lost its index card, so it runs as one editorial column
    rather than a column and a hole. */
-.page-hero-inner--solo { grid-template-columns: minmax(0, 1fr); }
-.page-hero-inner--solo > div { max-width: 34ch; }
-.page-hero-inner--solo .lead { max-width: 46ch; }
+
 
 @media (max-width: 860px) {
   /* The work heading and its filters stayed side by side on a phone: the
@@ -2682,8 +2680,6 @@ textarea[aria-invalid="true"] {
     align-items: start;
     gap: 1.25rem;
   }
-  .page-hero-inner--solo > div,
-  .page-hero-inner--solo .lead { max-width: none; }
 
 }
 
@@ -2867,3 +2863,36 @@ img.avatar { object-fit: cover; background: var(--ground-alt); }
   color: var(--text-muted);
 }
 .reviews-sub .stars { margin-right: 0.35rem; }
+
+/* Work masthead: the right half shows the work itself, two live builds
+   layered like prints on a table. The heading holds two lines. */
+.page-hero-inner h1 { max-width: 16ch; }
+/* Edgar: this heading sits on two lines at every desktop width, breaking
+   after "we". 12ch forces that break even at 1680 and up. */
+.page-hero-inner:has(.work-collage) h1 { max-width: 12ch; }
+.work-collage {
+  position: relative;
+  align-self: center;
+  /* Room for the front print to hang past the back one. */
+  padding: 0 0 clamp(2.5rem, 5vw, 4rem) clamp(2.5rem, 5vw, 4rem);
+}
+.work-collage img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: top center;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--paper);
+}
+.work-collage .collage-front {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 52%;
+  box-shadow: 0 24px 60px color-mix(in srgb, var(--ink) 22%, transparent);
+}
+@media (max-width: 860px) {
+  .work-collage { padding: 0 0 2rem 2rem; margin-top: 0.5rem; }
+}
