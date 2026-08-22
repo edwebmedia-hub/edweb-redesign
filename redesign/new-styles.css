@@ -707,7 +707,6 @@ p { margin: 0; text-wrap: pretty; }
   width: 100vw;
   margin-left: calc(50% - 50vw);
   padding-inline: var(--gutter);
-  padding-bottom: 0.5rem;
   overflow: clip;
 }
 .reviews-track {
