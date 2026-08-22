@@ -320,14 +320,15 @@ p { margin: 0; text-wrap: pretty; }
 /* ---------------------------------- Hero ---------------------------------- */
 .hero {
   position: relative;
-  padding-top: calc(var(--header-h) + clamp(3rem, 7.5vh, 6.5rem));
+  padding-top: calc(var(--header-h) + clamp(1.25rem, 4.5vh, 3.5rem));
   padding-bottom: clamp(1.5rem, 3vw, 2.5rem);
   min-height: 100svh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   overflow: clip;
 }
+.hero .logo-strip { margin-top: auto; }
 /* One quiet wash, derived from brand tokens, never a random gradient. */
 .hero::before {
   content: "";
@@ -439,11 +440,7 @@ p { margin: 0; text-wrap: pretty; }
 .logo-strip img {
   height: 30px;
   width: auto;
-  opacity: 0.62;
-  filter: grayscale(1) contrast(0.95);
-  transition: opacity var(--speed) var(--ease), filter var(--speed) var(--ease);
 }
-.logo-strip img:hover { opacity: 1; filter: grayscale(0); }
 @keyframes strip { to { transform: translateX(-50%); } }
 .logo-strip:hover .logo-strip-track { animation-play-state: paused; }
 
@@ -1260,7 +1257,9 @@ form > div:has(textarea:focus) label,
 
 /* Hero copy sits lower than the card top, not level with it. */
 @media (min-width: 981px) {
-  .hero-copy { padding-top: clamp(2rem, 9vh, 7rem); }
+  /* Was pushing the headline 85px down toward the card's middle. Edgar wants
+     it up by the header. */
+  .hero-copy { padding-top: 0; }
 }
 
 /* ====================== Section audit fixes (2026-08-19) ================== */
@@ -2895,4 +2894,67 @@ img.avatar { object-fit: cover; background: var(--ground-alt); }
 }
 @media (max-width: 860px) {
   .work-collage { padding: 0 0 2rem 2rem; margin-top: 0.5rem; }
+}
+
+/* ====================== Colour pass, Edgar 2026-08-22 ======================
+   The hero opened flat and contact read white on white. Two treatments, both
+   token-derived: a teal wash in the top corner and the wordmark's chevrons as
+   a large tinted mark behind the headline. */
+.hero::before,
+.page-hero--wash::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(46rem 30rem at 88% -4%, color-mix(in srgb, var(--teal) 26%, transparent), transparent 68%),
+    radial-gradient(30rem 22rem at -6% 104%, color-mix(in srgb, var(--teal) 14%, transparent), transparent 70%);
+  pointer-events: none;
+}
+.hero-mark {
+  position: absolute;
+  left: clamp(1rem, 6vw, 6rem);
+  bottom: clamp(7rem, 16vh, 11rem);
+  width: clamp(200px, 22vw, 340px);
+  height: auto;
+  fill: color-mix(in srgb, var(--coral) 14%, transparent);
+  pointer-events: none;
+}
+.hero > .container,
+.page-hero--wash > .container { position: relative; }
+@media (max-width: 860px) {
+  /* The full-width form card sits over where the mark lands; the wash and the
+     coral card edge carry the colour on a phone. */
+  .hero-mark { display: none; }
+}
+
+/* One coral edge on the form cards, so the white card carries the brand. */
+.hero-card,
+.quote-card { border-top: 3px solid var(--coral); }
+
+/* The Google badge: the mark, the stars, the rating, the count, linked to the
+   listing. The G is a third-party mark, rendered in its own colours like the
+   card marks on the checkout. */
+.gbadge {
+  grid-column: 1 / -1;
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-top: 0.5rem;
+  padding: 0.55rem 0.9rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  font-size: var(--fs-small);
+  color: var(--text-muted);
+  transition: border-color var(--speed-tap) var(--ease), transform var(--speed-tap) var(--ease);
+}
+.gbadge:hover { border-color: var(--line-strong); transform: translateY(-2px); }
+.gbadge-g { width: 20px; height: 20px; flex: none; }
+/* Same darkened coral the review cards use, one star colour site-wide. */
+.gbadge-stars { color: color-mix(in srgb, var(--coral) 84%, var(--ink)); letter-spacing: 0.1em; font-size: 0.85rem; }
+.gbadge b { color: var(--text); font-weight: 700; }
+.gbadge-count { color: var(--text-meta); }
+@media (max-width: 620px) {
+  .gbadge { flex-wrap: wrap; row-gap: 0.15rem; }
 }

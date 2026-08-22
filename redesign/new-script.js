@@ -149,28 +149,6 @@
     });
   });
 
-  /* --------------------------- Reviews rail ------------------------------- */
-  /* The rail glides in CSS. This owns only the pause control, which WCAG 2.2.2
-     requires for content that moves on its own: hover pausing is not a
-     mechanism a keyboard or touch user can reach. */
-  (function () {
-    var rail = $('#reviews-rail');
-    var btn = $('#rev-toggle');
-    if (!rail || !btn) return;
-
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      /* Nothing is moving, so there is nothing to pause. */
-      btn.hidden = true;
-      return;
-    }
-
-    btn.addEventListener('click', function () {
-      var paused = rail.classList.toggle('is-paused');
-      btn.setAttribute('aria-pressed', String(paused));
-      btn.setAttribute('aria-label', paused ? 'Play the reviews' : 'Pause the reviews');
-    });
-  })();
-
   /* ------------------- Package buttons prefill the form ------------------- */
   $$('[data-package]').forEach(function (btn) {
     btn.addEventListener('click', function () {
