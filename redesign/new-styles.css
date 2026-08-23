@@ -45,7 +45,6 @@
 
   /* Rhythm: 8px scale. s3 12, s4 16, s5 24, s6 32, s7 48, s8 64, s9 96, s10 128 */
   --ground-teal: color-mix(in srgb, var(--teal) 16%, var(--paper)); /* teal-washed band */
-  --surface-teal: color-mix(in srgb, var(--teal) 8%, var(--paper));  /* tinted card and field fill */
   --gutter: clamp(1.75rem, 4vw, 3rem);       /* page edge to content, 28 min */
   --container: min(100% - var(--gutter) * 2, 1320px);
   --band: clamp(3.5rem, 8.5vw, 8rem);        /* section padding, 128 max */
@@ -801,7 +800,7 @@ textarea {
   font: inherit;
   font-size: var(--fs-small);
   color: var(--text);
-  background: var(--surface-teal);
+  background: var(--paper);
   border: 1px solid var(--line);
   border-radius: var(--radius);
   padding: 0.8rem 0.9rem;
@@ -1074,7 +1073,7 @@ form > div:has(textarea:focus) label,
    same radius. Gives the right column a designed shape now the fake screenshot
    is gone, and adds a surface step against the page ground. */
 .tab-panel.is-active {
-  background: var(--surface-teal);
+  background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--radius);
   padding: clamp(1.75rem, 2.4vw, 2.25rem);
@@ -1627,7 +1626,7 @@ select {
   font: inherit;
   font-size: var(--fs-small);
   color: var(--text);
-  background: var(--surface-teal);
+  background: var(--paper);
   border: 1px solid var(--line);
   border-radius: var(--radius);
   padding: 0.8rem 0.9rem;
@@ -2174,7 +2173,7 @@ textarea[aria-invalid="true"] {
   font: inherit;
   font-size: var(--fs-small);
   color: var(--text);
-  background: var(--surface-teal);
+  background: var(--paper);
   border: 1px solid var(--line);
   border-radius: var(--radius);
   padding: 0.8rem 0.9rem;
@@ -2942,8 +2941,9 @@ img.avatar { object-fit: cover; background: var(--ground-alt); }
    listing. The G is a third-party mark, rendered in its own colours like the
    card marks on the checkout. */
 .gbadge {
-  grid-column: 1 / -1;
-  justify-self: start;
+  grid-column: 2;
+  justify-self: end;
+  align-self: center;
   display: inline-flex;
   align-items: center;
   gap: 0.55rem;
@@ -2981,10 +2981,15 @@ img.avatar { object-fit: cover; background: var(--ground-alt); }
 /* ================= Warm the white sections, Edgar 2026-08-23 ==============
    Field fill and card tints come off one token. On focus a field opens to
    paper so the typing surface reads active. */
-input:focus,
-textarea:focus,
-select:focus { background: var(--paper); }
 /* The reviews band sits on the teal ground now; keep its cards paper so they
    pop, and let the badge sit on paper too. */
 .band--teal .review,
 .band--teal .gbadge { background: var(--paper); }
+
+/* Edgar's flip: the form cards carry the teal, the boxes inside stay white.
+   The info cards on the mastheads join the same family. */
+.hero-card,
+.quote-card { background: var(--ground-teal); }
+@media (max-width: 860px) {
+  .gbadge { grid-column: 1; justify-self: start; align-self: start; }
+}
