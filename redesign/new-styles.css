@@ -45,6 +45,7 @@
 
   /* Rhythm: 8px scale. s3 12, s4 16, s5 24, s6 32, s7 48, s8 64, s9 96, s10 128 */
   --ground-teal: color-mix(in srgb, var(--teal) 16%, var(--paper)); /* teal-washed band */
+  --coral-deep: color-mix(in srgb, var(--coral) 78%, var(--ink)); /* button surface, AA under paper text */
   --gutter: clamp(1.75rem, 4vw, 3rem);       /* page edge to content, 28 min */
   --container: min(100% - var(--gutter) * 2, 1320px);
   --band: clamp(3.5rem, 8.5vw, 8rem);        /* section padding, 128 max */
@@ -167,34 +168,35 @@ p { margin: 0; text-wrap: pretty; }
   align-items: center;
   justify-content: center;
   gap: 0.6rem;
-  background: var(--ink);
+  background: var(--coral-deep);
   color: var(--paper);
   font-size: var(--fs-micro);
   font-weight: 600;
   letter-spacing: 0.085em;
   text-transform: uppercase;
   padding: 1.15rem 2.2rem;
-  border: 1px solid var(--ink);
+  border: 1px solid var(--coral-deep);
   border-radius: var(--radius);
   cursor: pointer;
   transition: background var(--speed) var(--ease), color var(--speed) var(--ease),
     transform var(--speed) var(--ease);
 }
 .btn:hover {
-  background: var(--coral);
-  border-color: var(--coral);
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
   transform: translateY(-2px);
 }
 .btn--block { width: 100%; }
 .btn--light {
-  background: var(--paper);
-  color: var(--ink);
-  border-color: var(--paper);
+  background: var(--coral-deep);
+  color: var(--paper);
+  border-color: var(--coral-deep);
 }
 .btn--light:hover {
-  background: var(--coral);
-  border-color: var(--coral);
-  color: var(--paper);
+  background: var(--paper);
+  border-color: var(--paper);
+  color: var(--ink);
 }
 
 /* Underline link: the reference's signature "Let's work together" treatment. */
@@ -1228,15 +1230,16 @@ form > div:has(textarea:focus) label,
 .band--ink .wordstack .w-bold { color: var(--paper); }
 .band--ink .wordstack .w-accent { color: var(--coral); }
 .band--ink .ulink { color: var(--paper); }
+/* Red at rest on ink too; the hover flips to paper. */
 .band--ink .btn {
-  background: var(--paper);
-  color: var(--ink);
-  border-color: var(--paper);
+  background: var(--coral-deep);
+  color: var(--paper);
+  border-color: var(--coral-deep);
 }
 .band--ink .btn:hover {
-  background: var(--coral);
-  border-color: var(--coral);
-  color: var(--paper);
+  background: var(--paper);
+  border-color: var(--paper);
+  color: var(--ink);
 }
 .band--ink .price-note { color: color-mix(in srgb, var(--paper) 70%, var(--ink)); }
 
@@ -1247,15 +1250,8 @@ form > div:has(textarea:focus) label,
 
 /* White cards sitting on an ink band keep the ink button: the light-button
    override above is for buttons directly on the dark ground. */
-.band--ink .pcard .btn {
-  background: var(--ink);
-  color: var(--paper);
-  border-color: var(--ink);
-}
-.band--ink .pcard .btn:hover {
-  background: color-mix(in srgb, var(--ink) 80%, var(--coral));
-  border-color: color-mix(in srgb, var(--ink) 80%, var(--coral));
-}
+
+
 .band--ink .pcard p,
 .band--ink .pcard li { color: var(--text-muted); }
 .band--ink .pcard .pcard-price { color: var(--text); }
@@ -2972,7 +2968,6 @@ img.avatar { object-fit: cover; background: var(--ground-alt); }
    carry the coral thread everywhere. */
 .band--teal { background: var(--ground-teal); }
 .band--teal .cta-card { background: var(--paper); }
-.figure-val { color: var(--coral); }
 /* Same darkened coral as the stars: reads red, clears 4.5:1 at text size. */
 .ulink .arrow,
 .head-aside .arrow,
@@ -2999,5 +2994,5 @@ img.avatar { object-fit: cover; background: var(--ground-alt); }
    site two light grounds meet before the footer. The section keeps the tight
    band value on top, desktop only; mobile keeps the standard rhythm. */
 @media (min-width: 861px) {
-  #contact { padding-top: var(--band-tight); }
+  #contact { padding-block: var(--band-tight); }
 }
