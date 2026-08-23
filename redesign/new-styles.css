@@ -2988,8 +2988,16 @@ img.avatar { object-fit: cover; background: var(--ground-alt); }
 
 /* Edgar's flip: the form cards carry the teal, the boxes inside stay white.
    The info cards on the mastheads join the same family. */
-.hero-card,
-.quote-card { background: var(--ground-teal); }
+.hero-card { background: var(--ground-teal); }
 @media (max-width: 860px) {
   .gbadge { grid-column: 1; justify-self: start; align-self: start; }
+}
+
+/* Edgar, on the live site: the space above "Let us start your website" reads
+   far bigger than below it. True: the teal band's bottom padding and this
+   section's top padding stack into one 218px pale seam, the only place on the
+   site two light grounds meet before the footer. The section keeps the tight
+   band value on top, desktop only; mobile keeps the standard rhythm. */
+@media (min-width: 861px) {
+  #contact { padding-top: var(--band-tight); }
 }
