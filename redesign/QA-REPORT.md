@@ -805,3 +805,13 @@ Verified after the final flip: card tint identical on contact, pay and all six
 write-ups; thirteen pages clean at 390, 768 and 1280; contrast register at its
 exempt-only baseline; no console errors; payment picker and enquiry payloads
 unchanged by the styling passes.
+
+## LAUNCHED, 2026-08-23
+
+The go/no-go review's blocker (home Platinum at R5,499 against a R5,999
+checkout) and its polish items were fixed, the reviewer's verdict flipped to
+GO, and the build deployed. Verified on the live domain after the alias: ten
+pages clean at 390 and 1280 with zero console errors, both Platinum cards
+showing struck R6,499 and R5,999, the teal seam rule, red buttons and on-ink
+arrows all serving. This closes the redesign: every further change is normal
+site maintenance.
