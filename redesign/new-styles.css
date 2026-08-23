@@ -1383,12 +1383,14 @@ form > div:has(textarea:focus) label,
    real colour change, so it keeps the full rhythm on both sides. */
 .band--alt + .band--alt,
 .band--ink + .band--ink,
-.band:not(.band--alt):not(.band--ink) + .band:not(.band--alt):not(.band--ink) {
+.band--teal + .band--teal,
+.band:not(.band--alt):not(.band--ink):not(.band--teal) + .band:not(.band--alt):not(.band--ink):not(.band--teal) {
   padding-top: clamp(2rem, 3.4vw, 3.25rem);
 }
 .band--alt:has(+ .band--alt),
 .band--ink:has(+ .band--ink),
-.band:not(.band--alt):not(.band--ink):has(+ .band:not(.band--alt):not(.band--ink)) {
+.band--teal:has(+ .band--teal),
+.band:not(.band--alt):not(.band--ink):not(.band--teal):has(+ .band:not(.band--alt):not(.band--ink):not(.band--teal)) {
   padding-bottom: clamp(2.5rem, 4vw, 4rem);
 }
 
