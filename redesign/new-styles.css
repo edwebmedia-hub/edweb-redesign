@@ -44,6 +44,7 @@
   --fs-micro: 0.8125rem;
 
   /* Rhythm: 8px scale. s3 12, s4 16, s5 24, s6 32, s7 48, s8 64, s9 96, s10 128 */
+  --ground-teal: color-mix(in srgb, var(--teal) 16%, var(--paper)); /* teal-washed band */
   --gutter: clamp(1.75rem, 4vw, 3rem);       /* page edge to content, 28 min */
   --container: min(100% - var(--gutter) * 2, 1320px);
   --band: clamp(3.5rem, 8.5vw, 8rem);        /* section padding, 128 max */
@@ -180,8 +181,8 @@ p { margin: 0; text-wrap: pretty; }
     transform var(--speed) var(--ease);
 }
 .btn:hover {
-  background: color-mix(in srgb, var(--ink) 80%, var(--coral));
-  border-color: color-mix(in srgb, var(--ink) 80%, var(--coral));
+  background: var(--coral);
+  border-color: var(--coral);
   transform: translateY(-2px);
 }
 .btn--block { width: 100%; }
@@ -191,8 +192,9 @@ p { margin: 0; text-wrap: pretty; }
   border-color: var(--paper);
 }
 .btn--light:hover {
-  background: color-mix(in srgb, var(--paper) 82%, var(--coral));
-  border-color: color-mix(in srgb, var(--paper) 82%, var(--coral));
+  background: var(--coral);
+  border-color: var(--coral);
+  color: var(--paper);
 }
 
 /* Underline link: the reference's signature "Let's work together" treatment. */
@@ -1232,8 +1234,9 @@ form > div:has(textarea:focus) label,
   border-color: var(--paper);
 }
 .band--ink .btn:hover {
-  background: color-mix(in srgb, var(--paper) 84%, var(--coral));
-  border-color: color-mix(in srgb, var(--paper) 84%, var(--coral));
+  background: var(--coral);
+  border-color: var(--coral);
+  color: var(--paper);
 }
 .band--ink .price-note { color: color-mix(in srgb, var(--paper) 70%, var(--ink)); }
 
@@ -2961,3 +2964,15 @@ img.avatar { object-fit: cover; background: var(--ground-alt); }
 @media (max-width: 620px) {
   .gbadge { flex-wrap: wrap; row-gap: 0.15rem; }
 }
+
+/* ===================== More red and teal, Edgar 2026-08-23 =================
+   Structural colour only. The closing CTA band sits on a teal ground on every
+   page, the results figures burn coral on the ink band, and the link arrows
+   carry the coral thread everywhere. */
+.band--teal { background: var(--ground-teal); }
+.band--teal .cta-card { background: var(--paper); }
+.figure-val { color: var(--coral); }
+/* Same darkened coral as the stars: reads red, clears 4.5:1 at text size. */
+.ulink .arrow,
+.head-aside .arrow,
+.case-links .arrow { color: color-mix(in srgb, var(--coral) 72%, var(--ink)); }
