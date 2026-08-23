@@ -21,7 +21,7 @@ const LIVE = {
   merchantKey: 'ln11ns5q1npeg',
   usePassphrase: true,
 };
-// Payfast's public sandbox — no real money moves. Add &sandbox=1 to any link to
+// Payfast's public sandbox, no real money moves. Add &sandbox=1 to any link to
 // test the full checkout. The generic sandbox has no passphrase, so none is
 // appended to the signature.
 const SANDBOX = {

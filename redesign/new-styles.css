@@ -2998,3 +2998,7 @@ img.avatar { object-fit: cover; background: var(--ground-alt); }
 @media (min-width: 861px) {
   #contact { padding-block: var(--band-tight); }
 }
+
+/* The link arrows use a darkened coral tuned for light grounds; on the ink
+   band that mix reads at 2.85:1. On ink they take the on-ink accent form. */
+.band--ink .ulink .arrow { color: color-mix(in srgb, var(--coral) 88%, var(--paper)); }

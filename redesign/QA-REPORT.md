@@ -789,7 +789,7 @@ console errors.
 
 Edgar's colour push, settled over three rounds and signed off on screenshots:
 
-- **Coral**: heading accent words, the results figures on the ink band, button
+- **Coral**: heading accent words, button
   hover everywhere, the arrow thread in every link, the top edge on the teal
   form cards, footer social tiles, review stars (darkened mix at text size).
 - **Teal**: the ground of two band roles (reviews on home, the closing CTA on

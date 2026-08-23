@@ -34,7 +34,7 @@ module.exports = async function handler(req, res) {
           name, meeting_date, note, company, website_type } = req.body;
 
   // Honeypot: bots fill the hidden field; drop silently with a fake success.
-  // Note: no `sent` flag here — the client only fires the Ads conversion when
+  // Note: no `sent` flag here, the client only fires the Ads conversion when
   // sent === true, so trapped bots can't inflate conversion counts.
   if (company) return res.status(200).json({ success: true });
   const ip = (req.headers['x-forwarded-for'] || '').split(',')[0].trim() || 'unknown';
