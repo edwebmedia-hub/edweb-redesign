@@ -784,3 +784,24 @@ says "in writing before the next billing date". The loose version is gone.
 Verified after: picker still builds the real /api/payfast URLs, cancel-note
 still script-driven, 13 pages clean at 390, 768, 1280, all links resolve, no
 console errors.
+
+## Colour system final state, 2026-08-23
+
+Edgar's colour push, settled over three rounds and signed off on screenshots:
+
+- **Coral**: heading accent words, the results figures on the ink band, button
+  hover everywhere, the arrow thread in every link, the top edge on the teal
+  form cards, footer social tiles, review stars (darkened mix at text size).
+- **Teal**: the ground of two band roles (reviews on home, the closing CTA on
+  every page) and the form and info cards on every masthead, all one 16%
+  --ground-teal token. White fields sit on the teal cards, flipped at Edgar's
+  call after the tinted-field version.
+- **Reverted on his eye**: the tinted services panel, the "from 10 Google
+  reviews" badge tail, the hero chevron mark.
+- The Google badge is G, five stars, 5.0, linked to the listing, beside the
+  reviews heading on desktop and under it on phones.
+
+Verified after the final flip: card tint identical on contact, pay and all six
+write-ups; thirteen pages clean at 390, 768 and 1280; contrast register at its
+exempt-only baseline; no console errors; payment picker and enquiry payloads
+unchanged by the styling passes.
