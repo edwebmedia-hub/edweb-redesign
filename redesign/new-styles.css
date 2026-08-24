@@ -2901,9 +2901,9 @@ img.avatar { object-fit: cover; background: var(--ground-alt); }
 }
 
 /* ====================== Colour pass, Edgar 2026-08-22 ======================
-   The hero opened flat and contact read white on white. Two treatments, both
-   token-derived: a teal wash in the top corner and the wordmark's chevrons as
-   a large tinted mark behind the headline. */
+   The hero opened flat and contact read white on white: a teal wash in the
+   top corners, token-derived. (A chevron watermark also lived here until
+   Edgar rejected it on 2026-08-23; do not bring it back.) */
 .hero::before,
 .page-hero--wash::before {
   content: "";
@@ -2914,22 +2914,8 @@ img.avatar { object-fit: cover; background: var(--ground-alt); }
     radial-gradient(30rem 22rem at -6% 104%, color-mix(in srgb, var(--teal) 14%, transparent), transparent 70%);
   pointer-events: none;
 }
-.hero-mark {
-  position: absolute;
-  left: clamp(1rem, 6vw, 6rem);
-  bottom: clamp(7rem, 16vh, 11rem);
-  width: clamp(200px, 22vw, 340px);
-  height: auto;
-  fill: color-mix(in srgb, var(--coral) 14%, transparent);
-  pointer-events: none;
-}
 .hero > .container,
 .page-hero--wash > .container { position: relative; }
-@media (max-width: 860px) {
-  /* The full-width form card sits over where the mark lands; the wash and the
-     coral card edge carry the colour on a phone. */
-  .hero-mark { display: none; }
-}
 
 /* One coral edge on the form cards, so the white card carries the brand. */
 .hero-card,
@@ -2983,9 +2969,6 @@ img.avatar { object-fit: cover; background: var(--ground-alt); }
 .band--teal .review,
 .band--teal .gbadge { background: var(--paper); }
 
-/* Edgar's flip: the form cards carry the teal, the boxes inside stay white.
-   The info cards on the mastheads join the same family. */
-.hero-card { background: var(--ground-teal); }
 @media (max-width: 860px) {
   .gbadge { grid-column: 1; justify-self: start; align-self: start; }
 }
