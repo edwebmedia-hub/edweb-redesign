@@ -2996,36 +2996,72 @@ img.avatar { object-fit: cover; background: var(--ground-alt); }
    band that mix reads at 2.85:1. On ink they take the on-ink accent form. */
 .band--ink .ulink .arrow { color: color-mix(in srgb, var(--coral) 88%, var(--paper)); }
 
-/* The three ways to reach us, one row across the width. Replaced a two-column
-   split whose second column repeated the reply time already published in the
-   masthead and answered again in the FAQ (Edgar, 2026-08-23). */
+/* The three ways to reach us. Three blocks divided by vertical hairlines, so
+   the section reads as one structure instead of three stranded lines; the
+   whole block is the link, and the arrow is the same one every other link on
+   the site uses (Edgar, 2026-08-23: "make this better more modern"). */
 .reach {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0 var(--gap-grid);
+  gap: 0;
   padding: 0;
   margin: 0;
   list-style: none;
-  border-bottom: 1px solid var(--line);
+  border-block: 1px solid var(--line);
 }
-.reach li {
-  display: grid;
-  gap: 0.3rem;
-  padding-block: clamp(1rem, 1.5vw, 1.35rem);
-  border-top: 1px solid var(--line);
-}
+.reach li + li { border-left: 1px solid var(--line); }
 .reach a {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-content: start;
+  gap: 0.35rem 1rem;
+  height: 100%;
+  padding: clamp(1.5rem, 2.2vw, 2rem) clamp(1.25rem, 2vw, 2rem);
+  color: inherit;
+  transition: background var(--speed) var(--ease);
+}
+.reach-kind,
+.reach-meta { grid-column: 1 / -1; }
+.reach li:first-child a { padding-left: 0; }
+.reach a:hover { background: color-mix(in srgb, var(--ink) 4%, transparent); }
+.reach-kind {
+  font-size: var(--fs-micro);
+  font-weight: 600;
+  color: var(--text-meta);
+}
+.reach-value {
   font-size: var(--fs-h4);
   font-weight: 700;
   color: var(--text);
+  transition: color var(--speed) var(--ease);
 }
-.reach a:hover { color: var(--coral); }
-.reach span { font-size: var(--fs-micro); color: var(--text-meta); }
+.reach a:hover .reach-value { color: var(--coral); }
+.reach-meta { font-size: var(--fs-micro); color: var(--text-meta); }
+.reach .arrow {
+  grid-column: 2;
+  grid-row: 2;
+  align-self: center;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: color-mix(in srgb, var(--coral) 72%, var(--ink));
+  transition: transform var(--speed) var(--ease);
+}
+.reach a:hover .arrow { transform: translateX(6px); }
+
+/* On the ink band the hairlines, text and arrow take their on-ink forms. */
 .band--ink .reach,
-.band--ink .reach li { border-color: var(--line-on-ink); }
-.band--ink .reach a { color: var(--paper); }
-.band--ink .reach a:hover { color: var(--coral); }
-.band--ink .reach span { color: var(--text-on-ink-muted); }
+.band--ink .reach li + li { border-color: var(--line-on-ink); }
+.band--ink .reach a:hover { background: color-mix(in srgb, var(--paper) 5%, transparent); }
+.band--ink .reach-value { color: var(--paper); }
+.band--ink .reach a:hover .reach-value { color: var(--coral); }
+.band--ink .reach-kind,
+.band--ink .reach-meta { color: var(--text-on-ink-muted); }
+.band--ink .reach .arrow { color: color-mix(in srgb, var(--coral) 88%, var(--paper)); }
+
 @media (max-width: 720px) {
+  /* Stacked, so the divider turns horizontal and the inline padding goes. */
   .reach { grid-template-columns: 1fr; }
+  .reach li + li { border-left: 0; border-top: 1px solid var(--line); }
+  .band--ink .reach li + li { border-color: var(--line-on-ink); }
+  .reach a { padding-inline: 0; }
 }
