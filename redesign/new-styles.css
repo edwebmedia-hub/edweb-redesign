@@ -2595,7 +2595,7 @@ textarea[aria-invalid="true"] {
 .booking { grid-template-columns: minmax(0, 0.55fr) minmax(0, 0.45fr); }
 
 /* 3.89:1 as coral; a little ink clears the 4.5 text threshold outright. */
-.stars { color: color-mix(in srgb, var(--coral) 84%, var(--ink)); }
+.stars { color: color-mix(in srgb, var(--coral) 80%, var(--ink)); }
 
 /* Day cells must clear the 24x24 target minimum on a phone. */
 @media (max-width: 620px) {
@@ -2979,7 +2979,7 @@ img.avatar { object-fit: cover; background: var(--ground-alt); }
 .gbadge:hover { border-color: var(--line-strong); transform: translateY(-2px); }
 .gbadge-g { width: 20px; height: 20px; flex: none; }
 /* Same darkened coral the review cards use, one star colour site-wide. */
-.gbadge-stars { color: color-mix(in srgb, var(--coral) 84%, var(--ink)); letter-spacing: 0.1em; font-size: 0.85rem; }
+.gbadge-stars { color: color-mix(in srgb, var(--coral) 80%, var(--ink)); letter-spacing: 0.1em; font-size: 0.85rem; }
 .gbadge b { color: var(--text); font-weight: 700; }
 .gbadge-count { color: var(--text-meta); }
 @media (max-width: 620px) {
@@ -3007,6 +3007,12 @@ img.avatar { object-fit: cover; background: var(--ground-alt); }
    paper so the typing surface reads active. */
 /* The reviews band sits on the teal ground now; keep its cards paper so they
    pop, and let the badge sit on paper too. */
+/* A card reads by contrast with its band: white on a grey or teal ground,
+   grey on a white one. The reviews band is white, so these take the grey. */
+.review,
+.gbadge { background: var(--ground-alt); }
+.band--alt .review,
+.band--alt .gbadge,
 .band--teal .review,
 .band--teal .gbadge { background: var(--paper); }
 
