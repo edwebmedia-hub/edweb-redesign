@@ -828,9 +828,10 @@ short summary card.
 
 He then sent the six craft points with "make this look better more ux ui".
 They were a wall of identical rows on a phone, icons thinner than the text
-beside them. The icon now carries a coral-tinted chip, rows are divided by the
-existing hairline token with the gap moved into row padding, and the chip
-takes more coral on the ink bands where 11 percent disappeared. The pattern is
+beside them. The rows are divided by the existing hairline token with the gap moved into
+row padding, and the icon grew with a heavier stroke. A coral-tinted chip
+behind each icon was tried in this pass and rejected the same day as an
+AI-template tell; it is gone and must not return. The pattern is
 shared with the "what we delivered" list on all six write-ups, so seven pages
 moved on one CSS change and no markup.
 
