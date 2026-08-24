@@ -1190,19 +1190,32 @@ form > div:has(textarea:focus) label,
 .craft-items {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(1.25rem, 2vw, 1.9rem) var(--gap-grid);
+  gap: 0 var(--gap-grid);
+  border-bottom: 1px solid var(--line);
 }
-.craft-item { display: flex; gap: 0.85rem; align-items: flex-start; }
+.craft-item {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  padding-block: clamp(1rem, 1.5vw, 1.35rem);
+  border-top: 1px solid var(--line);
+}
+/* The svg is its own chip: padding and a ground, no wrapper element, so the
+   markup on all seven pages is untouched. */
 .craft-item svg {
-  width: 26px;
-  height: 26px;
+  width: 42px;
+  height: 42px;
   flex: none;
+  box-sizing: border-box;
+  padding: 9px;
+  border-radius: var(--radius);
   color: var(--coral);
-  margin-top: 2px;
-  transition: transform var(--speed) var(--ease);
+  background: color-mix(in srgb, var(--coral) 11%, transparent);
+  stroke-width: 1.7;
+  transition: background var(--speed-tap) var(--ease);
 }
-.craft-item:hover svg { transform: translateY(-3px); }
-.craft-item h3 { font-size: var(--fs-h4); margin-bottom: 0.25rem; }
+.craft-item:hover svg { background: color-mix(in srgb, var(--coral) 18%, transparent); }
+.craft-item h3 { font-size: var(--fs-h4); margin-bottom: 0.3rem; }
 .craft-item p { font-size: var(--fs-small); max-width: 34ch; }
 
 @media (max-width: 900px) {
@@ -1242,6 +1255,12 @@ form > div:has(textarea:focus) label,
   color: var(--ink);
 }
 .band--ink .price-note { color: color-mix(in srgb, var(--paper) 70%, var(--ink)); }
+.band--ink .craft-item,
+.band--ink .craft-items { border-color: var(--line-on-ink); }
+/* Coral at 11% disappears into the ink; on a dark band the chip needs more of
+   it to read as tinted rather than as an empty box. */
+.band--ink .craft-item svg { background: color-mix(in srgb, var(--coral) 22%, transparent); }
+.band--ink .craft-item:hover svg { background: color-mix(in srgb, var(--coral) 32%, transparent); }
 
 /* Studio section: copy left, portrait right, quote and figures underneath. */
 
