@@ -9,7 +9,7 @@
 /* ---------------------------------- Tokens -------------------------------- */
 :root {
   /* The only four brand colours. Everything else is a mix of these. */
-  --ink: #161616;   /* was #2b2b2b, deepened on Edgar's call 2026-08-22 */
+  --ink: #1c1c1c;   /* #2b2b2b, then #0d0d0d too dark, #161616, lifted one step 2026-08-24 */
   --paper: #fafafa;
   --coral: #e0474c;
   --teal: #7acfd6;
@@ -3015,14 +3015,29 @@ img.avatar { object-fit: cover; background: var(--ground-alt); }
    whole block is the link, and the arrow is the same one every other link on
    the site uses (Edgar, 2026-08-23: "make this better more modern"). */
 .reach {
+  --reach-bleed: clamp(0.9rem, 1.4vw, 1.35rem);
+  position: relative;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0;
   padding: 0;
-  margin: 0;
+  /* Pulled out by one block's padding, so the text keeps the alignment line
+     while the hover ground has room to breathe around it. */
+  margin: 0 calc(var(--reach-bleed) * -1);
   list-style: none;
-  border-block: 1px solid var(--line);
 }
+/* The rules stay at container width rather than riding out with the list. */
+.reach::before,
+.reach::after {
+  content: "";
+  position: absolute;
+  left: var(--reach-bleed);
+  right: var(--reach-bleed);
+  height: 1px;
+  background: var(--line);
+}
+.reach::before { top: 0; }
+.reach::after { bottom: 0; }
 .reach li + li { border-left: 1px solid var(--line); }
 .reach a {
   display: grid;
@@ -3030,13 +3045,13 @@ img.avatar { object-fit: cover; background: var(--ground-alt); }
   align-content: start;
   gap: 0.35rem 1rem;
   height: 100%;
-  padding: clamp(1.5rem, 2.2vw, 2rem) clamp(1.25rem, 2vw, 2rem);
+  padding: clamp(1.5rem, 2.2vw, 2rem) var(--reach-bleed);
   color: inherit;
   transition: background var(--speed) var(--ease);
 }
 .reach-kind,
 .reach-meta { grid-column: 1 / -1; }
-.reach li:first-child a { padding-left: 0; }
+.reach a { border-radius: var(--radius); }
 .reach a:hover { background: color-mix(in srgb, var(--ink) 4%, transparent); }
 .reach-kind {
   font-size: var(--fs-micro);
@@ -3065,8 +3080,9 @@ img.avatar { object-fit: cover; background: var(--ground-alt); }
 .reach a:hover .arrow { transform: translateX(6px); }
 
 /* On the ink band the hairlines, text and arrow take their on-ink forms. */
-.band--ink .reach,
 .band--ink .reach li + li { border-color: var(--line-on-ink); }
+.band--ink .reach::before,
+.band--ink .reach::after { background: var(--line-on-ink); }
 .band--ink .reach a:hover { background: color-mix(in srgb, var(--paper) 5%, transparent); }
 .band--ink .reach-value { color: var(--paper); }
 .band--ink .reach a:hover .reach-value { color: var(--coral); }
@@ -3081,5 +3097,5 @@ img.avatar { object-fit: cover; background: var(--ground-alt); }
   .reach { grid-template-columns: 1fr; }
   .reach li + li { border-left: 0; border-top: 1px solid var(--line); }
   .band--ink .reach li + li { border-color: var(--line-on-ink); }
-  .reach a { padding-inline: 0; }
+  .reach a { padding-inline: var(--reach-bleed); }
 }
