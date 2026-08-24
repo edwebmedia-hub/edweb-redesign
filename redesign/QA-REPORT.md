@@ -815,3 +815,27 @@ pages clean at 390 and 1280 with zero console errors, both Platinum cards
 showing struck R6,499 and R5,999, the teal seam rule, red buttons and on-ink
 arrows all serving. This closes the redesign: every further change is normal
 site maintenance.
+
+## Copy density and the craft rows, 2026-08-23 (post-launch)
+
+Edgar, on the live site: "too much wording everywhere you have to read way to
+much all over the site". Every page lost its restating second sentences,
+qualifying tails and FAQ padding, keeping the facts and dropping the filler.
+Home 1784 -> 1591 words, projects 1659 -> 1252, packages 1161 -> 954, contact
+913 -> 746, and each of the six project write-ups roughly 60 words lighter.
+Terms and privacy were left alone: legal text, and both already open with a
+short summary card.
+
+He then sent the six craft points with "make this look better more ux ui".
+They were a wall of identical rows on a phone, icons thinner than the text
+beside them. The icon now carries a coral-tinted chip, rows are divided by the
+existing hairline token with the gap moved into row padding, and the chip
+takes more coral on the ink bands where 11 percent disappeared. The pattern is
+shared with the "what we delivered" list on all six write-ups, so seven pages
+moved on one CSS change and no markup.
+
+Gates: 13 pages at 390/768/1280 with no problems, 18 internal links sound,
+zero console errors, one value per role held (h2 36/51.2, radius 4, button
+61.1, control 55.1), reveal opacity 1 on every craft row at both widths,
+contrast register unchanged (the exempt disabled calendar days and the Visa
+mark only).

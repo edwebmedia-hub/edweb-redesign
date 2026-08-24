@@ -3004,3 +3004,37 @@ img.avatar { object-fit: cover; background: var(--ground-alt); }
 /* The link arrows use a darkened coral tuned for light grounds; on the ink
    band that mix reads at 2.85:1. On ink they take the on-ink accent form. */
 .band--ink .ulink .arrow { color: color-mix(in srgb, var(--coral) 88%, var(--paper)); }
+
+/* The three ways to reach us, one row across the width. Replaced a two-column
+   split whose second column repeated the reply time already published in the
+   masthead and answered again in the FAQ (Edgar, 2026-08-23). */
+.reach {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0 var(--gap-grid);
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  border-bottom: 1px solid var(--line);
+}
+.reach li {
+  display: grid;
+  gap: 0.3rem;
+  padding-block: clamp(1rem, 1.5vw, 1.35rem);
+  border-top: 1px solid var(--line);
+}
+.reach a {
+  font-size: var(--fs-h4);
+  font-weight: 700;
+  color: var(--text);
+}
+.reach a:hover { color: var(--coral); }
+.reach span { font-size: var(--fs-micro); color: var(--text-meta); }
+.band--ink .reach,
+.band--ink .reach li { border-color: var(--line-on-ink); }
+.band--ink .reach a { color: var(--paper); }
+.band--ink .reach a:hover { color: var(--coral); }
+.band--ink .reach span { color: var(--text-on-ink-muted); }
+@media (max-width: 720px) {
+  .reach { grid-template-columns: 1fr; }
+}
