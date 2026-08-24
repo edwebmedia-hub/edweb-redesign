@@ -1203,18 +1203,13 @@ form > div:has(textarea:focus) label,
 /* The svg is its own chip: padding and a ground, no wrapper element, so the
    markup on all seven pages is untouched. */
 .craft-item svg {
-  width: 42px;
-  height: 42px;
+  width: 30px;
+  height: 30px;
   flex: none;
-  box-sizing: border-box;
-  padding: 9px;
-  border-radius: var(--radius);
   color: var(--coral);
-  background: color-mix(in srgb, var(--coral) 11%, transparent);
-  stroke-width: 1.7;
-  transition: background var(--speed-tap) var(--ease);
+  margin-top: 1px;
+  stroke-width: 1.6;
 }
-.craft-item:hover svg { background: color-mix(in srgb, var(--coral) 18%, transparent); }
 .craft-item h3 { font-size: var(--fs-h4); margin-bottom: 0.3rem; }
 .craft-item p { font-size: var(--fs-small); max-width: 34ch; }
 
@@ -1257,10 +1252,6 @@ form > div:has(textarea:focus) label,
 .band--ink .price-note { color: color-mix(in srgb, var(--paper) 70%, var(--ink)); }
 .band--ink .craft-item,
 .band--ink .craft-items { border-color: var(--line-on-ink); }
-/* Coral at 11% disappears into the ink; on a dark band the chip needs more of
-   it to read as tinted rather than as an empty box. */
-.band--ink .craft-item svg { background: color-mix(in srgb, var(--coral) 22%, transparent); }
-.band--ink .craft-item:hover svg { background: color-mix(in srgb, var(--coral) 32%, transparent); }
 
 /* Studio section: copy left, portrait right, quote and figures underneath. */
 
