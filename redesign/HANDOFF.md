@@ -49,7 +49,7 @@ that were live before the rebuild.
 
 ## Design system
 
-Four brand tokens only: ink `#2b2b2b`, paper `#fafafa`, coral `#e0474c`, teal
+Four brand tokens only: ink `#161616`, paper `#fafafa`, coral `#e0474c`, teal
 `#7acfd6`, plus `color-mix()` of those. The one exception is the Visa and
 Mastercard marks on `/pay`, which are third-party logos and are documented as
 such in the stylesheet.

@@ -20,7 +20,7 @@ Active site folders (each is an independent static HTML/CSS/vanilla-JS site):
 - **Deploy parity (hard rule, 2026-08-17):** a commit is not a deploy. After any content fix on a token-deploy site, fetch the LIVE URL and confirm the change is visible before calling it done. Two live sites were found stale against committed source (navigator missing hero CTAs, spiralguard selling a removed product option).
 
 ## Edweb Media brand — exactly 4 colors, no others
-- `#2b2b2b` faded black (ink — headings, dark section backgrounds)
+- `#161616` faded black (ink — headings, dark section backgrounds)
 - `#fafafa` faded white (paper — backgrounds, text on dark)
 - `#e0474c` coral (primary accent)
 - `#7acfd6` teal (secondary accent)

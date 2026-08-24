@@ -839,3 +839,44 @@ zero console errors, one value per role held (h2 36/51.2, radius 4, button
 61.1, control 55.1), reveal opacity 1 on every craft row at both widths,
 contrast register unchanged (the exempt disabled calendar days and the Visa
 mark only).
+
+## Review round 4 and the phone pass, 2026-08-24
+
+Independent review of the copy trim, the craft list and the rebuilt contact
+index returned NO-GO on one blocker: in the reach index the value column was
+minmax(0, 1fr), which may shrink below its content, so between 721 and about
+795 the email address ran underneath its own arrow. Three columns need roughly
+230px each, so the list now stacks below 861 rather than 721 and the value may
+break as a last resort. Measured clear at 721, 744, 768, 800, 840, 860, 861,
+900, 1024, 1280 and 1440, tightest clearance 19px.
+
+Also from that review: a stray closing div on the work page, dating to the
+original build, removed from both copies; the CSS comment that still described
+the deleted chip, rewritten; the upsell sentence dropped from the work page,
+because item five of that list is hosting and management at R199 a month; and
+the contact page second preparation heading renamed, since the page asked
+twice to be prepared.
+
+Edgar on the phone the same morning: the four assurance blocks in the closing
+CTA kept a white card ground on the teal band. The 620px rule turns them into
+flat rows and clears the ground, but a later two-class rule put the ground back
+at every width. Scoped to 621 and up. Their icons were drawn in ink while every
+other icon list draws in coral, now coral. The craft list opened with a hairline
+above its first row, which reads as a stray rule rather than a divider; rules
+now fall between items only, in both lists.
+
+The ground bug had no detector, so tools/_grounds.mjs was written: at 390 and
+768 it flags any element painting a ground different from the band behind it
+while carrying no border, radius or shadow to justify being a card. Clean
+across all 13 pages.
+
+The booking calendar day cells were square, which in a 620px seven-column grid
+made every cell 85px and stood the month 620px tall, leaving 333px of dead
+ground beside the form. Rows take a 44px height instead; the gap between the
+two columns is now 86px.
+
+Look loop: chip rejected round 1, removed and re-shot round 2, accepted. Reach
+index rebuilt across three rounds (stranded arrow, then unclosed grid, then
+pinned to the value line) and shot at 390 and 1440 with hover proof before it
+was shown. Gates green: 13 pages by three widths, no console errors, 18 links,
+contrast exempt-only, grounds clean.
