@@ -881,3 +881,68 @@ index rebuilt across three rounds (stranded arrow, then unclosed grid, then
 pinned to the value line) and shot at 390 and 1440 with hover proof before it
 was shown. Gates green: 13 pages by three widths, no console errors, 18 links,
 contrast exempt-only, grounds clean.
+
+## Deep pass on pay and pricing, 2026-08-24
+
+Edgar, before leaving for two hours: the payments page does not look
+professional, the pricing page add-ons read as information thrown at you,
+and on "Not sure which one fits?" the word is red while the question mark is
+black. Take the time, improve the UX, keep the vibe.
+
+The question mark was not one heading. Every heading that ends on its accent
+word closed the span before the punctuation, so a coral word was followed by
+an ink full stop in 37 places across 20 files. Punctuation that falls
+immediately before the closing heading tag now sits inside the span; where
+the accent is mid-heading the stop still follows ink words and stays ink.
+
+The add-on rows said everything twice. Hosting's paragraph and its bullets
+both listed hosting, SSL and email; Extra services listed photography,
+branding, social, Ads and SEO in the paragraph and again in the bullets. The
+paragraphs went, the bullets stayed, and the one fact that lived only in
+prose, R249 for stores and directories, moved to the price column. The name
+column came in from 0.8fr to 0.55fr now that it holds one word, the price
+track widened to 210px to hold its note, and the bullets tightened to a spec
+rhythm. Section height 1231px to 1010px with nothing removed but repetition.
+
+The split rows bottom-aligned their two columns with align-content:
+space-between, which shares the slack across every gap. On the pay page that
+put 143px between a heading and its own one-line paragraph, and 129px before
+two bullets: three things adrift in a column rather than a block of copy.
+Columns now hug their content and align at the top. The section-geometry
+rule stands, but alignment cannot be manufactured by inflating gaps.
+
+The pay page's first step stacked all eight plans as eight identical cards
+under three headings. It now uses the tab pattern the pricing page already
+uses for the same three types, driven by the shared handler, so the picker
+shows three cards instead of eight. Tabs had never appeared on a dark band,
+so .tab colour was ink on ink and the types were invisible; they take the
+on-ink pair now. Both journey rows had their arrow in the class that means
+"price", parked 500px from the words it belonged to; it moved onto the title
+and the row reads as a link.
+
+The three plan cards started their tick lists on three different lines,
+because one description was a line shorter and, on the directory tab, "From
+R14,499" was long enough to push its period label onto a third line. The
+description reserves two line boxes and the period always takes its own line.
+Measured 0px spread on cards and lists across all three tabs, once the
+reveals had settled; before that wait the numbers read 2 to 3px off, which is
+the animation mid-flight rather than the layout, and the align sweep now
+waits for it too.
+
+Both type strips ran off the edge of a phone, the pricing page's by 85px and
+the picker's by 34px, sliced at both ends for the sake of a scroll nobody
+would notice. Three short labels wrap onto two lines below 620px instead.
+
+tools/repeat-sweep.mjs was written for the complaint underneath all of this,
+that the pages say the same thing several times. It compares every text block
+on a page against every other and reports heavy word overlap, ignoring
+parallel structure, since three plan cards listing the same features are
+meant to echo. First run: 123 overlapping pairs. After cutting the add-on
+prose, the hosting line the home page ran twice, the store group intro that
+repeated its own first card and the solar demo intro that pre-empted both its
+bullets: 21, all of them FAQ answers restating a card fact, which is correct.
+
+Gates: 13 pages by three widths, no console errors, 18 links, contrast
+exempt-only, grounds clean, alignment clean, no em-dashes. Both payment
+journeys exercised end to end at 1280 and 390, correct Payfast keys and
+amounts against api/payfast.js.
