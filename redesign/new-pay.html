@@ -114,7 +114,7 @@
     <section class="band band--ink" id="checkout">
       <div class="container split split--lead">
         <div class="reveal">
-          <h2>Two ways to <span class="hl">pay</span>.</h2>
+          <h2>Two ways to <span class="hl">pay.</span></h2>
           <p>
             Pick the one that describes you. Nothing is charged on this page.
           </p>
@@ -134,23 +134,21 @@
             <span class="pay-mark pay-eft">Instant EFT</span>
             <span class="visually-hidden">Visa, Mastercard and Instant EFT accepted</span>
           </div>
-          <p class="pay-note">Card details are entered on Payfast's secure checkout, never on this site.</p>
+          <p class="pay-note">Card details are entered on Payfast's secure checkout, never on this site. If a number here does not match your quote, ask before paying.</p>
 
           <!-- Step 1: which kind of payment -->
           <div id="pay-journey" class="opts reveal">
             <button type="button" class="opt" data-journey="new">
               <span>
-                <strong>Book a new website</strong>
+                <strong>Book a new website <span class="opt-go" aria-hidden="true">&raquo;</span></strong>
                 <span>Pay my website design fee now and start a monthly plan, all in one go.</span>
               </span>
-              <span class="opt-amt" aria-hidden="true">&raquo;</span>
             </button>
             <button type="button" class="opt" data-journey="existing">
               <span>
-                <strong>Start a monthly plan</strong>
+                <strong>Start a monthly plan <span class="opt-go" aria-hidden="true">&raquo;</span></strong>
                 <span>I already have a website. Start my hosting or management billing.</span>
               </span>
-              <span class="opt-amt" aria-hidden="true">&raquo;</span>
             </button>
           </div>
 
@@ -165,7 +163,22 @@
           <div id="pay-new" class="pay-step" hidden>
             <button type="button" class="back-link" data-back>&larr; Change</button>
             <p class="step-label">1. Choose your website</p>
-            <div id="pay-websites" role="radiogroup" aria-label="Choose your website"></div>
+            <div class="tab-list tab-list--row paytype" role="tablist" aria-label="Choose a website type">
+              <button class="tab" role="tab" id="paytab-business" aria-controls="paypanel-business" aria-selected="true">Business websites</button>
+              <button class="tab" role="tab" id="paytab-stores" aria-controls="paypanel-stores" aria-selected="false" tabindex="-1">Online stores</button>
+              <button class="tab" role="tab" id="paytab-directory" aria-controls="paypanel-directory" aria-selected="false" tabindex="-1">Directory sites</button>
+            </div>
+            <div id="pay-websites">
+              <div class="tab-panel is-active" id="paypanel-business" role="tabpanel" aria-labelledby="paytab-business">
+                <div class="opts" role="radiogroup" aria-label="Choose your website"></div>
+              </div>
+              <div class="tab-panel" id="paypanel-stores" role="tabpanel" aria-labelledby="paytab-stores" hidden>
+                <div class="opts" role="radiogroup" aria-label="Choose your website"></div>
+              </div>
+              <div class="tab-panel" id="paypanel-directory" role="tabpanel" aria-labelledby="paytab-directory" hidden>
+                <div class="opts" role="radiogroup" aria-label="Choose your website"></div>
+              </div>
+            </div>
             <p class="pay-note">
               Bigger or custom project? <a href="new-contact.html" class="ulink">Get a quote <span class="arrow" aria-hidden="true">&raquo;</span></a> and we will send a payment link.
             </p>
@@ -202,10 +215,10 @@
     <section class="band band--alt" id="help">
       <div class="container split split--lead">
         <div class="reveal">
-          <h2>What happens <span class="hl">next</span>.</h2>
-          <p>If a number does not match your quote, stop and ask before paying.</p>
+          <h2>What happens <span class="hl">next.</span></h2>
+          <p>Payment is the start of the build, not the end of the conversation.</p>
           <div class="hero-actions">
-            <a href="new-contact.html" class="btn">Ask first</a>
+            <a href="new-contact.html" class="btn">Ask a question</a>
             <a href="new-packages.html" class="ulink">See the pricing page <span class="arrow" aria-hidden="true">&raquo;</span></a>
           </div>
         </div>
@@ -485,16 +498,12 @@
       }
 
       var siteWrap = document.getElementById('pay-websites');
-      WEBSITES.forEach(function (g) {
-        var group = document.createElement('div');
-        group.className = 'pay-group';
-        var label = document.createElement('p');
-        label.className = 'pay-group-label';
-        label.textContent = g.group;
-        group.appendChild(label);
-
-        var list = document.createElement('div');
-        list.className = 'opts';
+      var PANEL_IDS = ['paypanel-business', 'paypanel-stores', 'paypanel-directory'];
+      WEBSITES.forEach(function (g, gi) {
+        /* The panel and its tab are already in the markup, so the type label
+           lives on the tab rather than being repeated above the list. */
+        var list = document.querySelector('#' + PANEL_IDS[gi] + ' .opts');
+        if (!list) return;
         g.items.forEach(function (it) {
           it.groupLabel = g.group;
           var b = document.createElement('button');
@@ -519,8 +528,7 @@
           });
           list.appendChild(b);
         });
-        group.appendChild(list);
-        siteWrap.appendChild(group);
+
       });
     })();
   </script>

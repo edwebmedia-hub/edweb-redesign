@@ -685,12 +685,18 @@ p { margin: 0; text-wrap: pretty; }
   letter-spacing: -0.04em;
   color: var(--text);
   font-weight: 700;
+  /* A price is one token: it never breaks across lines, which would drop the
+     rest of that card out of step with the two beside it. */
+  white-space: nowrap;
 }
 .pcard-period {
   font-size: var(--fs-small);
   font-weight: 500;
   letter-spacing: 0;
   color: var(--text-meta);
+  /* Its own line in every card, so one long price cannot make one card a
+     line taller than the others. */
+  flex-basis: 100%;
 }
 .pcard-head {
   display: grid;
@@ -698,7 +704,13 @@ p { margin: 0; text-wrap: pretty; }
   padding-bottom: 1.25rem;
   border-bottom: 1px solid var(--line);
 }
-.pcard-desc { font-size: var(--fs-small); }
+.pcard-desc {
+  font-size: var(--fs-small);
+  /* Two line boxes of space, used or not, so the tick lists in all three
+     cards start on one line instead of three. */
+  min-height: 3.44em;
+  min-height: 2lh;
+}
 .pcard ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.7rem; }
 .pcard li { display: flex; gap: 0.7rem; align-items: flex-start; font-size: var(--fs-small); }
 .pcard li svg { flex: none; margin-top: 0.28rem; }
@@ -1602,7 +1614,7 @@ h3, h4 { font-variation-settings: "wght" 600; }
   display: grid;
   /* Fixed price track. auto sized itself to each row's content, so the three
      rows landed on three different grids with 25px of jitter between them. */
-  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.5fr) 160px;
+  grid-template-columns: minmax(0, 0.55fr) minmax(0, 1.45fr) 210px;
   gap: var(--gap-grid);
   align-items: start;
   padding-block: clamp(1.5rem, 2.6vw, 2.25rem);
@@ -1800,9 +1812,7 @@ select:focus {
 .opt-amt small { font-size: var(--fs-micro); font-weight: 400; color: var(--text-meta); }
 .pay-step { display: grid; gap: 1.25rem; justify-items: stretch; }
 .pay-step > .back-link { justify-self: start; }
-.pay-group + .pay-group { margin-top: 1.5rem; }
 /* Group labels are plain sentence case, never the letterspaced caps tell. */
-.pay-group-label { font-size: var(--fs-micro); color: var(--text-meta); margin-bottom: 0.6rem; }
 #pay-monthly-step { margin-top: 0.75rem; }
 .paysum .btn { justify-self: start; }
 .pay-step .step-label { font-size: var(--fs-h4); font-weight: 600; color: var(--text); }
@@ -1892,6 +1902,7 @@ select:focus {
 
 /* The services spine puts its panel on a white card. Pricing panels hold cards
    of their own, so the wrapper card is reset here: no card inside a card. */
+#pay-websites .tab-panel.is-active,
 #plans .tab-panel.is-active {
   gap: clamp(2.5rem, 4.5vw, 4rem);
   background: none;
@@ -2628,11 +2639,15 @@ textarea[aria-invalid="true"] {
 }
 
 /* Both edges of a split row, not just the top. align-items:start lines the tops
-   up; stretch plus space-between lands the last element of each column on the
-   same line as the other, which is the whole of the section-geometry rule. */
+   up; stretch lets each column fill the row, and the LAST element takes all the
+   slack so the two columns finish on the same line. space-between did this too,
+   but it shared the slack across every gap, which turned a short column into
+   evenly spaced debris (the pay page had 143px between a heading and its own
+   one-line paragraph). Content keeps its own rhythm; only the final element
+   moves. */
 @media (min-width: 861px) {
-  .split { align-items: stretch; }
-  .split > div { align-content: space-between; }
+  .split { align-items: start; }
+  .split > div { align-content: start; }
 }
 
 /* ------------------------- Card marks on the checkout ---------------------- */
@@ -3126,3 +3141,41 @@ img.avatar { object-fit: cover; background: var(--ground-alt); }
   .band--ink .reach li + li { border-color: var(--line-on-ink); }
   .reach a { padding-inline: var(--reach-bleed); }
 }
+
+/* The pay picker's panel is a plain wrapper around one list of options. */
+#pay-websites .tab-panel.is-active { gap: 0; display: block; }
+#pay-websites .tab-list--row { margin-bottom: clamp(1.5rem, 2.5vw, 2rem); }
+
+
+/* Tabs on a dark band. The idle state stays legible rather than washing out,
+   and the selected one takes paper with the coral underline the light bands
+   already use. */
+.band--ink .tab { color: var(--text-on-ink); }
+.band--ink .tab[aria-selected="true"] { color: var(--paper); }
+.band--ink .tab[aria-selected="false"] { color: var(--text-on-ink-muted); }
+.band--ink .tab-list--row { border-bottom-color: var(--line-on-ink); }
+
+/* The picker sits in a narrow column, so its type labels run smaller and stay
+   on one line. */
+.paytype .tab { font-size: var(--fs-small); font-weight: 600; }
+.paytype { gap: clamp(1rem, 2vw, 1.75rem); }
+.paytype .tab { white-space: nowrap; }
+
+
+/* The price stays one line; the note under it is prose and wraps. */
+.addon-price span { white-space: normal; }
+/* A spec list of two or three items, not a standalone list: closer rhythm. */
+.addon .facts { gap: 0.15rem; }
+.addon .facts li { padding-block: 0.3rem; }
+
+
+/* The journey rows go somewhere, so they carry the site's arrow rather than
+   borrowing the price class. Same coral, same slide, as every other link. */
+.opt-go {
+  display: inline-block;
+  font-size: 1.15em;
+  line-height: 1;
+  color: color-mix(in srgb, var(--coral) 72%, var(--ink));
+  transition: transform var(--speed) var(--ease);
+}
+.opt:hover .opt-go { transform: translateX(5px); }
