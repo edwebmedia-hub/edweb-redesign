@@ -3179,3 +3179,16 @@ img.avatar { object-fit: cover; background: var(--ground-alt); }
   transition: transform var(--speed) var(--ease);
 }
 .opt:hover .opt-go { transform: translateX(5px); }
+
+
+/* Three type labels wrap rather than scroll on a phone: a strip cut off at
+   both edges reads as broken, and there was only 34 to 85px hidden anyway. */
+@media (max-width: 620px) {
+  .tab-list--row {
+    flex-wrap: wrap;
+    overflow-x: visible;
+    row-gap: 0.5rem;
+    column-gap: clamp(1rem, 4vw, 1.75rem);
+  }
+  .tab-list--row .tab { white-space: normal; }
+}
