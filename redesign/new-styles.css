@@ -1633,7 +1633,7 @@ h3, h4 { font-variation-settings: "wght" 600; }
   .addon h3 { order: 1; }
   .addon-price { order: 2; }
   .addon > div { order: 3; }
-  .addon-price span { display: inline; }
+  .addon-price span { display: inline; margin-left: 0.4rem; }
   .addon-price { font-size: var(--fs-h4); }
 }
 
