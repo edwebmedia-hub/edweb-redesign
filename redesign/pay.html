@@ -143,7 +143,22 @@
           <div id="pay-new" class="pay-step" hidden>
             <button type="button" class="back-link" data-back>&larr; Change</button>
             <p class="step-label">1. Choose your website</p>
-            <div id="pay-websites" class="ppanel" role="radiogroup" aria-label="Choose your website"></div>
+            <div class="tab-list tab-list--row paytype" role="tablist" aria-label="Choose a website type">
+              <button class="tab" role="tab" id="paytab-business" aria-controls="paypanel-business" aria-selected="true">Business websites</button>
+              <button class="tab" role="tab" id="paytab-stores" aria-controls="paypanel-stores" aria-selected="false" tabindex="-1">Online stores</button>
+              <button class="tab" role="tab" id="paytab-directory" aria-controls="paypanel-directory" aria-selected="false" tabindex="-1">Directory sites</button>
+            </div>
+            <div id="pay-websites">
+              <div class="tab-panel is-active" id="paypanel-business" role="tabpanel" aria-labelledby="paytab-business">
+                <div class="ppanel" role="radiogroup" aria-label="Choose your website"></div>
+              </div>
+              <div class="tab-panel" id="paypanel-stores" role="tabpanel" aria-labelledby="paytab-stores" hidden>
+                <div class="ppanel" role="radiogroup" aria-label="Choose your website"></div>
+              </div>
+              <div class="tab-panel" id="paypanel-directory" role="tabpanel" aria-labelledby="paytab-directory" hidden>
+                <div class="ppanel" role="radiogroup" aria-label="Choose your website"></div>
+              </div>
+            </div>
             <p class="pay-note">
               Bigger or custom project? <a href="/contact" class="ulink">Get a quote <span class="arrow" aria-hidden="true">&raquo;</span></a> and we will send a payment link.
             </p>
@@ -463,14 +478,12 @@
       }
 
       var siteWrap = document.getElementById('pay-websites');
-      WEBSITES.forEach(function (g) {
-        /* One panel holds every type, each under its own label, so no price is
-           hidden behind a control (Edgar's pick, 2026-08-25). */
-        var list = siteWrap;
-        var label = document.createElement('p');
-        label.className = 'pglabel';
-        label.textContent = g.group;
-        list.appendChild(label);
+      var PANEL_IDS = ['paypanel-business', 'paypanel-stores', 'paypanel-directory'];
+      WEBSITES.forEach(function (g, gi) {
+        /* Choose the type first, then its plans load: the tab carries the
+           group name, so it is not repeated above the rows (Edgar, 2026-08-26). */
+        var list = document.querySelector('#' + PANEL_IDS[gi] + ' .ppanel');
+        if (!list) return;
         g.items.forEach(function (it) {
           it.groupLabel = g.group;
           var b = document.createElement('button');
