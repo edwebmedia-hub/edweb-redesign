@@ -3355,3 +3355,147 @@ img.avatar { object-fit: cover; background: var(--ground-alt); }
 }
 /* The slide is framed by the nav rule above and its own rule below. */
 .opt-c .tab-panels { padding-bottom: clamp(1.75rem, 3vw, 2.5rem); border-bottom: 1px solid var(--line); }
+
+
+/* ================= The build panel, Edgar's pick 2026-08-26 ===============
+   The old site's "Built To Perform" card in this site's clothes. It carries
+   its own dark state, which is the point of the switch: the same information,
+   both ways round. */
+.panel {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  overflow: hidden;
+  transition: background var(--speed) var(--ease), border-color var(--speed) var(--ease),
+    color var(--speed) var(--ease);
+}
+.panel.is-dark {
+  background: var(--ink);
+  border-color: var(--line-on-ink);
+  color: var(--text-on-ink);
+}
+.p-head {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.1rem clamp(1rem, 2vw, 1.4rem);
+  border-bottom: 1px solid var(--line);
+}
+.panel.is-dark .p-head { border-bottom-color: var(--line-on-ink); }
+.p-title { font-weight: 700; font-size: var(--fs-h4); }
+.p-sub { display: block; font-size: var(--fs-micro); font-weight: 400; color: var(--text-meta); }
+.panel.is-dark .p-sub { color: var(--text-on-ink-muted); }
+
+/* A square track: the site has one radius and a pill would be the only one. */
+.sw {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0;
+  background: none;
+  border: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+.sw-label { font-size: var(--fs-micro); color: var(--text-meta); }
+.panel.is-dark .sw-label { color: var(--text-on-ink-muted); }
+.sw-track {
+  position: relative;
+  width: 46px;
+  height: 24px;
+  flex: none;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  transition: border-color var(--speed) var(--ease), background var(--speed) var(--ease);
+}
+.panel.is-dark .sw-track {
+  border-color: var(--line-on-ink);
+  background: color-mix(in srgb, var(--paper) 8%, transparent);
+}
+.sw-knob {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 18px;
+  height: 18px;
+  border-radius: 2px;
+  background: var(--coral);
+  transition: transform var(--speed) var(--ease);
+}
+.panel.is-dark .sw-knob { transform: translateX(22px); }
+
+.p-tabs {
+  display: flex;
+  gap: 1.25rem;
+  padding: 0 clamp(1rem, 2vw, 1.4rem);
+  border-bottom: 1px solid var(--line);
+}
+.panel.is-dark .p-tabs { border-bottom-color: var(--line-on-ink); }
+.p-tabs button {
+  margin-bottom: -1px;
+  padding: 0.75rem 0;
+  background: none;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  font: inherit;
+  font-size: var(--fs-small);
+  font-weight: 600;
+  color: var(--text-meta);
+  cursor: pointer;
+  transition: color var(--speed) var(--ease), border-color var(--speed) var(--ease);
+}
+.panel.is-dark .p-tabs button { color: var(--text-on-ink-muted); }
+.p-tabs button[aria-selected="true"] { color: var(--text); border-bottom-color: var(--coral); }
+.panel.is-dark .p-tabs button[aria-selected="true"] { color: var(--paper); }
+
+.p-body { padding: clamp(1rem, 2vw, 1.4rem); }
+.tp { display: none; }
+.tp.is-on { display: grid; gap: 1.1rem; }
+.stat-line { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; }
+.stat-k { font-size: var(--fs-micro); color: var(--text-meta); }
+.panel.is-dark .stat-k { color: var(--text-on-ink-muted); }
+.stat-v {
+  font-size: clamp(1.6rem, 2.4vw, 2rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.bar { height: 4px; border-radius: 2px; background: var(--line); overflow: hidden; }
+.panel.is-dark .bar { background: color-mix(in srgb, var(--paper) 14%, transparent); }
+/* Scaled rather than widened: animating width relayouts the row every frame. */
+.bar span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--coral);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 1.1s var(--ease);
+}
+.p-rows { display: grid; }
+.p-rows div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: 0.7rem;
+  border-top: 1px solid var(--line);
+  font-size: var(--fs-small);
+}
+.panel.is-dark .p-rows div { border-top-color: var(--line-on-ink); }
+.p-rows div:first-child { border-top: 0; }
+.p-rows b { font-weight: 700; }
+.p-rows span { color: var(--text-meta); text-align: right; }
+.panel.is-dark .p-rows span { color: var(--text-on-ink-muted); }
+
+@media (max-width: 620px) {
+  /* Stacked, the key and value stop fighting for one line. */
+  .p-rows div { flex-direction: column; gap: 0.1rem; }
+  .p-rows span { text-align: left; }
+  .p-tabs { gap: 1rem; }
+  .p-tabs button { font-size: var(--fs-micro); }
+}

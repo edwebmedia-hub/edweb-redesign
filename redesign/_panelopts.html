@@ -1,0 +1,345 @@
+<title>Three Interactive Panels</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+  /* The old site's "Built To Perform" card in the current site's clothes:
+     one 4px radius, hairlines instead of soft shadows, the four brand colours
+     and nothing else. No pills, no floating chips, no drop shadows. */
+  :root {
+    --ink: #1c1c1c; --paper: #fafafa; --coral: #e0474c; --teal: #7acfd6;
+    --ground-alt: color-mix(in srgb, var(--paper) 93%, var(--ink) 7%);
+    --text: var(--ink);
+    --text-muted: color-mix(in srgb, var(--ink) 72%, var(--paper));
+    --text-meta: color-mix(in srgb, var(--ink) 55%, var(--paper));
+    --on-ink: color-mix(in srgb, var(--paper) 88%, var(--ink));
+    --on-ink-muted: color-mix(in srgb, var(--paper) 62%, var(--ink));
+    --line: color-mix(in srgb, var(--ink) 12%, transparent);
+    --line-strong: color-mix(in srgb, var(--ink) 26%, transparent);
+    --line-on-ink: color-mix(in srgb, var(--paper) 16%, transparent);
+    --radius: 4px;
+    --fs-h2: clamp(2rem, 4.6vw, 3.25rem);
+    --fs-h4: clamp(1.0625rem, 1.35vw, 1.1875rem);
+    --fs-small: 1rem; --fs-micro: 0.8125rem;
+    --gutter: clamp(1.5rem, 4vw, 3rem);
+    --speed: 240ms; --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--text); font-family: Manrope, "Segoe UI", system-ui, sans-serif; font-size: var(--fs-small); line-height: 1.72; -webkit-font-smoothing: antialiased; }
+  h1, h2, h3, p { margin: 0; }
+  h2 { font-size: var(--fs-h2); font-weight: 800; letter-spacing: -0.035em; line-height: 1.06; text-wrap: balance; }
+  .hl { color: var(--coral); }
+  .wrap { max-width: 1180px; margin-inline: auto; padding-inline: var(--gutter); }
+
+  .intro { padding: clamp(2.5rem, 6vw, 4.5rem) 0 clamp(1.5rem, 3vw, 2.5rem); }
+  .intro h1 { font-size: var(--fs-h2); font-weight: 800; letter-spacing: -0.035em; line-height: 1.06; max-width: 18ch; }
+  .intro p { margin-top: 1.1rem; max-width: 58ch; color: var(--text-muted); }
+  .how { margin-top: 1.75rem; padding-top: 1.1rem; border-top: 1px solid var(--line-strong); }
+  .how b { font-weight: 700; }
+
+  .lab { position: sticky; top: 0; z-index: 5; display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.35rem 0.9rem; padding: 0.7rem var(--gutter); background: var(--coral); color: var(--paper); }
+  .lab .n { font-weight: 800; letter-spacing: 0.04em; font-size: var(--fs-micro); }
+  .lab .d { font-size: var(--fs-micro); color: color-mix(in srgb, var(--paper) 88%, var(--coral)); }
+
+  .band { padding-block: clamp(2.5rem, 6vw, 4.5rem); }
+  .band--alt { background: var(--ground-alt); }
+  .split { display: grid; gap: clamp(2rem, 4vw, 3.5rem); align-items: start; }
+  @media (min-width: 861px) { .split { grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr); } }
+  .side h2 { max-width: 14ch; }
+  .side p { margin-top: 1.1rem; max-width: 44ch; color: var(--text-muted); }
+  .facts { list-style: none; margin: 1.5rem 0 0; padding: 0; display: grid; gap: 0.45rem; }
+  .facts li { position: relative; padding-left: 1.15rem; font-size: var(--fs-small); }
+  .facts li::before { content: ""; position: absolute; left: 0; top: 0.72em; width: 5px; height: 5px; border-radius: 50%; background: var(--coral); }
+
+  /* ------------------------------ shared panel ---------------------------- */
+  .panel { border: 1px solid var(--line); border-radius: var(--radius); background: var(--paper); overflow: hidden; transition: background var(--speed) var(--ease), border-color var(--speed) var(--ease), color var(--speed) var(--ease); }
+  .panel.is-dark { background: var(--ink); border-color: var(--line-on-ink); color: var(--on-ink); }
+  .p-head { display: flex; align-items: center; gap: 1rem; padding: 1.1rem clamp(1rem, 2vw, 1.4rem); border-bottom: 1px solid var(--line); }
+  .panel.is-dark .p-head { border-bottom-color: var(--line-on-ink); }
+  .p-title { font-weight: 700; font-size: var(--fs-h4); }
+  .p-sub { display: block; font-size: var(--fs-micro); font-weight: 400; color: var(--text-meta); }
+  .panel.is-dark .p-sub { color: var(--on-ink-muted); }
+
+  /* The switch: a square track, not a pill, because the site has one radius. */
+  .sw { margin-left: auto; display: inline-flex; align-items: center; gap: 0.5rem; background: none; border: 0; padding: 0; cursor: pointer; font: inherit; color: inherit; }
+  .sw-label { font-size: var(--fs-micro); color: var(--text-meta); }
+  .panel.is-dark .sw-label { color: var(--on-ink-muted); }
+  .sw-track { width: 46px; height: 24px; flex: none; border: 1px solid var(--line-strong); border-radius: var(--radius); position: relative; transition: border-color var(--speed) var(--ease), background var(--speed) var(--ease); }
+  .panel.is-dark .sw-track { border-color: var(--line-on-ink); background: color-mix(in srgb, var(--paper) 8%, transparent); }
+  .sw-knob { position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; border-radius: 2px; background: var(--coral); transition: transform var(--speed) var(--ease); }
+  .panel.is-dark .sw-knob { transform: translateX(22px); }
+  .sw:focus-visible { outline: 2px solid var(--coral); outline-offset: 3px; }
+
+  .p-body { padding: clamp(1rem, 2vw, 1.4rem); display: grid; gap: 1.1rem; }
+
+  /* ------------------- PANEL 1: the build tracker ------------------------- */
+  .tabs { display: flex; gap: 1.25rem; border-bottom: 1px solid var(--line); padding: 0 clamp(1rem, 2vw, 1.4rem); }
+  .panel.is-dark .tabs { border-bottom-color: var(--line-on-ink); }
+  .tabs button { background: none; border: 0; padding: 0.75rem 0; font: inherit; font-size: var(--fs-small); font-weight: 600; color: var(--text-meta); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; transition: color var(--speed) var(--ease), border-color var(--speed) var(--ease); }
+  .panel.is-dark .tabs button { color: var(--on-ink-muted); }
+  .tabs button[aria-selected="true"] { color: var(--text); border-bottom-color: var(--coral); }
+  .panel.is-dark .tabs button[aria-selected="true"] { color: var(--paper); }
+  .tp { display: none; }
+  .tp.is-on { display: grid; gap: 1.1rem; }
+  .stat-line { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; }
+  .stat-k { font-size: var(--fs-micro); color: var(--text-meta); }
+  .panel.is-dark .stat-k { color: var(--on-ink-muted); }
+  .stat-v { font-size: clamp(1.6rem, 2.4vw, 2rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1; font-variant-numeric: tabular-nums; }
+  .bar { height: 4px; background: var(--line); border-radius: 2px; overflow: hidden; }
+  .panel.is-dark .bar { background: color-mix(in srgb, var(--paper) 14%, transparent); }
+  /* Scaled, not widened: animating width relayouts the row on every frame. */
+  .bar span { display: block; height: 100%; width: 100%; transform: scaleX(0); transform-origin: left center; background: var(--coral); transition: transform 1.1s var(--ease); }
+  .rows { display: grid; }
+  .rows div { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; padding-block: 0.7rem; border-top: 1px solid var(--line); font-size: var(--fs-small); }
+  .panel.is-dark .rows div { border-top-color: var(--line-on-ink); }
+  .rows div:first-child { border-top: 0; }
+  .rows b { font-weight: 700; }
+  .rows span { color: var(--text-meta); }
+  .panel.is-dark .rows span { color: var(--on-ink-muted); }
+
+  /* --------------- PANEL 2: the same page, light and dark ----------------- */
+  .mock { border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: var(--paper); color: var(--ink); transition: background var(--speed) var(--ease), color var(--speed) var(--ease), border-color var(--speed) var(--ease); }
+  .panel.is-dark .mock { background: var(--ink); color: var(--on-ink); border-color: var(--line-on-ink); }
+  .mock-bar { display: flex; align-items: center; gap: 0.9rem; padding: 0.6rem 0.9rem; border-bottom: 1px solid var(--line); font-size: var(--fs-micro); }
+  .panel.is-dark .mock-bar { border-bottom-color: var(--line-on-ink); }
+  .mock-logo { font-weight: 800; letter-spacing: -0.02em; }
+  .mock-nav { margin-left: auto; display: flex; gap: 0.75rem; color: var(--text-meta); }
+  .panel.is-dark .mock-nav { color: var(--on-ink-muted); }
+  .mock-body { padding: clamp(1rem, 2.4vw, 1.75rem); display: grid; gap: 0.7rem; }
+  .mock-h { font-size: clamp(1.35rem, 2.6vw, 1.9rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; }
+  .mock-p { font-size: var(--fs-micro); color: var(--text-meta); max-width: 40ch; }
+  .panel.is-dark .mock-p { color: var(--on-ink-muted); }
+  .mock-btn { justify-self: start; margin-top: 0.35rem; padding: 0.6rem 1.1rem; background: color-mix(in srgb, var(--coral) 78%, var(--ink)); color: var(--paper); border-radius: var(--radius); font-size: var(--fs-micro); font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; }
+  .mock-tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem; margin-top: 0.6rem; }
+  .mock-tile { border: 1px solid var(--line); border-radius: var(--radius); padding: 0.7rem; font-size: var(--fs-micro); }
+  .panel.is-dark .mock-tile { border-color: var(--line-on-ink); }
+  .mock-tile b { display: block; font-size: var(--fs-small); }
+
+  /* ------------- PANEL 3: pick the size, see price and time --------------- */
+  .sizes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 1px solid var(--line-strong); border-radius: var(--radius); overflow: hidden; }
+  .panel.is-dark .sizes { border-color: var(--line-on-ink); }
+  .sizes button { background: none; border: 0; border-left: 1px solid var(--line); padding: 0.8rem 0.5rem; font: inherit; font-weight: 600; color: inherit; cursor: pointer; transition: background var(--speed) var(--ease); }
+  .panel.is-dark .sizes button { border-left-color: var(--line-on-ink); }
+  .sizes button:first-child { border-left: 0; }
+  .sizes button[aria-pressed="true"] { background: var(--coral); color: var(--paper); }
+  .sizes small { display: block; font-size: var(--fs-micro); font-weight: 400; color: var(--text-meta); }
+  .panel.is-dark .sizes small { color: var(--on-ink-muted); }
+  .sizes button[aria-pressed="true"] small { color: color-mix(in srgb, var(--paper) 82%, var(--coral)); }
+  .quote { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .quote > div { border-top: 1px solid var(--line); padding-top: 0.8rem; }
+  .panel.is-dark .quote > div { border-top-color: var(--line-on-ink); }
+  .quote .stat-v { font-size: clamp(1.8rem, 3vw, 2.4rem); }
+
+  .foot { padding: clamp(2.5rem, 6vw, 4rem) 0 clamp(3rem, 7vw, 5rem); }
+  .foot p { max-width: 56ch; color: var(--text-muted); }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<section class="wrap intro">
+  <h1>Three interactive panels.</h1>
+  <p>
+    The old site's "Built To Perform" card, rebuilt in this site's clothes: one
+    4px corner, hairlines instead of soft shadows, the four brand colours, no
+    pills and no floating chips. Each one does something different, and two of
+    them keep the light and dark switch you remembered. Every number is one the
+    site already publishes, nothing invented.
+  </p>
+  <p class="how"><b>How to answer:</b> send me one number, like &ldquo;panel 2&rdquo;. If none land, say which is closest and what is wrong.</p>
+</section>
+
+<!-- ============================== PANEL 1 ============================== -->
+<p class="lab"><span class="n">PANEL 1</span><span class="d">Build tracker: closest to the old card, with tabs and a progress bar</span></p>
+<section class="band">
+  <div class="wrap split">
+    <div class="side">
+      <h2>Built to be <span class="hl">judged.</span></h2>
+      <p>What a build actually involves, and what lands at the end of it. The panel flips to dark so you can see the same information both ways.</p>
+      <ul class="facts">
+        <li>Every figure comes off the live sites or the Google listing</li>
+        <li>Nothing here is an estimate dressed up as a promise</li>
+      </ul>
+    </div>
+    <div class="panel" id="p1">
+      <div class="p-head">
+        <span class="p-title">Built to perform<span class="p-sub">What every project includes</span></span>
+        <button class="sw" data-dark="p1" aria-pressed="false"><span class="sw-label">Dark</span><span class="sw-track"><span class="sw-knob"></span></span></button>
+      </div>
+      <div class="tabs" role="tablist">
+        <button role="tab" aria-selected="true" data-tp="a">Overview</button>
+        <button role="tab" aria-selected="false" data-tp="b">Included</button>
+        <button role="tab" aria-selected="false" data-tp="c">After launch</button>
+      </div>
+      <div class="p-body">
+        <div class="tp is-on" data-tp="a">
+          <div class="stat-line"><span class="stat-k">Kickoff to live website</span><span class="stat-v">1 to 3 weeks</span></div>
+          <div class="bar"><span data-fill="72"></span></div>
+          <div class="rows">
+            <div><b>Design</b><span>Built around your brand, never a template</span></div>
+            <div><b>Pages</b><span>Five, ten or twenty</span></div>
+            <div><b>Clock starts</b><span>The day your content arrives</span></div>
+          </div>
+        </div>
+        <div class="tp" data-tp="b">
+          <div class="stat-line"><span class="stat-k">On every build, whatever the size</span><span class="stat-v">Six things</span></div>
+          <div class="bar"><span data-fill="100"></span></div>
+          <div class="rows">
+            <div><b>Mobile first</b><span>Checked on phone, tablet and desktop</span></div>
+            <div><b>SSL and forms</b><span>Certificate, contact form, WhatsApp button</span></div>
+            <div><b>Found on Google</b><span>SEO foundations on every build</span></div>
+          </div>
+        </div>
+        <div class="tp" data-tp="c">
+          <div class="stat-line"><span class="stat-k">Optional, from</span><span class="stat-v">R199 a month</span></div>
+          <div class="bar"><span data-fill="40"></span></div>
+          <div class="rows">
+            <div><b>Hosting</b><span>SSL, backups and email on your domain</span></div>
+            <div><b>Management</b><span>One hour of work included each month</span></div>
+            <div><b>Yours to keep</b><span>Every file, once the fee is paid</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== PANEL 2 ============================== -->
+<p class="lab"><span class="n">PANEL 2</span><span class="d">The same page, light and dark: the switch actually demonstrates something</span></p>
+<section class="band band--alt">
+  <div class="wrap split">
+    <div class="side">
+      <h2>Your site, both <span class="hl">ways.</span></h2>
+      <p>Phones ship with dark mode on by default now. Flip the switch and watch the page change, because yours has to hold up in both.</p>
+      <ul class="facts">
+        <li>The switch changes a real page, not a picture of one</li>
+        <li>Same content, same layout, two grounds</li>
+      </ul>
+    </div>
+    <div class="panel" id="p2">
+      <div class="p-head">
+        <span class="p-title">Light and dark<span class="p-sub">Flip it and watch the page follow</span></span>
+        <button class="sw" data-dark="p2" aria-pressed="false"><span class="sw-label">Dark</span><span class="sw-track"><span class="sw-knob"></span></span></button>
+      </div>
+      <div class="p-body">
+        <div class="mock">
+          <div class="mock-bar">
+            <span class="mock-logo">Your business</span>
+            <span class="mock-nav"><span>Services</span><span>Work</span><span>Contact</span></span>
+          </div>
+          <div class="mock-body">
+            <p class="mock-h">The thing you actually do, said plainly.</p>
+            <p class="mock-p">One line about who you do it for and where, then the button that gets you the call.</p>
+            <span class="mock-btn">Get a quote</span>
+            <div class="mock-tiles">
+              <div class="mock-tile"><b>Fast</b>on a phone</div>
+              <div class="mock-tile"><b>Found</b>on Google</div>
+              <div class="mock-tile"><b>Yours</b>to keep</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== PANEL 3 ============================== -->
+<p class="lab"><span class="n">PANEL 3</span><span class="d">Pick a size, see the price and the timeline move</span></p>
+<section class="band">
+  <div class="wrap split">
+    <div class="side">
+      <h2>What it costs, <span class="hl">now.</span></h2>
+      <p>Three sizes, real prices, no form to fill in first. Pick one and the figure and the timeline change with it.</p>
+      <ul class="facts">
+        <li>The same prices as the pricing page and the checkout</li>
+        <li>R500 off every plan while the promotion runs</li>
+      </ul>
+    </div>
+    <div class="panel" id="p3">
+      <div class="p-head">
+        <span class="p-title">What it costs<span class="p-sub">Once-off design fee, R500 off right now</span></span>
+        <button class="sw" data-dark="p3" aria-pressed="false"><span class="sw-label">Dark</span><span class="sw-track"><span class="sw-knob"></span></span></button>
+      </div>
+      <div class="p-body">
+        <div class="sizes" id="sizes">
+          <button aria-pressed="true" data-fee="R3,499" data-was="R3,999" data-days="5" data-pages="5">Silver<small>5 pages</small></button>
+          <button aria-pressed="false" data-fee="R4,499" data-was="R4,999" data-days="10" data-pages="10">Gold<small>10 pages</small></button>
+          <button aria-pressed="false" data-fee="R5,999" data-was="R6,499" data-days="15" data-pages="20">Platinum<small>20 pages</small></button>
+        </div>
+        <div class="quote">
+          <div><span class="stat-k">Once-off, was <s id="qwas">R3,999</s></span><p class="stat-v" id="qfee">R3,499</p></div>
+          <div><span class="stat-k">Typically</span><p class="stat-v" id="qdays">5 working days</p></div>
+        </div>
+        <div class="bar"><span data-fill="33" id="qbar"></span></div>
+        <div class="rows">
+          <div><b id="qpages">5 pages</b><span>designed from scratch</span></div>
+          <div><b>Hosting</b><span>optional, R199 a month</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap foot">
+  <p>Nothing here is live. Pick one and I will build it into the home page, then run the usual checks.</p>
+</section>
+
+<script>
+  (function () {
+    /* Dark switch, shared by all three panels. */
+    document.querySelectorAll('.sw').forEach(function (sw) {
+      sw.addEventListener('click', function () {
+        var panel = document.getElementById(sw.getAttribute('data-dark'));
+        var on = panel.classList.toggle('is-dark');
+        sw.setAttribute('aria-pressed', String(on));
+        sw.querySelector('.sw-label').textContent = on ? 'Light' : 'Dark';
+      });
+    });
+
+    /* Panel 1 tabs. */
+    var p1 = document.getElementById('p1');
+    p1.querySelectorAll('.tabs button').forEach(function (t) {
+      t.addEventListener('click', function () {
+        p1.querySelectorAll('.tabs button').forEach(function (x) { x.setAttribute('aria-selected', String(x === t)); });
+        p1.querySelectorAll('.tp').forEach(function (p) { p.classList.toggle('is-on', p.getAttribute('data-tp') === t.getAttribute('data-tp')); });
+        fill(p1);
+      });
+    });
+
+    /* Bars fill when their panel is on screen, and again on tab change. */
+    function fill(root) {
+      root.querySelectorAll('.tp.is-on [data-fill], .p-body > .bar [data-fill]').forEach(function (b) {
+        b.style.transform = 'scaleX(0)';
+        requestAnimationFrame(function () {
+          requestAnimationFrame(function () {
+            b.style.transform = 'scaleX(' + (+b.getAttribute('data-fill') / 100) + ')';
+          });
+        });
+      });
+    }
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (es) {
+        es.forEach(function (e) { if (e.isIntersecting) { fill(e.target); io.unobserve(e.target); } });
+      }, { threshold: 0.3 });
+      document.querySelectorAll('.panel').forEach(function (p) { io.observe(p); });
+    } else {
+      document.querySelectorAll('.panel').forEach(fill);
+    }
+
+    /* Panel 3 size picker. */
+    var sizes = document.getElementById('sizes');
+    if (sizes) {
+      sizes.querySelectorAll('button').forEach(function (btn, i) {
+        btn.addEventListener('click', function () {
+          sizes.querySelectorAll('button').forEach(function (x) { x.setAttribute('aria-pressed', String(x === btn)); });
+          document.getElementById('qfee').textContent = btn.getAttribute('data-fee');
+          document.getElementById('qwas').textContent = btn.getAttribute('data-was');
+          document.getElementById('qdays').textContent = btn.getAttribute('data-days') + ' working days';
+          document.getElementById('qpages').textContent = btn.getAttribute('data-pages') + ' pages';
+          var bar = document.getElementById('qbar');
+          bar.setAttribute('data-fill', [33, 66, 100][i]);
+          bar.style.transform = 'scaleX(' + [0.33, 0.66, 1][i] + ')';
+        });
+      });
+    }
+  }());
+</script>

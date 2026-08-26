@@ -180,8 +180,69 @@
 
     </section>
 
+    <!-- ============================== BUILD PANEL ============================= -->
+    <section class="band" id="build">
+      <div class="container split split--lead">
+        <div class="reveal">
+          <h2>The build, in <span class="hl">detail.</span></h2>
+          <p>
+            What the three weeks actually consist of, what you have to hand over,
+            and what carries on afterwards. Flip it to dark if that is how you read.
+          </p>
+          <ul class="facts">
+            <li>Every figure is one we publish on the pricing page</li>
+            <li>The clock starts the day your content arrives, not the day you pay</li>
+          </ul>
+        </div>
+
+        <div class="panel reveal" id="build-panel" style="--reveal-delay:100ms">
+          <div class="p-head">
+            <span class="p-title">Built to perform<span class="p-sub">What every project includes</span></span>
+            <button type="button" class="sw" data-panel-dark="build-panel" aria-pressed="false">
+              <span class="sw-label">Dark</span>
+              <span class="sw-track" aria-hidden="true"><span class="sw-knob"></span></span>
+            </button>
+          </div>
+          <div class="p-tabs" role="tablist" aria-label="What the build involves">
+            <button role="tab" aria-selected="true" data-tp="a" id="btab-a" aria-controls="bpan-a">Overview</button>
+            <button role="tab" aria-selected="false" tabindex="-1" data-tp="b" id="btab-b" aria-controls="bpan-b">What we need</button>
+            <button role="tab" aria-selected="false" tabindex="-1" data-tp="c" id="btab-c" aria-controls="bpan-c">After launch</button>
+          </div>
+          <div class="p-body">
+            <div class="tp is-on" data-tp="a" id="bpan-a" role="tabpanel" aria-labelledby="btab-a">
+              <div class="stat-line"><span class="stat-k">Kickoff to live website</span><span class="stat-v">1 to 3 weeks</span></div>
+              <div class="bar"><span data-fill="72"></span></div>
+              <div class="p-rows">
+                <div><b>Design</b><span>Built around your brand, never a template</span></div>
+                <div><b>Pages</b><span>Five, ten or twenty</span></div>
+                <div><b>Approval</b><span>You see the first page before the rest is built</span></div>
+              </div>
+            </div>
+            <div class="tp" data-tp="b" id="bpan-b" role="tabpanel" aria-labelledby="btab-b" hidden>
+              <div class="stat-line"><span class="stat-k">Before the clock starts</span><span class="stat-v">Three things</span></div>
+              <div class="bar"><span data-fill="55"></span></div>
+              <div class="p-rows">
+                <div><b>Your words</b><span>Or we write them from a call with you</span></div>
+                <div><b>Your photos</b><span>Or we shoot them, quoted separately</span></div>
+                <div><b>Domain access</b><span>Only if you already own one</span></div>
+              </div>
+            </div>
+            <div class="tp" data-tp="c" id="bpan-c" role="tabpanel" aria-labelledby="btab-c" hidden>
+              <div class="stat-line"><span class="stat-k">Optional, from</span><span class="stat-v">R199 a month</span></div>
+              <div class="bar"><span data-fill="40"></span></div>
+              <div class="p-rows">
+                <div><b>Hosting</b><span>SSL, backups and email on your domain</span></div>
+                <div><b>Management</b><span>One hour of work included each month</span></div>
+                <div><b>Or neither</b><span>The site is yours either way</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- =============================== SERVICES =============================== -->
-    <section class="band" id="services">
+    <section class="band band--alt" id="services">
       <div class="container">
         <div class="head reveal">
           <h2>Everything your business needs to work <span class="hl">online.</span></h2>

@@ -139,6 +139,77 @@
     });
   });
 
+  /* ---------------------- The build panel ---------------------------------- */
+  /* Its own tabs rather than the shared handler's: these panels live inside a
+     card that also flips to dark, and the shared handler owns page-level tab
+     lists whose panels are sections. Keeping them apart means neither can
+     surprise the other. */
+  (function () {
+    var panel = document.getElementById('build-panel');
+    if (!panel) return;
+    var tabs = $$('.p-tabs button', panel);
+    var panes = $$('.tp', panel);
+
+    var fill = function () {
+      $$('.tp.is-on .bar span', panel).forEach(function (b) {
+        b.style.transform = 'scaleX(0)';
+        requestAnimationFrame(function () {
+          requestAnimationFrame(function () {
+            b.style.transform = 'scaleX(' + (+b.getAttribute('data-fill') / 100) + ')';
+          });
+        });
+      });
+    };
+
+    var select = function (tab) {
+      tabs.forEach(function (t) {
+        var on = t === tab;
+        t.setAttribute('aria-selected', String(on));
+        t.tabIndex = on ? 0 : -1;
+      });
+      panes.forEach(function (p) {
+        var on = p.getAttribute('data-tp') === tab.getAttribute('data-tp');
+        p.classList.toggle('is-on', on);
+        p.hidden = !on;
+      });
+      fill();
+    };
+
+    tabs.forEach(function (tab, i) {
+      tab.addEventListener('click', function () { select(tab); });
+      tab.addEventListener('keydown', function (e) {
+        var next = null;
+        if (e.key === 'ArrowRight') next = tabs[(i + 1) % tabs.length];
+        if (e.key === 'ArrowLeft') next = tabs[(i - 1 + tabs.length) % tabs.length];
+        if (e.key === 'Home') next = tabs[0];
+        if (e.key === 'End') next = tabs[tabs.length - 1];
+        if (next) { e.preventDefault(); select(next); next.focus(); }
+      });
+    });
+
+    /* The switch flips the card, not the page. */
+    var sw = panel.querySelector('.sw');
+    if (sw) {
+      sw.addEventListener('click', function () {
+        var dark = panel.classList.toggle('is-dark');
+        sw.setAttribute('aria-pressed', String(dark));
+        sw.querySelector('.sw-label').textContent = dark ? 'Light' : 'Dark';
+      });
+    }
+
+    /* The bar fills when the panel arrives, not on load where nobody sees it. */
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { fill(); io.disconnect(); }
+        });
+      }, { threshold: 0.3 });
+      io.observe(panel);
+    } else {
+      fill();
+    }
+  }());
+
   /* ------------------ Arrows for the work slider --------------------------- */
   /* They click the neighbouring thumbnail rather than duplicating selectTab,
      so panel switching, focus order and the rail scroll stay in one place. */
