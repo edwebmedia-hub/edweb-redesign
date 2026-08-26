@@ -1902,7 +1902,6 @@ select:focus {
 
 /* The services spine puts its panel on a white card. Pricing panels hold cards
    of their own, so the wrapper card is reset here: no card inside a card. */
-#pay-websites .tab-panel.is-active,
 #plans .tab-panel.is-active {
   gap: clamp(2.5rem, 4.5vw, 4rem);
   background: none;
@@ -3142,10 +3141,6 @@ img.avatar { object-fit: cover; background: var(--ground-alt); }
   .reach a { padding-inline: var(--reach-bleed); }
 }
 
-/* The pay picker's panel is a plain wrapper around one list of options. */
-#pay-websites .tab-panel.is-active { gap: 0; display: block; }
-#pay-websites .tab-list--row { margin-bottom: clamp(1.5rem, 2.5vw, 2rem); }
-
 
 /* Tabs on a dark band. The idle state stays legible rather than washing out,
    and the selected one takes paper with the coral underline the light bands
@@ -3157,9 +3152,6 @@ img.avatar { object-fit: cover; background: var(--ground-alt); }
 
 /* The picker sits in a narrow column, so its type labels run smaller and stay
    on one line. */
-.paytype .tab { font-size: var(--fs-small); font-weight: 600; }
-.paytype { gap: clamp(1rem, 2vw, 1.75rem); }
-.paytype .tab { white-space: nowrap; }
 
 
 /* The price stays one line; the note under it is prose and wraps. */
@@ -3191,4 +3183,118 @@ img.avatar { object-fit: cover; background: var(--ground-alt); }
     column-gap: clamp(1rem, 4vw, 1.75rem);
   }
   .tab-list--row .tab { white-space: normal; }
+}
+
+
+/* ==================== The picker Edgar chose, 2026-08-25 ==================
+   PAY 2 of the three options: the checkout stays dark, and each list of
+   choices is one framed panel of rows instead of a scatter of white blocks.
+   Used by all three steps on the page, so nothing on that band is a card. */
+.ppanel {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.band--ink .ppanel { border-color: var(--line-on-ink); }
+
+.prow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 1rem;
+  width: 100%;
+  text-align: left;
+  padding: 1.05rem clamp(1rem, 2vw, 1.4rem);
+  background: none;
+  border: 0;
+  border-top: 1px solid var(--line);
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  transition: background var(--speed) var(--ease);
+}
+.band--ink .prow { border-top-color: var(--line-on-ink); }
+.ppanel > .prow:first-child { border-top: 0; }
+.prow:hover,
+.prow[aria-checked="true"] { background: color-mix(in srgb, var(--ink) 5%, transparent); }
+.band--ink .prow:hover,
+.band--ink .prow[aria-checked="true"] { background: color-mix(in srgb, var(--paper) 7%, transparent); }
+
+.pname { font-weight: 700; font-size: var(--fs-h4); color: var(--text); display: block; }
+.band--ink .pname { color: var(--paper); }
+.psub { display: block; font-size: var(--fs-micro); font-weight: 400; color: var(--text-meta); }
+.band--ink .psub { color: var(--text-on-ink-muted); }
+.pprice {
+  font-weight: 700;
+  font-size: var(--fs-h4);
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.band--ink .pprice { color: var(--paper); }
+.pprice small { display: block; font-size: var(--fs-micro); font-weight: 400; color: var(--text-meta); }
+.band--ink .pprice small { color: var(--text-on-ink-muted); }
+
+/* The type label heads its group inside the panel. */
+.pglabel {
+  margin: 0;
+  padding: 0.85rem clamp(1rem, 2vw, 1.4rem) 0.5rem;
+  font-size: var(--fs-micro);
+  color: var(--text-meta);
+  border-top: 1px solid var(--line);
+  background: color-mix(in srgb, var(--ink) 3%, transparent);
+}
+.band--ink .pglabel {
+  color: var(--text-on-ink-muted);
+  border-top-color: var(--line-on-ink);
+  background: color-mix(in srgb, var(--paper) 4%, transparent);
+}
+.ppanel > .pglabel:first-child { border-top: 0; }
+
+/* The two journey rows go somewhere rather than costing something, so they
+   carry the arrow in the price's place. */
+.prow--go .pgo {
+  font-size: 1.15em;
+  line-height: 1;
+  color: color-mix(in srgb, var(--coral) 88%, var(--paper));
+  transition: transform var(--speed) var(--ease);
+}
+.prow--go:hover .pgo { transform: translateX(5px); }
+.prow--go .psub { max-width: 46ch; }
+
+/* ==================== The add-ons Edgar chose, 2026-08-25 =================
+   ADD-ONS 3 of the three options: the price leads, the name and its one line
+   sit beside it, and the band is light. */
+.addon {
+  grid-template-columns: 190px minmax(0, 1fr);
+  gap: clamp(1.25rem, 3vw, 2.5rem);
+  align-items: start;
+  padding-block: 1.6rem;
+  border-bottom: 0;
+  border-top: 1px solid var(--line);
+}
+.addons { border-top: 0; border-block: 1px solid var(--line-strong); }
+.addons > .addon:first-child { border-top: 0; }
+.addon-price {
+  font-size: clamp(2rem, 2.8vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.035em;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.addon-price span {
+  display: block;
+  font-size: var(--fs-micro);
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.5;
+  color: var(--text-meta);
+  margin-top: 0.45rem;
+  white-space: normal;
+  margin-left: 0;
+}
+.addon h3 { margin-bottom: 0.25rem; }
+@media (max-width: 720px) {
+  .addon { grid-template-columns: 1fr; gap: 0.6rem; }
 }

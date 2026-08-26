@@ -99,3 +99,6 @@ demos/plumbing/assets/_raw/p-8486978.jpg
 # sites' own styles.css and script.js and ship them unstyled.
 /styles.css
 /script.js
+
+# Layout options fixture for Edgar to choose from; never served.
+_options.html

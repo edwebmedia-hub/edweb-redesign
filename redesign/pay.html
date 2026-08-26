@@ -121,18 +121,14 @@
           <p class="pay-note">Card details are entered on Payfast's secure checkout, never on this site. If a number here does not match your quote, ask before paying.</p>
 
           <!-- Step 1: which kind of payment -->
-          <div id="pay-journey" class="opts reveal">
-            <button type="button" class="opt" data-journey="new">
-              <span>
-                <strong>Book a new website <span class="opt-go" aria-hidden="true">&raquo;</span></strong>
-                <span>Pay my website design fee now and start a monthly plan, all in one go.</span>
-              </span>
+          <div id="pay-journey" class="ppanel reveal">
+            <button type="button" class="prow prow--go" data-journey="new">
+              <span class="pname">Book a new website<span class="psub">Pay my website design fee now and start a monthly plan, all in one go.</span></span>
+              <span class="pgo" aria-hidden="true">&raquo;</span>
             </button>
-            <button type="button" class="opt" data-journey="existing">
-              <span>
-                <strong>Start a monthly plan <span class="opt-go" aria-hidden="true">&raquo;</span></strong>
-                <span>I already have a website. Start my hosting or management billing.</span>
-              </span>
+            <button type="button" class="prow prow--go" data-journey="existing">
+              <span class="pname">Start a monthly plan<span class="psub">I already have a website. Start my hosting or management billing.</span></span>
+              <span class="pgo" aria-hidden="true">&raquo;</span>
             </button>
           </div>
 
@@ -140,36 +136,21 @@
           <div id="pay-existing" class="pay-step" hidden>
             <button type="button" class="back-link" data-back>&larr; Change</button>
             <p class="step-label">Which one is you?</p>
-            <div class="opts" id="pay-plans" role="radiogroup" aria-label="Choose a monthly plan"></div>
+            <div class="ppanel" id="pay-plans" role="radiogroup" aria-label="Choose a monthly plan"></div>
           </div>
 
           <!-- Journey B: design fee plus monthly -->
           <div id="pay-new" class="pay-step" hidden>
             <button type="button" class="back-link" data-back>&larr; Change</button>
             <p class="step-label">1. Choose your website</p>
-            <div class="tab-list tab-list--row paytype" role="tablist" aria-label="Choose a website type">
-              <button class="tab" role="tab" id="paytab-business" aria-controls="paypanel-business" aria-selected="true">Business websites</button>
-              <button class="tab" role="tab" id="paytab-stores" aria-controls="paypanel-stores" aria-selected="false" tabindex="-1">Online stores</button>
-              <button class="tab" role="tab" id="paytab-directory" aria-controls="paypanel-directory" aria-selected="false" tabindex="-1">Directory sites</button>
-            </div>
-            <div id="pay-websites">
-              <div class="tab-panel is-active" id="paypanel-business" role="tabpanel" aria-labelledby="paytab-business">
-                <div class="opts" role="radiogroup" aria-label="Choose your website"></div>
-              </div>
-              <div class="tab-panel" id="paypanel-stores" role="tabpanel" aria-labelledby="paytab-stores" hidden>
-                <div class="opts" role="radiogroup" aria-label="Choose your website"></div>
-              </div>
-              <div class="tab-panel" id="paypanel-directory" role="tabpanel" aria-labelledby="paytab-directory" hidden>
-                <div class="opts" role="radiogroup" aria-label="Choose your website"></div>
-              </div>
-            </div>
+            <div id="pay-websites" class="ppanel" role="radiogroup" aria-label="Choose your website"></div>
             <p class="pay-note">
               Bigger or custom project? <a href="/contact" class="ulink">Get a quote <span class="arrow" aria-hidden="true">&raquo;</span></a> and we will send a payment link.
             </p>
 
             <div id="pay-monthly-step" hidden>
               <p class="step-label">2. Add a monthly plan</p>
-              <div class="opts" id="pay-monthly" role="radiogroup" aria-label="Choose a monthly plan"></div>
+              <div class="ppanel" id="pay-monthly" role="radiogroup" aria-label="Choose a monthly plan"></div>
             </div>
           </div>
 
@@ -379,15 +360,15 @@
       MONTHLY_PLANS.forEach(function (p) {
         var b = document.createElement('button');
         b.type = 'button';
-        b.className = 'opt';
+        b.className = 'prow';
         b.setAttribute('role', 'radio');
         b.setAttribute('aria-checked', 'false');
-        b.innerHTML = '<span><strong></strong><span></span></span>' +
-          '<span class="opt-amt">' + rand(p.amt) + '<small> a month</small></span>';
-        b.querySelector('strong').textContent = p.name;
-        b.querySelector('span > span').textContent = p.desc;
+        b.innerHTML = '<span class="pname"><span class="pname-t"></span><span class="psub"></span></span>' +
+          '<span class="pprice">' + rand(p.amt) + '<small>a month</small></span>';
+        b.querySelector('.pname-t').textContent = p.name;
+        b.querySelector('.psub').textContent = p.desc;
         b.addEventListener('click', function () {
-          plansWrap.querySelectorAll('.opt').forEach(function (o) {
+          plansWrap.querySelectorAll('.prow').forEach(function (o) {
             o.setAttribute('aria-checked', String(o === b));
           });
           renderResult({
@@ -445,16 +426,16 @@
         monthlyOptionsFor(chosenSite.type).forEach(function (o) {
           var b = document.createElement('button');
           b.type = 'button';
-          b.className = 'opt';
+          b.className = 'prow';
           b.setAttribute('role', 'radio');
           b.setAttribute('aria-checked', 'false');
-          b.innerHTML = '<span><strong></strong><span></span></span>' +
-            '<span class="opt-amt">' + (o.amt > 0 ? rand(o.amt) + '<small> a month</small>' : 'R0') + '</span>';
-          b.querySelector('strong').textContent = o.label;
-          b.querySelector('span > span').textContent = o.desc;
+          b.innerHTML = '<span class="pname"><span class="pname-t"></span><span class="psub"></span></span>' +
+            '<span class="pprice">' + (o.amt > 0 ? rand(o.amt) + '<small>a month</small>' : 'R0') + '</span>';
+          b.querySelector('.pname-t').textContent = o.label;
+          b.querySelector('.psub').textContent = o.desc;
           b.addEventListener('click', function () {
             chosenMonthly = o.key;
-            monthlyWrap.querySelectorAll('.opt').forEach(function (x) {
+            monthlyWrap.querySelectorAll('.prow').forEach(function (x) {
               x.setAttribute('aria-checked', String(x === b));
             });
             showFreshResult();
@@ -482,26 +463,28 @@
       }
 
       var siteWrap = document.getElementById('pay-websites');
-      var PANEL_IDS = ['paypanel-business', 'paypanel-stores', 'paypanel-directory'];
-      WEBSITES.forEach(function (g, gi) {
-        /* The panel and its tab are already in the markup, so the type label
-           lives on the tab rather than being repeated above the list. */
-        var list = document.querySelector('#' + PANEL_IDS[gi] + ' .opts');
-        if (!list) return;
+      WEBSITES.forEach(function (g) {
+        /* One panel holds every type, each under its own label, so no price is
+           hidden behind a control (Edgar's pick, 2026-08-25). */
+        var list = siteWrap;
+        var label = document.createElement('p');
+        label.className = 'pglabel';
+        label.textContent = g.group;
+        list.appendChild(label);
         g.items.forEach(function (it) {
           it.groupLabel = g.group;
           var b = document.createElement('button');
           b.type = 'button';
-          b.className = 'opt';
+          b.className = 'prow';
           b.setAttribute('role', 'radio');
           b.setAttribute('aria-checked', 'false');
-          b.innerHTML = '<span><strong></strong><span></span></span>' +
-            '<span class="opt-amt">' + rand(it.fee) + '</span>';
-          b.querySelector('strong').textContent = it.plan;
-          b.querySelector('span > span').textContent = it.sub;
+          b.innerHTML = '<span class="pname"><span class="pname-t"></span><span class="psub"></span></span>' +
+            '<span class="pprice">' + rand(it.fee) + '</span>';
+          b.querySelector('.pname-t').textContent = it.plan;
+          b.querySelector('.psub').textContent = it.sub;
           b.addEventListener('click', function () {
             chosenSite = it;
-            siteWrap.querySelectorAll('.opt').forEach(function (x) {
+            siteWrap.querySelectorAll('.prow').forEach(function (x) {
               x.setAttribute('aria-checked', String(x === b));
             });
             chosenMonthly = null;

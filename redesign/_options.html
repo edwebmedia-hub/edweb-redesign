@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en-ZA">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Layout options</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="new-styles.css" />
+  <style>
+    /* ================================================================
+       Options for two sections Edgar has now rejected twice: the pay
+       page's plan picker and the pricing page's add-ons. Built on the
+       real stylesheet and the real tokens, so what he picks is what
+       ships. Each option is a different ANSWER, not a different tint:
+       the objection was white blocks on black, so no option repeats
+       that arrangement.
+       ================================================================ */
+    .optlab {
+      position: sticky; top: 0; z-index: 5;
+      padding: 0.6rem var(--gutter);
+      background: var(--coral); color: var(--paper);
+      font-size: var(--fs-micro); font-weight: 700; letter-spacing: 0.02em;
+    }
+    /* The split column packs its children to the start, so these blocks have
+       to claim the full width or the price sits against the name. */
+    .p1 .split > div > *, .p2 .split > div > * { justify-self: stretch; width: 100%; }
+    .optnote { padding: 0 var(--gutter) 1.25rem; font-size: var(--fs-micro); color: var(--text-meta); }
+
+    /* ---------- PAY, option 1: light ground, flat rows ---------------- */
+    .p1 { background: var(--ground-alt); }
+    .p1 .prow {
+      display: grid; grid-template-columns: minmax(0,1fr) auto;
+      align-items: baseline; gap: 1rem;
+      padding: 1.15rem 0 1.15rem 1rem;
+      border-top: 1px solid var(--line);
+      border-left: 3px solid transparent;
+      cursor: pointer; transition: border-color var(--speed) var(--ease), background var(--speed) var(--ease);
+    }
+    .p1 .prow:first-of-type { border-top: 0; }
+    .p1 .prow:hover, .p1 .prow[aria-checked="true"] { border-left-color: var(--coral); background: color-mix(in srgb, var(--ink) 3%, transparent); }
+    .p1 .pname { font-weight: 700; font-size: var(--fs-h4); }
+    .p1 .psub { display: block; font-size: var(--fs-micro); color: var(--text-meta); font-weight: 400; }
+    .p1 .pprice { font-weight: 700; font-size: var(--fs-h4); font-variant-numeric: tabular-nums; }
+    .p1 .pgroup { margin-top: 2rem; }
+    .p1 .pgroup:first-child { margin-top: 0; }
+    .p1 .pglabel { font-size: var(--fs-micro); color: var(--text-meta); padding-bottom: 0.5rem; border-bottom: 1px solid var(--line-strong); margin-bottom: 0.25rem; }
+
+    /* ---------- PAY, option 2: dark, one framed panel ----------------- */
+    .p2 .ppanel { border: 1px solid var(--line-on-ink); border-radius: var(--radius); overflow: hidden; }
+    .p2 .prow {
+      display: grid; grid-template-columns: minmax(0,1fr) auto;
+      align-items: baseline; gap: 1rem;
+      padding: 1.15rem clamp(1rem, 2vw, 1.5rem);
+      border-top: 1px solid var(--line-on-ink);
+      cursor: pointer; transition: background var(--speed) var(--ease);
+    }
+    .p2 .prow:first-child { border-top: 0; }
+    .p2 .prow:hover, .p2 .prow[aria-checked="true"] { background: color-mix(in srgb, var(--paper) 6%, transparent); }
+    .p2 .pname { font-weight: 700; font-size: var(--fs-h4); color: var(--paper); }
+    .p2 .psub { display: block; font-size: var(--fs-micro); color: var(--text-on-ink-muted); font-weight: 400; }
+    .p2 .pprice { font-weight: 700; font-size: var(--fs-h4); color: var(--paper); font-variant-numeric: tabular-nums; }
+    .p2 .pglabel { font-size: var(--fs-micro); color: var(--text-on-ink-muted); padding: 0.9rem clamp(1rem,2vw,1.5rem) 0.55rem; border-top: 1px solid var(--line-on-ink); background: color-mix(in srgb, var(--paper) 3%, transparent); }
+    .p2 .ppanel > .pglabel:first-child { border-top: 0; }
+
+    /* ---------- PAY, option 3: light, three columns ------------------- */
+    .p3 { background: var(--paper); }
+    .p3 .pcols { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 0; border-block: 1px solid var(--line); }
+    .p3 .pcol { padding: clamp(1.25rem,2vw,1.75rem) clamp(1rem,1.6vw,1.35rem); }
+    .p3 .pcol + .pcol { border-left: 1px solid var(--line); }
+    .p3 .pglabel { font-size: var(--fs-micro); color: var(--text-meta); margin-bottom: 0.9rem; }
+    .p3 .prow { display: grid; gap: 0.1rem; padding: 0.7rem 0; border-top: 1px solid var(--line); cursor: pointer; }
+    .p3 .prow:first-of-type { border-top: 0; }
+    .p3 .prow:hover .pname { color: var(--coral); }
+    .p3 .pname { font-weight: 700; font-size: var(--fs-small); }
+    .p3 .psub { font-size: var(--fs-micro); color: var(--text-meta); }
+    .p3 .pprice { font-weight: 700; font-size: var(--fs-h4); font-variant-numeric: tabular-nums; }
+    @media (max-width: 720px) { .p3 .pcols { grid-template-columns: 1fr; } .p3 .pcol + .pcol { border-left: 0; border-top: 1px solid var(--line); } }
+
+    /* ---------- ADD-ONS, option 1: light price table ------------------ */
+    .a1 { background: var(--ground-alt); }
+    .a1 .atable { border-block: 1px solid var(--line-strong); }
+    .a1 .arow { display: grid; grid-template-columns: minmax(0,0.9fr) minmax(0,1.6fr) auto; gap: clamp(1rem,3vw,3rem); align-items: baseline; padding-block: 1.5rem; border-top: 1px solid var(--line); }
+    .a1 .arow:first-child { border-top: 0; }
+    .a1 .ahead { font-weight: 700; font-size: var(--fs-h4); }
+    .a1 .awhat { font-size: var(--fs-small); color: var(--text-muted); }
+    .a1 .aprice { font-weight: 700; font-size: var(--fs-h3); font-variant-numeric: tabular-nums; white-space: nowrap; }
+    .a1 .aper { display: block; font-size: var(--fs-micro); font-weight: 400; color: var(--text-meta); white-space: normal; }
+    @media (max-width: 720px) { .a1 .arow { grid-template-columns: 1fr; gap: 0.5rem; } }
+
+    /* ---------- ADD-ONS, option 2: two priced cards + a line ---------- */
+    .a2 { background: var(--paper); }
+    .a2 .apair { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: var(--gap-grid); }
+    .a2 .acard { border: 1px solid var(--line); border-radius: var(--radius); padding: clamp(1.5rem,2.4vw,2rem); display: grid; gap: 0.9rem; align-content: start; border-top: 3px solid var(--coral); }
+    .a2 .aprice { font-weight: 700; font-size: clamp(2.2rem,3.2vw,2.8rem); line-height: 1; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+    .a2 .aper { font-size: var(--fs-micro); color: var(--text-meta); font-weight: 400; letter-spacing: 0; margin-left: 0.45rem; }
+    /* The closing line is a footnote, not a headline price. */
+    .a2 .aextra .aprice { font-size: var(--fs-h4); }
+    .a2 .ahead { font-weight: 700; font-size: var(--fs-h4); }
+    .a2 .aextra { margin-top: var(--gap-grid); padding-top: 1.25rem; border-top: 1px solid var(--line); display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 1rem; align-items: baseline; }
+    @media (max-width: 720px) { .a2 .apair { grid-template-columns: 1fr; } .a2 .aextra { grid-template-columns: 1fr; } }
+
+    /* ---------- ADD-ONS, option 3: price-led rows on light ----------- */
+    .a3 { background: var(--ground-alt); }
+    .a3 .arow { display: grid; grid-template-columns: 190px minmax(0,1fr); gap: clamp(1.25rem,3vw,2.5rem); align-items: start; padding-block: 1.6rem; border-top: 1px solid var(--line); }
+    .a3 .arow:first-child { border-top: 0; }
+    .a3 .abig { font-weight: 700; font-size: clamp(2rem,2.8vw,2.5rem); line-height: 1; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+    .a3 .aper { display: block; font-size: var(--fs-micro); font-weight: 400; letter-spacing: 0; line-height: 1.5; color: var(--text-meta); margin-top: 0.45rem; }
+    .a3 .ahead { font-weight: 700; font-size: var(--fs-h4); margin-bottom: 0.3rem; }
+    .a3 .awhat { font-size: var(--fs-small); color: var(--text-muted); }
+    @media (max-width: 720px) { .a3 .arow { grid-template-columns: 1fr; gap: 0.6rem; } }
+  </style>
+</head>
+<body class="js">
+<main>
+
+  <!-- ============================ PAY OPTION 1 ============================ -->
+  <p class="optlab">PAY 1 &nbsp;&nbsp; Light section, flat rows, no boxes at all</p>
+  <section class="band p1" id="pay1">
+    <div class="container split split--lead">
+      <div>
+        <h2>Two ways to <span class="hl">pay.</span></h2>
+        <p>Pick the one that describes you. Nothing is charged on this page.</p>
+        <ul class="facts">
+          <li>Monthly plans start the month after a new website is paid for</li>
+          <li>Cancel a monthly plan in writing before the next billing date</li>
+        </ul>
+      </div>
+      <div>
+        <p class="step-label">1. Choose your website</p>
+        <div class="pgroup">
+          <p class="pglabel">Business websites</p>
+          <div class="prow" role="radio" aria-checked="true"><span class="pname">Silver<span class="psub">5 pages</span></span><span class="pprice">R3,499</span></div>
+          <div class="prow" role="radio" aria-checked="false"><span class="pname">Gold<span class="psub">10 pages</span></span><span class="pprice">R4,499</span></div>
+          <div class="prow" role="radio" aria-checked="false"><span class="pname">Platinum<span class="psub">20 pages</span></span><span class="pprice">R5,999</span></div>
+        </div>
+        <div class="pgroup">
+          <p class="pglabel">Online stores</p>
+          <div class="prow" role="radio" aria-checked="false"><span class="pname">Silver<span class="psub">up to 10 products</span></span><span class="pprice">R5,499</span></div>
+          <div class="prow" role="radio" aria-checked="false"><span class="pname">Gold<span class="psub">up to 25 products</span></span><span class="pprice">R6,999</span></div>
+          <div class="prow" role="radio" aria-checked="false"><span class="pname">Platinum<span class="psub">up to 50 products</span></span><span class="pprice">R8,999</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ PAY OPTION 2 ============================ -->
+  <p class="optlab">PAY 2 &nbsp;&nbsp; Stays dark, but one framed panel instead of eight loose blocks</p>
+  <section class="band band--ink p2" id="pay2">
+    <div class="container split split--lead">
+      <div>
+        <h2>Two ways to <span class="hl">pay.</span></h2>
+        <p>Pick the one that describes you. Nothing is charged on this page.</p>
+        <ul class="facts">
+          <li>Monthly plans start the month after a new website is paid for</li>
+          <li>Cancel a monthly plan in writing before the next billing date</li>
+        </ul>
+      </div>
+      <div>
+        <p class="step-label">1. Choose your website</p>
+        <div class="ppanel">
+          <p class="pglabel">Business websites</p>
+          <div class="prow" role="radio" aria-checked="true"><span class="pname">Silver<span class="psub">5 pages</span></span><span class="pprice">R3,499</span></div>
+          <div class="prow" role="radio" aria-checked="false"><span class="pname">Gold<span class="psub">10 pages</span></span><span class="pprice">R4,499</span></div>
+          <div class="prow" role="radio" aria-checked="false"><span class="pname">Platinum<span class="psub">20 pages</span></span><span class="pprice">R5,999</span></div>
+          <p class="pglabel">Online stores</p>
+          <div class="prow" role="radio" aria-checked="false"><span class="pname">Silver<span class="psub">up to 10 products</span></span><span class="pprice">R5,499</span></div>
+          <div class="prow" role="radio" aria-checked="false"><span class="pname">Gold<span class="psub">up to 25 products</span></span><span class="pprice">R6,999</span></div>
+          <div class="prow" role="radio" aria-checked="false"><span class="pname">Platinum<span class="psub">up to 50 products</span></span><span class="pprice">R8,999</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ PAY OPTION 3 ============================ -->
+  <p class="optlab">PAY 3 &nbsp;&nbsp; Light, all three types side by side, nothing hidden behind a tab</p>
+  <section class="band p3" id="pay3">
+    <div class="container">
+      <div class="head">
+        <h2>Two ways to <span class="hl">pay.</span></h2>
+        <p class="lead">Pick your website, then add a monthly plan. Nothing is charged on this page.</p>
+      </div>
+      <div class="pcols">
+        <div class="pcol">
+          <p class="pglabel">Business websites</p>
+          <div class="prow"><span class="pname">Silver</span><span class="psub">5 pages</span><span class="pprice">R3,499</span></div>
+          <div class="prow"><span class="pname">Gold</span><span class="psub">10 pages</span><span class="pprice">R4,499</span></div>
+          <div class="prow"><span class="pname">Platinum</span><span class="psub">20 pages</span><span class="pprice">R5,999</span></div>
+        </div>
+        <div class="pcol">
+          <p class="pglabel">Online stores</p>
+          <div class="prow"><span class="pname">Silver</span><span class="psub">up to 10 products</span><span class="pprice">R5,499</span></div>
+          <div class="prow"><span class="pname">Gold</span><span class="psub">up to 25 products</span><span class="pprice">R6,999</span></div>
+          <div class="prow"><span class="pname">Platinum</span><span class="psub">up to 50 products</span><span class="pprice">R8,999</span></div>
+        </div>
+        <div class="pcol">
+          <p class="pglabel">Directory sites</p>
+          <div class="prow"><span class="pname">Silver</span><span class="psub">up to 25 listings</span><span class="pprice">R8,499</span></div>
+          <div class="prow"><span class="pname">Gold</span><span class="psub">up to 50 listings</span><span class="pprice">R11,499</span></div>
+          <div class="prow"><span class="pname">Platinum</span><span class="psub">unlimited listings</span><span class="pprice">From R14,499</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================== ADD-ONS OPTION 1 ========================= -->
+  <p class="optlab">ADD-ONS 1 &nbsp;&nbsp; Light, read as a price table</p>
+  <section class="band a1" id="add1">
+    <div class="container">
+      <div class="head">
+        <h2>Optional <span class="hl">monthly</span> add-ons.</h2>
+        <p class="lead">Neither is required to own the site.</p>
+      </div>
+      <div class="atable">
+        <div class="arow">
+          <p class="ahead">Hosting</p>
+          <p class="awhat">Hosting, SSL and daily backups, with professional email on your domain.</p>
+          <p class="aprice">R199<span class="aper">a month</span></p>
+        </div>
+        <div class="arow">
+          <p class="ahead">Website management</p>
+          <p class="awhat">Updates, maintenance and content changes, with one hour of work included every month.</p>
+          <p class="aprice">From R199<span class="aper">a month, R249 for stores</span></p>
+        </div>
+        <div class="arow">
+          <p class="ahead">Extra services</p>
+          <p class="awhat">Photography, logo and branding, social media, Google Ads and SEO.</p>
+          <p class="aprice">Quoted<span class="aper">per job</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================== ADD-ONS OPTION 2 ========================= -->
+  <p class="optlab">ADD-ONS 2 &nbsp;&nbsp; The two you can actually buy become priced cards, the rest is a line</p>
+  <section class="band a2" id="add2">
+    <div class="container">
+      <div class="head">
+        <h2>Optional <span class="hl">monthly</span> add-ons.</h2>
+        <p class="lead">Neither is required to own the site.</p>
+      </div>
+      <div class="apair">
+        <div class="acard">
+          <p class="ahead">Hosting</p>
+          <p class="aprice">R199<span class="aper">a month</span></p>
+          <p class="awhat">Hosting, SSL and daily backups, with professional email on your domain.</p>
+        </div>
+        <div class="acard">
+          <p class="ahead">Website management</p>
+          <p class="aprice">From R199<span class="aper">a month</span></p>
+          <p class="awhat">Updates, maintenance and content changes, one hour of work included. R249 for stores and directories.</p>
+        </div>
+      </div>
+      <div class="aextra">
+        <p class="awhat"><b>Extra services.</b> Photography, logo and branding, social media, Google Ads and SEO.</p>
+        <p class="aprice">Quoted per job</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================== ADD-ONS OPTION 3 ========================= -->
+  <p class="optlab">ADD-ONS 3 &nbsp;&nbsp; Price leads, on the left, at a size you can read from across the room</p>
+  <section class="band a3" id="add3">
+    <div class="container">
+      <div class="head">
+        <h2>Optional <span class="hl">monthly</span> add-ons.</h2>
+        <p class="lead">Neither is required to own the site.</p>
+      </div>
+      <div class="atable">
+        <div class="arow">
+          <p class="abig">R199<span class="aper">a month</span></p>
+          <div>
+            <p class="ahead">Hosting</p>
+            <p class="awhat">Hosting, SSL and daily backups, with professional email on your own domain.</p>
+          </div>
+        </div>
+        <div class="arow">
+          <p class="abig">R199<span class="aper">a month, R249 for stores</span></p>
+          <div>
+            <p class="ahead">Website management</p>
+            <p class="awhat">Updates, maintenance and content changes, with one hour of work included every month.</p>
+          </div>
+        </div>
+        <div class="arow">
+          <p class="abig">Quoted<span class="aper">per job</span></p>
+          <div>
+            <p class="ahead">Extra services</p>
+            <p class="awhat">Photography, logo and branding, social media, Google Ads and SEO.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+</body>
+</html>
