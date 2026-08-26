@@ -3317,3 +3317,41 @@ img.avatar { object-fit: cover; background: var(--ground-alt); }
   padding: 0;
   box-shadow: none;
 }
+
+
+/* ============== The work slider Edgar chose, 2026-08-26 ==================
+   One project at a time, framed above and below, stepped with arrows. The
+   thumbnail strip below is the "show me all the websites" control and stays. */
+.work-nav {
+  /* Sits between the slide and the thumbnail strip. The rule above it comes
+     from the slide; a second one below would box it in for no reason. */
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding-top: clamp(1rem, 1.8vw, 1.5rem);
+  margin-bottom: clamp(1.5rem, 2.6vw, 2.25rem);
+}
+.work-arrow {
+  width: 44px;
+  height: 44px;
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  color: var(--text);
+  background: none;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: border-color var(--speed) var(--ease), color var(--speed) var(--ease);
+}
+.work-arrow:hover { border-color: var(--coral); color: var(--coral); }
+.work-count {
+  margin: 0 0 0 auto;
+  font-size: var(--fs-micro);
+  color: var(--text-meta);
+  font-variant-numeric: tabular-nums;
+}
+/* The slide is framed by the nav rule above and its own rule below. */
+.opt-c .tab-panels { padding-bottom: clamp(1.75rem, 3vw, 2.5rem); border-bottom: 1px solid var(--line); }

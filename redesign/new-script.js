@@ -139,6 +139,39 @@
     });
   });
 
+  /* ------------------ Arrows for the work slider --------------------------- */
+  /* They click the neighbouring thumbnail rather than duplicating selectTab,
+     so panel switching, focus order and the rail scroll stay in one place. */
+  (function () {
+    var rail = document.querySelector('.opt-c .thumb-track');
+    var prev = document.querySelector('[data-work-prev]');
+    var next = document.querySelector('[data-work-next]');
+    var count = document.querySelector('.work-count');
+    if (!rail || (!prev && !next)) return;
+    /* The rail carries a duplicate set for the seamless loop; only the real
+       ones are steppable. */
+    var thumbs = $$('.thumb', rail).filter(function (t) {
+      return t.getAttribute('aria-hidden') !== 'true';
+    });
+    if (thumbs.length < 2) return;
+
+    var at = function () {
+      var i = thumbs.findIndex(function (t) { return t.getAttribute('aria-selected') === 'true'; });
+      return i < 0 ? 0 : i;
+    };
+    var say = function () {
+      if (count) count.textContent = (at() + 1) + ' of ' + thumbs.length;
+    };
+    var step = function (by) {
+      thumbs[(at() + by + thumbs.length) % thumbs.length].click();
+      say();
+    };
+    if (prev) prev.addEventListener('click', function () { step(-1); });
+    if (next) next.addEventListener('click', function () { step(1); });
+    thumbs.forEach(function (t) { t.addEventListener('click', say); });
+    say();
+  }());
+
   /* -------------- Masthead index rows open the tab they name --------------- */
   /* The pricing masthead lists the three website types; clicking one has to
      select that tab as well as jump, or the visitor lands on the wrong panel. */
