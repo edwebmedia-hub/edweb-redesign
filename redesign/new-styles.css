@@ -3456,7 +3456,10 @@ img.avatar { object-fit: cover; background: var(--ground-alt); }
 .stat-line { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; }
 .stat-k { font-size: var(--fs-micro); color: var(--text-meta); }
 .panel.is-dark .stat-k { color: var(--text-on-ink-muted); }
+.panel.is-dark .stat-v { color: var(--paper); }
 .stat-v {
+  /* The figure is the point of the row: full ink, like a heading. */
+  color: var(--text);
   font-size: clamp(1.6rem, 2.4vw, 2rem);
   font-weight: 700;
   letter-spacing: -0.03em;
@@ -3489,8 +3492,8 @@ img.avatar { object-fit: cover; background: var(--ground-alt); }
 .panel.is-dark .p-rows div { border-top-color: var(--line-on-ink); }
 .p-rows div:first-child { border-top: 0; }
 .p-rows b { font-weight: 700; }
-.p-rows span { color: var(--text-meta); text-align: right; }
-.panel.is-dark .p-rows span { color: var(--text-on-ink-muted); }
+.p-rows span { color: var(--text-muted); text-align: right; }
+.panel.is-dark .p-rows span { color: var(--text-on-ink); }
 
 @media (max-width: 620px) {
   /* Stacked, the key and value stop fighting for one line. */
@@ -3498,4 +3501,12 @@ img.avatar { object-fit: cover; background: var(--ground-alt); }
   .p-rows span { text-align: left; }
   .p-tabs { gap: 1rem; }
   .p-tabs button { font-size: var(--fs-micro); }
+}
+
+
+/* The pricing masthead's summary card previews the section directly below it.
+   Side by side that is useful; stacked it is a wall to climb before the first
+   price, so on a phone the plans speak for themselves. */
+@media (max-width: 860px) {
+  .hero-card--preview { display: none; }
 }
