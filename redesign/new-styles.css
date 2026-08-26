@@ -2358,22 +2358,18 @@ textarea[aria-invalid="true"] {
 /* Multiple screens sit two-up; a single screen is centred at a readable width
    instead of stretching the full container or leaving half the row empty. */
 .shots { display: grid; gap: var(--gap-grid); }
-.shots--many { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.shots--many { grid-template-columns: 1fr; }
 .shots--one { max-width: 900px; margin-inline: auto; }
-/* An odd last screen would sit alone leaving half a row empty, so it spans. */
-.shots--many .shot:last-child:nth-child(odd) {
-  grid-column: 1 / -1;
-  max-width: 900px;
-  margin-inline: auto;
-  width: 100%;
-}
+/* Every screen gets the same column now, so nothing is left stranded. */
+.shots--many .shot { max-width: 900px; margin-inline: auto; width: 100%; }
 @media (max-width: 860px) { .shots--many { grid-template-columns: 1fr; } }
 .shot { margin: 0; }
 .shot img {
+  /* No crop: these are full-page scrolls of the client's site, and a 4:3 box
+     showed the top tenth of them. They run at their real height. */
+  display: block;
   width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
-  object-position: top center;
+  height: auto;
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: var(--surface);
