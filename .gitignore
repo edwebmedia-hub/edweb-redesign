@@ -1,4 +1,9 @@
 node_modules/
-data/
+# Root only. Unanchored "data/" matched at every depth and was silently
+# swallowing site content folders such as erfdevco/data/listings.json.
+# The root data/ dir belonged to the removed Node CMS app.
+/data/
 .env
 *.log
+
+.vercel
