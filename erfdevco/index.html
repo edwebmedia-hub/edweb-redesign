@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en-ZA">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ERFDEVCO | Farms, smallholdings and game farms for sale in South Africa</title>
+  <meta name="description" content="ERFDEVCO lists farms, smallholdings, game farms and vineyards across all nine provinces, with water rights, hectares, carrying capacity, zoning and title recorded on every listing." />
+  <link rel="canonical" href="https://erfdevco.com/" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="ERFDEVCO | Farms for sale in South Africa" />
+  <meta property="og:description" content="Farms, smallholdings, game farms and vineyards across all nine provinces, listed with the water, soil and infrastructure detail that actually matters." />
+  <meta property="og:url" content="https://erfdevco.com/" />
+  <meta property="og:image" content="https://erfdevco.com/assets/og-image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="icon" href="assets/favicon.png" type="image/png" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="preload" as="image" href="assets/hero.jpg" />
+  <link rel="stylesheet" href="styles.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "RealEstateAgent",
+    "name": "ERFDEVCO",
+    "url": "https://erfdevco.com/",
+    "email": "info@erfdevco.com",
+    "telephone": "+27829005019",
+    "areaServed": "South Africa",
+    "address": { "@type": "PostalAddress", "addressLocality": "Kleinbaai", "addressRegion": "Western Cape", "addressCountry": "ZA" },
+    "employee": { "@type": "Person", "name": "Martiens Du Plessis", "jobTitle": "Managing Director" },
+    "knowsAbout": ["Farm sales", "Agricultural land", "Game farms", "Vineyards", "Smallholdings"]
+  }
+  </script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header" id="site-header">
+  <div class="header-inner">
+    <a class="brand" href="index.html" aria-label="ERFDEVCO home">
+      <img src="assets/logo-white.png" alt="ERFDEVCO" width="480" height="434" />
+    </a>
+    <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="nav" aria-label="Menu">
+      <span></span>
+    </button>
+    <nav class="nav" id="nav" aria-label="Main">
+      <ul class="nav-list">
+        <li><a href="index.html" aria-current="page">Home</a></li>
+        <li><a href="listings.html">Farms for sale</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <a class="btn btn--gold header-cta" href="contact.html?subject=list">List your farm</a>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ======================================================================
+       HERO. Full bleed land under a graded scrim, the display face set in
+       uppercase at negative tracking, lines rising in behind a clip.
+       ====================================================================== -->
+  <section class="hero">
+    <div class="hero__media">
+      <img src="assets/hero.jpg" alt="Storm light over harvested farmland below a mountain range in South Africa" width="2400" height="1600" fetchpriority="high" />
+    </div>
+    <div class="hero__scrim" aria-hidden="true"></div>
+
+    <div class="shell hero__inner">
+      <h1 class="hero__title">
+        <span class="rise"><span>Farms sold on</span></span>
+        <span class="rise"><span>what the land</span></span>
+        <span class="rise"><span><em class="gold" style="font-style:normal">actually carries</em></span></span>
+      </h1>
+      <p class="hero__lede hero__fade">
+        Water rights, hectares, carrying capacity, zoning and title. ERFDEVCO records the same schedule of measured facts on every farm, smallholding, game farm and vineyard we list, in all nine provinces.
+      </p>
+      <div class="hero__actions hero__fade hero__fade--late">
+        <a class="btn btn--gold btn--wide" href="listings.html">Browse farms for sale</a>
+        <a class="btn btn--ghost" href="contact.html?subject=list">List your farm</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       SEARCH RAIL. Fused to the hero's bottom edge. This is a marketplace,
+       so the first thing under the headline is the inventory, not a pitch.
+       ====================================================================== -->
+  <section class="searchrail" aria-label="Search farms for sale">
+    <div class="shell" style="padding-inline:0;max-width:100%">
+      <form class="searchrail__inner" id="farm-search">
+        <div class="searchrail__field">
+          <label for="s-type">Farm type</label>
+          <select id="s-type" name="type">
+            <option value="any">Any type</option>
+            <option value="Livestock Farm">Livestock farm</option>
+            <option value="Crop Farm">Crop farm</option>
+            <option value="Game Farm">Game farm</option>
+            <option value="Dairy Farm">Dairy farm</option>
+            <option value="Poultry Farm">Poultry farm</option>
+            <option value="Mixed Farm">Mixed farm</option>
+            <option value="Smallholding">Smallholding</option>
+            <option value="Vineyard / Orchard">Vineyard or orchard</option>
+            <option value="Irrigation Farm">Irrigation farm</option>
+            <option value="Dry Land Farm">Dry land farm</option>
+          </select>
+        </div>
+        <div class="searchrail__field">
+          <label for="s-province">Province</label>
+          <select id="s-province" name="province">
+            <option value="any">All nine provinces</option>
+            <option>Eastern Cape</option>
+            <option>Free State</option>
+            <option>Gauteng</option>
+            <option>KwaZulu-Natal</option>
+            <option>Limpopo</option>
+            <option>Mpumalanga</option>
+            <option>Northern Cape</option>
+            <option>North West</option>
+            <option>Western Cape</option>
+          </select>
+        </div>
+        <div class="searchrail__field">
+          <label for="s-size">Size</label>
+          <select id="s-size" name="size">
+            <option value="any">Any extent</option>
+            <option value="0-50">Up to 50 ha</option>
+            <option value="50-200">50 to 200 ha</option>
+            <option value="200-500">200 to 500 ha</option>
+            <option value="500-+">500 ha and above</option>
+          </select>
+        </div>
+        <button class="searchrail__submit" type="submit">
+          Search <span aria-hidden="true">&rarr;</span>
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       ON THE MARKET
+       ====================================================================== -->
+  <section class="band" aria-labelledby="market-h">
+    <div class="shell">
+      <div class="section-head section-head--split reveal">
+        <div>
+          <p class="eyebrow">On the market</p>
+          <h2 id="market-h">Farms currently under mandate</h2>
+        </div>
+        <div>
+          <p class="lede">Each one carries the full listing schedule: land, water, irrigation, buildings, power, security, equipment, legal and lifestyle, recorded before it goes live.</p>
+          <p style="margin-top:1.5rem"><a class="link-line" href="listings.html">See all <span id="farm-count">4</span> farms <span class="arw" aria-hidden="true">&rarr;</span></a></p>
+        </div>
+      </div>
+
+      <div class="farm-grid" id="featured-farms" data-limit="4" data-stagger>
+        <div class="farm-empty">Loading current mandates.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       WHO WE ARE
+       ====================================================================== -->
+  <section class="band band--stone" aria-labelledby="about-h">
+    <div class="shell">
+      <div class="split split--wide-right">
+        <div class="reveal">
+          <div class="media-pair">
+            <div class="media-pair__main">
+              <img src="assets/intro.jpg" alt="Rolling contour ploughed farmland fading into morning haze" loading="lazy" decoding="async" width="1600" height="1067" />
+            </div>
+            <div class="media-pair__inset">
+              <img src="assets/farm-cattle-field.jpg" alt="Dairy cattle standing in open pasture on a South African farm" loading="lazy" decoding="async" width="1600" height="1065" />
+            </div>
+          </div>
+        </div>
+        <div class="reveal">
+          <h2 id="about-h">An agency built for agricultural property, not adapted to it</h2>
+          <p class="lede" style="margin-top:1.5rem">
+            ERFDEVCO sells farms, agricultural land, game farms and smallholdings across South Africa. The agency is led by Martiens Du Plessis, a Master Practitioner in Real Estate with a B.Econ from Stellenbosch, registered with the Property Practitioners Regulatory Authority.
+          </p>
+          <p style="margin-top:1.25rem;color:var(--muted);line-height:1.72;max-width:60ch">
+            Residential portals were built for houses, so they ask about bedrooms. A buyer looking at 400 hectares needs to know the borehole yield, the carrying capacity, the zoning and whether the water use licence is registered or still under application. That is what our listing schedule asks, and it is why our listings read the way they do.
+          </p>
+          <dl class="stat-strip">
+            <div><dt>9</dt><dd>Provinces covered</dd></div>
+            <div><dt>10</dt><dd>Farm categories</dd></div>
+            <div><dt>MPRE</dt><dd>Master Practitioner in Real Estate</dd></div>
+            <div><dt>PPRA</dt><dd>Registered practitioner</dd></div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       THE NUMBERS. Counters on what the listing schedule holds, not invented
+       sales figures.
+       ====================================================================== -->
+  <section class="band band--tight" aria-labelledby="numbers-h">
+    <div class="shell">
+      <div class="section-head reveal">
+        <h2 id="numbers-h" class="measure">What sits behind every ERFDEVCO listing</h2>
+      </div>
+      <div class="counters reveal">
+        <div class="counter">
+          <p class="counter__n"><span data-count="103">0</span></p>
+          <p class="counter__label">Fields in the schedule</p>
+          <p class="counter__note">Across the eighteen sections. A farm answers the ones that apply to it.</p>
+        </div>
+        <div class="counter">
+          <p class="counter__n"><span data-count="18">0</span></p>
+          <p class="counter__label">Schedule sections</p>
+          <p class="counter__note">Land through to lifestyle, in a fixed order on every farm.</p>
+        </div>
+        <div class="counter">
+          <p class="counter__n"><span data-count="10">0</span></p>
+          <p class="counter__label">Farm categories</p>
+          <p class="counter__note">From smallholdings to game farms and irrigation units.</p>
+        </div>
+        <div class="counter">
+          <p class="counter__n"><span data-count="9">0</span></p>
+          <p class="counter__label">Provinces</p>
+          <p class="counter__note">National coverage, with no listing fee to the seller.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       DARK CHAPTER. The one full bleed value change on the page, carrying
+       the category wall. Replaces the reference's developments band.
+       ====================================================================== -->
+  <section class="band band--ink" aria-labelledby="types-h">
+    <div class="shell">
+      <div class="section-head section-head--centre reveal">
+        <p class="eyebrow">Browse by farm type</p>
+        <h2 id="types-h">Ten kinds of land, each measured on its own terms</h2>
+      </div>
+
+      <div class="type-grid" data-stagger>
+        <a class="type-tile reveal" href="listings.html?type=Vineyard%20%2F%20Orchard">
+          <img src="assets/farm-vines.jpg" alt="Vineyard rows below a mountain in the Western Cape" loading="lazy" decoding="async" width="2400" height="1600" />
+          <span class="type-tile__label"><h3>Vineyards and orchards</h3><span class="type-tile__count">Hectares under vine</span></span>
+        </a>
+        <a class="type-tile reveal" href="listings.html?type=Livestock%20Farm">
+          <img src="assets/farm-cattle.jpg" alt="Nguni cattle grazing sweetveld below mountains" loading="lazy" decoding="async" width="2400" height="1600" />
+          <span class="type-tile__label"><h3>Livestock</h3><span class="type-tile__count">Carrying capacity</span></span>
+        </a>
+        <a class="type-tile reveal" href="listings.html?type=Game%20Farm">
+          <img src="assets/farm-bushveld.jpg" alt="Bushveld with a large tree and hills behind" loading="lazy" decoding="async" width="2400" height="1590" />
+          <span class="type-tile__label"><h3>Game farms</h3><span class="type-tile__count">Fence and species</span></span>
+        </a>
+        <a class="type-tile reveal" href="listings.html?type=Irrigation%20Farm">
+          <img src="assets/farm-irrigation.jpg" alt="Centre pivot irrigating a green circle of crop from the air" loading="lazy" decoding="async" width="2400" height="1800" />
+          <span class="type-tile__label"><h3>Irrigation farms</h3><span class="type-tile__count">Scheme and licence</span></span>
+        </a>
+        <a class="type-tile reveal" href="listings.html?type=Crop%20Farm">
+          <img src="assets/farm-grain.jpg" alt="Ripe wheat heads in a field before harvest" loading="lazy" decoding="async" width="2400" height="1600" />
+          <span class="type-tile__label"><h3>Crop farms</h3><span class="type-tile__count">Soil and yield history</span></span>
+        </a>
+        <a class="type-tile reveal" href="listings.html?type=Smallholding">
+          <img src="assets/farm-pasture-tree.jpg" alt="A single tree beside a farm road on green pasture" loading="lazy" decoding="async" width="1600" height="1065" />
+          <span class="type-tile__label"><h3>Smallholdings</h3><span class="type-tile__count">Zoning and services</span></span>
+        </a>
+      </div>
+
+      <div class="type-more reveal">
+        <a href="listings.html?type=Dairy%20Farm">Dairy farms</a>
+        <a href="listings.html?type=Poultry%20Farm">Poultry farms</a>
+        <a href="listings.html?type=Mixed%20Farm">Mixed farms</a>
+        <a href="listings.html?type=Dry%20Land%20Farm">Dry land farms</a>
+        <a href="listings.html">Everything currently listed</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       THE SCHEDULE. The part of ERFDEVCO no residential portal has: the
+       actual listing form, shown as the promise it makes to a buyer.
+       ====================================================================== -->
+  <section class="band" aria-labelledby="schedule-h">
+    <div class="shell">
+      <div class="section-head section-head--split reveal">
+        <div>
+          <h2 id="schedule-h">Every farm we list answers the same eighteen sections</h2>
+          <p style="margin-top:2rem">
+            <a class="btn btn--ink" href="contact.html?subject=list">Start a listing schedule</a>
+          </p>
+        </div>
+        <div>
+          <p class="lede">
+            A photograph sells the view. A schedule sells the farm. Before a listing goes live, the seller works through eighteen sections with us, and what comes back is what a buyer, a bank and a valuer all need in one place.
+          </p>
+          <p style="margin-top:1.25rem;color:var(--muted);line-height:1.72">
+            If a fact is not known, the listing says so rather than filling the gap. That is the whole point of publishing the schedule instead of a paragraph.
+          </p>
+        </div>
+      </div>
+
+      <div class="reveal">
+          <ol class="schedule">
+            <li><span>General</span><span class="n">4 fields</span></li>
+            <li><span>Farm information</span><span class="n">4 fields</span></li>
+            <li><span>Land information</span><span class="n">8 fields</span></li>
+            <li><span>Water resources</span><span class="n">9 fields</span></li>
+            <li><span>Irrigation</span><span class="n">5 fields</span></li>
+            <li><span>Livestock</span><span class="n">7 fields</span></li>
+            <li><span>Crop farming</span><span class="n">8 fields</span></li>
+            <li><span>Game farm</span><span class="n">7 fields</span></li>
+            <li><span>Buildings and infrastructure</span><span class="n">10 fields</span></li>
+            <li><span>Power and utilities</span><span class="n">6 fields</span></li>
+            <li><span>Security</span><span class="n">5 fields</span></li>
+            <li><span>Equipment included</span><span class="n">6 fields</span></li>
+            <li><span>Legal information</span><span class="n">6 fields</span></li>
+            <li><span>Lifestyle features</span><span class="n">9 fields</span></li>
+            <li><span>Contact information</span><span class="n">3 fields</span></li>
+            <li><span>Location and coordinates</span><span class="n">3 fields</span></li>
+            <li><span>Media and gallery</span><span class="n">2 fields</span></li>
+            <li><span>Mandate and consent</span><span class="n">1 field</span></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       THE MANDATE. Statement band over land, in place of invented
+       testimonials.
+       ====================================================================== -->
+  <section class="statement" aria-labelledby="mandate-h">
+    <div class="statement__media">
+      <img src="assets/land-ploughed-aerial.jpg" alt="Contour ploughed lands running toward an escarpment at dawn" loading="lazy" decoding="async" width="2400" height="1600" />
+    </div>
+    <div class="statement__scrim" aria-hidden="true"></div>
+    <div class="shell">
+      <div class="reveal" style="max-width:44rem">
+        <p class="statement__quote" id="mandate-h">One practitioner, <em>one mandate</em>, one farm at a time</p>
+        <p style="color:color-mix(in srgb, #fff 80%, transparent);font-size:var(--fs-lead);line-height:1.65;max-width:52ch">
+          ERFDEVCO is led by Martiens Du Plessis from Kleinbaai in the Western Cape, working sellers and buyers directly rather than through a call centre. One practitioner, one mandate, one schedule per farm.
+        </p>
+        <ul class="credentials">
+          <li>Master Practitioner in Real Estate</li>
+          <li>B.Econ, Stellenbosch</li>
+          <li>Registered with the PPRA</li>
+        </ul>
+        <p style="margin-top:2rem">
+          <a class="btn btn--gold" href="tel:+27829005019">082 900 5019</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       WHAT WE DO. Flat rows, no card grid.
+       ====================================================================== -->
+  <section class="band" aria-labelledby="services-h">
+    <div class="shell">
+      <div class="section-head section-head--split reveal">
+        <div>
+          <h2 id="services-h">Six services, all of them agricultural</h2>
+        </div>
+        <div><p class="lede">No residential, no commercial, no rentals. The whole agency points at one kind of property.</p></div>
+      </div>
+
+      <div class="rows" data-stagger>
+        <div class="row-item reveal">
+          <h3>Farm sales</h3>
+          <div class="row-item__body"><p>Working farms taken on mandate, scheduled, photographed and marketed to buyers who are looking for production, not a weekend house.</p></div>
+        </div>
+        <div class="row-item reveal">
+          <h3>Agricultural land sales</h3>
+          <div class="row-item__body"><p>Bare land and portions, sold on extent, soil, water and zoning, with the servitudes and title position established up front.</p></div>
+        </div>
+        <div class="row-item reveal">
+          <h3>Game farm sales</h3>
+          <div class="row-item__body"><p>Certified fencing, species counts, lodges and hunting infrastructure recorded on the schedule so a buyer knows what is standing and what is running.</p></div>
+        </div>
+        <div class="row-item reveal">
+          <h3>Property marketing</h3>
+          <div class="row-item__body"><p>Every mandate goes onto erfdevco.com and onto Property24, with matching photography and the same schedule of facts in both places.</p></div>
+        </div>
+        <div class="row-item reveal">
+          <h3>Buyer and seller assistance</h3>
+          <div class="row-item__body"><p>Guidance through offer, suspensive conditions, VAT treatment and transfer, with the conveyancer and the bank kept on the same set of facts.</p></div>
+        </div>
+        <div class="row-item reveal">
+          <h3>Agricultural property consulting</h3>
+          <div class="row-item__body"><p>Advice on how a property is likely to be received by the market before it is listed, including what to measure and what to fix first.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       CTA
+       ====================================================================== -->
+  <section class="cta" aria-labelledby="cta-h">
+    <div class="cta__media">
+      <img src="assets/land-caledon-fields.jpg" alt="Striped green and gold croplands running to the horizon under a wide sky" loading="lazy" decoding="async" width="2400" height="1600" />
+    </div>
+    <div class="cta__scrim" aria-hidden="true"></div>
+    <div class="shell">
+      <div class="cta__inner reveal">
+        <div>
+          <h2 id="cta-h">List your farm with the detail it deserves</h2>
+          <p style="margin-top:1.25rem;max-width:48ch">There is no listing fee. Send us the property and we will work through the schedule with you, then take it to market on erfdevco.com and Property24.</p>
+        </div>
+        <div class="cta__actions">
+          <a class="btn btn--gold btn--wide" href="contact.html?subject=list">List your farm</a>
+          <a class="btn btn--ghost" href="tel:+27829005019">082 900 5019</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="shell">
+    <div class="footer-grid">
+      <div>
+        <img src="assets/logo-white.png" alt="ERFDEVCO" width="480" height="434" loading="lazy" />
+        <p>Farms, smallholdings, game farms and vineyards for sale across all nine South African provinces. Every listing carries the full farm schedule.</p>
+      </div>
+      <div>
+        <h4>Site</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="listings.html">Farms for sale</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Farm types</h4>
+        <ul>
+          <li><a href="listings.html?type=Livestock%20Farm">Livestock</a></li>
+          <li><a href="listings.html?type=Game%20Farm">Game farms</a></li>
+          <li><a href="listings.html?type=Vineyard%20%2F%20Orchard">Vineyards and orchards</a></li>
+          <li><a href="listings.html?type=Irrigation%20Farm">Irrigation farms</a></li>
+          <li><a href="listings.html?type=Smallholding">Smallholdings</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:+27829005019">082 900 5019</a></li>
+          <li><a href="https://wa.me/27829005019" rel="noopener">WhatsApp</a></li>
+          <li><a href="mailto:martiens@erfdevco.com">martiens@erfdevco.com</a></li>
+          <li>Kleinbaai, Western Cape</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-base">
+      <p>&copy; <span data-year>2026</span> ERFDEVCO. Registered with the Property Practitioners Regulatory Authority.</p>
+      <p>Martiens Du Plessis, MPRE, B.Econ (Stell.)</p>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

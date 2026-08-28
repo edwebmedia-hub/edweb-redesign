@@ -3,9 +3,21 @@
   "configurations": [
     {
       "name": "redesign-static",
-      "runtimeExecutable": "python",
-      "runtimeArgs": ["-m", "http.server", "4173", "--directory", "redesign", "--bind", "127.0.0.1"],
+      "runtimeExecutable": "node",
+      "runtimeArgs": [".claude/static-server.mjs", "4173", "redesign"],
       "port": 4173
+    },
+    {
+      "name": "erfdevco",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [".claude/static-server.mjs", "4210", "erfdevco"],
+      "port": 4210
+    },
+    {
+      "name": "erfdevco-alt",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [".claude/static-server.mjs", "4211", "erfdevco"],
+      "port": 4211
     }
   ]
 }

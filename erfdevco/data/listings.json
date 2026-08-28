@@ -1,0 +1,460 @@
+{
+  "note": "DEMO DATA. Four sample farms built to the exact shape of the ERFDEVCO listing form (18 sections). Replace each entry with a real mandate before launch.",
+  "listings": [
+    {
+      "id": "erf-vin-014",
+      "ref": "ERF-VIN-014",
+      "title": "Weltevrede Vineyard Estate",
+      "place": "Banhoek Valley, Stellenbosch",
+      "province": "Western Cape",
+      "category": "Vineyard / Orchard",
+      "farmType": "Vineyard / Orchard",
+      "price": 24500000,
+      "priceDisplay": "R24 500 000",
+      "perHa": "R360 294 / ha",
+      "sizeHa": 68,
+      "status": "For sale",
+      "image": "assets/farm-vines.jpg",
+      "alt": "Vineyard rows running toward the Banhoek mountains outside Stellenbosch",
+      "gallery": ["assets/vineyard-lush.jpg", "assets/cellar-barrels.jpg", "assets/farm-vineyard-aerial.jpg"],
+      "summary": "A registered wine farm on the Banhoek side of Stellenbosch, with 41 hectares under vine, a working cellar and a licensed water use allocation from the Dwars River.",
+      "description": "Weltevrede sits on the cooler eastern slopes of the Banhoek Valley, where late-ripening reds hold acid longer than they do on the valley floor. Forty-one of the sixty-eight hectares are under vine, planted in blocks between 2004 and 2018, with Cabernet Sauvignon and Shiraz on the upper decomposed granite and Chardonnay on the lower alluvial soils. The cellar handles 320 tonnes a season and carries its own crush, press and 18 stainless tanks. The homestead is a restored 1920s farmhouse, and two cottages currently run as guest accommodation with an existing tourism consent. Water comes from a registered Dwars River abstraction plus three boreholes, and the entire vineyard is under drip. Sold as a going concern with the standing crop, cellar plant and irrigation infrastructure included.",
+      "facts": [
+        ["68 ha", "Total extent"],
+        ["41 ha", "Under vine"],
+        ["Registered", "Water use licence"],
+        ["3", "Boreholes"],
+        ["Tarred", "Road access"],
+        ["Going concern", "VAT status"]
+      ],
+      "specs": {
+        "Land Information": {
+          "Total hectares": "68 ha",
+          "Arable land": "44 ha",
+          "Irrigated land": "41 ha",
+          "Orchard / vineyard": "41 ha",
+          "Grazing land": "9 ha",
+          "Natural veld": "15 ha",
+          "Soil type": "Decomposed granite over alluvial",
+          "River frontage": "410 m (Dwars River)"
+        },
+        "Water Resources": {
+          "Water rights": "Yes, registered",
+          "Boreholes": "3",
+          "Borehole yield": "9 400 L/h combined",
+          "Dams": "2",
+          "Dam capacity": "26 000 m³",
+          "Rivers / streams": "Yes",
+          "Reservoirs": "2 (1 200 m³)",
+          "Water tanks": "6 x 10 000 L"
+        },
+        "Irrigation": {
+          "Drip irrigation": "Yes, full vineyard",
+          "Sprinkler systems": "Frost protection, 8 ha",
+          "Total irrigated area": "41 ha",
+          "Irrigation pumps": "4",
+          "Centre pivots": "None",
+          "Fertigation": "Yes, automated"
+        },
+        "Crop Farming": {
+          "Current crops": "Cabernet Sauvignon, Shiraz, Chardonnay",
+          "Cultivated hectares": "41 ha",
+          "Yield history": "8 to 11 tonnes per hectare, 2019 to 2024",
+          "Packhouse": "No",
+          "Cold rooms": "Yes, 2",
+          "Processing facilities": "Yes, 320 t cellar"
+        },
+        "Buildings & Infrastructure": {
+          "Main farmhouse": "Yes, restored 1920s homestead",
+          "Additional houses": "1 manager's house",
+          "Guest houses": "2 cottages",
+          "Staff accommodation": "5 units",
+          "Workshops": "1",
+          "Sheds": "3",
+          "Storage facilities": "Barrel store, 480 m²",
+          "Offices": "Yes"
+        },
+        "Power & Utilities": {
+          "Eskom connection": "Yes, 150 kVA three phase",
+          "Solar power": "Yes, 42 kWp",
+          "Generator": "Yes, 60 kVA",
+          "Inverter system": "Yes",
+          "Battery backup": "Yes, 40 kWh",
+          "Internet": "Fibre"
+        },
+        "Security": {
+          "Boundary fencing": "Yes, full perimeter",
+          "Electric fencing": "Yes, homestead and cellar",
+          "CCTV": "Yes, 14 cameras",
+          "Alarm system": "Yes, armed response",
+          "Security gates": "Yes, 2"
+        },
+        "Equipment Included": {
+          "Tractors": "4",
+          "Implements included": "Sprayers, mulchers, trailers, tipper",
+          "Trailers": "3",
+          "Harvesters": "None",
+          "Irrigation equipment": "Included",
+          "Vehicles included": "2 bakkies"
+        },
+        "Legal Information": {
+          "Title deed available": "Yes",
+          "Zoning": "Agricultural",
+          "Water use licence": "Yes, registered",
+          "VAT status": "Going concern, zero rated",
+          "Going concern": "Yes",
+          "Servitudes": "One municipal pipeline servitude registered"
+        },
+        "Lifestyle Features": {
+          "Mountain views": "Yes",
+          "River frontage": "Yes",
+          "Dam frontage": "Yes",
+          "Hiking trails": "Yes",
+          "Wedding venue potential": "Yes, consent in place",
+          "Eco-tourism potential": "Yes",
+          "Bird watching": "Yes",
+          "Fishing": "No"
+        }
+      }
+    },
+    {
+      "id": "erf-lst-021",
+      "ref": "ERF-LST-021",
+      "title": "Grootvlei Cattle & Grazing Farm",
+      "place": "Bergville, Northern Drakensberg",
+      "province": "KwaZulu-Natal",
+      "category": "Livestock Farm",
+      "farmType": "Livestock Farm",
+      "price": 16800000,
+      "priceDisplay": "R16 800 000",
+      "perHa": "R40 777 / ha",
+      "sizeHa": 412,
+      "status": "For sale",
+      "image": "assets/farm-nguni-kzn.jpg",
+      "alt": "Nguni cattle grazing sweetveld below the Drakensberg escarpment near Bergville",
+      "gallery": ["assets/farm-cattle.jpg", "assets/farm-cattle-close.jpg", "assets/farm-pasture-tree.jpg"],
+      "summary": "412 hectares of sweetveld running below the Drakensberg escarpment, split into fourteen camps with a full handling facility and year round water.",
+      "description": "Grootvlei is a working beef unit on the sweetveld belt outside Bergville, carrying a commercial Nguni and Bonsmara cross herd. The land is divided into fourteen camps with water to every camp from two equipped boreholes and a gravity fed reticulation line off the upper spring. Carrying capacity is measured at 1 large stock unit per 3.2 hectares in a normal season. Infrastructure includes a full handling facility with crush, scale and loading ramp, a 90 tonne feed store, and 46 hectares of planted pasture under dryland. The homestead is a four bedroom face brick house with a separate manager's cottage and four staff units. Rainfall averages 780 mm and the farm has never been destocked for drought in the current owner's fifteen years. Sold with the fixed improvements; livestock negotiable separately.",
+      "facts": [
+        ["412 ha", "Total extent"],
+        ["1 : 3.2", "Carrying capacity"],
+        ["14", "Camps"],
+        ["2", "Equipped boreholes"],
+        ["780 mm", "Average rainfall"],
+        ["Gravel", "Road access"]
+      ],
+      "specs": {
+        "Land Information": {
+          "Total hectares": "412 ha",
+          "Grazing land": "352 ha",
+          "Arable land": "46 ha",
+          "Natural veld": "352 ha sweetveld",
+          "Mountain land": "14 ha",
+          "Soil type": "Clay loam",
+          "River frontage": "1 100 m (seasonal stream)"
+        },
+        "Water Resources": {
+          "Water rights": "Yes",
+          "Boreholes": "2 equipped, 1 unequipped",
+          "Borehole yield": "6 200 L/h combined",
+          "Dams": "3 earth dams",
+          "Dam capacity": "48 000 m³",
+          "Rivers / streams": "Yes, seasonal",
+          "Reservoirs": "1 (300 m³)",
+          "Water tanks": "9 x 5 000 L"
+        },
+        "Livestock": {
+          "Carrying capacity": "1 LSU per 3.2 ha",
+          "Camps / paddocks": "14",
+          "Cattle facilities": "Yes, full handling facility",
+          "Sheep facilities": "Yes, shearing shed",
+          "Feedlots": "Yes, 120 head",
+          "Loading ramps": "Yes, 2",
+          "Water points": "16, one per camp"
+        },
+        "Irrigation": {
+          "Centre pivots": "None",
+          "Drip irrigation": "No",
+          "Sprinkler systems": "No",
+          "Total irrigated area": "0 ha, dryland pasture",
+          "Irrigation pumps": "2 reticulation pumps"
+        },
+        "Buildings & Infrastructure": {
+          "Main farmhouse": "Yes, 4 bedroom face brick",
+          "Additional houses": "1 manager's cottage",
+          "Staff accommodation": "4 units",
+          "Workshops": "1",
+          "Sheds": "2",
+          "Barns": "1",
+          "Storage facilities": "90 t feed store",
+          "Offices": "Yes"
+        },
+        "Power & Utilities": {
+          "Eskom connection": "Yes, 80 kVA",
+          "Solar power": "Yes, borehole pumps",
+          "Generator": "Yes, 25 kVA",
+          "Inverter system": "Yes",
+          "Battery backup": "Yes, 15 kWh",
+          "Internet": "LTE / 4G"
+        },
+        "Security": {
+          "Boundary fencing": "Yes, stock proof",
+          "Electric fencing": "Yes, homestead",
+          "CCTV": "Yes, 6 cameras",
+          "Alarm system": "Yes",
+          "Security gates": "Yes, 1"
+        },
+        "Equipment Included": {
+          "Tractors": "2",
+          "Implements included": "Planter, disc harrow, baler, slasher",
+          "Trailers": "2",
+          "Harvesters": "None",
+          "Irrigation equipment": "Reticulation pumps included",
+          "Vehicles included": "1 bakkie, 2 quad bikes"
+        },
+        "Legal Information": {
+          "Title deed available": "Yes",
+          "Zoning": "Agricultural",
+          "Water use licence": "General authorisation",
+          "VAT status": "VAT exclusive",
+          "Going concern": "No",
+          "Servitudes": "Eskom powerline servitude registered"
+        },
+        "Lifestyle Features": {
+          "Mountain views": "Yes, Drakensberg escarpment",
+          "River frontage": "Yes, seasonal",
+          "Dam frontage": "Yes",
+          "Fishing": "Yes",
+          "Hiking trails": "Yes",
+          "Horse riding": "Yes",
+          "Bird watching": "Yes",
+          "Eco-tourism potential": "Yes"
+        }
+      }
+    },
+    {
+      "id": "erf-gam-008",
+      "ref": "ERF-GAM-008",
+      "title": "Rietfontein Game Farm",
+      "place": "Vaalwater, Waterberg",
+      "province": "Limpopo",
+      "category": "Game Farm",
+      "farmType": "Game Farm",
+      "price": 31000000,
+      "priceDisplay": "R31 000 000",
+      "perHa": "R25 000 / ha",
+      "sizeHa": 1240,
+      "status": "For sale",
+      "image": "assets/game-springbok.jpg",
+      "alt": "Springbok standing in long grass on Waterberg bushveld",
+      "gallery": ["assets/farm-bushveld.jpg", "assets/game-plains.jpg", "assets/land-dusk.jpg"],
+      "summary": "1 240 hectares of certified game fenced Waterberg bushveld with a six suite lodge, plains game and an existing hunting operation.",
+      "description": "Rietfontein lies in the Waterberg, an hour north of Vaalwater on gravel, and is fully enclosed by 2.4 metre certified game fence. The property runs a plains game population including kudu, impala, waterbuck, zebra, blue wildebeest and giraffe, with a counted estimate of roughly 640 animals at the last aerial census. Income currently comes from a six suite thatched lodge with its own boma, a separate four bed hunting camp and a walk in cold room with a carcass rail. Twelve boreholes feed a network of drinking troughs and three pans hold water through most of the dry season. The bush is mixed broadleaf and thorn on sandy soil, with a rocky ridge running the northern boundary that gives the lodge its view. Sold as a going concern with the game, lodge contents and vehicles included.",
+      "facts": [
+        ["1 240 ha", "Total extent"],
+        ["2.4 m", "Certified game fence"],
+        ["±640", "Head of game"],
+        ["12", "Boreholes"],
+        ["6 suites", "Lodge"],
+        ["Going concern", "VAT status"]
+      ],
+      "specs": {
+        "Land Information": {
+          "Total hectares": "1 240 ha",
+          "Natural veld": "1 196 ha",
+          "Arable land": "24 ha",
+          "Mountain land": "180 ha ridge",
+          "Soil type": "Sandy, mixed broadleaf and thorn",
+          "River frontage": "None, three natural pans"
+        },
+        "Game Farm": {
+          "Game fencing": "Yes, certified",
+          "Fence height": "2.4 m",
+          "Wildlife species": "Kudu, impala, waterbuck, zebra, blue wildebeest, giraffe, warthog",
+          "Estimated animal count": "±640 (last aerial census)",
+          "Hunting facilities": "Yes, 4 bed hunting camp",
+          "Lodges": "Yes, 6 suite thatched lodge",
+          "Tourism potential": "Yes, operating"
+        },
+        "Water Resources": {
+          "Water rights": "Yes",
+          "Boreholes": "12",
+          "Borehole yield": "21 000 L/h combined",
+          "Dams": "3 natural pans",
+          "Dam capacity": "Seasonal",
+          "Rivers / streams": "No",
+          "Reservoirs": "4",
+          "Water tanks": "18 x 5 000 L"
+        },
+        "Buildings & Infrastructure": {
+          "Main farmhouse": "Yes, owner's house",
+          "Guest houses": "6 lodge suites",
+          "Additional houses": "1 hunting camp, 4 beds",
+          "Staff accommodation": "8 units",
+          "Workshops": "1",
+          "Sheds": "3",
+          "Storage facilities": "Walk in cold room with carcass rail",
+          "Offices": "Yes"
+        },
+        "Power & Utilities": {
+          "Eskom connection": "Yes, 100 kVA",
+          "Solar power": "Yes, 36 kWp plus solar borehole pumps",
+          "Generator": "Yes, 45 kVA",
+          "Inverter system": "Yes",
+          "Battery backup": "Yes, 60 kWh",
+          "Internet": "Satellite"
+        },
+        "Security": {
+          "Boundary fencing": "Yes, certified game fence",
+          "Electric fencing": "Yes, lodge and perimeter strands",
+          "CCTV": "Yes, gate and lodge",
+          "Alarm system": "Yes",
+          "Security gates": "Yes, 2 controlled entrances"
+        },
+        "Equipment Included": {
+          "Tractors": "2",
+          "Implements included": "Grader blade, slasher, water bowser",
+          "Trailers": "2 game trailers",
+          "Harvesters": "None",
+          "Irrigation equipment": "Trough reticulation included",
+          "Vehicles included": "3 game viewers, 1 bakkie"
+        },
+        "Legal Information": {
+          "Title deed available": "Yes",
+          "Zoning": "Game farm",
+          "Water use licence": "General authorisation",
+          "VAT status": "Going concern, zero rated",
+          "Going concern": "Yes",
+          "Servitudes": "Right of way to neighbouring farm registered"
+        },
+        "Lifestyle Features": {
+          "Mountain views": "Yes, Waterberg ridge",
+          "Dam frontage": "Yes, pans",
+          "Hiking trails": "Yes",
+          "Bird watching": "Yes, 240 species recorded",
+          "Horse riding": "Yes",
+          "Eco-tourism potential": "Yes, operating",
+          "Wedding venue potential": "Yes",
+          "Fishing": "No"
+        }
+      }
+    },
+    {
+      "id": "erf-irr-033",
+      "ref": "ERF-IRR-033",
+      "title": "Sonop Citrus & Irrigation Farm",
+      "place": "Hoedspruit, Lowveld",
+      "province": "Limpopo",
+      "category": "Irrigation Farm",
+      "farmType": "Irrigation Farm",
+      "price": 28900000,
+      "priceDisplay": "R28 900 000",
+      "perHa": "R155 376 / ha",
+      "sizeHa": 186,
+      "status": "For sale",
+      "image": "assets/farm-orchard-mountain.jpg",
+      "alt": "Citrus orchard rows with the Drakensberg foothills behind, near Hoedspruit",
+      "gallery": ["assets/farm-irrigation.jpg", "assets/farm-aerial-crops.jpg", "assets/farm-grain.jpg"],
+      "summary": "186 hectares under a registered Blyde River scheme allocation, 112 hectares of bearing citrus, packhouse and cold chain on site.",
+      "description": "Sonop is an established citrus unit on the Hoedspruit flats with a registered allocation off the Blyde River irrigation scheme, the single most valuable asset on the property. One hundred and twelve hectares carry bearing Valencia, Midknight and soft citrus, planted between 2011 and 2020, all under drip with a fertigation shed and a scheduling system already in place. The farm packs its own fruit through a 12 tonne per hour line with two cold rooms and a dispatch bay rated for export loading. Three centre pivots cover a further 22 hectares currently under maize and vegetables in rotation. Staff housing accommodates 34 permanent workers and there is a separate seasonal compound. Power is Eskom backed by a 300 kWp solar plant that carries the packhouse through daytime load shedding. Sold as a going concern.",
+      "facts": [
+        ["186 ha", "Total extent"],
+        ["112 ha", "Bearing citrus"],
+        ["Registered", "Scheme allocation"],
+        ["3", "Centre pivots"],
+        ["12 t/h", "Packhouse line"],
+        ["300 kWp", "Solar plant"]
+      ],
+      "specs": {
+        "Land Information": {
+          "Total hectares": "186 ha",
+          "Arable land": "148 ha",
+          "Irrigated land": "134 ha",
+          "Orchard / vineyard": "112 ha citrus",
+          "Grazing land": "22 ha",
+          "Natural veld": "16 ha",
+          "Soil type": "Sandy loam, alluvial",
+          "River frontage": "None, scheme fed"
+        },
+        "Water Resources": {
+          "Water rights": "Yes, registered scheme allocation",
+          "Boreholes": "4",
+          "Borehole yield": "14 000 L/h combined",
+          "Dams": "2 balancing dams",
+          "Dam capacity": "62 000 m³",
+          "Rivers / streams": "Blyde River scheme canal",
+          "Reservoirs": "3",
+          "Water tanks": "8 x 10 000 L"
+        },
+        "Irrigation": {
+          "Centre pivots": "3",
+          "Drip irrigation": "Yes, all citrus",
+          "Sprinkler systems": "Yes, frost and nursery",
+          "Total irrigated area": "134 ha",
+          "Irrigation pumps": "7",
+          "Fertigation": "Yes, dedicated shed"
+        },
+        "Crop Farming": {
+          "Current crops": "Valencia, Midknight, soft citrus, maize rotation",
+          "Cultivated hectares": "134 ha",
+          "Soil type": "Sandy loam",
+          "Yield history": "48 to 62 tonnes per hectare on mature blocks",
+          "Packhouse": "Yes, 12 t/h line",
+          "Cold rooms": "Yes, 2",
+          "Processing facilities": "Yes, export dispatch bay"
+        },
+        "Buildings & Infrastructure": {
+          "Main farmhouse": "Yes, 5 bedroom",
+          "Additional houses": "2",
+          "Staff accommodation": "34 permanent units plus seasonal compound",
+          "Workshops": "2",
+          "Sheds": "4",
+          "Silos": "None",
+          "Storage facilities": "Packhouse, 2 cold rooms, chemical store",
+          "Offices": "Yes, packhouse admin block"
+        },
+        "Power & Utilities": {
+          "Eskom connection": "Yes, 400 kVA three phase",
+          "Solar power": "Yes, 300 kWp",
+          "Generator": "Yes, 250 kVA",
+          "Inverter system": "Yes",
+          "Battery backup": "Yes, 120 kWh",
+          "Internet": "Fibre"
+        },
+        "Security": {
+          "Boundary fencing": "Yes, full perimeter",
+          "Electric fencing": "Yes, packhouse and homestead",
+          "CCTV": "Yes, 22 cameras",
+          "Alarm system": "Yes, armed response",
+          "Security gates": "Yes, manned main gate"
+        },
+        "Equipment Included": {
+          "Tractors": "8",
+          "Implements included": "Sprayers, mulchers, fertiliser spreaders, trailers",
+          "Trailers": "6 bin trailers",
+          "Harvesters": "None",
+          "Irrigation equipment": "Pivots, pumps and drip included",
+          "Vehicles included": "3 bakkies, 2 forklifts"
+        },
+        "Legal Information": {
+          "Title deed available": "Yes",
+          "Zoning": "Agricultural",
+          "Water use licence": "Yes, registered",
+          "VAT status": "Going concern, zero rated",
+          "Going concern": "Yes",
+          "Servitudes": "Canal servitude registered"
+        },
+        "Lifestyle Features": {
+          "Mountain views": "Yes, Drakensberg foothills",
+          "Dam frontage": "Yes",
+          "Fishing": "Yes",
+          "Bird watching": "Yes",
+          "Hiking trails": "No",
+          "Horse riding": "Yes",
+          "Eco-tourism potential": "Yes",
+          "Wedding venue potential": "No"
+        }
+      }
+    }
+  ]
+}
