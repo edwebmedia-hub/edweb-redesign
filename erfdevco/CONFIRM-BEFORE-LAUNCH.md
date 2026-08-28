@@ -12,12 +12,14 @@ against the email signature Edgar approved and installed in Hostinger webmail
 - Name spelled `Martiens Du Plessis` (capital D, now matched site-wide)
 - `info@erfdevco.com` / `martiens@erfdevco.com`
 
-## NOT verified: one item
-- **"Master Practitioner in Real Estate" / "MPRE"** appears 10 times across
-  index.html, about.html and contact.html. It is NOT on the approved email
-  signature. It is a real PPRA designation and plausible for a principal, but
-  no source in this project confirms Martiens holds it.
-  **Action: ask Martiens yes or no. If no, remove all 10 occurrences.**
+## RESOLVED 2026-08-28: MPRE removed
+- **"Master Practitioner in Real Estate" / "MPRE"** appeared 10 times across
+  index.html, about.html, contact.html, listing.html, listings.html and
+  script.js. It is NOT on the approved email signature and no source in this
+  project confirms Martiens holds it, so **all 10 occurrences were removed**
+  rather than shipped on an assumption. The site now claims only what is
+  verified: Managing Director, B.Econ (Stell.), registered with the PPRA.
+  **If Martiens confirms he holds it, say so and it goes back in one pass.**
 
 ## Numbers on the page, confirm they match his real listing form
 - 18 schedule sections

@@ -395,15 +395,24 @@ button, input, select, textarea { font: inherit; color: inherit; }
   isolation: isolate;
   overflow: hidden;
 }
-.hero__media { position: absolute; inset: 0; z-index: -2; }
+.hero__media { position: absolute; inset: 0; z-index: -2; background: var(--ink-deep); }
 .hero__media img {
+  position: absolute; inset: 0;
   width: 100%; height: 100%;
   object-fit: cover;
   object-position: center 58%;
-  transform: scale(1.06);
-  animation: heroDrift 22s var(--ease-soft) forwards;
+  animation: heroDrift 27s var(--ease-soft) infinite, heroFade 27s linear infinite;
 }
-@keyframes heroDrift { to { transform: scale(1); } }
+.hero__media img:nth-child(1) { animation-delay: 0s, 0s; }
+.hero__media img:nth-child(2) { animation-delay: -9s, -9s; }
+.hero__media img:nth-child(3) { animation-delay: -18s, -18s; }
+@keyframes heroDrift { from { transform: scale(1.09); } to { transform: scale(1); } }
+/* Each frame holds for a third of the cycle with a slow shoulder either side. */
+@keyframes heroFade {
+  0%, 30% { opacity: 1; }
+  36%, 94% { opacity: 0; }
+  100% { opacity: 1; }
+}
 
 .hero__scrim {
   position: absolute; inset: 0; z-index: -1;
@@ -548,12 +557,15 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .farm-grid > :nth-child(1) .farm-card__media { aspect-ratio: 16 / 9; }
 .farm-grid > :nth-child(2) .farm-card__media { aspect-ratio: 3 / 4; }
 
+/* The photo link fills the frame; the chips and the save button sit above it. */
+.farm-card__media > a { position: absolute; inset: 0; display: block; }
 .farm-card__media img {
   width: 100%; height: 100%;
   object-fit: cover;
   transition: transform 900ms var(--ease), filter 500ms var(--ease-soft);
 }
 .farm-card:hover .farm-card__media img { transform: scale(1.045); }
+.farm-card__ref, .farm-card__type, .farm-card__status, .farm-card .save-btn { z-index: 2; }
 
 .farm-card__ref {
   position: absolute;
@@ -617,7 +629,118 @@ button, input, select, textarea { font: inherit; color: inherit; }
   font-family: var(--display);
   letter-spacing: 0.02em;
 }
-.farm-card__foot { margin-top: auto; padding-top: 1.25rem; }
+.farm-card__foot {
+  margin-top: auto; padding-top: 1.25rem;
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 0.75rem 1.25rem; flex-wrap: wrap;
+}
+
+/* Status chip: only a genuinely new listing gets the gold treatment. */
+.farm-card__status {
+  position: absolute;
+  left: 14px; bottom: 14px;
+  display: inline-flex; align-items: center; gap: 0.45rem;
+  background: color-mix(in srgb, var(--ink-deep) 84%, transparent);
+  backdrop-filter: blur(6px);
+  color: var(--paper);
+  font-family: var(--display);
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.4rem 0.7rem;
+  border-radius: var(--r-chip);
+}
+.farm-card__status::before {
+  content: ""; width: 5px; height: 5px; border-radius: 50%;
+  background: color-mix(in srgb, var(--paper) 60%, transparent);
+}
+.farm-card__status[data-new]::before { background: var(--gold); }
+.farm-card__status[data-new] { color: var(--gold); }
+
+/* Save to shortlist. Stored per browser, never sent anywhere. */
+.save-btn {
+  position: absolute;
+  right: 14px; bottom: 14px;
+  width: 38px; height: 38px;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: color-mix(in srgb, var(--ink-deep) 78%, transparent);
+  backdrop-filter: blur(6px);
+  border: 1px solid color-mix(in srgb, var(--paper) 26%, transparent);
+  border-radius: 50%;
+  color: var(--paper);
+  cursor: pointer;
+  padding: 0;
+  transition: background var(--t-fast) var(--ease-soft),
+              border-color var(--t-fast) var(--ease-soft),
+              color var(--t-fast) var(--ease-soft),
+              transform var(--t-fast) var(--ease);
+}
+.save-btn:hover { transform: scale(1.08); border-color: var(--gold); color: var(--gold); }
+.save-btn svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 1.6; }
+.save-btn[aria-pressed="true"] { background: var(--gold); border-color: var(--gold); color: var(--ink); }
+.save-btn[aria-pressed="true"] svg { fill: currentColor; }
+.save-btn[aria-pressed="true"]:hover { color: var(--ink); }
+
+/* The same control inline on a detail page, where there is no photo behind it */
+.save-btn--inline {
+  position: static;
+  width: auto; height: auto;
+  border-radius: var(--r-chip);
+  background: transparent;
+  border-color: var(--line);
+  color: var(--ink);
+  gap: 0.55rem;
+  padding: 0.85rem 1.3rem;
+  font-family: var(--display);
+  font-size: 0.8125rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  backdrop-filter: none;
+}
+.save-btn--inline:hover { transform: none; border-color: var(--ink); color: var(--ink); }
+.save-btn--inline[aria-pressed="true"] { background: var(--gold); border-color: var(--gold); color: var(--ink); }
+
+/* Fact count: the site's whole argument, stated per farm. */
+.farm-card__facts {
+  display: inline-flex; align-items: center; gap: 0.45rem;
+  font-family: var(--display);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  color: var(--gold-deep);
+  white-space: nowrap;
+}
+.farm-card__facts::before {
+  content: ""; width: 6px; height: 6px; background: var(--gold); flex: none;
+}
+
+/* Listings toolbar: count left, sort right */
+.toolbar {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1rem; flex-wrap: wrap;
+  padding-bottom: 1.25rem;
+  margin-bottom: clamp(1.75rem, 3vw, 2.5rem);
+  border-bottom: 1px solid var(--line);
+}
+.toolbar label {
+  font-family: var(--display);
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-right: 0.6rem;
+}
+.toolbar select {
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: var(--r-chip);
+  padding: 0.55rem 0.9rem;
+  font-family: var(--display);
+  font-size: 0.8125rem;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  cursor: pointer;
+}
+.toolbar select:hover { border-color: var(--ink); }
 
 /* Listings page rows keep the same card, one per row on narrow screens */
 .farm-empty {
@@ -1050,7 +1173,126 @@ button, input, select, textarea { font: inherit; color: inherit; }
   font-family: var(--display);
 }
 
+/* Schedule spine. Ten same-shape blocks stacked is a wall, so the section
+   names run down the left and one panel opens beside them. "All sections"
+   opens the lot; print forces every one open regardless. */
+.schedule-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.36fr) minmax(0, 0.64fr);
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: start;
+}
+.spec-tabs {
+  display: flex; flex-direction: column;
+  border-top: 1px solid var(--line);
+}
+.spec-tab {
+  position: relative;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  padding: 0.95rem 0.75rem 0.95rem 1rem;
+  font-family: var(--display);
+  font-size: 0.8125rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+  cursor: pointer;
+  text-align: left;
+  display: flex; align-items: baseline; justify-content: space-between; gap: 0.75rem;
+  transition: color var(--t-fast) var(--ease-soft), padding-left var(--t-fast) var(--ease-soft);
+}
+/* A gold marker slides in on the selected section. */
+.spec-tab::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 50%;
+  width: 3px; height: 0;
+  background: var(--gold);
+  transform: translateY(-50%);
+  transition: height var(--t-mid) var(--ease);
+}
+.spec-tab .c { font-size: 0.6875rem; color: var(--gold-deep); flex: none; }
+.spec-tab:hover { color: var(--ink); }
+.spec-tab[aria-selected="true"] { color: var(--ink); }
+.spec-tab[aria-selected="true"]::before { height: 62%; }
+
 .spec-groups { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(1.5rem, 3vw, 2.75rem); }
+.spec-groups.is-single { grid-template-columns: minmax(0, 1fr); }
+.spec-group[hidden] { display: none; }
+/* Inside the spine the open panel gets the full right column, so its heading
+   sits larger and the rows have room to breathe. */
+.schedule-layout .spec-group h3 { font-size: var(--fs-h3); margin-bottom: 1.25rem; }
+.schedule-layout .spec-group dt,
+.schedule-layout .spec-group dd { padding: 0.75rem 0; font-size: 0.9375rem; }
+
+/* Schedule summary: the site's thesis, measured on this farm. */
+.schedule-meter {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.6rem 1.5rem;
+  padding: 1.1rem 1.35rem;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--gold);
+  border-radius: var(--r-chip);
+  margin-bottom: clamp(1.75rem, 3vw, 2.5rem);
+}
+.schedule-meter b {
+  font-family: var(--display); font-weight: 400;
+  font-size: 1.35rem; letter-spacing: -0.03em; color: var(--ink);
+}
+.schedule-meter span { font-size: 0.875rem; color: var(--muted); }
+
+/* Detail meta line under the title */
+.detail-meta {
+  display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem;
+  margin-top: 1rem;
+  font-size: 0.8125rem;
+  color: var(--muted);
+}
+.detail-meta b { font-weight: 500; color: var(--ink); }
+.detail-actions { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.5rem; }
+
+/* Gallery lightbox */
+.lightbox {
+  position: fixed; inset: 0; z-index: 500;
+  background: color-mix(in srgb, var(--ink-deep) 95%, transparent);
+  display: flex; align-items: center; justify-content: center;
+  padding: clamp(1rem, 4vw, 3rem);
+  opacity: 0;
+  transition: opacity var(--t-mid) var(--ease-soft);
+}
+.lightbox[hidden] { display: none; }
+.lightbox.is-open { opacity: 1; }
+.lightbox img {
+  max-width: 100%; max-height: 100%;
+  object-fit: contain;
+  border-radius: var(--r-media);
+  transform: scale(0.985);
+  transition: transform var(--t-mid) var(--ease);
+}
+.lightbox.is-open img { transform: none; }
+.lb-btn {
+  position: absolute;
+  width: 46px; height: 46px;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: color-mix(in srgb, var(--paper) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--paper) 30%, transparent);
+  border-radius: 50%;
+  color: var(--paper);
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background var(--t-fast) var(--ease-soft), border-color var(--t-fast) var(--ease-soft);
+}
+.lb-btn:hover { background: var(--gold); border-color: var(--gold); color: var(--ink); }
+.lb-close { top: clamp(1rem, 3vw, 2rem); right: clamp(1rem, 3vw, 2rem); }
+.lb-prev { left: clamp(0.5rem, 2vw, 1.75rem); top: 50%; transform: translateY(-50%); }
+.lb-next { right: clamp(0.5rem, 2vw, 1.75rem); top: 50%; transform: translateY(-50%); }
+.lb-count {
+  position: absolute; bottom: clamp(1rem, 3vw, 2rem); left: 50%; transform: translateX(-50%);
+  font-family: var(--display); font-size: 0.75rem; letter-spacing: 0.14em;
+  color: color-mix(in srgb, var(--paper) 70%, transparent);
+}
+.gallery figure { cursor: zoom-in; }
 .spec-group { border-top: 2px solid var(--ink); padding-top: 1.25rem; }
 .spec-group h3 { margin-bottom: 1rem; }
 .spec-group dl { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0; }
@@ -1189,7 +1431,9 @@ button, input, select, textarea { font: inherit; color: inherit; }
   .js .reveal { opacity: 1 !important; transform: none !important; }
   .rise > span { transform: none !important; }
   .hero__fade { opacity: 1 !important; transform: none !important; }
-  .hero__media img { animation: none; transform: none; }
+  /* Hold the first frame still: no drift, no crossfade. */
+  .hero__media img { animation: none !important; transform: none; opacity: 0; }
+  .hero__media img:nth-child(1) { opacity: 1; }
 }
 
 /* --------------------------------------------------------------------------
@@ -1246,6 +1490,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
   .split, .split--wide-left, .split--wide-right,
   .section-head--split, .cta__inner,
   .spec-groups { grid-template-columns: minmax(0, 1fr); }
+  .schedule-layout { grid-template-columns: minmax(0, 1fr); gap: 1.75rem; }
   .schedule { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .section-head--split { gap: 1.25rem; align-items: start; }
   .split__media { order: -1; }
@@ -1286,3 +1531,73 @@ button, input, select, textarea { font: inherit; color: inherit; }
   .type-tile:nth-child(1),
   .type-tile:last-child { grid-column: span 1; grid-row: span 1; }
 }
+
+/* --------------------------------------------------------------------------
+   22. Print. A listing page prints as a clean farm schedule an agent can hand
+   to a buyer or a bank: no chrome, no photo bleed, every section open.
+   -------------------------------------------------------------------------- */
+@media print {
+  @page { margin: 14mm; }
+
+  :root { --band: 0; --band-tight: 0; }
+
+  body { background: #fff; color: #000; font-size: 10.5pt; line-height: 1.42; }
+
+  .site-header, .site-footer, .searchrail, .cta, .statement,
+  .nav-toggle, .skip-link, .filters, .toolbar, .spec-tabs,
+  .enquiry-card, .save-btn, .lightbox, .type-more, .crumb,
+  .detail-actions, .link-line, .farm-card__foot { display: none !important; }
+
+  .band, .band--tight { padding-block: 0 !important; }
+  .band--stone, .band--ink { background: #fff !important; color: #000 !important; }
+  .band--ink h1, .band--ink h2, .band--ink h3 { color: #000 !important; }
+
+  .shell { max-width: none; padding-inline: 0; }
+
+  /* Everything the schedule holds, open, in two columns, unbroken per group */
+  .spec-group[hidden] { display: block !important; }
+  .schedule-layout { display: block !important; }
+  .spec-groups, .spec-groups.is-single { grid-template-columns: repeat(2, 1fr) !important; max-width: none; gap: 6mm 10mm; }
+  .spec-group { break-inside: avoid; border-top: 1.5pt solid #000; }
+  .spec-group h3 { font-size: 11pt; }
+  .spec-group dt, .spec-group dd { padding: 2pt 0; font-size: 9.5pt; border-bottom: 0.4pt solid #ccc; }
+
+  .factgrid { grid-template-columns: repeat(3, 1fr) !important; background: #fff; border-color: #000; }
+  .factgrid div { border-color: #ccc; }
+
+  /* One establishing photograph, then the facts */
+  .gallery { grid-template-columns: 1fr !important; }
+  .gallery figure:not(:first-child) { display: none; }
+  .gallery > :first-child { aspect-ratio: 21 / 9; }
+
+  .schedule-meter { border: 1pt solid #000; border-left-width: 3pt; }
+
+  h1 { font-size: 22pt; } h2 { font-size: 14pt; } h3 { font-size: 11pt; }
+  .detail-price { font-size: 18pt; color: #000; }
+  .eyebrow { color: #000; }
+  .reveal { opacity: 1 !important; transform: none !important; }
+
+  a[href]::after { content: ""; }
+
+  /* Contact block for whoever is holding the page */
+  #listing-detail::after {
+    content: "ERFDEVCO  |  Martiens Du Plessis  |  082 900 5019  |  martiens@erfdevco.com  |  www.erfdevco.com  |  Registered with the PPRA";
+    display: block;
+    margin-top: 8mm; padding-top: 3mm;
+    border-top: 1pt solid #000;
+    font-size: 8.5pt; letter-spacing: 0.04em;
+  }
+}
+
+/* Count badge inside a filter chip (shortlist) */
+.filter-btn .chip-n {
+  display: inline-block;
+  margin-left: 0.45rem;
+  min-width: 1.15rem;
+  padding: 0 0.3rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--ink) 10%, transparent);
+  font-size: 0.6875rem;
+  text-align: center;
+}
+.filter-btn[aria-pressed="true"] .chip-n { background: var(--gold); color: var(--ink); }

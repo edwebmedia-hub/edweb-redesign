@@ -60,7 +60,19 @@
   <section class="band">
     <div class="shell">
       <div class="filters" id="filters" role="group" aria-label="Filter by farm type"></div>
-      <p class="results-line" id="results-line" role="status" aria-live="polite"></p>
+      <div class="toolbar">
+        <p class="results-line" id="results-line" role="status" aria-live="polite" style="margin:0"></p>
+        <div>
+          <label for="sort-by">Sort</label>
+          <select id="sort-by">
+            <option value="newest">Most recently listed</option>
+            <option value="price-asc">Price, low to high</option>
+            <option value="price-desc">Price, high to low</option>
+            <option value="size-desc">Extent, largest first</option>
+            <option value="size-asc">Extent, smallest first</option>
+          </select>
+        </div>
+      </div>
       <div class="farm-grid farm-grid--even" id="all-farms" data-stagger>
         <div class="farm-empty">Loading current mandates.</div>
       </div>
@@ -122,7 +134,7 @@
     </div>
     <div class="footer-base">
       <p>&copy; <span data-year>2026</span> ERFDEVCO. Registered with the Property Practitioners Regulatory Authority.</p>
-      <p>Martiens Du Plessis, MPRE, B.Econ (Stell.)</p>
+      <p>Martiens Du Plessis, B.Econ (Stell.), registered with the PPRA</p>
     </div>
   </div>
 </footer>

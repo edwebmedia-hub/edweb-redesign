@@ -16,16 +16,38 @@
       "status": "For sale",
       "image": "assets/farm-vines.jpg",
       "alt": "Vineyard rows running toward the Banhoek mountains outside Stellenbosch",
-      "gallery": ["assets/vineyard-lush.jpg", "assets/cellar-barrels.jpg", "assets/farm-vineyard-aerial.jpg"],
+      "gallery": [
+        "assets/vineyard-lush.jpg",
+        "assets/cellar-barrels.jpg",
+        "assets/farm-vineyard-aerial.jpg"
+      ],
       "summary": "A registered wine farm on the Banhoek side of Stellenbosch, with 41 hectares under vine, a working cellar and a licensed water use allocation from the Dwars River.",
       "description": "Weltevrede sits on the cooler eastern slopes of the Banhoek Valley, where late-ripening reds hold acid longer than they do on the valley floor. Forty-one of the sixty-eight hectares are under vine, planted in blocks between 2004 and 2018, with Cabernet Sauvignon and Shiraz on the upper decomposed granite and Chardonnay on the lower alluvial soils. The cellar handles 320 tonnes a season and carries its own crush, press and 18 stainless tanks. The homestead is a restored 1920s farmhouse, and two cottages currently run as guest accommodation with an existing tourism consent. Water comes from a registered Dwars River abstraction plus three boreholes, and the entire vineyard is under drip. Sold as a going concern with the standing crop, cellar plant and irrigation infrastructure included.",
       "facts": [
-        ["68 ha", "Total extent"],
-        ["41 ha", "Under vine"],
-        ["Registered", "Water use licence"],
-        ["3", "Boreholes"],
-        ["Tarred", "Road access"],
-        ["Going concern", "VAT status"]
+        [
+          "68 ha",
+          "Total extent"
+        ],
+        [
+          "41 ha",
+          "Under vine"
+        ],
+        [
+          "Registered",
+          "Water use licence"
+        ],
+        [
+          "3",
+          "Boreholes"
+        ],
+        [
+          "Tarred",
+          "Road access"
+        ],
+        [
+          "Going concern",
+          "VAT status"
+        ]
       ],
       "specs": {
         "Land Information": {
@@ -115,7 +137,10 @@
           "Bird watching": "Yes",
           "Fishing": "No"
         }
-      }
+      },
+      "listedOn": "2026-07-02",
+      "factCount": 67,
+      "sectionCount": 10
     },
     {
       "id": "erf-lst-021",
@@ -132,16 +157,38 @@
       "status": "For sale",
       "image": "assets/farm-nguni-kzn.jpg",
       "alt": "Nguni cattle grazing sweetveld below the Drakensberg escarpment near Bergville",
-      "gallery": ["assets/farm-cattle.jpg", "assets/farm-cattle-close.jpg", "assets/farm-pasture-tree.jpg"],
+      "gallery": [
+        "assets/farm-cattle.jpg",
+        "assets/farm-cattle-close.jpg",
+        "assets/farm-pasture-tree.jpg"
+      ],
       "summary": "412 hectares of sweetveld running below the Drakensberg escarpment, split into fourteen camps with a full handling facility and year round water.",
       "description": "Grootvlei is a working beef unit on the sweetveld belt outside Bergville, carrying a commercial Nguni and Bonsmara cross herd. The land is divided into fourteen camps with water to every camp from two equipped boreholes and a gravity fed reticulation line off the upper spring. Carrying capacity is measured at 1 large stock unit per 3.2 hectares in a normal season. Infrastructure includes a full handling facility with crush, scale and loading ramp, a 90 tonne feed store, and 46 hectares of planted pasture under dryland. The homestead is a four bedroom face brick house with a separate manager's cottage and four staff units. Rainfall averages 780 mm and the farm has never been destocked for drought in the current owner's fifteen years. Sold with the fixed improvements; livestock negotiable separately.",
       "facts": [
-        ["412 ha", "Total extent"],
-        ["1 : 3.2", "Carrying capacity"],
-        ["14", "Camps"],
-        ["2", "Equipped boreholes"],
-        ["780 mm", "Average rainfall"],
-        ["Gravel", "Road access"]
+        [
+          "412 ha",
+          "Total extent"
+        ],
+        [
+          "1 : 3.2",
+          "Carrying capacity"
+        ],
+        [
+          "14",
+          "Camps"
+        ],
+        [
+          "2",
+          "Equipped boreholes"
+        ],
+        [
+          "780 mm",
+          "Average rainfall"
+        ],
+        [
+          "Gravel",
+          "Road access"
+        ]
       ],
       "specs": {
         "Land Information": {
@@ -230,7 +277,10 @@
           "Bird watching": "Yes",
           "Eco-tourism potential": "Yes"
         }
-      }
+      },
+      "listedOn": "2026-08-11",
+      "factCount": 66,
+      "sectionCount": 10
     },
     {
       "id": "erf-gam-008",
@@ -247,16 +297,38 @@
       "status": "For sale",
       "image": "assets/game-springbok.jpg",
       "alt": "Springbok standing in long grass on Waterberg bushveld",
-      "gallery": ["assets/farm-bushveld.jpg", "assets/game-plains.jpg", "assets/land-dusk.jpg"],
+      "gallery": [
+        "assets/farm-bushveld.jpg",
+        "assets/game-plains.jpg",
+        "assets/land-dusk.jpg"
+      ],
       "summary": "1 240 hectares of certified game fenced Waterberg bushveld with a six suite lodge, plains game and an existing hunting operation.",
       "description": "Rietfontein lies in the Waterberg, an hour north of Vaalwater on gravel, and is fully enclosed by 2.4 metre certified game fence. The property runs a plains game population including kudu, impala, waterbuck, zebra, blue wildebeest and giraffe, with a counted estimate of roughly 640 animals at the last aerial census. Income currently comes from a six suite thatched lodge with its own boma, a separate four bed hunting camp and a walk in cold room with a carcass rail. Twelve boreholes feed a network of drinking troughs and three pans hold water through most of the dry season. The bush is mixed broadleaf and thorn on sandy soil, with a rocky ridge running the northern boundary that gives the lodge its view. Sold as a going concern with the game, lodge contents and vehicles included.",
       "facts": [
-        ["1 240 ha", "Total extent"],
-        ["2.4 m", "Certified game fence"],
-        ["±640", "Head of game"],
-        ["12", "Boreholes"],
-        ["6 suites", "Lodge"],
-        ["Going concern", "VAT status"]
+        [
+          "1 240 ha",
+          "Total extent"
+        ],
+        [
+          "2.4 m",
+          "Certified game fence"
+        ],
+        [
+          "±640",
+          "Head of game"
+        ],
+        [
+          "12",
+          "Boreholes"
+        ],
+        [
+          "6 suites",
+          "Lodge"
+        ],
+        [
+          "Going concern",
+          "VAT status"
+        ]
       ],
       "specs": {
         "Land Information": {
@@ -337,7 +409,10 @@
           "Wedding venue potential": "Yes",
           "Fishing": "No"
         }
-      }
+      },
+      "listedOn": "2026-06-18",
+      "factCount": 60,
+      "sectionCount": 9
     },
     {
       "id": "erf-irr-033",
@@ -351,19 +426,41 @@
       "priceDisplay": "R28 900 000",
       "perHa": "R155 376 / ha",
       "sizeHa": 186,
-      "status": "For sale",
+      "status": "New listing",
       "image": "assets/farm-orchard-mountain.jpg",
       "alt": "Citrus orchard rows with the Drakensberg foothills behind, near Hoedspruit",
-      "gallery": ["assets/farm-irrigation.jpg", "assets/farm-aerial-crops.jpg", "assets/farm-grain.jpg"],
+      "gallery": [
+        "assets/farm-irrigation.jpg",
+        "assets/farm-aerial-crops.jpg",
+        "assets/farm-grain.jpg"
+      ],
       "summary": "186 hectares under a registered Blyde River scheme allocation, 112 hectares of bearing citrus, packhouse and cold chain on site.",
       "description": "Sonop is an established citrus unit on the Hoedspruit flats with a registered allocation off the Blyde River irrigation scheme, the single most valuable asset on the property. One hundred and twelve hectares carry bearing Valencia, Midknight and soft citrus, planted between 2011 and 2020, all under drip with a fertigation shed and a scheduling system already in place. The farm packs its own fruit through a 12 tonne per hour line with two cold rooms and a dispatch bay rated for export loading. Three centre pivots cover a further 22 hectares currently under maize and vegetables in rotation. Staff housing accommodates 34 permanent workers and there is a separate seasonal compound. Power is Eskom backed by a 300 kWp solar plant that carries the packhouse through daytime load shedding. Sold as a going concern.",
       "facts": [
-        ["186 ha", "Total extent"],
-        ["112 ha", "Bearing citrus"],
-        ["Registered", "Scheme allocation"],
-        ["3", "Centre pivots"],
-        ["12 t/h", "Packhouse line"],
-        ["300 kWp", "Solar plant"]
+        [
+          "186 ha",
+          "Total extent"
+        ],
+        [
+          "112 ha",
+          "Bearing citrus"
+        ],
+        [
+          "Registered",
+          "Scheme allocation"
+        ],
+        [
+          "3",
+          "Centre pivots"
+        ],
+        [
+          "12 t/h",
+          "Packhouse line"
+        ],
+        [
+          "300 kWp",
+          "Solar plant"
+        ]
       ],
       "specs": {
         "Land Information": {
@@ -454,7 +551,10 @@
           "Eco-tourism potential": "Yes",
           "Wedding venue potential": "No"
         }
-      }
+      },
+      "listedOn": "2026-08-25",
+      "factCount": 68,
+      "sectionCount": 10
     }
   ]
 }

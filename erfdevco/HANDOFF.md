@@ -44,6 +44,36 @@ Four values, everything else derived with `color-mix()`. Never add a stray hex.
 
 Type: **Tenor Sans** display (uppercase, negative tracking), **Instrument Sans** body.
 
+## What the site actually does
+Not a brochure. The pieces that make it behave like a working portal:
+
+- **Hero** crossfades three frames of South African land on a 27s cycle, each
+  frame drifting in scale. Held still under `prefers-reduced-motion`.
+- **Search rail** fused to the hero's bottom edge: farm type, province, extent.
+  Routes to `listings.html` with query parameters the listings page reads.
+- **Listings** filter by farm type, sort by most recently listed, price either
+  way and extent either way. Filter state syncs to the URL, so a filtered view
+  is a shareable link.
+- **Shortlist**: a heart on every farm, stored in `localStorage` under
+  `erfdevco:shortlist`. Never leaves the device, never posted anywhere. The
+  Shortlist chip carries a live count and filters to saved farms only, with its
+  own empty state.
+- **Cards** carry the reference, farm type, status (a genuinely new listing gets
+  the gold dot) and the recorded fact count for that farm.
+- **Farm page** opens on a schedule spine: section names down the left with
+  their field counts, one panel open beside them, a gold marker on the selected
+  section, arrow keys moving between them. "All sections" opens the lot.
+- **Schedule meter** states the farm's own numbers: measured facts recorded and
+  how many of the 18 sections apply, with a line saying sections that cannot
+  apply are left out rather than filled in.
+- **Photo viewer** on the gallery: click or keyboard, arrow keys to move, Escape
+  to close, focus returned to the thumbnail that opened it.
+- **Print the schedule** turns the farm page into a clean paper brochure: no
+  chrome, every section open regardless of the tab, two columns, and a contact
+  footer for whoever is holding the page. See section 22 of styles.css.
+- **Direct enquiry** per farm: the form prefills the reference, and the chat
+  link carries the reference, title and price in its message.
+
 ## Pages
 - `index.html` hero, search rail, 4 farms, agency split, counters, farm-type
   chapter, the listing schedule, the mandate, six services, CTA
@@ -74,7 +104,7 @@ property photographs as mandates come in.
 
 ## Verification (2026-08-28, headless Chrome via puppeteer-core)
 Every page at 1440, 768 and 390:
-- 0 console errors, 0 failed requests, 0 broken images
+- 24 page and width combinations swept: 0 console errors, 0 failed requests, 0 broken images
 - 0 horizontal overflow at any width
 - 28 of 28 scroll reveals resolve to opacity 1 (plus 60ms, 2.6s and 9s sweeps)
 - counters animate to 103 / 18 / 10 / 9
@@ -93,6 +123,11 @@ Phone-viewable Artifact of the whole design:
 https://claude.ai/code/artifact/ebc59c79-3947-47d4-b210-f0a8b65e703e
 
 ## Known gaps before launch
+0. **MPRE removed 2026-08-28.** "Master Practitioner in Real Estate" was on the
+   site 10 times but is not on the approved email signature and nothing in this
+   project confirms it. Removed rather than shipped on an assumption. If
+   Martiens confirms he holds it, it goes back in one pass. See
+   CONFIRM-BEFORE-LAUNCH.md.
 1. Four demo listings to be replaced with real mandates.
 2. `api/send-mail.js` posts to `info@erfdevco.com` and needs `SMTP_PASS` set as
    an env var at deploy time.
