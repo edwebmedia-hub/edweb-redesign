@@ -343,6 +343,7 @@
     var searchBox = $('#farm-q');
     var savedOnly = false;
     var query = '';
+    var mapApi = null;
 
     // Free text across the fields a buyer would actually type into.
     function hay(f) {
@@ -397,10 +398,12 @@
           (active === 'all' ? ' currently listed' : ' in ' + active.toLowerCase());
       }
       armReveals(mount);
+      if (mapApi) mapApi.sync(list, qProv);
     }
 
     loadData().then(function (farms) {
       all = farms;
+      buildMap(farms);
 
       if (chips) {
         var types = ['all'].concat(farms.map(function (f) { return f.farmType; })
@@ -472,6 +475,143 @@
     }).catch(function (err) {
       mount.innerHTML = '<div class="farm-empty"><h3>Listings unavailable</h3><p>' + esc(err.message) + '</p></div>';
     });
+
+    /* ------------------------------------------------------------------
+       Map search. Province outlines from Natural Earth, farms pinned at
+       their district. The map is a control, not a picture.
+       ------------------------------------------------------------------ */
+    function buildMap(farms) {
+      var host = $('#farm-map');
+      if (!host) return;
+
+      fetch('data/za-provinces.json', { cache: 'no-cache' })
+        .then(function (r) { if (!r.ok) throw new Error('map ' + r.status); return r.json(); })
+        .then(function (geo) {
+          var slugOf = {};
+          Object.keys(geo.names).forEach(function (s) { slugOf[geo.names[s]] = s; });
+
+          var counts = {};
+          farms.forEach(function (f) {
+            var s = slugOf[f.province];
+            if (s) counts[s] = (counts[s] || 0) + 1;
+          });
+
+          var paths = Object.keys(geo.paths).map(function (s) {
+            var n = counts[s] || 0;
+            return '<path class="prov' + (n ? ' has-farms' : '') + '" data-prov="' + s + '" d="' + geo.paths[s] + '">' +
+              '<title>' + esc(geo.names[s]) + (n ? ', ' + n + (n === 1 ? ' farm' : ' farms') : ', no farms listed') + '</title></path>';
+          }).join('');
+
+          var pins = farms.filter(function (f) { return f.mapXY; }).map(function (f) {
+            return '<g class="pin" data-id="' + esc(f.id) + '" tabindex="0" role="link"' +
+              ' aria-label="' + esc(f.title) + ', ' + esc(f.place) + ', ' + esc(f.priceDisplay) + '"' +
+              ' transform="translate(' + f.mapXY[0] + ',' + f.mapXY[1] + ')">' +
+              '<circle class="halo" r="18"></circle><circle class="dot" r="8"></circle></g>';
+          }).join('');
+
+          host.innerHTML =
+            '<div class="mapfig">' +
+              '<svg viewBox="' + geo.viewBox + '" role="img" aria-label="Map of South Africa showing where the listed farms are">' +
+                '<g class="provs">' + paths + '</g><g class="pins">' + pins + '</g>' +
+              '</svg>' +
+              '<div class="maptip" aria-hidden="true"></div>' +
+            '</div>' +
+            '<div>' +
+              '<div class="maphead">' +
+                '<h3>Where the farms are</h3>' +
+                '<p>Nine provinces, ' + farms.length + ' farms on the books. Pick a province to narrow the list, or tap a pin to open the farm.</p>' +
+              '</div>' +
+              '<div class="provlist">' +
+                Object.keys(geo.names).sort(function (a, b) {
+                  return (counts[b] || 0) - (counts[a] || 0) || geo.names[a].localeCompare(geo.names[b]);
+                }).map(function (s) {
+                  var n = counts[s] || 0;
+                  return '<button type="button" data-prov="' + s + '" aria-pressed="false"' +
+                    (n ? '' : ' disabled') + '>' + esc(geo.names[s]) +
+                    '<span class="n">' + (n || 'none') + '</span></button>';
+                }).join('') +
+              '</div>' +
+            '</div>';
+
+          var tip = $('.maptip', host);
+          var byId = {};
+          farms.forEach(function (f) { byId[f.id] = f; });
+
+          function showTip(g) {
+            var f = byId[g.getAttribute('data-id')];
+            if (!f) return;
+            var fig = $('.mapfig', host);
+            var r = g.getBoundingClientRect(), fr = fig.getBoundingClientRect();
+            tip.innerHTML = '<span class="r">' + esc(f.ref) + '</span>' +
+              '<span class="t">' + esc(f.title) + '</span>' +
+              '<span class="p">' + esc(f.place) + ' &middot; ' + esc(f.priceDisplay) + '</span>';
+            tip.style.left = (r.left - fr.left + r.width / 2) + 'px';
+            tip.style.top = (r.top - fr.top) + 'px';
+            tip.classList.add('is-on');
+          }
+          function hideTip() { tip.classList.remove('is-on'); }
+
+          function setProvince(slug) {
+            qProv = slug ? geo.names[slug] : null;
+            savedOnly = false;
+            var url = new URL(window.location.href);
+            if (qProv) url.searchParams.set('province', qProv);
+            else url.searchParams.delete('province');
+            history.replaceState(null, '', url);
+            render();
+          }
+
+          host.addEventListener('click', function (e) {
+            var pin = e.target.closest('.pin');
+            if (pin) { window.location.href = 'listing.html?id=' + encodeURIComponent(pin.getAttribute('data-id')); return; }
+            var p = e.target.closest('[data-prov]');
+            if (!p || p.hasAttribute('disabled') || (p.tagName === 'path' && !p.classList.contains('has-farms'))) return;
+            var slug = p.getAttribute('data-prov');
+            setProvince(qProv === geo.names[slug] ? null : slug);
+          });
+
+          host.addEventListener('mouseover', function (e) {
+            var pin = e.target.closest('.pin');
+            if (pin) showTip(pin);
+          });
+          host.addEventListener('mouseout', function (e) {
+            if (e.target.closest('.pin')) hideTip();
+          });
+          host.addEventListener('focusin', function (e) {
+            var pin = e.target.closest('.pin');
+            if (pin) showTip(pin);
+          });
+          host.addEventListener('focusout', hideTip);
+          host.addEventListener('keydown', function (e) {
+            var pin = e.target.closest('.pin');
+            if (pin && (e.key === 'Enter' || e.key === ' ')) {
+              e.preventDefault();
+              window.location.href = 'listing.html?id=' + encodeURIComponent(pin.getAttribute('data-id'));
+            }
+          });
+
+          mapApi = {
+            sync: function (visible, provName) {
+              var live = {};
+              visible.forEach(function (f) { live[f.id] = 1; });
+              $$('.pin', host).forEach(function (g) {
+                g.classList.toggle('is-dim', !live[g.getAttribute('data-id')]);
+              });
+              var slug = provName ? slugOf[provName] : null;
+              $$('[data-prov]', host).forEach(function (el) {
+                var on = slug && el.getAttribute('data-prov') === slug;
+                if (el.tagName === 'path') el.classList.toggle('is-active', !!on);
+                else el.setAttribute('aria-pressed', on ? 'true' : 'false');
+              });
+            }
+          };
+          render();
+        })
+        .catch(function () {
+          // A map that will not load must not take the listings with it.
+          host.closest('.mapbox') && host.closest('.mapbox').remove();
+        });
+    }
   })();
 
   /* Listing detail -------------------------------------------------------- */
@@ -536,6 +676,7 @@
                 saveButton(f, true) +
                 '<a class="btn btn--outline" href="https://wa.me/27829005019?text=' + waText + '" rel="noopener">WhatsApp about ' + esc(f.ref) + '</a>' +
                 '<button type="button" class="btn btn--outline" data-print>Print the schedule</button>' +
+                '<button type="button" class="btn btn--outline" data-share>Share this farm</button>' +
               '</div>' +
             '</div>' +
             '<div>' +
@@ -582,12 +723,31 @@
               '<div class="spec-groups is-single">' + specsHtml + '</div>' +
             '</div>' +
           '</div>' +
-        '</div>';
+        '</div>' +
+
+        '<div class="band band--tight">' +
+          '<div class="shell">' +
+            '<div class="section-head section-head--split reveal">' +
+              '<div>' +
+                '<p class="eyebrow">What it costs to carry</p>' +
+                '<h2>Work the bond on ' + esc(f.priceDisplay) + '</h2>' +
+              '</div>' +
+              '<div><p class="lede">Change the deposit, the rate and the term to see the monthly repayment. This is arithmetic, not a quote: your bank sets the rate, and agricultural bonds are usually written over shorter terms than a house.</p></div>' +
+            '</div>' +
+            '<div class="reveal">' + bondCard(f) + '</div>' +
+          '</div>' +
+        '</div>' +
+
+        '<div class="band band--tight band--top0" id="similar-farms"></div>';
 
       armReveals(mount);
       wireForms(mount);
       wireSpecTabs(mount);
       wireLightbox(mount, gallery, f);
+      wireBond(mount, f);
+      wireShare(mount, f);
+      renderSimilar(mount, f, farms);
+      injectSchema(f);
 
       var printBtn = $('[data-print]', mount);
       if (printBtn) printBtn.addEventListener('click', function () {
@@ -706,6 +866,152 @@
           if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(i); }
         });
       });
+    }
+
+    /* Bond repayment. Standard amortisation, run in the browser, nothing sent. */
+    function bondCard(f) {
+      return '' +
+        '<div class="bond">' +
+          '<div class="bond-grid">' +
+            '<label class="bond-f"><span>Deposit</span>' +
+              '<input type="range" id="bd-dep" min="0" max="60" step="5" value="20" />' +
+              '<output id="bd-dep-o"></output></label>' +
+            '<label class="bond-f"><span>Interest rate</span>' +
+              '<input type="range" id="bd-rate" min="6" max="18" step="0.25" value="11.75" />' +
+              '<output id="bd-rate-o"></output></label>' +
+            '<label class="bond-f"><span>Term</span>' +
+              '<input type="range" id="bd-term" min="5" max="30" step="1" value="15" />' +
+              '<output id="bd-term-o"></output></label>' +
+          '</div>' +
+          '<div class="bond-out">' +
+            '<p class="bond-lab">Monthly repayment</p>' +
+            '<p class="bond-big" id="bd-pm">&nbsp;</p>' +
+            '<dl class="bond-sum">' +
+              '<div><dt id="bd-dep-amt">&nbsp;</dt><dd>Deposit</dd></div>' +
+              '<div><dt id="bd-loan">&nbsp;</dt><dd>Amount bonded</dd></div>' +
+              '<div><dt id="bd-int">&nbsp;</dt><dd>Interest over the term</dd></div>' +
+            '</dl>' +
+            '<p class="form-note">An estimate only. Rates, terms and deposits on agricultural property are set by your bank against the farm and the buyer.</p>' +
+          '</div>' +
+        '</div>';
+    }
+
+    function wireBond(root, f) {
+      var dep = $('#bd-dep', root), rate = $('#bd-rate', root), term = $('#bd-term', root);
+      if (!dep || !rate || !term) return;
+
+      var money = function (n) {
+        return 'R' + Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+      };
+
+      function calc() {
+        var d = +dep.value, r = +rate.value, y = +term.value;
+        var deposit = f.price * d / 100;
+        var loan = f.price - deposit;
+        var i = r / 100 / 12, n = y * 12;
+        var pm = i === 0 ? loan / n : loan * i * Math.pow(1 + i, n) / (Math.pow(1 + i, n) - 1);
+
+        $('#bd-dep-o', root).textContent = d + '%';
+        $('#bd-rate-o', root).textContent = r.toFixed(2) + '%';
+        $('#bd-term-o', root).textContent = y + (y === 1 ? ' year' : ' years');
+        $('#bd-pm', root).textContent = money(pm);
+        $('#bd-dep-amt', root).textContent = money(deposit);
+        $('#bd-loan', root).textContent = money(loan);
+        $('#bd-int', root).textContent = money(pm * n - loan);
+      }
+
+      [dep, rate, term].forEach(function (el) { el.addEventListener('input', calc); });
+      calc();
+    }
+
+    /* Share. Native sheet where there is one, clipboard everywhere else. */
+    function wireShare(root, f) {
+      var btn = $('[data-share]', root);
+      if (!btn) return;
+      btn.addEventListener('click', function () {
+        var url = window.location.href;
+        var label = f.title + ', ' + f.place + ', ' + f.priceDisplay;
+        if (navigator.share) {
+          navigator.share({ title: f.title + ' | ERFDEVCO', text: label, url: url }).catch(function () {});
+          return;
+        }
+        var done = function () {
+          var was = btn.textContent;
+          btn.textContent = 'Link copied';
+          setTimeout(function () { btn.textContent = was; }, 1800);
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(url).then(done).catch(function () {});
+        } else {
+          var t = document.createElement('textarea');
+          t.value = url; document.body.appendChild(t); t.select();
+          try { document.execCommand('copy'); done(); } catch (e) {}
+          document.body.removeChild(t);
+        }
+      });
+    }
+
+    /* Similar farms: same type first, then same province, then nearest price. */
+    function renderSimilar(root, f, farms) {
+      var host = $('#similar-farms', root);
+      if (!host) return;
+      var rest = farms.filter(function (x) { return x.id !== f.id; });
+      var scored = rest.map(function (x) {
+        var s = 0;
+        if (x.farmType === f.farmType) s += 100;
+        if (x.province === f.province) s += 40;
+        s -= Math.abs(x.price - f.price) / f.price * 20;
+        return { f: x, s: s };
+      }).sort(function (a, b) { return b.s - a.s; }).slice(0, 3);
+
+      if (!scored.length) { host.remove(); return; }
+
+      host.innerHTML = '<div class="shell">' +
+        '<div class="section-head section-head--split reveal">' +
+          '<div><p class="eyebrow">Also on the books</p><h2>Farms a buyer of this one usually looks at</h2></div>' +
+          '<div><p class="lede">Matched on farm type first, then province, then price.</p>' +
+          '<p style="margin-top:1.25rem"><a class="link-line" href="listings.html">All ' + farms.length + ' farms <span class="arw" aria-hidden="true">&rarr;</span></a></p></div>' +
+        '</div>' +
+        '<div class="farm-grid farm-grid--even" data-stagger>' +
+          scored.map(function (x) { return farmCard(x.f, false); }).join('') +
+        '</div>' +
+      '</div>';
+      armReveals(host);
+    }
+
+    /* Structured data so a listing can surface as a rich result. */
+    function injectSchema(f) {
+      var old = document.getElementById('listing-schema');
+      if (old) old.remove();
+      var s = document.createElement('script');
+      s.type = 'application/ld+json';
+      s.id = 'listing-schema';
+      s.textContent = JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'Product',
+        name: f.title,
+        sku: f.ref,
+        description: f.summary,
+        image: [new URL(f.image, window.location.href).href],
+        category: f.farmType,
+        brand: { '@type': 'Brand', name: 'ERFDEVCO' },
+        offers: {
+          '@type': 'Offer',
+          price: f.price,
+          priceCurrency: 'ZAR',
+          availability: 'https://schema.org/InStock',
+          url: window.location.href,
+          seller: { '@type': 'RealEstateAgent', name: 'ERFDEVCO', telephone: '+27829005019' },
+          areaServed: f.province
+        },
+        additionalProperty: [
+          { '@type': 'PropertyValue', name: 'Total extent', value: f.sizeHa, unitCode: 'HAR' },
+          { '@type': 'PropertyValue', name: 'Province', value: f.province },
+          { '@type': 'PropertyValue', name: 'Farm type', value: f.farmType },
+          { '@type': 'PropertyValue', name: 'Schedule fields recorded', value: f.factCount }
+        ]
+      });
+      document.head.appendChild(s);
     }
 
     function enquiryCard(f) {

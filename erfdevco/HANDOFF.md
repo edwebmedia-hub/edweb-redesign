@@ -77,6 +77,29 @@ Not a brochure. The pieces that make it behave like a working portal:
   link carries the reference, title and price in its message.
 - **Free text search** across title, district, province, farm type, reference
   and summary, debounced, cleared with Escape.
+- **Map search** on the listings page. Real province outlines from Natural
+  Earth 1:50m admin-1 data (public domain, CC0), reprojected to Web Mercator,
+  Douglas-Peucker simplified to 12 KB of path data and served from
+  `data/za-provinces.json`. Farms are pinned at their district's real
+  coordinates through the same projection, so every pin lands inside its own
+  province (verified with `isPointInFill`). Provinces holding stock are
+  interactive, empty ones are muted. Clicking a province filters the list and
+  writes to the URL; pins for filtered-out farms fade. The province tally
+  beside the map does the same job for keyboard and screen readers. If the
+  geometry fails to load the whole panel removes itself rather than taking the
+  listings down with it.
+- **Bond calculator** on every farm page. Deposit, rate and term as sliders
+  over the standard amortisation formula, returning the monthly repayment, the
+  deposit, the amount bonded and total interest. Nothing is sent anywhere and
+  the default rate is a starting point, labelled as arithmetic rather than a
+  quote.
+- **Similar farms** under each listing, matched on farm type first, then
+  province, then price proximity.
+- **Share** on each farm: the native share sheet where the browser has one,
+  clipboard everywhere else, with the button confirming the copy.
+- **Structured data** per listing, injected as `Product` with a ZAR `Offer`
+  and the extent, province, farm type and recorded field count as
+  `additionalProperty`, so a farm can surface as a rich result.
 - **Compare**, the feature the uniform schedule exists for. Tick up to three
   farms, a tray rises with the selection, and `compare.html` lines them up
   field for field across the union of every section either farm answers.
@@ -92,6 +115,7 @@ Not a brochure. The pieces that make it behave like a working portal:
 - `listing.html?id=` JS-rendered from `data/listings.json`: gallery, 6-fact grid,
   description, 10 spec groups, sticky enquiry form
 - `compare.html` side by side schedule comparison of two or three farms
+- `data/za-provinces.json` province geometry for the map (Natural Earth, CC0)
 - `about.html`, `contact.html`, `404.html`
 - `sitemap.xml`, `robots.txt`, `vercel.json` (cleanUrls + security headers)
 
@@ -132,6 +156,8 @@ file is now 502 KB. Re-run that pass if large originals are added.
 ## Verification (2026-08-28, headless Chrome via puppeteer-core)
 Every page at 1440, 768 and 390:
 - 32 page and width combinations swept: 0 console errors, 0 failed requests, 0 broken images
+- map: all 9 pins verified inside their own province via SVG isPointInFill
+- bond maths checked by hand: R26m at 11.75% over 15 years is R307 874 a month
 - 0 horizontal overflow at any width
 - 28 of 28 scroll reveals resolve to opacity 1 (plus 60ms, 2.6s and 9s sweeps)
 - counters animate to 103 / 18 / 10 / 9
