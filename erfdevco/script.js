@@ -209,6 +209,54 @@
     });
   });
 
+  /* ----------------------------------------------------------------------
+     Compare. Up to three farms held side by side. Only possible because
+     every listing answers the same schedule.
+     ---------------------------------------------------------------------- */
+  var CMP_KEY = 'erfdevco:compare';
+  var CMP_MAX = 3;
+
+  function compareList() {
+    try {
+      var raw = window.localStorage.getItem(CMP_KEY);
+      var arr = raw ? JSON.parse(raw) : [];
+      return Array.isArray(arr) ? arr.slice(0, CMP_MAX) : [];
+    } catch (e) { return []; }
+  }
+
+  function setCompare(ids) {
+    try { window.localStorage.setItem(CMP_KEY, JSON.stringify(ids.slice(0, CMP_MAX))); } catch (e) {}
+    document.dispatchEvent(new CustomEvent('erf:compare'));
+  }
+
+  function inCompare(id) { return compareList().indexOf(id) !== -1; }
+
+  function toggleCompare(id) {
+    var ids = compareList();
+    var i = ids.indexOf(id);
+    if (i !== -1) { ids.splice(i, 1); setCompare(ids); return false; }
+    if (ids.length >= CMP_MAX) return null;      // full
+    ids.push(id); setCompare(ids); return true;
+  }
+
+  function compareToggle(f) {
+    var on = inCompare(f.id);
+    return '<button type="button" class="cmp-toggle" data-cmp="' + esc(f.id) + '"' +
+      ' aria-pressed="' + (on ? 'true' : 'false') + '">' +
+      '<span class="box" aria-hidden="true"></span>Compare</button>';
+  }
+
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest && e.target.closest('[data-cmp]');
+    if (!btn) return;
+    e.preventDefault();
+    var res = toggleCompare(btn.getAttribute('data-cmp'));
+    if (res === null) return;                     // already holding three
+    $$('[data-cmp="' + btn.getAttribute('data-cmp') + '"]').forEach(function (b) {
+      b.setAttribute('aria-pressed', res ? 'true' : 'false');
+    });
+  });
+
   function farmCard(f, eager) {
     var meta = (f.facts || []).slice(0, 3).map(function (pair) {
       return '<span><b>' + esc(pair[0]) + '</b> ' + esc(pair[1]).toLowerCase() + '</span>';
@@ -241,6 +289,9 @@
             '<a class="link-line" href="listing.html?id=' + encodeURIComponent(f.id) + '">View the schedule <span class="arw" aria-hidden="true">&rarr;</span></a>' +
             facts +
           '</div>' +
+          '<div class="farm-card__foot" style="padding-top:0.75rem">' +
+            compareToggle(f) +
+          '</div>' +
         '</div>' +
       '</article>';
   }
@@ -260,7 +311,10 @@
     if (!mount) return;
     loadData().then(function (farms) {
       var limit = parseInt(mount.getAttribute('data-limit') || '4', 10);
-      var list = farms.slice(0, limit);
+      // The home page shows what came on most recently, not file order.
+      var list = farms.slice().sort(function (a, b) {
+        return String(b.listedOn || '').localeCompare(String(a.listedOn || ''));
+      }).slice(0, limit);
       mount.innerHTML = list.map(function (f, i) { return farmCard(f, i === 0); }).join('');
       var count = $('#farm-count');
       if (count) count.textContent = String(farms.length);
@@ -286,9 +340,18 @@
     var qSize = params.get('size');
 
     var sortSel = $('#sort-by');
+    var searchBox = $('#farm-q');
     var savedOnly = false;
+    var query = '';
+
+    // Free text across the fields a buyer would actually type into.
+    function hay(f) {
+      return [f.title, f.place, f.province, f.farmType, f.ref, f.summary]
+        .join(' ').toLowerCase();
+    }
 
     function matches(f) {
+      if (query && hay(f).indexOf(query) === -1) return false;
       if (savedOnly && !isSaved(f.id)) return false;
       if (active !== 'all' && f.farmType !== active) return false;
       if (qProv && qProv !== 'any' && f.province !== qProv) return false;
@@ -324,13 +387,14 @@
           '<p style="margin-top:1.5rem"><a class="btn btn--ink" href="contact.html">Register your requirement</a></p>' +
         '</div>';
       } else {
-        mount.innerHTML = list.map(function (f, i) { return farmCard(f, i < 2); }).join('');
+        mount.innerHTML = list.map(function (f, i) { return farmCard(f, i < 3); }).join('');
       }
       if (resultLine) {
-        resultLine.textContent = savedOnly
-          ? list.length + (list.length === 1 ? ' farm' : ' farms') + ' on your shortlist'
-          : list.length + (list.length === 1 ? ' farm' : ' farms') +
-            (active === 'all' ? ' currently listed' : ' in ' + active.toLowerCase());
+        var n = list.length + (list.length === 1 ? ' farm' : ' farms');
+        if (savedOnly) resultLine.textContent = n + ' on your shortlist';
+        else if (query) resultLine.textContent = n + ' matching "' + query + '"';
+        else resultLine.textContent = n +
+          (active === 'all' ? ' currently listed' : ' in ' + active.toLowerCase());
       }
       armReveals(mount);
     }
@@ -382,6 +446,24 @@
       }
 
       if (sortSel) sortSel.addEventListener('change', render);
+
+      if (searchBox) {
+        var t = null;
+        searchBox.addEventListener('input', function () {
+          clearTimeout(t);
+          t = setTimeout(function () {
+            query = searchBox.value.trim().toLowerCase();
+            savedOnly = false;
+            render();
+          }, 160);
+        });
+        // A search box that cannot be cleared with Escape is a nuisance.
+        searchBox.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape' && searchBox.value) {
+            searchBox.value = ''; query = ''; render();
+          }
+        });
+      }
 
       // Un-saving from inside a shortlist view should drop the card immediately.
       document.addEventListener('erf:shortlist', function () { if (savedOnly) render(); });
@@ -771,6 +853,193 @@
 
   /* Year in the footer */
   $$('[data-year]').forEach(function (el) { el.textContent = String(new Date().getFullYear()); });
+
+  /* ----------------------------------------------------------------------
+     Compare tray. Built once, shown only while farms are selected.
+     ---------------------------------------------------------------------- */
+  (function compareTray() {
+    var tray = null, slots = null, cta = null;
+
+    function build() {
+      tray = document.createElement('div');
+      tray.className = 'cmp-tray';
+      tray.setAttribute('role', 'region');
+      tray.setAttribute('aria-label', 'Farms selected to compare');
+      tray.innerHTML =
+        '<span class="cmp-tray__label">Compare</span>' +
+        '<div class="cmp-tray__slots"></div>' +
+        '<div class="cmp-tray__actions">' +
+          '<button type="button" class="cmp-clear">Clear</button>' +
+          '<a class="btn btn--gold" href="compare.html">Compare</a>' +
+        '</div>';
+      document.body.appendChild(tray);
+      slots = $('.cmp-tray__slots', tray);
+      cta = $('.btn', tray);
+      $('.cmp-clear', tray).addEventListener('click', function () {
+        setCompare([]);
+        $$('[data-cmp]').forEach(function (b) { b.setAttribute('aria-pressed', 'false'); });
+      });
+      slots.addEventListener('click', function (e) {
+        var x = e.target.closest('.cmp-slot__x');
+        if (!x) return;
+        var id = x.getAttribute('data-drop');
+        var ids = compareList().filter(function (v) { return v !== id; });
+        setCompare(ids);
+        $$('[data-cmp="' + id + '"]').forEach(function (b) { b.setAttribute('aria-pressed', 'false'); });
+      });
+    }
+
+    function render() {
+      var ids = compareList();
+      if (!ids.length) {
+        if (tray) tray.classList.remove('is-up');
+        document.body.classList.remove('has-tray');
+        return;
+      }
+      if (!tray) build();
+      // Keep the tray from sitting on top of the last of the page.
+      document.body.classList.add('has-tray');
+      loadData().then(function (farms) {
+        var by = {};
+        farms.forEach(function (f) { by[f.id] = f; });
+        var html = '';
+        for (var i = 0; i < CMP_MAX; i++) {
+          var f = by[ids[i]];
+          html += f
+            ? '<div class="cmp-slot cmp-slot--filled"><img src="' + esc(f.image) + '" alt="' + esc(f.title) + '" />' +
+              '<button type="button" class="cmp-slot__x" data-drop="' + esc(f.id) + '" aria-label="Remove ' + esc(f.title) + '">&times;</button></div>'
+            : '<div class="cmp-slot" aria-hidden="true"></div>';
+        }
+        slots.innerHTML = html;
+        cta.textContent = ids.length < 2 ? 'Pick one more' : 'Compare ' + ids.length + ' farms';
+        if (ids.length < 2) cta.setAttribute('aria-disabled', 'true');
+        else cta.removeAttribute('aria-disabled');
+        requestAnimationFrame(function () { tray.classList.add('is-up'); });
+      });
+    }
+
+    document.addEventListener('erf:compare', render);
+    render();
+  })();
+
+  /* ----------------------------------------------------------------------
+     Compare page. Every field either farm answers, grouped by schedule
+     section, with the rows that actually differ marked.
+     ---------------------------------------------------------------------- */
+  (function comparePage() {
+    var mount = $('#compare-table');
+    if (!mount) return;
+
+    // Exposed so a single page shell (the design preview) can re-render this
+    // view after the selection changes. Harmless on the real multi-page site.
+    window.__erfRenderCompare = render;
+    render();
+
+    function render() {
+    loadData().then(function (farms) {
+      var by = {};
+      farms.forEach(function (f) { by[f.id] = f; });
+      var picked = compareList().map(function (id) { return by[id]; }).filter(Boolean);
+
+      if (picked.length < 2) {
+        mount.innerHTML = '<div class="farm-empty">' +
+          '<h3>Pick at least two farms</h3>' +
+          '<p>Tick Compare on any two or three farms and they will line up here, field for field, across the whole schedule.</p>' +
+          '<p style="margin-top:1.5rem"><a class="btn btn--ink" href="listings.html">Browse farms for sale</a></p>' +
+        '</div>';
+        return;
+      }
+
+      // Union of sections and of the fields inside them, in first-seen order.
+      var sections = [];
+      var fields = {};
+      picked.forEach(function (f) {
+        Object.keys(f.specs || {}).forEach(function (sec) {
+          if (sections.indexOf(sec) === -1) { sections.push(sec); fields[sec] = []; }
+          Object.keys(f.specs[sec]).forEach(function (k) {
+            if (fields[sec].indexOf(k) === -1) fields[sec].push(k);
+          });
+        });
+      });
+
+      var head = '<thead><tr><th scope="col"><span class="visually-hidden">Field</span></th>' +
+        picked.map(function (f) {
+          return '<th scope="col"><span class="cmp-head">' +
+            '<img src="' + esc(f.image) + '" alt="' + esc(f.alt) + '" loading="lazy" decoding="async" />' +
+            '<span class="r">' + esc(f.ref) + '</span>' +
+            '<span class="t"><a href="listing.html?id=' + encodeURIComponent(f.id) + '">' + esc(f.title) + '</a></span>' +
+            '<span class="l">' + esc(f.place) + ', ' + esc(f.province) + '</span>' +
+            '<span class="p">' + esc(f.priceDisplay) + '</span>' +
+          '</span></th>';
+        }).join('') + '</tr></thead>';
+
+      // Headline rows first, then the schedule proper.
+      var HEAD_ROWS = [
+        ['Farm type', function (f) { return f.farmType; }],
+        ['Province', function (f) { return f.province; }],
+        ['Total extent', function (f) { return thousands(f.sizeHa) + ' ha'; }],
+        ['Asking price', function (f) { return f.priceDisplay; }],
+        ['Price per hectare', function (f) { return f.perHa; }],
+        ['Facts recorded', function (f) { return f.factCount + ' across ' + f.sectionCount + ' sections'; }],
+        ['On the market since', function (f) { return monthYear(f.listedOn); }]
+      ];
+
+      function row(label, values) {
+        var seen = values.filter(function (v) { return v !== ''; });
+        var diff = new Set(seen).size > 1 || seen.length !== values.length ? 1 : 0;
+        return '<tr data-diff="' + diff + '"><th scope="row">' + esc(label) + '</th>' +
+          values.map(function (v) {
+            return v === ''
+              ? '<td class="is-blank">Not recorded</td>'
+              : '<td>' + esc(v) + '</td>';
+          }).join('') + '</tr>';
+      }
+
+      var body = '<tbody>';
+      body += '<tr class="cmp-sec"><th colspan="' + (picked.length + 1) + '" scope="colgroup">At a glance</th></tr>';
+      HEAD_ROWS.forEach(function (r) {
+        body += row(r[0], picked.map(function (f) { return String(r[1](f) || ''); }));
+      });
+      sections.forEach(function (sec) {
+        body += '<tr class="cmp-sec"><th colspan="' + (picked.length + 1) + '" scope="colgroup">' + esc(sec) + '</th></tr>';
+        fields[sec].forEach(function (k) {
+          body += row(k, picked.map(function (f) {
+            return (f.specs[sec] && f.specs[sec][k]) ? String(f.specs[sec][k]) : '';
+          }));
+        });
+      });
+      body += '</tbody>';
+
+      mount.innerHTML = '<div class="cmp-wrap"><table class="cmp-table">' + head + body + '</table></div>';
+
+      var table = $('.cmp-table', mount);
+      var diffCount = $$('tr[data-diff="1"]', table).length;
+      var totalRows = $$('tbody tr:not(.cmp-sec)', table).length;
+
+      var line = $('#compare-line');
+      if (line) {
+        line.textContent = picked.length + ' farms, ' + totalRows + ' fields compared, ' +
+          diffCount + ' where they differ.';
+      }
+
+      var sw = $('#compare-diff');
+      if (sw) {
+        sw.hidden = false;
+        sw.addEventListener('click', function () {
+          var on = sw.getAttribute('aria-pressed') !== 'true';
+          sw.setAttribute('aria-pressed', on ? 'true' : 'false');
+          table.classList.toggle('cmp-only-diff', on);
+          sw.querySelector('.lab').textContent = on ? 'Showing differences only' : 'Show differences only';
+        });
+      }
+
+      var printBtn = $('#compare-print');
+      if (printBtn) printBtn.addEventListener('click', function () { window.print(); });
+    }).catch(function (err) {
+      mount.innerHTML = '<div class="farm-empty"><h3>Comparison unavailable</h3><p>' + esc(err.message) + '</p></div>';
+    });
+    }
+  })();
 
   /* Keep every shortlist counter on the page in step with the store. */
   (function shortlistCount() {

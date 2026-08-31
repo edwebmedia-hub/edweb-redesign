@@ -555,6 +555,716 @@
       "listedOn": "2026-08-25",
       "factCount": 68,
       "sectionCount": 10
+    },
+    {
+      "id": "erf-crp-042",
+      "ref": "ERF-CRP-042",
+      "title": "Rietkuil Grain & Sunflower Farm",
+      "place": "Bothaville, Goldfields",
+      "province": "Free State",
+      "category": "Crop Farm",
+      "farmType": "Crop Farm",
+      "price": 21500000,
+      "priceDisplay": "R21 500 000",
+      "perHa": "R27 564 / ha",
+      "sizeHa": 780,
+      "status": "For sale",
+      "listedOn": "2026-08-19",
+      "image": "assets/grain-aerial-homestead.jpg",
+      "alt": "Striped grain lands running to the horizon with a farmstead among trees, Free State",
+      "gallery": [
+        "assets/grain-sunflowers.jpg",
+        "assets/grain-maize-rows.jpg",
+        "assets/farm-aerial-crops.jpg"
+      ],
+      "summary": "780 hectares of Free State grain land outside Bothaville, 640 hectares arable, with 3 400 tonnes of silo capacity on the farm and a full implement fleet included.",
+      "description": "Rietkuil lies on the red sandy loam belt west of Bothaville, the district that turns over more maize than any other in the country. Six hundred and forty of the seven hundred and eighty hectares are arable and have been in a maize, sunflower and soya rotation for the last twelve seasons, with yield records kept per camp. The farm carries its own storage: four silos rated at 3 400 tonnes combined, a grading floor and a weighbridge, which means the owner sells on his own timing rather than the co-operative's. Water is domestic and stock only, from three boreholes, as the lands are dryland. Improvements include a four bedroom homestead, two staff houses, a large implement shed and a workshop. The full implement fleet, including two tractors, a planter, a boom sprayer and the combine harvester, is included in the price.",
+      "facts": [
+        [
+          "780 ha",
+          "Total extent"
+        ],
+        [
+          "640 ha",
+          "Arable land"
+        ],
+        [
+          "3 400 t",
+          "Silo capacity"
+        ],
+        [
+          "Dryland",
+          "Production"
+        ],
+        [
+          "Tarred",
+          "Road access"
+        ],
+        [
+          "VAT exclusive",
+          "VAT status"
+        ]
+      ],
+      "specs": {
+        "Land Information": {
+          "Total hectares": "780 ha",
+          "Arable land": "640 ha",
+          "Grazing land": "118 ha",
+          "Natural veld": "118 ha",
+          "Irrigated land": "0 ha",
+          "Soil type": "Red sandy loam",
+          "Mountain land": "None",
+          "River frontage": "None"
+        },
+        "Crop Farming": {
+          "Current crops": "Maize, sunflower, soya in rotation",
+          "Cultivated hectares": "640 ha",
+          "Soil type": "Red sandy loam",
+          "Yield history": "4.8 to 6.4 t/ha maize, 12 seasons on record",
+          "Packhouse": "No",
+          "Cold rooms": "No",
+          "Processing facilities": "Grading floor and weighbridge"
+        },
+        "Water Resources": {
+          "Water rights": "Domestic and stock only",
+          "Boreholes": "3",
+          "Borehole yield": "5 100 L/h combined",
+          "Dams": "1 earth dam",
+          "Dam capacity": "18 000 m3",
+          "Rivers / streams": "No",
+          "Reservoirs": "2",
+          "Water tanks": "5 x 10 000 L"
+        },
+        "Irrigation": {
+          "Centre pivots": "None",
+          "Drip irrigation": "No",
+          "Sprinkler systems": "No",
+          "Total irrigated area": "0 ha, dryland",
+          "Irrigation pumps": "None"
+        },
+        "Buildings & Infrastructure": {
+          "Main farmhouse": "Yes, 4 bedroom",
+          "Additional houses": "None",
+          "Staff accommodation": "2 units",
+          "Workshops": "1",
+          "Sheds": "2 implement sheds",
+          "Silos": "4, 3 400 t combined",
+          "Storage facilities": "Grading floor, chemical store",
+          "Offices": "Yes"
+        },
+        "Power & Utilities": {
+          "Eskom connection": "Yes, 100 kVA three phase",
+          "Solar power": "Yes, borehole pumps",
+          "Generator": "Yes, 30 kVA",
+          "Inverter system": "Yes",
+          "Battery backup": "Yes, 20 kWh",
+          "Internet": "LTE / 4G"
+        },
+        "Security": {
+          "Boundary fencing": "Yes",
+          "Electric fencing": "Yes, homestead",
+          "CCTV": "Yes, 8 cameras",
+          "Alarm system": "Yes",
+          "Security gates": "Yes, 1"
+        },
+        "Equipment Included": {
+          "Tractors": "4",
+          "Implements included": "Planter, boom sprayer, disc harrow, ripper",
+          "Trailers": "4 grain trailers",
+          "Harvesters": "1 combine",
+          "Irrigation equipment": "None",
+          "Vehicles included": "2 bakkies"
+        },
+        "Legal Information": {
+          "Title deed available": "Yes",
+          "Zoning": "Agricultural",
+          "Water use licence": "Not required, dryland",
+          "VAT status": "VAT exclusive",
+          "Going concern": "No",
+          "Servitudes": "Eskom powerline servitude registered"
+        },
+        "Lifestyle Features": {
+          "Mountain views": "No",
+          "River frontage": "No",
+          "Dam frontage": "Yes",
+          "Fishing": "No",
+          "Hiking trails": "No",
+          "Horse riding": "Yes",
+          "Bird watching": "Yes",
+          "Wedding venue potential": "No",
+          "Eco-tourism potential": "No"
+        }
+      },
+      "factCount": 68,
+      "sectionCount": 10
+    },
+    {
+      "id": "erf-lst-047",
+      "ref": "ERF-LST-047",
+      "title": "Kareepoort Sheep & Karoo Grazing",
+      "place": "Victoria West, Upper Karoo",
+      "province": "Northern Cape",
+      "category": "Livestock Farm",
+      "farmType": "Livestock Farm",
+      "price": 14200000,
+      "priceDisplay": "R14 200 000",
+      "perHa": "R4 176 / ha",
+      "sizeHa": 3400,
+      "status": "For sale",
+      "listedOn": "2026-05-06",
+      "image": "assets/karoo-veld.jpg",
+      "alt": "Open Karoo veld running to a low ridge under a wide sky",
+      "gallery": [
+        "assets/karoo-sheep.jpg",
+        "assets/land-dusk.jpg",
+        "assets/farm-pasture-tree.jpg"
+      ],
+      "summary": "3 400 hectares of Upper Karoo grazing carrying a Dorper flock, twenty two camps, water to every camp and a shearing shed on the farm.",
+      "description": "Kareepoort is a classic Upper Karoo sheep unit an hour from Victoria West on gravel. The veld is sweet Karoo bossieveld on shale, measured at one small stock unit per 4.6 hectares in a normal season, which puts the farm at roughly 740 sheep before any supplementary feeding. It is divided into twenty two camps, each with a drinking trough fed from six windmills and two solar boreholes through 14 kilometres of piping. The handling infrastructure is complete and in use: a four stand shearing shed with a wool press, sorting pens, a dip and a loading ramp. The homestead is an old Karoo farmhouse with pressed ceilings, restored in 2018, with a separate cottage that has been let for stargazing weekends. Rainfall averages 280 mm and the farm has permanent stock water in every camp, which is the reason it holds through dry years.",
+      "facts": [
+        [
+          "3 400 ha",
+          "Total extent"
+        ],
+        [
+          "1 : 4.6",
+          "Carrying capacity"
+        ],
+        [
+          "22",
+          "Camps"
+        ],
+        [
+          "8",
+          "Water points"
+        ],
+        [
+          "4 stand",
+          "Shearing shed"
+        ],
+        [
+          "280 mm",
+          "Average rainfall"
+        ]
+      ],
+      "specs": {
+        "Land Information": {
+          "Total hectares": "3 400 ha",
+          "Grazing land": "3 340 ha",
+          "Natural veld": "3 340 ha, sweet bossieveld",
+          "Arable land": "18 ha lucerne",
+          "Irrigated land": "18 ha",
+          "Mountain land": "420 ha ridge",
+          "Soil type": "Shale over gravel",
+          "River frontage": "None"
+        },
+        "Livestock": {
+          "Carrying capacity": "1 SSU per 4.6 ha",
+          "Camps / paddocks": "22",
+          "Cattle facilities": "No",
+          "Sheep facilities": "Yes, 4 stand shearing shed and wool press",
+          "Feedlots": "No",
+          "Loading ramps": "Yes, 1",
+          "Water points": "22, one per camp"
+        },
+        "Water Resources": {
+          "Water rights": "Stock and domestic",
+          "Boreholes": "8 (6 windmill, 2 solar)",
+          "Borehole yield": "7 800 L/h combined",
+          "Dams": "2 earth dams",
+          "Dam capacity": "11 000 m3",
+          "Rivers / streams": "Seasonal",
+          "Reservoirs": "6",
+          "Water tanks": "14 km piping to troughs"
+        },
+        "Irrigation": {
+          "Centre pivots": "None",
+          "Drip irrigation": "No",
+          "Sprinkler systems": "Yes, 18 ha lucerne",
+          "Total irrigated area": "18 ha",
+          "Irrigation pumps": "2"
+        },
+        "Buildings & Infrastructure": {
+          "Main farmhouse": "Yes, restored Karoo homestead",
+          "Additional houses": "1 guest cottage",
+          "Staff accommodation": "3 units",
+          "Workshops": "1",
+          "Sheds": "2",
+          "Barns": "Shearing shed",
+          "Storage facilities": "Wool store, feed store",
+          "Offices": "Yes"
+        },
+        "Power & Utilities": {
+          "Eskom connection": "Yes, 40 kVA",
+          "Solar power": "Yes, 18 kWp plus 2 solar boreholes",
+          "Generator": "Yes, 15 kVA",
+          "Inverter system": "Yes",
+          "Battery backup": "Yes, 25 kWh",
+          "Internet": "Satellite"
+        },
+        "Security": {
+          "Boundary fencing": "Yes, jackal proof on 60 per cent",
+          "Electric fencing": "Yes, homestead",
+          "CCTV": "Yes, gate only",
+          "Alarm system": "Yes",
+          "Security gates": "Yes, 1"
+        },
+        "Equipment Included": {
+          "Tractors": "1",
+          "Implements included": "Slasher, water bowser, fencing gear",
+          "Trailers": "1 stock trailer",
+          "Harvesters": "None",
+          "Irrigation equipment": "Lucerne sprinklers included",
+          "Vehicles included": "1 bakkie"
+        },
+        "Legal Information": {
+          "Title deed available": "Yes",
+          "Zoning": "Agricultural",
+          "Water use licence": "General authorisation",
+          "VAT status": "VAT exclusive",
+          "Going concern": "No",
+          "Servitudes": "Right of way to neighbouring farm"
+        },
+        "Lifestyle Features": {
+          "Mountain views": "Yes",
+          "River frontage": "No",
+          "Dam frontage": "Yes",
+          "Fishing": "No",
+          "Hiking trails": "Yes",
+          "Horse riding": "Yes",
+          "Bird watching": "Yes",
+          "Wedding venue potential": "No",
+          "Eco-tourism potential": "Yes, dark sky location"
+        }
+      },
+      "factCount": 68,
+      "sectionCount": 10
+    },
+    {
+      "id": "erf-dry-009",
+      "ref": "ERF-DRY-009",
+      "title": "Melkhout Dairy Farm",
+      "place": "Humansdorp, Tsitsikamma",
+      "province": "Eastern Cape",
+      "category": "Dairy Farm",
+      "farmType": "Dairy Farm",
+      "price": 32500000,
+      "priceDisplay": "R32 500 000",
+      "perHa": "R121 269 / ha",
+      "sizeHa": 268,
+      "status": "New listing",
+      "listedOn": "2026-08-27",
+      "image": "assets/dairy-pasture.jpg",
+      "alt": "Holstein dairy cow on kikuyu pasture with green hills behind, Eastern Cape",
+      "gallery": [
+        "assets/dairy-shed.jpg",
+        "assets/farm-cattle-field.jpg",
+        "assets/farm-pasture-tree.jpg"
+      ],
+      "summary": "A pasture based dairy on the Tsitsikamma coast milking 420 cows through a 40 point rotary, with 196 hectares under irrigated kikuyu and ryegrass.",
+      "description": "Melkhout sits in the Humansdorp dairy belt, where the rainfall and the mild coast make pasture based milk production work without a feedlot. The herd is 420 Holstein and Jersey cross cows in milk, running on 196 hectares of irrigated kikuyu over-sown with ryegrass, split into 48 grazing paddocks on a rotational system. Milking is through a 40 point rotary parlour installed in 2019, with plate cooling, a 12 000 litre bulk tank and automatic cup removers. Effluent goes to a two pond system and back onto the pasture. Water is a registered abstraction off the Kromme River plus four boreholes, feeding eight travelling irrigators. Rainfall averages 720 mm spread through the year. The property includes a main homestead, a manager's house and eleven staff units. Sold as a going concern with the herd, the parlour plant and the irrigation infrastructure included.",
+      "facts": [
+        [
+          "268 ha",
+          "Total extent"
+        ],
+        [
+          "420",
+          "Cows in milk"
+        ],
+        [
+          "40 point",
+          "Rotary parlour"
+        ],
+        [
+          "196 ha",
+          "Irrigated pasture"
+        ],
+        [
+          "48",
+          "Grazing paddocks"
+        ],
+        [
+          "Going concern",
+          "VAT status"
+        ]
+      ],
+      "specs": {
+        "Land Information": {
+          "Total hectares": "268 ha",
+          "Arable land": "212 ha",
+          "Irrigated land": "196 ha",
+          "Grazing land": "212 ha",
+          "Natural veld": "44 ha",
+          "Soil type": "Sandy loam over clay",
+          "River frontage": "680 m (Kromme River)",
+          "Mountain land": "None"
+        },
+        "Livestock": {
+          "Carrying capacity": "2.1 cows per ha on irrigated pasture",
+          "Camps / paddocks": "48",
+          "Cattle facilities": "Yes, 40 point rotary parlour",
+          "Sheep facilities": "No",
+          "Feedlots": "No, pasture based",
+          "Loading ramps": "Yes, 1",
+          "Water points": "48, one per paddock"
+        },
+        "Water Resources": {
+          "Water rights": "Yes, registered river abstraction",
+          "Boreholes": "4",
+          "Borehole yield": "11 200 L/h combined",
+          "Dams": "2 balancing dams",
+          "Dam capacity": "34 000 m3",
+          "Rivers / streams": "Yes, Kromme River",
+          "Reservoirs": "3",
+          "Water tanks": "4 x 10 000 L"
+        },
+        "Irrigation": {
+          "Centre pivots": "None",
+          "Drip irrigation": "No",
+          "Sprinkler systems": "Yes, 8 travelling irrigators",
+          "Total irrigated area": "196 ha",
+          "Irrigation pumps": "6"
+        },
+        "Buildings & Infrastructure": {
+          "Main farmhouse": "Yes, 4 bedroom",
+          "Additional houses": "1 manager's house",
+          "Staff accommodation": "11 units",
+          "Workshops": "1",
+          "Sheds": "3",
+          "Barns": "Calf rearing shed",
+          "Storage facilities": "Milk room, 12 000 L bulk tank, feed store",
+          "Offices": "Yes"
+        },
+        "Power & Utilities": {
+          "Eskom connection": "Yes, 200 kVA three phase",
+          "Solar power": "Yes, 80 kWp",
+          "Generator": "Yes, 150 kVA, parlour rated",
+          "Inverter system": "Yes",
+          "Battery backup": "Yes, 60 kWh",
+          "Internet": "Fibre"
+        },
+        "Security": {
+          "Boundary fencing": "Yes",
+          "Electric fencing": "Yes, paddock and homestead",
+          "CCTV": "Yes, 12 cameras",
+          "Alarm system": "Yes, armed response",
+          "Security gates": "Yes, 2"
+        },
+        "Equipment Included": {
+          "Tractors": "3",
+          "Implements included": "Mixer wagon, mower, fertiliser spreader, slurry tanker",
+          "Trailers": "2",
+          "Harvesters": "None",
+          "Irrigation equipment": "8 travelling irrigators included",
+          "Vehicles included": "2 bakkies, 3 quad bikes"
+        },
+        "Legal Information": {
+          "Title deed available": "Yes",
+          "Zoning": "Agricultural",
+          "Water use licence": "Yes, registered",
+          "VAT status": "Going concern, zero rated",
+          "Going concern": "Yes",
+          "Servitudes": "Municipal pipeline servitude registered"
+        },
+        "Lifestyle Features": {
+          "Mountain views": "Yes, Tsitsikamma range",
+          "River frontage": "Yes",
+          "Dam frontage": "Yes",
+          "Fishing": "Yes",
+          "Hiking trails": "Yes",
+          "Horse riding": "Yes",
+          "Bird watching": "Yes",
+          "Wedding venue potential": "No",
+          "Eco-tourism potential": "Yes"
+        }
+      },
+      "factCount": 68,
+      "sectionCount": 10
+    },
+    {
+      "id": "erf-mix-027",
+      "ref": "ERF-MIX-027",
+      "title": "Nooitgedacht Macadamia Estate",
+      "place": "White River, Lowveld",
+      "province": "Mpumalanga",
+      "category": "Mixed Farm",
+      "farmType": "Mixed Farm",
+      "price": 37800000,
+      "priceDisplay": "R37 800 000",
+      "perHa": "R245 455 / ha",
+      "sizeHa": 154,
+      "status": "For sale",
+      "listedOn": "2026-07-24",
+      "image": "assets/lowveld-valley.jpg",
+      "alt": "Misty subtropical valley above White River in the Mpumalanga lowveld",
+      "gallery": [
+        "assets/lowveld-hills.jpg",
+        "assets/farm-orchard-mountain.jpg",
+        "assets/cellar-barrels.jpg"
+      ],
+      "summary": "98 hectares of bearing macadamia and 22 of avocado above White River, with a cracking and drying plant on site and a registered Crocodile River allocation.",
+      "description": "Nooitgedacht sits on the escarpment side of White River, high enough to escape the worst of the lowveld heat and low enough to carry macadamia comfortably. Ninety eight hectares are under bearing macadamia, mostly Beaumont and 816 planted between 2009 and 2019, with a further twenty two hectares of Hass and Fuerte avocado. Nut in shell goes through the farm's own dehusking, drying and cracking plant, which is licensed and has spare capacity that has been contract processed for two neighbours. Water is a registered allocation off the Crocodile River scheme plus five boreholes, and every orchard is under drip with fertigation. The property carries a homestead with a view down the valley, three cottages currently run as guest units, and staff housing for eighteen. Sold as a going concern with the standing crop, the plant and the vehicles included.",
+      "facts": [
+        [
+          "154 ha",
+          "Total extent"
+        ],
+        [
+          "98 ha",
+          "Bearing macadamia"
+        ],
+        [
+          "22 ha",
+          "Avocado"
+        ],
+        [
+          "Registered",
+          "Scheme allocation"
+        ],
+        [
+          "On site",
+          "Cracking plant"
+        ],
+        [
+          "Going concern",
+          "VAT status"
+        ]
+      ],
+      "specs": {
+        "Land Information": {
+          "Total hectares": "154 ha",
+          "Arable land": "128 ha",
+          "Irrigated land": "120 ha",
+          "Orchard / vineyard": "120 ha",
+          "Natural veld": "22 ha",
+          "Mountain land": "18 ha",
+          "Soil type": "Deep red clay loam",
+          "River frontage": "None, scheme fed"
+        },
+        "Crop Farming": {
+          "Current crops": "Macadamia (Beaumont, 816), avocado (Hass, Fuerte)",
+          "Cultivated hectares": "120 ha",
+          "Soil type": "Deep red clay loam",
+          "Yield history": "3.1 to 3.8 t/ha nut in shell on mature blocks",
+          "Packhouse": "Yes, dehusking and drying",
+          "Cold rooms": "Yes, 1",
+          "Processing facilities": "Yes, licensed cracking plant"
+        },
+        "Water Resources": {
+          "Water rights": "Yes, registered scheme allocation",
+          "Boreholes": "5",
+          "Borehole yield": "16 400 L/h combined",
+          "Dams": "3 storage dams",
+          "Dam capacity": "58 000 m3",
+          "Rivers / streams": "Crocodile River scheme canal",
+          "Reservoirs": "4",
+          "Water tanks": "6 x 10 000 L"
+        },
+        "Irrigation": {
+          "Centre pivots": "None",
+          "Drip irrigation": "Yes, all orchards",
+          "Sprinkler systems": "Yes, frost protection 30 ha",
+          "Total irrigated area": "120 ha",
+          "Irrigation pumps": "8"
+        },
+        "Buildings & Infrastructure": {
+          "Main farmhouse": "Yes, 5 bedroom with valley view",
+          "Guest houses": "3 cottages",
+          "Additional houses": "1 manager's house",
+          "Staff accommodation": "18 units",
+          "Workshops": "2",
+          "Sheds": "4",
+          "Storage facilities": "Nut store, chemical store, cold room",
+          "Offices": "Yes, plant admin block"
+        },
+        "Power & Utilities": {
+          "Eskom connection": "Yes, 315 kVA three phase",
+          "Solar power": "Yes, 220 kWp",
+          "Generator": "Yes, 200 kVA",
+          "Inverter system": "Yes",
+          "Battery backup": "Yes, 90 kWh",
+          "Internet": "Fibre"
+        },
+        "Security": {
+          "Boundary fencing": "Yes, full perimeter",
+          "Electric fencing": "Yes, plant and homestead",
+          "CCTV": "Yes, 26 cameras",
+          "Alarm system": "Yes, armed response",
+          "Security gates": "Yes, manned main gate"
+        },
+        "Equipment Included": {
+          "Tractors": "6",
+          "Implements included": "Sprayers, mulchers, harvesters, spreaders",
+          "Trailers": "5 bin trailers",
+          "Harvesters": "2 nut harvesters",
+          "Irrigation equipment": "Drip, pumps and fertigation included",
+          "Vehicles included": "3 bakkies, 2 forklifts"
+        },
+        "Legal Information": {
+          "Title deed available": "Yes",
+          "Zoning": "Agricultural",
+          "Water use licence": "Yes, registered",
+          "VAT status": "Going concern, zero rated",
+          "Going concern": "Yes",
+          "Servitudes": "Canal and powerline servitudes registered"
+        },
+        "Lifestyle Features": {
+          "Mountain views": "Yes, escarpment",
+          "River frontage": "No",
+          "Dam frontage": "Yes",
+          "Fishing": "Yes",
+          "Hiking trails": "Yes",
+          "Horse riding": "No",
+          "Bird watching": "Yes",
+          "Wedding venue potential": "Yes",
+          "Eco-tourism potential": "Yes, cottages already letting"
+        }
+      },
+      "factCount": 68,
+      "sectionCount": 10
+    },
+    {
+      "id": "erf-smh-053",
+      "ref": "ERF-SMH-053",
+      "title": "Klipheuwel Olive Smallholding",
+      "place": "Riebeek Valley, Swartland",
+      "province": "Western Cape",
+      "category": "Smallholding",
+      "farmType": "Smallholding",
+      "price": 6950000,
+      "priceDisplay": "R6 950 000",
+      "perHa": "R330 952 / ha",
+      "sizeHa": 21,
+      "status": "For sale",
+      "listedOn": "2026-08-05",
+      "image": "assets/smallholding-farmhouse.jpg",
+      "alt": "Whitewashed gabled farmhouse on green lawn under a wide sky",
+      "gallery": [
+        "assets/smallholding-olives.jpg",
+        "assets/farm-vines.jpg",
+        "assets/intro.jpg"
+      ],
+      "summary": "21 hectares in the Riebeek Valley with 9 hectares of established olives, a restored three bedroom homestead and a two bedroom cottage already letting.",
+      "description": "Klipheuwel is the size most buyers actually want when they say they are looking for a farm: small enough to run yourself, large enough to earn something. Nine of the twenty one hectares carry established Mission and Frantoio olives planted in 2011, producing between eleven and fourteen tonnes a season, currently pressed under contract at a neighbouring mill. The homestead is a restored three bedroom werf house with a stoep facing Kasteelberg, and a separate two bedroom cottage has been letting on short stays for four years with its own entrance. Water is two boreholes and a registered stream diversion, feeding drip through the whole grove and a 400 square metre vegetable garden. The balance of the land is grazing for a few head, and the zoning is agricultural with an existing consent for the guest cottage.",
+      "facts": [
+        [
+          "21 ha",
+          "Total extent"
+        ],
+        [
+          "9 ha",
+          "Established olives"
+        ],
+        [
+          "11 to 14 t",
+          "Annual crop"
+        ],
+        [
+          "2",
+          "Boreholes"
+        ],
+        [
+          "Consent in place",
+          "Guest cottage"
+        ],
+        [
+          "Tarred",
+          "Road access"
+        ]
+      ],
+      "specs": {
+        "Land Information": {
+          "Total hectares": "21 ha",
+          "Arable land": "11 ha",
+          "Irrigated land": "9.4 ha",
+          "Orchard / vineyard": "9 ha olives",
+          "Grazing land": "7 ha",
+          "Natural veld": "3 ha",
+          "Soil type": "Shale derived loam",
+          "River frontage": "140 m seasonal stream"
+        },
+        "Crop Farming": {
+          "Current crops": "Mission and Frantoio olives",
+          "Cultivated hectares": "9 ha",
+          "Soil type": "Shale derived loam",
+          "Yield history": "11 to 14 t per season since 2018",
+          "Packhouse": "No, pressed under contract",
+          "Cold rooms": "No",
+          "Processing facilities": "No"
+        },
+        "Water Resources": {
+          "Water rights": "Yes, registered stream diversion",
+          "Boreholes": "2",
+          "Borehole yield": "3 600 L/h combined",
+          "Dams": "1 farm dam",
+          "Dam capacity": "4 200 m3",
+          "Rivers / streams": "Seasonal",
+          "Reservoirs": "1",
+          "Water tanks": "3 x 5 000 L"
+        },
+        "Irrigation": {
+          "Centre pivots": "None",
+          "Drip irrigation": "Yes, full grove",
+          "Sprinkler systems": "Yes, vegetable garden",
+          "Total irrigated area": "9.4 ha",
+          "Irrigation pumps": "2"
+        },
+        "Buildings & Infrastructure": {
+          "Main farmhouse": "Yes, restored 3 bedroom werf house",
+          "Guest houses": "1 two bedroom cottage, letting",
+          "Additional houses": "None",
+          "Staff accommodation": "1 unit",
+          "Workshops": "1",
+          "Sheds": "1",
+          "Storage facilities": "Implement shed",
+          "Offices": "Yes, in the homestead"
+        },
+        "Power & Utilities": {
+          "Eskom connection": "Yes, 25 kVA",
+          "Solar power": "Yes, 12 kWp",
+          "Generator": "No",
+          "Inverter system": "Yes",
+          "Battery backup": "Yes, 15 kWh",
+          "Internet": "Fibre"
+        },
+        "Security": {
+          "Boundary fencing": "Yes",
+          "Electric fencing": "Yes, homestead",
+          "CCTV": "Yes, 4 cameras",
+          "Alarm system": "Yes, armed response",
+          "Security gates": "Yes, 1"
+        },
+        "Equipment Included": {
+          "Tractors": "1",
+          "Implements included": "Slasher, sprayer, trailer",
+          "Trailers": "1",
+          "Harvesters": "None",
+          "Irrigation equipment": "Drip and pumps included",
+          "Vehicles included": "None"
+        },
+        "Legal Information": {
+          "Title deed available": "Yes",
+          "Zoning": "Agricultural holdings",
+          "Water use licence": "Yes, registered diversion",
+          "VAT status": "VAT exempt, private seller",
+          "Going concern": "No",
+          "Servitudes": "None registered"
+        },
+        "Lifestyle Features": {
+          "Mountain views": "Yes, Kasteelberg",
+          "River frontage": "Yes, seasonal",
+          "Dam frontage": "Yes",
+          "Fishing": "No",
+          "Hiking trails": "Yes",
+          "Horse riding": "Yes",
+          "Bird watching": "Yes",
+          "Wedding venue potential": "Yes",
+          "Eco-tourism potential": "Yes, cottage already letting"
+        }
+      },
+      "factCount": 68,
+      "sectionCount": 10
     }
   ]
 }

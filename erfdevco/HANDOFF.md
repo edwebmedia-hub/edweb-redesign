@@ -73,38 +73,63 @@ Not a brochure. The pieces that make it behave like a working portal:
   footer for whoever is holding the page. See section 22 of styles.css.
 - **Direct enquiry** per farm: the form prefills the reference, and the chat
   link carries the reference, title and price in its message.
+- **Free text search** across title, district, province, farm type, reference
+  and summary, debounced, cleared with Escape.
+- **Compare**, the feature the uniform schedule exists for. Tick up to three
+  farms, a tray rises with the selection, and `compare.html` lines them up
+  field for field across the union of every section either farm answers.
+  Rows where they differ are shaded, a toggle hides the rows where they agree,
+  and fields one farm does not answer read "Not recorded" rather than blank.
+  It prints too. No other SA farm portal can do this, because no other one
+  holds the same fields on every listing.
 
 ## Pages
 - `index.html` hero, search rail, 4 farms, agency split, counters, farm-type
   chapter, the listing schedule, the mandate, six services, CTA
-- `listings.html` filter chips + province/size params, empty state
+- `listings.html` search, filter chips, sort, shortlist filter, empty state
 - `listing.html?id=` JS-rendered from `data/listings.json`: gallery, 6-fact grid,
   description, 10 spec groups, sticky enquiry form
+- `compare.html` side by side schedule comparison of two or three farms
 - `about.html`, `contact.html`, `404.html`
 - `sitemap.xml`, `robots.txt`, `vercel.json` (cleanUrls + security headers)
 
 ## Listings data
-`data/listings.json` holds **four sample farms**, marked as demo in the file's
-`note` field:
+`data/listings.json` holds **nine sample farms**, marked as demo in the file's
+`note` field. Seven provinces, eight farm types, R6.95m to R37.8m, 21 ha to
+3 400 ha, so the filters, the search and the sort orders all have something
+real to bite on:
 
-| Ref | Farm | Province | Extent | Price |
-|---|---|---|---|---|
-| ERF-VIN-014 | Weltevrede Vineyard Estate | Western Cape | 68 ha | R24 500 000 |
-| ERF-LST-021 | Grootvlei Cattle & Grazing Farm | KwaZulu-Natal | 412 ha | R16 800 000 |
-| ERF-GAM-008 | Rietfontein Game Farm | Limpopo | 1 240 ha | R31 000 000 |
-| ERF-IRR-033 | Sonop Citrus & Irrigation Farm | Limpopo | 186 ha | R28 900 000 |
+| Ref | Farm | Province | Type | Extent | Price |
+|---|---|---|---|---|---|
+| ERF-VIN-014 | Weltevrede Vineyard Estate | Western Cape | Vineyard / Orchard | 68 ha | R24 500 000 |
+| ERF-LST-021 | Grootvlei Cattle & Grazing Farm | KwaZulu-Natal | Livestock | 412 ha | R16 800 000 |
+| ERF-GAM-008 | Rietfontein Game Farm | Limpopo | Game | 1 240 ha | R31 000 000 |
+| ERF-IRR-033 | Sonop Citrus & Irrigation Farm | Limpopo | Irrigation | 186 ha | R28 900 000 |
+| ERF-CRP-042 | Rietkuil Grain & Sunflower Farm | Free State | Crop | 780 ha | R21 500 000 |
+| ERF-LST-047 | Kareepoort Sheep & Karoo Grazing | Northern Cape | Livestock | 3 400 ha | R14 200 000 |
+| ERF-DRY-009 | Melkhout Dairy Farm | Eastern Cape | Dairy | 268 ha | R32 500 000 |
+| ERF-MIX-027 | Nooitgedacht Macadamia Estate | Mpumalanga | Mixed | 154 ha | R37 800 000 |
+| ERF-SMH-053 | Klipheuwel Olive Smallholding | Western Cape | Smallholding | 21 ha | R6 950 000 |
 
 Each is built to the shape of the real listing form so the layout can be judged
-on real content. **Replace all four with real mandates before launch.** The spec
+on real content. **Replace all nine with real mandates before launch.** The spec
 group keys match the form's own section names, so a real listing is a
-copy-and-fill job, not a schema change.
+copy-and-fill job, not a schema change. `factCount` and `sectionCount` are
+derived, not typed: regenerate them if you edit a farm's `specs`.
 
 Photography is licence-free Pexels stock in `assets/`. Swap for the client's own
 property photographs as mandates come in.
 
+## Weight
+The asset folder was cut from 23.8 MB to 7.4 MB, a 69 per cent reduction: twelve
+leftover images from earlier iterations that nothing referenced were deleted,
+and the rest were re-encoded to the size they actually render at. Full-bleed
+backdrops cap at 1800px q78, everything else at 1400px q72. Largest single
+file is now 502 KB. Re-run that pass if large originals are added.
+
 ## Verification (2026-08-28, headless Chrome via puppeteer-core)
 Every page at 1440, 768 and 390:
-- 24 page and width combinations swept: 0 console errors, 0 failed requests, 0 broken images
+- 32 page and width combinations swept: 0 console errors, 0 failed requests, 0 broken images
 - 0 horizontal overflow at any width
 - 28 of 28 scroll reveals resolve to opacity 1 (plus 60ms, 2.6s and 9s sweeps)
 - counters animate to 103 / 18 / 10 / 9
@@ -128,7 +153,7 @@ https://claude.ai/code/artifact/ebc59c79-3947-47d4-b210-f0a8b65e703e
    project confirms it. Removed rather than shipped on an assumption. If
    Martiens confirms he holds it, it goes back in one pass. See
    CONFIRM-BEFORE-LAUNCH.md.
-1. Four demo listings to be replaced with real mandates.
+1. Nine demo listings to be replaced with real mandates.
 2. `api/send-mail.js` posts to `info@erfdevco.com` and needs `SMTP_PASS` set as
    an env var at deploy time.
 3. No real physical address published: the client has only ever confirmed

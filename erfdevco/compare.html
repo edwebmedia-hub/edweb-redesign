@@ -3,14 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Farms for sale | ERFDEVCO</title>
-  <meta name="description" content="Every farm, smallholding, game farm and vineyard currently under mandate with ERFDEVCO, filterable by farm type, province and extent." />
-  <link rel="canonical" href="https://erfdevco.com/listings" />
-
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Farms for sale | ERFDEVCO" />
-  <meta property="og:description" content="Every farm currently under mandate with ERFDEVCO, with the full listing schedule on each one." />
-  <meta property="og:image" content="https://erfdevco.com/assets/og-image.jpg" />
+  <title>Compare farms | ERFDEVCO</title>
+  <meta name="description" content="Two or three ERFDEVCO farms side by side, field for field, across the whole listing schedule." />
+  <meta name="robots" content="noindex, follow" />
 
   <link rel="icon" href="assets/favicon.png" type="image/png" />
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
@@ -45,56 +40,61 @@
 
 <main id="main">
 
-  <section class="page-hero">
-    <div class="page-hero__media">
-      <img src="assets/land-caledon-fields.jpg" alt="Striped croplands running to the horizon under a wide sky" width="2400" height="1600" fetchpriority="high" />
-    </div>
-    <div class="page-hero__scrim" aria-hidden="true"></div>
+  <div class="band band--bottom0" style="padding-top:calc(var(--header-h) + clamp(2.5rem,5vw,4.5rem))">
     <div class="shell">
-      <p class="crumb"><a href="index.html">Home</a> <span aria-hidden="true">/</span> <span>Farms for sale</span></p>
-      <h1>Every farm currently under mandate</h1>
-      <p class="lede">Filter by farm type. Each listing opens onto the full schedule: land, water, irrigation, buildings, power, security, equipment, legal and lifestyle.</p>
+      <p class="crumb" style="color:var(--muted)">
+        <a href="index.html" style="color:var(--gold-deep)">Home</a>
+        <span aria-hidden="true">/</span>
+        <a href="listings.html" style="color:var(--gold-deep)">Farms for sale</a>
+        <span aria-hidden="true">/</span>
+        <span>Compare</span>
+      </p>
+      <div class="section-head section-head--split" style="margin-top:1.5rem;margin-bottom:0">
+        <div>
+          <p class="eyebrow">Side by side</p>
+          <h1>Compare the schedules</h1>
+        </div>
+        <div>
+          <p class="lede">Because every ERFDEVCO farm answers the same eighteen sections, two farms can be read field for field. Rows where they differ are marked.</p>
+        </div>
+      </div>
     </div>
-  </section>
+  </div>
 
   <section class="band">
     <div class="shell">
-      <form class="findbar" role="search" onsubmit="return false">
-        <label for="farm-q">Search</label>
-        <input id="farm-q" type="search" name="q" autocomplete="off"
-               placeholder="Try a district, a province or a farm type. Bergville, Karoo, dairy, macadamia." />
-      </form>
-
-      <div class="filters" id="filters" role="group" aria-label="Filter by farm type"></div>
-      <div class="toolbar">
-        <p class="results-line" id="results-line" role="status" aria-live="polite" style="margin:0"></p>
-        <div>
-          <label for="sort-by">Sort</label>
-          <select id="sort-by">
-            <option value="newest">Most recently listed</option>
-            <option value="price-asc">Price, low to high</option>
-            <option value="price-desc">Price, high to low</option>
-            <option value="size-desc">Extent, largest first</option>
-            <option value="size-asc">Extent, smallest first</option>
-          </select>
+      <div class="cmp-controls">
+        <p class="results-line" id="compare-line" role="status" aria-live="polite" style="margin:0"></p>
+        <div style="display:flex;gap:0.6rem;flex-wrap:wrap">
+          <button type="button" class="cmp-switch" id="compare-diff" aria-pressed="false" hidden>
+            <span class="lab">Show differences only</span>
+          </button>
+          <button type="button" class="cmp-switch" id="compare-print">Print this comparison</button>
+          <a class="cmp-switch" href="listings.html">Change selection</a>
         </div>
       </div>
-      <div class="farm-grid farm-grid--even" id="all-farms" data-stagger>
-        <div class="farm-empty">Loading current mandates.</div>
+
+      <div id="compare-table">
+        <div class="farm-empty">Loading the comparison.</div>
       </div>
     </div>
   </section>
 
-  <section class="band band--stone band--tight">
+  <section class="cta">
+    <div class="cta__media">
+      <img src="assets/land-caledon-fields.jpg" alt="Striped croplands running to the horizon under a wide sky" loading="lazy" decoding="async" width="2400" height="1600" />
+    </div>
+    <div class="cta__scrim" aria-hidden="true"></div>
     <div class="shell">
-      <div class="split split--wide-left">
-        <div class="reveal">
-          <p class="eyebrow">Not seeing it</p>
-          <h2>Tell us what you are looking for</h2>
-          <p class="lede" style="margin-top:1.25rem">New mandates come on regularly and some sell before they are advertised. Register the province, farm type and extent you are after and we will come to you when it lands.</p>
+      <div class="cta__inner reveal">
+        <div>
+          <p class="eyebrow">Narrowed it down</p>
+          <h2>Ask for the mandate packs</h2>
+          <p style="margin-top:1.25rem;max-width:46ch">Tell us which of these you want to walk and we will set up the viewings, with the title deed extracts and water licence documents ready before you arrive.</p>
         </div>
-        <div class="reveal" style="align-self:center">
-          <p><a class="btn btn--ink btn--wide" href="contact.html?subject=requirement">Register your requirement</a></p>
+        <div class="cta__actions">
+          <a class="btn btn--gold btn--wide" href="contact.html?subject=listing">Request the packs</a>
+          <a class="btn btn--ghost" href="tel:+27829005019">082 900 5019</a>
         </div>
       </div>
     </div>

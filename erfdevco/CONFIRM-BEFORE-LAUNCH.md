@@ -31,6 +31,9 @@ listings themselves only populate 60 to 68 fields each, because a vineyard
 does not answer the game-farm section.
 
 ## Demo content still in place
-`data/listings.json` holds FOUR sample farms (Weltevrede, Grootvlei,
-Rietfontein, Sonop). They are realistic but invented. Replace with real
-mandates before launch.
+`data/listings.json` holds NINE sample farms (Weltevrede, Grootvlei,
+Rietfontein, Sonop, Rietkuil, Kareepoort, Melkhout, Nooitgedacht, Klipheuwel).
+They are realistic but invented, including their prices, yields, water figures
+and listed dates. Replace with real mandates before launch, and remember the
+comparison page publishes these numbers side by side, so a wrong figure is more
+visible here than on a normal listing site.

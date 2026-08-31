@@ -537,12 +537,14 @@ button, input, select, textarea { font: inherit; color: inherit; }
 }
 /* Deliberately uneven: a wide feature and a tall partner, then a pair. This
    is what keeps it off the default three across row. */
-.farm-grid > :nth-child(1) { grid-column: span 4; }
-.farm-grid > :nth-child(2) { grid-column: span 2; }
-.farm-grid > :nth-child(3) { grid-column: span 3; }
-.farm-grid > :nth-child(4) { grid-column: span 3; }
+.farm-grid:not(.farm-grid--even) > :nth-child(1) { grid-column: span 4; }
+.farm-grid:not(.farm-grid--even) > :nth-child(2) { grid-column: span 2; }
+.farm-grid:not(.farm-grid--even) > :nth-child(3) { grid-column: span 3; }
+.farm-grid:not(.farm-grid--even) > :nth-child(4) { grid-column: span 3; }
 
-.farm-grid--even > * { grid-column: span 3; }
+/* The listings page is an even three across: every card the same shape, so
+   nine farms read as one inventory rather than a feature plus leftovers. */
+.farm-grid--even > * { grid-column: span 2 !important; }
 
 .farm-card { display: flex; flex-direction: column; height: 100%; }
 
@@ -554,8 +556,8 @@ button, input, select, textarea { font: inherit; color: inherit; }
   background: var(--stone-2);
   aspect-ratio: 4 / 3;
 }
-.farm-grid > :nth-child(1) .farm-card__media { aspect-ratio: 16 / 9; }
-.farm-grid > :nth-child(2) .farm-card__media { aspect-ratio: 3 / 4; }
+.farm-grid:not(.farm-grid--even) > :nth-child(1) .farm-card__media { aspect-ratio: 16 / 9; }
+.farm-grid:not(.farm-grid--even) > :nth-child(2) .farm-card__media { aspect-ratio: 3 / 4; }
 
 /* The photo link fills the frame; the chips and the save button sit above it. */
 .farm-card__media > a { position: absolute; inset: 0; display: block; }
@@ -1443,10 +1445,10 @@ button, input, select, textarea { font: inherit; color: inherit; }
   .farm-grid > :nth-child(1),
   .farm-grid > :nth-child(2),
   .farm-grid > :nth-child(3),
-  .farm-grid > :nth-child(4),
-  .farm-grid--even > * { grid-column: span 3; }
+  .farm-grid > :nth-child(4) { grid-column: span 3; }
+  .farm-grid--even > * { grid-column: span 3 !important; }
   .farm-grid > :nth-child(1) .farm-card__media,
-  .farm-grid > :nth-child(2) .farm-card__media { aspect-ratio: 4 / 3; }
+  .farm-grid > :nth-child(2) .farm-card__media { aspect-ratio: 4 / 3 !important; }
   /* Two columns: a wide tile top and bottom, four square between. Still no
      empty cell. */
   .type-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: clamp(180px, 20vw, 240px); }
@@ -1601,3 +1603,186 @@ button, input, select, textarea { font: inherit; color: inherit; }
   text-align: center;
 }
 .filter-btn[aria-pressed="true"] .chip-n { background: var(--gold); color: var(--ink); }
+
+/* --------------------------------------------------------------------------
+   23. Compare. The payoff of a uniform schedule: two or three farms read
+   side by side, field for field, with the differences findable.
+   -------------------------------------------------------------------------- */
+.cmp-toggle {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: transparent; border: 0; padding: 0;
+  font-family: var(--display);
+  font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--muted); cursor: pointer;
+  transition: color var(--t-fast) var(--ease-soft);
+}
+.cmp-toggle:hover { color: var(--ink); }
+.cmp-toggle .box {
+  width: 15px; height: 15px; flex: none;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  display: inline-flex; align-items: center; justify-content: center;
+  transition: background var(--t-fast) var(--ease-soft), border-color var(--t-fast) var(--ease-soft);
+}
+.cmp-toggle .box::after {
+  content: ""; width: 7px; height: 7px; background: var(--ink);
+  transform: scale(0); transition: transform var(--t-fast) var(--ease);
+}
+.cmp-toggle[aria-pressed="true"] { color: var(--ink); }
+.cmp-toggle[aria-pressed="true"] .box { border-color: var(--ink); }
+.cmp-toggle[aria-pressed="true"] .box::after { transform: scale(1); }
+.cmp-toggle[disabled] { opacity: 0.4; cursor: not-allowed; }
+
+/* The tray only exists while something is selected. */
+.cmp-tray {
+  position: fixed;
+  left: 50%; bottom: clamp(0.75rem, 2vw, 1.5rem);
+  transform: translate(-50%, 130%);
+  z-index: 300;
+  width: min(calc(100vw - 2rem), 68rem);
+  background: var(--ink-deep);
+  border: 1px solid var(--line-dark);
+  border-top: 2px solid var(--gold);
+  border-radius: var(--r-card);
+  box-shadow: 0 18px 50px -12px color-mix(in srgb, var(--ink-deep) 55%, transparent);
+  display: flex; align-items: center; gap: clamp(0.75rem, 2vw, 1.5rem);
+  padding: 0.85rem clamp(0.85rem, 2vw, 1.35rem);
+  transition: transform var(--t-mid) var(--ease);
+}
+.cmp-tray.is-up { transform: translate(-50%, 0); }
+body.has-tray { padding-bottom: 6.5rem; }
+.cmp-tray__label {
+  font-family: var(--display); font-size: 0.6875rem; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--gold); flex: none;
+}
+.cmp-tray__slots { display: flex; gap: 0.6rem; flex: 1; min-width: 0; }
+.cmp-slot {
+  position: relative;
+  width: 62px; height: 46px; flex: none;
+  border-radius: var(--r-chip);
+  overflow: hidden;
+  background: color-mix(in srgb, var(--paper) 8%, transparent);
+  border: 1px dashed color-mix(in srgb, var(--paper) 22%, transparent);
+}
+.cmp-slot img { width: 100%; height: 100%; object-fit: cover; }
+.cmp-slot--filled { border-style: solid; border-color: transparent; }
+.cmp-slot__x {
+  position: absolute; inset: auto 2px 2px auto;
+  width: 18px; height: 18px;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: color-mix(in srgb, var(--ink-deep) 82%, transparent);
+  border: 0; border-radius: 50%;
+  color: var(--paper); font-size: 0.75rem; line-height: 1; cursor: pointer;
+}
+.cmp-slot__x:hover { background: var(--gold); color: var(--ink); }
+.cmp-tray__actions { display: flex; align-items: center; gap: 0.6rem; flex: none; }
+.cmp-tray .btn { padding: 0.7rem 1.15rem; font-size: 0.75rem; }
+.cmp-clear {
+  background: transparent; border: 0; cursor: pointer;
+  font-family: var(--display); font-size: 0.6875rem; letter-spacing: 0.12em;
+  text-transform: uppercase; color: color-mix(in srgb, var(--paper) 60%, transparent);
+}
+.cmp-clear:hover { color: var(--paper); }
+
+/* The comparison table itself */
+.cmp-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.cmp-table { border-collapse: collapse; width: 100%; min-width: 42rem; }
+.cmp-table th, .cmp-table td {
+  text-align: left; vertical-align: top;
+  padding: 0.8rem 1rem;
+  border-bottom: 1px solid var(--line-soft);
+  font-size: 0.9375rem;
+}
+.cmp-table thead th {
+  position: sticky; top: 0; z-index: 2;
+  background: var(--paper);
+  border-bottom: 2px solid var(--ink);
+  padding-top: 1.25rem;
+}
+.cmp-table tbody th {
+  font-weight: 400; color: var(--muted);
+  width: 22%; min-width: 11rem;
+}
+.cmp-table td { color: var(--ink); }
+.cmp-table td.is-blank { color: color-mix(in srgb, var(--muted) 60%, transparent); }
+.cmp-sec th {
+  background: var(--stone);
+  font-family: var(--display);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.8125rem;
+  color: var(--ink);
+  border-bottom: 1px solid var(--line);
+  padding-block: 0.7rem;
+}
+/* A row where the farms actually differ is the row worth reading. */
+.cmp-table tr[data-diff="1"] td { background: color-mix(in srgb, var(--gold) 7%, transparent); }
+.cmp-table tr[data-diff="1"] th { color: var(--ink); }
+.cmp-only-diff tr[data-diff="0"] { display: none; }
+
+/* Two lines reserved for the name so the prices below it line up across
+   columns whether a farm's title wraps or not. */
+.cmp-head { display: flex; flex-direction: column; gap: 0.4rem; }
+.cmp-head .t { min-height: 2.6em; }
+.cmp-head .r { font-family: var(--display); font-size: 0.6875rem; letter-spacing: 0.12em; color: var(--gold-deep); }
+.cmp-head .t { font-family: var(--display); font-size: 1.0625rem; letter-spacing: -0.02em; text-transform: uppercase; line-height: 1.2; }
+.cmp-head .p { color: var(--gold-deep); font-family: var(--display); font-size: 1rem; }
+.cmp-head .l { font-size: 0.8125rem; color: var(--muted); }
+.cmp-head img { width: 100%; aspect-ratio: 16/10; object-fit: cover; border-radius: var(--r-chip); margin-bottom: 0.35rem; }
+
+.cmp-controls {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1rem; flex-wrap: wrap;
+  padding-bottom: 1.25rem; margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--line);
+}
+.cmp-switch {
+  display: inline-flex; align-items: center; gap: 0.55rem;
+  font-family: var(--display); font-size: 0.75rem; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--muted); cursor: pointer;
+  background: transparent; border: 1px solid var(--line);
+  border-radius: var(--r-chip); padding: 0.6rem 1rem;
+  transition: all var(--t-fast) var(--ease-soft);
+}
+.cmp-switch:hover { border-color: var(--ink); color: var(--ink); }
+.cmp-switch[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+
+@media (max-width: 640px) {
+  .cmp-tray { gap: 0.6rem; padding: 0.7rem; }
+  .cmp-tray__label { display: none; }
+  .cmp-slot { width: 46px; height: 36px; }
+  .cmp-table th, .cmp-table td { padding: 0.65rem 0.7rem; font-size: 0.875rem; }
+}
+
+@media print {
+  .cmp-tray, .cmp-toggle, .cmp-controls { display: none !important; }
+  .cmp-table { min-width: 0; }
+  .cmp-table thead th { position: static; }
+}
+
+/* Search bar on the listings page */
+.findbar {
+  display: flex; align-items: center; gap: 0.9rem;
+  border-bottom: 2px solid var(--ink);
+  padding-bottom: 0.85rem;
+  margin-bottom: clamp(1.5rem, 2.5vw, 2rem);
+}
+.findbar label {
+  font-family: var(--display);
+  font-size: 0.6875rem; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--gold-deep); flex: none;
+}
+.findbar input {
+  flex: 1; min-width: 0;
+  background: transparent; border: 0; padding: 0.2rem 0;
+  font-family: var(--display);
+  font-size: clamp(1.05rem, 1.6vw, 1.4rem);
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.findbar input::placeholder { color: color-mix(in srgb, var(--muted) 72%, transparent); letter-spacing: -0.01em; }
+.findbar input:focus { outline: none; }
+.findbar:focus-within { border-bottom-color: var(--gold); }
+.findbar input::-webkit-search-cancel-button { cursor: pointer; }
+
+@media print { .findbar { display: none; } }
