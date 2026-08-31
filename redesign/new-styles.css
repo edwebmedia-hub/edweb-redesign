@@ -46,6 +46,12 @@
   /* Rhythm: 8px scale. s3 12, s4 16, s5 24, s6 32, s7 48, s8 64, s9 96, s10 128 */
   --ground-teal: color-mix(in srgb, var(--teal) 16%, var(--paper)); /* teal-washed band */
   --coral-deep: color-mix(in srgb, var(--coral) 78%, var(--ink)); /* button surface, AA under paper text */
+  /* One figure scale. Big numbers appear at three levels, page, section and
+     inside a card, so the three sizes are declared once and referenced, rather
+     than four separate clamps drifting apart. */
+  --fig-lg: clamp(2rem, 3.4vw, 3rem);      /* page-level: the results band */
+  --fig-md: clamp(2rem, 2.8vw, 2.5rem);    /* section-level: the add-on rows */
+  --fig-sm: clamp(1.6rem, 2.4vw, 2rem);    /* inside a card: the build panel */
   --gutter: clamp(1.75rem, 4vw, 3rem);       /* page edge to content, 28 min */
   --container: min(100% - var(--gutter) * 2, 1320px);
   --band: clamp(3.5rem, 8.5vw, 8rem);        /* section padding, 128 max */
@@ -435,6 +441,9 @@ p { margin: 0; text-wrap: pretty; }
   width: 100vw;
   margin-left: calc(50% - 50vw);
   overflow: clip;
+  /* Fades at both edges so a mark leaves the frame rather than being cut in
+     half, the treatment the reviews rail already uses. */
+  mask-image: linear-gradient(90deg, transparent 0, var(--ink) 6%, var(--ink) 94%, transparent 100%);
 }
 .logo-strip-track {
   display: flex;
@@ -601,7 +610,7 @@ p { margin: 0; text-wrap: pretty; }
   align-self: center;
 }
 .figure-val {
-  font-size: clamp(2rem, 3.4vw, 3rem);
+  font-size: var(--fig-lg);
   line-height: 1;
   letter-spacing: -0.03em;
   color: var(--paper);
@@ -2151,11 +2160,12 @@ textarea[aria-invalid="true"] {
   padding: 0.85rem 1.15rem;
   background: var(--ink);
   color: var(--paper);
-  border-radius: 999px;
+  /* The site has one radius; this was the only pill on it. */
+  border-radius: var(--radius);
   font-size: var(--fs-micro);
   font-weight: 600;
   letter-spacing: 0.01em;
-  box-shadow: 0 10px 30px color-mix(in srgb, var(--ink) 28%, transparent);
+  /* No blur: the rest of the site lifts things with a hairline and a ground. */
   transition: transform var(--speed) var(--ease), background var(--speed) var(--ease),
     box-shadow var(--speed) var(--ease);
 }
@@ -3275,7 +3285,7 @@ img.avatar { object-fit: cover; background: var(--ground-alt); }
   /* The row's own <p> colour is the muted one, which washed the loudest thing
      in the row to 72 percent while the name beside it was full ink. */
   color: var(--text);
-  font-size: clamp(2rem, 2.8vw, 2.5rem);
+  font-size: var(--fig-md);
   font-weight: 700;
   line-height: 1;
   letter-spacing: -0.035em;
@@ -3460,7 +3470,7 @@ img.avatar { object-fit: cover; background: var(--ground-alt); }
 .stat-v {
   /* The figure is the point of the row: full ink, like a heading. */
   color: var(--text);
-  font-size: clamp(1.6rem, 2.4vw, 2rem);
+  font-size: var(--fig-sm);
   font-weight: 700;
   letter-spacing: -0.03em;
   line-height: 1;
@@ -3509,4 +3519,13 @@ img.avatar { object-fit: cover; background: var(--ground-alt); }
    price, so on a phone the plans speak for themselves. */
 @media (max-width: 860px) {
   .hero-card--preview { display: none; }
+}
+
+
+/* The pay page's Continue starts with nothing to point at, so it reads and
+   behaves as unavailable until a plan is chosen and the script gives it a
+   destination. */
+.btn.is-disabled {
+  pointer-events: none;
+  opacity: 0.45;
 }

@@ -199,7 +199,7 @@
               </div>
             </div>
             <p class="pay-note" id="pay-freebie" hidden></p>
-            <a class="btn" id="pay-go" href="#">Continue</a>
+            <a class="btn is-disabled" id="pay-go" role="button" aria-disabled="true">Continue</a>
             <p class="pay-note"><span id="pay-cancel-note">Cancel any time.</span></p>
           </div>
 
@@ -356,6 +356,9 @@
 
         var go = document.getElementById('pay-go');
         go.setAttribute('href', spec.href);
+        /* It ships inert; a destination is what makes it usable. */
+        go.classList.remove('is-disabled');
+        go.removeAttribute('aria-disabled');
         go.textContent = spec.todayAmt > 0
           ? 'Pay ' + rand(spec.todayAmt) + ' now'
           : 'Subscribe ' + rand(spec.monthlyAmt) + ' a month';
