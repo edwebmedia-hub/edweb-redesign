@@ -3373,3 +3373,20 @@ img.avatar { object-fit: cover; background: var(--ground-alt); }
 }
 /* The slide is framed by the nav rule above and its own rule below. */
 .opt-c .tab-panels { padding-bottom: clamp(1.75rem, 3vw, 2.5rem); border-bottom: 1px solid var(--line); }
+
+/* The hero enquiry card full bleed on a phone (Edgar, 2026-08-31). It sat in
+   the page gutter with grey either side; on a small screen the form should
+   have the whole width. The coral top edge stays, the side borders and the
+   radius go, since a rounded corner against the screen edge reads as a fault. */
+@media (max-width: 620px) {
+  .quote-card {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    max-width: none;
+    border-left: 0;
+    border-right: 0;
+    border-radius: 0;
+    padding-inline: var(--gutter);
+  }
+}
