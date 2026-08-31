@@ -37,7 +37,10 @@
   --fs-h2: clamp(2.25rem, 4vw, 3.6rem);
   --fs-h3: clamp(1.35rem, 1.9vw, 1.75rem);
   --fs-h4: clamp(1.05rem, 1.25vw, 1.2rem);
-  --fs-lead: clamp(1.06rem, 1.28vw, 1.42rem);
+  /* Was clamp(1.06rem, 1.28vw, 1.42rem), which computed 16.96px against a
+     16px body at 375, 768 and 1280: a role nobody could see. It now reads as
+     a lead from the smallest screen up. */
+  --fs-lead: clamp(1.125rem, 0.55vw + 1rem, 1.42rem);
   --lh-lead: 1.6;               /* one value for both lead roles */
   --fs-body: 1rem;
   --fs-small: 1rem; /* alias of body; kept for existing rules */
@@ -158,10 +161,14 @@ p { margin: 0; text-wrap: pretty; }
   display: grid;
   grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
   gap: var(--gap);
+  /* The two columns finish on one line. `end` aligns the boxes, which left
+     the lead's last line 10 to 14px above the heading's; the baseline
+     keyword aligns what a reader actually sees. */
   align-items: end;
+  align-items: last baseline;
   margin-bottom: clamp(2.75rem, 6.5vw, 6.75rem);
 }
-.head h2 { max-width: 18ch; align-self: start; }
+.head h2 { max-width: 18ch; }
 .head .lead { max-width: 42ch; }
 
 @media (max-width: 860px) {
@@ -689,7 +696,7 @@ p { margin: 0; text-wrap: pretty; }
   flex-wrap: wrap;
   align-items: baseline;
   column-gap: 0.6rem;
-  font-size: clamp(2.4rem, 3.4vw, 3rem);
+  font-size: var(--fig-lg);
   line-height: 1;
   letter-spacing: -0.04em;
   color: var(--text);
@@ -1113,7 +1120,9 @@ form > div:has(textarea:focus) label,
    same radius. Gives the right column a designed shape now the fake screenshot
    is gone, and adds a surface step against the page ground. */
 .tab-panel.is-active {
-  background: var(--surface);
+  /* Edgar 2026-08-31: the band and the panel swap grounds. The section is
+     white now, so the selected service reads as a panel laid on it. */
+  background: var(--ground-alt);
   border: 1px solid var(--line);
   border-radius: var(--radius);
   padding: clamp(1.75rem, 2.4vw, 2.25rem);
@@ -1211,7 +1220,9 @@ form > div:has(textarea:focus) label,
 .wordstack {
   display: grid;
   justify-items: start;
-  font-size: clamp(2rem, 4.1vw, 3.7rem);
+  /* One declaration. Two later overrides used to sit further down the file,
+     which meant this value was never the one on screen. */
+  font-size: clamp(2.9rem, 4.8vw, 4.3rem);
   line-height: 1.04;
   letter-spacing: 0.005em;
   text-transform: uppercase;
@@ -2173,7 +2184,6 @@ textarea[aria-invalid="true"] {
 .chat-float:hover {
   transform: translateY(-3px);
   background: color-mix(in srgb, var(--ink) 86%, var(--coral));
-  box-shadow: 0 16px 38px color-mix(in srgb, var(--ink) 34%, transparent);
 }
 .chat-float:focus-visible { outline: 2px solid var(--coral); outline-offset: 3px; }
 
@@ -2871,7 +2881,6 @@ textarea[aria-invalid="true"] {
 /* M8. Raising the section h2 for phones left the page's one display heading
    smaller than the ordinary headings around it, which inverts the hierarchy on
    the screen it was raised for. It leads again at every width. */
-.wordstack { font-size: clamp(2.5rem, 4.3vw, 3.9rem); }
 
 /* Anchor targets clear the sticky header. Without this every nav link, the
    skip link and every jump link land their heading underneath it. */
@@ -2882,7 +2891,7 @@ main[id] {
 
 /* One value per role, corrected after measurement rather than reading. */
 .lead,
-.cta-sub { line-height: var(--lh-lead); }
+.cta-sub { font-size: var(--fs-lead); line-height: var(--lh-lead); }
 /* The long-form pages set their own reading line-height; every other paragraph
    on the site sits at the body value, so the policy pages were the odd ones. */
 .prose p,
@@ -2892,7 +2901,6 @@ main[id] {
 
 /* The display heading was raised to clear the section heading, but 40 against
    36 is neither the same role nor a step. It leads properly now. */
-.wordstack { font-size: clamp(2.9rem, 4.8vw, 4.3rem); }
 
 /* The chart is lifted 37px so its rising line tucks under the headline on a
    wide screen, where the line's right end is far from the text. On a phone the
@@ -3365,167 +3373,3 @@ img.avatar { object-fit: cover; background: var(--ground-alt); }
 }
 /* The slide is framed by the nav rule above and its own rule below. */
 .opt-c .tab-panels { padding-bottom: clamp(1.75rem, 3vw, 2.5rem); border-bottom: 1px solid var(--line); }
-
-
-/* ================= The build panel, Edgar's pick 2026-08-26 ===============
-   The old site's "Built To Perform" card in this site's clothes. It carries
-   its own dark state, which is the point of the switch: the same information,
-   both ways round. */
-.panel {
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: var(--surface);
-  overflow: hidden;
-  transition: background var(--speed) var(--ease), border-color var(--speed) var(--ease),
-    color var(--speed) var(--ease);
-}
-.panel.is-dark {
-  background: var(--ink);
-  border-color: var(--line-on-ink);
-  color: var(--text-on-ink);
-}
-.p-head {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 1.1rem clamp(1rem, 2vw, 1.4rem);
-  border-bottom: 1px solid var(--line);
-}
-.panel.is-dark .p-head { border-bottom-color: var(--line-on-ink); }
-.p-title { font-weight: 700; font-size: var(--fs-h4); }
-.p-sub { display: block; font-size: var(--fs-micro); font-weight: 400; color: var(--text-meta); }
-.panel.is-dark .p-sub { color: var(--text-on-ink-muted); }
-
-/* A square track: the site has one radius and a pill would be the only one. */
-.sw {
-  margin-left: auto;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0;
-  background: none;
-  border: 0;
-  font: inherit;
-  color: inherit;
-  cursor: pointer;
-}
-.sw-label { font-size: var(--fs-micro); color: var(--text-meta); }
-.panel.is-dark .sw-label { color: var(--text-on-ink-muted); }
-.sw-track {
-  position: relative;
-  width: 46px;
-  height: 24px;
-  flex: none;
-  border: 1px solid var(--line-strong);
-  border-radius: var(--radius);
-  transition: border-color var(--speed) var(--ease), background var(--speed) var(--ease);
-}
-.panel.is-dark .sw-track {
-  border-color: var(--line-on-ink);
-  background: color-mix(in srgb, var(--paper) 8%, transparent);
-}
-.sw-knob {
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  width: 18px;
-  height: 18px;
-  border-radius: 2px;
-  background: var(--coral);
-  transition: transform var(--speed) var(--ease);
-}
-.panel.is-dark .sw-knob { transform: translateX(22px); }
-
-.p-tabs {
-  display: flex;
-  gap: 1.25rem;
-  padding: 0 clamp(1rem, 2vw, 1.4rem);
-  border-bottom: 1px solid var(--line);
-}
-.panel.is-dark .p-tabs { border-bottom-color: var(--line-on-ink); }
-.p-tabs button {
-  margin-bottom: -1px;
-  padding: 0.75rem 0;
-  background: none;
-  border: 0;
-  border-bottom: 2px solid transparent;
-  font: inherit;
-  font-size: var(--fs-small);
-  font-weight: 600;
-  color: var(--text-meta);
-  cursor: pointer;
-  transition: color var(--speed) var(--ease), border-color var(--speed) var(--ease);
-}
-.panel.is-dark .p-tabs button { color: var(--text-on-ink-muted); }
-.p-tabs button[aria-selected="true"] { color: var(--text); border-bottom-color: var(--coral); }
-.panel.is-dark .p-tabs button[aria-selected="true"] { color: var(--paper); }
-
-.p-body { padding: clamp(1rem, 2vw, 1.4rem); }
-.tp { display: none; }
-.tp.is-on { display: grid; gap: 1.1rem; }
-.stat-line { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; }
-.stat-k { font-size: var(--fs-micro); color: var(--text-meta); }
-.panel.is-dark .stat-k { color: var(--text-on-ink-muted); }
-.panel.is-dark .stat-v { color: var(--paper); }
-.stat-v {
-  /* The figure is the point of the row: full ink, like a heading. */
-  color: var(--text);
-  font-size: var(--fig-sm);
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  line-height: 1;
-  font-variant-numeric: tabular-nums;
-  white-space: nowrap;
-}
-.bar { height: 4px; border-radius: 2px; background: var(--line); overflow: hidden; }
-.panel.is-dark .bar { background: color-mix(in srgb, var(--paper) 14%, transparent); }
-/* Scaled rather than widened: animating width relayouts the row every frame. */
-.bar span {
-  display: block;
-  width: 100%;
-  height: 100%;
-  background: var(--coral);
-  transform: scaleX(0);
-  transform-origin: left center;
-  transition: transform 1.1s var(--ease);
-}
-.p-rows { display: grid; }
-.p-rows div {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 1rem;
-  padding-block: 0.7rem;
-  border-top: 1px solid var(--line);
-  font-size: var(--fs-small);
-}
-.panel.is-dark .p-rows div { border-top-color: var(--line-on-ink); }
-.p-rows div:first-child { border-top: 0; }
-.p-rows b { font-weight: 700; }
-.p-rows span { color: var(--text-muted); text-align: right; }
-.panel.is-dark .p-rows span { color: var(--text-on-ink); }
-
-@media (max-width: 620px) {
-  /* Stacked, the key and value stop fighting for one line. */
-  .p-rows div { flex-direction: column; gap: 0.1rem; }
-  .p-rows span { text-align: left; }
-  .p-tabs { gap: 1rem; }
-  .p-tabs button { font-size: var(--fs-micro); }
-}
-
-
-/* The pricing masthead's summary card previews the section directly below it.
-   Side by side that is useful; stacked it is a wall to climb before the first
-   price, so on a phone the plans speak for themselves. */
-@media (max-width: 860px) {
-  .hero-card--preview { display: none; }
-}
-
-
-/* The pay page's Continue starts with nothing to point at, so it reads and
-   behaves as unavailable until a plan is chosen and the script gives it a
-   destination. */
-.btn.is-disabled {
-  pointer-events: none;
-  opacity: 0.45;
-}

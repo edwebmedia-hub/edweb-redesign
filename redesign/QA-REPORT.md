@@ -946,3 +946,56 @@ Gates: 13 pages by three widths, no console errors, 18 links, contrast
 exempt-only, grounds clean, alignment clean, no em-dashes. Both payment
 journeys exercised end to end at 1280 and 390, correct Payfast keys and
 amounts against api/payfast.js.
+
+
+## Self-directed quality pass, 2026-08-31
+
+Edgar asked for a pass with no direction from him: find the faults, fix them,
+report once. Audited all seven pages at 375, 768, 1280 and 1440 with measured
+computed styles rather than by reading the stylesheet.
+
+Twelve faults found and fixed. Consistency: four unrelated clamps were doing
+one big-number job (48, 44, 36 and 32px), now three declared tokens, --fig-lg,
+--fig-md and --fig-sm; the chat button carried the only 999px pill and the last
+drop shadow on the site, both gone; .wordstack declared font-size three times
+with two dead, now one. Performance: 22 work-page images had no dimensions and
+18 logo marks loaded eagerly below the fold. Correctness: the pay page's
+Continue shipped as href="#", a live link to nowhere, and now ships inert with
+aria-disabled and is enabled by script only once a plan is chosen. Motion: the
+logo marquee ran full bleed with no mask and sliced a mark in half at both
+edges, and now fades like the reviews rail.
+
+Clean on audit and left alone: 66 of 66 interactive elements had focus rings,
+no heading orphans, no horizontal overflow at any of the four widths, no
+media-query override bugs, 404 present and styled, every image had alt text.
+
+Two mistakes made and corrected inside the pass. A blanket 1200x900 was stamped
+on every undimensioned image, which trades one layout shift for another; and
+the marquee mask first landed on .hero because `overflow: clip` appears in both
+rules and the insert matched the first, which briefly faded the whole hero.
+
+Independent review returned GO with seven gaps, four of them introduced by this
+pass. All seven fixed: the work page's images reused one file in two boxes of
+different ratios, so no single pair could be right and the attributes came off,
+since the CSS aspect-ratio already reserves the box; the logo strip's blanket
+200x72 was wrong for all nine marks and its lazy attribute reversed a
+documented decision, since off-screen marquee marks may never load, so real
+dimensions went on and eager loading came back; .pcard-price never took a token
+and out-sized the section heading on a phone; the chat button dropped its
+shadow at rest but grew one on hover; and --fs-lead computed 16.96px against a
+16px body, because .lead had a token and a line-height but never a size, so
+every lead on the site rendered as body copy. It now runs 1.13x body at 375 and
+1.42x at 1280.
+
+Edgar's calls during the pass: the build panel he picked on 2026-08-26 was
+removed entirely, with its styles and script; and the services band and its
+selected-service panel swapped grounds, the band to white and the panel to
+grey, which also returns the home tone ladder to grey, white, INK, white, INK,
+grey, white, grey, white, TEAL, white.
+
+Not done: the work page masthead was rejected twice, first as a collage and
+then as a list of the client sites, which let a visitor count them. Three
+replacements are with Edgar to pick from and none of them enumerates the work.
+
+Gates: 13 pages by three widths, no console errors, 18 links, contrast
+exempt-only, alignment and ground sweeps clean, no em-dashes.
