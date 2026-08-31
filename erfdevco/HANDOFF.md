@@ -146,6 +146,32 @@ derived, not typed: regenerate them if you edit a farm's `specs`.
 Photography is licence-free Pexels stock in `assets/`. Swap for the client's own
 property photographs as mandates come in.
 
+## Correctness pass (2026-08-28, found by auditing rather than guessing)
+Four real defects the audit turned up, all fixed:
+
+1. **The forms were losing data.** The contact form collected a reason and a
+   province and posted neither, so a seller who picked "I want an idea of what
+   my land is worth" in the Free State reached the inbox as an unlabelled
+   message. Both forms now send every field the visitor filled in, plus the
+   page they sent it from, and the subject line names the reason so an enquiry
+   can be triaged from the inbox list. The farm enquiry also carries its
+   reference and the listing URL.
+2. **Farm pages were `noindex`.** On a property portal the listings are the
+   pages that should rank. The robots tag is gone and each farm now sets its
+   own title, description, canonical and share card from its data as it
+   renders, and all nine are in the sitemap.
+3. **The bond sliders were mute to screen readers** ("20", not "20 per cent"),
+   and the schedule spine was a tablist in class name only. Sliders now carry
+   `aria-valuetext`, panels are real `tabpanel`s owned by their tabs, and the
+   tabs use a roving tabindex so Tab reaches the group once and arrows move
+   inside it.
+4. **Images were four times larger than they rendered.** A card 370px wide was
+   downloading a 1400px file. Every photograph now has 480w, 800w and 1200w
+   variants with `srcset` and real `sizes`, wired into the static pages and
+   into the cards, galleries and comparison thumbnails the script renders.
+   Measured on the listings page: 68% fewer image bytes at 390, 85% at 768 and
+   73% at 1440.
+
 ## Weight
 The asset folder was cut from 23.8 MB to 7.4 MB, a 69 per cent reduction: twelve
 leftover images from earlier iterations that nothing referenced were deleted,
@@ -156,6 +182,7 @@ file is now 502 KB. Re-run that pass if large originals are added.
 ## Verification (2026-08-28, headless Chrome via puppeteer-core)
 Every page at 1440, 768 and 390:
 - 32 page and width combinations swept: 0 console errors, 0 failed requests, 0 broken images
+- both form payloads captured and inspected, not assumed: every field arrives
 - map: all 9 pins verified inside their own province via SVG isPointInFill
 - bond maths checked by hand: R26m at 11.75% over 15 years is R307 874 a month
 - 0 horizontal overflow at any width

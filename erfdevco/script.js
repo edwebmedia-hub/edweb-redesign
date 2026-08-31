@@ -138,6 +138,49 @@
       .replace(/"/g, '&quot;');
   }
 
+  /* ----------------------------------------------------------------------
+     Responsive images. Cards render around 370 to 750 CSS pixels, so serving
+     the full file to a phone wastes most of the download. Variants are on
+     disk as name-480w.jpg and so on; widths come from data/img-widths.json.
+     ---------------------------------------------------------------------- */
+  var IMG_W = null;
+  var VARIANTS = [480, 800, 1200];
+
+  fetch('data/img-widths.json', { cache: 'force-cache' })
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (m) {
+      if (!m) return;
+      IMG_W = m;
+      // Anything already rendered gets upgraded in place.
+      $$('img[data-responsive]').forEach(function (img) {
+        var a = srcAttrs(img.getAttribute('src'), img.getAttribute('sizes') || '100vw');
+        if (a.srcset) img.setAttribute('srcset', a.srcset);
+      });
+    })
+    .catch(function () { /* full-size images still work */ });
+
+  function srcAttrs(src, sizes) {
+    var file = String(src).split('/').pop();
+    if (!IMG_W || !IMG_W[file]) return { srcset: '', sizes: sizes };
+    var base = file.replace(/\.jpg$/i, '');
+    var w = IMG_W[file];
+    var parts = VARIANTS.filter(function (v) { return v < w; })
+      .map(function (v) { return 'assets/' + base + '-' + v + 'w.jpg ' + v + 'w'; });
+    parts.push('assets/' + file + ' ' + w + 'w');
+    return { srcset: parts.join(', '), sizes: sizes };
+  }
+
+  function imgTag(src, alt, sizes, opts) {
+    opts = opts || {};
+    var a = srcAttrs(src, sizes);
+    return '<img src="' + esc(src) + '" alt="' + esc(alt) + '" data-responsive' +
+      (a.srcset ? ' srcset="' + esc(a.srcset) + '"' : '') +
+      ' sizes="' + esc(sizes) + '"' +
+      (opts.eager ? ' fetchpriority="high"' : ' loading="lazy"') +
+      ' decoding="async"' +
+      (opts.wh ? ' width="1200" height="900"' : '') + ' />';
+  }
+
   var MONTHS = ['January','February','March','April','May','June',
                 'July','August','September','October','November','December'];
 
@@ -269,7 +312,7 @@
       '<article class="farm-card reveal">' +
         '<div class="farm-card__media">' +
           '<a href="listing.html?id=' + encodeURIComponent(f.id) + '" aria-label="' + esc(f.title) + ', ' + esc(f.place) + '">' +
-            '<img src="' + esc(f.image) + '" alt="' + esc(f.alt) + '" ' + (eager ? '' : 'loading="lazy" ') + 'decoding="async" width="1200" height="900" />' +
+            imgTag(f.image, f.alt, '(max-width:640px) 92vw, (max-width:1100px) 46vw, 31vw', { eager: eager, wh: true }) +
           '</a>' +
           '<span class="farm-card__ref">' + esc(f.ref) + '</span>' +
           '<span class="farm-card__type">' + esc(f.farmType) + '</span>' +
@@ -625,14 +668,16 @@
       var f = farms.filter(function (x) { return x.id === id; })[0] || farms[0];
       if (!f) throw new Error('Listing not found');
 
-      document.title = f.title + ', ' + f.province + ' | ERFDEVCO';
+      setHead(f);
       var crumbNow = $('#crumb-now');
       if (crumbNow) crumbNow.textContent = f.ref;
 
       var gallery = [f.image].concat(f.gallery || []);
       var galleryHtml = gallery.map(function (src, i) {
-        return '<figure data-lb="' + i + '"><img src="' + esc(src) + '" alt="' + esc(i === 0 ? f.alt : f.title + ', view ' + (i + 1)) + '" ' +
-          (i === 0 ? '' : 'loading="lazy" ') + 'decoding="async" /></figure>';
+        return '<figure data-lb="' + i + '">' +
+          imgTag(src, i === 0 ? f.alt : f.title + ', view ' + (i + 1),
+                 i === 0 ? '(max-width:1100px) 96vw, 92vw' : '(max-width:640px) 92vw, 30vw',
+                 { eager: i === 0 }) + '</figure>';
       }).join('');
 
       var factsHtml = (f.facts || []).map(function (p) {
@@ -645,12 +690,15 @@
         var body = Object.keys(rows).map(function (k) {
           return '<dt>' + esc(k) + '</dt><dd>' + esc(rows[k]) + '</dd>';
         }).join('');
-        return '<div class="spec-group" data-group="' + i + '"' + (i === 0 ? '' : ' hidden') + '>' +
+        return '<div class="spec-group" data-group="' + i + '" role="tabpanel" tabindex="0"' +
+          ' id="specpanel-' + i + '" aria-labelledby="spectab-' + i + '"' + (i === 0 ? '' : ' hidden') + '>' +
           '<h3>' + esc(group) + '</h3><dl>' + body + '</dl></div>';
       }).join('');
 
       var tabsHtml = groupNames.map(function (group, i) {
         return '<button type="button" class="spec-tab" role="tab" data-group="' + i + '"' +
+          ' id="spectab-' + i + '" aria-controls="specpanel-' + i + '"' +
+          ' tabindex="' + (i === 0 ? '0' : '-1') + '"' +
           ' aria-selected="' + (i === 0 ? 'true' : 'false') + '">' + esc(group) +
           '<span class="c">' + Object.keys(f.specs[group]).length + '</span></button>';
       }).join('') +
@@ -771,7 +819,11 @@
 
       function select(tab) {
         var key = tab.getAttribute('data-group');
-        tabs.forEach(function (t) { t.setAttribute('aria-selected', t === tab ? 'true' : 'false'); });
+        tabs.forEach(function (t) {
+          var on = t === tab;
+          t.setAttribute('aria-selected', on ? 'true' : 'false');
+          t.setAttribute('tabindex', on ? '0' : '-1');
+        });
         groups.forEach(function (g) {
           g.hidden = !(key === 'all' || g.getAttribute('data-group') === key);
         });
@@ -906,6 +958,9 @@
 
       function calc() {
         var d = +dep.value, r = +rate.value, y = +term.value;
+        dep.setAttribute('aria-valuetext', d + ' per cent deposit');
+        rate.setAttribute('aria-valuetext', r.toFixed(2) + ' per cent interest');
+        term.setAttribute('aria-valuetext', y + (y === 1 ? ' year' : ' years'));
         var deposit = f.price * d / 100;
         var loan = f.price - deposit;
         var i = r / 100 / 12, n = y * 12;
@@ -979,6 +1034,23 @@
       armReveals(host);
     }
 
+    /* Head tags per farm. These pages are the ones that should rank, so they
+       carry a real title, description, canonical and share card. */
+    function setHead(f) {
+      var url = new URL('listing.html?id=' + encodeURIComponent(f.id), window.location.href).href;
+      var img = new URL(f.image, window.location.href).href;
+      var desc = f.summary;
+      var title = f.title + ', ' + f.place + ', ' + f.province + ' | ERFDEVCO';
+
+      document.title = title;
+      var set = function (sel, attr, v) { var el = $(sel); if (el) el.setAttribute(attr, v); };
+      set('meta[name="description"]', 'content', desc);
+      set('#listing-canonical', 'href', url);
+      set('#og-title', 'content', title);
+      set('#og-desc', 'content', desc);
+      set('#og-image', 'content', img);
+    }
+
     /* Structured data so a listing can surface as a rich result. */
     function injectSchema(f) {
       var old = document.getElementById('listing-schema');
@@ -1019,7 +1091,7 @@
         '<div class="enquiry-card">' +
           '<h3>Enquire on ' + esc(f.ref) + '</h3>' +
           '<p style="margin-top:0.5rem">Ask for the full mandate pack, the title deed extract or a viewing date.</p>' +
-          '<form class="form-grid" style="margin-top:1.5rem" data-form="enquiry" data-subject="Enquiry: ' + esc(f.ref) + ', ' + esc(f.title) + '" novalidate>' +
+          '<form class="form-grid" style="margin-top:1.5rem" data-form="enquiry" data-ref="' + esc(f.ref) + ', ' + esc(f.title) + '" data-subject="Enquiry: ' + esc(f.ref) + ', ' + esc(f.title) + '" novalidate>' +
             '<div class="field field--full"><label for="eq-name">Your name</label><input id="eq-name" name="name" type="text" autocomplete="name" required /></div>' +
             '<div class="field field--full"><label for="eq-email">Email</label><input id="eq-email" name="email" type="email" autocomplete="email" required /></div>' +
             '<div class="field field--full"><label for="eq-phone">Phone</label><input id="eq-phone" name="phone" type="tel" autocomplete="tel" /></div>' +
@@ -1087,14 +1159,36 @@
           return;
         }
 
-        var payload = {
-          name: (form.elements.name && form.elements.name.value || '').trim(),
-          email: (form.elements.email && form.elements.email.value || '').trim(),
-          message: (form.elements.message && form.elements.message.value || '').trim(),
-          subject: form.getAttribute('data-subject') || 'New enquiry from the ERFDEVCO website'
+        var val = function (n) {
+          var el = form.elements[n];
+          return el && el.value ? String(el.value).trim() : '';
         };
-        var phone = form.elements.phone && form.elements.phone.value;
-        if (phone) payload.message = payload.message + '\n\nPhone: ' + phone;
+        var labelOf = function (n) {
+          var el = form.elements[n];
+          if (!el || !el.options) return val(n);
+          var o = el.options[el.selectedIndex];
+          return o && o.value ? o.text.trim() : '';
+        };
+
+        var subject = form.getAttribute('data-subject') || 'New enquiry from the ERFDEVCO website';
+        var reason = labelOf('reason');
+        if (reason) subject = 'ERFDEVCO: ' + reason;
+
+        // Everything the visitor filled in has to reach the inbox. A dropdown
+        // that never leaves the browser is a form that quietly loses enquiries.
+        var extra = [];
+        if (reason) extra.push('Reason: ' + reason);
+        if (val('province')) extra.push('Province: ' + labelOf('province'));
+        if (val('phone')) extra.push('Phone: ' + val('phone'));
+        if (form.getAttribute('data-ref')) extra.push('Listing: ' + form.getAttribute('data-ref'));
+        extra.push('Sent from: ' + window.location.href);
+
+        var payload = {
+          name: val('name'),
+          email: val('email'),
+          message: val('message') + '\n\n' + extra.join('\n'),
+          subject: subject
+        };
 
         if (btn) { btn.disabled = true; btn.dataset.label = btn.textContent; btn.textContent = 'Sending'; }
         setStatus('Sending your message', null);
@@ -1212,7 +1306,7 @@
         for (var i = 0; i < CMP_MAX; i++) {
           var f = by[ids[i]];
           html += f
-            ? '<div class="cmp-slot cmp-slot--filled"><img src="' + esc(f.image) + '" alt="' + esc(f.title) + '" />' +
+            ? '<div class="cmp-slot cmp-slot--filled">' + imgTag(f.image, f.title, '62px', {}) +
               '<button type="button" class="cmp-slot__x" data-drop="' + esc(f.id) + '" aria-label="Remove ' + esc(f.title) + '">&times;</button></div>'
             : '<div class="cmp-slot" aria-hidden="true"></div>';
         }
@@ -1271,7 +1365,7 @@
       var head = '<thead><tr><th scope="col"><span class="visually-hidden">Field</span></th>' +
         picked.map(function (f) {
           return '<th scope="col"><span class="cmp-head">' +
-            '<img src="' + esc(f.image) + '" alt="' + esc(f.alt) + '" loading="lazy" decoding="async" />' +
+            imgTag(f.image, f.alt, '(max-width:640px) 45vw, 22vw', {}) +
             '<span class="r">' + esc(f.ref) + '</span>' +
             '<span class="t"><a href="listing.html?id=' + encodeURIComponent(f.id) + '">' + esc(f.title) + '</a></span>' +
             '<span class="l">' + esc(f.place) + ', ' + esc(f.province) + '</span>' +
