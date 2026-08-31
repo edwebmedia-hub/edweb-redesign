@@ -535,12 +535,9 @@ button, input, select, textarea { font: inherit; color: inherit; }
   grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: clamp(1.25rem, 2.4vw, 2.2rem);
 }
-/* Deliberately uneven: a wide feature and a tall partner, then a pair. This
-   is what keeps it off the default three across row. */
-.farm-grid:not(.farm-grid--even) > :nth-child(1) { grid-column: span 4; }
-.farm-grid:not(.farm-grid--even) > :nth-child(2) { grid-column: span 2; }
-.farm-grid:not(.farm-grid--even) > :nth-child(3) { grid-column: span 3; }
-.farm-grid:not(.farm-grid--even) > :nth-child(4) { grid-column: span 3; }
+/* Every card the same size, everywhere. The home page runs two across, the
+   listings page three, and a card is a card either way. */
+.farm-grid > * { grid-column: span 3; }
 
 /* The listings page is an even three across: every card the same shape, so
    nine farms read as one inventory rather than a feature plus leftovers. */
@@ -556,9 +553,6 @@ button, input, select, textarea { font: inherit; color: inherit; }
   background: var(--stone-2);
   aspect-ratio: 4 / 3;
 }
-.farm-grid:not(.farm-grid--even) > :nth-child(1) .farm-card__media { aspect-ratio: 16 / 9; }
-.farm-grid:not(.farm-grid--even) > :nth-child(2) .farm-card__media { aspect-ratio: 3 / 4; }
-
 /* The photo link fills the frame; the chips and the save button sit above it. */
 .farm-card__media > a { position: absolute; inset: 0; display: block; }
 .farm-card__media img {
@@ -1442,13 +1436,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
    21. Responsive
    -------------------------------------------------------------------------- */
 @media (max-width: 1100px) {
-  .farm-grid > :nth-child(1),
-  .farm-grid > :nth-child(2),
-  .farm-grid > :nth-child(3),
-  .farm-grid > :nth-child(4) { grid-column: span 3; }
   .farm-grid--even > * { grid-column: span 3 !important; }
-  .farm-grid > :nth-child(1) .farm-card__media,
-  .farm-grid > :nth-child(2) .farm-card__media { aspect-ratio: 4 / 3 !important; }
   /* Two columns: a wide tile top and bottom, four square between. Still no
      empty cell. */
   .type-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: clamp(180px, 20vw, 240px); }

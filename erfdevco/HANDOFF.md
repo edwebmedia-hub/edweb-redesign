@@ -20,7 +20,7 @@ was taken from it, and what was deliberately changed:
 | Radius set 4 / 5 / 6 / 100% | Yes | 6 media, 6 card, 4 chip, 4 field |
 | One full-bleed black chapter band | Yes | Estate green `#0b1710`, not black |
 | Blue-grey body text `#475676` | No | Warm green-grey, derived from the brand ink |
-| Three-across property card row | No | Uneven 4/2 then 3/3 grid, feature card first |
+| Three-across property card row | Partly | Every card one size: home two across, listings three across |
 | Hero with two buttons | No | Hero plus a **search rail fused to its bottom edge** |
 | "Featured developments" black band | No | **Browse by farm type**, a 3x3 tile block, no empty cell |
 | Testimonial slider | No | **The mandate**: real credentials, no invented testimonials |
@@ -59,7 +59,9 @@ Not a brochure. The pieces that make it behave like a working portal:
   Shortlist chip carries a live count and filters to saved farms only, with its
   own empty state.
 - **Cards** carry the reference, farm type, status (a genuinely new listing gets
-  the gold dot) and the recorded fact count for that farm.
+  the gold dot) and the recorded fact count for that farm. Every card is the
+  same size on every page: the home page runs two across, the listings page
+  three, and one card never gets a feature treatment the others do not.
 - **Farm page** opens on a schedule spine: section names down the left with
   their field counts, one panel open beside them, a gold marker on the selected
   section, arrow keys moving between them. "All sections" opens the lot.
@@ -84,7 +86,7 @@ Not a brochure. The pieces that make it behave like a working portal:
   holds the same fields on every listing.
 
 ## Pages
-- `index.html` hero, search rail, 4 farms, agency split, counters, farm-type
+- `index.html` hero, search rail, 4 featured farms in a 2x2, agency split, counters, farm-type
   chapter, the listing schedule, the mandate, six services, CTA
 - `listings.html` search, filter chips, sort, shortlist filter, empty state
 - `listing.html?id=` JS-rendered from `data/listings.json`: gallery, 6-fact grid,
