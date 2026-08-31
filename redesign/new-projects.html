@@ -73,10 +73,10 @@
 
   <main id="main">
     <!-- =============================== MASTHEAD =============================== -->
-    <section class="page-hero band--alt" id="top">
-      <div class="container page-hero-inner">
-        <div>
-          <h1>Websites we have <span class="hl">built.</span></h1>
+    <section class="page-hero page-hero--strip band--alt" id="top">
+      <div class="container page-hero-inner page-hero-inner--stack">
+        <h1>Websites we have <span class="hl">built.</span></h1>
+        <div class="mast-foot">
           <p class="lead">
             Client work and demo builds across eleven trades. Most are online right now, so open them and judge for yourself.
           </p>
@@ -85,19 +85,39 @@
             <a href="new-packages.html" class="ulink">See what it costs <span class="arrow" aria-hidden="true">&raquo;</span></a>
           </div>
         </div>
+      </div>
+      </div>
 
-        <div class="hero-card reveal" style="--reveal-delay:120ms">
-          <h2>Recent client sites</h2>
-          <p class="hero-card-sub">Open any one and judge it for yourself.</p>
-          <div class="hero-rows">
-            <a href="new-project-navigator.html"><span class="row-name">Navigator Vietnam</span><span class="row-meta">Travel</span></a>
-            <a href="new-project-crazydaizy.html"><span class="row-name">Crazy Daizy</span><span class="row-meta">Bakery and store</span></a>
-            <a href="new-project-teetotrail.html"><span class="row-name">Tee to Trail Africa</span><span class="row-meta">Golf tourism</span></a>
-            <a href="new-project-spiralguard.html"><span class="row-name">Helix SpiralGuard</span><span class="row-meta">Manufacturing</span></a>
-            <a href="new-project-lekkerdoos.html"><span class="row-name">Die Lekker Doos</span><span class="row-meta">Wine club</span></a>
-            <a href="new-project-muire.html"><span class="row-name">Muire Maintenance</span><span class="row-meta">Home services</span></a>
-          </div>
-          <p class="hero-card-foot">Demo builds sit below them, across roofing, plumbing, painting, construction and solar.</p>
+      <!-- Decorative. Every site in this rail is a real, named link in the grid
+           below, so it is hidden from screen readers rather than repeating that
+           list. Eager, because an off-screen marquee frame set to lazy may never
+           load at all. The set is duplicated once so the loop has no seam.
+           A frame is never wider than about 390px, so an ordinary screen takes the
+           400w file and only a retina one pays for 800w. -->
+      <div class="work-strip" aria-hidden="true">
+        <div class="work-strip-track">
+            <img src="assets/work/demo-paintco-800w.webp" srcset="assets/work/demo-paintco-400w.webp 400w, assets/work/demo-paintco-800w.webp 800w" sizes="(max-width: 768px) 240px, 390px" alt="" width="800" height="500" decoding="async" fetchpriority="low" />
+            <img src="assets/work/muire-home-800w.webp" srcset="assets/work/muire-home-400w.webp 400w, assets/work/muire-home-800w.webp 800w" sizes="(max-width: 768px) 240px, 390px" alt="" width="800" height="600" decoding="async" fetchpriority="low" />
+            <img src="assets/work/demo-brightline-800w.webp" srcset="assets/work/demo-brightline-400w.webp 400w, assets/work/demo-brightline-800w.webp 800w" sizes="(max-width: 768px) 240px, 390px" alt="" width="800" height="500" decoding="async" fetchpriority="low" />
+            <img src="assets/work/lekkerdoos-home-800w.webp" srcset="assets/work/lekkerdoos-home-400w.webp 400w, assets/work/lekkerdoos-home-800w.webp 800w" sizes="(max-width: 768px) 240px, 390px" alt="" width="800" height="600" decoding="async" fetchpriority="low" />
+            <img src="assets/work/demo-construction-800w.webp" srcset="assets/work/demo-construction-400w.webp 400w, assets/work/demo-construction-800w.webp 800w" sizes="(max-width: 768px) 240px, 390px" alt="" width="800" height="500" decoding="async" fetchpriority="low" />
+            <img src="assets/work/spiralguard-full-800w.webp" srcset="assets/work/spiralguard-full-400w.webp 400w, assets/work/spiralguard-full-800w.webp 800w" sizes="(max-width: 768px) 240px, 390px" alt="" width="800" height="600" decoding="async" fetchpriority="low" />
+            <img src="assets/work/demo-plumbing-800w.webp" srcset="assets/work/demo-plumbing-400w.webp 400w, assets/work/demo-plumbing-800w.webp 800w" sizes="(max-width: 768px) 240px, 390px" alt="" width="800" height="500" decoding="async" fetchpriority="low" />
+            <img src="assets/work/teetotrail-home-800w.webp" srcset="assets/work/teetotrail-home-400w.webp 400w, assets/work/teetotrail-home-800w.webp 800w" sizes="(max-width: 768px) 240px, 390px" alt="" width="800" height="600" decoding="async" fetchpriority="low" />
+            <img src="assets/work/demo-roofing-800w.webp" srcset="assets/work/demo-roofing-400w.webp 400w, assets/work/demo-roofing-800w.webp 800w" sizes="(max-width: 768px) 240px, 390px" alt="" width="800" height="500" decoding="async" fetchpriority="low" />
+            <img src="assets/work/crazydaizy-home-800w.webp" srcset="assets/work/crazydaizy-home-400w.webp 400w, assets/work/crazydaizy-home-800w.webp 800w" sizes="(max-width: 768px) 240px, 390px" alt="" width="800" height="600" decoding="async" fetchpriority="low" />
+            <img src="assets/work/navigator-home-800w.webp" srcset="assets/work/navigator-home-400w.webp 400w, assets/work/navigator-home-800w.webp 800w" sizes="(max-width: 768px) 240px, 390px" alt="" width="800" height="528" decoding="async" fetchpriority="low" />
+            <img src="assets/work/demo-paintco-800w.webp" srcset="assets/work/demo-paintco-400w.webp 400w, assets/work/demo-paintco-800w.webp 800w" sizes="(max-width: 768px) 240px, 390px" alt="" width="800" height="500" decoding="async" fetchpriority="low" />
+            <img src="assets/work/muire-home-800w.webp" srcset="assets/work/muire-home-400w.webp 400w, assets/work/muire-home-800w.webp 800w" sizes="(max-width: 768px) 240px, 390px" alt="" width="800" height="600" decoding="async" fetchpriority="low" />
+            <img src="assets/work/demo-brightline-800w.webp" srcset="assets/work/demo-brightline-400w.webp 400w, assets/work/demo-brightline-800w.webp 800w" sizes="(max-width: 768px) 240px, 390px" alt="" width="800" height="500" decoding="async" fetchpriority="low" />
+            <img src="assets/work/lekkerdoos-home-800w.webp" srcset="assets/work/lekkerdoos-home-400w.webp 400w, assets/work/lekkerdoos-home-800w.webp 800w" sizes="(max-width: 768px) 240px, 390px" alt="" width="800" height="600" decoding="async" fetchpriority="low" />
+            <img src="assets/work/demo-construction-800w.webp" srcset="assets/work/demo-construction-400w.webp 400w, assets/work/demo-construction-800w.webp 800w" sizes="(max-width: 768px) 240px, 390px" alt="" width="800" height="500" decoding="async" fetchpriority="low" />
+            <img src="assets/work/spiralguard-full-800w.webp" srcset="assets/work/spiralguard-full-400w.webp 400w, assets/work/spiralguard-full-800w.webp 800w" sizes="(max-width: 768px) 240px, 390px" alt="" width="800" height="600" decoding="async" fetchpriority="low" />
+            <img src="assets/work/demo-plumbing-800w.webp" srcset="assets/work/demo-plumbing-400w.webp 400w, assets/work/demo-plumbing-800w.webp 800w" sizes="(max-width: 768px) 240px, 390px" alt="" width="800" height="500" decoding="async" fetchpriority="low" />
+            <img src="assets/work/teetotrail-home-800w.webp" srcset="assets/work/teetotrail-home-400w.webp 400w, assets/work/teetotrail-home-800w.webp 800w" sizes="(max-width: 768px) 240px, 390px" alt="" width="800" height="600" decoding="async" fetchpriority="low" />
+            <img src="assets/work/demo-roofing-800w.webp" srcset="assets/work/demo-roofing-400w.webp 400w, assets/work/demo-roofing-800w.webp 800w" sizes="(max-width: 768px) 240px, 390px" alt="" width="800" height="500" decoding="async" fetchpriority="low" />
+            <img src="assets/work/crazydaizy-home-800w.webp" srcset="assets/work/crazydaizy-home-400w.webp 400w, assets/work/crazydaizy-home-800w.webp 800w" sizes="(max-width: 768px) 240px, 390px" alt="" width="800" height="600" decoding="async" fetchpriority="low" />
+            <img src="assets/work/navigator-home-800w.webp" srcset="assets/work/navigator-home-400w.webp 400w, assets/work/navigator-home-800w.webp 800w" sizes="(max-width: 768px) 240px, 390px" alt="" width="800" height="528" decoding="async" fetchpriority="low" />
         </div>
       </div>
     </section>
@@ -350,91 +370,91 @@
           <div class="thumb-rail">
             <div class="thumb-track" role="tablist" aria-label="Projects">
               <button class="thumb" role="tab" id="tab-navigator" aria-controls="panel-navigator" aria-selected="true">
-                <img src="assets/work/navigator-home-1200w.webp" alt="" loading="lazy" decoding="async"   />
+                <img src="assets/work/navigator-home-800w.webp" srcset="assets/work/navigator-home-400w.webp 400w, assets/work/navigator-home-800w.webp 800w" sizes="(max-width: 640px) 170px, 300px" alt="" loading="lazy" decoding="async"   />
                 <span>Navigator Vietnam</span>
                 </button>
               <button class="thumb" role="tab" id="tab-crazydaizy" aria-controls="panel-crazydaizy" aria-selected="false" tabindex="-1">
-                <img src="assets/work/crazydaizy-home-1200w.webp" alt="" loading="lazy" decoding="async"   />
+                <img src="assets/work/crazydaizy-home-800w.webp" srcset="assets/work/crazydaizy-home-400w.webp 400w, assets/work/crazydaizy-home-800w.webp 800w" sizes="(max-width: 640px) 170px, 300px" alt="" loading="lazy" decoding="async"   />
                 <span>Crazy Daizy</span>
                 </button>
               <button class="thumb" role="tab" id="tab-teetotrail" aria-controls="panel-teetotrail" aria-selected="false" tabindex="-1">
-                <img src="assets/work/teetotrail-home-1200w.webp" alt="" loading="lazy" decoding="async" />
+                <img src="assets/work/teetotrail-home-800w.webp" srcset="assets/work/teetotrail-home-400w.webp 400w, assets/work/teetotrail-home-800w.webp 800w" sizes="(max-width: 640px) 170px, 300px" alt="" loading="lazy" decoding="async" />
                 <span>Tee to Trail Africa</span>
                 </button>
               <button class="thumb" role="tab" id="tab-spiralguard" aria-controls="panel-spiralguard" aria-selected="false" tabindex="-1">
-                <img src="assets/work/spiralguard-full-1200w.webp" alt="" loading="lazy" decoding="async" />
+                <img src="assets/work/spiralguard-full-800w.webp" srcset="assets/work/spiralguard-full-400w.webp 400w, assets/work/spiralguard-full-800w.webp 800w" sizes="(max-width: 640px) 170px, 300px" alt="" loading="lazy" decoding="async" />
                 <span>Helix SpiralGuard</span>
                 </button>
               <button class="thumb" role="tab" id="tab-lekkerdoos" aria-controls="panel-lekkerdoos" aria-selected="false" tabindex="-1">
-                <img src="assets/work/lekkerdoos-home-1200w.webp" alt="" loading="lazy" decoding="async" />
+                <img src="assets/work/lekkerdoos-home-800w.webp" srcset="assets/work/lekkerdoos-home-400w.webp 400w, assets/work/lekkerdoos-home-800w.webp 800w" sizes="(max-width: 640px) 170px, 300px" alt="" loading="lazy" decoding="async" />
                 <span>Die Lekker Doos</span>
                 </button>
               <button class="thumb" role="tab" id="tab-muire" aria-controls="panel-muire" aria-selected="false" tabindex="-1">
-                <img src="assets/work/muire-home-1200w.webp" alt="" loading="lazy" decoding="async" />
+                <img src="assets/work/muire-home-800w.webp" srcset="assets/work/muire-home-400w.webp 400w, assets/work/muire-home-800w.webp 800w" sizes="(max-width: 640px) 170px, 300px" alt="" loading="lazy" decoding="async" />
                 <span>Muire Maintenance</span>
                 </button>
               <button class="thumb" role="tab" id="tab-roofing" aria-controls="panel-roofing" aria-selected="false" tabindex="-1">
-                <img src="assets/work/demo-roofing.jpg" alt="" loading="lazy" decoding="async" />
+                <img src="assets/work/demo-roofing-800w.webp" srcset="assets/work/demo-roofing-400w.webp 400w, assets/work/demo-roofing-800w.webp 800w" sizes="(max-width: 640px) 170px, 300px" alt="" loading="lazy" decoding="async" />
                 <span>Ridgeworks Roofing <span class="demo-tag">Demo</span></span>
               </button>
               <button class="thumb" role="tab" id="tab-plumbing" aria-controls="panel-plumbing" aria-selected="false" tabindex="-1">
-                <img src="assets/work/demo-plumbing.jpg" alt="" loading="lazy" decoding="async" />
+                <img src="assets/work/demo-plumbing-800w.webp" srcset="assets/work/demo-plumbing-400w.webp 400w, assets/work/demo-plumbing-800w.webp 800w" sizes="(max-width: 640px) 170px, 300px" alt="" loading="lazy" decoding="async" />
                 <span>Waterline Plumbing <span class="demo-tag">Demo</span></span>
               </button>
               <button class="thumb" role="tab" id="tab-paintco" aria-controls="panel-paintco" aria-selected="false" tabindex="-1">
-                <img src="assets/work/demo-paintco.jpg" alt="" loading="lazy" decoding="async" />
+                <img src="assets/work/demo-paintco-800w.webp" srcset="assets/work/demo-paintco-400w.webp 400w, assets/work/demo-paintco-800w.webp 800w" sizes="(max-width: 640px) 170px, 300px" alt="" loading="lazy" decoding="async" />
                 <span>Paintco Paarl <span class="demo-tag">Demo</span></span>
               </button>
               <button class="thumb" role="tab" id="tab-construction" aria-controls="panel-construction" aria-selected="false" tabindex="-1">
-                <img src="assets/work/demo-construction.jpg" alt="" loading="lazy" decoding="async" />
+                <img src="assets/work/demo-construction-800w.webp" srcset="assets/work/demo-construction-400w.webp 400w, assets/work/demo-construction-800w.webp 800w" sizes="(max-width: 640px) 170px, 300px" alt="" loading="lazy" decoding="async" />
                 <span>Ironstone Construction <span class="demo-tag">Demo</span></span>
               </button>
               <button class="thumb" role="tab" id="tab-brightline" aria-controls="panel-brightline" aria-selected="false" tabindex="-1">
-                <img src="assets/work/demo-brightline.jpg" alt="" loading="lazy" decoding="async" />
+                <img src="assets/work/demo-brightline-800w.webp" srcset="assets/work/demo-brightline-400w.webp 400w, assets/work/demo-brightline-800w.webp 800w" sizes="(max-width: 640px) 170px, 300px" alt="" loading="lazy" decoding="async" />
                 <span>Brightline Electrical <span class="demo-tag">Demo</span></span>
               </button>
               <button class="thumb" aria-hidden="true" tabindex="-1" role="tab" aria-controls="panel-navigator" aria-selected="true">
-                <img src="assets/work/navigator-home-1200w.webp" alt="" loading="lazy" decoding="async"   />
+                <img src="assets/work/navigator-home-800w.webp" srcset="assets/work/navigator-home-400w.webp 400w, assets/work/navigator-home-800w.webp 800w" sizes="(max-width: 640px) 170px, 300px" alt="" loading="lazy" decoding="async"   />
                 <span>Navigator Vietnam</span>
                 </button>
               <button class="thumb" aria-hidden="true" tabindex="-1" role="tab" aria-controls="panel-crazydaizy" aria-selected="false" tabindex="-1">
-                <img src="assets/work/crazydaizy-home-1200w.webp" alt="" loading="lazy" decoding="async"   />
+                <img src="assets/work/crazydaizy-home-800w.webp" srcset="assets/work/crazydaizy-home-400w.webp 400w, assets/work/crazydaizy-home-800w.webp 800w" sizes="(max-width: 640px) 170px, 300px" alt="" loading="lazy" decoding="async"   />
                 <span>Crazy Daizy</span>
                 </button>
               <button class="thumb" aria-hidden="true" tabindex="-1" role="tab" aria-controls="panel-teetotrail" aria-selected="false" tabindex="-1">
-                <img src="assets/work/teetotrail-home-1200w.webp" alt="" loading="lazy" decoding="async" />
+                <img src="assets/work/teetotrail-home-800w.webp" srcset="assets/work/teetotrail-home-400w.webp 400w, assets/work/teetotrail-home-800w.webp 800w" sizes="(max-width: 640px) 170px, 300px" alt="" loading="lazy" decoding="async" />
                 <span>Tee to Trail Africa</span>
                 </button>
               <button class="thumb" aria-hidden="true" tabindex="-1" role="tab" aria-controls="panel-spiralguard" aria-selected="false" tabindex="-1">
-                <img src="assets/work/spiralguard-full-1200w.webp" alt="" loading="lazy" decoding="async" />
+                <img src="assets/work/spiralguard-full-800w.webp" srcset="assets/work/spiralguard-full-400w.webp 400w, assets/work/spiralguard-full-800w.webp 800w" sizes="(max-width: 640px) 170px, 300px" alt="" loading="lazy" decoding="async" />
                 <span>Helix SpiralGuard</span>
                 </button>
               <button class="thumb" aria-hidden="true" tabindex="-1" role="tab" aria-controls="panel-lekkerdoos" aria-selected="false" tabindex="-1">
-                <img src="assets/work/lekkerdoos-home-1200w.webp" alt="" loading="lazy" decoding="async" />
+                <img src="assets/work/lekkerdoos-home-800w.webp" srcset="assets/work/lekkerdoos-home-400w.webp 400w, assets/work/lekkerdoos-home-800w.webp 800w" sizes="(max-width: 640px) 170px, 300px" alt="" loading="lazy" decoding="async" />
                 <span>Die Lekker Doos</span>
                 </button>
               <button class="thumb" aria-hidden="true" tabindex="-1" role="tab" aria-controls="panel-muire" aria-selected="false" tabindex="-1">
-                <img src="assets/work/muire-home-1200w.webp" alt="" loading="lazy" decoding="async" />
+                <img src="assets/work/muire-home-800w.webp" srcset="assets/work/muire-home-400w.webp 400w, assets/work/muire-home-800w.webp 800w" sizes="(max-width: 640px) 170px, 300px" alt="" loading="lazy" decoding="async" />
                 <span>Muire Maintenance</span>
                 </button>
               <button class="thumb" aria-hidden="true" tabindex="-1" role="tab" aria-controls="panel-roofing" aria-selected="false" tabindex="-1">
-                <img src="assets/work/demo-roofing.jpg" alt="" loading="lazy" decoding="async" />
+                <img src="assets/work/demo-roofing-800w.webp" srcset="assets/work/demo-roofing-400w.webp 400w, assets/work/demo-roofing-800w.webp 800w" sizes="(max-width: 640px) 170px, 300px" alt="" loading="lazy" decoding="async" />
                 <span>Ridgeworks Roofing <span class="demo-tag">Demo</span></span>
               </button>
               <button class="thumb" aria-hidden="true" tabindex="-1" role="tab" aria-controls="panel-plumbing" aria-selected="false" tabindex="-1">
-                <img src="assets/work/demo-plumbing.jpg" alt="" loading="lazy" decoding="async" />
+                <img src="assets/work/demo-plumbing-800w.webp" srcset="assets/work/demo-plumbing-400w.webp 400w, assets/work/demo-plumbing-800w.webp 800w" sizes="(max-width: 640px) 170px, 300px" alt="" loading="lazy" decoding="async" />
                 <span>Waterline Plumbing <span class="demo-tag">Demo</span></span>
               </button>
               <button class="thumb" aria-hidden="true" tabindex="-1" role="tab" aria-controls="panel-paintco" aria-selected="false" tabindex="-1">
-                <img src="assets/work/demo-paintco.jpg" alt="" loading="lazy" decoding="async" />
+                <img src="assets/work/demo-paintco-800w.webp" srcset="assets/work/demo-paintco-400w.webp 400w, assets/work/demo-paintco-800w.webp 800w" sizes="(max-width: 640px) 170px, 300px" alt="" loading="lazy" decoding="async" />
                 <span>Paintco Paarl <span class="demo-tag">Demo</span></span>
               </button>
               <button class="thumb" aria-hidden="true" tabindex="-1" role="tab" aria-controls="panel-construction" aria-selected="false" tabindex="-1">
-                <img src="assets/work/demo-construction.jpg" alt="" loading="lazy" decoding="async" />
+                <img src="assets/work/demo-construction-800w.webp" srcset="assets/work/demo-construction-400w.webp 400w, assets/work/demo-construction-800w.webp 800w" sizes="(max-width: 640px) 170px, 300px" alt="" loading="lazy" decoding="async" />
                 <span>Ironstone Construction <span class="demo-tag">Demo</span></span>
               </button>
               <button class="thumb" aria-hidden="true" tabindex="-1" role="tab" aria-controls="panel-brightline" aria-selected="false" tabindex="-1">
-                <img src="assets/work/demo-brightline.jpg" alt="" loading="lazy" decoding="async" />
+                <img src="assets/work/demo-brightline-800w.webp" srcset="assets/work/demo-brightline-400w.webp 400w, assets/work/demo-brightline-800w.webp 800w" sizes="(max-width: 640px) 170px, 300px" alt="" loading="lazy" decoding="async" />
                 <span>Brightline Electrical <span class="demo-tag">Demo</span></span>
               </button>
             </div>

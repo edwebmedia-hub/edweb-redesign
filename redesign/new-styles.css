@@ -3391,3 +3391,62 @@ img.avatar { object-fit: cover; background: var(--ground-alt); }
     padding-inline: var(--gutter);
   }
 }
+
+
+/* ------------------------- Work masthead rail ----------------------------- */
+/* The work page opens on the work itself sliding past, rather than on a card
+   that lists the sites and so invites counting them. Same mechanics as the
+   reviews rail, at screenshot scale. */
+/* Heading one side, the supporting text and buttons the other, sharing a
+   bottom line. With the old card gone a single column left half the masthead
+   empty, which is the one thing no section here is allowed to do. */
+/* The heading takes its own line and the supporting row sits under it, text
+   one side and buttons the other. Side by side, a heading that happens to fit
+   on one line leaves a quarter of the masthead empty. */
+.page-hero-inner--stack { grid-template-columns: minmax(0, 1fr); gap: clamp(1.5rem, 3vw, 2.5rem); }
+.page-hero-inner--stack > h1 { margin: 0; }
+.mast-foot {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--gap-split);
+  align-items: end;
+}
+.mast-foot .lead { margin: 0; max-width: 46ch; }
+.mast-foot .hero-actions { margin-top: 0; }
+@media (max-width: 860px) {
+  .mast-foot { grid-template-columns: minmax(0, 1fr); gap: clamp(1.5rem, 3vw, 2rem); }
+}
+.page-hero--strip .page-hero-inner { padding-bottom: clamp(2.5rem, 5vw, 4rem); }
+.page-hero--strip h1 { max-width: 22ch; }
+.work-strip {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  overflow: clip;
+  mask-image: linear-gradient(90deg, transparent 0, var(--ink) 6%, var(--ink) 94%, transparent 100%);
+}
+.work-strip-track {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-grid);
+  width: max-content;
+  animation: work-strip 96s linear infinite;
+}
+.work-strip img {
+  display: block;
+  height: clamp(148px, 19vw, 240px);
+  width: auto;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+/* Half the track plus half a gap, so the second copy lands exactly where the
+   first started and the loop has no visible jump. */
+@keyframes work-strip { to { transform: translateX(calc(-50% - var(--gap-grid) / 2)); } }
+.work-strip:hover .work-strip-track { animation-play-state: paused; }
+/* After the rail, not in the shared reduced-motion block near the top: these
+   rules and those have the same specificity, so the later one wins and the
+   earlier copy never applied. */
+@media (prefers-reduced-motion: reduce) {
+  .work-strip-track { animation: none; }
+  .work-strip { overflow-x: auto; scrollbar-width: none; }
+  .work-strip::-webkit-scrollbar { display: none; }
+}
