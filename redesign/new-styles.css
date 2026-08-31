@@ -47,7 +47,8 @@
   --fs-micro: 0.8125rem;
 
   /* Rhythm: 8px scale. s3 12, s4 16, s5 24, s6 32, s7 48, s8 64, s9 96, s10 128 */
-  --ground-teal: color-mix(in srgb, var(--teal) 16%, var(--paper)); /* teal-washed band */
+  --ground-teal: color-mix(in srgb, var(--teal) 30%, var(--paper)); /* teal-washed band. Deep enough to read as a different
+     colour to the soft grey band, which a 16% wash did not. */
   --coral-deep: color-mix(in srgb, var(--coral) 78%, var(--ink)); /* button surface, AA under paper text */
   /* One figure scale. Big numbers appear at three levels, page, section and
      inside a card, so the three sizes are declared once and referenced, rather
