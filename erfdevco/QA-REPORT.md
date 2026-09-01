@@ -174,6 +174,62 @@ rule written outside its media query forced two columns on a phone and pushed
 a button 88px off screen, and a nowrap button with a long label widened the
 document by 30px.
 
+## Round 5, 2026-09-01: the experience pass
+
+Full-page captures of six pages at 375 and 1440 first, 34 faults and gaps
+listed before any code. The themes:
+
+**The farm page spoke in reference numbers.** The breadcrumb ended in
+ERF-DRY-009 and wrapped mid-token on a phone; the same ref repeated in the
+eyebrow directly below; the messaging button was addressed to the ref; the
+enquiry card was headed "Enquire on ERF-DRY-009" and its prefilled message
+repeated the ref a fifth time. Every one of them now names the farm. The ref
+lives in one place, the eyebrow, where a valuer expects it.
+
+**A phone buyer paid four screens of chrome before the price.** Four stacked
+full-width action buttons between title and price became a 2x2 grid, 129px.
+The gallery stacked four screen-height photographs down the page, about
+4000px; now the lead photograph plus a row of thumbnails, 338px, all opening
+the same lightbox, which also answers a swipe now.
+
+**A 6700px page got an in-page nav.** Photos, About, Schedule, Bond, Similar,
+Enquire; sticky under the header, the current section marked in gold by a
+scrollspy, one scrolling line on a phone, hidden in print. The enquiry card
+holds sticky beside the long about text.
+
+**Cards dropped a third of their furniture.** The FOR SALE chip said nothing
+on a site where every farm is for sale; only a status that differs (New
+listing) earns the corner. The gold square before "facts recorded" was the
+same family as the chip dot already banned; the credentials list carried the
+same squares, now thin rules. The save button lost its translucent blur
+(recorded ban) for solid paper with a shadow.
+
+**The six services became the question pattern.** Six identical stacked rows
+are the exact shape the tabs-for-repeated-sections rule names. Same mechanic
+as the buyer questions, one pattern site-wide; the wiring now handles every
+tablist on a page, not just the first.
+
+**Forms answer at the field.** One generic sentence for three different empty
+fields became a message at each field, specific ("That email address does not
+look right"), focus moved to the first, cleared the moment typing starts,
+aria-invalid and describedby set. Error red tokenised; the last two ad-hoc
+hexes in the file are gone.
+
+**Navigation feels like one site.** Cross-document view transitions with the
+header holding still while the page fades under it; smooth in-page scrolling;
+scroll-driven drift on the hero and the photo bands (statement and cta moved
+from overflow hidden to clip, the recorded view-timeline lesson); a press
+state on every button; brand gold selection colour; theme-color on all eight
+pages so the phone browser chrome matches the header. All of it absent under
+prefers-reduced-motion, measured: hero and band animations compute to none.
+
+Verified after: 32 page and width combinations clean; ground and align sweeps
+clean; repeat-sweep has three new pairs, all the farm's own name in the crumb,
+the About heading and the Enquire heading, which is the point of naming the
+farm; no-JS still shows one open panel per tablist and all reveals visible;
+scrollspy marks Bond at the bond band; field errors render, focus and clear;
+tray absent on the compare page; zero page errors anywhere.
+
 ---
 
 ## Standing verification

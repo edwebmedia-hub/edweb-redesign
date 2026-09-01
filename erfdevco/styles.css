@@ -25,6 +25,8 @@
   --sage: color-mix(in srgb, var(--gold) 7%,
             color-mix(in srgb, var(--ink) 11%, var(--canvas)));
   --gold-dark: color-mix(in srgb, var(--gold) 40%, var(--ink));
+  --err: #a3271a;          /* error red, AA on canvas and paper (audit round 2) */
+  --err-dark: #ff9b8c;     /* error red for ink grounds */
   --stone-2: color-mix(in srgb, var(--ink) 9%, var(--canvas));
   --line: color-mix(in srgb, var(--ink) 14%, transparent);
   --line-soft: color-mix(in srgb, var(--ink) 8%, transparent);
@@ -797,15 +799,12 @@ button, input, select, textarea { font: inherit; color: inherit; }
 
 /* Fact count: the site's whole argument, stated per farm. */
 .farm-card__facts {
-  display: inline-flex; align-items: center; gap: 0.45rem;
+  display: inline-flex; align-items: center;
   font-family: var(--display);
   font-size: 0.75rem;
   letter-spacing: 0.06em;
-  color: var(--gold-deep);
+  color: var(--muted);
   white-space: nowrap;
-}
-.farm-card__facts::before {
-  content: ""; width: 6px; height: 6px; background: var(--gold); flex: none;
 }
 
 /* Listings toolbar: count left, sort right */
@@ -1301,7 +1300,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .statement {
   position: relative;
   isolation: isolate;
-  overflow: hidden;
+  overflow: clip;
   min-height: clamp(480px, 62vw, 720px);
   display: flex; align-items: center;
 }
@@ -1336,11 +1335,11 @@ button, input, select, textarea { font: inherit; color: inherit; }
   text-transform: uppercase;
   font-family: var(--display);
   color: color-mix(in srgb, var(--paper) 72%, transparent);
-  display: flex; align-items: center; gap: 0.55rem;
+  display: flex; align-items: center;
 }
-.credentials li::before {
-  content: ""; width: 5px; height: 5px; background: var(--gold); flex: none;
-}
+.credentials li + li { border-left: 1px solid color-mix(in srgb, var(--paper) 28%, transparent); padding-left: 2rem; margin-left: -1rem; }
+/* On light grounds (the about page reuses this list) the rule takes the light line. */
+.band .credentials li + li { border-left-color: var(--line); }
 
 /* --------------------------------------------------------------------------
    14. Service rows (flat, not a card grid)
@@ -1379,7 +1378,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .cta {
   position: relative;
   isolation: isolate;
-  overflow: hidden;
+  overflow: clip;
   padding-block: clamp(4.5rem, 9vw, 8rem);
 }
 .cta__media { position: absolute; inset: 0; z-index: -2; }
@@ -1698,7 +1697,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .form-status { margin-top: 1rem; font-size: 0.9375rem; }
 .form-status[data-state="ok"] { color: var(--gold-deep); }
 .enquiry-card .form-status[data-state="ok"] { color: var(--gold); }
-.form-status[data-state="error"] { color: #d24b3c; }
+.form-status[data-state="error"] { color: var(--err); }
 
 /* --------------------------------------------------------------------------
    19. Footer
@@ -2718,9 +2717,9 @@ main .cmp-table p, main .factgrid p, main .bond p { max-width: none; }
 .btn--outline { border-color: color-mix(in srgb, var(--ink) 32%, transparent); }
 
 /* A-S4/M5. The error red was 3.97:1 on canvas and 4.20:1 on ink. */
-.form-status[data-state="error"] { color: #a3271a; }
+.form-status[data-state="error"] { color: var(--err); }
 .enquiry-card .form-status[data-state="error"],
-.band--ink .form-status[data-state="error"] { color: #ff9b8c; }
+.band--ink .form-status[data-state="error"] { color: var(--err-dark); }
 
 /* A-S20. The tile count text was clipped at 320. */
 @media (max-width: 380px) {
@@ -2741,4 +2740,151 @@ main .cmp-table p, main .factgrid p, main .bond p { max-width: none; }
     box-shadow: 0 8px 16px -12px color-mix(in srgb, var(--ink) 50%, transparent);
   }
   .cmp-table thead th { position: static; background: transparent; }
+}
+
+
+/* --------------------------------------------------------------------------
+   28. Final pass: navigation feel, the jump nav, and touch polish.
+   -------------------------------------------------------------------------- */
+
+/* Page-to-page crossfade. The header keeps its own name so it holds still
+   while the page changes under it. Off entirely for reduced motion. */
+@view-transition { navigation: auto; }
+::view-transition-old(root), ::view-transition-new(root) { animation-duration: 220ms; }
+#site-header { view-transition-name: site-header; }
+@media (prefers-reduced-motion: reduce) {
+  @view-transition { navigation: none; }
+}
+
+html { scroll-behavior: smooth; scroll-padding-top: calc(var(--header-h) + 64px); }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+::selection { background: var(--gold); color: var(--ink-deep); }
+
+a, button { -webkit-tap-highlight-color: transparent; }
+.btn:active { transform: translateY(1px); }
+
+/* The jump nav on a farm page: one line, sticky under the header, the
+   current section marked in gold. Scrolls its own overflow on a phone. */
+.jumpnav {
+  position: sticky;
+  top: calc(var(--header-h) - 1px);
+  z-index: 40;
+  background: color-mix(in srgb, var(--canvas) 92%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+  margin-top: clamp(1.5rem, 2.5vw, 2rem);
+}
+.jumpnav__inner {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 2.5vw, 2rem);
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.jumpnav__inner::-webkit-scrollbar { display: none; }
+.jumpnav a {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  min-height: 48px;
+  font-family: var(--display);
+  font-size: var(--fs-label);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border-bottom: 2px solid transparent;
+  transition: color var(--t-fast) var(--ease-soft),
+              border-color var(--t-fast) var(--ease-soft);
+}
+.jumpnav a:hover { color: var(--ink); }
+.jumpnav a[aria-current="true"] { color: var(--ink); border-bottom-color: var(--gold); }
+.jumpnav__cta { margin-left: auto; color: var(--gold-deep); }
+#photos, #about-farm, #schedule, #bond, #similar-farms { scroll-margin-top: calc(var(--header-h) + 56px); }
+
+/* Detail actions: 2x2 on a phone instead of four stacked rows of chrome
+   between the title and the price. */
+@media (max-width: 640px) {
+  .detail-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.6rem;
+  }
+  .detail-actions .btn, .detail-actions .save-btn--inline {
+    width: 100%;
+    justify-content: center;
+    padding-inline: 0.4rem;
+    font-size: 0.6875rem;
+    letter-spacing: 0.08em;
+  }
+}
+
+/* Phone gallery: the lead photograph, then thumbnails in a row, instead of
+   four screen-height photographs stacked down the page. They all open the
+   same lightbox. */
+@media (max-width: 640px) {
+  .gallery { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.5rem; }
+  .gallery > :first-child { grid-column: span 3; aspect-ratio: 3 / 2; }
+  .gallery figure:not(:first-child) { aspect-ratio: 1 / 1; }
+}
+
+/* The saved-farm control: solid grounds, no glass. */
+.save-btn {
+  background: var(--paper);
+  backdrop-filter: none;
+  border: 0;
+  color: var(--ink);
+  box-shadow: 0 1px 6px color-mix(in srgb, var(--ink-deep) 30%, transparent);
+}
+.save-btn:hover { color: var(--gold-deep); }
+
+/* Bond slider tracks were nearly invisible on the white panel. */
+.bond-f input[type="range"]::-webkit-slider-runnable-track {
+  background: color-mix(in srgb, var(--ink) 24%, transparent);
+}
+.bond-f input[type="range"]::-moz-range-track {
+  background: color-mix(in srgb, var(--ink) 24%, transparent);
+}
+
+/* Services as question-tabs: the panel body is prose, not a spec table. */
+.qa--svc .qa__body {
+  color: color-mix(in srgb, var(--paper) 82%, transparent);
+  line-height: 1.7;
+  max-width: 52ch;
+}
+
+/* Subtle depth on the big photographs. Scroll-driven, so it costs nothing
+   on the main thread; off when the visitor asks for reduced motion, and
+   absent entirely where the timeline is unsupported. */
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .hero__media {
+      animation: hero-drift linear both;
+      animation-timeline: scroll();
+      animation-range: 0 100vh;
+    }
+    @keyframes hero-drift { to { transform: translateY(9%) scale(1.06); } }
+    .statement__media img, .cta__media img {
+      animation: band-pan linear both;
+      animation-timeline: view();
+      animation-range: cover 0% cover 100%;
+    }
+    @keyframes band-pan {
+      from { transform: translateY(-5%) scale(1.1); }
+      to { transform: translateY(5%) scale(1.1); }
+    }
+  }
+}
+
+#about-farm .enquiry-card { position: sticky; top: calc(var(--header-h) + 72px); }
+
+/* Field-level form errors. */
+.field-err { font-size: var(--fs-label); color: var(--err); }
+.enquiry-card .field-err { color: var(--err-dark); }
+.field [aria-invalid="true"] { border-color: var(--err); }
+.enquiry-card .field [aria-invalid="true"] { border-color: var(--err-dark); }
+
+@media print {
+  .jumpnav { display: none !important; }
 }

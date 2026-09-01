@@ -14,6 +14,7 @@
   <meta property="og:image" content="https://erfdevco.com/assets/og-image.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
 
+  <meta name="theme-color" content="#0b1710" />
   <link rel="icon" href="assets/favicon.png" type="image/png" />
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
 
@@ -413,7 +414,9 @@
   </section>
 
   <!-- ======================================================================
-       WHAT WE DO. Flat rows, no card grid.
+       WHAT WE DO. Six same-shape services, so a tab selector shows one at a
+       time instead of stacking them (standing rule for repeated sections).
+       Same pattern as the buyer questions above, one mechanic site-wide.
        ====================================================================== -->
   <section class="band" aria-labelledby="services-h">
     <div class="shell">
@@ -424,30 +427,52 @@
         <div><p class="lede">No residential, no commercial, no rentals. The whole agency points at one kind of property.</p></div>
       </div>
 
-      <div class="rows" data-stagger>
-        <div class="row-item reveal">
-          <h3>Farm sales</h3>
-          <div class="row-item__body"><p>Working farms taken on mandate, scheduled, photographed and marketed to buyers who are looking for production, not a weekend house.</p></div>
+      <div class="qa qa--svc reveal">
+        <div class="qa__list" role="tablist" aria-orientation="vertical" aria-label="What ERFDEVCO does">
+          <button class="qa__q" type="button" role="tab" id="svc-t0"
+                  aria-controls="svc-p0" aria-selected="true" tabindex="0">Farm sales</button>
+          <button class="qa__q" type="button" role="tab" id="svc-t1"
+                  aria-controls="svc-p1" aria-selected="false" tabindex="-1">Agricultural land sales</button>
+          <button class="qa__q" type="button" role="tab" id="svc-t2"
+                  aria-controls="svc-p2" aria-selected="false" tabindex="-1">Game farm sales</button>
+          <button class="qa__q" type="button" role="tab" id="svc-t3"
+                  aria-controls="svc-p3" aria-selected="false" tabindex="-1">Property marketing</button>
+          <button class="qa__q" type="button" role="tab" id="svc-t4"
+                  aria-controls="svc-p4" aria-selected="false" tabindex="-1">Buyer and seller assistance</button>
+          <button class="qa__q" type="button" role="tab" id="svc-t5"
+                  aria-controls="svc-p5" aria-selected="false" tabindex="-1">Agricultural property consulting</button>
         </div>
-        <div class="row-item reveal">
-          <h3>Agricultural land sales</h3>
-          <div class="row-item__body"><p>Bare land and portions, sold on extent, soil, water and zoning, with the servitudes and title position established up front.</p></div>
+        <div class="qa__panels">
+        <div class="qa__a" role="tabpanel" id="svc-p0" aria-labelledby="svc-t0">
+          <p class="qa__from">Farm sales</p>
+          <p class="qa__body">Working farms taken on mandate, scheduled, photographed and marketed to buyers who are looking for production, not a weekend house.</p>
+          <a class="qa__more" href="contact.html?subject=list">List a farm with us</a>
         </div>
-        <div class="row-item reveal">
-          <h3>Game farm sales</h3>
-          <div class="row-item__body"><p>Certified fencing, species counts, lodges and hunting infrastructure recorded on the schedule so a buyer knows what is standing and what is running.</p></div>
+        <div class="qa__a" role="tabpanel" id="svc-p1" aria-labelledby="svc-t1" hidden>
+          <p class="qa__from">Agricultural land sales</p>
+          <p class="qa__body">Bare land and portions, sold on extent, soil, water and zoning, with the servitudes and title position established up front.</p>
+          <a class="qa__more" href="contact.html?subject=list">Talk to us about your land</a>
         </div>
-        <div class="row-item reveal">
-          <h3>Property marketing</h3>
-          <div class="row-item__body"><p>Photography, the written schedule and the marketing copy are produced once and used everywhere the farm is advertised, so a buyer comparing two sources never finds a discrepancy.</p></div>
+        <div class="qa__a" role="tabpanel" id="svc-p2" aria-labelledby="svc-t2" hidden>
+          <p class="qa__from">Game farm sales</p>
+          <p class="qa__body">Certified fencing, species counts, lodges and hunting infrastructure recorded on the schedule so a buyer knows what is standing and what is running.</p>
+          <a class="qa__more" href="listings.html?type=Game%20Farm">See the game farms listed</a>
         </div>
-        <div class="row-item reveal">
-          <h3>Buyer and seller assistance</h3>
-          <div class="row-item__body"><p>Guidance through offer, suspensive conditions, VAT treatment and transfer, with the conveyancer and the bank kept on the same set of facts.</p></div>
+        <div class="qa__a" role="tabpanel" id="svc-p3" aria-labelledby="svc-t3" hidden>
+          <p class="qa__from">Property marketing</p>
+          <p class="qa__body">Photography, the written schedule and the marketing copy are produced once and used everywhere the farm is advertised, so a buyer comparing two sources never finds a discrepancy.</p>
+          <a class="qa__more" href="about.html">How the schedule works</a>
         </div>
-        <div class="row-item reveal">
-          <h3>Agricultural property consulting</h3>
-          <div class="row-item__body"><p>Advice on how a property is likely to be received by the market before it is listed, including what to measure and what to fix first.</p></div>
+        <div class="qa__a" role="tabpanel" id="svc-p4" aria-labelledby="svc-t4" hidden>
+          <p class="qa__from">Buyer and seller assistance</p>
+          <p class="qa__body">Guidance through offer, suspensive conditions, VAT treatment and transfer, with the conveyancer and the bank kept on the same set of facts.</p>
+          <a class="qa__more" href="contact.html?subject=requirement">Register what you are after</a>
+        </div>
+        <div class="qa__a" role="tabpanel" id="svc-p5" aria-labelledby="svc-t5" hidden>
+          <p class="qa__from">Agricultural property consulting</p>
+          <p class="qa__body">Advice on how a property is likely to be received by the market before it is listed, including what to measure and what to fix first.</p>
+          <a class="qa__more" href="contact.html?subject=valuation">Ask what your land is worth</a>
+        </div>
         </div>
       </div>
     </div>

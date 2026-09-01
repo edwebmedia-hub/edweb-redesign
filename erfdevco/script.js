@@ -334,7 +334,7 @@
     }).join('');
     var isNew = f.status === 'New listing';
     var facts = f.factCount
-      ? '<span class="farm-card__facts">' + f.factCount + ' facts recorded</span>' : '';
+      ? '<span class="farm-card__facts">' + f.factCount + ' facts on file</span>' : '';
 
     return '' +
       '<article class="farm-card reveal">' +
@@ -344,7 +344,8 @@
           '</a>' +
           '<span class="farm-card__ref">' + esc(f.ref) + '</span>' +
           '<span class="farm-card__type">' + esc(f.farmType) + '</span>' +
-          '<span class="farm-card__status"' + (isNew ? ' data-new' : '') + '>' + esc(f.status || 'For sale') + '</span>' +
+          (f.status && f.status.toLowerCase() !== 'for sale'
+            ? '<span class="farm-card__status"' + (isNew ? ' data-new' : '') + '>' + esc(f.status) + '</span>' : '') +
           saveButton(f, false) +
         '</div>' +
         '<div class="farm-card__body">' +
@@ -775,7 +776,9 @@
 
       setHead(f);
       var crumbNow = $('#crumb-now');
-      if (crumbNow) crumbNow.textContent = f.ref;
+      // The name, not the raw ref: a crumb is for a person, and the ref
+      // wrapped mid-token at phone widths.
+      if (crumbNow) crumbNow.textContent = f.title;
 
       var gallery = [f.image].concat(f.gallery || []);
       var galleryHtml = gallery.map(function (src, i) {
@@ -828,9 +831,9 @@
               '</p>' +
               '<div class="detail-actions">' +
                 saveButton(f, true) +
-                '<a class="btn btn--outline" href="https://wa.me/27829005019?text=' + waText + '" rel="noopener">WhatsApp about ' + esc(f.ref) + '</a>' +
-                '<button type="button" class="btn btn--outline" data-print>Print the schedule</button>' +
-                '<button type="button" class="btn btn--outline" data-share>Share this farm</button>' +
+                '<a class="btn btn--outline" href="https://wa.me/27829005019?text=' + waText + '" rel="noopener">WhatsApp Martiens</a>' +
+                '<button type="button" class="btn btn--outline" data-print>Print schedule</button>' +
+                '<button type="button" class="btn btn--outline" data-share>Share</button>' +
               '</div>' +
             '</div>' +
             '<div class="detail-price-block">' +
@@ -849,7 +852,16 @@
           '</dl>' +
         '</div>' +
 
-        '<div class="shell" style="margin-top:clamp(2.5rem,4vw,3.5rem)">' +
+        '<nav class="jumpnav" aria-label="On this page"><div class="shell jumpnav__inner">' +
+          '<a href="#photos">Photos</a>' +
+          '<a href="#about-farm">About</a>' +
+          '<a href="#schedule">Schedule</a>' +
+          '<a href="#bond">Bond</a>' +
+          '<a href="#similar-farms">Similar</a>' +
+          '<a class="jumpnav__cta" href="#enquire">Enquire</a>' +
+        '</div></nav>' +
+
+        '<div class="shell" id="photos" style="margin-top:clamp(2.5rem,4vw,3.5rem)">' +
           '<div class="gallery reveal">' + galleryHtml + '</div>' +
         '</div>' +
 
@@ -857,18 +869,18 @@
           '<dl class="factgrid factgrid--rest reveal">' + factsHtml + '</dl>' +
         '</div>' +
 
-        '<div class="shell band">' +
+        '<div class="shell band" id="about-farm">' +
           '<div class="split split--wide-left split--top">' +
             '<div class="reveal">' +
                             '<h2>About ' + esc(f.title) + '</h2>' +
               '<p class="lede" style="margin-top:1.5rem">' + esc(f.summary) + '</p>' +
               '<p style="margin-top:1.25rem;color:var(--muted);line-height:1.75;max-width:64ch">' + esc(f.description) + '</p>' +
             '</div>' +
-            '<div class="reveal">' + enquiryCard(f) + '</div>' +
+            '<div class="reveal" id="enquire">' + enquiryCard(f) + '</div>' +
           '</div>' +
         '</div>' +
 
-        '<div class="band band--ink">' +
+        '<div class="band band--ink" id="schedule">' +
           '<div class="shell">' +
             '<div class="section-head reveal">' +
                             '<h2>Every measured fact on this farm</h2>' +
@@ -886,7 +898,7 @@
           '</div>' +
         '</div>' +
 
-        '<div class="band band--tight">' +
+        '<div class="band band--tight" id="bond">' +
           '<div class="shell">' +
             '<div class="section-head reveal">' +
               '<h2>Work the bond on ' + esc(f.priceDisplay) + '</h2>' +
@@ -909,6 +921,8 @@
       renderSimilar(mount, f, farms);
       injectSchema(f);
 
+      wireJumpnav(mount);
+
       var printBtn = $('[data-print]', mount);
       if (printBtn) printBtn.addEventListener('click', function () {
         // Print shows every section regardless of the open tab (see @media print).
@@ -919,6 +933,40 @@
         '<h3>That listing is not available</h3><p>' + esc(err.message) + '</p>' +
         '<p style="margin-top:1.5rem"><a class="btn btn--ink" href="listings.html">Back to all farms</a></p></div></div>';
     });
+
+    /* The jump nav follows the reader: the link whose section is on screen
+       carries aria-current, and the bar scrolls its own overflow to keep
+       that link in view on a phone. */
+    function wireJumpnav(root) {
+      var nav = $('.jumpnav', root);
+      if (!nav || !('IntersectionObserver' in window)) return;
+      var links = $$('a', nav);
+      var byId = {};
+      links.forEach(function (a) { byId[a.getAttribute('href').slice(1)] = a; });
+
+      function mark(a) {
+        links.forEach(function (x) {
+          if (x === a) x.setAttribute('aria-current', 'true');
+          else x.removeAttribute('aria-current');
+        });
+        if (a && a.scrollIntoView) {
+          var r = a.getBoundingClientRect(), n = nav.getBoundingClientRect();
+          if (r.left < n.left || r.right > n.right) {
+            nav.querySelector('.jumpnav__inner').scrollLeft += r.left - n.left - 16;
+          }
+        }
+      }
+
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting && byId[en.target.id]) mark(byId[en.target.id]);
+        });
+      }, { rootMargin: '-35% 0px -55% 0px' });
+      Object.keys(byId).forEach(function (id) {
+        var el = document.getElementById(id);
+        if (el) io.observe(el);
+      });
+    }
 
     /* One schedule section at a time, or all of them. Keyboard: arrows move
        between tabs the way a real tablist does. */
@@ -975,6 +1023,18 @@
         box.setAttribute('role', 'dialog');
         box.setAttribute('aria-modal', 'true');
         box.setAttribute('aria-label', farm.title + ', photographs');
+      // Swipe pages the gallery on touch. Pointer events cover mouse drags
+      // too, which costs nothing.
+      var swipeX = null;
+      box.addEventListener('pointerdown', function (e) { swipeX = e.clientX; });
+      box.addEventListener('pointerup', function (e) {
+        if (swipeX === null) return;
+        var dx = e.clientX - swipeX;
+        swipeX = null;
+        if (Math.abs(dx) < 44) return;
+        var go = $(dx > 0 ? '.lb-prev' : '.lb-next', box);
+        if (go) go.click();
+      });
         box.hidden = true;
         box.innerHTML =
           '<button type="button" class="lb-btn lb-close" aria-label="Close">&times;</button>' +
@@ -1228,13 +1288,13 @@
     function enquiryCard(f) {
       return '' +
         '<div class="enquiry-card">' +
-          '<h3>Enquire on ' + esc(f.ref) + '</h3>' +
+          '<h3>Enquire on ' + esc(f.title) + '</h3>' +
           '<p style="margin-top:0.5rem">Ask for the full mandate pack, the title deed extract or a viewing date.</p>' +
           '<form class="form-grid" style="margin-top:1.5rem" data-form="enquiry" data-ref="' + esc(f.ref) + ', ' + esc(f.title) + '" data-subject="Enquiry: ' + esc(f.ref) + ', ' + esc(f.title) + '" novalidate>' +
             '<div class="field field--full"><label for="eq-name">Your name</label><input id="eq-name" name="name" type="text" autocomplete="name" required /></div>' +
             '<div class="field field--full"><label for="eq-email">Email</label><input id="eq-email" name="email" type="email" autocomplete="email" required /></div>' +
             '<div class="field field--full"><label for="eq-phone">Phone</label><input id="eq-phone" name="phone" type="tel" autocomplete="tel" /></div>' +
-            '<div class="field field--full"><label for="eq-message">Message</label><textarea id="eq-message" name="message" required>I would like more information on ' + esc(f.ref) + '.</textarea></div>' +
+            '<div class="field field--full"><label for="eq-message">Message</label><textarea id="eq-message" name="message" required>I would like more information on ' + esc(f.title) + '.</textarea></div>' +
             '<div class="hp" aria-hidden="true" inert><label for="eq-farmname">Farm name</label><input id="eq-farmname" name="farmname" type="text" tabindex="-1" autocomplete="off" /></div>' +
             '<div class="field--full"><button class="btn btn--gold" type="submit">Send enquiry</button></div>' +
             '<p class="form-status field--full" role="status" aria-live="polite"></p>' +
@@ -1271,8 +1331,8 @@
      in the tab order.
      ---------------------------------------------------------------------- */
   (function buyerQuestions() {
-    var list = $('.qa__list');
-    if (!list) return;
+    $$('.qa__list').forEach(wireList);
+    function wireList(list) {
     var tabs = $$('.qa__q', list);
     if (!tabs.length) return;
 
@@ -1305,6 +1365,7 @@
       t.focus();
       select(t);
     });
+    }
   })();
 
   /* ----------------------------------------------------------------------
@@ -1335,9 +1396,43 @@
           return;
         }
 
-        if (!form.checkValidity()) {
-          setStatus('Please fill in your name, a valid email and a message.', 'error');
-          form.reportValidity();
+        var bad = [];
+        $$('[required]', form).forEach(function (el) {
+          var fld = el.closest('.field');
+          var why = '';
+          if (!el.value.trim()) {
+            why = el.type === 'email' ? 'We need an email to reply to.'
+              : el.tagName === 'TEXTAREA' ? 'Tell us what you need in a line or two.'
+              : 'We need your name for the reply.';
+          } else if (el.type === 'email' && el.validity && !el.validity.valid) {
+            why = 'That email address does not look right.';
+          }
+          if (!fld) { if (why) bad.push(el); return; }
+          var err = fld.querySelector('.field-err');
+          if (why) {
+            bad.push(el);
+            el.setAttribute('aria-invalid', 'true');
+            if (!err) {
+              err = document.createElement('p');
+              err.className = 'field-err';
+              err.id = el.id + '-err';
+              fld.appendChild(err);
+              el.setAttribute('aria-describedby', err.id);
+              el.addEventListener('input', function () {
+                el.removeAttribute('aria-invalid');
+                var e2 = fld.querySelector('.field-err');
+                if (e2) e2.remove();
+              });
+            }
+            err.textContent = why;
+          } else {
+            el.removeAttribute('aria-invalid');
+            if (err) err.remove();
+          }
+        });
+        if (bad.length) {
+          setStatus('', null);
+          bad[0].focus();
           return;
         }
 
@@ -1440,6 +1535,9 @@
      Compare tray. Built once, shown only while farms are selected.
      ---------------------------------------------------------------------- */
   (function compareTray() {
+    // The compare page IS the tray's destination; showing it there floats a
+    // second copy of the selection over the table.
+    if ($('#compare-table')) return;
     var tray = null, slots = null, cta = null;
 
     function build() {
