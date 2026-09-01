@@ -375,6 +375,16 @@
       .then(function (json) { return (json && json.listings) || []; });
   }
 
+  /* Home: pins on the country band ---------------------------------------- */
+  function paintCountryPins(farms) {
+    var g = $('[data-map-pins]');
+    if (!g) return;
+    g.innerHTML = farms.filter(function (f) { return f.mapXY; }).map(function (f) {
+      return '<g transform="translate(' + f.mapXY[0] + ',' + f.mapXY[1] + ')">' +
+        '<circle class="halo" r="18"></circle><circle class="dot" r="8"></circle></g>';
+    }).join('');
+  }
+
   /* Home: featured farms ------------------------------------------------- */
   (function homeFarms() {
     var mount = $('#featured-farms');
@@ -386,6 +396,7 @@
         return String(b.listedOn || '').localeCompare(String(a.listedOn || ''));
       }).slice(0, limit);
       mount.innerHTML = list.map(function (f, i) { return farmCard(f, i === 0); }).join('');
+      paintCountryPins(farms);
       var count = $('#farm-count');
       if (count) count.textContent = String(farms.length);
       armReveals(mount);
@@ -1227,6 +1238,48 @@
       });
       var qs = params.toString();
       window.location.href = 'listings.html' + (qs ? '?' + qs : '');
+    });
+  })();
+
+  /* ----------------------------------------------------------------------
+     Home: the five questions. A vertical tablist, so it answers Up, Down,
+     Home and End as well as the pointer, and only the selected question is
+     in the tab order.
+     ---------------------------------------------------------------------- */
+  (function buyerQuestions() {
+    var list = $('.qa__list');
+    if (!list) return;
+    var tabs = $$('.qa__q', list);
+    if (!tabs.length) return;
+
+    function select(tab) {
+      tabs.forEach(function (t) {
+        var on = t === tab;
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+        t.tabIndex = on ? 0 : -1;
+        var panel = document.getElementById(t.getAttribute('aria-controls'));
+        if (panel) panel.hidden = !on;
+      });
+    }
+
+    list.addEventListener('click', function (e) {
+      var tab = e.target.closest('.qa__q');
+      if (tab) select(tab);
+    });
+
+    list.addEventListener('keydown', function (e) {
+      var i = tabs.indexOf(document.activeElement);
+      if (i === -1) return;
+      var next = -1;
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') next = i + 1;
+      else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') next = i - 1;
+      else if (e.key === 'Home') next = 0;
+      else if (e.key === 'End') next = tabs.length - 1;
+      if (next === -1) return;
+      e.preventDefault();
+      var t = tabs[(next + tabs.length) % tabs.length];
+      t.focus();
+      select(t);
     });
   })();
 

@@ -890,6 +890,126 @@ button, input, select, textarea { font: inherit; color: inherit; }
 /* --------------------------------------------------------------------------
    10. Counter band
    -------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------
+   11b. The country. The reach numbers hang off the actual shape of South
+   Africa rather than sitting in a row of four, so the scale is seen instead
+   of counted. Province geometry is inlined and draws without JavaScript;
+   the pins are added from the listings file.
+   -------------------------------------------------------------------------- */
+.country {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: center;
+}
+.country__map svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 66vh;
+}
+.country__map .prov {
+  fill: color-mix(in srgb, var(--ink) 9%, transparent);
+  stroke: var(--canvas);
+  stroke-width: 2;
+}
+.country__map .prov.has-farms { fill: color-mix(in srgb, var(--ink) 26%, transparent); }
+.country__map .halo { fill: var(--gold); opacity: 0.22; }
+.country__map .dot { fill: var(--gold); stroke: var(--canvas); stroke-width: 3; }
+.country__side .lede { margin-top: 1.25rem; }
+.country__facts {
+  margin-top: clamp(1.75rem, 3vw, 2.5rem);
+  display: grid;
+  border-top: 1px solid var(--line);
+}
+.country__facts > div {
+  display: grid;
+  grid-template-columns: 4.5rem minmax(0, 1fr);
+  gap: clamp(1rem, 2vw, 1.5rem);
+  align-items: baseline;
+  padding: 1.1rem 0;
+  border-bottom: 1px solid var(--line);
+}
+.country__facts dt {
+  font-family: var(--display);
+  /* Sized to fill its column so the number reads as the point of the row,
+     not as a marker sitting a long way from its label. */
+  font-size: clamp(2.4rem, 3.6vw, 3.4rem);
+  letter-spacing: -0.05em;
+  line-height: 1;
+  color: var(--ink);
+}
+.country__facts dd { margin: 0; font-size: 0.9375rem; color: var(--muted); }
+.country__cta { margin-top: 1.75rem; }
+
+@media (max-width: 900px) {
+  .country { grid-template-columns: minmax(0, 1fr); }
+  .country__map svg { max-height: 46vh; margin-inline: auto; }
+  .country__facts > div { grid-template-columns: 3rem minmax(0, 1fr); gap: 1rem; }
+}
+
+/* --------------------------------------------------------------------------
+   11c. Contact details as a band, not a card. Four labelled columns on ink,
+   read like a letterhead, so the enquiry form underneath gets the page
+   instead of being squeezed beside a panel.
+   -------------------------------------------------------------------------- */
+.cband {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-top: 1px solid var(--line-dark);
+}
+.cband > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.5rem 1.25rem 1.5rem 0;
+  border-right: 1px solid var(--line-dark);
+}
+.cband > div:last-child { border-right: 0; }
+.cband > div + div { padding-left: 1.25rem; }
+.cband span {
+  font-family: var(--display);
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.cband a,
+.cband b {
+  font-family: var(--display);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  font-size: clamp(1rem, 1.5vw, 1.3rem);
+  color: var(--paper);
+  word-break: break-word;
+  transition: color var(--t-fast) var(--ease-soft);
+}
+.cband a:hover { color: var(--gold); }
+.cband__foot {
+  margin-top: 1.5rem;
+  max-width: 78ch;
+  font-size: 0.9375rem;
+  color: color-mix(in srgb, var(--paper) 62%, transparent);
+}
+/* Wide, but not so wide the fields become unreadable lines. */
+.form-wide { max-width: 62rem; }
+
+@media (max-width: 900px) {
+  .cband { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cband > div:nth-child(2n) { border-right: 0; }
+}
+@media (max-width: 560px) {
+  .cband { grid-template-columns: minmax(0, 1fr); }
+  /* Media queries add no specificity, so this has to match the weight of
+     `.cband > div + div` or the desktop indent survives on a phone. */
+  .cband > div,
+  .cband > div + div {
+    border-right: 0;
+    border-bottom: 1px solid var(--line-dark);
+    padding-left: 0;
+  }
+}
+
 .counters {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -993,41 +1113,141 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .type-more a:hover { background: var(--gold); border-color: var(--gold); color: var(--ink); }
 
 /* --------------------------------------------------------------------------
-   12. The schedule: what every ERFDEVCO listing answers. Our own twist on the
-   reference's "filter what matters" block, driven by the real listing form.
+   12. The five questions. Our own twist on the reference's "filter what
+   matters" block: a buyer's question on the left, the answer pulled off a
+   real listing on the right. Replaced the flat eighteen-section checklist,
+   which stated what we hold rather than showing it.
    -------------------------------------------------------------------------- */
-.schedule {
+.qa {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0 clamp(1.5rem, 3vw, 3.5rem);
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  align-items: stretch;
 }
-.schedule li {
-  display: flex; align-items: baseline; gap: 1rem;
-  padding: 0.95rem 0;
+.qa__list {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--line);
+}
+.qa__q {
+  flex: 1;
+  text-align: left;
+  background: transparent;
+  border: 0;
   border-bottom: 1px solid var(--line);
+  padding: 1.05rem 2rem 1.05rem 1.1rem;
+  cursor: pointer;
+  position: relative;
+  font-family: var(--display);
+  font-size: clamp(1rem, 1.3vw, 1.15rem);
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+  color: var(--muted);
+  transition: color var(--t-fast) var(--ease-soft),
+              border-color var(--t-fast) var(--ease-soft);
 }
-/* A gold tick, not an 01/02/03 counter: this is a checklist of what the
-   listing answers, never a numbered process block. */
-.schedule li::before {
+/* A chevron, not a numbered marker: this is a question you open, never an
+   01/02/03 process step. */
+.qa__q::after {
   content: "";
-  flex: none;
+  position: absolute;
+  right: 0.4rem;
+  top: 50%;
   width: 7px;
   height: 7px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: translateY(-50%) rotate(-45deg);
+  opacity: 0.35;
+  transition: opacity var(--t-fast) var(--ease-soft),
+              transform var(--t-mid) var(--ease);
+}
+/* A gold bar marks the open question. It sits in space every question
+   reserves, so changing the selection moves no text. A gold bottom border
+   read as a rule between two rows instead of a mark on one. */
+.qa__q::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.9rem;
+  bottom: 0.9rem;
+  width: 3px;
   background: var(--gold);
-  transform: translateY(-2px);
+  opacity: 0;
+  transform: scaleY(0.4);
+  transition: opacity var(--t-fast) var(--ease-soft),
+              transform var(--t-mid) var(--ease);
 }
-.schedule li span:first-of-type {
+.qa__q:hover { color: var(--ink); }
+.qa__q:hover::before { opacity: 0.35; transform: scaleY(1); }
+.qa__q[aria-selected="true"] { color: var(--ink); }
+.qa__q[aria-selected="true"]::before { opacity: 1; transform: scaleY(1); }
+.qa__q[aria-selected="true"]::after {
+  opacity: 1;
+  color: var(--gold-deep);
+  transform: translateY(-50%) rotate(-45deg) translate(3px, -3px);
+}
+/* display:flex would beat the user agent's [hidden] rule, so the closed
+   panels must be told to stay closed. */
+.qa__a[hidden] { display: none; }
+.qa__a {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--ink-deep);
+  color: var(--paper);
+  padding: clamp(1.25rem, 2.4vw, 1.9rem);
+  border-radius: var(--r-card);
+  animation: qa-in var(--t-mid) var(--ease) both;
+}
+@keyframes qa-in { from { opacity: 0; transform: translateY(6px); } }
+.qa__from {
   font-family: var(--display);
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  letter-spacing: -0.01em;
-  font-size: 1rem;
-  color: var(--ink);
+  color: var(--gold);
+  margin-bottom: 1.1rem;
 }
-.schedule li .n {
-  margin-left: auto;
+.qa__from span { padding: 0 0.35em; opacity: 0.6; }
+.qa__a dl {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-content: start;
+}
+.qa__a dt,
+.qa__a dd {
+  margin: 0;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid var(--line-dark);
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+.qa__a dt { color: color-mix(in srgb, var(--paper) 66%, transparent); }
+.qa__a dd { text-align: right; padding-left: 1rem; }
+/* Pinned to the foot so the panel finishes on the same line as the question
+   list instead of leaving a dead half. */
+.qa__more {
+  margin-top: auto;
+  padding-top: 1.4rem;
+  align-self: start;
+  font-family: var(--display);
   font-size: 0.8125rem;
-  color: var(--muted);
-  white-space: nowrap;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border-bottom: 1px solid color-mix(in srgb, var(--gold) 40%, transparent);
+  transition: border-color var(--t-fast) var(--ease-soft);
+}
+.qa__more:hover { border-bottom-color: var(--gold); }
+
+@media (max-width: 900px) {
+  .qa { grid-template-columns: minmax(0, 1fr); }
+  .qa__q { flex: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .qa__a { animation: none; }
+  .qa__q::before { transition: opacity var(--t-fast) linear; transform: scaleY(1); }
 }
 
 /* --------------------------------------------------------------------------
@@ -1535,7 +1755,6 @@ button, input, select, textarea { font: inherit; color: inherit; }
   .section-head--split, .cta__inner,
   .spec-groups { grid-template-columns: minmax(0, 1fr); }
   .schedule-layout { grid-template-columns: minmax(0, 1fr); gap: 1.75rem; }
-  .schedule { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .section-head--split { gap: 1.25rem; align-items: start; }
   .split__media { order: -1; }
   .split--media-last .split__media { order: 0; }
@@ -1570,7 +1789,6 @@ button, input, select, textarea { font: inherit; color: inherit; }
   .spec-group dl { grid-template-columns: minmax(0, 1fr); }
   .spec-group dd { text-align: left; padding-left: 0; padding-top: 0; border-bottom: 1px solid var(--line-soft); }
   .spec-group dt { border-bottom: 0; padding-bottom: 0.2rem; }
-  .schedule { grid-template-columns: minmax(0, 1fr); gap: 0; }
   .type-grid { grid-auto-rows: clamp(170px, 46vw, 230px); }
   .type-tile:nth-child(1),
   .type-tile:last-child { grid-column: span 1; grid-row: span 1; }

@@ -80,6 +80,45 @@ Between them, 8 blockers and a long must-fix list. All 8 blockers cleared.
 | Stray `</div>` in index.html | unbalanced | all eight pages balanced |
 | Stale data note said "Four sample farms" | wrong | says nine, and that no farm answers all 103 |
 
+## Round 3, 2026-09-01: Edgar's three section picks
+
+Three sections were rebuilt after he picked one live option each from
+https://claude.ai/code/artifact/894540e1-8c2b-44d5-9e69-823077b8b332.
+
+| Pick | Section | Was | Is |
+|---|---|---|---|
+| A2 | index, the schedule block | A flat checklist of eighteen headings with a field count beside each. Stated what we hold. | The five questions a farm buyer asks first. A vertical tablist; each answer is pulled off a named farm currently for sale and links to its full schedule. |
+| B5 | index, the numbers band | Four counters in a row, one of which asserted the unverified syndication claim. | The country. Nine province outlines drawn inline, gold pins from the listings file, and three numbers hung off the map. |
+| C8 | contact, the DIRECT card | A boxed card beside a squeezed form. | Four labelled columns on ink, read like a letterhead, with the form given the page underneath. |
+
+Faults found and fixed inside this round, each caught from a capture or a
+measurement rather than from reading the diff:
+
+| Fault | Evidence | Fix |
+|---|---|---|
+| Four facts in the picked prototype did not exist in the data: a combined borehole yield, a dam capacity, a camp count and two equipment rows were invented labels. | assertion against `listings.json` failed on 4 of 21 rows | Every row is now read out of the data file by key, and the build asserts each key exists. A wrong fact cannot reach the page without failing the build. |
+| All five answers rendered at once, 1838px of stacked panels. `display: flex` on the panel beat the user agent's `[hidden]` rule. | panel height 1838 where the list needs 401 | `.qa__a[hidden] { display: none; }` |
+| Question rows were 367px tall on desktop because `flex: 1` stretched five of them across the panel's full height. | measured tap height 367 | Panels sized first, questions share the height; 80px each at desktop, 55px at 375. |
+| The contact details band sat directly under the photo hero: two dark values touching. | computed grounds ink, ink, canvas, ink | Details moved below the form and the last band changed to the white surface. Strip is now photo, canvas, ink, white. |
+| On a phone the contact columns 2 to 4 were indented and column 1 was not. `.cband > div + div` outweighs a media query, which adds no specificity. | 375px capture | The mobile reset matches the selector weight. |
+| The selected question was marked by a gold bottom border, which read as a rule between two rows rather than a mark on one. | 1440px capture | A gold bar in space every row reserves, so opening one moves no text. |
+| The number column was 5.5rem wide for a two digit number, stranding the label. | 1440px capture | Column and type sized to each other. |
+| The heading said "Nine provinces" directly above a row labelled "Provinces". | repeat-sweep | Heading names the range instead. |
+
+Verified after: counters land on 9, 10 and 18 with JavaScript on, with it off
+and under reduced motion; nine pins painted; the country still draws with
+JavaScript off because the province geometry is inlined; click, ArrowDown, Home
+and End all move the selection; one tabbable question at a time; closed answers
+are not in the tab order; both columns start and finish on the same line at
+1280 and 1440 (6448 to 6849 on both); 32 page and width combinations clean;
+ground-sweep and align-sweep clean; no em-dashes; all eight pages balanced.
+
+Declared, not fixed: repeat-sweep reports six overlapping pairs. One is a farm
+name appearing both on its card and in the answer that quotes it, which is the
+point of the section. Five are the Melkhout description restating figures that
+also appear in its schedule. The description sells the farm and the schedule
+proves it; removing the prose would leave a table with no story.
+
 ---
 
 ## Standing verification
