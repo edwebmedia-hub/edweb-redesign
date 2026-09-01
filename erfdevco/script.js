@@ -735,7 +735,9 @@
     var mount = $('#listing-detail');
     if (!mount) return;
 
-    var id = new URLSearchParams(window.location.search).get('id');
+    // A wrong id is a stale link and must say so. A single-page bundle (the
+    // design preview) has no query string at all, so it names a default.
+    var id = new URLSearchParams(window.location.search).get('id') || window.__ERF_DEFAULT_ID;
 
     loadData().then(function (farms) {
       var f = farms.filter(function (x) { return x.id === id; })[0];
