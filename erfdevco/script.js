@@ -641,7 +641,14 @@
             '<div>' +
               '<div class="maphead">' +
                 '<h2>Where the farms are</h2>' +
-                '<p>' + farms.length + ' farms on the books across nine provinces. Pick a province to narrow the list, or tap a pin to open the farm.</p>' +
+                (function () {
+                  var provWith = Object.keys(counts).length;
+                  var words = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
+                  return '<p>' + farms.length + ' farms on the books in ' +
+                    (provWith === 9 ? 'all nine' : words[provWith] || provWith) +
+                    (provWith === 1 ? ' province' : ' provinces') +
+                    '. Pick a province to narrow the list, or tap a pin to open the farm.</p>';
+                })() +
               '</div>' +
               '<div class="provlist">' +
                 Object.keys(geo.names)

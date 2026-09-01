@@ -230,6 +230,41 @@ farm; no-JS still shows one open panel per tablist and all reveals visible;
 scrollspy marks Bond at the bond band; field errors render, focus and clear;
 tray absent on the compare page; zero page errors anywhere.
 
+## Round 6, 2026-09-01: independent review, fresh context
+
+`site-reviewer` verdict RETURNED, one blocker: **"nine provinces" claimed as
+stock while the data holds farms in seven.** The map intro said "9 farms on
+the books across nine provinces" one screen above a map drawing Gauteng and
+North West muted; the footer repeated "for sale across all nine South African
+provinces" on seven pages; the index meta, OG description and hero lede said
+"we list, in all nine provinces". Same truth class as the "103 facts" blocker
+in round 2, and static text, so replacing the demo data would not have fixed
+it.
+
+Cleared: the map line now derives its province count from the same data that
+paints the pins ("9 farms on the books in seven provinces", "all nine" only
+when it is true); every static line is service-area framing ("for sale across
+South Africa, with mandates taken in any of the nine provinces"), which stays
+true whatever the stock does. Acceptance grep: the only remaining "nine
+provinces" strings are the mandate framing and the search filter's own scope
+label.
+
+Material gaps from the review, disposition:
+1. Ghost buttons over photography (hero, cta, 404) sit against the recorded
+   no-transparent-buttons ruling. Edgar has seen these through five rounds
+   without objecting; left for his call, one token swap if he wants them solid.
+2. Meta and lede present-tense claims: fixed with the blocker.
+3. No DECISIONS.md by that name; HANDOFF.md carries the record. Left.
+4. Launch-blocking carried gaps restated: send-mail CORS wildcard, no rate
+   limit, delivery untested, demo data and retention periods awaiting
+   Martiens. All already in this report and CONFIRM-BEFORE-LAUNCH.md.
+
+Reviewer confirmed working end to end in its own context: field validation,
+?ids compare with URL in step, chips syncing, shortlist persistence, bond
+maths with aria-valuetext, lightbox cycle, keyboard tablists, per-farm heads
+and schema, noindex not-found, inert honeypot, three widths with zero
+overflow, no em-dashes, no banned phrases, token-pure CSS.
+
 ---
 
 ## Standing verification
