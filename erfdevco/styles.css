@@ -2280,3 +2280,31 @@ main .cmp-table p, main .factgrid p, main .bond p { max-width: none; }
   .findbar { flex-direction: column; align-items: stretch; gap: 0.35rem; }
   .findbar input { font-size: 1.0625rem; }
 }
+
+@media print {
+  /* The ink-band component colours were written after the print block and
+     outrank it, so a printed schedule came out white on white. Everything on
+     a dark band prints as ink on paper. */
+  .band--ink, .band--ink * { background: transparent !important; }
+  .band--ink,
+  .band--ink h1, .band--ink h2, .band--ink h3, .band--ink h4,
+  .band--ink p, .band--ink span, .band--ink b,
+  .band--ink .spec-group h3,
+  .band--ink .spec-group dt,
+  .band--ink .spec-group dd,
+  .band--ink .schedule-meter b,
+  .band--ink .schedule-meter span,
+  .band--ink .row-item h3,
+  .band--ink .row-item__body p,
+  .band--ink .counter__n,
+  .band--ink .counter__label,
+  .band--ink .counter__note { color: #000 !important; }
+  .band--ink .spec-group dt { color: #444 !important; }
+  .band--ink .spec-group { border-top-color: #000 !important; }
+  .band--ink .spec-group dt,
+  .band--ink .spec-group dd { border-bottom-color: #ccc !important; }
+  .band--ink .schedule-meter { border: 1pt solid #000 !important; border-left-width: 3pt !important; }
+  .headline-facts { break-inside: avoid; }
+  .headline-facts dt { color: #000 !important; }
+  .mapbox, .page-hero--flat { display: none !important; }
+}
