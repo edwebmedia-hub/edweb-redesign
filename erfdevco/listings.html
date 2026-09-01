@@ -57,30 +57,53 @@
     </div>
   </section>
 
-  <section class="band">
+  <!-- The map is a full-bleed ink band. It breaks the page's value the moment
+       you leave the hero, and a map reads better on dark than in a grey box. -->
+  <section class="band band--ink band--tight" aria-label="Farms by province">
     <div class="shell">
       <div class="mapbox" id="farm-map">
-        <p class="results-line" style="grid-column:1 / -1">Loading the map.</p>
+        <p class="results-line" style="grid-column:1 / -1;color:var(--muted-dark)">Loading the map.</p>
       </div>
+    </div>
+  </section>
 
+  <section class="band">
+    <div class="shell">
       <form class="findbar" role="search" onsubmit="return false">
         <label for="farm-q">Search</label>
         <input id="farm-q" type="search" name="q" autocomplete="off"
-               placeholder="Try a district, a province or a farm type. Bergville, Karoo, dairy, macadamia." />
+               placeholder="District, province or farm type" />
       </form>
 
       <div class="filters" id="filters" role="group" aria-label="Filter by farm type"></div>
       <div class="toolbar">
         <p class="results-line" id="results-line" role="status" aria-live="polite" style="margin:0"></p>
-        <div>
-          <label for="sort-by">Sort</label>
+        <div class="toolbar__controls">
+          <span><label for="price-band">Price</label>
+          <select id="price-band">
+            <option value="any">Any price</option>
+            <option value="0-10000000">Under R10m</option>
+            <option value="10000000-20000000">R10m to R20m</option>
+            <option value="20000000-30000000">R20m to R30m</option>
+            <option value="30000000-+">Over R30m</option>
+          </select></span>
+          <span><label for="extent-band">Extent</label>
+          <select id="extent-band">
+            <option value="any">Any extent</option>
+            <option value="0-50">Up to 50 ha</option>
+            <option value="50-200">50 to 200 ha</option>
+            <option value="200-500">200 to 500 ha</option>
+            <option value="500-+">500 ha and above</option>
+          </select></span>
+          <span><label for="sort-by">Sort</label>
           <select id="sort-by">
             <option value="newest">Most recently listed</option>
             <option value="price-asc">Price, low to high</option>
             <option value="price-desc">Price, high to low</option>
             <option value="size-desc">Extent, largest first</option>
             <option value="size-asc">Extent, smallest first</option>
-          </select>
+          </select></span>
+          <button type="button" class="toolbar__clear" id="clear-filters" hidden>Clear all</button>
         </div>
       </div>
       <div class="farm-grid farm-grid--even" id="all-farms" data-stagger>
@@ -91,14 +114,13 @@
 
   <section class="band band--stone band--tight">
     <div class="shell">
-      <div class="split split--wide-left">
+      <div class="split split--action">
         <div class="reveal">
-          <p class="eyebrow">Not seeing it</p>
           <h2>Tell us what you are looking for</h2>
           <p class="lede" style="margin-top:1.25rem">New mandates come on regularly and some sell before they are advertised. Register the province, farm type and extent you are after and we will come to you when it lands.</p>
         </div>
-        <div class="reveal" style="align-self:center">
-          <p><a class="btn btn--ink btn--wide" href="contact.html?subject=requirement">Register your requirement</a></p>
+        <div class="reveal">
+          <a class="btn btn--ink btn--wide" href="contact.html?subject=requirement">Register your requirement</a>
         </div>
       </div>
     </div>

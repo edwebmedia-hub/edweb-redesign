@@ -146,6 +146,43 @@ derived, not typed: regenerate them if you edit a farm's `specs`.
 Photography is licence-free Pexels stock in `assets/`. Swap for the client's own
 property photographs as mandates come in.
 
+## The /better pass (2026-09-01)
+A deep quality pass run against 39 faults found by measurement and full-page
+captures at 375, 768, 1280 and 1440, not by guessing. What changed structurally:
+
+**The ground.** The page ran on pure white with a 5% stone tint doing the work
+of alternation, which is exactly the failure Edgar has named: a 5% deeper shade
+of the same paper is the same value. The page ground is now warm canvas
+`--canvas #f6f4ef`, panels and cards are white surfaces on it, and real
+alternation comes from ink bands. The listings map became a full-bleed ink
+band, the farm page's schedule became an ink band, the compare page gained an
+ink masthead where it previously opened on white, and contact gained a dark
+band. Measured strips now alternate on every page.
+
+**Cards.** A farm card was a photo with a naked body on a flat page. It is now
+a white surface with a hairline and one hover lift, and the three facts that
+sell the farm sit in a measured tray at its foot: value first, label under it,
+instead of a grey sentence. Titles reserve two lines so price and tray line up
+across a row.
+
+**The farm page.** The three headline figures now open the page at 3rem and
+the remaining three sit quieter below the gallery, so no figure is stated
+twice. The bond heading stopped being a half-empty row.
+
+**Type.** Five body sizes became two roles. Nothing renders below 12px.
+Paragraph measure capped so nothing runs past about 68 characters.
+
+**The bans.** Eyebrows went from one above nearly every heading to three that
+carry real data (an error code, a category, a listing reference). The status
+chip lost its dot and reads white. Both on Edgar's instruction.
+
+**Filters.** Price band, extent band and a clear-all, which a property portal
+needs and this did not have.
+
+Contrast was re-measured by compositing alpha over the real ground rather than
+from computed styles, because three of the failures the naive sweep reported
+were the translucent-ground artefact recorded in OS memory. All pass.
+
 ## Correctness pass (2026-08-28, found by auditing rather than guessing)
 Four real defects the audit turned up, all fixed:
 

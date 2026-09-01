@@ -105,6 +105,8 @@
       var target = parseFloat(el.getAttribute('data-count'));
       if (isNaN(target)) return;
       if (reduced || !('requestAnimationFrame' in window)) { el.textContent = String(target); return; }
+      if (el.dataset.ran) return;
+      el.dataset.ran = '1';
       var start = null;
       var dur = 1300;
       var step = function (ts) {
@@ -113,8 +115,12 @@
         var eased = 1 - Math.pow(1 - p, 3);
         el.textContent = String(Math.round(target * eased));
         if (p < 1) requestAnimationFrame(step);
+        else el.textContent = String(target);
       };
       requestAnimationFrame(step);
+      // A throttled tab can strand rAF part way. The number is the content,
+      // the count is decoration, so land it regardless.
+      setTimeout(function () { el.textContent = String(target); }, dur + 400);
     };
 
     if (!('IntersectionObserver' in window)) { nodes.forEach(run); return; }
@@ -124,7 +130,12 @@
       });
     }, { threshold: 0.4 });
     nodes.forEach(function (n) { io.observe(n); });
-    setTimeout(function () { nodes.forEach(function (n) { if (n.textContent === '0') run(n); }); }, 4000);
+    setTimeout(function () {
+      nodes.forEach(function (n) {
+        var t = n.getAttribute('data-count');
+        if (t && n.textContent !== t) n.textContent = t;
+      });
+    }, 4000);
   })();
 
   /* ----------------------------------------------------------------------
@@ -301,8 +312,10 @@
   });
 
   function farmCard(f, eager) {
+    // Value first, label under it. These are the numbers that sell the farm,
+    // so they read as figures rather than as a grey sentence.
     var meta = (f.facts || []).slice(0, 3).map(function (pair) {
-      return '<span><b>' + esc(pair[0]) + '</b> ' + esc(pair[1]).toLowerCase() + '</span>';
+      return '<span><b>' + esc(pair[0]) + '</b><i>' + esc(pair[1]) + '</i></span>';
     }).join('');
     var isNew = f.status === 'New listing';
     var facts = f.factCount
@@ -330,10 +343,9 @@
           '<div class="farm-card__meta">' + meta + '</div>' +
           '<div class="farm-card__foot">' +
             '<a class="link-line" href="listing.html?id=' + encodeURIComponent(f.id) + '">View the schedule <span class="arw" aria-hidden="true">&rarr;</span></a>' +
-            facts +
           '</div>' +
-          '<div class="farm-card__foot" style="padding-top:0.75rem">' +
-            compareToggle(f) +
+          '<div class="farm-card__foot farm-card__foot--sub">' +
+            compareToggle(f) + facts +
           '</div>' +
         '</div>' +
       '</article>';
@@ -383,6 +395,9 @@
     var qSize = params.get('size');
 
     var sortSel = $('#sort-by');
+    var priceSel = $('#price-band');
+    var extentSel = $('#extent-band');
+    var clearBtn = $('#clear-filters');
     var searchBox = $('#farm-q');
     var savedOnly = false;
     var query = '';
@@ -394,8 +409,18 @@
         .join(' ').toLowerCase();
     }
 
+    function inBand(value, band) {
+      if (!band || band === 'any') return true;
+      var p = band.split('-');
+      var min = parseFloat(p[0]);
+      var max = p[1] === '+' ? Infinity : parseFloat(p[1]);
+      return value >= min && value <= max;
+    }
+
     function matches(f) {
       if (query && hay(f).indexOf(query) === -1) return false;
+      if (priceSel && !inBand(f.price, priceSel.value)) return false;
+      if (extentSel && !inBand(f.sizeHa, extentSel.value)) return false;
       if (savedOnly && !isSaved(f.id)) return false;
       if (active !== 'all' && f.farmType !== active) return false;
       if (qProv && qProv !== 'any' && f.province !== qProv) return false;
@@ -437,11 +462,18 @@
         var n = list.length + (list.length === 1 ? ' farm' : ' farms');
         if (savedOnly) resultLine.textContent = n + ' on your shortlist';
         else if (query) resultLine.textContent = n + ' matching "' + query + '"';
+        else if ((priceSel && priceSel.value !== 'any') || (extentSel && extentSel.value !== 'any') || qProv)
+          resultLine.textContent = n + ' matching your filters';
         else resultLine.textContent = n +
           (active === 'all' ? ' currently listed' : ' in ' + active.toLowerCase());
       }
       armReveals(mount);
       if (mapApi) mapApi.sync(list, qProv);
+      if (clearBtn) {
+        var on = !!(query || savedOnly || active !== 'all' || qProv || qSize ||
+          (priceSel && priceSel.value !== 'any') || (extentSel && extentSel.value !== 'any'));
+        clearBtn.hidden = !on;
+      }
     }
 
     loadData().then(function (farms) {
@@ -491,7 +523,22 @@
         });
       }
 
-      if (sortSel) sortSel.addEventListener('change', render);
+      [sortSel, priceSel, extentSel].forEach(function (el) {
+        if (el) el.addEventListener('change', render);
+      });
+
+      if (clearBtn) clearBtn.addEventListener('click', function () {
+        query = ''; savedOnly = false; active = 'all';
+        qType = qProv = qSize = null;
+        if (searchBox) searchBox.value = '';
+        if (priceSel) priceSel.value = 'any';
+        if (extentSel) extentSel.value = 'any';
+        $$('.filter-btn', chips).forEach(function (b) {
+          b.setAttribute('aria-pressed', b.getAttribute('data-type') === 'all' ? 'true' : 'false');
+        });
+        history.replaceState(null, '', window.location.pathname);
+        render();
+      });
 
       if (searchBox) {
         var t = null;
@@ -565,15 +612,24 @@
                 '<p>Nine provinces, ' + farms.length + ' farms on the books. Pick a province to narrow the list, or tap a pin to open the farm.</p>' +
               '</div>' +
               '<div class="provlist">' +
-                Object.keys(geo.names).sort(function (a, b) {
-                  return (counts[b] || 0) - (counts[a] || 0) || geo.names[a].localeCompare(geo.names[b]);
-                }).map(function (s) {
-                  var n = counts[s] || 0;
-                  return '<button type="button" data-prov="' + s + '" aria-pressed="false"' +
-                    (n ? '' : ' disabled') + '>' + esc(geo.names[s]) +
-                    '<span class="n">' + (n || 'none') + '</span></button>';
-                }).join('') +
+                Object.keys(geo.names)
+                  .filter(function (s) { return counts[s]; })
+                  .sort(function (a, b) {
+                    return counts[b] - counts[a] || geo.names[a].localeCompare(geo.names[b]);
+                  }).map(function (s) {
+                    return '<button type="button" data-prov="' + s + '" aria-pressed="false">' +
+                      esc(geo.names[s]) + '<span class="n">' + counts[s] + '</span></button>';
+                  }).join('') +
               '</div>' +
+              (function () {
+                // Empty provinces are a fact, not nine dead rows.
+                var empty = Object.keys(geo.names).filter(function (s) { return !counts[s]; })
+                  .map(function (s) { return geo.names[s]; });
+                return empty.length
+                  ? '<p class="provlist-note">Nothing listed in ' + esc(empty.join(' or ')) +
+                    ' at the moment. Tell us what you want there and we will call when it comes on.</p>'
+                  : '';
+              })() +
             '</div>';
 
           var tip = $('.maptip', host);
@@ -680,7 +736,8 @@
                  { eager: i === 0 }) + '</figure>';
       }).join('');
 
-      var factsHtml = (f.facts || []).map(function (p) {
+      var headline = (f.facts || []).slice(0, 3);
+      var factsHtml = (f.facts || []).slice(3).map(function (p) {
         return '<div><dt>' + esc(p[0]) + '</dt><dd>' + esc(p[1]) + '</dd></div>';
       }).join('');
 
@@ -708,7 +765,7 @@
       var waText = encodeURIComponent(
         'Hello Martiens, I am enquiring about ' + f.ref + ', ' + f.title + ' (' + f.priceDisplay + ') on erfdevco.com.');
 
-      mount.innerHTML = '' +
+      var html = '' +
         '<div class="shell">' +
           '<div class="detail-head reveal">' +
             '<div>' +
@@ -727,11 +784,20 @@
                 '<button type="button" class="btn btn--outline" data-share>Share this farm</button>' +
               '</div>' +
             '</div>' +
-            '<div>' +
+            '<div class="detail-price-block">' +
               '<p class="detail-price">' + esc(f.priceDisplay) + '</p>' +
               '<p class="detail-perha">' + esc(f.perHa) + ' &nbsp;/&nbsp; ' + esc(thousands(f.sizeHa)) + ' ha</p>' +
             '</div>' +
           '</div>' +
+        '</div>';
+
+      html += '' +
+        '<div class="shell" style="margin-top:clamp(1.75rem,3vw,2.5rem)">' +
+          '<dl class="headline-facts reveal">' +
+            headline.map(function (p) {
+              return '<div><dt>' + esc(p[0]) + '</dt><dd>' + esc(p[1]) + '</dd></div>';
+            }).join('') +
+          '</dl>' +
         '</div>' +
 
         '<div class="shell" style="margin-top:clamp(2.5rem,4vw,3.5rem)">' +
@@ -739,14 +805,13 @@
         '</div>' +
 
         '<div class="shell" style="margin-top:clamp(2.5rem,4vw,3.5rem)">' +
-          '<dl class="factgrid reveal">' + factsHtml + '</dl>' +
+          '<dl class="factgrid factgrid--rest reveal">' + factsHtml + '</dl>' +
         '</div>' +
 
         '<div class="shell band">' +
           '<div class="split split--wide-left split--top">' +
             '<div class="reveal">' +
-              '<p class="eyebrow">The farm</p>' +
-              '<h2>About ' + esc(f.title) + '</h2>' +
+                            '<h2>About ' + esc(f.title) + '</h2>' +
               '<p class="lede" style="margin-top:1.5rem">' + esc(f.summary) + '</p>' +
               '<p style="margin-top:1.25rem;color:var(--muted);line-height:1.75;max-width:64ch">' + esc(f.description) + '</p>' +
             '</div>' +
@@ -754,11 +819,10 @@
           '</div>' +
         '</div>' +
 
-        '<div class="band band--stone">' +
+        '<div class="band band--ink">' +
           '<div class="shell">' +
             '<div class="section-head reveal">' +
-              '<p class="eyebrow">The schedule</p>' +
-              '<h2>Every measured fact on this farm</h2>' +
+                            '<h2>Every measured fact on this farm</h2>' +
               '<p class="lede">Recorded from the seller mandate against the ERFDEVCO listing schedule. Nothing here is estimated.</p>' +
             '</div>' +
             '<div class="schedule-meter reveal">' +
@@ -775,18 +839,17 @@
 
         '<div class="band band--tight">' +
           '<div class="shell">' +
-            '<div class="section-head section-head--split reveal">' +
-              '<div>' +
-                '<p class="eyebrow">What it costs to carry</p>' +
-                '<h2>Work the bond on ' + esc(f.priceDisplay) + '</h2>' +
-              '</div>' +
-              '<div><p class="lede">Change the deposit, the rate and the term to see the monthly repayment. This is arithmetic, not a quote: your bank sets the rate, and agricultural bonds are usually written over shorter terms than a house.</p></div>' +
+            '<div class="section-head reveal">' +
+              '<h2>Work the bond on ' + esc(f.priceDisplay) + '</h2>' +
+              '<p class="lede">Change the deposit, the rate and the term to see the monthly repayment. This is arithmetic, not a quote: your bank sets the rate, and agricultural bonds are usually written over shorter terms than a house.</p>' +
             '</div>' +
             '<div class="reveal">' + bondCard(f) + '</div>' +
           '</div>' +
         '</div>' +
 
         '<div class="band band--tight band--top0" id="similar-farms"></div>';
+
+      mount.innerHTML = html;
 
       armReveals(mount);
       wireForms(mount);
@@ -1023,8 +1086,8 @@
 
       host.innerHTML = '<div class="shell">' +
         '<div class="section-head section-head--split reveal">' +
-          '<div><p class="eyebrow">Also on the books</p><h2>Farms a buyer of this one usually looks at</h2></div>' +
-          '<div><p class="lede">Matched on farm type first, then province, then price.</p>' +
+          '<div><h2>Farms a buyer of this one usually looks at</h2></div>' +
+          '<div><p class="lede">Matched on farm type first, then province, then price. Every one of them carries the same schedule, so they compare field for field.</p>' +
           '<p style="margin-top:1.25rem"><a class="link-line" href="listings.html">All ' + farms.length + ' farms <span class="arw" aria-hidden="true">&rarr;</span></a></p></div>' +
         '</div>' +
         '<div class="farm-grid farm-grid--even" data-stagger>' +
@@ -1410,7 +1473,10 @@
       });
       body += '</tbody>';
 
-      mount.innerHTML = '<div class="cmp-wrap"><table class="cmp-table">' + head + body + '</table></div>';
+      // The phone layout stacks each row into as many columns as there are
+      // farms, so it has to know the count rather than assume two.
+      mount.innerHTML = '<div class="cmp-wrap"><table class="cmp-table" style="--cmp-cols:' +
+        picked.length + '">' + head + body + '</table></div>';
 
       var table = $('.cmp-table', mount);
       var diffCount = $$('tr[data-diff="1"]', table).length;

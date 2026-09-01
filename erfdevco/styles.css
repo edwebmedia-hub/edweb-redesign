@@ -20,8 +20,9 @@
   --paper: #ffffff;
 
   /* Derived grounds */
-  --stone: color-mix(in srgb, var(--ink) 4%, #f7f5f0);
-  --stone-2: color-mix(in srgb, var(--ink) 8%, #f7f5f0);
+  --canvas: #f6f4ef;                 /* the page ground: warm paper, not white */
+  --stone: color-mix(in srgb, var(--ink) 5%, var(--canvas));
+  --stone-2: color-mix(in srgb, var(--ink) 9%, var(--canvas));
   --line: color-mix(in srgb, var(--ink) 14%, transparent);
   --line-soft: color-mix(in srgb, var(--ink) 8%, transparent);
   --line-dark: color-mix(in srgb, var(--paper) 16%, transparent);
@@ -83,7 +84,7 @@ html {
 
 body {
   margin: 0;
-  background: var(--paper);
+  background: var(--canvas);
   color: var(--text);
   font-family: var(--body);
   font-size: var(--fs-body);
@@ -161,6 +162,9 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .band { padding-block: var(--band); }
 .band--tight { padding-block: var(--band-tight); }
 .band--stone { background: var(--stone); }
+/* A surface, not a tint step: white panels on the warm canvas are what give
+   the page its value change where a dark band would be too much. */
+.band--surface { background: var(--paper); }
 .band--top0 { padding-top: 0; }
 .band--bottom0 { padding-bottom: 0; }
 
@@ -487,7 +491,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 }
 .searchrail__field label {
   font-family: var(--display);
-  font-size: 0.6875rem;
+  font-size: 0.75rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--gold);
@@ -543,13 +547,27 @@ button, input, select, textarea { font: inherit; color: inherit; }
    nine farms read as one inventory rather than a feature plus leftovers. */
 .farm-grid--even > * { grid-column: span 2 !important; }
 
-.farm-card { display: flex; flex-direction: column; height: 100%; }
+.farm-card {
+  display: flex; flex-direction: column; height: 100%;
+  background: var(--paper);
+  border: 1px solid var(--line-soft);
+  border-radius: var(--r-card);
+  overflow: hidden;
+  transition: border-color var(--t-mid) var(--ease-soft),
+              box-shadow var(--t-mid) var(--ease-soft),
+              transform var(--t-mid) var(--ease);
+}
+.farm-card:hover {
+  border-color: color-mix(in srgb, var(--ink) 22%, transparent);
+  box-shadow: 0 18px 40px -24px color-mix(in srgb, var(--ink) 55%, transparent);
+  transform: translateY(-3px);
+}
 
 .farm-card__media {
   display: block;              /* it is an <a>, and inline boxes ignore aspect-ratio */
   position: relative;
   overflow: hidden;
-  border-radius: var(--r-media);
+  border-radius: 0;            /* the card carries the radius now */
   background: var(--stone-2);
   aspect-ratio: 4 / 3;
 }
@@ -570,7 +588,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
   backdrop-filter: blur(6px);
   color: var(--paper);
   font-family: var(--display);
-  font-size: 0.6875rem;
+  font-size: 0.75rem;
   letter-spacing: 0.14em;
   padding: 0.4rem 0.7rem;
   border-radius: var(--r-chip);
@@ -581,20 +599,23 @@ button, input, select, textarea { font: inherit; color: inherit; }
   background: var(--gold);
   color: var(--ink);
   font-family: var(--display);
-  font-size: 0.6875rem;
+  font-size: 0.75rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   padding: 0.4rem 0.7rem;
   border-radius: var(--r-chip);
 }
 
-.farm-card__body { padding-top: 1.35rem; display: flex; flex-direction: column; flex: 1; }
+.farm-card__body {
+  padding: 1.35rem clamp(1rem, 1.6vw, 1.35rem) 0;
+  display: flex; flex-direction: column; flex: 1;
+}
 
 .farm-card__row {
   display: flex; align-items: baseline; justify-content: space-between;
   gap: 1rem; flex-wrap: wrap;
 }
-.farm-card__title { margin-bottom: 0.35rem; }
+.farm-card__title { margin-bottom: 0.35rem; min-height: 2.4em; }
 .farm-card:hover .farm-card__title { color: var(--gold-deep); }
 .farm-card__title { transition: color var(--t-fast) var(--ease-soft); }
 
@@ -611,47 +632,80 @@ button, input, select, textarea { font: inherit; color: inherit; }
 }
 
 .farm-card__meta {
-  display: flex; flex-wrap: wrap;
-  gap: 0 1.5rem;
-  margin-top: 1.1rem;
-  padding-top: 1.1rem;
-  border-top: 1px solid var(--line-soft);
-  font-size: 0.8125rem;
-  color: var(--muted);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  margin: 1.15rem calc(clamp(1rem, 1.6vw, 1.35rem) * -1) 0;
+  padding: 0.9rem clamp(1rem, 1.6vw, 1.35rem);
+  border-top: 1px solid var(--line);
+  background: var(--stone);
+}
+.farm-card__meta span {
+  display: flex; flex-direction: column; gap: 0.15rem;
+  padding-right: 0.6rem;
+  min-width: 0;
+}
+.farm-card__meta span + span {
+  padding-left: 0.75rem;
+  border-left: 1px solid var(--line);
 }
 .farm-card__meta b {
-  font-weight: 500;
+  font-weight: 400;
   color: var(--ink);
   font-family: var(--display);
-  letter-spacing: 0.02em;
+  font-size: clamp(1rem, 1.25vw, 1.15rem);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
+.farm-card__meta i {
+  font-style: normal;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-family: var(--display);
+  color: var(--muted);
+  line-height: 1.25;
+}
+/* One action, one supporting note. The compare tick moved into its own quiet
+   row so three controls stop competing at the same weight. */
 .farm-card__foot {
-  margin-top: auto; padding-top: 1.25rem;
-  display: flex; align-items: baseline; justify-content: space-between;
+  margin-top: auto;
+  padding: 1rem clamp(1rem, 1.6vw, 1.35rem) 0;
+  margin-inline: calc(clamp(1rem, 1.6vw, 1.35rem) * -1);
+  display: flex; align-items: center; justify-content: space-between;
   gap: 0.75rem 1.25rem; flex-wrap: wrap;
+}
+.farm-card__foot--sub {
+  margin-top: 0;
+  padding-top: 0.75rem;
+  padding-bottom: 1.1rem;
+  border-top: 1px solid var(--line-soft);
+  margin-top: 1rem;
 }
 
 /* Status chip: only a genuinely new listing gets the gold treatment. */
 .farm-card__status {
   position: absolute;
   left: 14px; bottom: 14px;
-  display: inline-flex; align-items: center; gap: 0.45rem;
-  background: color-mix(in srgb, var(--ink-deep) 84%, transparent);
+  display: inline-flex; align-items: center;
+  background: color-mix(in srgb, var(--ink-deep) 90%, transparent);
   backdrop-filter: blur(6px);
   color: var(--paper);
   font-family: var(--display);
-  font-size: 0.6875rem;
+  font-size: 0.75rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  padding: 0.4rem 0.7rem;
+  padding: 0.45rem 0.8rem;
   border-radius: var(--r-chip);
 }
-.farm-card__status::before {
-  content: ""; width: 5px; height: 5px; border-radius: 50%;
-  background: color-mix(in srgb, var(--paper) 60%, transparent);
+/* No dot. A new listing earns a gold ground, not a gold speck. */
+.farm-card__status[data-new] {
+  background: var(--gold);
+  color: var(--ink);
 }
-.farm-card__status[data-new]::before { background: var(--gold); }
-.farm-card__status[data-new] { color: var(--gold); }
 
 /* Save to shortlist. Stored per browser, never sent anywhere. */
 .save-btn {
@@ -719,7 +773,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 }
 .toolbar label {
   font-family: var(--display);
-  font-size: 0.6875rem;
+  font-size: 0.75rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--muted);
@@ -1208,7 +1262,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
   transform: translateY(-50%);
   transition: height var(--t-mid) var(--ease);
 }
-.spec-tab .c { font-size: 0.6875rem; color: var(--gold-deep); flex: none; }
+.spec-tab .c { font-size: 0.75rem; color: var(--gold-deep); flex: none; }
 .spec-tab:hover { color: var(--ink); }
 .spec-tab[aria-selected="true"] { color: var(--ink); }
 .spec-tab[aria-selected="true"]::before { height: 62%; }
@@ -1341,7 +1395,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .field--full { grid-column: 1 / -1; }
 .field label {
   font-family: var(--display);
-  font-size: 0.6875rem;
+  font-size: 0.75rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--gold-deep);
@@ -1587,7 +1641,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
   padding: 0 0.3rem;
   border-radius: 999px;
   background: color-mix(in srgb, var(--ink) 10%, transparent);
-  font-size: 0.6875rem;
+  font-size: 0.75rem;
   text-align: center;
 }
 .filter-btn[aria-pressed="true"] .chip-n { background: var(--gold); color: var(--ink); }
@@ -1640,7 +1694,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .cmp-tray.is-up { transform: translate(-50%, 0); }
 body.has-tray { padding-bottom: 6.5rem; }
 .cmp-tray__label {
-  font-family: var(--display); font-size: 0.6875rem; letter-spacing: 0.16em;
+  font-family: var(--display); font-size: 0.75rem; letter-spacing: 0.16em;
   text-transform: uppercase; color: var(--gold); flex: none;
 }
 .cmp-tray__slots { display: flex; gap: 0.6rem; flex: 1; min-width: 0; }
@@ -1667,7 +1721,7 @@ body.has-tray { padding-bottom: 6.5rem; }
 .cmp-tray .btn { padding: 0.7rem 1.15rem; font-size: 0.75rem; }
 .cmp-clear {
   background: transparent; border: 0; cursor: pointer;
-  font-family: var(--display); font-size: 0.6875rem; letter-spacing: 0.12em;
+  font-family: var(--display); font-size: 0.75rem; letter-spacing: 0.12em;
   text-transform: uppercase; color: color-mix(in srgb, var(--paper) 60%, transparent);
 }
 .cmp-clear:hover { color: var(--paper); }
@@ -1712,7 +1766,7 @@ body.has-tray { padding-bottom: 6.5rem; }
    columns whether a farm's title wraps or not. */
 .cmp-head { display: flex; flex-direction: column; gap: 0.4rem; }
 .cmp-head .t { min-height: 2.6em; }
-.cmp-head .r { font-family: var(--display); font-size: 0.6875rem; letter-spacing: 0.12em; color: var(--gold-deep); }
+.cmp-head .r { font-family: var(--display); font-size: 0.75rem; letter-spacing: 0.12em; color: var(--gold-deep); }
 .cmp-head .t { font-family: var(--display); font-size: 1.0625rem; letter-spacing: -0.02em; text-transform: uppercase; line-height: 1.2; }
 .cmp-head .p { color: var(--gold-deep); font-family: var(--display); font-size: 1rem; }
 .cmp-head .l { font-size: 0.8125rem; color: var(--muted); }
@@ -1757,7 +1811,7 @@ body.has-tray { padding-bottom: 6.5rem; }
 }
 .findbar label {
   font-family: var(--display);
-  font-size: 0.6875rem; letter-spacing: 0.16em; text-transform: uppercase;
+  font-size: 0.75rem; letter-spacing: 0.16em; text-transform: uppercase;
   color: var(--gold-deep); flex: none;
 }
 .findbar input {
@@ -1816,6 +1870,8 @@ body.has-tray { padding-bottom: 6.5rem; }
 /* Tooltip rides above the SVG in normal DOM so type stays crisp. */
 .maptip {
   position: absolute;
+  left: 50%; top: 0;
+  visibility: hidden;          /* never widens the page while it is idle */
   z-index: 5;
   min-width: 12rem;
   background: var(--ink-deep);
@@ -1828,7 +1884,7 @@ body.has-tray { padding-bottom: 6.5rem; }
   transition: opacity var(--t-fast) var(--ease-soft), transform var(--t-fast) var(--ease);
   box-shadow: 0 12px 30px -10px color-mix(in srgb, var(--ink-deep) 60%, transparent);
 }
-.maptip.is-on { opacity: 1; transform: translate(-50%, -130%) scale(1); }
+.maptip.is-on { opacity: 1; visibility: visible; transform: translate(-50%, -130%) scale(1); }
 .maptip .r, .maptip .t, .maptip .p { display: block; }
 .maptip .r { font-family: var(--display); font-size: 0.625rem; letter-spacing: 0.14em; color: var(--gold); }
 .maptip .t { font-family: var(--display); font-size: 0.875rem; text-transform: uppercase; letter-spacing: -0.01em; margin-top: 0.15rem; }
@@ -1878,7 +1934,7 @@ body.has-tray { padding-bottom: 6.5rem; }
 }
 .bond-f { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem 1rem; align-items: baseline; }
 .bond-f > span {
-  font-family: var(--display); font-size: 0.6875rem; letter-spacing: 0.14em;
+  font-family: var(--display); font-size: 0.75rem; letter-spacing: 0.14em;
   text-transform: uppercase; color: var(--gold-deep);
 }
 .bond-f output {
@@ -1912,7 +1968,7 @@ body.has-tray { padding-bottom: 6.5rem; }
   display: flex; flex-direction: column;
 }
 .bond-lab {
-  font-family: var(--display); font-size: 0.6875rem; letter-spacing: 0.16em;
+  font-family: var(--display); font-size: 0.75rem; letter-spacing: 0.16em;
   text-transform: uppercase; color: var(--gold);
 }
 .bond-big {
@@ -1944,3 +2000,283 @@ body.has-tray { padding-bottom: 6.5rem; }
   .bond-grid { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; }
 }
 @media print { .bond, #similar-farms { display: none !important; } }
+
+/* --------------------------------------------------------------------------
+   26. The /better pass. Value strip, one value per role, dead halves.
+   -------------------------------------------------------------------------- */
+
+/* ---- Map on ink. The panel is the band now, so it loses its own box. ---- */
+.band--ink .mapbox {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  margin-bottom: 0;
+  align-items: center;
+}
+.band--ink .prov { fill: color-mix(in srgb, var(--paper) 11%, transparent); stroke: var(--ink-deep); }
+.band--ink .prov.has-farms { fill: color-mix(in srgb, var(--paper) 24%, transparent); }
+.band--ink .prov.has-farms:hover { fill: color-mix(in srgb, var(--paper) 40%, transparent); }
+.band--ink .prov.is-active { fill: var(--gold); }
+.band--ink .pin .dot { stroke: var(--ink-deep); }
+.band--ink .pin:hover .dot, .band--ink .pin.is-on .dot { fill: var(--paper); }
+.band--ink .maptip { background: var(--paper); color: var(--ink); }
+.band--ink .maptip .r { color: var(--gold-deep); }
+.band--ink .maptip .p { color: var(--muted); }
+.band--ink .provlist { border-top-color: var(--line-dark); }
+.band--ink .provlist button {
+  border-bottom-color: var(--line-dark);
+  color: color-mix(in srgb, var(--paper) 74%, transparent);
+  padding-block: 0.85rem;                       /* a real tap target on the rail */
+}
+.band--ink .provlist button:hover:not([disabled]) { color: var(--paper); }
+.band--ink .provlist button[aria-pressed="true"] { color: var(--paper); }
+.band--ink .provlist button[aria-pressed="true"] .n { background: var(--gold); color: var(--ink); }
+.band--ink .provlist button[disabled] { opacity: 0.55; color: color-mix(in srgb, var(--paper) 42%, transparent); }
+.band--ink .maphead p { color: var(--muted-dark); }
+
+/* ---- A masthead with no photograph still has to be a dark band. ---- */
+.page-hero--flat { background: var(--ink-deep); }
+.page-hero--flat .crumb a { color: var(--gold); }
+
+/* ---- One value per role. Five body sizes was four too many. ---- */
+.counter__note,
+.form-note,
+.farm-card__place,
+.results-line,
+.detail-meta,
+.spec-group dt, .spec-group dd,
+.cmp-table th, .cmp-table td,
+.site-footer li, .site-footer p,
+.maphead p { font-size: 0.9375rem; }
+.spec-tab .c, .cmp-head .r, .farm-card__meta i,
+.type-tile__count, .footer-base { font-size: 0.75rem; }
+
+/* ---- Measure. Nothing runs to 104 characters. ---- */
+main p { max-width: 68ch; }
+main .row-item__body p,
+main .counter__note,
+main .maphead p { max-width: 56ch; }
+.cta p, .statement p, .hero__lede, .page-hero .lede { max-width: 52ch; }
+main .cmp-table p, main .factgrid p, main .bond p { max-width: none; }
+
+/* ---- Section rhythm: two paddings, not four. ---- */
+.band--flush { padding-block: 0; }
+
+/* ---- Dead halves ---- */
+/* A lone button floating in a centred column is not a row. Desktop only:
+   below 900 the split collapses like every other one. */
+@media (min-width: 901px) {
+  .split--action { grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.65fr); align-items: end; }
+  .split--action > :last-child { justify-self: start; }
+}
+@media (max-width: 900px) { .split--action { grid-template-columns: minmax(0, 1fr); } }
+
+/* The enquiry card is sticky, so its column must not stretch past it. */
+.split--top > * { align-self: start; }
+
+/* ---- Mobile: real targets ---- */
+@media (max-width: 900px) {
+  .searchrail__field select { padding-block: 0.55rem; font-size: 1.0625rem; }
+  .findbar input { padding-block: 0.5rem; }
+  .link-line { padding-block: 0.5rem; }
+  .site-footer li { margin-bottom: 0.95rem; }
+}
+@media (max-width: 640px) {
+  /* The comparison is the best thing on the site and it was a sideways
+     scroll on a phone. Two farms at a time, with the field name above. */
+  .cmp-table { min-width: 0; }
+  .cmp-table thead th:first-child { display: none; }
+  .cmp-table tbody th {
+    display: block; width: auto; min-width: 0;
+    border-bottom: 0; padding-bottom: 0.2rem;
+    font-family: var(--display); text-transform: uppercase;
+    font-size: 0.75rem; letter-spacing: 0.08em; color: var(--gold-deep);
+  }
+  .cmp-table tbody tr { display: grid; grid-template-columns: repeat(var(--cmp-cols, 2), minmax(0, 1fr)); gap: 0 0.75rem; padding: 0.6rem 0; border-bottom: 1px solid var(--line-soft); }
+  .cmp-table tbody tr th { grid-column: 1 / -1; }
+  .cmp-table tbody td { border-bottom: 0; padding: 0.15rem 0; }
+  .cmp-table tr.cmp-sec { display: block; }
+  .cmp-table tr.cmp-sec th { grid-column: auto; color: var(--ink); }
+  .cmp-table thead th { padding: 0.75rem 0.4rem; }
+  .cmp-table thead tr { display: grid; grid-template-columns: repeat(var(--cmp-cols, 2), minmax(0, 1fr)); gap: 0 0.75rem; }
+  .cmp-table, .cmp-table tbody, .cmp-table thead { display: block; }
+  .cmp-head .t { font-size: 0.9375rem; min-height: 0; }
+  .cmp-head .p { font-size: 0.875rem; }
+  .cmp-head img { aspect-ratio: 4/3; }
+}
+
+/* ---- The farm's three headline figures, sized to be read across a room ---- */
+.headline-facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 2px solid var(--ink);
+  border-bottom: 1px solid var(--line);
+}
+.headline-facts > div {
+  padding: clamp(1.1rem, 2vw, 1.6rem) clamp(1rem, 2vw, 1.75rem) clamp(1.1rem, 2vw, 1.6rem) 0;
+  border-right: 1px solid var(--line);
+}
+.headline-facts > div:last-child { border-right: 0; }
+.headline-facts > div + div { padding-left: clamp(1rem, 2vw, 1.75rem); }
+.headline-facts dt {
+  font-family: var(--display);
+  font-size: clamp(1.9rem, 3.4vw, 3rem);
+  letter-spacing: -0.05em;
+  line-height: 1;
+  color: var(--ink);
+}
+.headline-facts dd {
+  margin: 0.6rem 0 0;
+  font-family: var(--display);
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* The full six-fact grid below is the supporting detail, so it sits quieter
+   than the three headline figures rather than competing with them. */
+.factgrid { background: var(--paper); }
+.factgrid dt { font-size: clamp(1rem, 1.3vw, 1.2rem); }
+
+/* Price block sits with the title row, not floating above an empty column. */
+.detail-price-block { align-self: end; text-align: right; }
+
+/* ---- The schedule band, now on ink ---- */
+.band--ink .schedule-meter {
+  background: color-mix(in srgb, var(--paper) 7%, transparent);
+  border-color: var(--line-dark);
+  border-left-color: var(--gold);
+}
+.band--ink .schedule-meter b { color: var(--paper); }
+.band--ink .schedule-meter span { color: var(--muted-dark); }
+.band--ink .spec-tabs { border-top-color: var(--line-dark); }
+.band--ink .spec-tab {
+  color: color-mix(in srgb, var(--paper) 66%, transparent);
+  border-bottom-color: var(--line-dark);
+}
+.band--ink .spec-tab:hover, .band--ink .spec-tab[aria-selected="true"] { color: var(--paper); }
+.band--ink .spec-tab .c { color: var(--gold); }
+.band--ink .spec-group { border-top-color: var(--gold); }
+.band--ink .spec-group h3 { color: var(--paper); }
+.band--ink .spec-group dt { color: var(--muted-dark); border-bottom-color: var(--line-dark); }
+.band--ink .spec-group dd { color: var(--paper); border-bottom-color: var(--line-dark); }
+
+/* ---- Compare: "Not recorded" was 2.96:1 ---- */
+.cmp-table td.is-blank { color: var(--muted); font-style: italic; }
+
+@media (max-width: 900px) {
+  .headline-facts { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .detail-price-block { text-align: left; align-self: start; }
+}
+@media (max-width: 560px) {
+  .headline-facts { grid-template-columns: minmax(0, 1fr); }
+  .headline-facts > div { border-right: 0; border-bottom: 1px solid var(--line); padding-left: 0 !important; }
+  .headline-facts > div:last-child { border-bottom: 0; }
+}
+
+/* ---- Components that now have to work on an ink band ---- */
+.band--ink .rows { border-top-color: var(--line-dark); }
+.band--ink .row-item { border-bottom-color: var(--line-dark); }
+.band--ink .row-item::before { background: color-mix(in srgb, var(--paper) 7%, transparent); }
+.band--ink .row-item h3 { color: var(--paper); }
+.band--ink .row-item:hover h3 { color: var(--gold); }
+.band--ink .row-item__body p { color: var(--muted-dark); }
+.band--ink .counters { border-top-color: var(--line-dark); }
+.band--ink .counter { border-right-color: var(--line-dark); }
+.band--ink .counter__n { color: var(--paper); }
+.band--ink .counter__label, .band--ink .counter__note { color: var(--muted-dark); }
+.band--ink .filter-btn { border-color: var(--line-dark); color: color-mix(in srgb, var(--paper) 72%, transparent); }
+.band--ink .filter-btn:hover { border-color: var(--gold); color: var(--paper); }
+
+/* ---- Map: fill the band rather than sit small inside a box ---- */
+.mapbox { align-items: center; }
+.mapfig svg { max-height: 62vh; margin-inline: auto; }
+.maphead h3 { font-size: var(--fs-h3); }
+
+/* Pins have to be tappable on a phone, so they scale with the drawing. */
+@media (max-width: 900px) {
+  .pin .dot { r: 13; }
+  .pin .halo { r: 26; }
+  .mapfig svg { max-height: none; }
+}
+
+/* ---- Filter chips: one tidy row of type chips, the shortlist set apart ---- */
+.filters { align-items: center; }
+.filter-btn[data-saved] {
+  margin-left: auto;
+  border-color: var(--ink);
+  color: var(--ink);
+}
+
+/* ---- Search bar: the placeholder was doing the work of a label ---- */
+.findbar input::placeholder { font-size: 0.9em; }
+
+/* ---- Compare: controls sit on the ink masthead ---- */
+.page-hero--flat + .band .cmp-controls { border-bottom-color: var(--line); }
+
+/* ---- Fact trays keep one height whether a label wraps or not ---- */
+.farm-card__meta span { justify-content: flex-start; }
+.farm-card__meta i { min-height: 2.4em; }
+
+/* ---- Chips flow; the shortlist is set apart by treatment, not position ---- */
+.filter-btn[data-saved] { margin-left: 0; border-color: var(--gold-deep); color: var(--gold-deep); }
+.filter-btn[data-saved]:hover { border-color: var(--ink); color: var(--ink); }
+.filter-btn { padding: 0.55rem 0.9rem; }
+
+/* ---- The map earns more of its band ---- */
+.mapbox { grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr); }
+.provlist-note {
+  margin-top: 1rem;
+  font-size: 0.8125rem;
+  color: color-mix(in srgb, var(--paper) 52%, transparent);
+}
+@media (max-width: 900px) { .mapbox { grid-template-columns: minmax(0, 1fr); } }
+
+/* The supporting facts under the gallery: three columns, quieter than the
+   headline band, because they are the detail rather than the argument. */
+.factgrid--rest { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 640px) { .factgrid--rest { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* The action row wrapped one button onto a line of its own. Let it breathe
+   into an even grid instead of a ragged wrap. */
+.detail-actions { display: grid; grid-template-columns: repeat(auto-fit, minmax(13.5rem, 1fr)); gap: 0.6rem; max-width: 46rem; }
+.detail-actions .btn, .detail-actions .save-btn--inline { width: 100%; }
+@media (max-width: 560px) { .detail-actions { grid-template-columns: minmax(0, 1fr); } }
+
+/* Tile labels sat at different heights where a name wrapped, so the row read
+   as broken. Reserve the second line on all of them. */
+.type-tile__label h3 { min-height: 2.4em; display: flex; align-items: flex-end; }
+
+/* A white band on the warm canvas has to read as a surface, not as a tint
+   step, so it carries an edge the way a card does. */
+.band--surface {
+  border-block: 1px solid var(--line-soft);
+}
+
+/* Toolbar now carries three controls plus a clear, so it needs to wrap well. */
+.toolbar__controls { display: flex; align-items: center; gap: 1.25rem; flex-wrap: wrap; }
+.toolbar__controls > span { display: inline-flex; align-items: center; }
+.toolbar__clear {
+  background: transparent; border: 0; cursor: pointer;
+  font-family: var(--display); font-size: 0.75rem; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--gold-deep);
+  padding: 0.55rem 0; border-bottom: 1px solid currentColor;
+}
+.toolbar__clear:hover { color: var(--ink); }
+@media (max-width: 640px) {
+  .toolbar { align-items: flex-start; }
+  .toolbar__controls { width: 100%; gap: 0.75rem; }
+  .toolbar__controls > span { flex: 1 1 46%; }
+  .toolbar__controls select { width: 100%; }
+}
+
+@media (max-width: 640px) {
+  /* Label above the control, so a select is never squeezed to "Any ex". */
+  .toolbar__controls > span { flex-direction: column; align-items: stretch; gap: 0.3rem; }
+  .toolbar__controls label { margin-right: 0; }
+  .toolbar__clear { flex: 1 1 100%; text-align: left; }
+  /* The long placeholder was being cut mid-word. */
+  .findbar { flex-direction: column; align-items: stretch; gap: 0.35rem; }
+  .findbar input { font-size: 1.0625rem; }
+}
