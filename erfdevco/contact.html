@@ -77,8 +77,8 @@
               <a href="mailto:info@erfdevco.com">info@erfdevco.com</a>
             </div>
             <div class="agent-line">
-              <span>Every mandate is marketed on erfdevco.com and on Property24.</span>
-              <span>There is no fee to list a farm.</span>
+              <span>Every mandate is worked through the full schedule before it is published.</span>
+              <span>Mandate and commission agreed in writing up front.</span>
             </div>
           </div>
         </div>
@@ -129,7 +129,10 @@
               <label for="c-message">Message</label>
               <textarea id="c-message" name="message" required placeholder="Extent in hectares, farm type, and anything a buyer or seller would want to know."></textarea>
             </div>
-            <div class="hp">
+            <!-- Bot trap. aria-hidden and inert keep it out of the accessibility
+                 tree entirely, so a screen reader user can never reach it and
+                 never has an enquiry silently discarded. -->
+            <div class="hp" aria-hidden="true" inert>
               <label for="c-farmname">Farm name</label>
               <input id="c-farmname" name="farmname" type="text" tabindex="-1" autocomplete="off" />
             </div>
@@ -190,6 +193,7 @@
           <li><a href="listings.html">Farms for sale</a></li>
           <li><a href="about.html">About</a></li>
           <li><a href="contact.html">Contact</a></li>
+          <li><a href="privacy.html">Privacy and POPIA</a></li>
         </ul>
       </div>
       <div>
@@ -219,7 +223,7 @@
   </div>
 </footer>
 
-<script src="script.js"></script>
+<script src="script.js" defer></script>
 <script>
   // Preselect the reason from ?subject= so the header and CTA buttons land
   // the visitor on the right form state.

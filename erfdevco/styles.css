@@ -2308,3 +2308,132 @@ main .cmp-table p, main .factgrid p, main .bond p { max-width: none; }
   .headline-facts dt { color: #000 !important; }
   .mapbox, .page-hero--flat { display: none !important; }
 }
+
+/* --------------------------------------------------------------------------
+   27. Findings from the independent review and the accessibility audit.
+   -------------------------------------------------------------------------- */
+
+/* A6. The global focus ring used bright gold, which the tokens reserve for ink
+   grounds. On canvas it measured 2.56:1 against a 3:1 requirement, and on the
+   gold button it was the same colour as the button. Two-tone: ink core, light
+   halo, so it reads on any ground. */
+:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--paper) 92%, transparent);
+}
+.band--ink :focus-visible,
+.site-footer :focus-visible,
+.enquiry-card :focus-visible,
+.hero :focus-visible,
+.page-hero :focus-visible,
+.cta :focus-visible,
+.statement :focus-visible,
+.cmp-tray :focus-visible,
+.lightbox :focus-visible {
+  outline-color: var(--gold);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--ink-deep) 88%, transparent);
+}
+
+/* A7. The gold hero line sat on a pale storm sky: 84% of its area was under
+   3:1. The scrim gains a horizontal pass weighted to the copy column, which
+   darkens the text side without flattening the photograph. */
+.hero__scrim {
+  background:
+    linear-gradient(96deg,
+      color-mix(in srgb, var(--ink-deep) 82%, transparent) 0%,
+      color-mix(in srgb, var(--ink-deep) 64%, transparent) 38%,
+      color-mix(in srgb, var(--ink-deep) 10%, transparent) 72%,
+      transparent 100%),
+    linear-gradient(180deg,
+      color-mix(in srgb, var(--ink-deep) 66%, transparent) 0%,
+      color-mix(in srgb, var(--ink-deep) 22%, transparent) 38%,
+      color-mix(in srgb, var(--ink-deep) 62%, transparent) 78%,
+      color-mix(in srgb, var(--ink-deep) 86%, transparent) 100%);
+}
+
+/* A1. The closed mobile menu kept four focusable links and stayed in the
+   accessibility tree while the toggle reported it collapsed. */
+@media (max-width: 900px) {
+  .nav { visibility: hidden; }
+  .nav.is-open { visibility: visible; }
+}
+
+/* A5. The bond sliders had a 173 x 2px hit box. The track is painted by the
+   pseudo-elements so the input itself can be a real 24px target. */
+.bond-f input[type="range"] {
+  height: 26px;
+  background: transparent;
+  border-radius: 0;
+}
+.bond-f input[type="range"]::-webkit-slider-runnable-track {
+  height: 2px; background: var(--line); border-radius: 2px;
+}
+.bond-f input[type="range"]::-moz-range-track {
+  height: 2px; background: var(--line); border-radius: 2px;
+}
+.bond-f input[type="range"]::-webkit-slider-thumb { margin-top: -8px; }
+
+/* A-B1. At 375 the compare tray's children overlapped: the gold call to action
+   covered the third slot and its remove button. It wraps now. */
+.cmp-tray { flex-wrap: wrap; }
+@media (max-width: 640px) {
+  .cmp-tray__slots { order: 1; flex: 1 1 100%; }
+  .cmp-tray__actions { order: 2; flex: 1 1 100%; justify-content: space-between; }
+  .cmp-slot { width: 74px; height: 54px; }
+  .cmp-slot__x { width: 26px; height: 26px; inset: auto 3px 3px auto; }
+}
+
+/* A-B2. thead was sticky against .cmp-wrap, and overflow-y:visible next to
+   overflow-x:auto computes back to auto, so the wrapper stayed a scroll
+   container and the header never stuck on a 96 row table. Since the phone
+   layout stacks the table, nothing needs to scroll sideways at any width, so
+   the wrapper stops being a scroll container at all and thead sticks to the
+   viewport under the site header. */
+.cmp-wrap { overflow: visible; }
+.cmp-table thead th { top: calc(var(--header-h) - 1px); }
+
+/* A8. A dismissed tray kept five focusable controls, including remove buttons
+   for farms that were no longer selected. */
+.cmp-tray:not(.is-up) { visibility: hidden; }
+
+/* A-S2/S3. Form fields had a 1.31:1 boundary and a focus ring under 3:1. */
+.field input, .field textarea, .field select { border-color: color-mix(in srgb, var(--ink) 34%, transparent); }
+.field input:focus, .field textarea:focus, .field select:focus {
+  border-color: var(--ink);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ink) 18%, transparent);
+}
+.enquiry-card .field input, .enquiry-card .field textarea, .enquiry-card .field select {
+  border-color: color-mix(in srgb, var(--paper) 40%, transparent);
+}
+.enquiry-card .field input:focus, .enquiry-card .field textarea:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--gold) 30%, transparent);
+}
+.btn--outline { border-color: color-mix(in srgb, var(--ink) 32%, transparent); }
+
+/* A-S4/M5. The error red was 3.97:1 on canvas and 4.20:1 on ink. */
+.form-status[data-state="error"] { color: #a3271a; }
+.enquiry-card .form-status[data-state="error"],
+.band--ink .form-status[data-state="error"] { color: #ff9b8c; }
+
+/* A-S20. The tile count text was clipped at 320. */
+@media (max-width: 380px) {
+  .type-tile__label { flex-direction: column; align-items: flex-start; gap: 0.2rem; }
+  .type-tile__count { padding-bottom: 0; }
+}
+
+/* A-M10. #listing-detail grew from 266px to 9214px once the JSON resolved,
+   shoving the CTA band down the page and costing 0.48 CLS. Reserve the space. */
+#listing-detail { min-height: 150vh; }
+
+@media (max-width: 640px) {
+  /* On the stacked phone layout the thead is a block, so the sticky lives on
+     the thead itself rather than on each cell. */
+  .cmp-table thead {
+    position: sticky; top: calc(var(--header-h) - 1px); z-index: 3;
+    background: var(--canvas);
+    box-shadow: 0 8px 16px -12px color-mix(in srgb, var(--ink) 50%, transparent);
+  }
+  .cmp-table thead th { position: static; background: transparent; }
+}

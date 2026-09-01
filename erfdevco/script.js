@@ -208,6 +208,18 @@
     return MONTHS[m - 1] + ' ' + p[0];
   }
 
+  var liveRegion = null;
+  function announce(msg) {
+    if (!liveRegion) {
+      liveRegion = document.createElement('p');
+      liveRegion.className = 'visually-hidden';
+      liveRegion.setAttribute('role', 'status');
+      liveRegion.setAttribute('aria-live', 'polite');
+      document.body.appendChild(liveRegion);
+    }
+    liveRegion.textContent = msg;
+  }
+
   var HEART = '<svg viewBox="0 0 24 24" aria-hidden="true">' +
     '<path d="M12 20.5S3.8 15.4 3.8 9.7A4.7 4.7 0 0 1 12 6.6a4.7 4.7 0 0 1 8.2 3.1c0 5.7-8.2 10.8-8.2 10.8Z"/></svg>';
 
@@ -305,7 +317,10 @@
     if (!btn) return;
     e.preventDefault();
     var res = toggleCompare(btn.getAttribute('data-cmp'));
-    if (res === null) return;                     // already holding three
+    if (res === null) {                           // already holding three
+      announce('You can compare three farms at a time. Remove one first.');
+      return;
+    }
     $$('[data-cmp="' + btn.getAttribute('data-cmp') + '"]').forEach(function (b) {
       b.setAttribute('aria-pressed', res ? 'true' : 'false');
     });
@@ -449,10 +464,12 @@
 
       if (!list.length) {
         mount.innerHTML = '<div class="farm-empty">' +
-          '<h3>' + (savedOnly ? 'Nothing shortlisted yet' : 'No farms match that yet') + '</h3>' +
+          '<h3>' + (savedOnly ? 'Nothing shortlisted yet'
+            : (active !== 'all' ? 'No ' + esc(active.toLowerCase()) + 's on the books right now'
+            : 'No farms match that yet')) + '</h3>' +
           '<p>' + (savedOnly
             ? 'Tap the heart on any farm to keep it here. Your shortlist stays on this device.'
-            : 'New mandates come on regularly. Clear the filters, or tell us what you are looking for and we will come back to you when it lands.') + '</p>' +
+            : 'We take mandates on every farm type, and this one is simply not on the books today. Register what you are after and we will call you when it comes on.') + '</p>' +
           '<p style="margin-top:1.5rem"><a class="btn btn--ink" href="contact.html">Register your requirement</a></p>' +
         '</div>';
       } else {
@@ -464,8 +481,8 @@
         else if (query) resultLine.textContent = n + ' matching "' + query + '"';
         else if ((priceSel && priceSel.value !== 'any') || (extentSel && extentSel.value !== 'any') || qProv)
           resultLine.textContent = n + ' matching your filters';
-        else resultLine.textContent = n +
-          (active === 'all' ? ' currently listed' : ' in ' + active.toLowerCase());
+        else if (active !== 'all') resultLine.textContent = n + ' in ' + active.toLowerCase();
+        else resultLine.textContent = n + ' currently listed';
       }
       armReveals(mount);
       if (mapApi) mapApi.sync(list, qProv);
@@ -601,7 +618,7 @@
 
           host.innerHTML =
             '<div class="mapfig">' +
-              '<svg viewBox="' + geo.viewBox + '" role="img" aria-label="Map of South Africa showing where the listed farms are">' +
+              '<svg viewBox="' + geo.viewBox + '" role="group" aria-label="Map of South Africa showing where the listed farms are">' +
                 '<g class="provs">' + paths + '</g><g class="pins">' + pins + '</g>' +
               '</svg>' +
               '<div class="maptip" aria-hidden="true"></div>' +
@@ -721,8 +738,19 @@
     var id = new URLSearchParams(window.location.search).get('id');
 
     loadData().then(function (farms) {
-      var f = farms.filter(function (x) { return x.id === id; })[0] || farms[0];
-      if (!f) throw new Error('Listing not found');
+      var f = farms.filter(function (x) { return x.id === id; })[0];
+      if (!f) {
+        var meta = document.querySelector('meta[name="robots"]');
+        if (!meta) {
+          meta = document.createElement('meta');
+          meta.name = 'robots';
+          document.head.appendChild(meta);
+        }
+        meta.content = 'noindex, follow';
+        throw new Error(id
+          ? 'That farm is no longer listed. It may have sold, or the link may be out of date.'
+          : 'No farm was requested.');
+      }
 
       setHead(f);
       var crumbNow = $('#crumb-now');
@@ -759,7 +787,7 @@
           ' aria-selected="' + (i === 0 ? 'true' : 'false') + '">' + esc(group) +
           '<span class="c">' + Object.keys(f.specs[group]).length + '</span></button>';
       }).join('') +
-      '<button type="button" class="spec-tab" role="tab" data-group="all" aria-selected="false">All sections' +
+      '<button type="button" class="spec-tab" role="tab" data-group="all" tabindex="-1" aria-selected="false">All sections' +
         '<span class="c">' + (f.factCount || '') + '</span></button>';
 
       var waText = encodeURIComponent(
@@ -831,7 +859,7 @@
               '<span>Sections that cannot apply to a ' + esc(String(f.farmType).toLowerCase()) + ' are left out rather than filled in.</span>' +
             '</div>' +
             '<div class="schedule-layout">' +
-              '<div class="spec-tabs" role="tablist" aria-label="Schedule sections">' + tabsHtml + '</div>' +
+              '<div class="spec-tabs" role="tablist" aria-orientation="vertical" aria-label="Schedule sections">' + tabsHtml + '</div>' +
               '<div class="spec-groups is-single">' + specsHtml + '</div>' +
             '</div>' +
           '</div>' +
@@ -901,7 +929,11 @@
       list.addEventListener('keydown', function (e) {
         var i = tabs.indexOf(document.activeElement);
         if (i === -1) return;
-        var next = e.key === 'ArrowRight' ? i + 1 : e.key === 'ArrowLeft' ? i - 1 : -1;
+        var next = -1;
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') next = i + 1;
+        else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') next = i - 1;
+        else if (e.key === 'Home') next = 0;
+        else if (e.key === 'End') next = tabs.length - 1;
         if (next === -1) return;
         e.preventDefault();
         var t = tabs[(next + tabs.length) % tabs.length];
@@ -928,7 +960,7 @@
           '<button type="button" class="lb-btn lb-prev" aria-label="Previous photograph">&#8249;</button>' +
           '<img alt="" />' +
           '<button type="button" class="lb-btn lb-next" aria-label="Next photograph">&#8250;</button>' +
-          '<p class="lb-count"></p>';
+          '<p class="lb-count" role="status" aria-live="polite"></p>';
         document.body.appendChild(box);
         imgEl = $('img', box);
         countEl = $('.lb-count', box);
@@ -969,7 +1001,14 @@
         if (e.key === 'Escape') close();
         else if (e.key === 'ArrowRight') go(1);
         else if (e.key === 'ArrowLeft') go(-1);
-        else if (e.key === 'Tab') { e.preventDefault(); $('.lb-close', box).focus(); }
+        else if (e.key === 'Tab') {
+          // Cycle the three controls instead of pinning focus to one of them.
+          var f = $$('.lb-btn', box);
+          var i = f.indexOf(document.activeElement);
+          var n = (i + (e.shiftKey ? -1 : 1) + f.length) % f.length;
+          e.preventDefault();
+          f[n].focus();
+        }
       }
 
       figures.forEach(function (fig, i) {
@@ -1159,7 +1198,7 @@
             '<div class="field field--full"><label for="eq-email">Email</label><input id="eq-email" name="email" type="email" autocomplete="email" required /></div>' +
             '<div class="field field--full"><label for="eq-phone">Phone</label><input id="eq-phone" name="phone" type="tel" autocomplete="tel" /></div>' +
             '<div class="field field--full"><label for="eq-message">Message</label><textarea id="eq-message" name="message" required>I would like more information on ' + esc(f.ref) + '.</textarea></div>' +
-            '<div class="hp"><label for="eq-farmname">Farm name</label><input id="eq-farmname" name="farmname" type="text" tabindex="-1" autocomplete="off" /></div>' +
+            '<div class="hp" aria-hidden="true" inert><label for="eq-farmname">Farm name</label><input id="eq-farmname" name="farmname" type="text" tabindex="-1" autocomplete="off" /></div>' +
             '<div class="field--full"><button class="btn btn--gold" type="submit">Send enquiry</button></div>' +
             '<p class="form-status field--full" role="status" aria-live="polite"></p>' +
           '</form>' +
@@ -1209,10 +1248,11 @@
           else status.removeAttribute('data-state');
         };
 
-        // Honeypot: a real person never fills this.
+        // Bot trap. The field is aria-hidden and inert, so a person should
+        // never be able to fill it. If one somehow does, do not claim the
+        // message was sent: give them a route that works.
         if (form.elements.farmname && form.elements.farmname.value) {
-          setStatus('Thank you, your message has been sent.', 'ok');
-          form.reset();
+          setStatus('We could not send that automatically. Please email martiens@erfdevco.com or call 082 900 5019 and we will pick it up.', 'error');
           return;
         }
 
@@ -1375,13 +1415,21 @@
         }
         slots.innerHTML = html;
         cta.textContent = ids.length < 2 ? 'Pick one more' : 'Compare ' + ids.length + ' farms';
-        if (ids.length < 2) cta.setAttribute('aria-disabled', 'true');
-        else cta.removeAttribute('aria-disabled');
+        if (ids.length < 2) {
+          cta.setAttribute('aria-disabled', 'true');
+          cta.removeAttribute('href');
+        } else {
+          cta.removeAttribute('aria-disabled');
+          cta.setAttribute('href', 'compare.html');
+        }
         requestAnimationFrame(function () { tray.classList.add('is-up'); });
       });
     }
 
-    document.addEventListener('erf:compare', render);
+    document.addEventListener('erf:compare', function () {
+      render();
+      if (window.__erfRenderCompare) window.__erfRenderCompare();
+    });
     render();
   })();
 

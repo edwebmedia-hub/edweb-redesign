@@ -20,7 +20,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="preload" as="image" href="assets/hero.jpg" />
+  <link rel="preload" as="image" href="assets/hero.jpg"
+        imagesrcset="assets/hero-480w.jpg 480w, assets/hero-800w.jpg 800w, assets/hero-1200w.jpg 1200w, assets/hero.jpg 1800w"
+        imagesizes="100vw" />
   <link rel="stylesheet" href="styles.css" />
 
   <script type="application/ld+json">
@@ -72,8 +74,8 @@
          eager and painted before the others are asked for. -->
     <div class="hero__media">
       <img src="assets/hero.jpg" alt="Storm light over harvested farmland below a mountain range in South Africa" width="2400" height="1600" fetchpriority="high" srcset="assets/hero-480w.jpg 480w, assets/hero-800w.jpg 800w, assets/hero-1200w.jpg 1200w, assets/hero.jpg 1800w" sizes="100vw" />
-      <img src="assets/land-caledon-fields.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async" width="2400" height="1600" srcset="assets/land-caledon-fields-480w.jpg 480w, assets/land-caledon-fields-800w.jpg 800w, assets/land-caledon-fields-1200w.jpg 1200w, assets/land-caledon-fields.jpg 1800w" sizes="100vw" />
-      <img src="assets/land-ploughed-aerial.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async" width="2400" height="1600" srcset="assets/land-ploughed-aerial-480w.jpg 480w, assets/land-ploughed-aerial-800w.jpg 800w, assets/land-ploughed-aerial-1200w.jpg 1200w, assets/land-ploughed-aerial.jpg 1800w" sizes="100vw" />
+      <img src="assets/land-caledon-fields.jpg" alt="" aria-hidden="true" decoding="async" fetchpriority="low" width="2400" height="1600" srcset="assets/land-caledon-fields-480w.jpg 480w, assets/land-caledon-fields-800w.jpg 800w, assets/land-caledon-fields-1200w.jpg 1200w, assets/land-caledon-fields.jpg 1800w" sizes="100vw" />
+      <img src="assets/land-ploughed-aerial.jpg" alt="" aria-hidden="true" decoding="async" fetchpriority="low" width="2400" height="1600" srcset="assets/land-ploughed-aerial-480w.jpg 480w, assets/land-ploughed-aerial-800w.jpg 800w, assets/land-ploughed-aerial-1200w.jpg 1200w, assets/land-ploughed-aerial.jpg 1800w" sizes="100vw" />
     </div>
     <div class="hero__scrim" aria-hidden="true"></div>
 
@@ -194,9 +196,9 @@
             Residential portals were built for houses, so they ask about bedrooms. A buyer looking at 400 hectares needs to know the borehole yield, the carrying capacity, the zoning and whether the water use licence is registered or still under application. That is what our listing schedule asks, and it is why our listings read the way they do.
           </p>
           <dl class="stat-strip">
-            <div><dt>9</dt><dd>Provinces covered</dd></div>
-            <div><dt>10</dt><dd>Farm categories</dd></div>
-            <div><dt>103</dt><dd>Facts recorded per farm</dd></div>
+            <div><dt>21 to 3 400</dt><dd>Hectares, smallest to largest on the books</dd></div>
+            <div><dt>1</dt><dd>Practitioner, from valuation to transfer</dd></div>
+            <div><dt>18</dt><dd>Sections on every schedule</dd></div>
             <div><dt>PPRA</dt><dd>Registered practitioner</dd></div>
           </dl>
         </div>
@@ -225,9 +227,9 @@
           <p class="counter__note">From a 21 hectare smallholding to a 3 400 hectare Karoo run.</p>
         </div>
         <div class="counter">
-          <p class="counter__n">R0</p>
-          <p class="counter__label">To list a farm</p>
-          <p class="counter__note">No listing fee. Commission is agreed in writing on mandate.</p>
+          <p class="counter__n">1</p>
+          <p class="counter__label">Mandate, one practitioner</p>
+          <p class="counter__note">The person who walks the farm is the person who sells it.</p>
         </div>
         <div class="counter">
           <p class="counter__n">2</p>
@@ -310,7 +312,7 @@
       </div>
 
       <div class="reveal">
-          <ol class="schedule">
+        <ol class="schedule">
             <li><span>General</span><span class="n">4 fields</span></li>
             <li><span>Farm information</span><span class="n">4 fields</span></li>
             <li><span>Land information</span><span class="n">8 fields</span></li>
@@ -329,8 +331,7 @@
             <li><span>Location and coordinates</span><span class="n">3 fields</span></li>
             <li><span>Media and gallery</span><span class="n">2 fields</span></li>
             <li><span>Mandate and consent</span><span class="n">1 field</span></li>
-          </ol>
-        </div>
+        </ol>
       </div>
     </div>
   </section>
@@ -388,7 +389,7 @@
         </div>
         <div class="row-item reveal">
           <h3>Property marketing</h3>
-          <div class="row-item__body"><p>Every mandate goes onto erfdevco.com and onto Property24, with matching photography and the same schedule of facts in both places.</p></div>
+          <div class="row-item__body"><p>Photography, the written schedule and the marketing copy are produced once and used everywhere the farm is advertised, so a buyer comparing two sources never finds a discrepancy.</p></div>
         </div>
         <div class="row-item reveal">
           <h3>Buyer and seller assistance</h3>
@@ -414,7 +415,7 @@
       <div class="cta__inner reveal">
         <div>
           <h2 id="cta-h">List your farm with the detail it deserves</h2>
-          <p style="margin-top:1.25rem;max-width:48ch">There is no listing fee. Send us the property and we will work through the schedule with you, then take it to market on erfdevco.com and Property24.</p>
+          <p style="margin-top:1.25rem;max-width:48ch">Send us the property and we will work through the schedule with you, then agree the mandate and the commission in writing before anything is published.</p>
         </div>
         <div class="cta__actions">
           <a class="btn btn--gold btn--wide" href="contact.html?subject=list">List your farm</a>
@@ -440,6 +441,7 @@
           <li><a href="listings.html">Farms for sale</a></li>
           <li><a href="about.html">About</a></li>
           <li><a href="contact.html">Contact</a></li>
+          <li><a href="privacy.html">Privacy and POPIA</a></li>
         </ul>
       </div>
       <div>
@@ -469,6 +471,6 @@
   </div>
 </footer>
 
-<script src="script.js"></script>
+<script src="script.js" defer></script>
 </body>
 </html>

@@ -1,0 +1,8 @@
+# Internal working documents must not deploy. They state, among other things,
+# that the current listings are invented, and robots.txt allows everything.
+# Patterns are anchored: an unanchored name matches at every depth.
+/HANDOFF.md
+/QA-REPORT.md
+/CONFIRM-BEFORE-LAUNCH.md
+/DEGENERIC-AUDIT-PHASE1.md
+.impeccable/

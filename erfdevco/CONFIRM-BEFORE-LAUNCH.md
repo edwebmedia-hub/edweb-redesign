@@ -37,3 +37,24 @@ They are realistic but invented, including their prices, yields, water figures
 and listed dates. Replace with real mandates before launch, and remember the
 comparison page publishes these numbers side by side, so a wrong figure is more
 visible here than on a normal listing site.
+
+## REMOVED 2026-09-01: two unverified commercial promises
+Both were published seven times between them and neither was ever verified.
+Both are now off the site. They go back the moment Martiens confirms them.
+
+1. **Property24 syndication.** The site said "Every mandate goes onto
+   erfdevco.com and onto Property24". Project notes record that Edgar agreed
+   this service with the client on 2026-08-14 and that the client pays
+   Property24 directly, but nothing confirms an agency account is live.
+   **Action: confirm the Property24 agency subscription is active.**
+2. **"There is no listing fee."** A pricing commitment that appears nowhere in
+   any record. The same notes mention a monthly labour fee to Edgar, which is
+   not the same thing as free to the seller.
+   **Action: ask Martiens what a seller actually pays, if anything, to list.**
+
+## Also confirm
+- **Retention periods** in `privacy.html` (two years for a dead enquiry, five
+  years where it becomes a mandate, citing FICA) are the standard practice for
+  a property practitioner, not something Martiens has stated. Have his attorney
+  check the page before launch.
+- **Kleinbaai** is given as the office. There is still no street address.

@@ -1,5 +1,5 @@
 {
-  "note": "DEMO DATA. Four sample farms built to the exact shape of the ERFDEVCO listing form (18 sections). Replace each entry with a real mandate before launch.",
+  "note": "DEMO DATA. Nine sample farms built to the exact shape of the ERFDEVCO listing form (18 sections, 103 fields). No single farm answers all 103: each records only the sections that apply to it. Replace every entry with a real mandate before launch.",
   "listings": [
     {
       "id": "erf-vin-014",
