@@ -492,7 +492,10 @@
         else if (query) resultLine.textContent = n + ' matching "' + query + '"';
         else if ((priceSel && priceSel.value !== 'any') || (extentSel && extentSel.value !== 'any') || qProv)
           resultLine.textContent = n + ' matching your filters';
-        else if (active !== 'all') resultLine.textContent = n + ' in ' + active.toLowerCase();
+        // "0 farms in poultry farm" is not a sentence. The type keeps its
+        // own capitals because it is a category name, not a noun phrase.
+        else if (active !== 'all') resultLine.textContent = n + ' under ' + active;
+        else if (qType && qType !== 'any') resultLine.textContent = n + ' under ' + qType;
         else resultLine.textContent = n + ' currently listed';
       }
       armReveals(mount);
@@ -636,8 +639,8 @@
             '</div>' +
             '<div>' +
               '<div class="maphead">' +
-                '<h3>Where the farms are</h3>' +
-                '<p>Nine provinces, ' + farms.length + ' farms on the books. Pick a province to narrow the list, or tap a pin to open the farm.</p>' +
+                '<h2>Where the farms are</h2>' +
+                '<p>' + farms.length + ' farms on the books across nine provinces. Pick a province to narrow the list, or tap a pin to open the farm.</p>' +
               '</div>' +
               '<div class="provlist">' +
                 Object.keys(geo.names)
@@ -653,9 +656,14 @@
                 // Empty provinces are a fact, not nine dead rows.
                 var empty = Object.keys(geo.names).filter(function (s) { return !counts[s]; })
                   .map(function (s) { return geo.names[s]; });
+                // A buyer looking at a province with nothing in it is the
+                // person most worth capturing, so the note carries an action
+                // rather than ending the page in a dead corner.
                 return empty.length
                   ? '<p class="provlist-note">Nothing listed in ' + esc(empty.join(' or ')) +
-                    ' at the moment. Tell us what you want there and we will call when it comes on.</p>'
+                    ' at the moment. Tell us what you are looking for and we will call when it comes on.</p>' +
+                    '<p class="provlist-act"><a class="btn btn--outline" href="contact.html?subject=requirement">' +
+                    'Register a requirement</a></p>'
                   : '';
               })() +
             '</div>';
@@ -1136,10 +1144,26 @@
 
       if (!scored.length) { host.remove(); return; }
 
+      // The old heading said a buyer of this one "usually looks at" these,
+      // which is behaviour the site has no way of knowing. It now says what
+      // it can prove, and the note names the ground they were matched on
+      // rather than implying they share a type when nothing else does.
+      var sameType = scored.filter(function (x) { return x.f.farmType === f.farmType; }).length;
+      var sameProv = scored.filter(function (x) { return x.f.province === f.province; }).length;
+      var basis = sameType
+        ? (sameType === scored.length ? 'All of them are the same kind of farm.'
+           : sameType === 1 ? 'One of them is the same kind of farm.'
+           : 'Two of them are the same kind of farm.')
+        : (sameProv ? 'Nothing else of this type is on the books today, so these are matched on province and price.'
+           : 'Nothing else of this type or province is on the books today, so these are the nearest on price.');
+      var count = scored.length === 1 ? 'The closest farm' :
+        (scored.length === 2 ? 'The two closest farms' : 'The three closest farms');
+
       host.innerHTML = '<div class="shell">' +
         '<div class="section-head section-head--split reveal">' +
-          '<div><h2>Farms a buyer of this one usually looks at</h2></div>' +
-          '<div><p class="lede">Matched on farm type first, then province, then price. Every one of them carries the same schedule, so they compare field for field.</p>' +
+          '<div><h2>' + count + ' on the books</h2></div>' +
+          '<div><p class="lede">Matched on farm type first, then province, then price. ' + basis +
+          ' Every one carries the same schedule, so they compare field for field.</p>' +
           '<p style="margin-top:1.25rem"><a class="link-line" href="listings.html">All ' + farms.length + ' farms <span class="arw" aria-hidden="true">&rarr;</span></a></p></div>' +
         '</div>' +
         '<div class="farm-grid farm-grid--even" data-stagger>' +
@@ -1499,6 +1523,19 @@
     // Exposed so a single page shell (the design preview) can re-render this
     // view after the selection changes. Harmless on the real multi-page site.
     window.__erfRenderCompare = render;
+
+    // A comparison lives in this browser's storage, which makes it
+    // unshareable: the buyer cannot send it to a partner, a bank or a valuer,
+    // who are exactly the people the schedule is written for. An ids list in
+    // the address bar wins over storage, and the address bar is kept in step
+    // with the selection so the link in it is always the one on screen.
+    (function () {
+      var ids = (new URLSearchParams(window.location.search).get('ids') || '')
+        .split(',').map(function (x) { return x.trim(); }).filter(Boolean);
+      if (ids.length >= 2) setCompare(ids.slice(0, CMP_MAX));
+    }());
+
+    document.addEventListener('erf:compare', render);
     render();
 
     function render() {
@@ -1506,6 +1543,16 @@
       var by = {};
       farms.forEach(function (f) { by[f.id] = f; });
       var picked = compareList().map(function (id) { return by[id]; }).filter(Boolean);
+
+      var acts = $('.cmp-controls .cmp-acts');
+      if (acts) acts.hidden = picked.length < 2;
+
+      if (picked.length >= 2 && window.history && history.replaceState) {
+        var want = '?ids=' + picked.map(function (f) { return f.id; }).join(',');
+        if (window.location.search !== want) {
+          history.replaceState(null, '', window.location.pathname + want);
+        }
+      }
 
       if (picked.length < 2) {
         mount.innerHTML = '<div class="farm-empty">' +

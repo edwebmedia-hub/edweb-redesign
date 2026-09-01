@@ -119,6 +119,61 @@ point of the section. Five are the Melkhout description restating figures that
 also appear in its schedule. The description sells the farm and the schedule
 proves it; removing the prose would leave a table with no story.
 
+## Round 4, 2026-09-01: fewer dark bands, and a usability pass
+
+Edgar: "make it user friendly and i think less of that dark background
+sectiosn". Measured first. Share of each page painted dark, before:
+
+| Page | Before | After |
+|---|---|---|
+| compare | 70% | 23% |
+| about | 54% | 38% |
+| contact | 43% | 32% |
+| index | 40% | 27% |
+| listings | 37% | 21% |
+| listing | 15% | 15% |
+
+Every flat ink band is gone. What is left dark is a photograph or the footer.
+A third light value was added rather than reusing a 5% tint, which reads as
+the same value: `--sage`, ink and gold mixed into the canvas, so bands can
+still alternate without going dark.
+
+The first measurement said nothing had changed. That was the instrument:
+`color-mix()` serialises as `color(srgb 0.85 0.86 0.84)`, whose numbers run 0
+to 1, and the luminance function was reading them as bytes, so every mixed
+colour came back near black. It now paints the colour to a canvas and reads
+the pixel.
+
+Components that had only ever lived on ink then had to be re-lit. Measured by
+compositing over the real ground, twelve items failed on the new ground:
+white counters at 1.42:1 held there by inline styles, the empty province note
+at 1.1:1, gold labels at 3.85 to 3.88:1 where 4.5 is needed. A darker gold
+token was added for small text on sage; the inline whites were deleted rather
+than overridden, because an inline style beats every rule.
+
+Usability, all found by driving the pages rather than reading them:
+
+| Fault | Fix |
+|---|---|
+| The compare page showed Show differences, Print and Change selection with nothing selected. An inline `display:flex` beat the `hidden` attribute, the same bug class as the answer panels. | The rule moved to the stylesheet and the group is hidden until two farms are picked. |
+| A comparison lived only in this browser's storage, so a buyer could not send it to a partner, a bank or a valuer, who are the people the schedule is written for. | `?ids=` in the address bar wins over storage, and the address bar is kept in step with the selection, so the link on screen is always the one being viewed. |
+| Ten filter chips wrapped to 220px on a phone, a quarter of the screen before a single farm. | One scrolling row, snapped, 43px, with the shortlist count pinned in view. |
+| "0 farms currently listed" for a type with no stock read as though the agency had nothing. | The line names the filter: "0 farms under Poultry Farm". |
+| The similar farms heading said these are what a buyer of this one "usually looks at", which is behaviour the site cannot know, and it claimed a type match even when nothing else shared the type. | The heading says what it can prove and the note states the actual ground each set was matched on. |
+| A dead corner under the province list. | The empty province note carries the action a buyer in that province needs. |
+| The Compare control on every card was 95 x 18px, footer and breadcrumb links 19 to 20px, all under the 24px minimum. | 26px minimum on all three. |
+| The document went h1 then h3 on listings: nine card titles with no section heading above them. | The map heading is an h2 and the results list has one. |
+| Four pages carried no structured data and none carried breadcrumbs. | BreadcrumbList on five pages, plus CollectionPage, AboutPage and ContactPage. |
+| The logo shipped a 480px, 41KB file into a 51px slot on every page, header and footer. | 160px, 11KB. |
+| An eyebrow over a centred heading over a card grid, which is the exact rhythm on the ban list. | Left aligned split with a lede that says something. |
+| "Building dreams one farm at a time" on the about page, and its paragraph duplicated the homepage. | Replaced with what actually happens before a listing goes live. |
+| Three label sizes doing one job: 12px, 13px and 15px. | Breadcrumbs, eyebrows, column labels and counts all take `--fs-label`. |
+
+Two regressions introduced in this round and caught before it closed: a grid
+rule written outside its media query forced two columns on a phone and pushed
+a button 88px off screen, and a nowrap button with a long label widened the
+document by 30px.
+
 ---
 
 ## Standing verification
@@ -153,8 +208,9 @@ Run after every change in this session:
    generic card. Fixing this needs a build step or an edge function.
 3. `assets/` is about 15MB on disk because of the responsive variants. What a
    visitor downloads is 68 to 85 per cent less than before the variants existed.
-4. No `.vercelignore`: `HANDOFF.md`, `CONFIRM-BEFORE-LAUNCH.md` and this file
-   would deploy publicly.
+4. Repeat-sweep reports six overlapping pairs, all declared: a farm named
+   both on its card and in the answer quoting it, and the Melkhout description
+   restating figures its own schedule lists.
 5. `api/send-mail.js` sets `Access-Control-Allow-Origin: *`, has no rate limit
    and returns raw SMTP error text.
 6. Form delivery never tested end to end: it would send real mail to the client.
