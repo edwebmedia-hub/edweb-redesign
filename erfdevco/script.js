@@ -640,7 +640,7 @@
             '</div>' +
             '<div>' +
               '<div class="maphead">' +
-                '<h2>Where the farms are</h2>' +
+                '<h3 role="heading" aria-level="2">Where the farms are</h3>' +
                 (function () {
                   var provWith = Object.keys(counts).length;
                   var words = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
@@ -791,8 +791,8 @@
       var galleryHtml = gallery.map(function (src, i) {
         return '<figure data-lb="' + i + '">' +
           imgTag(src, i === 0 ? f.alt : f.title + ', view ' + (i + 1),
-                 i === 0 ? '(max-width:1100px) 96vw, 92vw' : '(max-width:640px) 92vw, 30vw',
-                 { eager: i === 0 }) + '</figure>';
+                 i === 0 ? '(max-width:1100px) 96vw, 92vw' : '(max-width:900px) 31vw, 30vw',
+                 { eager: i === 0, wh: true }) + '</figure>';
       }).join('');
 
       var headline = (f.facts || []).slice(0, 3);
@@ -1060,6 +1060,9 @@
 
       function show(i) {
         at = (i + srcs.length) % srcs.length;
+        var lbAttrs = srcAttrs(srcs[at], '100vw');
+        if (lbAttrs.srcset) { imgEl.srcset = lbAttrs.srcset; imgEl.sizes = lbAttrs.sizes; }
+        else { imgEl.removeAttribute('srcset'); imgEl.removeAttribute('sizes'); }
         imgEl.src = srcs[at];
         imgEl.alt = farm.title + ', photograph ' + (at + 1) + ' of ' + srcs.length;
         countEl.textContent = (at + 1) + ' / ' + srcs.length;
@@ -1223,12 +1226,13 @@
            : 'Two of them are the same kind of farm.')
         : (sameProv ? 'Nothing else of this type is on the books today, so these are matched on province and price.'
            : 'Nothing else of this type or province is on the books today, so these are the nearest on price.');
+      host.setAttribute('aria-labelledby', 'similar-h');
       var count = scored.length === 1 ? 'The closest farm' :
         (scored.length === 2 ? 'The two closest farms' : 'The three closest farms');
 
       host.innerHTML = '<div class="shell">' +
         '<div class="section-head section-head--split reveal">' +
-          '<div><h2>' + count + ' on the books</h2></div>' +
+          '<div><h2 id="similar-h">' + count + ' on the books</h2></div>' +
           '<div><p class="lede">Matched on farm type first, then province, then price. ' + basis +
           ' Every one carries the same schedule, so they compare field for field.</p>' +
           '<p style="margin-top:1.25rem"><a class="link-line" href="listings.html">All ' + farms.length + ' farms <span class="arw" aria-hidden="true">&rarr;</span></a></p></div>' +
@@ -1259,6 +1263,20 @@
 
     /* Structured data so a listing can surface as a rich result. */
     function injectSchema(f) {
+
+      var bc = document.createElement('script');
+      bc.type = 'application/ld+json';
+      bc.textContent = JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://erfdevco.com/' },
+          { '@type': 'ListItem', position: 2, name: 'Farms for sale', item: 'https://erfdevco.com/farms-for-sale' },
+          { '@type': 'ListItem', position: 3, name: f.title,
+            item: 'https://erfdevco.com/listing?id=' + encodeURIComponent(f.id) }
+        ]
+      });
+      document.head.appendChild(bc);
       var old = document.getElementById('listing-schema');
       if (old) old.remove();
       var s = document.createElement('script');
@@ -1305,6 +1323,7 @@
             '<div class="hp" aria-hidden="true" inert><label for="eq-farmname">Farm name</label><input id="eq-farmname" name="farmname" type="text" tabindex="-1" autocomplete="off" /></div>' +
             '<div class="field--full"><button class="btn btn--gold" type="submit">Send enquiry</button></div>' +
             '<p class="form-status field--full" role="status" aria-live="polite"></p>' +
+            '<noscript><p class="form-note">This form needs JavaScript. Rather email martiens@erfdevco.com or call 082 900 5019.</p></noscript>' +
           '</form>' +
           '<div class="agent-line">' +
             '<strong>Martiens Du Plessis</strong>' +

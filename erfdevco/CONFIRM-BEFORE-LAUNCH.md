@@ -47,6 +47,19 @@ Both are now off the site. They go back the moment Martiens confirms them.
    this service with the client on 2026-08-14 and that the client pays
    Property24 directly, but nothing confirms an agency account is live.
    **Action: confirm the Property24 agency subscription is active.**
+   **Update 2026-09-01, answers from Property24 in writing:**
+   - PropCtrl IS Property24's back office; capturing in PropCtrl is capturing
+     into Property24. No separate route.
+   - Property24 does NOT pull listings from external websites, and there is
+     no spreadsheet/CSV bulk upload.
+   - The capture-once route they name themselves: a developer-built API feed
+     from our side into the Property24 portal, built to their specification.
+     That developer is Edgar; the site's `data/listings.json` already holds
+     every farm as structured data, so the feed would be generated from the
+     same file that renders the site. erfdevco.com becomes the master record,
+     Property24 the mirror.
+   - The claim stays OFF the site until the feed (or manual PropCtrl
+     capture) is actually live, not merely possible.
 2. **"There is no listing fee."** A pricing commitment that appears nowhere in
    any record. The same notes mention a monthly labour fee to Edgar, which is
    not the same thing as free to the seller.

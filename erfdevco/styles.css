@@ -203,10 +203,24 @@ button, input, select, textarea { font: inherit; color: inherit; }
    for a 12px count. */
 .band--sage .provlist button .n { color: var(--gold-dark); }
 .provlist-act { margin-top: 1.25rem; }
+/* Stacked link lists (enquiry card, footer, privacy card) meet the 24px
+   target floor; measured 19 to 21px before. */
+.agent-line a,
+.site-footer li a,
+.footer-base a { display: inline-flex; align-items: center; min-height: 26px; }
 /* An inline display:flex beats the user agent's [hidden] rule, so this lives
    in the stylesheet: with nothing selected the three controls did nothing. */
 .cmp-acts { display: flex; gap: 0.6rem; flex-wrap: wrap; }
 .cmp-acts[hidden] { display: none; }
+/* Listings render after a fetch; reserve the grid's ground so the footer
+   does not jump up and back (CLS 0.22 measured). */
+#all-farms { min-height: 70vh; }
+/* Type chips over a photo scrim (the 404): light borders and paper text. */
+.type-more--dark a {
+  border-color: color-mix(in srgb, var(--paper) 45%, transparent);
+  color: color-mix(in srgb, var(--paper) 88%, transparent);
+}
+.type-more--dark a:hover { background: var(--paper); border-color: var(--paper); color: var(--ink); }
 .band--sage .counter,
 .band--sage .counters { border-color: color-mix(in srgb, var(--ink) 18%, transparent) !important; }
 .band--sage .counter__n { color: var(--ink) !important; }
@@ -295,8 +309,8 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .btn--ink { background: var(--ink); color: var(--paper); border-color: var(--ink); }
 .btn--ink:hover { background: var(--gold); border-color: var(--gold); color: var(--ink); }
 
-.btn--ghost { background: transparent; color: var(--paper); border-color: color-mix(in srgb, var(--paper) 45%, transparent); }
-.btn--ghost:hover { background: var(--paper); color: var(--ink); border-color: var(--paper); }
+.btn--paper { background: var(--paper); color: var(--ink); border-color: var(--paper); }
+.btn--paper:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
 
 .btn--outline { background: transparent; color: var(--ink); border-color: var(--line); }
 .btn--outline:hover { border-color: var(--ink); background: var(--ink); color: var(--paper); }
@@ -2201,15 +2215,22 @@ body.has-tray { padding-bottom: 6.5rem; }
   border-radius: var(--r-card);
   overflow: hidden;
 }
+/* Three full-width rows, label | track | value, so the controls fill the
+   panel instead of huddling in its middle third. */
 .bond-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(1.5rem, 3vw, 2.75rem);
-  align-content: center;
-  padding: clamp(1.25rem, 2.4vw, 1.9rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(1.25rem, 2.4vw, 2rem);
+  padding: clamp(1.5rem, 2.8vw, 2.25rem);
   background: var(--paper);
 }
-.bond-f { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem 1rem; align-items: baseline; }
+.bond-f {
+  display: grid;
+  grid-template-columns: 6.5rem minmax(0, 1fr) auto;
+  gap: 1.25rem;
+  align-items: center;
+}
 .bond-f > span {
   font-family: var(--display); font-size: 0.75rem; letter-spacing: 0.14em;
   text-transform: uppercase; color: var(--gold-deep);
@@ -2219,13 +2240,21 @@ body.has-tray { padding-bottom: 6.5rem; }
   color: var(--ink); text-align: right; font-variant-numeric: tabular-nums;
 }
 .bond-f input[type="range"] {
-  grid-column: 1 / -1;
   -webkit-appearance: none; appearance: none;
-  width: 100%; height: 2px; margin: 0;
-  background: var(--line); border-radius: 2px; cursor: pointer;
+  width: 100%; height: 26px; margin: 0;
+  background: transparent; cursor: pointer;
+}
+.bond-f input[type="range"]::-webkit-slider-runnable-track {
+  height: 4px; border-radius: 2px;
+  background: color-mix(in srgb, var(--ink) 26%, transparent);
+}
+.bond-f input[type="range"]::-moz-range-track {
+  height: 4px; border-radius: 2px;
+  background: color-mix(in srgb, var(--ink) 26%, transparent);
 }
 .bond-f input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none; appearance: none;
+  margin-top: -7px;
   width: 18px; height: 18px; border-radius: 50%;
   background: var(--ink); border: 3px solid var(--paper);
   box-shadow: 0 0 0 1px var(--line);
@@ -2274,7 +2303,9 @@ body.has-tray { padding-bottom: 6.5rem; }
 
 @media (max-width: 900px) {
   .bond { grid-template-columns: minmax(0, 1fr); }
-  .bond-grid { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; }
+  .bond-grid { gap: 1.5rem; }
+  .bond-f { grid-template-columns: minmax(0, 1fr) auto; }
+  .bond-f input[type="range"] { grid-column: 1 / -1; grid-row: 2; }
 }
 @media print { .bond, #similar-farms { display: none !important; } }
 
@@ -2665,18 +2696,6 @@ main .cmp-table p, main .factgrid p, main .bond p { max-width: none; }
 
 /* A5. The bond sliders had a 173 x 2px hit box. The track is painted by the
    pseudo-elements so the input itself can be a real 24px target. */
-.bond-f input[type="range"] {
-  height: 26px;
-  background: transparent;
-  border-radius: 0;
-}
-.bond-f input[type="range"]::-webkit-slider-runnable-track {
-  height: 2px; background: var(--line); border-radius: 2px;
-}
-.bond-f input[type="range"]::-moz-range-track {
-  height: 2px; background: var(--line); border-radius: 2px;
-}
-.bond-f input[type="range"]::-webkit-slider-thumb { margin-top: -8px; }
 
 /* A-B1. At 375 the compare tray's children overlapped: the gold call to action
    covered the third slot and its remove button. It wraps now. */
@@ -2805,7 +2824,7 @@ a, button { -webkit-tap-highlight-color: transparent; }
 
 /* Detail actions: 2x2 on a phone instead of four stacked rows of chrome
    between the title and the price. */
-@media (max-width: 640px) {
+@media (max-width: 900px) {
   .detail-actions {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -2823,7 +2842,7 @@ a, button { -webkit-tap-highlight-color: transparent; }
 /* Phone gallery: the lead photograph, then thumbnails in a row, instead of
    four screen-height photographs stacked down the page. They all open the
    same lightbox. */
-@media (max-width: 640px) {
+@media (max-width: 900px) {
   .gallery { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.5rem; }
   .gallery > :first-child { grid-column: span 3; aspect-ratio: 3 / 2; }
   .gallery figure:not(:first-child) { aspect-ratio: 1 / 1; }
@@ -2839,13 +2858,6 @@ a, button { -webkit-tap-highlight-color: transparent; }
 }
 .save-btn:hover { color: var(--gold-deep); }
 
-/* Bond slider tracks were nearly invisible on the white panel. */
-.bond-f input[type="range"]::-webkit-slider-runnable-track {
-  background: color-mix(in srgb, var(--ink) 24%, transparent);
-}
-.bond-f input[type="range"]::-moz-range-track {
-  background: color-mix(in srgb, var(--ink) 24%, transparent);
-}
 
 /* Services as question-tabs: the panel body is prose, not a spec table. */
 .qa--svc .qa__body {
@@ -2888,3 +2900,14 @@ a, button { -webkit-tap-highlight-color: transparent; }
 @media print {
   .jumpnav { display: none !important; }
 }
+
+/* Compare header columns share one geometry: equal photographs, top-aligned
+   stacks, the price pinned to a common last line. Lives at the end of the
+   cascade so the component's base block cannot override it. */
+.cmp-table thead th { vertical-align: top; height: 1px; }
+/* The 1px height is the table-cell trick that makes a child's height:100%
+   real, so the flex column can pin the price to one shared last line no
+   matter how the names and places wrap. */
+.cmp-head { height: 100%; }
+.cmp-head img { aspect-ratio: 16 / 10; height: auto; }
+.cmp-head .p { margin-top: auto; padding-top: 0.5rem; }

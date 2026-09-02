@@ -265,6 +265,55 @@ maths with aria-valuetext, lightbox cycle, keyboard tablists, per-farm heads
 and schema, noindex not-found, inert honeypot, three widths with zero
 overflow, no em-dashes, no banned phrases, token-pure CSS.
 
+## Round 7, 2026-09-02: /better, full-width sweep
+
+Full-page captures of eight pages at 375, 768, 1280 and 1440 first; 34 faults
+listed before code, heaviest at 768, the width no earlier round had walked.
+
+Structural:
+- **The bond panel stopped being two-thirds empty.** Three full-width rows,
+  label, track, value, filling the panel; one slider definition instead of a
+  base plus two patch-blocks fighting it (tracks were computing back to 2px).
+- **Compare header columns share one geometry.** The 1px table-cell height
+  trick makes height:100% real inside th, so the price pins to one shared
+  line however the names wrap. Measured: photo tops 632/632/632, price
+  bottoms 925/925/925 at 768; 968/968/968 at 1280.
+- **The 404 became a route back in**: six farm-type chips styled for the dark
+  ground, instead of a dead end with two buttons.
+- **Ghost buttons are gone.** The transparent-over-photo secondary button sat
+  against the recorded no-glass-buttons ruling on the hero and three CTAs;
+  all five are now solid paper. .btn--ghost no longer exists in the file.
+
+Tablet (768):
+- Farm action row wrapped 3+1 with SHARE orphaned; the 2x2 grid now holds to
+  900. The gallery put 3 thumbnails in a 2-column grid, leaving a dead cell;
+  three-across now fills the row.
+
+Mechanics and audit debt:
+- Gallery images carry width/height (four were shifting the page).
+- The lightbox uses the responsive variants instead of the full original.
+- Cache-Control shipped: a day plus revalidation on /assets, no-cache on /data.
+- #all-farms reserves its ground (listings CLS 0.22 measured earlier).
+- Both forms say what to do when JavaScript is off.
+- Farm pages inject BreadcrumbList alongside Product; similar-farms band is
+  aria-labelled; the map heading is level 2 by aria-level while keeping the
+  sub-heading size, which restores one h2 size per page.
+- Heading skips healed on compare and privacy with hidden h2s.
+- Target floor on the enquiry-card and footer link stacks (19 to 21px before).
+- The old ".bond-f input" patch-blocks and the ghost button pair deleted:
+  the dead-CSS complaint from round 6, settled by removal.
+
+Declared, not fixed: inline mailto links inside privacy paragraphs measure
+under 24px, which is the WCAG inline exception; the 160px logo serves 3x
+screens at 51 CSS px slightly soft, accepted; repeat-sweep's nine pairs are
+the farm's own name in crumbs and headings plus the Melkhout prose, declared
+in rounds 3 and 6.
+
+Verified after: 32 page and width combinations clean; ground and align sweeps
+clean; tablist, counters, no-JS, reduced-motion and detail feature tests all
+passing; the bond, gallery, action row, compare headers, 404 and hero buttons
+re-captured.
+
 ---
 
 ## Standing verification
