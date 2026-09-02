@@ -33,8 +33,12 @@
 
   /* Type */
   --font: "Manrope", "Helvetica Neue", Arial, sans-serif;
-  --fs-h1: clamp(2.4rem, 5.1vw, 4.25rem);
-  --fs-h2: clamp(2.25rem, 4vw, 3.6rem);
+  /* Section headings only. Archivo is drawn to work at 900, so at 86px it reads
+     solid where Manrope at the same size reads merely large. Loaded at one
+     weight because one weight is all that uses it. */
+  --font-display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --fs-h1: clamp(2.9rem, 6.7vw, 5.7rem);
+  --fs-h2: clamp(2.6rem, 5.2vw, 4.6rem);
   --fs-h3: clamp(1.35rem, 1.9vw, 1.75rem);
   --fs-h4: clamp(1.05rem, 1.25vw, 1.2rem);
   /* Was clamp(1.06rem, 1.28vw, 1.42rem), which computed 16.96px against a
@@ -107,10 +111,21 @@ h1, h2, h3, h4 {
   margin: 0;
   text-wrap: balance;
 }
-h1 { font-size: var(--fs-h1); line-height: 1.06; letter-spacing: -0.035em; }
-h2 { font-size: var(--fs-h2); line-height: 1.1; letter-spacing: -0.03em; }
-h3 { font-size: var(--fs-h3); line-height: 1.24; letter-spacing: -0.02em; font-weight: 600; }
-h4 { font-size: var(--fs-h4); line-height: 1.35; letter-spacing: -0.01em; font-weight: 600; }
+h1 { font-family: var(--font-display); font-weight: 900; font-size: var(--fs-h1); line-height: 0.95; letter-spacing: -0.045em; }
+h2 { font-family: var(--font-display); font-weight: 900; font-size: var(--fs-h2); line-height: 0.95; letter-spacing: -0.045em; }
+/* A heading inside a card is a card title, not a section heading: it sits at
+   h3 size, where a 900 display weight reads as a mistake rather than as
+   confidence. These three are the only cards on the site that hold an h2. */
+.hero-card h2,
+.quote-card h2,
+.process-card h2 {
+  font-family: var(--font);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+h3 { font-size: var(--fs-h3); line-height: 1.24; letter-spacing: -0.02em; font-weight: 700; }
+h4 { font-size: var(--fs-h4); line-height: 1.35; letter-spacing: -0.01em; font-weight: 700; }
 p { margin: 0; text-wrap: pretty; }
 
 ::selection { background: var(--coral); color: var(--paper); }
