@@ -1,3 +1,9 @@
+> **SUPERSEDED, and describing a site that no longer exists.** This audit is
+> dated 2026-08-02 and reads the PRE-REBUILD edwebmedia.com: the mesh hero, the
+> dashboard card and the 01/02/03 process blocks it discusses were all replaced
+> in the 2026-08-21 rebuild. Kept for the reasoning, not for the findings. The
+> current design system is in HANDOFF.md and the current state in QA-REPORT.md.
+
 # Edweb Media, 2030 pass. Audit and plan (2026-08-02)
 
 Baseline: live edwebmedia.com, `v=2026072939`. Audit method: full-page sweeps at 390px and 1440px through this session, computed-style census (fonts, radii, shadows), section-by-section review against the modern-design-playbook.

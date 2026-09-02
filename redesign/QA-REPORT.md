@@ -999,3 +999,47 @@ replacements are with Edgar to pick from and none of them enumerates the work.
 
 Gates: 13 pages by three widths, no console errors, 18 links, contrast
 exempt-only, alignment and ground sweeps clean, no em-dashes.
+
+## Type change and the /better pass, 2026-09-02
+
+Two batches on one day. The first changed a typeface across all 14 pages, the
+second was a self-directed audit. Rounds, in order.
+
+**Round 1, the look target.** Edgar sent a crop of a heavy headline and asked
+for "a bolder type of font". Four heavy treatments were built on the real page
+and shot at 1280 and 390, each on three sections including the ink band that
+matched his crop most closely: Manrope pushed to 800, Archivo 900, Bricolage
+Grotesque 800, Anton. Verdict: he picked Archivo, option 2.
+
+**Round 2, first render after the swap.** Found: the display face leaked onto
+card titles, where a 900 weight at h3 size reads as a mistake. Fixed by
+excluding the two cards on the site that hold an h2. Verified by walking all 13
+pages at 390, 768 and 1440 and reading the computed family back: 67 section
+headings on Archivo, every card title still Manrope, no silent fallback, no
+clipped heading, no sideways scroll.
+
+**Round 3, the /better audit.** 35 faults found by measurement across 14 pages
+at 375, 768, 1280 and 1440. A blocker among them: the contact form quoted the
+struck-through list prices while api/payfast.js charges R500 less, on all three
+website types. Also the value strip (six consecutive light bands on the home
+page, four on pricing, with no dark anchor in either lower half), the pricing
+cards sitting at 1.000:1 against their own band, content clipped and
+unreachable below 349px, four rails moving with no pause control, and focus
+falling to <body> on three separate journeys. 33 fixed, 2 left with reasons
+stated.
+
+**Round 4, independent review in a fresh context.** Returned with one blocker
+and ten gaps. Two of the ten were caused by round 3 itself: moving the pricing
+masthead to paper fixed the cards below it and left its own card at 1.000:1,
+and the new pause button landed under the fixed chat button, reachable at 3 of
+9 sample points. All ten re-measured after fixing: masthead card now grey on
+paper, plan names one size on both pages (16px), pause button reachable at 9 of
+9, footer headings back on Manrope, booking confirmation lands focus on
+#book-done, and today's date closes once its last slot has passed rather than
+offering eight disabled ones.
+
+**Verdict: passed.** Gates at close: 13 pages by three widths, zero console
+errors, 18 links, contrast sweep clean, alignment, ground and tone sweeps
+clean, zero em-dashes, no placeholder text. Not verified locally and still
+deploy-gate items: the real send-mail endpoint, the live Payfast checkout,
+clean-URL routing and field Core Web Vitals.

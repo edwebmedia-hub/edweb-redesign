@@ -476,9 +476,20 @@
     var chosenDate = null;
     var chosenTime = null;
 
+    /* The last slot is 16:00, so after it there is nothing left to pick today.
+       Leaving today enabled sent evening visitors to a date whose eight slots
+       were all disabled, under a summary telling them to pick a time. */
+    var lastSlotGone = function () {
+      var now = new Date();
+      var last = Number(TIMES[TIMES.length - 1].split(':')[0]);
+      return now.getHours() > last || (now.getHours() === last && now.getMinutes() > 0);
+    };
+
     var isPickable = function (d) {
       var day = d.getDay();
-      return d >= today && day !== 0 && day !== 6;
+      if (day === 0 || day === 6) return false;
+      if (d.getTime() === today.getTime()) return !lastSlotGone();
+      return d >= today;
     };
 
     var longDate = function (d) {
@@ -639,6 +650,11 @@
             form.hidden = true;
             $('#book-pick').hidden = true;
             done.hidden = false;
+            /* The submit button was inside the form we just hid. The contact and
+               payment journeys already land focus on what replaced them; this
+               one did not. */
+            if (!done.hasAttribute('tabindex')) done.setAttribute('tabindex', '-1');
+            done.focus({ preventScroll: true });
             $('#book-done-msg').textContent =
               'Thanks ' + name + '. We have your request for ' + longDate(chosenDate) +
               ' at ' + chosenTime + '.';
@@ -700,16 +716,6 @@
     });
   }());
 
-  /* ------------------- Focus follows the step it opened -------------------- */
-  /* Hiding the container that holds the button someone just pressed drops focus
-     to <body>, so a keyboard or screen-reader user loses their place and hears
-     nothing. Every swap below moves focus to the panel that replaced it. */
-  var focusPanel = function (el) {
-    if (!el) return;
-    if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '-1');
-    try { el.focus({ preventScroll: false }); } catch (e) { el.focus(); }
-  };
-  window.__edwebFocusPanel = focusPanel;
 
 
   /* Escape closes the mobile menu. It had no handler, so a keyboard user who

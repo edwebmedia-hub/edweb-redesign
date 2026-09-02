@@ -346,10 +346,10 @@ p { margin: 0; text-wrap: pretty; }
     border-bottom: 1px solid var(--line);
     transform: translateY(-120%);
     visibility: hidden;
-    transition: transform 0.45s var(--ease), visibility 0s linear 0.45s;
+    transition: transform var(--speed) var(--ease), visibility 0s linear var(--speed);
   }
   .nav-links a { padding: 0.9rem 0; font-size: 1.1rem; width: 100%; }
-  .nav.is-open .nav-links { transform: translateY(0); visibility: visible; transition: transform 0.45s var(--ease), visibility 0s; }
+  .nav.is-open .nav-links { transform: translateY(0); visibility: visible; transition: transform var(--speed) var(--ease), visibility 0s; }
   .nav-end .ulink { display: none; }
 }
 
@@ -551,7 +551,7 @@ p { margin: 0; text-wrap: pretty; }
 .tab-panel.is-active {
   display: grid;
   gap: 1.5rem;
-  animation: fade-in 0.6s var(--ease) both;
+  animation: fade-in var(--speed-reveal) var(--ease) both;
 }
 @keyframes fade-in {
   from { opacity: 0; transform: translateY(10px); }
@@ -2150,7 +2150,7 @@ p a:not(.ulink):not(.btn):hover,
   gap: 1rem;
   padding: 1rem 0 0.25rem 1rem;
   border-left: 2px solid color-mix(in srgb, var(--coral) 45%, transparent);
-  animation: subfield-in 0.45s var(--ease) both;
+  animation: subfield-in var(--speed-reveal) var(--ease) both;
 }
 @keyframes subfield-in {
   from { opacity: 0; transform: translateY(-6px); }
@@ -3554,3 +3554,28 @@ img.avatar { object-fit: cover; background: var(--ground-alt); }
    specificity and rendered the loudest thing in the row at 65% grey while the
    name beside it was full paper. */
 .band--ink .addon .addon-price { color: var(--paper); }
+
+/* A card takes the opposite tone to the band behind it. .review and
+   .tab-panel already do; the hero card did not, so the one paper masthead
+   on the site had a paper card on it at 1.000:1. */
+.band:not(.band--alt):not(.band--ink):not(.band--teal) .hero-card,
+.page-hero:not(.band--alt):not(.band--ink) .hero-card {
+  background: var(--ground-alt);
+}
+
+/* .tab-panel h3 outranks .pcard-name, so the plan names rendered at h3 size
+   on the pricing page and at their intended size on the home page. */
+.pcard .pcard-name { font-size: var(--fs-small); }
+
+/* The chat button is fixed to the bottom right corner and covered 62% of
+   this one. The rail is symmetric, so the control moves to the other end. */
+.rail-pause { right: auto; left: var(--gutter); }
+
+/* Footer column headings sit below even the card titles in size, so they
+   belong to the reading face for the same reason those do. */
+.site-footer h2, footer h2 {
+  font-family: var(--font);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.35;
+}
