@@ -970,6 +970,7 @@
         });
       }, { rootMargin: '-35% 0px -55% 0px' });
       Object.keys(byId).forEach(function (id) {
+        if (id === 'enquire') return;
         var el = document.getElementById(id);
         if (el) io.observe(el);
       });

@@ -892,7 +892,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
   margin-bottom: clamp(2rem, 3vw, 3rem);
 }
 .filter-btn {
-  background: transparent;
+  background: var(--paper);
   border: 1px solid var(--line);
   border-radius: var(--r-chip);
   padding: 0.6rem 1.05rem;
@@ -2098,7 +2098,7 @@ body.has-tray { padding-bottom: 6.5rem; }
   display: inline-flex; align-items: center; gap: 0.55rem;
   font-family: var(--display); font-size: 0.75rem; letter-spacing: 0.1em;
   text-transform: uppercase; color: var(--muted); cursor: pointer;
-  background: transparent; border: 1px solid var(--line);
+  background: var(--paper); border: 1px solid var(--line);
   border-radius: var(--r-chip); padding: 0.6rem 1rem;
   transition: all var(--t-fast) var(--ease-soft);
 }
@@ -2975,11 +2975,16 @@ a, button { -webkit-tap-highlight-color: transparent; }
 
 /* The card itself answers a hover, not just its photograph: a small lift
    with a soft ink shadow, in the same motion tokens as everything else. */
+.js .farm-card.reveal.is-visible {
+  transition: transform var(--t-mid) var(--ease),
+              box-shadow var(--t-mid) var(--ease);
+}
 .farm-card {
   transition: transform var(--t-mid) var(--ease),
               box-shadow var(--t-mid) var(--ease);
 }
-.farm-card:hover {
+.farm-card:hover,
+.js .farm-card.reveal.is-visible:hover {
   transform: translateY(-4px);
   box-shadow: 0 18px 40px -18px color-mix(in srgb, var(--ink-deep) 38%, transparent);
 }
@@ -3004,7 +3009,7 @@ a, button { -webkit-tap-highlight-color: transparent; }
   .provlist button, .spec-tab, .qa__more {
     min-height: 44px;
   }
-  .findbar input { min-height: 44px; }
+  .findbar input, .searchrail__field select { min-height: 44px; }
 }
 
 /* The type tiles clip their contents, so their focus ring draws inside. */

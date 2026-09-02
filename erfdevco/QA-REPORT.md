@@ -401,6 +401,22 @@ re-verification of rounds 8 and 9 holding.
   quote, pretty on body copy, supports-guarded so older browsers change
   nothing.
 - 404's dark chips stepped up to 94 per cent paper.
+- **Layout, on Edgar's instruction**: the List-your-farm photo band moved
+  from the end of the page to sit between the country map and the buyer
+  questions, and the questions band moved to the white surface so the strip
+  alternates through the new order.
+
+Fresh-context review of this round: **SHIP, zero blockers**, five material
+gaps, all five closed the same day: the card hover lift was dead under the
+reveal rule's higher specificity (now measured translateY(-4px) with an
+eased shadow); the scrollspy marked Enquire while reading About because the
+sticky card spans the About band (the spy now watches only the five bands;
+mid-About marks About, measured); quiet chips on light grounds took a solid
+paper ground and the no-transparent-controls ruling is narrowed in writing
+to controls on light grounds, tablists on the ink chapter stay hairline;
+the search rail selects joined the 44px coarse floor; one stray #fff became
+var(--paper). This record's strip description was itself stale and is
+corrected above.
 
 Verified: 32 page and width combinations clean after the batch; strip probe
 green; coarse-pointer heights 44/44/44; jump-nav animation present.
@@ -417,9 +433,12 @@ Run after every change in this session:
 - **OS sweeps**: `ground-sweep` clean at 390 and 768, `align-sweep` clean at
   768, 1280 and 1440 with no hardcoded nudges, `repeat-sweep` zero overlapping
   pairs on every page.
-- **Value strip**: every page alternates. index photo, canvas, white surface,
-  ink, photo, ink. listings photo, ink, canvas, white surface, ink. about photo,
-  canvas, white surface, ink, photo, ink. contact photo, canvas, ink, ink.
+- **Value strip**: every page alternates, and no flat ink band remains
+  outside the footer and the farm page's schedule chapter. index photo,
+  canvas, white, sage, canvas, photo, white, photo, canvas. listings photo,
+  sage, canvas, white. about photo, canvas, white, sage, photo. contact
+  photo, canvas, sage, white. Same-value seams collapse to balanced tight
+  joins by design (round 9).
 - **One value per role**: one h1, h2 and h3 size per page; two body sizes;
   nothing below 12px; button radius one value.
 - **Contrast** measured by compositing alpha over the real ground, never from
