@@ -314,6 +314,44 @@ clean; tablist, counters, no-JS, reduced-motion and detail feature tests all
 passing; the bond, gallery, action row, compare headers, 404 and hero buttons
 re-captured.
 
+## Round 8, 2026-09-02: reviewer blocker and gaps cleared
+
+Fresh-context reviewer verdict on round 7: RETURNED, one blocker, and it was
+round 7's own regression. The 1px table-cell height trick that pins the
+compare header columns collapsed the header cells in the stacked phone mode,
+printing all three columns of names, refs and prices over the first 220px of
+the table at 375 to 640. The trick is now scoped to 641px and up, and the
+stacked mode resets cell heights. Acceptance run: at 375, 390, 560 and 640,
+with two and with three farms, the deepest header pixel sits 14px above the
+first row, all eight combinations; the 375 capture shows all three headers
+legible above an uncovered At a glance row.
+
+Reviewer gaps cleared in the same pass:
+- Desktop farm pages wrapped four action buttons 3+1 with SHARE orphaned
+  (the same fault round 7 fixed at 768, still shipping above 900). Four on
+  one row at 1280 and 1440, measured one distinct row top; 901 to 1100 gets
+  a deliberate 2x2.
+- "Registered" was ellipsised in the card fact tray at 375 (80px word, 78px
+  cell). Values may wrap, and below 420px the value size steps once so the
+  word fits whole; zero overflowing trays across all nine farms.
+- listing.html with JavaScript off said "Loading this farm." forever; a
+  static noscript now names the phone number and email.
+- Throttled-mobile numbers logged for the first time (375px, slow 4G, 4x
+  CPU): LCP index 2.9s, listings 1.7s, listing 3.4s; CLS 0.019 / 0.001 /
+  0.047. Listings CLS was 0.178 in the same run before the map band and
+  chips row reserved their measured heights (the injected map was stepping
+  the cards band down). The two LCPs above 2.5s are the full-bleed
+  photography under 4x throttle; recorded as accepted risk.
+
+Left for Edgar: outline (transparent-background, hairline-border) secondary
+buttons on flat light grounds (map band, about, compare CTA). The recorded
+ban covers glass over photography, which is gone; whether flat-ground
+outlines follow is his call, one token if so.
+
+Verified after: 32 page and width combinations clean; acceptance suite green
+(compare 8/8, one action row at both desktop widths, zero tray overflows,
+honest no-JS state).
+
 ---
 
 ## Standing verification

@@ -215,6 +215,16 @@ button, input, select, textarea { font: inherit; color: inherit; }
 /* Listings render after a fetch; reserve the grid's ground so the footer
    does not jump up and back (CLS 0.22 measured). */
 #all-farms { min-height: 70vh; }
+/* The chips and the results line render after the fetch; reserving their
+   height stops the whole listings column stepping down (CLS 0.178 measured
+   throttled). */
+#filters { min-height: 44px; }
+/* The map injects after its fetch; reserving the measured heights stops the
+   cards band stepping down under it (the 0.177 CLS source). */
+#farm-map { min-height: 527px; }
+@media (max-width: 900px) { #farm-map { min-height: 1176px; } }
+@media (max-width: 640px) { #farm-map { min-height: 874px; } }
+#results-line { min-height: 1.5em; display: block; }
 /* Type chips over a photo scrim (the 404): light borders and paper text. */
 .type-more--dark a {
   border-color: color-mix(in srgb, var(--paper) 45%, transparent);
@@ -717,9 +727,6 @@ button, input, select, textarea { font: inherit; color: inherit; }
   font-size: clamp(1rem, 1.25vw, 1.15rem);
   letter-spacing: -0.02em;
   line-height: 1.1;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 .farm-card__meta i {
   font-style: normal;
@@ -2573,9 +2580,18 @@ main .cmp-table p, main .factgrid p, main .bond p { max-width: none; }
 
 /* The action row wrapped one button onto a line of its own. Let it breathe
    into an even grid instead of a ragged wrap. */
-.detail-actions { display: grid; grid-template-columns: repeat(auto-fit, minmax(13.5rem, 1fr)); gap: 0.6rem; max-width: 46rem; }
-.detail-actions .btn, .detail-actions .save-btn--inline { width: 100%; }
-@media (max-width: 560px) { .detail-actions { grid-template-columns: minmax(0, 1fr); } }
+.detail-actions { display: grid; grid-template-columns: repeat(4, minmax(0, auto)); justify-content: start; gap: 0.6rem; }
+.detail-actions .btn, .detail-actions .save-btn--inline { width: auto; }
+@media (max-width: 1100px) and (min-width: 901px) {
+  .detail-actions { grid-template-columns: repeat(2, minmax(0, 13.5rem)); }
+  .detail-actions .btn, .detail-actions .save-btn--inline { width: 100%; }
+}
+@media (max-width: 560px) { .detail-actions { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+/* At 375 the tray cell is 78px and the word "Registered" set 16px is 80px:
+   one size step down for the narrowest phones keeps every value whole. */
+@media (max-width: 420px) {
+  .farm-card__meta b { font-size: 0.9375rem; }
+}
 
 /* Tile labels sat at different heights where a name wrapped, so the row read
    as broken. Reserve the second line on all of them. */
@@ -2904,10 +2920,19 @@ a, button { -webkit-tap-highlight-color: transparent; }
 /* Compare header columns share one geometry: equal photographs, top-aligned
    stacks, the price pinned to a common last line. Lives at the end of the
    cascade so the component's base block cannot override it. */
-.cmp-table thead th { vertical-align: top; height: 1px; }
-/* The 1px height is the table-cell trick that makes a child's height:100%
-   real, so the flex column can pin the price to one shared last line no
-   matter how the names and places wrap. */
-.cmp-head { height: 100%; }
-.cmp-head img { aspect-ratio: 16 / 10; height: auto; }
-.cmp-head .p { margin-top: auto; padding-top: 0.5rem; }
+/* Desktop and tablet only: below 641 the table stacks and these rules
+   collapsed the header cells to 1px, spilling their content over the first
+   rows (round 7 regression, caught by review). */
+@media (min-width: 641px) {
+  .cmp-table thead th { vertical-align: top; height: 1px; }
+  /* The 1px height is the table-cell trick that makes a child's height:100%
+     real, so the flex column can pin the price to one shared last line no
+     matter how the names and places wrap. */
+  .cmp-head { height: 100%; }
+  .cmp-head img { aspect-ratio: 16 / 10; height: auto; }
+  .cmp-head .p { margin-top: auto; padding-top: 0.5rem; }
+}
+@media (max-width: 640px) {
+  .cmp-table thead th { height: auto; vertical-align: top; }
+  .cmp-head { height: auto; }
+}
