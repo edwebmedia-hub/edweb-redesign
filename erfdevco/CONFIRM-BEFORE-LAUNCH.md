@@ -65,6 +65,13 @@ Both are now off the site. They go back the moment Martiens confirms them.
    not the same thing as free to the seller.
    **Action: ask Martiens what a seller actually pays, if anything, to list.**
 
+## Staging deploy (2026-09-02)
+Live for review at https://erfdevco.vercel.app with an `X-Robots-Tag: noindex`
+header in vercel.json so the demo farms stay out of search. **Before real
+launch: remove that header line** and point the real domain. The enquiry
+forms on this staging link do not send mail yet (no SMTP environment
+variable is set on the project); that is a launch-checklist item, not a bug.
+
 ## Also confirm
 - **Retention periods** in `privacy.html` (two years for a dead enquiry, five
   years where it becomes a mandate, citing FICA) are the standard practice for
