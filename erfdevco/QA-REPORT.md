@@ -352,6 +352,33 @@ Verified after: 32 page and width combinations clean; acceptance suite green
 (compare 8/8, one action row at both desktop widths, zero tray overflows,
 honest no-JS state).
 
+## Round 9, 2026-09-02: spacing
+
+Edgar: paragraph spacing, and the void where two sections meet without a
+colour change.
+
+**Section seams.** Where two light bands touch (canvas against white) the
+stacked paddings read as one ground with a hole in it; his screenshots showed
+the cards band to the next section on listings and home. Same-value seams now
+collapse to a quarter step while sage, ink and photo seams keep their full
+air. Measured content-to-content at 1440: listings cards to "Tell us what you
+are looking for" 285 to 175, home cards to the agency section 280 to 178.
+
+**Paragraph rhythm.** Adjacent paragraphs measured nine different gaps, 0 to
+34px, from nine ad-hoc inline margins. One rule now owns it: `main p + p`
+gets 1em, scaled by its own type size; ten inline margins came off across
+five files and the injected farm-page paragraphs. Remaining distinct values
+are components doing different jobs (a counter's number to its label, the
+question label to its answer), verified by naming every pair.
+
+**The outline secondary settled.** Edgar left the flat-ground outline
+buttons to my judgement; they are now solid paper with a hairline, the same
+direction the photo-ground ghosts went in round 7. No transparent control
+remains anywhere.
+
+Verified after: 32 page and width combinations clean; ground and align
+sweeps clean; both of his screenshotted seams re-captured.
+
 ---
 
 ## Standing verification

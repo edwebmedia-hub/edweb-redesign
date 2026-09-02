@@ -171,6 +171,18 @@ button, input, select, textarea { font: inherit; color: inherit; }
    the page its value change where a dark band would be too much. */
 .band--surface { background: var(--paper); }
 .band--sage { background: var(--sage); }
+/* Two light bands meeting stack their paddings into a void: the value only
+   steps subtly (canvas to white), so the eye reads one ground with a hole
+   in it. Same-value seams collapse to a quarter step; seams where the
+   ground genuinely changes (sage, ink, photo) keep their full air. */
+:is(.band, .band--surface):not(.band--sage):not(.band--ink)
+  + :is(.band, .band--surface):not(.band--sage):not(.band--ink) {
+  padding-top: calc(var(--band) * 0.25);
+}
+:is(.band, .band--surface):not(.band--sage):not(.band--ink)
+  + :is(.band--tight):not(.band--sage):not(.band--ink) {
+  padding-top: calc(var(--band-tight) * 0.35);
+}
 .band--sage .rows, .band--sage .cband { border-top-color: color-mix(in srgb, var(--ink) 18%, transparent); }
 .band--sage .row-item, .band--sage .cband > div { border-color: color-mix(in srgb, var(--ink) 18%, transparent); }
 .band--sage .eyebrow,
@@ -322,7 +334,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .btn--paper { background: var(--paper); color: var(--ink); border-color: var(--paper); }
 .btn--paper:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
 
-.btn--outline { background: transparent; color: var(--ink); border-color: var(--line); }
+.btn--outline { background: var(--paper); color: var(--ink); border-color: color-mix(in srgb, var(--ink) 32%, transparent); }
 .btn--outline:hover { border-color: var(--ink); background: var(--ink); color: var(--paper); }
 
 .btn--wide { padding-inline: 2.25rem; }
@@ -2372,6 +2384,11 @@ body.has-tray { padding-bottom: 6.5rem; }
 
 /* ---- Measure. Nothing runs to 104 characters. ---- */
 main p { max-width: 68ch; }
+/* One paragraph rhythm site-wide: measured gaps ran 0 to 32px across nine
+   ad-hoc inline margins; adjacent paragraphs now breathe 1em, scaled by
+   their own type size. Tables and fact grids opt out. */
+main p + p { margin-top: 1em; }
+main .cmp-table p + p, main .factgrid p + p, main .bond p + p { margin-top: 0; }
 main .row-item__body p,
 main .counter__note,
 main .maphead p { max-width: 56ch; }

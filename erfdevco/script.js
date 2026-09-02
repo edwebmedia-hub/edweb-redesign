@@ -881,7 +881,7 @@
             '<div class="reveal">' +
                             '<h2>About ' + esc(f.title) + '</h2>' +
               '<p class="lede" style="margin-top:1.5rem">' + esc(f.summary) + '</p>' +
-              '<p style="margin-top:1.25rem;color:var(--muted);line-height:1.75;max-width:64ch">' + esc(f.description) + '</p>' +
+              '<p style="color:var(--muted);line-height:1.75;max-width:64ch">' + esc(f.description) + '</p>' +
             '</div>' +
             '<div class="reveal" id="enquire">' + enquiryCard(f) + '</div>' +
           '</div>' +
@@ -1235,7 +1235,7 @@
           '<div><h2 id="similar-h">' + count + ' on the books</h2></div>' +
           '<div><p class="lede">Matched on farm type first, then province, then price. ' + basis +
           ' Every one carries the same schedule, so they compare field for field.</p>' +
-          '<p style="margin-top:1.25rem"><a class="link-line" href="listings.html">All ' + farms.length + ' farms <span class="arw" aria-hidden="true">&rarr;</span></a></p></div>' +
+          '<p><a class="link-line" href="listings.html">All ' + farms.length + ' farms <span class="arw" aria-hidden="true">&rarr;</span></a></p></div>' +
         '</div>' +
         '<div class="farm-grid farm-grid--even" data-stagger>' +
           scored.map(function (x) { return farmCard(x.f, false); }).join('') +
