@@ -1,5 +1,7 @@
 User-agent: *
 Allow: /
-Disallow: /demos/
+# /demos/ is deliberately crawlable so Googlebot can read the noindex on
+# each demo page. Disallowing the path hid that tag while the work page still
+# linked to them, which is how bare URLs end up in results.
 
 Sitemap: https://edwebmedia.com/sitemap.xml

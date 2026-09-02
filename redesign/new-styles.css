@@ -58,8 +58,8 @@
      inside a card, so the three sizes are declared once and referenced, rather
      than four separate clamps drifting apart. */
   --fig-lg: clamp(2rem, 3.4vw, 3rem);      /* page-level: the results band */
-  --fig-md: clamp(2rem, 2.8vw, 2.5rem);    /* section-level: the add-on rows */
-  --fig-sm: clamp(1.6rem, 2.4vw, 2rem);    /* inside a card: the build panel */
+  --fig-md: clamp(1.7rem, 2.8vw, 2.5rem);  /* section-level: the add-on rows */
+  --fig-sm: clamp(1.4rem, 2.4vw, 2rem);    /* inside a card */
   --gutter: clamp(1.75rem, 4vw, 3rem);       /* page edge to content, 28 min */
   --container: min(100% - var(--gutter) * 2, 1320px);
   --band: clamp(3.5rem, 8.5vw, 8rem);        /* section padding, 128 max */
@@ -72,8 +72,11 @@
   /* One value per role */
   --radius: 4px;
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
-  --speed: 0.55s;
-  --speed-tap: 0.2s;            /* anything that answers a click */
+  /* Two roles, two values. A state change answers a pointer and has to feel
+     immediate; an entrance is watched once and can take its time. */
+  --speed: 0.2s;
+  --speed-reveal: 0.7s;
+  --speed-tap: var(--speed);    /* kept as an alias; one state duration now */
 
   --header-h: 82px;
   --stick-top: calc(var(--header-h) + 3rem);
@@ -115,10 +118,10 @@ h1 { font-family: var(--font-display); font-weight: 900; font-size: var(--fs-h1)
 h2 { font-family: var(--font-display); font-weight: 900; font-size: var(--fs-h2); line-height: 0.95; letter-spacing: -0.045em; }
 /* A heading inside a card is a card title, not a section heading: it sits at
    h3 size, where a 900 display weight reads as a mistake rather than as
-   confidence. These three are the only cards on the site that hold an h2. */
+   confidence. These two are the only cards on the site that hold an h2, and
+   .process-card is a section wrapper despite the name, so it is not one. */
 .hero-card h2,
-.quote-card h2,
-.process-card h2 {
+.quote-card h2 {
   font-family: var(--font);
   font-weight: 700;
   letter-spacing: -0.02em;
@@ -452,7 +455,7 @@ p { margin: 0; text-wrap: pretty; }
 .rise > span {
   display: inline-block;
   transform: translateY(102%);
-  animation: rise-up 0.95s var(--ease) forwards;
+  animation: rise-up var(--speed-reveal) var(--ease) forwards;
   animation-delay: var(--d, 0ms);
 }
 @keyframes rise-up { to { transform: translateY(0); } }
@@ -667,7 +670,7 @@ p { margin: 0; text-wrap: pretty; }
   aspect-ratio: 4 / 3;
   object-fit: cover;
   object-position: top center;
-  transition: transform 0.8s var(--ease);
+  transition: transform var(--speed) var(--ease);
 }
 .work-item:hover .work-shot img { transform: scale(1.045); }
 .work-meta { margin-top: 1rem; display: flex; justify-content: space-between; gap: 1rem; }
@@ -706,7 +709,7 @@ p { margin: 0; text-wrap: pretty; }
   transform: translateY(-3px);
   box-shadow: 0 18px 40px color-mix(in srgb, var(--ink) 10%, transparent);
 }
-.pcard-name { font-size: var(--fs-small); font-weight: 600; color: var(--text-muted); }
+.pcard-name { font-size: var(--fs-small); font-weight: 700; color: var(--text-muted); }
 .pcard-price {
   display: flex;
   flex-wrap: wrap;
@@ -910,7 +913,7 @@ textarea { resize: vertical; min-height: 140px; }
 .js .reveal {
   opacity: 0;
   transform: translateY(16px);
-  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+  transition: opacity var(--speed-reveal) var(--ease), transform var(--speed-reveal) var(--ease);
   transition-delay: var(--reveal-delay, 0ms);
 }
 .js .reveal.is-visible { opacity: 1; transform: none; }
@@ -1238,12 +1241,20 @@ form > div:has(textarea:focus) label,
   justify-items: start;
   /* One declaration. Two later overrides used to sit further down the file,
      which meant this value was never the one on screen. */
-  font-size: clamp(2.9rem, 4.8vw, 4.3rem);
+  font-size: var(--fs-h2);
   line-height: 1.04;
   letter-spacing: 0.005em;
   text-transform: uppercase;
 }
+/* Nowrap keeps each word on its own line, which is the whole device, but
+   below 360px "that work" is wider than the viewport and body overflow is
+   clipped rather than scrollable, so the right edge of the whole section was
+   cut off rather than reachable. Under 360 the words are allowed to break. */
 .wordstack span { white-space: nowrap; }
+@media (max-width: 359px) {
+  .wordstack span { white-space: normal; }
+  .wordstack { font-size: clamp(2rem, 11vw, 2.6rem); }
+}
 .wordstack .w-light {
   font-weight: 500;
   color: color-mix(in srgb, var(--ink) 60%, var(--paper));
@@ -1507,12 +1518,20 @@ form > div:has(textarea:focus) label,
 /* Manrope is a variable font. WebKit does not always apply font-weight to a
    variable face fetched from the CSS2 API, so the axis is pinned as well.
    Chrome ignores the duplication; Safari and the QA screenshots now match. */
-h1, h2 { font-variation-settings: "wght" 700; }
+.hero-card h2, .quote-card h2 { font-variation-settings: "wght" 700; }
 h3, h4 { font-variation-settings: "wght" 600; }
 .btn { font-variation-settings: "wght" 600; }
 .wordstack .w-light { font-variation-settings: "wght" 500; }
 .wordstack .w-bold { font-variation-settings: "wght" 800; }
-.figure-val, .pcard-price { font-variation-settings: "wght" 700; }
+/* Anything at figure scale is display type doing a heading's job, so it takes
+   the display face. These were Manrope 700 sitting beside Archivo 900. */
+.figure-val,
+.pcard-price,
+.addon-price,
+.stat-v {
+  font-family: var(--font-display);
+  font-weight: 900;
+}
 
 /* The process and closing bands moved off ink onto the light tones, so their
    parts take the light tokens by default. The .band--ink overrides below keep
@@ -1670,7 +1689,6 @@ h3, h4 { font-variation-settings: "wght" 600; }
   .addon-price { order: 2; }
   .addon > div { order: 3; }
   .addon-price span { display: inline; margin-left: 0.4rem; }
-  .addon-price { font-size: var(--fs-h4); }
 }
 
 /* --------------------------- Choice chips (forms) -------------------------- */
@@ -2338,6 +2356,12 @@ textarea[aria-invalid="true"] {
 }
 .prose { max-width: 72ch; margin-inline: auto; }
 .prose h2 {
+  /* Clause headings sit at h3 size, so they belong to the h3 role and take
+     the reading face, not the display face. */
+  font-family: var(--font);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.24;
   font-size: var(--fs-h3);
   margin-top: clamp(2.75rem, 5vw, 4rem);
   padding-top: clamp(1.5rem, 2.5vw, 2rem);
@@ -2679,6 +2703,12 @@ textarea[aria-invalid="true"] {
 @media (min-width: 861px) {
   .split { align-items: start; }
   .split > div { align-content: start; }
+
+  /* Edgar's ruling: a section is rows, and rows start and finish on the same
+     line. Where a column holds a heading, a line of copy and one action, the
+     action goes to the bottom edge so the row closes level with the list
+     beside it. Measured, not eyeballed: see tools/align-sweep.mjs. */
+  .faq-block, .numbers-grid { align-items: stretch; }
 }
 
 /* ------------------------- Card marks on the checkout ---------------------- */
@@ -2936,7 +2966,23 @@ main[id] {
    The columns beside them keep their alignment; only the heading is pinned. */
 .process-head h2 { align-self: start; }
 @media (min-width: 861px) {
-  .faq-block .faq-intro { align-self: start; }
+  /* Stretch rather than start. It satisfies the same ruling, because the first
+     child still sits at the top edge, and it also satisfies the other one:
+     space-between drops the single action to the bottom so the row finishes
+     level with the list beside it instead of 131px above it. */
+  .faq-block .faq-intro,
+  .numbers-grid > div:first-child {
+    align-self: stretch;
+    display: grid;
+    align-content: space-between;
+    row-gap: 1rem;
+  }
+  /* The figure grid centred itself against the taller copy column, so the row
+     started 68px apart and finished 68px apart. It spreads instead. */
+  .numbers-grid .figures {
+    align-self: stretch;
+    align-content: space-between;
+  }
 }
 
 /* Real Google reviewer photos where the reviewer has one; the styled initials
@@ -3074,7 +3120,6 @@ img.avatar { object-fit: cover; background: var(--ground-alt); }
    site two light grounds meet before the footer. The section keeps the tight
    band value on top, desktop only; mobile keeps the standard rhythm. */
 @media (min-width: 861px) {
-  #contact { padding-block: var(--band-tight); }
 }
 
 /* The link arrows use a darkened coral tuned for light grounds; on the ink
@@ -3310,7 +3355,7 @@ img.avatar { object-fit: cover; background: var(--ground-alt); }
      in the row to 72 percent while the name beside it was full ink. */
   color: var(--text);
   font-size: var(--fig-md);
-  font-weight: 700;
+  font-weight: 900;
   line-height: 1;
   letter-spacing: -0.035em;
   font-variant-numeric: tabular-nums;
@@ -3465,3 +3510,47 @@ img.avatar { object-fit: cover; background: var(--ground-alt); }
   .work-strip { overflow-x: auto; scrollbar-width: none; }
   .work-strip::-webkit-scrollbar { display: none; }
 }
+
+/* The reviews heading row carried a 0.85fr second column holding one small
+   badge, which read as a dead half. The badge takes the width it needs. */
+#reviews .head { grid-template-columns: minmax(0, 1fr) auto; }
+
+/* Pause control for the self-moving rails. WCAG 2.2.2 wants a mechanism in
+   the content, and hover is not one: a touch user cannot hover and these
+   rails hold no focusable children, so the :focus-within rules could never
+   match. The button is small, sits at the rail's trailing edge and only
+   appears once the script has wired it, so no-JS never shows a dead control. */
+.rail-pause {
+  position: absolute;
+  right: var(--gutter);
+  bottom: 0;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font: inherit;
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  color: var(--text-meta);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 0.3rem 0.6rem;
+  cursor: pointer;
+  transition: color var(--speed) var(--ease), border-color var(--speed) var(--ease);
+}
+.rail-pause:hover { color: var(--text); border-color: var(--line-strong); }
+.band--ink .rail-pause {
+  color: var(--text-on-ink-muted);
+  background: transparent;
+  border-color: var(--line-on-ink);
+}
+.band--ink .rail-pause:hover { color: var(--paper); }
+.rail-holder { position: relative; }
+.logo-strip.is-paused .logo-strip-track,
+.work-strip.is-paused .work-strip-track,
+.thumb-rail.is-paused .thumb-track { animation-play-state: paused; }
+/* The add-on band moved to ink, and there .addon .addon-price won on
+   specificity and rendered the loudest thing in the row at 65% grey while the
+   name beside it was full paper. */
+.band--ink .addon .addon-price { color: var(--paper); }

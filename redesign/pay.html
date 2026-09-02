@@ -98,7 +98,7 @@
     <section class="band band--ink" id="checkout">
       <div class="container split split--lead">
         <div class="reveal">
-          <h2>Two ways to <span class="hl">pay.</span></h2>
+          <h2>Two ways to pay.</h2>
           <p>
             Pick the one that describes you. Nothing is charged on this page.
           </p>
@@ -172,7 +172,7 @@
           </div>
 
           <!-- Shared result -->
-          <div class="paysum" id="pay-result" hidden>
+          <div class="paysum" id="pay-result" role="status" aria-live="polite" hidden>
             <h3 id="pay-name"></h3>
             <div>
               <div class="payline" id="pay-line-today" hidden>
@@ -197,11 +197,11 @@
     <section class="band band--alt" id="help">
       <div class="container split split--lead">
         <div class="reveal">
-          <h2>What happens <span class="hl">next.</span></h2>
+          <h2>What happens next.</h2>
           <p>Payment is the start of the build, not the end of the conversation.</p>
           <div class="hero-actions">
             <a href="/contact" class="btn">Ask a question</a>
-            <a href="/packages" class="ulink">See the pricing page <span class="arrow" aria-hidden="true">&raquo;</span></a>
+            <a href="/packages" class="ulink">See packages <span class="arrow" aria-hidden="true">&raquo;</span></a>
           </div>
         </div>
         <div class="reveal" style="--reveal-delay:100ms">
@@ -222,7 +222,7 @@
       <div class="footer-grid">
         <div>
           <div class="footer-logo">
-            <img src="assets/work/logo-edweb-light.webp" alt="Edweb Media" width="296" height="54" loading="lazy" />
+            <img src="assets/work/logo-edweb-light.webp" alt="Edweb Media" width="296" height="54" />
           </div>
           <p class="footer-blurb">
             Custom websites for South African businesses, hosted, updated and marketed by
@@ -302,6 +302,14 @@
       };
       var show = function (el) { el.hidden = false; };
       var hide = function (el) { el.hidden = true; };
+      /* Hiding the panel that holds the button someone just pressed leaves focus
+         on <body>: no announcement, and a keyboard user loses their place. Move
+         it to the step that replaced it instead. */
+      var land = function (el) {
+        if (!el) return;
+        if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '-1');
+        el.focus({ preventScroll: true });
+      };
 
       /* ---------------------------- Result card ---------------------------- */
       function renderResult(spec) {
@@ -358,8 +366,8 @@
         btn.addEventListener('click', function () {
           hide(journey);
           hide(result);
-          if (btn.getAttribute('data-journey') === 'existing') { hide(fresh); show(existing); }
-          else { hide(existing); show(fresh); }
+          if (btn.getAttribute('data-journey') === 'existing') { hide(fresh); show(existing); land(existing); }
+          else { hide(existing); show(fresh); land(fresh); }
         });
       });
       document.querySelectorAll('[data-back]').forEach(function (b) {

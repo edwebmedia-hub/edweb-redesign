@@ -169,8 +169,13 @@
     if (prev) prev.addEventListener('click', function () { step(-1); });
     if (next) next.addEventListener('click', function () { step(1); });
     thumbs.forEach(function (t) { t.addEventListener('click', say); });
+    /* The counter is a polite live region and it was only updated on click.
+       Arrow keys call selectTab directly, so it kept announcing the position
+       the user had already left, which is worse than announcing nothing. */
+    rail.addEventListener('keyup', say);
     say();
-  }());
+  
+}());
 
   /* -------------- Masthead index rows open the tab they name --------------- */
   /* The pricing masthead lists the three website types; clicking one has to
@@ -258,9 +263,9 @@
     var typeNote = $('#type-note');
 
     var RANGES = {
-      business: 'Business websites run R3,999 to R6,499 once-off.',
-      stores: 'Online stores run R5,999 to R9,499 once-off.',
-      directory: 'Directory sites start at R8,999 once-off.'
+      business: 'Business websites run R3,499 to R5,999 once-off.',
+      stores: 'Online stores run R5,499 to R8,999 once-off.',
+      directory: 'Directory sites start at R8,499 once-off.'
     };
 
     /* Keep every option in the DOM and hide the ones that do not apply, so a
@@ -378,6 +383,11 @@
               }
               form.hidden = true;
               panel.hidden = false;
+              /* The submit button lived inside the form we just hid, so focus is
+                 on <body> and nothing is announced. The panel carries
+                 role="status" and now takes focus too. */
+              if (!panel.hasAttribute('tabindex')) panel.setAttribute('tabindex', '-1');
+              panel.focus({ preventScroll: true });
               panel.scrollIntoView({ behavior: 'smooth', block: 'center' });
             } else {
               status.textContent = 'Thank you. Your enquiry is in, we usually reply within one working day.';
@@ -515,6 +525,11 @@
     };
 
     var draw = function () {
+      /* Rebuilding the grid removes the button the user is standing on, which
+         ejects them to <body> on every date press. Remember which day held
+         focus and hand it back once the cells exist again. */
+      var refocus = document.activeElement &&
+        document.activeElement.parentElement === grid ? document.activeElement.textContent.trim() : null;
       grid.innerHTML = '';
       monthLabel.textContent = MONTHS[view.getMonth()] + ' ' + view.getFullYear();
 
@@ -550,6 +565,12 @@
           });
           grid.appendChild(b);
         })(d);
+      }
+      if (refocus) {
+        var back = Array.prototype.filter.call(grid.children, function (c) {
+          return c.tagName === 'BUTTON' && c.textContent.trim() === refocus;
+        })[0];
+        if (back) back.focus({ preventScroll: true });
       }
     };
 
@@ -643,4 +664,61 @@
   /* --------------------------------- Year --------------------------------- */
   var year = $('#year');
   if (year) year.textContent = String(new Date().getFullYear());
+  /* ---------------------- Pause control for the rails ---------------------- */
+  /* Four rails move on their own. Hover was the only way to stop them, which no
+     touch user has and no keyboard user can reach, and the .is-paused hook the
+     stylesheet already defined was never set by anything. The button is built
+     here rather than in the markup so a no-JS visitor never sees a control that
+     cannot work. */
+  (function () {
+    var RAILS = [
+      ['.logo-strip', 'client logos'],
+      ['.reviews-rail', 'reviews'],
+      ['.work-strip', 'recent builds'],
+      ['.opt-c .thumb-rail', 'project thumbnails']
+    ];
+    RAILS.forEach(function (pair) {
+      var rail = document.querySelector(pair[0]);
+      if (!rail) return;
+      var track = rail.firstElementChild;
+      if (!track || getComputedStyle(track).animationName === 'none') return;
+      rail.classList.add('rail-holder');
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'rail-pause';
+      var paint = function () {
+        var off = rail.classList.contains('is-paused');
+        btn.textContent = off ? 'Play' : 'Pause';
+        btn.setAttribute('aria-label', (off ? 'Resume the ' : 'Pause the ') + pair[1] + ' strip');
+      };
+      btn.addEventListener('click', function () {
+        rail.classList.toggle('is-paused');
+        paint();
+      });
+      paint();
+      rail.appendChild(btn);
+    });
+  }());
+
+  /* ------------------- Focus follows the step it opened -------------------- */
+  /* Hiding the container that holds the button someone just pressed drops focus
+     to <body>, so a keyboard or screen-reader user loses their place and hears
+     nothing. Every swap below moves focus to the panel that replaced it. */
+  var focusPanel = function (el) {
+    if (!el) return;
+    if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '-1');
+    try { el.focus({ preventScroll: false }); } catch (e) { el.focus(); }
+  };
+  window.__edwebFocusPanel = focusPanel;
+
+
+  /* Escape closes the mobile menu. It had no handler, so a keyboard user who
+     opened it had no way out but to tab through every link. edweb menu escape */
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Escape') return;
+    var toggle = document.getElementById('nav-toggle');
+    if (!toggle || toggle.getAttribute('aria-expanded') !== 'true') return;
+    toggle.click();
+    toggle.focus();
+  });
 })();
