@@ -177,11 +177,17 @@ button, input, select, textarea { font: inherit; color: inherit; }
    ground genuinely changes (sage, ink, photo) keep their full air. */
 :is(.band, .band--surface):not(.band--sage):not(.band--ink)
   + :is(.band, .band--surface):not(.band--sage):not(.band--ink) {
-  padding-top: calc(var(--band) * 0.25);
+  padding-top: calc(var(--band) * 0.3);
 }
 :is(.band, .band--surface):not(.band--sage):not(.band--ink)
   + :is(.band--tight):not(.band--sage):not(.band--ink) {
-  padding-top: calc(var(--band-tight) * 0.35);
+  padding-top: calc(var(--band-tight) * 0.4);
+}
+/* The band above the seam gives up half its bottom air too, so the meeting
+   point sits balanced instead of hanging under the previous section. */
+:is(.band, .band--surface):not(.band--sage):not(.band--ink):has(
+  + :is(.band, .band--surface, .band--tight):not(.band--sage):not(.band--ink)) {
+  padding-bottom: calc(var(--band) * 0.5);
 }
 .band--sage .rows, .band--sage .cband { border-top-color: color-mix(in srgb, var(--ink) 18%, transparent); }
 .band--sage .row-item, .band--sage .cband > div { border-color: color-mix(in srgb, var(--ink) 18%, transparent); }
