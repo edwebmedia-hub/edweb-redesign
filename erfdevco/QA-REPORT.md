@@ -379,6 +379,32 @@ remains anywhere.
 Verified after: 32 page and width combinations clean; ground and align
 sweeps clean; both of his screenshotted seams re-captured.
 
+## Round 10, 2026-09-02: /better, states and strip
+
+34 items catalogued from fresh captures at four widths plus instrument
+probes; the groups: value strip 1, motion states 3, touch floors 6, line
+breaking sitewide, focus rings 2, dark-chip contrast 1, and the rest
+re-verification of rounds 8 and 9 holding.
+
+- **The strip alternates again.** The section swap had put the country band
+  and the buyer questions on the same canvas; the questions moved to the
+  white surface. Composited walk: photo, canvas, white, sage, canvas, white,
+  photo, canvas, photo.
+- **States**: farm cards lift 4px with a soft ink shadow in the site's
+  motion tokens; the jump-nav marker scales in instead of snapping; both
+  disabled under reduced motion. Type tiles, which clip their contents, get
+  an inset paper focus ring.
+- **Touch floors**: on coarse pointers the filter chips, search field,
+  province rows, spec tabs and question links all reach 44px (measured 44
+  under touch emulation; they were 38 to 43).
+- **Line breaking**: text-wrap balance on headings, ledes and the statement
+  quote, pretty on body copy, supports-guarded so older browsers change
+  nothing.
+- 404's dark chips stepped up to 94 per cent paper.
+
+Verified: 32 page and width combinations clean after the batch; strip probe
+green; coarse-pointer heights 44/44/44; jump-nav animation present.
+
 ---
 
 ## Standing verification

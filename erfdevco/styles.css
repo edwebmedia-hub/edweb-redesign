@@ -2959,3 +2959,66 @@ a, button { -webkit-tap-highlight-color: transparent; }
   .cmp-table thead th { height: auto; vertical-align: top; }
   .cmp-head { height: auto; }
 }
+
+/* --------------------------------------------------------------------------
+   29. /better round 10: line breaks, motion states, touch floors.
+   -------------------------------------------------------------------------- */
+
+/* Headings and ledes balance their breaks; body copy avoids lone last
+   words. Progressive: browsers without it change nothing. */
+@supports (text-wrap: balance) {
+  h1, h2, h3, .lede, .statement__quote { text-wrap: balance; }
+}
+@supports (text-wrap: pretty) {
+  main p { text-wrap: pretty; }
+}
+
+/* The card itself answers a hover, not just its photograph: a small lift
+   with a soft ink shadow, in the same motion tokens as everything else. */
+.farm-card {
+  transition: transform var(--t-mid) var(--ease),
+              box-shadow var(--t-mid) var(--ease);
+}
+.farm-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px -18px color-mix(in srgb, var(--ink-deep) 38%, transparent);
+}
+
+/* The jump nav marker grows in instead of snapping. */
+.jumpnav a { position: relative; border-bottom: 0; }
+.jumpnav a::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 2px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  transition: transform var(--t-mid) var(--ease);
+}
+.jumpnav a[aria-current="true"]::after { transform: scaleX(1); }
+
+/* Touch floors: on coarse pointers every chip-sized control reaches 44px. */
+@media (pointer: coarse) {
+  .filter-btn, .type-more a, .cmp-switch,
+  .provlist button, .spec-tab, .qa__more {
+    min-height: 44px;
+  }
+  .findbar input { min-height: 44px; }
+}
+
+/* The type tiles clip their contents, so their focus ring draws inside. */
+.type-tile:focus-visible {
+  outline: 2px solid var(--paper);
+  outline-offset: -6px;
+  box-shadow: none;
+}
+
+/* Dark-ground chips on the 404 read a step brighter. */
+.type-more--dark a { color: color-mix(in srgb, var(--paper) 94%, transparent); }
+
+@media (prefers-reduced-motion: reduce) {
+  .farm-card { transition: none; }
+  .farm-card:hover { transform: none; }
+  .jumpnav a::after { transition: none; }
+}
