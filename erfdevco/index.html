@@ -21,8 +21,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="preload" as="image" href="assets/hero.jpg"
-        imagesrcset="assets/hero-480w.jpg 480w, assets/hero-800w.jpg 800w, assets/hero-1200w.jpg 1200w, assets/hero.jpg 1800w"
+  <link rel="preload" as="image" href="assets/land-caledon-fields.jpg"
+        imagesrcset="assets/land-caledon-fields-480w.jpg 480w, assets/land-caledon-fields-800w.jpg 800w, assets/land-caledon-fields-1200w.jpg 1200w, assets/land-caledon-fields.jpg 1800w"
         imagesizes="100vw" />
   <link rel="stylesheet" href="styles.css" />
 
@@ -74,8 +74,8 @@
     <!-- Three frames of the same country, crossfading slowly. The first is
          eager and painted before the others are asked for. -->
     <div class="hero__media">
-      <img src="assets/hero.jpg" alt="Storm light over harvested farmland below a mountain range in South Africa" width="2400" height="1600" fetchpriority="high" srcset="assets/hero-480w.jpg 480w, assets/hero-800w.jpg 800w, assets/hero-1200w.jpg 1200w, assets/hero.jpg 1800w" sizes="100vw" />
-      <img src="assets/land-caledon-fields.jpg" alt="" aria-hidden="true" decoding="async" fetchpriority="low" width="2400" height="1600" srcset="assets/land-caledon-fields-480w.jpg 480w, assets/land-caledon-fields-800w.jpg 800w, assets/land-caledon-fields-1200w.jpg 1200w, assets/land-caledon-fields.jpg 1800w" sizes="100vw" />
+      <img src="assets/land-caledon-fields.jpg" alt="Green and gold crop fields under a blue summer sky, wind turbines on the horizon" width="2400" height="1600" fetchpriority="high" srcset="assets/land-caledon-fields-480w.jpg 480w, assets/land-caledon-fields-800w.jpg 800w, assets/land-caledon-fields-1200w.jpg 1200w, assets/land-caledon-fields.jpg 1800w" sizes="100vw" />
+      <img src="assets/hero.jpg" alt="" aria-hidden="true" decoding="async" fetchpriority="low" width="2400" height="1600" srcset="assets/hero-480w.jpg 480w, assets/hero-800w.jpg 800w, assets/hero-1200w.jpg 1200w, assets/hero.jpg 1800w" sizes="100vw" />
       <img src="assets/land-ploughed-aerial.jpg" alt="" aria-hidden="true" decoding="async" fetchpriority="low" width="2400" height="1600" srcset="assets/land-ploughed-aerial-480w.jpg 480w, assets/land-ploughed-aerial-800w.jpg 800w, assets/land-ploughed-aerial-1200w.jpg 1200w, assets/land-ploughed-aerial.jpg 1800w" sizes="100vw" />
     </div>
     <div class="hero__scrim" aria-hidden="true"></div>
@@ -408,99 +408,6 @@
       </div>
     </div>
   </section>
-
-  <!-- ======================================================================
-       THE MANDATE. Statement band over land, in place of invented
-       testimonials.
-       ====================================================================== -->
-  <section class="statement" aria-labelledby="mandate-h">
-    <div class="statement__media">
-      <img src="assets/land-ploughed-aerial.jpg" alt="Contour ploughed lands running toward an escarpment at dawn" loading="lazy" decoding="async" width="2400" height="1600" srcset="assets/land-ploughed-aerial-480w.jpg 480w, assets/land-ploughed-aerial-800w.jpg 800w, assets/land-ploughed-aerial-1200w.jpg 1200w, assets/land-ploughed-aerial.jpg 1800w" sizes="100vw" />
-    </div>
-    <div class="statement__scrim" aria-hidden="true"></div>
-    <div class="shell">
-      <div class="reveal" style="max-width:44rem">
-        <p class="statement__quote" id="mandate-h">One practitioner, <em>one mandate</em>, one farm at a time</p>
-        <p style="color:color-mix(in srgb, var(--paper) 80%, transparent);font-size:var(--fs-lead);line-height:1.65;max-width:52ch">
-          ERFDEVCO is led by Martiens Du Plessis from Kleinbaai in the Western Cape, working sellers and buyers directly rather than through a call centre. The person who answers this number is the person who walked the farm.
-        </p>
-        <ul class="credentials">
-          <li>B.Econ, Stellenbosch</li>
-          <li>Registered with the PPRA</li>
-        </ul>
-        <p style="margin-top:2rem">
-          <a class="btn btn--gold" href="tel:+27829005019">082 900 5019</a>
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ======================================================================
-       WHAT WE DO. Six same-shape services, so a tab selector shows one at a
-       time instead of stacking them (standing rule for repeated sections).
-       Same pattern as the buyer questions above, one mechanic site-wide.
-       ====================================================================== -->
-  <section class="band" aria-labelledby="services-h">
-    <div class="shell">
-      <div class="section-head section-head--split reveal">
-        <div>
-          <h2 id="services-h">Six services, all of them agricultural</h2>
-        </div>
-        <div><p class="lede">No residential, no commercial, no rentals. The whole agency points at one kind of property.</p></div>
-      </div>
-
-      <div class="qa qa--svc reveal">
-        <div class="qa__list" role="tablist" aria-orientation="vertical" aria-label="What ERFDEVCO does">
-          <button class="qa__q" type="button" role="tab" id="svc-t0"
-                  aria-controls="svc-p0" aria-selected="true" tabindex="0">Farm sales</button>
-          <button class="qa__q" type="button" role="tab" id="svc-t1"
-                  aria-controls="svc-p1" aria-selected="false" tabindex="-1">Agricultural land sales</button>
-          <button class="qa__q" type="button" role="tab" id="svc-t2"
-                  aria-controls="svc-p2" aria-selected="false" tabindex="-1">Game farm sales</button>
-          <button class="qa__q" type="button" role="tab" id="svc-t3"
-                  aria-controls="svc-p3" aria-selected="false" tabindex="-1">Property marketing</button>
-          <button class="qa__q" type="button" role="tab" id="svc-t4"
-                  aria-controls="svc-p4" aria-selected="false" tabindex="-1">Buyer and seller assistance</button>
-          <button class="qa__q" type="button" role="tab" id="svc-t5"
-                  aria-controls="svc-p5" aria-selected="false" tabindex="-1">Agricultural property consulting</button>
-        </div>
-        <div class="qa__panels">
-        <div class="qa__a" role="tabpanel" id="svc-p0" aria-labelledby="svc-t0">
-          <p class="qa__from">Farm sales</p>
-          <p class="qa__body">Working farms taken on mandate, scheduled, photographed and marketed to buyers who are looking for production, not a weekend house.</p>
-          <a class="qa__more" href="contact.html?subject=list">List a farm with us</a>
-        </div>
-        <div class="qa__a" role="tabpanel" id="svc-p1" aria-labelledby="svc-t1" hidden>
-          <p class="qa__from">Agricultural land sales</p>
-          <p class="qa__body">Bare land and portions, sold on extent, soil, water and zoning, with the servitudes and title position established up front.</p>
-          <a class="qa__more" href="contact.html?subject=list">Talk to us about your land</a>
-        </div>
-        <div class="qa__a" role="tabpanel" id="svc-p2" aria-labelledby="svc-t2" hidden>
-          <p class="qa__from">Game farm sales</p>
-          <p class="qa__body">Certified fencing, species counts, lodges and hunting infrastructure recorded on the schedule so a buyer knows what is standing and what is running.</p>
-          <a class="qa__more" href="listings.html?type=Game%20Farm">See the game farms listed</a>
-        </div>
-        <div class="qa__a" role="tabpanel" id="svc-p3" aria-labelledby="svc-t3" hidden>
-          <p class="qa__from">Property marketing</p>
-          <p class="qa__body">Photography, the written schedule and the marketing copy are produced once and used everywhere the farm is advertised, so a buyer comparing two sources never finds a discrepancy.</p>
-          <a class="qa__more" href="about.html">How the schedule works</a>
-        </div>
-        <div class="qa__a" role="tabpanel" id="svc-p4" aria-labelledby="svc-t4" hidden>
-          <p class="qa__from">Buyer and seller assistance</p>
-          <p class="qa__body">Guidance through offer, suspensive conditions, VAT treatment and transfer, with the conveyancer and the bank kept on the same set of facts.</p>
-          <a class="qa__more" href="contact.html?subject=requirement">Register what you are after</a>
-        </div>
-        <div class="qa__a" role="tabpanel" id="svc-p5" aria-labelledby="svc-t5" hidden>
-          <p class="qa__from">Agricultural property consulting</p>
-          <p class="qa__body">Advice on how a property is likely to be received by the market before it is listed, including what to measure and what to fix first.</p>
-          <a class="qa__more" href="contact.html?subject=valuation">Ask what your land is worth</a>
-        </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
 
 </main>
 

@@ -1337,39 +1337,8 @@ main > :is(.band, .band--surface, .band--sage, .band--tight):has(+ section) {
 }
 
 /* --------------------------------------------------------------------------
-   13. Statement band (the mandate)
+   13. Credentials list (about page)
    -------------------------------------------------------------------------- */
-.statement {
-  position: relative;
-  isolation: isolate;
-  overflow: clip;
-  min-height: clamp(480px, 62vw, 720px);
-  display: flex; align-items: center;
-}
-.statement__media { position: absolute; inset: 0; z-index: -2; }
-.statement__media img { width: 100%; height: 100%; object-fit: cover; }
-/* Directional, so the copy column stays readable and the right half is
-   carried by the land itself rather than left empty. */
-.statement__scrim {
-  position: absolute; inset: 0; z-index: -1;
-  background: linear-gradient(96deg,
-    color-mix(in srgb, var(--ink-deep) 80%, transparent) 0%,
-    color-mix(in srgb, var(--ink-deep) 62%, transparent) 40%,
-    color-mix(in srgb, var(--ink-deep) 14%, transparent) 72%,
-    color-mix(in srgb, var(--ink-deep) 6%, transparent) 100%);
-}
-.statement__quote {
-  font-family: var(--display);
-  text-transform: uppercase;
-  font-size: clamp(1.75rem, 3.4vw, 3.1rem);
-  line-height: 1.1;
-  letter-spacing: -0.045em;
-  color: var(--paper);
-  max-width: 19ch;
-  margin-bottom: 2rem;
-}
-.statement__quote em { font-style: normal; color: var(--gold); }
-
 .credentials { display: flex; flex-wrap: wrap; gap: 0.5rem 2rem; margin-top: 1.75rem; }
 .credentials li {
   font-size: 0.8125rem;
@@ -1904,7 +1873,7 @@ main > :is(.band, .band--surface, .band--sage, .band--tight):has(+ section) {
 
   body { background: #fff; color: #000; font-size: 10.5pt; line-height: 1.42; }
 
-  .site-header, .site-footer, .searchrail, .cta, .statement,
+  .site-header, .site-footer, .searchrail, .cta,
   .nav-toggle, .skip-link, .filters, .toolbar, .spec-tabs,
   .enquiry-card, .save-btn, .lightbox, .type-more, .crumb,
   .detail-actions, .link-line, .farm-card__foot { display: none !important; }
@@ -2401,7 +2370,7 @@ main .cmp-table p + p, main .factgrid p + p, main .bond p + p { margin-top: 0; }
 main .row-item__body p,
 main .counter__note,
 main .maphead p { max-width: 56ch; }
-.cta p, .statement p, .hero__lede, .page-hero .lede { max-width: 52ch; }
+.cta p, .hero__lede, .page-hero .lede { max-width: 52ch; }
 main .cmp-table p, main .factgrid p, main .bond p { max-width: none; }
 
 /* ---- Section rhythm: two paddings, not four. ---- */
@@ -2705,7 +2674,6 @@ main .cmp-table p, main .factgrid p, main .bond p { max-width: none; }
 .hero :focus-visible,
 .page-hero :focus-visible,
 .cta :focus-visible,
-.statement :focus-visible,
 .cmp-tray :focus-visible,
 .lightbox :focus-visible {
   outline-color: var(--gold);
@@ -2718,15 +2686,15 @@ main .cmp-table p, main .factgrid p, main .bond p { max-width: none; }
 .hero__scrim {
   background:
     linear-gradient(96deg,
-      color-mix(in srgb, var(--ink-deep) 76%, transparent) 0%,
-      color-mix(in srgb, var(--ink-deep) 58%, transparent) 38%,
-      color-mix(in srgb, var(--ink-deep) 6%, transparent) 72%,
+      color-mix(in srgb, var(--ink-deep) 68%, transparent) 0%,
+      color-mix(in srgb, var(--ink-deep) 48%, transparent) 38%,
+      color-mix(in srgb, var(--ink-deep) 4%, transparent) 72%,
       transparent 100%),
     linear-gradient(180deg,
-      color-mix(in srgb, var(--ink-deep) 58%, transparent) 0%,
-      color-mix(in srgb, var(--ink-deep) 16%, transparent) 38%,
-      color-mix(in srgb, var(--ink-deep) 54%, transparent) 78%,
-      color-mix(in srgb, var(--ink-deep) 82%, transparent) 100%);
+      color-mix(in srgb, var(--ink-deep) 46%, transparent) 0%,
+      color-mix(in srgb, var(--ink-deep) 10%, transparent) 38%,
+      color-mix(in srgb, var(--ink-deep) 44%, transparent) 78%,
+      color-mix(in srgb, var(--ink-deep) 74%, transparent) 100%);
 }
 
 /* A1. The closed mobile menu kept four focusable links and stayed in the
@@ -2919,7 +2887,7 @@ a, button { -webkit-tap-highlight-color: transparent; }
       animation-range: 0 100vh;
     }
     @keyframes hero-drift { to { transform: translateY(9%) scale(1.06); } }
-    .statement__media img, .cta__media img {
+    .cta__media img {
       animation: band-pan linear both;
       animation-timeline: view();
       animation-range: cover 0% cover 100%;
@@ -2970,7 +2938,7 @@ a, button { -webkit-tap-highlight-color: transparent; }
 /* Headings and ledes balance their breaks; body copy avoids lone last
    words. Progressive: browsers without it change nothing. */
 @supports (text-wrap: balance) {
-  h1, h2, h3, .lede, .statement__quote { text-wrap: balance; }
+  h1, h2, h3, .lede { text-wrap: balance; }
 }
 @supports (text-wrap: pretty) {
   main p { text-wrap: pretty; }
@@ -3266,11 +3234,6 @@ body:has(.cmp-tray.is-up) .chat-fab { bottom: calc(clamp(1rem, 2.5vw, 1.75rem) +
   .section-head { margin-bottom: clamp(1.75rem, 8vw, 2.5rem); }
 }
 
-/* The statement stack read cramped once the paragraph rhythm took over:
-   a display quote needs more than a body paragraph's 1em under it. */
-.statement__quote { margin-bottom: 1.25rem; }
-.statement .credentials { margin-top: 1.75rem; }
-
 /* The leftover-type chips on a phone: a clean two-column grid, with the
    view-everything route on its own full row instead of dangling. */
 @media (max-width: 640px) {
@@ -3300,12 +3263,14 @@ body:has(.cmp-tray.is-up) .chat-fab { bottom: calc(clamp(1rem, 2.5vw, 1.75rem) +
 /* Light grade so the land reads as photography, not backdrop. Subtle enough
    that the copy zones above keep their measured contrast. */
 .hero__media img,
-.statement__media img,
 .cta__media img,
 .page-hero__media img {
   filter: saturate(1.14) contrast(1.06) brightness(1.06);
 }
 .farm-card__media img { filter: saturate(1.08) contrast(1.03); }
+/* The storm frame (second in the cycle) runs naturally darker than the
+   other two, so it carries its own stronger lift. */
+.hero__media img:nth-child(2) { filter: saturate(1.2) contrast(1.04) brightness(1.22); }
 
 @media (max-width: 640px) {
   /* Credentials: the desktop rule-and-gap pair wrapped into a ragged second
@@ -3318,17 +3283,10 @@ body:has(.cmp-tray.is-up) .chat-fab { bottom: calc(clamp(1rem, 2.5vw, 1.75rem) +
      land actually shows. */
   .hero__scrim {
     background: linear-gradient(180deg,
-      color-mix(in srgb, var(--ink-deep) 74%, transparent) 0%,
-      color-mix(in srgb, var(--ink-deep) 60%, transparent) 42%,
-      color-mix(in srgb, var(--ink-deep) 46%, transparent) 74%,
-      color-mix(in srgb, var(--ink-deep) 76%, transparent) 100%);
-  }
-  .statement__scrim {
-    background: linear-gradient(180deg,
-      color-mix(in srgb, var(--ink-deep) 86%, transparent) 0%,
-      color-mix(in srgb, var(--ink-deep) 78%, transparent) 52%,
-      color-mix(in srgb, var(--ink-deep) 58%, transparent) 80%,
-      color-mix(in srgb, var(--ink-deep) 32%, transparent) 100%);
+      color-mix(in srgb, var(--ink-deep) 66%, transparent) 0%,
+      color-mix(in srgb, var(--ink-deep) 52%, transparent) 42%,
+      color-mix(in srgb, var(--ink-deep) 38%, transparent) 74%,
+      color-mix(in srgb, var(--ink-deep) 68%, transparent) 100%);
   }
   .cta__scrim {
     background: linear-gradient(180deg,
