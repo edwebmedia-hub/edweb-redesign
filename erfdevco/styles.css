@@ -175,19 +175,14 @@ button, input, select, textarea { font: inherit; color: inherit; }
    steps subtly (canvas to white), so the eye reads one ground with a hole
    in it. Same-value seams collapse to a quarter step; seams where the
    ground genuinely changes (sage, ink, photo) keep their full air. */
-:is(.band, .band--surface):not(.band--sage):not(.band--ink)
-  + :is(.band, .band--surface):not(.band--sage):not(.band--ink) {
-  padding-top: calc(var(--band) * 0.3);
+/* One seam for the whole site. Every section boundary shows the same 0.4
+   step on each side, whatever the grounds are, photo bands included. No
+   tiers, no special cases: measured equal everywhere. */
+main > section + :is(.band, .band--surface, .band--sage, .band--tight) {
+  padding-top: calc(var(--band) * 0.4);
 }
-:is(.band, .band--surface):not(.band--sage):not(.band--ink)
-  + :is(.band--tight):not(.band--sage):not(.band--ink) {
-  padding-top: calc(var(--band-tight) * 0.4);
-}
-/* The band above the seam gives up half its bottom air too, so the meeting
-   point sits balanced instead of hanging under the previous section. */
-:is(.band, .band--surface):not(.band--sage):not(.band--ink):has(
-  + :is(.band, .band--surface, .band--tight):not(.band--sage):not(.band--ink)) {
-  padding-bottom: calc(var(--band) * 0.5);
+main > :is(.band, .band--surface, .band--sage, .band--tight):has(+ section) {
+  padding-bottom: calc(var(--band) * 0.4);
 }
 .band--sage .rows, .band--sage .cband { border-top-color: color-mix(in srgb, var(--ink) 18%, transparent); }
 .band--sage .row-item, .band--sage .cband > div { border-color: color-mix(in srgb, var(--ink) 18%, transparent); }
