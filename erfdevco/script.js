@@ -1555,6 +1555,26 @@
     });
   });
 
+  /* ----------------------------------------------------------------------
+     Chat. The pitch of this agency is that the person who walked the farm
+     answers, so the chat button is a direct WhatsApp line to Martiens, not
+     a bot pretending to be one. Injected everywhere; hidden in print.
+     ---------------------------------------------------------------------- */
+  (function chatLine() {
+    if (document.querySelector('.chat-fab')) return;
+    var text = encodeURIComponent('Hi Martiens, I am on erfdevco.com and have a question.');
+    var a = document.createElement('a');
+    a.className = 'chat-fab';
+    a.href = 'https://wa.me/27829005019?text=' + text;
+    a.rel = 'noopener';
+    a.setAttribute('aria-label', 'WhatsApp Martiens, opens in WhatsApp');
+    a.innerHTML =
+      '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">' +
+      '<path fill="currentColor" d="M12 2a9.9 9.9 0 0 0-8.5 15L2 22l5.2-1.4A10 10 0 1 0 12 2Zm0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3 .8.8-3-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.6-6.1c-.3-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.3-.7.8-.8 1-.1.2-.3.2-.6.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4 0-.5.1-.7l.5-.6c.1-.2.1-.4 0-.5l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2 0 1.3.9 2.6 1.1 2.8.1.2 1.9 3 4.6 4.1.6.3 1.1.4 1.5.6.6.2 1.2.2 1.6.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.6-.3Z"/></svg>' +
+      '<span class="chat-fab__tip">Chat to Martiens</span>';
+    document.body.appendChild(a);
+  })();
+
   /* Year in the footer */
   $$('[data-year]').forEach(function (el) { el.textContent = String(new Date().getFullYear()); });
 
