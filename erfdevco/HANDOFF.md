@@ -438,3 +438,27 @@ OPEN, next session:
    replace the 9 demo farms.
 5. Launch gate list unchanged in CONFIRM-BEFORE-LAUNCH.md (incl. removing the
    X-Robots-Tag noindex in vercel.json at real launch).
+
+## Evening round 13 (2026-09-03, after the session-close note above)
+
+All APPROVED by Edgar ("perfect") and live at erfdevco.vercel.app, pushed at 472a7f8:
+- 13 of his 17 chosen photos placed site-wide (hero crossfade, about splits,
+  type tiles, CTA tractor, page heroes, 3 listing cards; 4 people/detail shots
+  banked unplaced in that session's scratchpad only).
+- Home page: statement + six-services sections REMOVED; five-questions became
+  a native details/summary FAQ with the rose-vineyard photo right column.
+- Hero settled after 6 rejected options: CENTRED CLASSIC (Helix/Tee-to-Trail
+  shape, ruling harvested to OS TASTE-PROFILE), flat scrim, heading
+  "Farms for sale in South Africa" with gold country. fs-hero 2.7-5.5rem.
+- CTA band pans straight top-to-bottom with scroll. ROOT FIX with it: the
+  sideways-overflow guard moved from body to html; body-level hidden had
+  every scroll timeline dead since launch (memory lesson rule 10).
+- Receptionist widget v2: pulsing gold-ring launcher with persistent
+  "Ask about a farm" label until first open, branded panel (mark, gold rule,
+  duty dot), avatar bubbles, row chips, round gold send, sessionStorage
+  thread restore across pages. E2E tested live. Fixes: avatar CSS path needed
+  assets/ prefix; .chat-chips[hidden] needed display:none (grid beat UA rule).
+
+Still open, unchanged: SMTP_PASS (no lead/contact email), real mandates for
+the 9 demo farms, launch gates in CONFIRM-BEFORE-LAUNCH.md, P24 + Martiens
+answers. Vercel token from this session must be deleted by Edgar.
