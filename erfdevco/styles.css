@@ -45,7 +45,7 @@
   --body: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
 
   /* Fluid display scale. Tracking tightens as size grows, the Altnest move. */
-  --fs-hero: clamp(2.4rem, 6.1vw, 5.25rem);
+  --fs-hero: clamp(2.15rem, 5.4vw, 4.5rem);
   --fs-h1: clamp(2.4rem, 4.6vw, 4rem);
   --fs-h2: clamp(1.85rem, 3.1vw, 2.85rem);
   --fs-h3: clamp(1.25rem, 1.6vw, 1.6rem);
@@ -522,10 +522,10 @@ main > :is(.band, .band--surface, .band--sage, .band--tight):has(+ section) {
 
 .hero__title {
   font-size: var(--fs-hero);
-  line-height: 0.98;
-  letter-spacing: -0.06em;
+  line-height: 1.02;
+  letter-spacing: -0.045em;
   color: var(--paper);
-  max-width: 22ch;
+  max-width: 34ch;
   margin-inline: auto;
   margin-bottom: 1.5rem;
 }
