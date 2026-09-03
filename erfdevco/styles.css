@@ -519,7 +519,7 @@ main > :is(.band, .band--surface, .band--sage, .band--tight):has(+ section) {
   line-height: 0.98;
   letter-spacing: -0.06em;
   color: var(--paper);
-  max-width: 16ch;
+  max-width: 22ch;
   margin-bottom: 1.5rem;
 }
 .hero__title .gold { color: var(--gold); }
