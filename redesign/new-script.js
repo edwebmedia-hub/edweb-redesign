@@ -403,7 +403,7 @@
         return 'Call or WhatsApp 084 620 4583, or email info@edwebmedia.com. Every enquiry gets a reply within one working day.';
       if (has('who', 'where', 'cape town', 'about', 'edgar'))
         return 'Edweb Media is a web design studio in Cape Town. You deal with the person building the site, and we work with businesses across South Africa.';
-      return 'I cannot reach the live assistant right now. WhatsApp 084 620 4583 or use the contact form and Edgar will answer personally.';
+      return 'I cannot reach the live assistant right now. WhatsApp 084 620 4583 or use the contact form and we will answer personally.';
     };
 
     var render = function (m) {
@@ -440,7 +440,7 @@
         typing(false);
         history.push({ role: 'assistant', content: reply }); save();
         render({ role: 'assistant', content: reply });
-        if (lead) { history.push({ role: 'note', content: 'Sent to Edgar. He will phone you back.' }); save(); render({ role: 'note', content: 'Sent to Edgar. He will phone you back.' }); }
+        if (lead) { history.push({ role: 'note', content: 'Sent to the studio. We will phone you back.' }); save(); render({ role: 'note', content: 'Sent to the studio. We will phone you back.' }); }
         busy = false;
       };
       var ctrl = 'AbortController' in window ? new AbortController() : null;
