@@ -78,3 +78,12 @@ variable is set on the project); that is a launch-checklist item, not a bug.
   a property practitioner, not something Martiens has stated. Have his attorney
   check the page before launch.
 - **Kleinbaai** is given as the office. There is still no street address.
+
+## AI receptionist (added 2026-09-03)
+
+- LIVE on the staging deploy. Key "erfdevco-site" in the Anthropic console,
+  billed off the org's prepaid credits (US$5 balance = natural spend cap;
+  top up or set auto-reload consciously, never blindly).
+- BEFORE LAUNCH: set SMTP_PASS on Vercel production, or chatbot leads are
+  never emailed to Martiens (they only flash in the visitor's widget).
+- Guardrail gate passed 2026-09-03, transcript in QA-REPORT.md round 11.

@@ -259,3 +259,128 @@ https://claude.ai/code/artifact/ebc59c79-3947-47d4-b210-f0a8b65e703e
   only by the `.js` class on `<html>`, and three sweeps force everything visible.
 - No em-dashes or en-dashes anywhere in output. Swept clean.
 - One site per branch: this work belongs on `erfdevco-custom` only.
+
+---
+
+# Session addendum, 2026-08-28 (email + Property24 thread)
+
+This section covers work done in a parallel chat that is not reflected above.
+
+## CRITICAL: info@erfdevco.com does not exist
+
+Verified in Hostinger hPanel on 2026-08-28. The domain erfdevco.com has:
+
+- exactly ONE mailbox, `martiens@erfdevco.com`
+- no email alias
+- no forwarder
+- no catch-all
+
+So anything sent to `info@erfdevco.com` bounces. It was published in several
+places and all of them are now pointed at `martiens@erfdevco.com`:
+
+- `index.html` JSON-LD `email` field
+- `contact.html` (mailto link and the general-enquiries row)
+- `api/send-mail.js` `CLIENT_EMAIL` constant, which is where the contact form
+  delivers. This one was the real bug: every form submission would have
+  bounced.
+- `api/chat.js` system prompt
+
+The printed yard board, the SOLD board and the Martiens email signature only
+ever used `martiens@erfdevco.com`, so nothing printed is affected.
+
+If the client wants info@ to work it has to be created as an alias in hPanel
+first. Do not put it back on the site before that exists.
+
+## Mailbox is full and it is not the client's mail
+
+`martiens@erfdevco.com` sits at 1023.96 MB of 1024 MB on Hostinger's **Free
+Business Email** plan (1 GB per mailbox). Every other Edweb domain is on the
+same free plan, they are just not full.
+
+Checked every folder in Titan webmail: Inbox, Sent, Drafts, Spam all empty.
+Trash was emptied during the session and freed about 40 KB. Seven sub-folders
+sit under Trash and are all empty: Agente, Lauricia, Capitec, Discovery Bank,
+MJ, Prop 24, Prop24. No email import was ever run. No catch-all, no forwarders.
+
+So the server is charging for data that is not visible in any folder. That is
+either IMAP mail deleted but never expunged, or a quota counter that has not
+recalculated. Neither is fixable from the webmail screen.
+
+A folder named "Capitec" appeared in the list mid-session, which means an IMAP
+client (Martiens' Outlook) is connected and actively syncing his personal mail
+structure into this business mailbox. Those folder names are his own filing
+folders, not anything ERFDEVCO generated. If the quota is cleared and Outlook is
+left as it is, it will refill.
+
+Next action, for Edgar: Hostinger live chat, ask them to recalculate the mailbox
+quota and purge deleted-but-unexpunged data. Wording is in the chat. Then check
+Outlook on Martiens' side. Do not upgrade the plan until that is done.
+
+While it sits at 100% the mailbox rejects incoming mail with attachments.
+
+## Property24: PropCtrl question, email drafted but NOT sent
+
+Client wants listings pushed from the new site to Property24 plus three or four
+other portals. Open question: is PropCtrl required.
+
+Researched and verified by opening the pages:
+
+- **PropCtrl is Property24's own back-office product**, not a third party.
+  property24.com/products/online-management-software calls it "SA's favourite
+  real estate back-office system". Pricing is "office dependent" and the public
+  rate card link 404s, so only the account manager can quote it.
+- **PropCon is a separate company** (propcon.co.za) that syndicates one listing
+  to Property24, Private Property, ImmoAfrica and Gumtree. Farms and vacant land
+  are supported property types. It has a public pricing calculator and a free
+  trial. This already solves the multi-portal requirement out of the box.
+- Third-party systems demonstrably do feed Property24 (PropCon, Prop Data,
+  Entegral, Cloud Property Solutions all syndicate into it).
+
+NOT verified, and this is what the email asks:
+
+- whether Property24 will accept a feed from a plain website rather than an
+  established CRM vendor
+- what PropCtrl costs
+- what PropCon costs
+
+A short email to Caron at Property24 was drafted in chat and approved by Edgar
+but had not been sent when this chat was parked. It asks four things: can we
+load listings straight into a P24 back office, what does PropCtrl cost for a one
+office agency, can P24 pull automatically from erfdevco.com, and is there a bulk
+CSV upload.
+
+Her answer decides the architecture:
+
+- **If P24 takes a feed:** build one feed off the site, every portal pulls the
+  same one, the website stays the master record. Cheapest and cleanest.
+- **If P24 insists on a CRM:** the CRM becomes the master record and the website
+  reads from it instead. More work, plus a monthly fee. PropCon likely beats
+  PropCtrl there because PropCtrl only serves Property24 while PropCon covers
+  four portals. Neither has been priced.
+
+## Content fixes made this session
+
+- Eyebrow labels sat above all eight sections, which is the repetition tell in
+  the OS taste profile. Cut to two.
+- A counter claimed "103 fields per listing". No listing has 103, the demo data
+  populates 60 to 68 because a vineyard does not answer the game-farm section.
+  Relabelled to "fields in the schedule".
+- Statement headline was "Building dreams one farm at a time", an empty-verb
+  headline banned in the AI-slop six. Now "One practitioner, one mandate, one
+  farm at a time".
+- The site spelled the client "Martiens du Plessis". The approved email
+  signature spells it "Du Plessis". Fixed across five pages.
+
+## Verified client facts, do not re-ask
+
+Checked against the email signature Edgar approved and installed in Hostinger
+webmail (`Desktop/Companies/ERFDEVCO/erfdevco-signature-martiens.html`):
+
+- phone `082 900 5019`
+- `B.Econ (Stell.)`
+- `Registered with the PPRA`
+- based in `Kleinbaai, Western Cape`
+- name spelled `Martiens Du Plessis`
+
+Still unverified: the MPRE / Master Practitioner in Real Estate designation.
+See CONFIRM-BEFORE-LAUNCH.md.

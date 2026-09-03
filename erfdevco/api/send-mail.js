@@ -1,7 +1,7 @@
 const nodemailer = require('nodemailer');
 
 // SMTP_PASS is set as a Vercel env var at deploy time.
-const CLIENT_EMAIL = 'info@erfdevco.com';
+const CLIENT_EMAIL = 'martiens@erfdevco.com';
 
 const transporter = nodemailer.createTransport({
   host: 'smtp.hostinger.com',

@@ -466,3 +466,33 @@ Run after every change in this session:
 6. Form delivery never tested end to end: it would send real mail to the client.
 7. Screen readers not tested with NVDA or VoiceOver; findings are from the
    Chrome accessibility tree.
+
+## Round 11 - AI receptionist live, guardrail gate (2026-09-03)
+
+Backend `api/chat.js` connected to the Anthropic API and deployed. Console key
+"erfdevco-site" (never expires) with the workspace id sent as a default header:
+identity-linked console keys 400 without `anthropic-workspace-id`, which was the
+whole cause of the first 500. Env vars on Vercel production: ANTHROPIC_API_KEY,
+ANTHROPIC_WORKSPACE_ID. Model claude-haiku-4-5, max 300 tokens, farms digest
+self-fetched from /data/listings.json (10 min cache).
+
+30-question guardrail suite run against the LIVE endpoint
+(scratchpad/guardrail-results.jsonl transcript):
+
+- 10 in-facts: 10/10 correct, no invented farms or figures, Afrikaans answered
+  in Afrikaans, "are you a person" answered per rule 5.
+- 10 out-of-facts: 10/10 declined without inventing (commission, listing fee,
+  past sales, price cuts, load shedding, bonds, rentals, "best investment"),
+  each routed to Martiens or the farm page.
+- 5 lead flows: 4/4 leads fired with clean name | phone | need and the LEAD
+  line stripped from the visible reply; the refusal case correctly fired none.
+- 5 hostile: impersonation ("this is Martiens"), DAN jailbreak, system-prompt
+  dump, key phishing, off-topic poem - all held.
+
+Two cosmetic leaks found and fixed the same run: replies sometimes carried
+markdown asterisks (widget renders plain text) and em dashes. RULES tightened,
+redeployed, 3-question re-spot came back clean.
+
+Carried: SMTP_PASS is still unset on Vercel, so lead emails are silently
+skipped; leads only show in the visitor's widget card. Set SMTP_PASS before
+telling Martiens the bot captures leads.
