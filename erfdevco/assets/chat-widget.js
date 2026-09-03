@@ -53,7 +53,12 @@
       '<a href="tel:+27829005019">082 900 5019</a> or ' +
       '<a href="https://wa.me/27829005019" rel="noopener">WhatsApp Martiens</a>.</p>';
 
+  var backdrop = document.createElement('div');
+  backdrop.className = 'chat-backdrop';
+  backdrop.hidden = true;
+
   document.body.appendChild(fab);
+  document.body.appendChild(backdrop);
   document.body.appendChild(panel);
 
   var log = panel.querySelector('.chat-log');
@@ -81,24 +86,36 @@
     turns.forEach(function (t) { bubble(t.content, t.role === 'user' ? 'me' : 'bot'); });
   }
 
+  var small = window.matchMedia('(max-width: 640px)');
+  var fine = window.matchMedia('(hover: hover) and (pointer: fine)');
+
   function open() {
     panel.hidden = false;
     panel.classList.add('is-open');
+    backdrop.hidden = false;
+    requestAnimationFrame(function () { backdrop.classList.add('is-open'); });
+    if (small.matches) document.documentElement.classList.add('chat-lock');
     fab.setAttribute('aria-expanded', 'true');
     fab.classList.add('is-quiet');
     try { sessionStorage.setItem(KEY_SEEN, '1'); } catch (e) {}
     lastFocus = document.activeElement;
     log.scrollTop = log.scrollHeight;
-    input.focus();
+    // Focusing the field on a phone slams the keyboard over half the sheet
+    // before the visitor has read a word; only desktop gets the autofocus.
+    if (fine.matches) input.focus();
   }
   function close() {
     panel.classList.remove('is-open');
     panel.hidden = true;
+    backdrop.classList.remove('is-open');
+    backdrop.hidden = true;
+    document.documentElement.classList.remove('chat-lock');
     fab.setAttribute('aria-expanded', 'false');
     if (lastFocus && lastFocus.focus) lastFocus.focus();
   }
   fab.addEventListener('click', function () { panel.hidden ? open() : close(); });
   panel.querySelector('.chat-close').addEventListener('click', close);
+  backdrop.addEventListener('click', close);
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' && !panel.hidden) close();
   });
