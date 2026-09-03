@@ -1277,7 +1277,14 @@ button, input, select, textarea { font: inherit; color: inherit; }
   display: flex;
   flex-direction: column;
   height: 100%;
-  background: var(--ink-deep);
+  /* Farmland under a heavy ink overlay: the photograph gives the panel a
+     ground without costing the values their contrast. The gradient alone
+     carries it anywhere the image cannot load. */
+  background:
+    linear-gradient(168deg,
+      color-mix(in srgb, var(--ink-deep) 92%, transparent) 0%,
+      color-mix(in srgb, var(--ink-deep) 84%, transparent) 100%),
+    var(--ink-deep) url("assets/land-ploughed-aerial-800w.jpg") center / cover no-repeat;
   color: var(--paper);
   padding: clamp(1.25rem, 2.4vw, 1.9rem);
   border-radius: var(--r-card);
