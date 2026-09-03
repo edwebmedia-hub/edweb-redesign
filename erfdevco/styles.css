@@ -97,8 +97,13 @@ body {
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  overflow-x: hidden;
 }
+/* The sideways-overflow guard lives on html, not body: on body it either
+   creates a scroll container that never scrolls (hidden), which leaves every
+   scroll-driven animation timeline inactive, or propagates clip to the
+   viewport and kills page scrolling outright. On the root, the page keeps
+   scrolling and the timelines attach to it. */
+html { overflow-x: hidden; }
 
 img, svg, video { display: block; max-width: 100%; }
 img { height: auto; }
