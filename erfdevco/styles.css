@@ -179,10 +179,10 @@ button, input, select, textarea { font: inherit; color: inherit; }
    step on each side, whatever the grounds are, photo bands included. No
    tiers, no special cases: measured equal everywhere. */
 main > section + :is(.band, .band--surface, .band--sage, .band--tight) {
-  padding-top: calc(var(--band) * 0.4);
+  padding-top: calc(var(--band) * 0.6);
 }
 main > :is(.band, .band--surface, .band--sage, .band--tight):has(+ section) {
-  padding-bottom: calc(var(--band) * 0.4);
+  padding-bottom: calc(var(--band) * 0.6);
 }
 .band--sage .rows, .band--sage .cband { border-top-color: color-mix(in srgb, var(--ink) 18%, transparent); }
 .band--sage .row-item, .band--sage .cband > div { border-color: color-mix(in srgb, var(--ink) 18%, transparent); }
