@@ -1,6 +1,6 @@
 # Edweb Media (edwebmedia.com), state handoff
 
-## 2026-09-03: full rebuild, committed 0878cda, merged into the live branch, awaiting the launch click
+## 2026-09-03: full rebuild LIVE at edwebmedia.com (tip fd57c4d, launched 20:45)
 
 Edgar asked for the whole site redone from scratch ("boring", "I don't like
 the flow") with an AI chatbot, delivered once at 95%+. Built in the worktree
@@ -48,7 +48,7 @@ hosting project before it goes live.**
 **Preview.** `.claude/launch.json` entry `edweb-next` (port 4240, static server
 on the worktree). `/api/*` 404s locally by design.
 
-**To go live.** (1) DONE: merged fast-forward into `edweb-logo-refresh` and pushed. (2) DONE: promote run, 14 pages, no leftover draft links. (3) Edgar adds `ANTHROPIC_API_KEY` in the hosting project's environment variables. (4) Edgar runs the launch script. (5) Live checks: one real form send, one chat turn that captures a lead, /pay?test=1 through the sandbox. Old steps for reference: (2) `node C:\Users\edgar\Edweb-Claude-Website-OS\tools\promote.mjs <redesign>`
+**To go live.** (1) DONE: merged fast-forward into `edweb-logo-refresh` and pushed. (2) DONE: promote run, 14 pages, no leftover draft links. (3) DONE: `ANTHROPIC_API_KEY` plus `ANTHROPIC_WORKSPACE_ID` (identity-linked console keys need it) set on the hosting project. (4) DONE: launched, chat verified live. (5) Still owed: one real form send, one chat turn that captures a lead, /pay?test=1 through the sandbox. Old steps for reference: (2) `node C:\Users\edgar\Edweb-Claude-Website-OS\tools\promote.mjs <redesign>`
 to copy drafts onto the live filenames. (3) Add `ANTHROPIC_API_KEY` in the
 hosting project's environment variables. (4) Run the launch script. (5) Send
 one real form and one real chat lead.
