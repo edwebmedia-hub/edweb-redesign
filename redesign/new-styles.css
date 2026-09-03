@@ -33,12 +33,8 @@
 
   /* Type */
   --font: "Manrope", "Helvetica Neue", Arial, sans-serif;
-  /* Section headings only. Archivo is drawn to work at 900, so at 86px it reads
-     solid where Manrope at the same size reads merely large. Loaded at one
-     weight because one weight is all that uses it. */
-  --font-display: "Archivo", "Helvetica Neue", Arial, sans-serif;
-  --fs-h1: clamp(2.9rem, 6.7vw, 5.7rem);
-  --fs-h2: clamp(2.6rem, 5.2vw, 4.6rem);
+  --fs-h1: clamp(2.4rem, 5.1vw, 4.25rem);
+  --fs-h2: clamp(2.25rem, 4vw, 3.6rem);
   --fs-h3: clamp(1.35rem, 1.9vw, 1.75rem);
   --fs-h4: clamp(1.05rem, 1.25vw, 1.2rem);
   /* Was clamp(1.06rem, 1.28vw, 1.42rem), which computed 16.96px against a
@@ -114,21 +110,9 @@ h1, h2, h3, h4 {
   margin: 0;
   text-wrap: balance;
 }
-h1 { font-family: var(--font-display); font-weight: 900; font-size: var(--fs-h1); line-height: 0.95; letter-spacing: -0.045em; }
-h2 { font-family: var(--font-display); font-weight: 900; font-size: var(--fs-h2); line-height: 0.95; letter-spacing: -0.045em; }
-/* A heading inside a card is a card title, not a section heading: it sits at
-   h3 size, where a 900 display weight reads as a mistake rather than as
-   confidence. These two are the only cards on the site that hold an h2, and
-   .process-card is a section wrapper despite the name, so it is not one. */
-.hero-card h2,
-.quote-card h2 {
-  font-family: var(--font);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  line-height: 1.2;
-}
-h3 { font-size: var(--fs-h3); line-height: 1.24; letter-spacing: -0.02em; font-weight: 700; }
-h4 { font-size: var(--fs-h4); line-height: 1.35; letter-spacing: -0.01em; font-weight: 700; }
+h1 { font-size: var(--fs-h1); line-height: 1.06; letter-spacing: -0.035em; }
+h2 { font-size: var(--fs-h2); line-height: 1.1; letter-spacing: -0.03em; }
+h4 { font-size: var(--fs-h4); line-height: 1.35; letter-spacing: -0.01em; font-weight: 600; }
 p { margin: 0; text-wrap: pretty; }
 
 ::selection { background: var(--coral); color: var(--paper); }
@@ -1518,20 +1502,16 @@ form > div:has(textarea:focus) label,
 /* Manrope is a variable font. WebKit does not always apply font-weight to a
    variable face fetched from the CSS2 API, so the axis is pinned as well.
    Chrome ignores the duplication; Safari and the QA screenshots now match. */
-.hero-card h2, .quote-card h2 { font-variation-settings: "wght" 700; }
+h1, h2 { font-variation-settings: "wght" 700; }
 h3, h4 { font-variation-settings: "wght" 600; }
 .btn { font-variation-settings: "wght" 600; }
 .wordstack .w-light { font-variation-settings: "wght" 500; }
 .wordstack .w-bold { font-variation-settings: "wght" 800; }
-/* Anything at figure scale is display type doing a heading's job, so it takes
-   the display face. These were Manrope 700 sitting beside Archivo 900. */
+/* One face on the site again, so a figure is Manrope like everything else. */
 .figure-val,
 .pcard-price,
 .addon-price,
-.stat-v {
-  font-family: var(--font-display);
-  font-weight: 900;
-}
+.stat-v { font-variation-settings: "wght" 700; }
 
 /* The process and closing bands moved off ink onto the light tones, so their
    parts take the light tokens by default. The .band--ink overrides below keep
@@ -2356,13 +2336,7 @@ textarea[aria-invalid="true"] {
 }
 .prose { max-width: 72ch; margin-inline: auto; }
 .prose h2 {
-  /* Clause headings sit at h3 size, so they belong to the h3 role and take
-     the reading face, not the display face. */
-  font-family: var(--font);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  line-height: 1.24;
-  font-size: var(--fs-h3);
+    font-size: var(--fs-h3);
   margin-top: clamp(2.75rem, 5vw, 4rem);
   padding-top: clamp(1.5rem, 2.5vw, 2rem);
   border-top: 1px solid var(--line);
@@ -3571,11 +3545,4 @@ img.avatar { object-fit: cover; background: var(--ground-alt); }
    this one. The rail is symmetric, so the control moves to the other end. */
 .rail-pause { right: auto; left: var(--gutter); }
 
-/* Footer column headings sit below even the card titles in size, so they
-   belong to the reading face for the same reason those do. */
-.site-footer h2, footer h2 {
-  font-family: var(--font);
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  line-height: 1.35;
-}
+
