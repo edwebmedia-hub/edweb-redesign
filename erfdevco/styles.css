@@ -2781,17 +2781,14 @@ a, button { -webkit-tap-highlight-color: transparent; }
       animation-range: 0 100vh;
     }
     @keyframes hero-drift { to { transform: translateY(9%) scale(1.06); } }
-    /* The tractor sits right of frame heading down-left, so the frame pans
-       up-right to down-left with the scroll and the machine reads as driving
-       its rows while the band moves through the viewport. */
     .cta__media img {
       animation: band-pan linear both;
       animation-timeline: view();
       animation-range: cover 0% cover 100%;
     }
     @keyframes band-pan {
-      from { transform: translate(5.5%, -3%) scale(1.14); }
-      to { transform: translate(-5.5%, 3%) scale(1.14); }
+      from { transform: translateY(-6%) scale(1.13); }
+      to { transform: translateY(6%) scale(1.13); }
     }
   }
 }
