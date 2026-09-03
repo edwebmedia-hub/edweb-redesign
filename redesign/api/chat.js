@@ -79,7 +79,9 @@ async function sendLeadMail(lead, transcript) {
 module.exports = async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store');
   if (req.method !== 'POST') return res.status(405).json({ error: 'POST only' });
-  if (!process.env.ANTHROPIC_API_KEY) return res.status(503).json({ error: 'not configured' });
+  // The key may have been pasted with a note around it; use the sk-ant-… token only.
+  const API_KEY = ((process.env.ANTHROPIC_API_KEY || '').match(/sk-ant-[A-Za-z0-9_-]+/) || [''])[0];
+  if (!API_KEY) return res.status(503).json({ error: 'not configured' });
 
   const ip = (req.headers['x-forwarded-for'] || '').split(',')[0].trim() || 'unknown';
   if (rateLimited(ip)) return res.status(429).json({ error: 'busy' });
@@ -104,7 +106,7 @@ module.exports = async function handler(req, res) {
       method: 'POST',
       headers: Object.assign({
         'content-type': 'application/json',
-        'x-api-key': process.env.ANTHROPIC_API_KEY.trim(),
+        'x-api-key': API_KEY,
         'anthropic-version': '2023-06-01',
       }, process.env.ANTHROPIC_WORKSPACE_ID
         // Identity-linked console keys are refused without the workspace they act in.
