@@ -5,602 +5,166 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Website Design Projects | Edweb Media</title>
 
-  <meta name="description" content="Live websites designed and built by Edweb Media for travel, retail, industrial and trade businesses in South Africa and abroad. Open the live ones and judge the work yourself." />
+  <meta name="description" content="Six live client websites and five demo builds by Edweb Media, Cape Town: travel, e-commerce, golf tours, industrial, wine and home services." />
   <link rel="canonical" href="https://edwebmedia.com/projects" />
-
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://edwebmedia.com/projects" />
   <meta property="og:title" content="Website Design Projects | Edweb Media" />
-  <meta property="og:description" content="Live websites designed and built by Edweb Media for travel, retail, industrial and trade businesses." />
+  <meta property="og:description" content="Six live client websites and five demo builds, with a short write-up on each." />
   <meta property="og:image" content="https://edwebmedia.com/assets/edweb-logo-dark.png" />
-  <meta property="og:locale" content="en_ZA" />
-  <meta property="og:site_name" content="Edweb Media" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Website Design Projects | Edweb Media" />
-  <meta name="twitter:description" content="Live websites designed and built by Edweb Media for travel, retail, industrial and trade businesses." />
-  <meta name="twitter:image" content="https://edwebmedia.com/assets/edweb-logo-dark.png" />
-
-  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16948063813"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'AW-16948063813');
-  </script>
-
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
-
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="new-styles.css" />
-
   <script>document.documentElement.classList.replace('no-js', 'js');</script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
+  <div class="backdrop" aria-hidden="true"></div>
+  <svg style="display:none" aria-hidden="true"><symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol></svg>
 
-  <!-- ================================ HEADER ================================ -->
   <header class="site-header" id="site-header">
-    <div class="nav" id="nav">
-      <a href="/" class="logo" aria-label="Edweb Media home">
-        <img src="assets/work/logo-edweb-dark.webp" alt="Edweb Media" />
-      </a>
-
-      <nav class="nav-links" aria-label="Primary">
+    <div class="nav">
+      <a href="/" class="logo" aria-label="Edweb Media home"><img src="assets/work/logo-edweb-dark.webp" alt="Edweb Media" width="264" height="48" /></a>
+      <nav class="nav-links" id="nav-links" aria-label="Primary">
         <a href="/#services">Services</a>
-        <a href="/projects" aria-current="page">Work</a>
+        <a href="/projects">Work</a>
         <a href="/packages">Pricing</a>
         <a href="/pay">Payments</a>
         <a href="/contact">Contact</a>
       </nav>
-
       <div class="nav-end">
-        <a href="/contact" class="ulink">Start a project</a>
-        <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav">
-          <span></span><span></span><span></span>
-        </button>
+        <a href="/contact" class="btn">Start a project</a>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links"><span></span><span></span><span></span></button>
       </div>
     </div>
   </header>
 
   <main id="main">
-    <!-- =============================== MASTHEAD =============================== -->
-    <section class="page-hero page-hero--strip band--alt" id="top">
-      <div class="container page-hero-inner page-hero-inner--stack">
-        <h1>Websites we have <span class="hl">built.</span></h1>
-        <div class="mast-foot">
-          <p class="lead">
-            Client work and demo builds across eleven trades. Most are online right now, so open them and judge for yourself.
-          </p>
+    <section class="page-hero" id="top" aria-labelledby="page-title">
+      <div class="container">
+        <div>
+          <h1 id="page-title">Websites we have <span class="accent">built</span>.</h1>
+          <p class="lead">Six client sites and five demo builds across eleven trades. Most are online right now, so open them and judge for yourself.</p>
           <div class="hero-actions">
             <a href="/contact" class="btn">Start a project</a>
-            <a href="/packages" class="ulink">See what it costs <span class="arrow" aria-hidden="true">&raquo;</span></a>
+            <a href="/packages" class="ulink">See what it costs</a>
           </div>
         </div>
-      </div>
-      </div>
-
-      <!-- Decorative. Every site in this rail is a real, named link in the grid
-           below, so it is hidden from screen readers rather than repeating that
-           list. Eager, because an off-screen marquee frame set to lazy may never
-           load at all. The set is duplicated once so the loop has no seam.
-           A frame is never wider than about 390px, so an ordinary screen takes the
-           400w file and only a retina one pays for 800w. -->
-      <div class="work-strip" aria-hidden="true">
-        <div class="work-strip-track">
-            <img src="assets/work/demo-paintco-800w.webp" srcset="assets/work/demo-paintco-400w.webp 400w, assets/work/demo-paintco-800w.webp 800w" sizes="(max-width: 768px) 240px, 390px" alt="" width="800" height="500" decoding="async" fetchpriority="low" />
-            <img src="assets/work/muire-home-800w.webp" srcset="assets/work/muire-home-400w.webp 400w, assets/work/muire-home-800w.webp 800w" sizes="(max-width: 768px) 240px, 390px" alt="" width="800" height="600" decoding="async" fetchpriority="low" />
-            <img src="assets/work/demo-brightline-800w.webp" srcset="assets/work/demo-brightline-400w.webp 400w, assets/work/demo-brightline-800w.webp 800w" sizes="(max-width: 768px) 240px, 390px" alt="" width="800" height="500" decoding="async" fetchpriority="low" />
-            <img src="assets/work/lekkerdoos-home-800w.webp" srcset="assets/work/lekkerdoos-home-400w.webp 400w, assets/work/lekkerdoos-home-800w.webp 800w" sizes="(max-width: 768px) 240px, 390px" alt="" width="800" height="600" decoding="async" fetchpriority="low" />
-            <img src="assets/work/demo-construction-800w.webp" srcset="assets/work/demo-construction-400w.webp 400w, assets/work/demo-construction-800w.webp 800w" sizes="(max-width: 768px) 240px, 390px" alt="" width="800" height="500" decoding="async" fetchpriority="low" />
-            <img src="assets/work/spiralguard-full-800w.webp" srcset="assets/work/spiralguard-full-400w.webp 400w, assets/work/spiralguard-full-800w.webp 800w" sizes="(max-width: 768px) 240px, 390px" alt="" width="800" height="600" decoding="async" fetchpriority="low" />
-            <img src="assets/work/demo-plumbing-800w.webp" srcset="assets/work/demo-plumbing-400w.webp 400w, assets/work/demo-plumbing-800w.webp 800w" sizes="(max-width: 768px) 240px, 390px" alt="" width="800" height="500" decoding="async" fetchpriority="low" />
-            <img src="assets/work/teetotrail-home-800w.webp" srcset="assets/work/teetotrail-home-400w.webp 400w, assets/work/teetotrail-home-800w.webp 800w" sizes="(max-width: 768px) 240px, 390px" alt="" width="800" height="600" decoding="async" fetchpriority="low" />
-            <img src="assets/work/demo-roofing-800w.webp" srcset="assets/work/demo-roofing-400w.webp 400w, assets/work/demo-roofing-800w.webp 800w" sizes="(max-width: 768px) 240px, 390px" alt="" width="800" height="500" decoding="async" fetchpriority="low" />
-            <img src="assets/work/crazydaizy-home-800w.webp" srcset="assets/work/crazydaizy-home-400w.webp 400w, assets/work/crazydaizy-home-800w.webp 800w" sizes="(max-width: 768px) 240px, 390px" alt="" width="800" height="600" decoding="async" fetchpriority="low" />
-            <img src="assets/work/navigator-home-800w.webp" srcset="assets/work/navigator-home-400w.webp 400w, assets/work/navigator-home-800w.webp 800w" sizes="(max-width: 768px) 240px, 390px" alt="" width="800" height="528" decoding="async" fetchpriority="low" />
-            <img src="assets/work/demo-paintco-800w.webp" srcset="assets/work/demo-paintco-400w.webp 400w, assets/work/demo-paintco-800w.webp 800w" sizes="(max-width: 768px) 240px, 390px" alt="" width="800" height="500" decoding="async" fetchpriority="low" />
-            <img src="assets/work/muire-home-800w.webp" srcset="assets/work/muire-home-400w.webp 400w, assets/work/muire-home-800w.webp 800w" sizes="(max-width: 768px) 240px, 390px" alt="" width="800" height="600" decoding="async" fetchpriority="low" />
-            <img src="assets/work/demo-brightline-800w.webp" srcset="assets/work/demo-brightline-400w.webp 400w, assets/work/demo-brightline-800w.webp 800w" sizes="(max-width: 768px) 240px, 390px" alt="" width="800" height="500" decoding="async" fetchpriority="low" />
-            <img src="assets/work/lekkerdoos-home-800w.webp" srcset="assets/work/lekkerdoos-home-400w.webp 400w, assets/work/lekkerdoos-home-800w.webp 800w" sizes="(max-width: 768px) 240px, 390px" alt="" width="800" height="600" decoding="async" fetchpriority="low" />
-            <img src="assets/work/demo-construction-800w.webp" srcset="assets/work/demo-construction-400w.webp 400w, assets/work/demo-construction-800w.webp 800w" sizes="(max-width: 768px) 240px, 390px" alt="" width="800" height="500" decoding="async" fetchpriority="low" />
-            <img src="assets/work/spiralguard-full-800w.webp" srcset="assets/work/spiralguard-full-400w.webp 400w, assets/work/spiralguard-full-800w.webp 800w" sizes="(max-width: 768px) 240px, 390px" alt="" width="800" height="600" decoding="async" fetchpriority="low" />
-            <img src="assets/work/demo-plumbing-800w.webp" srcset="assets/work/demo-plumbing-400w.webp 400w, assets/work/demo-plumbing-800w.webp 800w" sizes="(max-width: 768px) 240px, 390px" alt="" width="800" height="500" decoding="async" fetchpriority="low" />
-            <img src="assets/work/teetotrail-home-800w.webp" srcset="assets/work/teetotrail-home-400w.webp 400w, assets/work/teetotrail-home-800w.webp 800w" sizes="(max-width: 768px) 240px, 390px" alt="" width="800" height="600" decoding="async" fetchpriority="low" />
-            <img src="assets/work/demo-roofing-800w.webp" srcset="assets/work/demo-roofing-400w.webp 400w, assets/work/demo-roofing-800w.webp 800w" sizes="(max-width: 768px) 240px, 390px" alt="" width="800" height="500" decoding="async" fetchpriority="low" />
-            <img src="assets/work/crazydaizy-home-800w.webp" srcset="assets/work/crazydaizy-home-400w.webp 400w, assets/work/crazydaizy-home-800w.webp 800w" sizes="(max-width: 768px) 240px, 390px" alt="" width="800" height="600" decoding="async" fetchpriority="low" />
-            <img src="assets/work/navigator-home-800w.webp" srcset="assets/work/navigator-home-400w.webp 400w, assets/work/navigator-home-800w.webp 800w" sizes="(max-width: 768px) 240px, 390px" alt="" width="800" height="528" decoding="async" fetchpriority="low" />
+        <div class="card index-card">
+          <h3>On this page</h3>
+          <ul>
+            <li><span>Navigator Vietnam</span><span>Travel and tourism</span></li>
+            <li><span>Crazy Daizy</span><span>Bakery and online store</span></li>
+            <li><span>Tee to Trail Africa</span><span>Golf tours</span></li>
+            <li><span>Helix SpiralGuard</span><span>Industrial</span></li>
+            <li><span>Die Lekker Doos</span><span>Wine, online store</span></li>
+            <li><span>Muire Maintenance</span><span>Home services</span></li>
+            <li><span>Five demo builds</span><span>Trades, ready to book</span></li>
+          </ul>
         </div>
       </div>
     </section>
 
-    <section class="band" id="work">
+    <section class="band band--alt" id="clients" aria-labelledby="clients-title">
       <div class="container">
         <div class="head reveal">
-          <h2>Every build, start to finish.</h2>
-          <p class="lead">
-            What the business needed, what we built and where it lives.
-          </p>
+          <div><h2 id="clients-title">Client <span class="accent">work</span>, start to finish.</h2></div>
+          <p class="lead">What the business needed, what we built and where it lives. Every capture is the full page width.</p>
         </div>
-
-        <div class="opt-c">
-          <div class="tab-panels">
-            <div class="tab-panel is-active" role="tabpanel" tabindex="0" id="panel-navigator" aria-labelledby="tab-navigator">
-              <div class="work-shot">
-                <img src="assets/work/navigator-home-1200w.webp" srcset="assets/work/navigator-home-800w.webp 800w, assets/work/navigator-home-1200w.webp 1200w" sizes="(max-width: 860px) 92vw, 46vw" alt="Navigator Vietnam website designed by Edweb Media" loading="lazy" decoding="async"  />
-              </div>
-              <div class="panel-body">
-              <p class="case-cat">Travel & Tourism</p>
-              <h3>Navigator Vietnam</h3>
-              <p>Small-group guided journeys across Vietnam and Cambodia. Built to explore destinations, browse tours and enquire in one flow.</p>
-              <ul class="facts">
-                <li>A swipeable destinations guide covering sixteen-plus regions</li>
-                <li>Tour pages showing duration, group size and route at a glance</li>
-                <li>A plan-your-trip enquiry form instead of a call centre</li>
-                <li>Verified five-star Google reviews built into the page</li>
-              </ul>
-              <div class="case-links">
-                <a class="ulink" href="https://navigator-vietnam.com" target="_blank" rel="noopener">Visit navigator-vietnam.com <span class="arrow" aria-hidden="true">&raquo;</span></a>
-                <a class="ulink" href="/projects/navigator">Read the write-up <span class="arrow" aria-hidden="true">&raquo;</span></a>
-              </div>
-              </div>
-            </div>
-
-            <div class="tab-panel" role="tabpanel" tabindex="0" id="panel-crazydaizy" aria-labelledby="tab-crazydaizy" hidden>
-              <div class="work-shot">
-                <img src="assets/work/crazydaizy-home-1200w.webp" srcset="assets/work/crazydaizy-home-800w.webp 800w, assets/work/crazydaizy-home-1200w.webp 1200w" sizes="(max-width: 860px) 92vw, 46vw" alt="Crazy Daizy website designed by Edweb Media" loading="lazy" decoding="async"  />
-              </div>
-              <div class="panel-body">
-              <p class="case-cat">Bakery & Cake Shop</p>
-              <h3>Crazy Daizy</h3>
-              <p>Cakes and savouries across eight Cape Town pickup stores. Orders are collected, not delivered, so checkout is built around choosing a store.</p>
-              <ul class="facts">
-                <li>A full product catalogue with category filters</li>
-                <li>A page per branch with its own hours, contact details and map link</li>
-                <li>A pickup-only checkout, plus a blog for recipes and stories</li>
-              </ul>
-              <div class="case-links">
-                <a class="ulink" href="https://crazydaizycakeshop.co.za" target="_blank" rel="noopener">Visit crazydaizycakeshop.co.za <span class="arrow" aria-hidden="true">&raquo;</span></a>
-                <a class="ulink" href="/projects/crazydaizy">Read the write-up <span class="arrow" aria-hidden="true">&raquo;</span></a>
-              </div>
-              </div>
-            </div>
-
-            <div class="tab-panel" role="tabpanel" tabindex="0" id="panel-teetotrail" aria-labelledby="tab-teetotrail" hidden>
-              <div class="work-shot">
-                <img src="assets/work/teetotrail-home-1200w.webp" srcset="assets/work/teetotrail-home-800w.webp 800w, assets/work/teetotrail-home-1200w.webp 1200w" sizes="(max-width: 860px) 92vw, 46vw" alt="Tee to Trail Africa website designed by Edweb Media" loading="lazy" decoding="async" />
-              </div>
-              <div class="panel-body">
-              <p class="case-cat">Travel & Golf Tourism</p>
-              <h3>Tee to Trail Africa</h3>
-              <p>Custom golf tours: courses across three regions, international destinations and a full trip-planning enquiry, five pages reading as one trip.</p>
-              <ul class="facts">
-                <li>Five pages: home, about, local courses, international courses, plan your trip</li>
-                <li>Course and region browsing across three local areas and five international destinations</li>
-                <li>A trip-planning form covering tour type, group size and dates in one step</li>
-                <li>A tabbed FAQ answering the real questions golfers ask before booking</li>
-              </ul>
-              <div class="case-links">
-                <a class="ulink" href="https://teetotrailafrica.com" target="_blank" rel="noopener">Visit teetotrailafrica.com <span class="arrow" aria-hidden="true">&raquo;</span></a>
-                <a class="ulink" href="/projects/tee-to-trail">Read the write-up <span class="arrow" aria-hidden="true">&raquo;</span></a>
-              </div>
-              </div>
-            </div>
-
-            <div class="tab-panel" role="tabpanel" tabindex="0" id="panel-spiralguard" aria-labelledby="tab-spiralguard" hidden>
-              <div class="work-shot">
-                <img src="assets/work/spiralguard-full-1200w.webp" srcset="assets/work/spiralguard-full-800w.webp 800w, assets/work/spiralguard-full-1200w.webp 1200w" sizes="(max-width: 860px) 92vw, 46vw" alt="Helix SpiralGuard website designed by Edweb Media" loading="lazy" decoding="async" />
-              </div>
-              <div class="panel-body">
-              <p class="case-cat">Industrial manufacturing</p>
-              <h3>Helix SpiralGuard</h3>
-              <p>A technical product, spiral hose and cable protection, explained in plain language and built to pull quote requests from procurement buyers.</p>
-              <ul class="facts">
-                <li>Custom home, product and applications pages built around the brand</li>
-                <li>Per-metre and bulk-bag pricing tables for all three product sizes</li>
-                <li>A quote path built for procurement teams, not a generic contact form</li>
-              </ul>
-              <div class="case-links">
-                <a class="ulink" href="https://spiralguard.co.za" target="_blank" rel="noopener">Visit spiralguard.co.za <span class="arrow" aria-hidden="true">&raquo;</span></a>
-                <a class="ulink" href="/projects/spiralguard">Read the write-up <span class="arrow" aria-hidden="true">&raquo;</span></a>
-              </div>
-              </div>
-            </div>
-
-            <div class="tab-panel" role="tabpanel" tabindex="0" id="panel-lekkerdoos" aria-labelledby="tab-lekkerdoos" hidden>
-              <div class="work-shot">
-                <img src="assets/work/lekkerdoos-home-1200w.webp" srcset="assets/work/lekkerdoos-home-800w.webp 800w, assets/work/lekkerdoos-home-1200w.webp 1200w" sizes="(max-width: 860px) 92vw, 46vw" alt="Die Lekker Doos website designed by Edweb Media" loading="lazy" decoding="async" />
-              </div>
-              <div class="panel-body">
-              <p class="case-cat">Wine & E-commerce Retail</p>
-              <h3>Die Lekker Doos</h3>
-              <p>A wine box club store: one once-off box, real reviews and order cut-off dates, kept personal rather than transactional.</p>
-              <ul class="facts">
-                <li>A wine-box product page with pricing, description and stock status</li>
-                <li>Star ratings and customer reviews built into the product page</li>
-                <li>An about page that puts the founders front and centre</li>
-                <li>A built-in FAQ covering order cut-off dates and delivery</li>
-              </ul>
-              <div class="case-links">
-                <span class="demo-note">Built and finished. The domain has not been pointed at it yet, so there is nothing to open.</span>
-                <a class="ulink" href="/projects/lekkerdoos">Read the write-up <span class="arrow" aria-hidden="true">&raquo;</span></a>
-              </div>
-              </div>
-            </div>
-
-            <div class="tab-panel" role="tabpanel" tabindex="0" id="panel-muire" aria-labelledby="tab-muire" hidden>
-              <div class="work-shot">
-                <img src="assets/work/muire-home-1200w.webp" srcset="assets/work/muire-home-800w.webp 800w, assets/work/muire-home-1200w.webp 1200w" sizes="(max-width: 860px) 92vw, 46vw" alt="Muire Maintenance website designed by Edweb Media" loading="lazy" decoding="async" />
-              </div>
-              <div class="panel-body">
-              <p class="case-cat">Home Cleaning & Maintenance</p>
-              <h3>Muire Maintenance</h3>
-              <p>Six home services on one site, with real price ranges published so a homeowner knows the cost before calling.</p>
-              <ul class="facts">
-                <li>Six services, each with its own quote request</li>
-                <li>Clear price ranges by home size, published on the page</li>
-                <li>Real client quotes and a built-in FAQ for booking questions</li>
-              </ul>
-              <div class="case-links">
-                <a class="ulink" href="https://muiremaintenance.co.za" target="_blank" rel="noopener">Visit muiremaintenance.co.za <span class="arrow" aria-hidden="true">&raquo;</span></a>
-                <a class="ulink" href="/projects/muire">Read the write-up <span class="arrow" aria-hidden="true">&raquo;</span></a>
-              </div>
-              </div>
-            </div>
-
-            <div class="tab-panel" role="tabpanel" tabindex="0" id="panel-roofing" aria-labelledby="tab-roofing" hidden>
-              <div class="work-shot">
-                <img src="assets/work/demo-roofing.jpg" srcset="assets/work/demo-roofing.jpg 1440w" sizes="(max-width: 860px) 92vw, 56vw" alt="Ridgeworks Roofing demo website designed by Edweb Media" loading="lazy" decoding="async" />
-              </div>
-              <div class="panel-body">
-                <p class="case-cat">Roofing and waterproofing <span class="demo-tag">Demo build</span></p>
-                <h3>Ridgeworks Roofing</h3>
-                <p>Built around one promise: nobody prices a roof they have not stood on. The whole page drives a booked site visit.</p>
-                <ul class="facts">
-                  <li>Quote flow starts with a site visit and a photographed report</li>
-                  <li>Services, past work, about and contact across five pages</li>
-                  <li>Phone number fixed in the header on every screen</li>
-                </ul>
-                <div class="case-links">
-                  <a class="ulink" href="/demos/roofing/index.html" target="_blank" rel="noopener">Open the Ridgeworks Roofing demo <span class="arrow" aria-hidden="true">&raquo;</span></a>
-                  <a class="btn" href="/contact?demo=Ridgeworks%20Roofing">Book this design</a>
-                </div>
-                <p class="demo-note">Concept build. Yours would carry your name, photos and services.</p>
-              </div>
-            </div>
-
-            <div class="tab-panel" role="tabpanel" tabindex="0" id="panel-plumbing" aria-labelledby="tab-plumbing" hidden>
-              <div class="work-shot">
-                <img src="assets/work/demo-plumbing.jpg" srcset="assets/work/demo-plumbing.jpg 1440w" sizes="(max-width: 860px) 92vw, 56vw" alt="Waterline Plumbing demo website designed by Edweb Media" loading="lazy" decoding="async" />
-              </div>
-              <div class="panel-body">
-                <p class="case-cat">Plumbing <span class="demo-tag">Demo build</span></p>
-                <h3>Waterline Plumbing</h3>
-                <p>Written for the moment something is leaking. Emergency work, geysers, drains and installs each get their own entry point.</p>
-                <ul class="facts">
-                  <li>Emergency, geysers, drains and installs as separate paths</li>
-                  <li>Fixed quote before work starts, stated in the hero</li>
-                  <li>Certified and registered status shown, not claimed vaguely</li>
-                </ul>
-                <div class="case-links">
-                  <a class="ulink" href="/demos/plumbing/index.html" target="_blank" rel="noopener">Open the Waterline Plumbing demo <span class="arrow" aria-hidden="true">&raquo;</span></a>
-                  <a class="btn" href="/contact?demo=Waterline%20Plumbing">Book this design</a>
-                </div>
-                <p class="demo-note">Concept build. Yours would carry your name, photos and services.</p>
-              </div>
-            </div>
-
-            <div class="tab-panel" role="tabpanel" tabindex="0" id="panel-paintco" aria-labelledby="tab-paintco" hidden>
-              <div class="work-shot">
-                <img src="assets/work/demo-paintco.jpg" srcset="assets/work/demo-paintco.jpg 1440w" sizes="(max-width: 860px) 92vw, 56vw" alt="Paintco Paarl demo website designed by Edweb Media" loading="lazy" decoding="async" />
-              </div>
-              <div class="panel-body">
-                <p class="case-cat">Painting and pressure washing <span class="demo-tag">Demo build</span></p>
-                <h3>Paintco Paarl</h3>
-                <p>"Pick a colour, we do the rest" is the whole proposition. The page leads with finished work, the quote one tap away.</p>
-                <ul class="facts">
-                  <li>Roof, wall, driveway and fence painting each shown separately</li>
-                  <li>Built for a regional service area, not a single town</li>
-                  <li>Quote request repeated down the page, never buried</li>
-                </ul>
-                <div class="case-links">
-                  <a class="ulink" href="/demos/paintco/index.html" target="_blank" rel="noopener">Open the Paintco Paarl demo <span class="arrow" aria-hidden="true">&raquo;</span></a>
-                  <a class="btn" href="/contact?demo=Paintco%20Paarl">Book this design</a>
-                </div>
-                <p class="demo-note">Concept build. Yours would carry your name, photos and services.</p>
-              </div>
-            </div>
-
-            <div class="tab-panel" role="tabpanel" tabindex="0" id="panel-construction" aria-labelledby="tab-construction" hidden>
-              <div class="work-shot">
-                <img src="assets/work/demo-construction.jpg" srcset="assets/work/demo-construction.jpg 1440w" sizes="(max-width: 860px) 92vw, 56vw" alt="Ironstone Construction demo website designed by Edweb Media" loading="lazy" decoding="async" />
-              </div>
-              <div class="panel-body">
-                <p class="case-cat">Building and civils <span class="demo-tag">Demo build</span></p>
-                <h3>Ironstone Construction</h3>
-                <p>Aimed at the client who has been let down before. The headline commits to quality and dates, the strip carries the credentials.</p>
-                <ul class="facts">
-                  <li>Years, projects handed over and registrations in the hero strip</li>
-                  <li>New builds, renovations and civil works as separate services</li>
-                  <li>One accountable site team, from first sod to final snag</li>
-                </ul>
-                <div class="case-links">
-                  <a class="ulink" href="/demos/construction/index.html" target="_blank" rel="noopener">Open the Ironstone Construction demo <span class="arrow" aria-hidden="true">&raquo;</span></a>
-                  <a class="btn" href="/contact?demo=Ironstone%20Construction">Book this design</a>
-                </div>
-                <p class="demo-note">Concept build. Yours would carry your name, photos and services.</p>
-              </div>
-            </div>
-
-            <div class="tab-panel" role="tabpanel" tabindex="0" id="panel-brightline" aria-labelledby="tab-brightline" hidden>
-              <div class="work-shot">
-                <img src="assets/work/demo-brightline.jpg" srcset="assets/work/demo-brightline.jpg 1440w" sizes="(max-width: 860px) 92vw, 56vw" alt="Brightline Electrical demo website designed by Edweb Media" loading="lazy" decoding="async" />
-              </div>
-              <div class="panel-body">
-                <p class="case-cat">Solar and backup power <span class="demo-tag">Demo build</span></p>
-                <h3>Brightline Electrical</h3>
-                <p>Built for the two questions every load-shedding buyer asks before they will take a quote seriously.</p>
-                <ul class="facts">
-                  <li>Solar, inverters and battery backup as three clear offers</li>
-                  <li>Sizing based on real usage, stated up front</li>
-                  <li>Certificate of compliance before the team leaves site</li>
-                </ul>
-                <div class="case-links">
-                  <a class="ulink" href="/demos/brightline/index.html" target="_blank" rel="noopener">Open the Brightline Electrical demo <span class="arrow" aria-hidden="true">&raquo;</span></a>
-                  <a class="btn" href="/contact?demo=Brightline%20Electrical">Book this design</a>
-                </div>
-                <p class="demo-note">Concept build. Yours would carry your name, photos and services.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="work-nav">
-            <button type="button" class="work-arrow" data-work-prev aria-label="Previous project">&#8249;</button>
-            <button type="button" class="work-arrow" data-work-next aria-label="Next project">&#8250;</button>
-            <p class="work-count" aria-live="polite"></p>
-          </div>
-          <div class="thumb-rail">
-            <div class="thumb-track" role="tablist" aria-label="Projects">
-              <button class="thumb" role="tab" id="tab-navigator" aria-controls="panel-navigator" aria-selected="true">
-                <img src="assets/work/navigator-home-800w.webp" srcset="assets/work/navigator-home-400w.webp 400w, assets/work/navigator-home-800w.webp 800w" sizes="(max-width: 640px) 170px, 300px" alt="" loading="lazy" decoding="async"   />
-                <span>Navigator Vietnam</span>
-                </button>
-              <button class="thumb" role="tab" id="tab-crazydaizy" aria-controls="panel-crazydaizy" aria-selected="false" tabindex="-1">
-                <img src="assets/work/crazydaizy-home-800w.webp" srcset="assets/work/crazydaizy-home-400w.webp 400w, assets/work/crazydaizy-home-800w.webp 800w" sizes="(max-width: 640px) 170px, 300px" alt="" loading="lazy" decoding="async"   />
-                <span>Crazy Daizy</span>
-                </button>
-              <button class="thumb" role="tab" id="tab-teetotrail" aria-controls="panel-teetotrail" aria-selected="false" tabindex="-1">
-                <img src="assets/work/teetotrail-home-800w.webp" srcset="assets/work/teetotrail-home-400w.webp 400w, assets/work/teetotrail-home-800w.webp 800w" sizes="(max-width: 640px) 170px, 300px" alt="" loading="lazy" decoding="async" />
-                <span>Tee to Trail Africa</span>
-                </button>
-              <button class="thumb" role="tab" id="tab-spiralguard" aria-controls="panel-spiralguard" aria-selected="false" tabindex="-1">
-                <img src="assets/work/spiralguard-full-800w.webp" srcset="assets/work/spiralguard-full-400w.webp 400w, assets/work/spiralguard-full-800w.webp 800w" sizes="(max-width: 640px) 170px, 300px" alt="" loading="lazy" decoding="async" />
-                <span>Helix SpiralGuard</span>
-                </button>
-              <button class="thumb" role="tab" id="tab-lekkerdoos" aria-controls="panel-lekkerdoos" aria-selected="false" tabindex="-1">
-                <img src="assets/work/lekkerdoos-home-800w.webp" srcset="assets/work/lekkerdoos-home-400w.webp 400w, assets/work/lekkerdoos-home-800w.webp 800w" sizes="(max-width: 640px) 170px, 300px" alt="" loading="lazy" decoding="async" />
-                <span>Die Lekker Doos</span>
-                </button>
-              <button class="thumb" role="tab" id="tab-muire" aria-controls="panel-muire" aria-selected="false" tabindex="-1">
-                <img src="assets/work/muire-home-800w.webp" srcset="assets/work/muire-home-400w.webp 400w, assets/work/muire-home-800w.webp 800w" sizes="(max-width: 640px) 170px, 300px" alt="" loading="lazy" decoding="async" />
-                <span>Muire Maintenance</span>
-                </button>
-              <button class="thumb" role="tab" id="tab-roofing" aria-controls="panel-roofing" aria-selected="false" tabindex="-1">
-                <img src="assets/work/demo-roofing-800w.webp" srcset="assets/work/demo-roofing-400w.webp 400w, assets/work/demo-roofing-800w.webp 800w" sizes="(max-width: 640px) 170px, 300px" alt="" loading="lazy" decoding="async" />
-                <span>Ridgeworks Roofing <span class="demo-tag">Demo</span></span>
-              </button>
-              <button class="thumb" role="tab" id="tab-plumbing" aria-controls="panel-plumbing" aria-selected="false" tabindex="-1">
-                <img src="assets/work/demo-plumbing-800w.webp" srcset="assets/work/demo-plumbing-400w.webp 400w, assets/work/demo-plumbing-800w.webp 800w" sizes="(max-width: 640px) 170px, 300px" alt="" loading="lazy" decoding="async" />
-                <span>Waterline Plumbing <span class="demo-tag">Demo</span></span>
-              </button>
-              <button class="thumb" role="tab" id="tab-paintco" aria-controls="panel-paintco" aria-selected="false" tabindex="-1">
-                <img src="assets/work/demo-paintco-800w.webp" srcset="assets/work/demo-paintco-400w.webp 400w, assets/work/demo-paintco-800w.webp 800w" sizes="(max-width: 640px) 170px, 300px" alt="" loading="lazy" decoding="async" />
-                <span>Paintco Paarl <span class="demo-tag">Demo</span></span>
-              </button>
-              <button class="thumb" role="tab" id="tab-construction" aria-controls="panel-construction" aria-selected="false" tabindex="-1">
-                <img src="assets/work/demo-construction-800w.webp" srcset="assets/work/demo-construction-400w.webp 400w, assets/work/demo-construction-800w.webp 800w" sizes="(max-width: 640px) 170px, 300px" alt="" loading="lazy" decoding="async" />
-                <span>Ironstone Construction <span class="demo-tag">Demo</span></span>
-              </button>
-              <button class="thumb" role="tab" id="tab-brightline" aria-controls="panel-brightline" aria-selected="false" tabindex="-1">
-                <img src="assets/work/demo-brightline-800w.webp" srcset="assets/work/demo-brightline-400w.webp 400w, assets/work/demo-brightline-800w.webp 800w" sizes="(max-width: 640px) 170px, 300px" alt="" loading="lazy" decoding="async" />
-                <span>Brightline Electrical <span class="demo-tag">Demo</span></span>
-              </button>
-              <button class="thumb" aria-hidden="true" tabindex="-1" role="tab" aria-controls="panel-navigator" aria-selected="true">
-                <img src="assets/work/navigator-home-800w.webp" srcset="assets/work/navigator-home-400w.webp 400w, assets/work/navigator-home-800w.webp 800w" sizes="(max-width: 640px) 170px, 300px" alt="" loading="lazy" decoding="async"   />
-                <span>Navigator Vietnam</span>
-                </button>
-              <button class="thumb" aria-hidden="true" tabindex="-1" role="tab" aria-controls="panel-crazydaizy" aria-selected="false" tabindex="-1">
-                <img src="assets/work/crazydaizy-home-800w.webp" srcset="assets/work/crazydaizy-home-400w.webp 400w, assets/work/crazydaizy-home-800w.webp 800w" sizes="(max-width: 640px) 170px, 300px" alt="" loading="lazy" decoding="async"   />
-                <span>Crazy Daizy</span>
-                </button>
-              <button class="thumb" aria-hidden="true" tabindex="-1" role="tab" aria-controls="panel-teetotrail" aria-selected="false" tabindex="-1">
-                <img src="assets/work/teetotrail-home-800w.webp" srcset="assets/work/teetotrail-home-400w.webp 400w, assets/work/teetotrail-home-800w.webp 800w" sizes="(max-width: 640px) 170px, 300px" alt="" loading="lazy" decoding="async" />
-                <span>Tee to Trail Africa</span>
-                </button>
-              <button class="thumb" aria-hidden="true" tabindex="-1" role="tab" aria-controls="panel-spiralguard" aria-selected="false" tabindex="-1">
-                <img src="assets/work/spiralguard-full-800w.webp" srcset="assets/work/spiralguard-full-400w.webp 400w, assets/work/spiralguard-full-800w.webp 800w" sizes="(max-width: 640px) 170px, 300px" alt="" loading="lazy" decoding="async" />
-                <span>Helix SpiralGuard</span>
-                </button>
-              <button class="thumb" aria-hidden="true" tabindex="-1" role="tab" aria-controls="panel-lekkerdoos" aria-selected="false" tabindex="-1">
-                <img src="assets/work/lekkerdoos-home-800w.webp" srcset="assets/work/lekkerdoos-home-400w.webp 400w, assets/work/lekkerdoos-home-800w.webp 800w" sizes="(max-width: 640px) 170px, 300px" alt="" loading="lazy" decoding="async" />
-                <span>Die Lekker Doos</span>
-                </button>
-              <button class="thumb" aria-hidden="true" tabindex="-1" role="tab" aria-controls="panel-muire" aria-selected="false" tabindex="-1">
-                <img src="assets/work/muire-home-800w.webp" srcset="assets/work/muire-home-400w.webp 400w, assets/work/muire-home-800w.webp 800w" sizes="(max-width: 640px) 170px, 300px" alt="" loading="lazy" decoding="async" />
-                <span>Muire Maintenance</span>
-                </button>
-              <button class="thumb" aria-hidden="true" tabindex="-1" role="tab" aria-controls="panel-roofing" aria-selected="false" tabindex="-1">
-                <img src="assets/work/demo-roofing-800w.webp" srcset="assets/work/demo-roofing-400w.webp 400w, assets/work/demo-roofing-800w.webp 800w" sizes="(max-width: 640px) 170px, 300px" alt="" loading="lazy" decoding="async" />
-                <span>Ridgeworks Roofing <span class="demo-tag">Demo</span></span>
-              </button>
-              <button class="thumb" aria-hidden="true" tabindex="-1" role="tab" aria-controls="panel-plumbing" aria-selected="false" tabindex="-1">
-                <img src="assets/work/demo-plumbing-800w.webp" srcset="assets/work/demo-plumbing-400w.webp 400w, assets/work/demo-plumbing-800w.webp 800w" sizes="(max-width: 640px) 170px, 300px" alt="" loading="lazy" decoding="async" />
-                <span>Waterline Plumbing <span class="demo-tag">Demo</span></span>
-              </button>
-              <button class="thumb" aria-hidden="true" tabindex="-1" role="tab" aria-controls="panel-paintco" aria-selected="false" tabindex="-1">
-                <img src="assets/work/demo-paintco-800w.webp" srcset="assets/work/demo-paintco-400w.webp 400w, assets/work/demo-paintco-800w.webp 800w" sizes="(max-width: 640px) 170px, 300px" alt="" loading="lazy" decoding="async" />
-                <span>Paintco Paarl <span class="demo-tag">Demo</span></span>
-              </button>
-              <button class="thumb" aria-hidden="true" tabindex="-1" role="tab" aria-controls="panel-construction" aria-selected="false" tabindex="-1">
-                <img src="assets/work/demo-construction-800w.webp" srcset="assets/work/demo-construction-400w.webp 400w, assets/work/demo-construction-800w.webp 800w" sizes="(max-width: 640px) 170px, 300px" alt="" loading="lazy" decoding="async" />
-                <span>Ironstone Construction <span class="demo-tag">Demo</span></span>
-              </button>
-              <button class="thumb" aria-hidden="true" tabindex="-1" role="tab" aria-controls="panel-brightline" aria-selected="false" tabindex="-1">
-                <img src="assets/work/demo-brightline-800w.webp" srcset="assets/work/demo-brightline-400w.webp 400w, assets/work/demo-brightline-800w.webp 800w" sizes="(max-width: 640px) 170px, 300px" alt="" loading="lazy" decoding="async" />
-                <span>Brightline Electrical <span class="demo-tag">Demo</span></span>
-              </button>
-            </div>
-          </div>
-          </div>
-        </div>
-    </section>
-
-    <!-- ============================= WHAT'S INCLUDED =========================== -->
-    <section class="band band--ink" id="included">
-      <div class="container split split--lead">
-        <div class="reveal">
-          <h2>The same <span class="hl">six things</span> ship on every build.</h2>
-          <p>
-            Different industries, one standard underneath.
-          </p>
-          <a href="/packages" class="btn btn--light">See what it costs</a>
-        </div>
-
-        <div class="reveal" style="--reveal-delay:120ms">
-          <ul class="facts">
-            <li>Designed and coded from scratch, never a bought template</li>
-            <li>Mobile-first, checked on phone, tablet and desktop</li>
-            <li>SSL certificate, contact form and WhatsApp button</li>
-            <li>SEO foundations so the site can be found on Google</li>
-            <li>Hosting, email and security, if you want us to run it</li>
-            <li>Every file yours once the fee is paid</li>
-          </ul>
+        <div class="work-grid">
+          <a class="work-tile reveal" href="/projects/navigator"><figure><div class="work-shot"><img src="assets/work/navigator-home-1200w.webp" srcset="assets/work/navigator-home-800w.webp 800w, assets/work/navigator-home-1200w.webp 1200w" sizes="(max-width: 900px) 92vw, 46vw" alt="Navigator Vietnam home page" width="1200" height="750" loading="eager" /></div><figcaption><strong>Navigator Vietnam</strong><span>Travel and tourism, live at navigator-vietnam.com</span></figcaption></figure></a>
+          <a class="work-tile reveal" href="/projects/crazydaizy"><figure><div class="work-shot"><img src="assets/work/crazydaizy-home-1200w.webp" srcset="assets/work/crazydaizy-home-800w.webp 800w, assets/work/crazydaizy-home-1200w.webp 1200w" sizes="(max-width: 900px) 92vw, 46vw" alt="Crazy Daizy home page" width="1200" height="750" loading="lazy" /></div><figcaption><strong>Crazy Daizy</strong><span>Bakery and online store, eight pickup branches</span></figcaption></figure></a>
+          <a class="work-tile reveal" href="/projects/tee-to-trail"><figure><div class="work-shot"><img src="assets/work/teetotrail-home-1200w.webp" srcset="assets/work/teetotrail-home-800w.webp 800w, assets/work/teetotrail-home-1200w.webp 1200w" sizes="(max-width: 900px) 92vw, 46vw" alt="Tee to Trail Africa home page" width="1200" height="750" loading="lazy" /></div><figcaption><strong>Tee to Trail Africa</strong><span>Golf tours, five pages reading as one trip</span></figcaption></figure></a>
+          <a class="work-tile reveal" href="/projects/spiralguard"><figure><div class="work-shot"><img src="assets/work/spiralguard-full-800w.webp" srcset="assets/work/spiralguard-full-400w.webp 400w, assets/work/spiralguard-full-800w.webp 800w" sizes="(max-width: 900px) 92vw, 46vw" alt="Helix SpiralGuard home page" width="800" height="500" loading="lazy" /></div><figcaption><strong>Helix SpiralGuard</strong><span>Industrial manufacturing, built for quote requests</span></figcaption></figure></a>
+          <a class="work-tile reveal" href="/projects/lekkerdoos"><figure><div class="work-shot"><img src="assets/work/lekkerdoos-home-1200w.webp" srcset="assets/work/lekkerdoos-home-800w.webp 800w, assets/work/lekkerdoos-home-1200w.webp 1200w" sizes="(max-width: 900px) 92vw, 46vw" alt="Die Lekker Doos home page" width="1200" height="750" loading="lazy" /></div><figcaption><strong>Die Lekker Doos</strong><span>Wine box store, built and waiting on the domain</span></figcaption></figure></a>
+          <a class="work-tile reveal" href="/projects/muire"><figure><div class="work-shot"><img src="assets/work/muire-home-1200w.webp" srcset="assets/work/muire-home-800w.webp 800w, assets/work/muire-home-1200w.webp 1200w" sizes="(max-width: 900px) 92vw, 46vw" alt="Muire Maintenance home page" width="1200" height="750" loading="lazy" /></div><figcaption><strong>Muire Maintenance</strong><span>Home services, prices published on the page</span></figcaption></figure></a>
         </div>
       </div>
     </section>
 
-    <!-- ================================= FAQ ================================== -->
-    <section class="band" id="faq">
+    <section class="band" id="demos" aria-labelledby="demos-title" data-rail>
       <div class="container">
-        <div class="faq-block">
-          <div class="faq-intro reveal">
-            <h2>Questions about the work above.</h2>
-            <p>Want something similar? Ask.</p>
-            <a href="tel:+27846204583" class="ulink">Call +27 84 620 4583 <span class="arrow" aria-hidden="true">&raquo;</span></a>
+        <div class="head reveal">
+          <div><h2 id="demos-title">Demo builds you can <span class="accent">book</span>.</h2></div>
+          <div class="head-end">
+            <p class="lead">Concept sites for five trades, each a fictional business. Book one and it ships with your name, photos and services.</p>
+            <div class="rail-nav">
+              <button type="button" class="rail-btn" data-prev aria-label="Previous demos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button>
+              <button type="button" class="rail-btn" data-next aria-label="Next demos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
+            </div>
           </div>
-
-          <div class="faq-list">
-            <details class="faq-card reveal" open style="--reveal-delay:0ms">
-              <summary>How long does a website like these take?</summary>
-              <p>Most builds run five to fifteen working days, depending on size and how quickly content and feedback arrive.</p>
-            </details>
-            <details class="faq-card reveal" style="--reveal-delay:50ms">
-              <summary>Can you build something similar for my industry?</summary>
-              <p>Yes. These span travel, e-commerce, golf tourism and industrial manufacturing. Every site is designed around your brand and customers.</p>
-            </details>
-            <details class="faq-card reveal" style="--reveal-delay:100ms">
-              <summary>What does a project like this cost?</summary>
-              <p>A once-off fee from R3,499 for a business website; stores and directories cost more. See the <a href="/packages">pricing page</a> for the full breakdown.</p>
-            </details>
-            <details class="faq-card reveal" style="--reveal-delay:150ms">
-              <summary>Will I own my website once it is built?</summary>
-              <p>Yes. Once the fee is paid in full, all files and design work belong to you.</p>
-            </details>
-            <details class="faq-card reveal" style="--reveal-delay:200ms">
-              <summary>Do you look after the site after launch?</summary>
-              <p>If you want us to. Hosting and management are optional monthly add-ons. Take both, one, or neither.</p>
-            </details>
-          </div>
+        </div>
+        <div class="rail" aria-label="Demo builds">
+          <div class="work-tile reveal"><figure><a class="work-shot" href="/demos/roofing/" target="_blank" rel="noopener"><img src="assets/work/demo-roofing-800w.webp" srcset="assets/work/demo-roofing-400w.webp 400w, assets/work/demo-roofing-800w.webp 800w" sizes="(max-width: 900px) 92vw, 46vw" alt="Ridgeworks Roofing demo home page" width="800" height="500" loading="lazy" /></a><figcaption><strong>Ridgeworks Roofing</strong><span>Roofing and waterproofing</span><a href="/contact?package=business-silver" class="btn btn--sm btn--ink" data-package="business-silver">Book this design</a></figcaption></figure></div>
+          <div class="work-tile reveal"><figure><a class="work-shot" href="/demos/plumbing/" target="_blank" rel="noopener"><img src="assets/work/demo-plumbing-800w.webp" srcset="assets/work/demo-plumbing-400w.webp 400w, assets/work/demo-plumbing-800w.webp 800w" sizes="(max-width: 900px) 92vw, 46vw" alt="Waterline Plumbing demo home page" width="800" height="500" loading="lazy" /></a><figcaption><strong>Waterline Plumbing</strong><span>Plumbing</span><a href="/contact?package=business-silver" class="btn btn--sm btn--ink" data-package="business-silver">Book this design</a></figcaption></figure></div>
+          <div class="work-tile reveal"><figure><a class="work-shot" href="/demos/paintco/" target="_blank" rel="noopener"><img src="assets/work/demo-paintco-800w.webp" srcset="assets/work/demo-paintco-400w.webp 400w, assets/work/demo-paintco-800w.webp 800w" sizes="(max-width: 900px) 92vw, 46vw" alt="Paintco Paarl demo home page" width="800" height="500" loading="lazy" /></a><figcaption><strong>Paintco Paarl</strong><span>Painting and pressure washing</span><a href="/contact?package=business-silver" class="btn btn--sm btn--ink" data-package="business-silver">Book this design</a></figcaption></figure></div>
+          <div class="work-tile reveal"><figure><a class="work-shot" href="/demos/construction/" target="_blank" rel="noopener"><img src="assets/work/demo-construction-800w.webp" srcset="assets/work/demo-construction-400w.webp 400w, assets/work/demo-construction-800w.webp 800w" sizes="(max-width: 900px) 92vw, 46vw" alt="Ironstone Construction demo home page" width="800" height="500" loading="lazy" /></a><figcaption><strong>Ironstone Construction</strong><span>Building and civils</span><a href="/contact?package=business-silver" class="btn btn--sm btn--ink" data-package="business-silver">Book this design</a></figcaption></figure></div>
+          <div class="work-tile reveal"><figure><a class="work-shot" href="/demos/brightline/" target="_blank" rel="noopener"><img src="assets/work/demo-brightline-800w.webp" srcset="assets/work/demo-brightline-400w.webp 400w, assets/work/demo-brightline-800w.webp 800w" sizes="(max-width: 900px) 92vw, 46vw" alt="Brightline Electrical demo home page" width="800" height="500" loading="lazy" /></a><figcaption><strong>Brightline Electrical</strong><span>Solar and backup power</span><a href="/contact?package=business-silver" class="btn btn--sm btn--ink" data-package="business-silver">Book this design</a></figcaption></figure></div>
         </div>
       </div>
     </section>
 
-    <!-- ================================ ENDCAP ================================ -->
-    <section class="band band--teal" id="start">
-      <div class="container split split--lead">
-        <div class="reveal">
-          <h2>Want yours on this page?</h2>
-          <p>Tell us what your business does. A plan and a price come back within one working day.</p>
-          <div class="hero-actions">
-            <a href="/contact" class="btn">Start a project</a>
-            <a href="https://wa.me/27846204583" target="_blank" rel="noopener" class="ulink">Message us <span class="arrow" aria-hidden="true">&raquo;</span></a>
-          </div>
+    <section class="band band--ink" id="standard" aria-labelledby="standard-title">
+      <div class="container">
+        <div class="head reveal">
+          <div><h2 id="standard-title">The same six things ship on <span class="accent">every</span> build.</h2></div>
+          <p class="lead">Different industries, one standard underneath.</p>
         </div>
-        <div class="reveal" style="--reveal-delay:100ms">
-          <h3>What every one of these got</h3>
-          <ul class="facts">
-            <li>Brief and sitemap agreed before design started</li>
-            <li>First page shown for approval before the rest</li>
-            <li>Timeline agreed on kickoff, counted from content arrival</li>
-            <li>Files handed over once the fee was settled</li>
-          </ul>
+        <ul class="facts facts--ink reveal">
+          <li><svg><use href="#i-check"/></svg>Designed and coded from scratch, never a bought template</li>
+          <li><svg><use href="#i-check"/></svg>Mobile-first, checked on phone, tablet and desktop</li>
+          <li><svg><use href="#i-check"/></svg>SSL certificate, contact form and WhatsApp button</li>
+          <li><svg><use href="#i-check"/></svg>SEO foundations so the site can be found on Google</li>
+          <li><svg><use href="#i-check"/></svg>Hosting, email and security, if you want us to run it</li>
+          <li><svg><use href="#i-check"/></svg>Every file yours once the fee is paid</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="band band--alt" id="start" aria-labelledby="start-title">
+      <div class="container cta-grid">
+        <div class="reveal">
+          <h2 id="start-title">Want <span class="accent">yours</span> on this page?</h2>
+          <p class="lead">Tell us what your business does. A plan and a price come back within one working day.</p>
+        </div>
+        <div class="cta-side reveal" style="--reveal-delay:120ms">
+          <a href="/contact" class="btn">Get in touch</a>
+          <a href="https://wa.me/27846204583" class="ulink" target="_blank" rel="noopener">Message on WhatsApp</a>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- ================================ FOOTER ================================ -->
   <footer class="site-footer">
     <div class="container">
-      <div class="footer-grid">
-        <div>
-          <div class="footer-logo">
-            <img src="assets/work/logo-edweb-light.webp" alt="Edweb Media" />
-          </div>
-          <p class="footer-blurb">
-            Custom websites for South African businesses, hosted, updated and marketed by
-            the people who built them.
-          </p>
-          <div class="footer-socials">
-            <a href="https://www.facebook.com/edwebmediasolutions" target="_blank" rel="noopener" aria-label="Edweb Media on Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7h2.4l.4-2.8h-2.8v-1.6c0-.8.2-1.4 1.4-1.4h1.5V5.7c-.3 0-1.2-.1-2.2-.1-2.3 0-3.8 1.4-3.8 3.9v1.7H8v2.8h2.4V21h3.1z"/></svg></a>
-            <a href="https://www.instagram.com/edwebmedia/" target="_blank" rel="noopener" aria-label="Edweb Media on Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="3.5"/><circle cx="17.2" cy="6.8" r="0.8" fill="currentColor" stroke="none"/></svg></a>
-            <a href="https://wa.me/27846204583" target="_blank" rel="noopener" aria-label="Message Edweb Media"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-1.2-.6-2-1-2.8-2.3-.2-.3 0-.5.2-.7.2-.2.4-.5.6-.7.1-.2.1-.4 0-.6-.1-.2-.6-1.5-.8-2-.1-.4-.3-.4-.5-.4h-.4c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.1s.9 2.5 1.1 2.7c.1.2 1.6 2.5 4 3.4 2 .8 2.4.7 2.8.6.4-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2 0-.1-.2-.2-.4-.3z"/></svg></a>
+      <div class="foot-grid">
+        <div class="foot-brand">
+          <img src="assets/work/logo-edweb-light.webp" alt="Edweb Media" width="264" height="48" loading="lazy" />
+          <p>Web design studio in Cape Town. Custom websites for businesses across South Africa, hosted and looked after by the people who built them.</p>
+          <div class="socials">
+            <a href="https://www.facebook.com/edwebmediasolutions" target="_blank" rel="noopener" aria-label="Edweb Media on Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 22v-8h2.7l.4-3.2h-3.1V8.8c0-.9.3-1.6 1.6-1.6h1.7V4.4c-.3 0-1.3-.1-2.5-.1-2.5 0-4.1 1.5-4.1 4.2v2.3H7.4V14h2.8v8h3.3z"/></svg></a>
+            <a href="https://www.instagram.com/edwebmedia/" target="_blank" rel="noopener" aria-label="Edweb Media on Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+            <a href="https://wa.me/27846204583" target="_blank" rel="noopener" aria-label="Message Edweb Media on WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-1.2-.6-2-1-2.8-2.3-.2-.3 0-.5.2-.7.2-.2.4-.5.6-.7.1-.2.1-.4 0-.6-.1-.2-.6-1.5-.8-2-.1-.4-.3-.4-.5-.4h-.4c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.1s.9 2.5 1.1 2.7c.1.2 1.6 2.5 4 3.4 2 .8 2.4.7 2.8.6.4-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2 0-.1-.2-.2-.4-.3z"/></svg></a>
           </div>
         </div>
-
-        <div>
-          <h2>Company</h2>
-          <ul>
-            <li><a href="/#services">Services</a></li>
-            <li><a href="/projects">Work</a></li>
-            <li><a href="/packages">Pricing</a></li>
-            <li><a href="/contact">Contact</a></li>
-            <li><a href="/pay">Payments</a></li>
-          </ul>
-        </div>
-
-        <div>
-          <h2>Policies</h2>
-          <ul>
-            <li><a href="/terms-conditions">Terms and conditions</a></li>
-            <li><a href="/privacy-policy">Privacy policy</a></li>
-          </ul>
-        </div>
-
-        <div>
-          <h2>Contact</h2>
-          <ul>
-            <li><a href="tel:+27846204583">+27 84 620 4583</a></li>
-            <li><a href="mailto:info@edwebmedia.com">info@edwebmedia.com</a></li>
-            <li>Cape Town, South Africa</li>
-          </ul>
-        </div>
+        <div class="foot-col"><h4>Pages</h4><ul><li><a href="/#services">Services</a></li><li><a href="/projects">Work</a></li><li><a href="/packages">Pricing</a></li><li><a href="/pay">Payments</a></li><li><a href="/contact">Contact</a></li></ul></div>
+        <div class="foot-col"><h4>Contact</h4><ul><li><a href="mailto:info@edwebmedia.com">info@edwebmedia.com</a></li><li><a href="tel:+27846204583">084 620 4583</a></li><li><a href="https://wa.me/27846204583" target="_blank" rel="noopener">WhatsApp</a></li><li>Cape Town, South Africa</li></ul></div>
+        <div class="foot-col"><h4>Hours</h4><ul><li>Replies within one working day</li><li>Every enquiry answered by Edgar</li></ul></div>
       </div>
-
-      <div class="footer-base">
+      <div class="foot-legal">
         <span>&copy; <span id="year">2026</span> Edweb Media. All rights reserved.</span>
+        <nav aria-label="Legal"><a href="/privacy-policy">Privacy policy</a><a href="/terms-conditions">Terms and conditions</a></nav>
       </div>
     </div>
   </footer>
 
-  <a class="chat-float" href="https://wa.me/27846204583?text=Hi%20Edweb%2C%20I%27m%20looking%20for%20a%20website.%20Can%20we%20chat%3F" target="_blank" rel="noopener" aria-label="Message us about a website">
-    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-1.2-.6-2-1-2.8-2.3-.2-.3 0-.5.2-.7.2-.2.4-.5.6-.7.1-.2.1-.4 0-.6-.1-.2-.6-1.5-.8-2-.1-.4-.3-.4-.5-.4h-.4c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.1s.9 2.5 1.1 2.7c.1.2 1.6 2.5 4 3.4 2 .8 2.4.7 2.8.6.4-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2 0-.1-.2-.2-.4-.3z"/></svg>
-    <span>Chat to us</span>
-  </a>
-
+  <button type="button" class="chat-launch" id="chat-launch" aria-expanded="false" aria-controls="chat-drawer">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-5 4v-4H6.5A2.5 2.5 0 0 1 4 13.5z"/></svg>
+    <span>Ask Edweb</span>
+  </button>
   <script src="new-script.js"></script>
 </body>
 </html>
