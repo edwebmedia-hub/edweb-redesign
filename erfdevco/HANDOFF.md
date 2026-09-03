@@ -384,3 +384,57 @@ webmail (`Desktop/Companies/ERFDEVCO/erfdevco-signature-martiens.html`):
 
 Still unverified: the MPRE / Master Practitioner in Real Estate designation.
 See CONFIRM-BEFORE-LAUNCH.md.
+
+## Session close 2026-09-03 evening (rounds 12 + receptionist live + cuts)
+
+State on disk = state on production https://erfdevco.vercel.app (deployed after
+every change below; branch erfdevco-custom pushed to origin at ef0b18a).
+
+Shipped this stretch:
+- AI receptionist LIVE end to end: api/chat.js + assets/chat-widget.js on all
+  pages. ANTHROPIC_API_KEY is set on Vercel production (Edgar's own console key
+  "erfdevco-site"; console also holds an unused spare "erfdevco-prod" that
+  Edgar was told to delete). 30-question guardrail suite re-run against the
+  live endpoint 2026-09-03: QA-REPORT.md "Round 12b" + raw transcript in
+  CHATBOT-GUARDRAIL-RESULTS.json (vercelignored). Verdict: passes; two soft
+  notes (phone-only lead not asked for name; 4 replies over 55 words).
+- Round 12 mobile pass: credentials stack flush-left under 640, all big-photo
+  scrims lightened + turned vertical on mobile, photo grade filters, chat fab
+  52px mobile.
+- Hero: sunny land-caledon-fields frame now leads the crossfade (storm frame
+  second with its own brightness lift), preload updated, scrims thinned again.
+- REMOVED from home at Edgar's order: the "One practitioner" statement band and
+  the "Six services" tab section. Statement CSS stripped (credentials list kept
+  for about.html). Home now ends buyer-questions then footer.
+- Hero line trimmed to "Farms sold on what the land carries" (gold on
+  "carries"), title cap 22ch: 2 lines desktop, 3 mobile.
+
+OPEN, next session:
+1. Mobile hero text pick pending. Edgar has 3 live-CSS options on his phone:
+   https://claude.ai/code/artifact/d25d29fd-652f-489b-9c4a-935db6ce5c37
+   He answers "hero 1/2/3". Build the winner EXACTLY as shown from these
+   overrides (all inside @media (max-width:640px)):
+   - hero 1 Tidy: .hero{min-height:100svh;padding-bottom:2.75rem}
+     .hero__lede{font-size:.95rem;line-height:1.55;max-width:38ch;margin-bottom:1.6rem}
+     .hero__actions{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
+     .hero__actions .btn{padding-inline:.4rem;justify-content:center;font-size:.72rem;letter-spacing:.06em}
+   - hero 2 Editorial: .hero{min-height:100svh;padding-bottom:2.5rem}
+     .hero__inner{border-left:4px solid var(--gold);padding-left:1.25rem;margin-left:.25rem}
+     :root{--fs-hero:2.05rem} .hero__title{letter-spacing:-.03em;line-height:1.06}
+     .hero__lede{font-size:.9rem;line-height:1.6;max-width:34ch;margin-bottom:1.5rem;color:color-mix(in srgb,var(--paper) 76%,transparent)}
+     .hero__actions{gap:.6rem} .hero__actions .btn{padding-inline:1.3rem;font-size:.75rem}
+   - hero 3 Poster: .hero{min-height:100svh;align-items:center;padding-bottom:3rem}
+     :root{--fs-hero:2.9rem} .hero__title{line-height:1.0} .hero__lede{display:none}
+     .hero__actions{flex-direction:column;align-items:flex-start;gap:.75rem;margin-top:2.4rem}
+   (Options were shot BEFORE the headline trim; the winner gets the current
+   shorter headline. Screenshots showed the old 3-span markup; irrelevant.)
+2. SMTP_PASS still unset on Vercel: chatbot leads and the contact form send no
+   email. Needs martiens@erfdevco.com mailbox password. Blocks "leads work"
+   claim to Martiens.
+3. Token hygiene told to Edgar, unconfirmed: delete Vercel token vcp_4bKO...,
+   delete spare console key erfdevco-prod.
+4. Waiting external: Property24 answers (feed spec, cost, own-dev approval,
+   test env); Martiens: MPRE yes/no + seller listing fee + real mandates to
+   replace the 9 demo farms.
+5. Launch gate list unchanged in CONFIRM-BEFORE-LAUNCH.md (incl. removing the
+   X-Robots-Tag noindex in vercel.json at real launch).
