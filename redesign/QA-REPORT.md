@@ -1123,3 +1123,17 @@ from CSS and JS. Prices moved to R1,000 off across every surface, shown as a
 coral deal sticker. Verified after the swap: work tiles align in pairs
 (tops 324/835/1347 at 1440), add-on price lines align (372 x3), 0 console
 errors, script passes `node --check`.
+
+### Go-live pass (2026-09-03, late)
+
+Mobile 390 checked page by page in real Chrome (home at seven scroll
+positions, contact, packages, pay with a plan chosen, work with the demo
+rail, one write-up, 404): no horizontal overflow on any page, launcher
+clears the footer. Fixes from the pass: pricing type tabs wrap instead of
+clipping, work and demo captions left-align on phones, review cards size to
+their own content on phones. Forms: contact form posts every field
+`api/send-mail.js` reads, `website_type` derived from the package key so the
+enquiry routes; conversion fires only on `sent: true`. Payfast picker
+produces the right endpoint and amount. Promote run: 14 pages, zero
+leftover draft references, 404 links repaired. Committed 0878cda on
+`edweb-next`, fast-forwarded into `edweb-logo-refresh`.
