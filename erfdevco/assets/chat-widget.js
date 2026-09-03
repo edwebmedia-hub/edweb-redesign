@@ -1,0 +1,147 @@
+/* ERFDEVCO chat widget. Vanilla, styled from the site's own tokens.
+   Launcher opens a panel; answers come from /api/chat (server-side key).
+   The human route (call or WhatsApp Martiens) stays one tap away inside
+   the panel, because the agency's pitch is the person. */
+(function () {
+  'use strict';
+  if (document.querySelector('.chat-fab')) return;
+
+  var turns = [];
+  var busy = false;
+
+  var fab = document.createElement('button');
+  fab.type = 'button';
+  fab.className = 'chat-fab';
+  fab.setAttribute('aria-label', 'Chat to ERFDEVCO');
+  fab.setAttribute('aria-expanded', 'false');
+  fab.innerHTML =
+    '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 3C6.9 3 3 6.5 3 10.8c0 2.3 1.1 4.3 2.9 5.7-.1.9-.5 2.2-1.6 3.3-.2.2 0 .6.3.6 2 0 3.6-.9 4.6-1.7.9.2 1.8.4 2.8.4 5.1 0 9-3.5 9-7.8S17.1 3 12 3Z"/></svg>' +
+    '<span class="chat-fab__tip">Ask about a farm</span>';
+
+  var panel = document.createElement('div');
+  panel.className = 'chat-panel';
+  panel.hidden = true;
+  panel.setAttribute('role', 'dialog');
+  panel.setAttribute('aria-label', 'Chat with ERFDEVCO');
+  panel.innerHTML =
+    '<div class="chat-head">' +
+      '<div><strong>ERFDEVCO</strong><span>English or Afrikaans, ask about any farm</span></div>' +
+      '<button type="button" class="chat-close" aria-label="Close chat">&times;</button>' +
+    '</div>' +
+    '<div class="chat-log" aria-live="polite">' +
+      '<div class="chat-msg chat-msg--bot">Welcome. Ask me about any farm on the books, how listing works, or leave your number and Martiens phones you back.</div>' +
+    '</div>' +
+    '<div class="chat-chips">' +
+      '<button type="button">Which farms are for sale?</button>' +
+      '<button type="button">How do I sell my farm through you?</button>' +
+      '<button type="button">What does the 18-section schedule cover?</button>' +
+      '<button type="button">Ask Martiens to phone me</button>' +
+    '</div>' +
+    '<form class="chat-form">' +
+      '<label class="visually-hidden" for="chat-in">Your message</label>' +
+      '<input id="chat-in" type="text" maxlength="500" autocomplete="off" placeholder="Type your question" />' +
+      '<button type="submit" class="chat-send" aria-label="Send">&rarr;</button>' +
+    '</form>' +
+    '<p class="chat-foot">We only use your details to call you back. Rather talk to a person? ' +
+      '<a href="tel:+27829005019">082 900 5019</a> or ' +
+      '<a href="https://wa.me/27829005019" rel="noopener">WhatsApp Martiens</a>.</p>';
+
+  document.body.appendChild(fab);
+  document.body.appendChild(panel);
+
+  var log = panel.querySelector('.chat-log');
+  var form = panel.querySelector('.chat-form');
+  var input = panel.querySelector('#chat-in');
+  var chips = panel.querySelector('.chat-chips');
+  var lastFocus = null;
+
+  function open() {
+    panel.hidden = false;
+    fab.setAttribute('aria-expanded', 'true');
+    lastFocus = document.activeElement;
+    input.focus();
+  }
+  function close() {
+    panel.hidden = true;
+    fab.setAttribute('aria-expanded', 'false');
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+  fab.addEventListener('click', function () { panel.hidden ? open() : close(); });
+  panel.querySelector('.chat-close').addEventListener('click', close);
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && !panel.hidden) close();
+  });
+
+  function bubble(text, who) {
+    var d = document.createElement('div');
+    d.className = 'chat-msg chat-msg--' + who;
+    d.textContent = text;
+    log.appendChild(d);
+    log.scrollTop = log.scrollHeight;
+    return d;
+  }
+
+  function leadCard(lead) {
+    var d = document.createElement('div');
+    d.className = 'chat-lead';
+    d.innerHTML = '<span>Sent to Martiens</span>' +
+      '<b></b><i></i>';
+    d.querySelector('b').textContent = lead.name + ' · ' + lead.phone;
+    d.querySelector('i').textContent = lead.need;
+    log.appendChild(d);
+    log.scrollTop = log.scrollHeight;
+  }
+
+  function typing(on) {
+    var t = log.querySelector('.chat-typing');
+    if (on && !t) {
+      t = document.createElement('div');
+      t.className = 'chat-msg chat-msg--bot chat-typing';
+      t.setAttribute('aria-label', 'Typing');
+      t.innerHTML = '<span></span><span></span><span></span>';
+      log.appendChild(t);
+      log.scrollTop = log.scrollHeight;
+    } else if (!on && t) t.remove();
+  }
+
+  function send(text) {
+    if (busy || !text.trim()) return;
+    busy = true;
+    chips.hidden = true;
+    bubble(text, 'me');
+    turns.push({ role: 'user', content: text });
+    typing(true);
+    fetch('/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ messages: turns.slice(-24) })
+    }).then(function (r) {
+      return r.json().then(function (j) { return { ok: r.ok, status: r.status, j: j }; });
+    }).then(function (out) {
+      typing(false);
+      if (out.ok && out.j.reply) {
+        bubble(out.j.reply, 'bot');
+        turns.push({ role: 'assistant', content: out.j.reply });
+        if (out.j.lead) leadCard(out.j.lead);
+      } else if (out.status === 503) {
+        bubble('Bit busy right now, try again in a minute. Or WhatsApp Martiens directly on 082 900 5019.', 'bot');
+      } else {
+        bubble('Connection hiccup, please send that again.', 'bot');
+      }
+    }).catch(function () {
+      typing(false);
+      bubble('Connection hiccup, please send that again.', 'bot');
+    }).finally(function () { busy = false; });
+  }
+
+  chips.addEventListener('click', function (e) {
+    var b = e.target.closest('button');
+    if (b) send(b.textContent);
+  });
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var v = input.value;
+    input.value = '';
+    send(v);
+  });
+})();
