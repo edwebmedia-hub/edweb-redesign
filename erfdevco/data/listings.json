@@ -161,9 +161,10 @@
       "perHa": "R40 777 / ha",
       "sizeHa": 412,
       "status": "For sale",
-      "image": "assets/farm-nguni-kzn.jpg",
-      "alt": "Nguni cattle grazing sweetveld below the Drakensberg escarpment near Bergville",
+      "image": "assets/card-cattle-hills.jpg",
+      "alt": "Cattle grazing green hill pasture above a farmhouse in rolling country",
       "gallery": [
+        "assets/farm-nguni-kzn.jpg",
         "assets/farm-cattle.jpg",
         "assets/farm-cattle-close.jpg",
         "assets/farm-pasture-tree.jpg"
@@ -742,9 +743,10 @@
       "sizeHa": 3400,
       "status": "For sale",
       "listedOn": "2026-05-06",
-      "image": "assets/karoo-veld.jpg",
-      "alt": "Open Karoo veld running to a low ridge under a wide sky",
+      "image": "assets/card-sheep.jpg",
+      "alt": "A woolled ewe looking at the camera in front of the grazing flock",
       "gallery": [
+        "assets/karoo-veld.jpg",
         "assets/karoo-sheep.jpg",
         "assets/land-dusk.jpg",
         "assets/farm-pasture-tree.jpg"
@@ -890,9 +892,10 @@
       "sizeHa": 268,
       "status": "New listing",
       "listedOn": "2026-08-27",
-      "image": "assets/dairy-pasture.jpg",
-      "alt": "Holstein dairy cow on kikuyu pasture with green hills behind, Eastern Cape",
+      "image": "assets/card-dairy-herd.jpg",
+      "alt": "The dairy herd spread over flat green pasture with a tree line behind",
       "gallery": [
+        "assets/dairy-pasture.jpg",
         "assets/dairy-shed.jpg",
         "assets/farm-cattle-field.jpg",
         "assets/farm-pasture-tree.jpg"
