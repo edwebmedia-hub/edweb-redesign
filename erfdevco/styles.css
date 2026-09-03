@@ -1191,149 +1191,45 @@ main > :is(.band, .band--surface, .band--sage, .band--tight):has(+ section) {
 .type-more a:hover { background: var(--gold); border-color: var(--gold); color: var(--ink); }
 
 /* --------------------------------------------------------------------------
-   12. The five questions. Our own twist on the reference's "filter what
-   matters" block: a buyer's question on the left, the answer pulled off a
-   real listing on the right. Replaced the flat eighteen-section checklist,
-   which stated what we hold rather than showing it.
+   12. The five questions, as a plain FAQ. Native details/summary, no JS.
    -------------------------------------------------------------------------- */
-.qa {
-  display: grid;
-  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
-  gap: clamp(1.5rem, 4vw, 3.5rem);
-  align-items: stretch;
-}
-.qa__list {
-  display: flex;
-  flex-direction: column;
-  border-top: 1px solid var(--line);
-}
-.qa__q {
-  flex: 1;
-  text-align: left;
-  background: transparent;
-  border: 0;
-  border-bottom: 1px solid var(--line);
-  padding: 1.05rem 2rem 1.05rem 1.1rem;
+.faq { border-top: 1px solid var(--line); max-width: 62rem; }
+.faq-card { border-bottom: 1px solid var(--line); }
+.faq-card summary {
+  list-style: none;
   cursor: pointer;
-  position: relative;
-  font-family: var(--display);
-  font-size: clamp(1rem, 1.3vw, 1.15rem);
-  letter-spacing: -0.02em;
-  line-height: 1.3;
-  color: var(--muted);
-  transition: color var(--t-fast) var(--ease-soft),
-              border-color var(--t-fast) var(--ease-soft);
-}
-/* A chevron, not a numbered marker: this is a question you open, never an
-   01/02/03 process step. */
-.qa__q::after {
-  content: "";
-  position: absolute;
-  right: 0.4rem;
-  top: 50%;
-  width: 7px;
-  height: 7px;
-  border-right: 1.5px solid currentColor;
-  border-bottom: 1.5px solid currentColor;
-  transform: translateY(-50%) rotate(-45deg);
-  opacity: 0.35;
-  transition: opacity var(--t-fast) var(--ease-soft),
-              transform var(--t-mid) var(--ease);
-}
-/* A gold bar marks the open question. It sits in space every question
-   reserves, so changing the selection moves no text. A gold bottom border
-   read as a rule between two rows instead of a mark on one. */
-.qa__q::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0.9rem;
-  bottom: 0.9rem;
-  width: 3px;
-  background: var(--gold);
-  opacity: 0;
-  transform: scaleY(0.4);
-  transition: opacity var(--t-fast) var(--ease-soft),
-              transform var(--t-mid) var(--ease);
-}
-.qa__q:hover { color: var(--ink); }
-.qa__q:hover::before { opacity: 0.35; transform: scaleY(1); }
-.qa__q[aria-selected="true"] { color: var(--ink); }
-.qa__q[aria-selected="true"]::before { opacity: 1; transform: scaleY(1); }
-.qa__q[aria-selected="true"]::after {
-  opacity: 1;
-  color: var(--gold-deep);
-  transform: translateY(-50%) rotate(-45deg) translate(3px, -3px);
-}
-/* display:flex would beat the user agent's [hidden] rule, so the closed
-   panels must be told to stay closed. */
-.qa__a[hidden] { display: none; }
-.qa__a {
   display: flex;
-  flex-direction: column;
-  height: 100%;
-  /* Farmland under a heavy ink overlay: the photograph gives the panel a
-     ground without costing the values their contrast. The gradient alone
-     carries it anywhere the image cannot load. */
-  background:
-    linear-gradient(176deg,
-      color-mix(in srgb, var(--ink-deep) 88%, transparent) 0%,
-      color-mix(in srgb, var(--ink-deep) 78%, transparent) 38%,
-      color-mix(in srgb, var(--ink-deep) 64%, transparent) 100%),
-    var(--ink-deep) url("assets/land-ploughed-aerial-800w.jpg") center / cover no-repeat;
-  color: var(--paper);
-  padding: clamp(1.25rem, 2.4vw, 1.9rem);
-  border-radius: var(--r-card);
-  animation: qa-in var(--t-mid) var(--ease) both;
-}
-@keyframes qa-in { from { opacity: 0; transform: translateY(6px); } }
-.qa__from {
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding-block: 1.35rem;
   font-family: var(--display);
-  font-size: var(--fs-label);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 1.1rem;
+  font-size: 1.0625rem;
+  letter-spacing: 0.01em;
+  color: var(--ink);
+  transition: color var(--t-fast) var(--ease-soft);
 }
-.qa__from span { padding: 0 0.35em; opacity: 0.6; }
-.qa__a dl {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  align-content: start;
+.faq-card summary::-webkit-details-marker { display: none; }
+.faq-card summary::after {
+  content: "+";
+  flex: none;
+  font-size: 1.25rem;
+  line-height: 1;
+  color: var(--gold-deep);
+  transition: rotate var(--t-fast) var(--ease);
 }
-.qa__a dt,
-.qa__a dd {
-  margin: 0;
-  padding: 0.7rem 0;
-  border-bottom: 1px solid var(--line-dark);
-  font-size: 0.9375rem;
-  line-height: 1.5;
-}
-.qa__a dt { color: color-mix(in srgb, var(--paper) 66%, transparent); }
-.qa__a dd { text-align: right; padding-left: 1rem; }
-/* Pinned to the foot so the panel finishes on the same line as the question
-   list instead of leaving a dead half. */
-.qa__more {
-  margin-top: auto;
-  padding-top: 1.4rem;
-  align-self: start;
-  font-family: var(--display);
-  font-size: 0.8125rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--gold);
-  border-bottom: 1px solid color-mix(in srgb, var(--gold) 40%, transparent);
+.faq-card[open] summary::after { rotate: 45deg; }
+.faq-card summary:hover { color: var(--gold-deep); }
+.faq-card__a { padding-bottom: 1.6rem; max-width: 62ch; }
+.faq-card__a p { color: var(--muted); line-height: 1.72; }
+.faq-card__a a {
+  color: var(--gold-deep);
+  border-bottom: 1px solid color-mix(in srgb, var(--gold) 45%, transparent);
   transition: border-color var(--t-fast) var(--ease-soft);
 }
-.qa__more:hover { border-bottom-color: var(--gold); }
-
-@media (max-width: 900px) {
-  .qa { grid-template-columns: minmax(0, 1fr); }
-  .qa__q { flex: none; }
-}
+.faq-card__a a:hover { border-bottom-color: var(--gold-deep); }
 @media (prefers-reduced-motion: reduce) {
-  .qa__a { animation: none; }
-  .qa__q::before { transition: opacity var(--t-fast) linear; transform: scaleY(1); }
+  .faq-card summary::after { transition: none; }
 }
 
 /* --------------------------------------------------------------------------
@@ -2869,13 +2765,6 @@ a, button { -webkit-tap-highlight-color: transparent; }
 .save-btn:hover { color: var(--gold-deep); }
 
 
-/* Services as question-tabs: the panel body is prose, not a spec table. */
-.qa--svc .qa__body {
-  color: color-mix(in srgb, var(--paper) 82%, transparent);
-  line-height: 1.7;
-  max-width: 52ch;
-}
-
 /* Subtle depth on the big photographs. Scroll-driven, so it costs nothing
    on the main thread; off when the visitor asks for reduced motion, and
    absent entirely where the timeline is unsupported. */
@@ -2887,14 +2776,17 @@ a, button { -webkit-tap-highlight-color: transparent; }
       animation-range: 0 100vh;
     }
     @keyframes hero-drift { to { transform: translateY(9%) scale(1.06); } }
+    /* The tractor sits right of frame heading down-left, so the frame pans
+       up-right to down-left with the scroll and the machine reads as driving
+       its rows while the band moves through the viewport. */
     .cta__media img {
       animation: band-pan linear both;
       animation-timeline: view();
       animation-range: cover 0% cover 100%;
     }
     @keyframes band-pan {
-      from { transform: translateY(-5%) scale(1.1); }
-      to { transform: translateY(5%) scale(1.1); }
+      from { transform: translate(5.5%, -3%) scale(1.14); }
+      to { transform: translate(-5.5%, 3%) scale(1.14); }
     }
   }
 }
@@ -2977,7 +2869,7 @@ a, button { -webkit-tap-highlight-color: transparent; }
 /* Touch floors: on coarse pointers every chip-sized control reaches 44px. */
 @media (pointer: coarse) {
   .filter-btn, .type-more a, .cmp-switch,
-  .provlist button, .spec-tab, .qa__more {
+  .provlist button, .spec-tab {
     min-height: 44px;
   }
   .findbar input, .searchrail__field select { min-height: 44px; }

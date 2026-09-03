@@ -1353,49 +1353,6 @@
   })();
 
   /* ----------------------------------------------------------------------
-     Home: the five questions. A vertical tablist, so it answers Up, Down,
-     Home and End as well as the pointer, and only the selected question is
-     in the tab order.
-     ---------------------------------------------------------------------- */
-  (function buyerQuestions() {
-    $$('.qa__list').forEach(wireList);
-    function wireList(list) {
-    var tabs = $$('.qa__q', list);
-    if (!tabs.length) return;
-
-    function select(tab) {
-      tabs.forEach(function (t) {
-        var on = t === tab;
-        t.setAttribute('aria-selected', on ? 'true' : 'false');
-        t.tabIndex = on ? 0 : -1;
-        var panel = document.getElementById(t.getAttribute('aria-controls'));
-        if (panel) panel.hidden = !on;
-      });
-    }
-
-    list.addEventListener('click', function (e) {
-      var tab = e.target.closest('.qa__q');
-      if (tab) select(tab);
-    });
-
-    list.addEventListener('keydown', function (e) {
-      var i = tabs.indexOf(document.activeElement);
-      if (i === -1) return;
-      var next = -1;
-      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') next = i + 1;
-      else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') next = i - 1;
-      else if (e.key === 'Home') next = 0;
-      else if (e.key === 'End') next = tabs.length - 1;
-      if (next === -1) return;
-      e.preventDefault();
-      var t = tabs[(next + tabs.length) % tabs.length];
-      t.focus();
-      select(t);
-    });
-    }
-  })();
-
-  /* ----------------------------------------------------------------------
      Forms. One handler for every form on the site, injected or static.
      ---------------------------------------------------------------------- */
   function wireForms(root) {
