@@ -3027,3 +3027,45 @@ a, button { -webkit-tap-highlight-color: transparent; }
   .farm-card:hover { transform: none; }
   .jumpnav a::after { transition: none; }
 }
+
+/* --------------------------------------------------------------------------
+   30. Mobile rhythm. The band scale was desktop's clamp floor, so colour
+   seams stacked ~180px of air on a phone while component insides stayed
+   desktop-tight. One scale for small screens, and every seam, full or
+   collapsed, shrinks in proportion because they are all calc'd from it.
+   -------------------------------------------------------------------------- */
+@media (max-width: 640px) {
+  :root {
+    --band: clamp(3.75rem, 15vw, 5rem);
+    --band-tight: clamp(3rem, 12vw, 4rem);
+  }
+  .section-head { margin-bottom: clamp(1.75rem, 8vw, 2.5rem); }
+}
+
+/* The statement stack read cramped once the paragraph rhythm took over:
+   a display quote needs more than a body paragraph's 1em under it. */
+.statement__quote { margin-bottom: 1.25rem; }
+.statement .credentials { margin-top: 1.75rem; }
+
+/* The leftover-type chips on a phone: a clean two-column grid, with the
+   view-everything route on its own full row instead of dangling. */
+@media (max-width: 640px) {
+  .type-more {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.5rem;
+  }
+  .type-more a {
+    justify-content: center;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+  }
+  .type-more a:last-child {
+    grid-column: 1 / -1;
+    border-color: var(--ink);
+    color: var(--ink);
+  }
+  /* Stacked stat rows were touching once the grid collapsed to one column. */
+  .stat-strip { row-gap: 1.5rem; }
+}
