@@ -60,6 +60,13 @@ Both are now off the site. They go back the moment Martiens confirms them.
      Property24 the mirror.
    - The claim stays OFF the site until the feed (or manual PropCtrl
      capture) is actually live, not merely possible.
+   **Update 2026-09-03, Carol at Property24:** feeding listings into the
+   portal costs nothing ("we do not charge for feeding listings into the
+   portal"). She asked for the developer's name and email to send the feed
+   documentation; the developer is Edgar (Edweb Media). Receiving the docs
+   commits to nothing. Standing verdict from 2026-08-28 holds: do NOT build
+   the feed yet (effort vs six farms); revisit at 3+ property clients or
+   50+ listings. Cost is no longer the unknown, effort is.
 2. **"There is no listing fee."** A pricing commitment that appears nowhere in
    any record. The same notes mention a monthly labour fee to Edgar, which is
    not the same thing as free to the seller.
