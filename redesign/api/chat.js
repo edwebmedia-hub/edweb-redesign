@@ -1,5 +1,6 @@
 // api/chat.js: the site assistant (Vercel serverless, CommonJS like send-mail.js).
-// Env: ANTHROPIC_API_KEY (required), SMTP_PASS (existing, for lead mail),
+// Env: ANTHROPIC_API_KEY (required), ANTHROPIC_WORKSPACE_ID (required for
+//      identity-linked console keys), SMTP_PASS (existing, for lead mail),
 //      CHAT_MODEL (optional override).
 // Calls the Anthropic Messages API directly over fetch: no SDK, no new dependency.
 const nodemailer = require('nodemailer');
@@ -101,11 +102,13 @@ module.exports = async function handler(req, res) {
   try {
     const r = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
-      headers: {
+      headers: Object.assign({
         'content-type': 'application/json',
-        'x-api-key': process.env.ANTHROPIC_API_KEY,
+        'x-api-key': process.env.ANTHROPIC_API_KEY.trim(),
         'anthropic-version': '2023-06-01',
-      },
+      }, process.env.ANTHROPIC_WORKSPACE_ID
+        // Identity-linked console keys are refused without the workspace they act in.
+        ? { 'anthropic-workspace-id': process.env.ANTHROPIC_WORKSPACE_ID.trim() } : {}),
       body: JSON.stringify({ model: MODEL, max_tokens: 320, system: SYSTEM, messages: clean }),
     });
     if (!r.ok) {
