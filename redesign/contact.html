@@ -72,7 +72,7 @@
             <input type="hidden" name="type" value="contact" />
             <div class="form-grid">
               <div class="field span-2">
-                <span>What do you need? Pick as many as apply.</span>
+                <span>What do you need? Tap as many as apply.</span>
                 <div class="choices">
                   <label class="choice"><input type="checkbox" name="services" value="Website design" data-require-one /><span>Website design</span></label>
                   <label class="choice"><input type="checkbox" name="services" value="Hosting and management" /><span>Hosting and management</span></label>
@@ -108,8 +108,8 @@
               <div class="field span-2" data-show-when="services=Website design">
                 <span>Add-ons, both optional</span>
                 <div class="choices">
-                  <label class="choice"><input type="checkbox" name="addons" value="Hosting R199/month" /><span>Hosting, R199 a month</span></label>
-                  <label class="choice"><input type="checkbox" name="addons" value="Management from R199/month" /><span>Management, from R199 a month</span></label>
+                  <label class="choice"><input type="checkbox" name="addons" value="Hosting R199/month" /><span>Hosting, R199/m</span></label>
+                  <label class="choice"><input type="checkbox" name="addons" value="Management from R199/month" /><span>Management, from R199/m</span></label>
                 </div>
               </div>
               <div class="field">
@@ -137,23 +137,19 @@
                 <textarea id="message" name="message" required placeholder="One or two lines is enough. If you have a website already, paste the address."></textarea>
                 <span class="field-error" aria-live="polite"></span>
               </div>
-              <div class="field">
-                <label for="first_name">First name</label>
-                <input id="first_name" name="first_name" type="text" autocomplete="given-name" required />
-                <span class="field-error" aria-live="polite"></span>
-              </div>
-              <div class="field">
-                <label for="last_name">Last name</label>
-                <input id="last_name" name="last_name" type="text" autocomplete="family-name" />
-              </div>
-              <div class="field">
-                <label for="email">Email</label>
-                <input id="email" name="email" type="email" autocomplete="email" required />
+              <div class="field span-2">
+                <label for="first_name">Your name</label>
+                <input id="first_name" name="first_name" type="text" autocomplete="name" required />
                 <span class="field-error" aria-live="polite"></span>
               </div>
               <div class="field">
                 <label for="phone">Phone or WhatsApp</label>
-                <input id="phone" name="phone" type="tel" autocomplete="tel" required />
+                <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required />
+                <span class="field-error" aria-live="polite"></span>
+              </div>
+              <div class="field">
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" inputmode="email" autocomplete="email" required />
                 <span class="field-error" aria-live="polite"></span>
               </div>
               <div class="hp" aria-hidden="true"><label for="company"><input id="company" name="company" type="checkbox" value="yes" tabindex="-1" autocomplete="off" /> Leave this unticked</label></div>
