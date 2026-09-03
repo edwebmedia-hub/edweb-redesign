@@ -1043,3 +1043,83 @@ errors, 18 links, contrast sweep clean, alignment, ground and tone sweeps
 clean, zero em-dashes, no placeholder text. Not verified locally and still
 deploy-gate items: the real send-mail endpoint, the live Payfast checkout,
 clean-URL routing and field Core Web Vitals.
+
+
+## 2026-09-03 evening: from-scratch rebuild, branch `edweb-next`
+
+Scope: every page rebuilt on a new stylesheet and script. Pages covered:
+new-home, new-projects, new-packages, new-contact, new-pay, the six
+new-project-* write-ups (navigator, crazydaizy, teetotrail, spiralguard,
+lekkerdoos, muire), new-privacy, new-terms, 404. Look-target: Edgar's
+standing rulings (one face Manrope 700, four tokens, light base, no dark
+mid-page bands except the one statement/figures band, no pinned headings)
+plus the modern-design-playbook bar (fluid type, scroll-driven motion, one
+living element, asymmetric splits, designed hovers).
+
+### First-render look loop (real Chrome via DevTools MCP, 1440x900 and 390x844)
+
+Round 1, home 1440: hero, pinned work rail, services tab spine, statement
+band, pricing, process, reviews, FAQ, CTA, footer all rendered; entrance
+choreography, cycling word, statement words lighting up and count-up figures
+confirmed live. Faults: work tiles too tall under the fixed header; services
+column sticky with nothing to pin against; "Services" nav link marked current
+on the home page. All three fixed (tile width 56vw/800 max, sticky removed,
+anchor links skipped by the current-page marker).
+
+Round 2, home 390: single column, chat panel under the copy, rail mode for
+the work section, no horizontal overflow (scrollWidth 390). Mobile nav
+toggle, chat chip (fallback answer), services tab switch and FAQ open all
+exercised and confirmed by DOM state.
+
+Round 3, inner pages 1440 (projects, packages, contact, pay, one write-up,
+privacy): rendered on the shared shell. Faults: demo tiles left a dead half
+(5 in a 2-up grid), replaced by a manual prev/next rail; pay step showed a
+focus ring after programmatic focus, removed. Pay picker exercised end to
+end: Business Silver + hosting and management produced
+`/api/payfast?website=business-silver&monthly=mgmt-standard` and "Pay R3,499
+now". Contact form validation names the missing fields.
+
+Edgar correction mid-build (crop of the FAQ band): "don't like it when the
+header moves with the scroll". Sticky FAQ side column removed; only the work
+rail's media stage still pins. Harvested to OS TASTE-PROFILE the same
+session.
+
+### Independent review (site-reviewer, fresh context)
+
+Verdict BLOCKED on one item, this QA entry missing; four gaps. Actions:
+staggered work-grid rows removed (aligned tiles per the 2026-08-19 ruling);
+snap rails got `scroll-padding-inline` so the first tile lines up with the
+heading on mobile; footer gets 64px bottom clearance on mobile so the chat
+launcher never sits on the last line. Ink `#1c1c1c` kept: settled with Edgar
+on 2026-08-23 (three rounds, recorded in project memory and HANDOFF), the
+project CLAUDE.md line quoting `#2b2b2b` predates that ruling. Reviewer
+verified: Manrope only at 700, zero em-dashes, no ghost buttons, no eyebrows,
+prices match PACKAGES.md and `api/payfast.js`, 0 console errors, 0 broken
+images, no overflow at 390 or 1440.
+
+### Sweeps
+
+Em-dash sweep over all new files: 0. Stray hex sweep over the stylesheet: only
+the four tokens plus `#000` inside a mask gradient. Asset sweep: every
+`assets/` path resolves on disk.
+
+### Not checked locally (launch gate)
+
+Real form send, real chat turn against the Anthropic API (needs
+`ANTHROPIC_API_KEY` in the hosting env), Lighthouse on a hosted URL, clean-URL
+routing.
+
+### Edgar's first round of corrections (2026-09-03 evening, all applied)
+
+Particles stronger and only on paper sections; hairline above the logos
+removed; logo marquee no longer pauses on hover; statement rewritten ("and
+the results speak for us"); reviews three per view, paging by three; teal
+closing band replaced by the soft grey; no pinned section headings. Two
+sections went to three-option bake-offs in one artifact
+(https://claude.ai/code/artifact/4af07249-913f-440d-9ca0-f61d4d8e1f09):
+work section WORK 1 (aligned two-up grid) and add-ons ADDON 1 (white plan
+cards) won and are built in; rejected variants and the rail engine removed
+from CSS and JS. Prices moved to R1,000 off across every surface, shown as a
+coral deal sticker. Verified after the swap: work tiles align in pairs
+(tops 324/835/1347 at 1440), add-on price lines align (372 x3), 0 console
+errors, script passes `node --check`.

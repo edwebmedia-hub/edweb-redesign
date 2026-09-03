@@ -4,181 +4,125 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Muire Maintenance Website Design | Edweb Media</title>
-  <!-- PROMOTION CHECKLIST: delete the noindex, set the canonical to the live
-       path, re-add the gtag loader, repoint new-*.html links. Every word of the
-       brief and the delivered list is carried over from projects/ unchanged. -->
   <meta name="robots" content="noindex, nofollow" />
   <meta name="description" content="A premium home cleaning and maintenance website for a Cape Town service business, built to turn homeowners into booked clients." />
   <link rel="canonical" href="https://edwebmedia.com/projects/muire" />
-
-  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16948063813"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'AW-16948063813');
-  </script>
-
-
   <meta property="og:type" content="article" />
-  <meta property="og:url" content="https://edwebmedia.com/projects/muire" />
   <meta property="og:title" content="Muire Maintenance Website Design | Edweb Media" />
   <meta property="og:description" content="A premium home cleaning and maintenance website for a Cape Town service business, built to turn homeowners into booked clients." />
   <meta property="og:image" content="https://edwebmedia.com/assets/edweb-logo-dark.png" />
-  <meta property="og:locale" content="en_ZA" />
-  <meta property="og:site_name" content="Edweb Media" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Muire Maintenance Website Design | Edweb Media" />
-  <meta name="twitter:description" content="A premium home cleaning and maintenance website for a Cape Town service business, built to turn homeowners into booked clients." />
-  <meta name="twitter:image" content="https://edwebmedia.com/assets/edweb-logo-dark.png" />
-
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
-
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="new-styles.css" />
-
   <script>document.documentElement.classList.replace('no-js', 'js');</script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
+  <div class="backdrop" aria-hidden="true"></div>
+  <svg style="display:none" aria-hidden="true"><symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol></svg>
 
   <header class="site-header" id="site-header">
-    <div class="nav" id="nav">
-      <a href="new-home.html" class="logo" aria-label="Edweb Media home">
-        <img src="assets/work/logo-edweb-dark.webp" alt="Edweb Media" width="264" height="48" />
-      </a>
-      <nav class="nav-links" aria-label="Primary">
+    <div class="nav">
+      <a href="new-home.html" class="logo" aria-label="Edweb Media home"><img src="assets/work/logo-edweb-dark.webp" alt="Edweb Media" width="264" height="48" /></a>
+      <nav class="nav-links" id="nav-links" aria-label="Primary">
         <a href="new-home.html#services">Services</a>
-        <a href="new-projects.html" aria-current="page">Work</a>
+        <a href="new-projects.html">Work</a>
         <a href="new-packages.html">Pricing</a>
         <a href="new-pay.html">Payments</a>
         <a href="new-contact.html">Contact</a>
       </nav>
       <div class="nav-end">
-        <a href="new-contact.html" class="ulink">Start a project</a>
-        <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav">
-          <span></span><span></span><span></span>
-        </button>
+        <a href="new-contact.html" class="btn">Start a project</a>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links"><span></span><span></span><span></span></button>
       </div>
     </div>
   </header>
 
   <main id="main">
-    <section class="page-hero page-hero--doc band--alt" id="top">
-      <div class="container page-hero-inner">
+    <section class="page-hero" id="top" aria-labelledby="page-title">
+      <div class="container">
         <div>
-          <h1><span class="hl">Muire</span> Maintenance.</h1>
+          <h1 id="page-title">Muire Maintenance<span class="accent">.</span></h1>
           <p class="lead">A premium home cleaning and maintenance website for a Cape Town service business, built to turn homeowners into booked clients.</p>
           <div class="hero-actions">
-            <a href="https://muiremaintenance.co.za" target="_blank" rel="noopener" class="btn">Open the live site</a>
-            <a href="new-projects.html" class="ulink">All work <span class="arrow" aria-hidden="true">&raquo;</span></a>
+            <a class="btn" href="https://muiremaintenance.co.za" target="_blank" rel="noopener">Open the live site</a>
+            <a class="ulink" href="new-projects.html">All work</a>
           </div>
         </div>
-
-        <div class="hero-card reveal" style="--reveal-delay:120ms">
-          <h2>At a glance</h2>
-          <p class="hero-card-sub">What we built and where it lives.</p>
-          <div class="hero-rows">
-            <div><span class="row-name">Industry</span><span class="row-meta">Home Cleaning & Maintenance</span></div>
-            <div><span class="row-name">What we did</span><span class="row-meta">Website Design, Hosting</span></div>
-            <div><span class="row-name">Live at</span><span class="row-meta">muiremaintenance.co.za</span></div>
-            <div><span class="row-name">Design</span><span class="row-meta">Around the brand, not a fixed template</span></div>
-          </div>
-          <p class="hero-card-foot">Want something like this? <a href="new-contact.html">Tell us what your business does.</a></p>
+        <div class="card index-card">
+          <h3>At a glance</h3>
+          <ul>
+            <li><span>Industry</span><span>Home cleaning and maintenance</span></li>
+            <li><span>What we did</span><span>Website design, hosting</span></li>
+            <li><span>Live at</span><span>muiremaintenance.co.za</span></li>
+            <li><span>Design</span><span>Around the brand, not a fixed template</span></li>
+          </ul>
         </div>
       </div>
     </section>
 
-    <section class="band" id="brief">
+    <section class="band band--alt">
       <div class="container">
         <div class="head reveal">
-          <h2>Make everyday home care feel premium</h2>
+          <div><h2>Make everyday home care feel <span class="accent">premium</span>.</h2></div>
           <p class="lead">Six services, from deep cleaning to handyman work, without a generic services list. Transparent price ranges so homeowners see the cost before calling.</p>
         </div>
-        <div class="shots shots--one">
-          <figure class="shot reveal">
-            <img src="assets/projects/muire/muire-home.jpg" alt="Full scroll of the Muire Maintenance homepage, top to bottom" loading="lazy" decoding="async" />
-          </figure>
-        </div>
-        <p class="price-note reveal">Every screen above is live. <a href="https://muiremaintenance.co.za" target="_blank" rel="noopener" class="ulink">Open muiremaintenance.co.za <span class="arrow" aria-hidden="true">&raquo;</span></a></p>
-      </div>
-    </section>
-
-    <section class="band band--ink" id="delivered">
-      <div class="container">
-        <div class="head reveal">
-          <h2>What we delivered.</h2>
-          <p class="lead">Everything below is live right now.</p>
-        </div>
-        <div class="craft-items">
-          <article class="craft-item reveal">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
-            <div>
-              <h3>Service Showcase</h3>
-              <p>Six signature services, each with its own quote-request call to action.</p>
-            </div>
-          </article>
-          <article class="craft-item reveal" style="--reveal-delay:60ms">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
-            <div>
-              <h3>Transparent Pricing</h3>
-              <p>Clear price ranges by home size, so clients know the cost upfront.</p>
-            </div>
-          </article>
-          <article class="craft-item reveal" style="--reveal-delay:120ms">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
-            <div>
-              <h3>Client Testimonials</h3>
-              <p>Real client quotes built into the homepage to build trust fast.</p>
-            </div>
-          </article>
-          <article class="craft-item reveal" style="--reveal-delay:180ms">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
-            <div>
-              <h3>Built-In FAQ</h3>
-              <p>Common booking and scheduling questions answered before anyone has to ask.</p>
-            </div>
-          </article>
-          <article class="craft-item reveal" style="--reveal-delay:240ms">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
-            <div>
-              <h3>Mobile-First Layout</h3>
-              <p>Built to browse and book cleanly from a phone.</p>
-            </div>
-          </article>
-          <article class="craft-item reveal" style="--reveal-delay:300ms">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
-            <div>
-              <h3>Hosting & Security</h3>
-              <p>SSL certificate, reliable hosting and ongoing site management included.</p>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="band band--alt" id="start">
-      <div class="container split split--lead">
-        <div class="reveal">
-          <h2>Want <span class="hl">yours</span> built like this?</h2>
-          <p>Tell us what your business does. A plan and a price come back within one working day.</p>
-          <div class="hero-actions">
-            <a href="new-contact.html" class="btn">Start a project</a>
-            <a href="new-packages.html" class="ulink">See what it costs <span class="arrow" aria-hidden="true">&raquo;</span></a>
+        <div class="shot-grid">
+          <div class="span-2">
+            <div class="work-shot"><img src="assets/projects/muire/muire-home.jpg" alt="Full scroll of the Muire Maintenance homepage, top to bottom" loading="eager" /></div>
           </div>
         </div>
-        <div class="reveal" style="--reveal-delay:100ms">
-          <h3>How this one ran</h3>
-          <ul class="facts">
-            <li>Designed around the brand and its customers, not a fixed template</li>
-            <li>Mobile-first, checked on phone, tablet and desktop</li>
-            <li>Hosting and security included if you want us to run it</li>
-            <li>Every file yours once the fee is settled</li>
-          </ul>
+      </div>
+    </section>
+
+    <section class="band">
+      <div class="container">
+        <div class="head reveal">
+          <div><h2>What we <span class="accent">delivered</span>.</h2></div>
+          <p class="lead">Everything below is live right now.</p>
+        </div>
+        <div class="process-grid process-grid--3">
+          <article class="card step"><h3>Service Showcase</h3><p>Six signature services, each with its own quote-request call to action.</p></article>
+          <article class="card step"><h3>Transparent Pricing</h3><p>Clear price ranges by home size, so clients know the cost upfront.</p></article>
+          <article class="card step"><h3>Client Testimonials</h3><p>Real client quotes built into the homepage to build trust fast.</p></article>
+          <article class="card step"><h3>Built-In FAQ</h3><p>Common booking and scheduling questions answered before anyone has to ask.</p></article>
+          <article class="card step"><h3>Mobile-First Layout</h3><p>Built to browse and book cleanly from a phone.</p></article>
+          <article class="card step"><h3>Hosting and Security</h3><p>SSL certificate, reliable hosting and ongoing site management included.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="band band--ink">
+      <div class="container">
+        <div class="head reveal">
+          <div><h2>How this one <span class="accent">ran</span>.</h2></div>
+        </div>
+        <ul class="facts facts--ink reveal">
+          <li><svg><use href="#i-check"/></svg>Designed around the brand and its customers, not a fixed template</li>
+          <li><svg><use href="#i-check"/></svg>Mobile-first, checked on phone, tablet and desktop</li>
+          <li><svg><use href="#i-check"/></svg>Hosting and security included if you want us to run it</li>
+          <li><svg><use href="#i-check"/></svg>Every file yours once the fee is settled</li>
+        </ul>
+        <div class="prevnext">
+          <a class="ulink" href="new-project-lekkerdoos.html">Previous: Die Lekker Doos</a>
+          <a class="ulink" href="new-project-navigator.html">Next: Navigator Vietnam</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="band band--alt">
+      <div class="container cta-grid">
+        <div class="reveal">
+          <h2>Want yours built like <span class="accent">this</span>?</h2>
+          <p class="lead">Tell us what your business does. A plan and a price come back within one working day.</p>
+        </div>
+        <div class="cta-side reveal">
+          <a class="btn" href="new-contact.html">Get in touch</a>
+          <a class="ulink" href="new-packages.html">See what it costs</a>
         </div>
       </div>
     </section>
@@ -186,58 +130,31 @@
 
   <footer class="site-footer">
     <div class="container">
-      <div class="footer-grid">
-        <div>
-          <div class="footer-logo">
-            <img src="assets/work/logo-edweb-light.webp" alt="Edweb Media" width="296" height="54" loading="lazy" />
-          </div>
-          <p class="footer-blurb">
-            Custom websites for South African businesses, hosted, updated and marketed by
-            the people who built them.
-          </p>
-          <div class="footer-socials">
-            <a href="https://www.facebook.com/edwebmediasolutions" target="_blank" rel="noopener" aria-label="Edweb Media on Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7h2.4l.4-2.8h-2.8v-1.6c0-.8.2-1.4 1.4-1.4h1.5V5.7c-.3 0-1.2-.1-2.2-.1-2.3 0-3.8 1.4-3.8 3.9v1.7H8v2.8h2.4V21h3.1z"/></svg></a>
-            <a href="https://www.instagram.com/edwebmedia/" target="_blank" rel="noopener" aria-label="Edweb Media on Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="3.5"/><circle cx="17.2" cy="6.8" r="0.8" fill="currentColor" stroke="none"/></svg></a>
-            <a href="https://wa.me/27846204583" target="_blank" rel="noopener" aria-label="Message Edweb Media"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-1.2-.6-2-1-2.8-2.3-.2-.3 0-.5.2-.7.2-.2.4-.5.6-.7.1-.2.1-.4 0-.6-.1-.2-.6-1.5-.8-2-.1-.4-.3-.4-.5-.4h-.4c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.1s.9 2.5 1.1 2.7c.1.2 1.6 2.5 4 3.4 2 .8 2.4.7 2.8.6.4-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2 0-.1-.2-.2-.4-.3z"/></svg></a>
+      <div class="foot-grid">
+        <div class="foot-brand">
+          <img src="assets/work/logo-edweb-light.webp" alt="Edweb Media" width="264" height="48" loading="lazy" />
+          <p>Web design studio in Cape Town. Custom websites for businesses across South Africa, hosted and looked after by the people who built them.</p>
+          <div class="socials">
+            <a href="https://www.facebook.com/edwebmediasolutions" target="_blank" rel="noopener" aria-label="Edweb Media on Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 22v-8h2.7l.4-3.2h-3.1V8.8c0-.9.3-1.6 1.6-1.6h1.7V4.4c-.3 0-1.3-.1-2.5-.1-2.5 0-4.1 1.5-4.1 4.2v2.3H7.4V14h2.8v8h3.3z"/></svg></a>
+            <a href="https://www.instagram.com/edwebmedia/" target="_blank" rel="noopener" aria-label="Edweb Media on Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+            <a href="https://wa.me/27846204583" target="_blank" rel="noopener" aria-label="Message Edweb Media on WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-1.2-.6-2-1-2.8-2.3-.2-.3 0-.5.2-.7.2-.2.4-.5.6-.7.1-.2.1-.4 0-.6-.1-.2-.6-1.5-.8-2-.1-.4-.3-.4-.5-.4h-.4c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.1s.9 2.5 1.1 2.7c.1.2 1.6 2.5 4 3.4 2 .8 2.4.7 2.8.6.4-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2 0-.1-.2-.2-.4-.3z"/></svg></a>
           </div>
         </div>
-        <div>
-          <h2>Company</h2>
-          <ul>
-            <li><a href="new-home.html#services">Services</a></li>
-            <li><a href="new-projects.html">Work</a></li>
-            <li><a href="new-packages.html">Pricing</a></li>
-            <li><a href="new-contact.html">Contact</a></li>
-            <li><a href="new-pay.html">Payments</a></li>
-          </ul>
-        </div>
-        <div>
-          <h2>Policies</h2>
-          <ul>
-            <li><a href="new-terms.html">Terms and conditions</a></li>
-            <li><a href="new-privacy.html">Privacy policy</a></li>
-          </ul>
-        </div>
-        <div>
-          <h2>Contact</h2>
-          <ul>
-            <li><a href="tel:+27846204583">+27 84 620 4583</a></li>
-            <li><a href="mailto:info@edwebmedia.com">info@edwebmedia.com</a></li>
-            <li>Cape Town, South Africa</li>
-          </ul>
-        </div>
+        <div class="foot-col"><h4>Pages</h4><ul><li><a href="new-home.html#services">Services</a></li><li><a href="new-projects.html">Work</a></li><li><a href="new-packages.html">Pricing</a></li><li><a href="new-pay.html">Payments</a></li><li><a href="new-contact.html">Contact</a></li></ul></div>
+        <div class="foot-col"><h4>Contact</h4><ul><li><a href="mailto:info@edwebmedia.com">info@edwebmedia.com</a></li><li><a href="tel:+27846204583">084 620 4583</a></li><li><a href="https://wa.me/27846204583" target="_blank" rel="noopener">WhatsApp</a></li><li>Cape Town, South Africa</li></ul></div>
+        <div class="foot-col"><h4>Hours</h4><ul><li>Replies within one working day</li><li>Every enquiry answered by Edgar</li></ul></div>
       </div>
-      <div class="footer-base">
+      <div class="foot-legal">
         <span>&copy; <span id="year">2026</span> Edweb Media. All rights reserved.</span>
+        <nav aria-label="Legal"><a href="new-privacy.html">Privacy policy</a><a href="new-terms.html">Terms and conditions</a></nav>
       </div>
     </div>
   </footer>
 
-  <a class="chat-float" href="https://wa.me/27846204583?text=Hi%20Edweb%2C%20I%27m%20looking%20for%20a%20website.%20Can%20we%20chat%3F" target="_blank" rel="noopener" aria-label="Message us about a website">
-    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-1.2-.6-2-1-2.8-2.3-.2-.3 0-.5.2-.7.2-.2.4-.5.6-.7.1-.2.1-.4 0-.6-.1-.2-.6-1.5-.8-2-.1-.4-.3-.4-.5-.4h-.4c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.1s.9 2.5 1.1 2.7c.1.2 1.6 2.5 4 3.4 2 .8 2.4.7 2.8.6.4-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2 0-.1-.2-.2-.4-.3z"/></svg>
-    <span>Chat to us</span>
-  </a>
-
+  <button type="button" class="chat-launch" id="chat-launch" aria-expanded="false" aria-controls="chat-drawer">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-5 4v-4H6.5A2.5 2.5 0 0 1 4 13.5z"/></svg>
+    <span>Ask Edweb</span>
+  </button>
   <script src="new-script.js"></script>
 </body>
 </html>
