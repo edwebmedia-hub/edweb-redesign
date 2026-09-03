@@ -730,6 +730,9 @@ select { appearance: none; background-image: linear-gradient(45deg, transparent 
 }
 @media (max-width: 900px) {
   :root { --header-h: 64px; }
+  .logo img, .foot-brand img { width: 144px; height: 26px; }
+  .hero { padding-top: calc(var(--header-h) + var(--s7)); }
+  .page-hero { padding-top: calc(var(--header-h) + var(--s7)); }
   .nav-links {
     position: fixed; inset: var(--header-h) 0 auto 0; z-index: 49;
     flex-direction: column; gap: 0; padding: var(--s3) var(--gutter) var(--s5);
@@ -742,7 +745,7 @@ select { appearance: none; background-image: linear-gradient(45deg, transparent 
   .nav-links a::after { display: none; }
   .nav-toggle { display: flex; }
   .nav-end .btn { display: none; }
-  .hero { min-height: 0; padding-top: calc(var(--header-h) + var(--s5)); }
+  .hero { min-height: 0; }
   .hero-grid { grid-template-columns: 1fr; padding-block: var(--s6); gap: var(--s7); }
   .hero-copy h1 { max-width: none; }
   .hero-panel .chat { height: min(520px, 70svh); }
