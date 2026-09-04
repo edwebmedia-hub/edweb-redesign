@@ -9,10 +9,13 @@
 
   var KEY_TURNS = 'erf-chat-turns';
   var KEY_SEEN = 'erf-chat-opened';
+  var KEY_ENDED = 'erf-chat-ended';
   var turns = [];
   var busy = false;
+  var ended = false;
 
   try { turns = JSON.parse(sessionStorage.getItem(KEY_TURNS) || '[]'); } catch (e) { turns = []; }
+  try { ended = !!sessionStorage.getItem(KEY_ENDED); } catch (e) {}
 
   var smallScreen = window.matchMedia('(max-width: 640px)').matches;
 
@@ -89,6 +92,17 @@
     chips.hidden = true;
     turns.forEach(function (t) { bubble(t.content, t.role === 'user' ? 'me' : 'bot'); });
   }
+
+  // The server closes a thread after its turn cap; the box then points at
+  // Martiens instead of pretending to listen.
+  function endThread() {
+    ended = true;
+    input.disabled = true;
+    input.placeholder = 'Call or WhatsApp Martiens: 082 900 5019';
+    chips.hidden = true;
+    try { sessionStorage.setItem(KEY_ENDED, '1'); } catch (e) {}
+  }
+  if (ended) endThread();
 
   var small = window.matchMedia('(max-width: 640px)');
   var fine = window.matchMedia('(hover: hover) and (pointer: fine)');
@@ -174,7 +188,7 @@
   }
 
   function send(text) {
-    if (busy || !text.trim()) return;
+    if (busy || ended || !text.trim()) return;
     busy = true;
     chips.hidden = true;
     bubble(text, 'me');
@@ -194,7 +208,8 @@
         turns.push({ role: 'assistant', content: out.j.reply });
         save();
         if (out.j.lead) leadCard(out.j.lead);
-      } else if (out.status === 503) {
+        if (out.j.ended) endThread();
+      } else if (out.status === 503 || out.status === 429) {
         bubble('Bit busy right now, try again in a minute. Or WhatsApp Martiens directly on 082 900 5019.', 'bot');
       } else {
         bubble('Connection hiccup, please send that again.', 'bot');

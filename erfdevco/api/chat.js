@@ -8,6 +8,28 @@ const MODEL = "claude-haiku-4-5";
 const MAX_TURNS = 12; // history cap sent by the widget
 const MAX_CHARS = 500; // per-message cap
 
+// Abuse limits. A real enquiry is three to six messages; a script hammering
+// the endpoint is not. Two independent caps, both server-side:
+//   1. SESSION_MAX: user turns per conversation, then the receptionist hands
+//      over to Martiens and the API is no longer called for that thread.
+//   2. RATE_MAX per IP per RATE_WINDOW_MS, in memory per warm instance
+//      (cheap; the hard stop is the spend cap on the Anthropic workspace).
+const SESSION_MAX = 10;
+const RATE_MAX = 20;
+const RATE_WINDOW_MS = 10 * 60 * 1000;
+const HANDOVER =
+  "That is about as far as I can take it here. For anything more, Martiens will help you directly: call or WhatsApp 082 900 5019, or leave your name and number on the contact page and he will phone you back.";
+
+const hits = new Map();
+function rateLimited(ip) {
+  const now = Date.now();
+  const recent = (hits.get(ip) || []).filter(t => now - t < RATE_WINDOW_MS);
+  recent.push(now);
+  hits.set(ip, recent);
+  if (hits.size > 1000) hits.delete(hits.keys().next().value);
+  return recent.length > RATE_MAX;
+}
+
 const BUSINESS = "ERFDEVCO";
 const OWNER_EMAIL = "martiens@erfdevco.com";
 
@@ -79,6 +101,14 @@ export default async function handler(req, res) {
   }
   if (msgs[msgs.length - 1].role !== "user")
     return res.status(400).json({ error: "must end on user" });
+
+  const ip = (req.headers["x-forwarded-for"] || "").split(",")[0].trim() || "unknown";
+  if (rateLimited(ip)) return res.status(429).json({ error: "busy" });
+
+  // Conversation cap: answered without touching the API.
+  const userTurns = msgs.filter(m => m.role === "user").length;
+  if (userTurns > SESSION_MAX)
+    return res.status(200).json({ reply: HANDOVER, lead: null, ended: true });
 
   if (!process.env.ANTHROPIC_API_KEY)
     return res.status(503).json({ error: "busy" });
