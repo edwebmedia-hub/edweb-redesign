@@ -303,16 +303,10 @@ main { position: relative; z-index: 1; }
   box-shadow: var(--shadow-lg);
   overflow: hidden;
 }
-.hero-panel .chat { height: min(600px, 74svh); }
-/* Before anyone talks to it there is nothing to scroll, so the panel takes the
-   height of what it holds instead of showing a half-empty box. The first
-   message hands it back its full height. */
-.hero-panel .chat.is-fresh { height: auto; }
-.chat.is-fresh .chat-log { flex: 0 0 auto; overflow-y: visible; }
-.chat-drawer:has(.chat.is-fresh) { height: auto; }
+.hero-panel .chat { height: min(620px, 76svh); }
 .chat-head {
   display: flex; align-items: center; gap: var(--s3);
-  padding: var(--s4) var(--s5);
+  padding: var(--s5);
   border-bottom: 1px solid var(--line);
 }
 .chat-head strong { display: block; line-height: 1.2; }
@@ -321,18 +315,21 @@ main { position: relative; z-index: 1; }
 .chat-mark {
   width: 38px; height: 38px; flex: none; border-radius: 50%;
   display: grid; place-items: center;
-  background: var(--ink); color: var(--paper); font-weight: 800; font-size: 0.95rem;
+  background: var(--ink); color: var(--paper);
 }
+/* The avatar carries the logo's own chevrons, not an initial. */
+.chat-mark svg { width: 21px; height: 21px; }
+.chat-teaser-mark svg { width: 17px; height: 17px; }
 .chat-close { margin-left: auto; width: 36px; height: 36px; border-radius: var(--r-control); display: none; place-items: center; }
 .chat-close:hover { background: var(--ground-alt); }
 .chat-close svg { width: 18px; height: 18px; }
 .chat-log {
   flex: 1; overflow-y: auto; padding: var(--s5);
-  display: flex; flex-direction: column; gap: var(--s3);
+  display: flex; flex-direction: column; gap: var(--s4);
   overscroll-behavior: contain;
 }
 .msg {
-  max-width: 88%; padding: 0.7rem 0.95rem;
+  max-width: 88%; padding: 0.85rem 1.1rem;
   border-radius: 14px; font-size: var(--fs-small); line-height: 1.5;
   animation: pop 0.45s var(--ease) both;
 }
@@ -349,7 +346,7 @@ main { position: relative; z-index: 1; }
 @keyframes dot { 0%, 60%, 100% { opacity: 0.3; transform: translateY(0); } 30% { opacity: 1; transform: translateY(-3px); } }
 /* The chips sit in the conversation, under the greeting, not pinned to the
    bottom of an empty panel. */
-.chat-chips { display: flex; flex-wrap: wrap; gap: var(--s2); padding-top: var(--s1); }
+.chat-chips { display: flex; flex-wrap: wrap; gap: var(--s3); padding-top: var(--s2); padding-bottom: var(--s2); }
 .chip {
   padding: 0.45rem 0.85rem; border-radius: var(--r-pill);
   border: 1px solid var(--line-strong); background: var(--surface);
@@ -361,7 +358,7 @@ main { position: relative; z-index: 1; }
    Opacity and blur only: the hover transform stays free. */
 .chat-chips .chip { animation: chip-in 380ms var(--ease) both; animation-delay: calc(var(--i, 0) * 70ms); }
 @keyframes chip-in { from { opacity: 0; filter: blur(4px); } }
-.chat-form { display: flex; gap: var(--s2); padding: var(--s3) var(--s4) var(--s2); border-top: 1px solid var(--line); }
+.chat-form { display: flex; gap: var(--s3); padding: var(--s4) var(--s5) var(--s3); border-top: 1px solid var(--line); }
 .chat-form input {
   flex: 1; min-width: 0; min-height: 46px; padding: 0 0.9rem;
   border: 1px solid var(--line-strong); border-radius: var(--r-control); background: var(--surface);
@@ -375,7 +372,7 @@ main { position: relative; z-index: 1; }
 }
 .chat-send:hover { background: var(--ink); transform: translateY(-1px); }
 .chat-send svg { width: 18px; height: 18px; }
-.chat-foot { padding: 0 var(--s4) var(--s3); font-size: var(--fs-micro); color: var(--text-muted); text-align: center; }
+.chat-foot { padding: 0 var(--s5) var(--s5); font-size: var(--fs-micro); color: var(--text-muted); text-align: center; }
 
 /* Floating launcher + drawer, every page */
 .chat-launch {
@@ -438,7 +435,7 @@ main { position: relative; z-index: 1; }
 .chat-teaser-mark {
   width: 30px; height: 30px; flex: none; border-radius: 50%;
   display: grid; place-items: center;
-  background: var(--ink); color: var(--paper); font-weight: 800; font-size: 0.78rem;
+  background: var(--ink); color: var(--paper);
 }
 .chat-teaser-dismiss {
   position: absolute; top: -9px; right: -9px;
@@ -763,11 +760,38 @@ select { appearance: none; background-image: linear-gradient(45deg, transparent 
 .shot-grid .span-2 { grid-column: 1 / -1; }
 .shot-grid .span-2 .work-shot { aspect-ratio: 21 / 9; }
 .prevnext { display: flex; justify-content: space-between; gap: var(--s5); padding-top: var(--s6); border-top: 1px solid var(--line); margin-top: var(--band-tight); }
-.legal { max-width: 72ch; }
-.legal h2 { font-size: var(--fs-h3); margin-top: var(--s7); margin-bottom: var(--s3); }
+/* A legal page is a reading document, so it gets a measured column and, on a
+   wide screen, its own contents rail instead of a dead right half. */
+.legal-wrap { display: grid; gap: var(--gap-split); align-items: start; }
+.legal { max-width: 72ch; margin-inline: auto; }
+.legal-wrap .legal { margin-inline: 0; }
+.legal h2 { font-size: var(--fs-h3); margin-top: var(--s7); margin-bottom: var(--s3); scroll-margin-top: var(--stick-top); }
+.legal h2.legal-major { padding-top: var(--s6); border-top: 1px solid var(--line); }
+.legal > p:first-child { font-size: var(--fs-lead); color: var(--text); }
 .legal p, .legal li { color: var(--text-muted); }
 .legal ul { list-style: disc; padding-left: 1.4rem; margin-top: var(--s3); }
 .legal li + li { margin-top: var(--s2); }
+
+.legal-toc { border: 1px solid var(--line); border-radius: var(--r-card); background: var(--surface); }
+.legal-toc summary {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--s3);
+  padding: var(--s4) var(--s5); font-weight: 800; cursor: pointer; list-style: none;
+}
+.legal-toc summary::-webkit-details-marker { display: none; }
+.legal-toc summary::after { content: "+"; font-weight: 700; color: var(--text-muted); }
+.legal-toc[open] summary::after { content: "2"; }
+.legal-toc ol { list-style: none; margin: 0; padding: 0 var(--s5) var(--s5); display: flex; flex-direction: column; gap: var(--s1); counter-reset: toc; }
+.legal-toc a {
+  display: block; padding: 0.35rem 0; font-size: var(--fs-small); color: var(--text-muted);
+  transition: color var(--speed) var(--ease);
+}
+.legal-toc a:hover { color: var(--coral-deep); }
+@media (min-width: 981px) {
+  .legal-wrap { grid-template-columns: 250px minmax(0, 1fr); }
+  .legal-toc { position: sticky; top: var(--stick-top); }
+  .legal-toc summary { cursor: default; }
+  .legal-toc summary::after { display: none; }
+}
 
 /* Payments (ids and .prow anatomy are what the checkout script drives) */
 .pay-wrap { max-width: 720px; margin-inline: auto; }

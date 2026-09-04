@@ -414,7 +414,6 @@
         el.innerHTML = linkify(m.content);
         log.appendChild(el);
         log.scrollTop = log.scrollHeight;
-        if (mt.panel) mt.panel.classList.remove('is-fresh');
         if (mt.chips && history.length) mt.chips.hidden = true;
       });
     };
@@ -456,7 +455,7 @@
       opts = opts || {};
       root.innerHTML =
         '<div class="chat" role="region" aria-label="Chat with Edweb">' +
-          '<div class="chat-head"><span class="chat-mark" aria-hidden="true">E</span><div><strong>Edweb assistant</strong><small>Replies in seconds</small></div>' +
+          '<div class="chat-head"><span class="chat-mark" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 9 L15.5 16 L8.5 23"/><path d="M16.5 9 L23.5 16 L16.5 23"/></svg></span><div><strong>Edweb assistant</strong><small>Replies in seconds</small></div>' +
           (opts.closable ? '<button type="button" class="chat-close" aria-label="Close chat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg></button>' : '') + '</div>' +
           '<div class="chat-log" aria-live="polite"></div>' +
           '<div class="chat-chips"></div>' +
@@ -465,8 +464,7 @@
           '<button type="submit" class="chat-send" aria-label="Send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h13M13 6l6 6-6 6"/></svg></button></form>' +
           '<p class="chat-foot">Answers come from our price list. Prefer a person? <a href="https://wa.me/27846204583" target="_blank" rel="noopener">WhatsApp us</a>.</p>' +
         '</div>';
-      var mt = { root: root, log: $('.chat-log', root), chips: $('.chat-chips', root), panel: $('.chat', root) };
-      if (!history.length) mt.panel.classList.add('is-fresh');
+      var mt = { root: root, log: $('.chat-log', root), chips: $('.chat-chips', root) };
       mounts.push(mt);
       var greetEl = function () {
         var g = document.createElement('div'); g.className = 'msg msg--bot'; g.textContent = GREETING;
@@ -570,7 +568,7 @@
       teaser.setAttribute('role', 'status');
       teaser.innerHTML =
         '<button type="button" class="chat-teaser-open">' +
-          '<span class="chat-teaser-mark" aria-hidden="true">E</span>' +
+          '<span class="chat-teaser-mark" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 9 L15.5 16 L8.5 23"/><path d="M16.5 9 L23.5 16 L16.5 23"/></svg></span>' +
           '<span>Hi, I am the Edweb assistant. Want a price or a timeline?</span>' +
         '</button>' +
         '<button type="button" class="chat-teaser-dismiss" aria-label="Dismiss this message">' +
@@ -621,6 +619,39 @@
       };
       window.addEventListener('scroll', onDepth, { passive: true });
     }
+  })();
+
+  /* Legal pages: a contents rail built from the numbered sections, so a long
+     document is navigable and the wide screen is not half empty. Nothing here
+     runs when the page has no .legal block. */
+  (function () {
+    var legal = $('.legal');
+    if (!legal) return;
+    var majors = [];
+    Array.prototype.forEach.call(legal.querySelectorAll('h2'), function (h) {
+      var m = /^(\d+)\.\s+(.+)$/.exec(h.textContent.trim());
+      if (!m) return;
+      h.classList.add('legal-major');
+      h.id = h.id || 'section-' + m[1];
+      majors.push({ id: h.id, n: m[1], label: m[2] });
+    });
+    if (majors.length < 4) return;
+
+    var wrap = document.createElement('div');
+    wrap.className = 'legal-wrap';
+    legal.parentNode.insertBefore(wrap, legal);
+
+    var toc = document.createElement('details');
+    toc.className = 'legal-toc';
+    var html = '<summary>Sections</summary><ol>';
+    majors.forEach(function (s) {
+      html += '<li><a href="#' + s.id + '">' + s.n + '. ' + s.label + '</a></li>';
+    });
+    toc.innerHTML = html + '</ol>';
+    if (window.matchMedia('(min-width: 981px)').matches) toc.open = true;
+
+    wrap.appendChild(toc);
+    wrap.appendChild(legal);
   })();
 
   /* Year */
