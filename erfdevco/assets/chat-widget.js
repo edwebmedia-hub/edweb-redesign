@@ -14,6 +14,8 @@
 
   try { turns = JSON.parse(sessionStorage.getItem(KEY_TURNS) || '[]'); } catch (e) { turns = []; }
 
+  var smallScreen = window.matchMedia('(max-width: 640px)').matches;
+
   var fab = document.createElement('button');
   fab.type = 'button';
   fab.className = 'chat-fab';
@@ -21,7 +23,9 @@
   fab.setAttribute('aria-expanded', 'false');
   fab.innerHTML =
     '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 3C6.9 3 3 6.5 3 10.8c0 2.3 1.1 4.3 2.9 5.7-.1.9-.5 2.2-1.6 3.3-.2.2 0 .6.3.6 2 0 3.6-.9 4.6-1.7.9.2 1.8.4 2.8.4 5.1 0 9-3.5 9-7.8S17.1 3 12 3Z"/></svg>' +
-    '<span class="chat-fab__label">Ask about a farm</span>';
+    // The label is a desktop device; on a phone it never enters the DOM, so
+    // no stale stylesheet can ever paint it raw over the circle.
+    (smallScreen ? '' : '<span class="chat-fab__label">Ask about a farm</span>');
   try { if (sessionStorage.getItem(KEY_SEEN)) fab.classList.add('is-quiet'); } catch (e) {}
 
   var panel = document.createElement('div');
@@ -116,6 +120,32 @@
   fab.addEventListener('click', function () { panel.hidden ? open() : close(); });
   panel.querySelector('.chat-close').addEventListener('click', close);
   backdrop.addEventListener('click', close);
+
+  // Phone manners: drag the sheet down by its header to dismiss, the way
+  // every native bottom sheet works.
+  (function sheetDrag() {
+    var head = panel.querySelector('.chat-head');
+    var startY = 0, delta = 0, dragging = false;
+    head.addEventListener('touchstart', function (e) {
+      if (!small.matches) return;
+      dragging = true;
+      startY = e.touches[0].clientY;
+      delta = 0;
+      panel.classList.add('is-dragging');
+    }, { passive: true });
+    head.addEventListener('touchmove', function (e) {
+      if (!dragging) return;
+      delta = Math.max(0, e.touches[0].clientY - startY);
+      panel.style.transform = 'translateY(' + delta + 'px)';
+    }, { passive: true });
+    head.addEventListener('touchend', function () {
+      if (!dragging) return;
+      dragging = false;
+      panel.classList.remove('is-dragging');
+      panel.style.transform = '';
+      if (delta > 110) close();
+    });
+  })();
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' && !panel.hidden) close();
   });

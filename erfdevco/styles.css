@@ -3357,12 +3357,20 @@ html.chat-lock, html.chat-lock body { overflow: hidden; }
     border-radius: 999px;
     background: color-mix(in srgb, var(--paper) 35%, transparent);
   }
+  /* A native slide-up sheet, not a desktop pop. Dragging suspends motion. */
+  .chat-panel.is-open { animation: chat-up 0.3s var(--ease) both; }
+  .chat-panel.is-dragging { animation: none; transition: none; }
   /* 16px floor stops iOS zooming the whole page when the field focuses. */
   .chat-form input { font-size: 1rem; }
   .chat-form { padding-bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px)); }
   .chat-foot { padding-bottom: calc(0.9rem + env(safe-area-inset-bottom, 0px)); }
   .chat-msg { max-width: 88%; }
 }
+@keyframes chat-up {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
 @media (prefers-reduced-motion: reduce) {
   .chat-backdrop { transition: none; }
+  .chat-panel.is-open { animation: none; }
 }
