@@ -474,7 +474,7 @@ main { position: relative; z-index: 1; }
 .checks svg { flex: none; width: 18px; height: 18px; margin-top: 2px; color: var(--teal-deep); }
 .pcard-time { margin-top: auto; padding-top: var(--s5); font-size: var(--fs-small); color: var(--text-muted); }
 .pricing-more { margin-top: var(--s7); display: flex; flex-wrap: wrap; gap: var(--s4) var(--s7); align-items: center; justify-content: space-between; color: var(--text-muted); }
-.tab-list--row { flex-direction: row; border-top: 0; border-bottom: 1px solid var(--line); gap: var(--s5); margin-bottom: var(--s7); overflow-x: auto; }
+.tab-list--row { flex-direction: row; flex-wrap: wrap; border-top: 0; border-bottom: 1px solid var(--line); gap: var(--s2) var(--s5); margin-bottom: var(--s7); overflow: visible; }
 .tab-list--row .tab { width: auto; padding: 0.8rem 0; border-bottom: 3px solid transparent; margin-bottom: -1px; white-space: nowrap; }
 .tab-list--row .tab::before { display: none; }
 .tab-list--row .tab:hover, .tab-list--row .tab[aria-selected="true"] { padding-left: 0; }
@@ -782,7 +782,6 @@ select { appearance: none; background-image: linear-gradient(45deg, transparent 
   .hero-actions { gap: var(--s4); }
   .hero-actions .btn { width: 100%; }
   .tab { font-size: var(--fs-body); }
-  .tab-list--row { flex-wrap: wrap; gap: var(--s2) var(--s5); overflow: visible; }
   .work-tile figcaption, .work-grid .work-tile figcaption, .rail .work-tile figcaption { flex-direction: column; align-items: flex-start; gap: var(--s1); }
   .rail .work-tile figcaption .btn { margin-left: 0; margin-top: var(--s2); }
   .rail { align-items: flex-start; }
