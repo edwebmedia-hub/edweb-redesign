@@ -125,7 +125,7 @@ such in the stylesheet.
 - Reveals are `.reveal` plus IntersectionObserver, with a no-JS guard and two
   fallback sweeps so nothing can be left invisible.
 
-## The assistant behaves like a staffed live chat (2026-09-04)
+## The assistant behaves like a staffed live chat (2026-09-04, commit 6f298f7, NOT DEPLOYED)
 
 - **The opener is typed, not pasted.** A mount with no history shows the typing
   dots for 900ms, then the greeting, then the chips stagger in. Returning
