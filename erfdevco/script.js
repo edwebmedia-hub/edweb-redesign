@@ -261,12 +261,30 @@
       '</button>';
   }
 
+  // A heart needs an answer: the toast says where the farm went and links
+  // straight to the shortlist view.
+  var toastTimer = null;
+  function savedToast() {
+    var t = $('.save-toast');
+    if (!t) {
+      t = document.createElement('div');
+      t.className = 'save-toast';
+      t.setAttribute('role', 'status');
+      t.innerHTML = 'Saved to your shortlist. <a href="listings.html#shortlist">View it</a>';
+      document.body.appendChild(t);
+    }
+    t.classList.add('is-on');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { t.classList.remove('is-on'); }, 4200);
+  }
+
   // One delegated handler covers every save button on the page, injected or not.
   document.addEventListener('click', function (e) {
     var btn = e.target.closest && e.target.closest('[data-save]');
     if (!btn) return;
     e.preventDefault();
     var on = toggleSaved(btn.getAttribute('data-save'));
+    if (on) savedToast();
     $$('[data-save="' + btn.getAttribute('data-save') + '"]').forEach(function (b) {
       b.setAttribute('aria-pressed', on ? 'true' : 'false');
       b.setAttribute('title', on ? 'Saved to your shortlist' : 'Save to your shortlist');
@@ -553,6 +571,12 @@
           history.replaceState(null, '', url);
           render();
         });
+
+        // The toast on every heart links here; land straight on the shortlist.
+        if (window.location.hash === '#shortlist') {
+          var savedChip = $('.filter-btn[data-saved]', chips);
+          if (savedChip) savedChip.click();
+        }
       }
 
       [sortSel, priceSel, extentSel].forEach(function (el) {
@@ -1713,6 +1737,19 @@
       var table = $('.cmp-table', mount);
       var diffCount = $$('tr[data-diff="1"]', table).length;
       var totalRows = $$('tbody tr:not(.cmp-sec)', table).length;
+
+      // Once the farm cards pin to the top they condense to title and price,
+      // so the pinned strip stays shallow and the page reads as one scroll.
+      if ('IntersectionObserver' in window) {
+        var sentinel = document.createElement('div');
+        sentinel.setAttribute('aria-hidden', 'true');
+        sentinel.style.cssText = 'position:absolute;height:1px;width:1px;';
+        mount.style.position = 'relative';
+        mount.insertBefore(sentinel, mount.firstChild);
+        new IntersectionObserver(function (entries) {
+          table.classList.toggle('is-stuck', !entries[0].isIntersecting);
+        }, { rootMargin: '-8px 0px 0px 0px' }).observe(sentinel);
+      }
 
       var line = $('#compare-line');
       if (line) {

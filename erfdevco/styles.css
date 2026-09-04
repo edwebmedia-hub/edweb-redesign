@@ -1980,6 +1980,24 @@ body.has-tray { padding-bottom: 6.5rem; }
 /* Two lines reserved for the name so the prices below it line up across
    columns whether a farm's title wraps or not. */
 .cmp-head { display: flex; flex-direction: column; gap: 0.4rem; }
+/* Pinned state: photos, refs and districts fold away so the stuck strip is
+   shallow and the visitor reads it as one page scrolling, not two halves. */
+.cmp-head img, .cmp-head .r, .cmp-head .l {
+  transition: opacity var(--t-fast) var(--ease-soft);
+}
+.cmp-table.is-stuck .cmp-head img,
+.cmp-table.is-stuck .cmp-head .r,
+.cmp-table.is-stuck .cmp-head .l {
+  height: 0;
+  min-height: 0;
+  aspect-ratio: auto;
+  opacity: 0;
+  margin: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.cmp-table.is-stuck .cmp-head .t { min-height: 0; }
+.cmp-table.is-stuck thead th { padding-top: 0.7rem; padding-bottom: 0.55rem; }
 .cmp-head .t { min-height: 2.6em; }
 .cmp-head .r { font-family: var(--display); font-size: 0.75rem; letter-spacing: 0.12em; color: var(--gold-deep); }
 .cmp-head .t { font-family: var(--display); font-size: 1.0625rem; letter-spacing: -0.02em; text-transform: uppercase; line-height: 1.2; }
@@ -3369,6 +3387,33 @@ html.chat-lock, html.chat-lock body { overflow: hidden; }
 @keyframes chat-up {
   from { transform: translateY(100%); }
   to { transform: translateY(0); }
+}
+
+/* The answer to a tapped heart: where the farm went, and the way there. */
+.save-toast {
+  position: fixed;
+  left: 50%;
+  bottom: calc(1.25rem + env(safe-area-inset-bottom, 0px));
+  transform: translate(-50%, 12px);
+  z-index: 105;
+  background: var(--ink-deep);
+  color: var(--paper);
+  font-size: 0.875rem;
+  padding: 0.7rem 1.1rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--gold) 55%, transparent);
+  box-shadow: 0 14px 40px -14px color-mix(in srgb, var(--ink-deep) 70%, transparent);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--t-fast) var(--ease-soft),
+              transform var(--t-fast) var(--ease),
+              visibility var(--t-fast) var(--ease-soft);
+  white-space: nowrap;
+}
+.save-toast.is-on { opacity: 1; visibility: visible; transform: translate(-50%, 0); }
+.save-toast a { color: var(--gold); text-decoration: underline; text-underline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) {
+  .save-toast { transition: opacity var(--t-fast) linear; transform: translate(-50%, 0); }
 }
 @media (prefers-reduced-motion: reduce) {
   .chat-backdrop { transition: none; }
