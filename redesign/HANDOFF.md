@@ -125,6 +125,31 @@ such in the stylesheet.
 - Reveals are `.reveal` plus IntersectionObserver, with a no-JS guard and two
   fallback sweeps so nothing can be left invisible.
 
+## The assistant behaves like a staffed live chat (2026-09-04)
+
+- **The opener is typed, not pasted.** A mount with no history shows the typing
+  dots for 900ms, then the greeting, then the chips stagger in. Returning
+  visitors and `prefers-reduced-motion` skip straight to the text.
+- **A teaser bubble speaks first, once per session.** It grows out of the
+  launcher (`transform-origin: 100% 100%`, 420ms in, 170ms out), carries a
+  static `1` badge on the launcher, and withdraws on its own after 15 seconds.
+  The badge stays until the panel is opened.
+- **When it fires:** 9 seconds after load, or once the visitor passes 60% of a
+  viewport. On the home page the launcher is hidden while the hero panel is on
+  screen, so the teaser retries every 1.2s (25 tries) and only lands once the
+  launcher is actually visible.
+- **It never nags.** `sessionStorage['edweb-chat-teased']` is set when it shows,
+  when it is dismissed and when the drawer is opened by any route.
+- **No looping attention motion anywhere.** The launcher gets one 620ms settle
+  and the class is stripped on `animationend`, because `.chat-launch` also
+  animates `transform` on hover and on `.is-hidden`; a filled animation would
+  freeze both.
+- **`.chat-badge` is a `<span>` inside the launcher**, and the 600px rule hides
+  the launcher label with `.chat-launch span`. It is now
+  `span:not(.chat-badge)`, otherwise the badge disappears on phones.
+- **Chips animate opacity and blur only.** `.chip` owns a hover `transform`, so
+  a transform keyframe with `both` fill would fight it.
+
 ## Traps this codebase has actually fallen into
 
 - **A flat rule declared after a media query wins.** It silently killed the

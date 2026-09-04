@@ -335,7 +335,7 @@ main { position: relative; z-index: 1; }
 .msg--note { align-self: stretch; max-width: none; background: var(--teal-soft); border-radius: var(--r-control); font-weight: 600; }
 .msg a { color: var(--coral-deep); font-weight: 700; text-decoration: underline; text-underline-offset: 2px; }
 .msg--me a { color: var(--teal); }
-@keyframes pop { from { opacity: 0; transform: translateY(8px); } }
+@keyframes pop { from { opacity: 0; transform: translateY(8px); filter: blur(4px); } }
 .typing { display: inline-flex; gap: 4px; padding: 0.35rem 0; }
 .typing i { width: 6px; height: 6px; border-radius: 50%; background: var(--text-muted); animation: dot 1.1s infinite; }
 .typing i:nth-child(2) { animation-delay: 0.15s; }
@@ -349,6 +349,10 @@ main { position: relative; z-index: 1; }
   transition: background var(--speed) var(--ease), color var(--speed) var(--ease), border-color var(--speed) var(--ease), transform var(--speed) var(--ease);
 }
 .chip:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); transform: translateY(-1px); }
+/* Chips materialise after the opener lands, one after the other.
+   Opacity and blur only: the hover transform stays free. */
+.chat-chips .chip { animation: chip-in 380ms var(--ease) both; animation-delay: calc(var(--i, 0) * 70ms); }
+@keyframes chip-in { from { opacity: 0; filter: blur(4px); } }
 .chat-form { display: flex; gap: var(--s2); padding: var(--s3) var(--s4) var(--s2); border-top: 1px solid var(--line); }
 .chat-form input {
   flex: 1; min-width: 0; min-height: 46px; padding: 0 0.9rem;
@@ -381,12 +385,79 @@ main { position: relative; z-index: 1; }
   position: fixed; right: var(--s5); bottom: calc(var(--s5) + 64px); z-index: 60;
   width: min(400px, calc(100vw - var(--s5) * 2));
   height: min(600px, calc(100svh - 120px));
-  opacity: 0; visibility: hidden; transform: translateY(14px) scale(0.98);
-  transition: opacity var(--speed) var(--ease), transform var(--speed) var(--ease), visibility 0s linear var(--speed);
+  /* It grows out of the launcher it came from, not out of thin air. */
+  transform-origin: 100% 100%;
+  opacity: 0; visibility: hidden; transform: translateY(12px) scale(0.94); filter: blur(5px);
+  transition: opacity 380ms var(--ease), transform 380ms var(--ease), filter 380ms var(--ease), visibility 0s linear 380ms;
 }
-.chat-drawer.is-open { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
+.chat-drawer.is-open {
+  opacity: 1; visibility: visible; transform: none; filter: blur(0);
+  transition-delay: 0s;
+}
+/* Closing is quieter and quicker than opening. */
+.chat-drawer:not(.is-open) {
+  transition: opacity 170ms var(--ease-io), transform 170ms var(--ease-io), filter 170ms var(--ease-io), visibility 0s linear 170ms;
+}
 .chat-drawer .chat { height: 100%; }
 .chat-drawer .chat-close { display: grid; }
+
+/* The assistant speaks first: one teaser per session, out of the launcher.
+   No looping pulse anywhere. It arrives once, then it is quiet. */
+.chat-teaser {
+  position: fixed; right: var(--s5); bottom: calc(var(--s5) + 66px); z-index: 59;
+  width: min(286px, calc(100vw - var(--s5) * 2));
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-card) var(--r-card) 6px var(--r-card);
+  box-shadow: var(--shadow-md);
+  transform-origin: 100% 100%;
+  opacity: 0; transform: translateY(14px) scale(0.92); filter: blur(5px);
+  transition: opacity 420ms var(--ease), transform 420ms var(--ease), filter 420ms var(--ease);
+}
+.chat-teaser.is-in { opacity: 1; transform: none; filter: blur(0); }
+.chat-teaser.is-out {
+  opacity: 0; transform: translateY(6px); filter: blur(4px);
+  transition-duration: 170ms; transition-timing-function: var(--ease-io);
+}
+.chat-teaser-open {
+  display: flex; align-items: flex-start; gap: var(--s3); width: 100%;
+  padding: var(--s3) var(--s4) var(--s3) var(--s3);
+  text-align: left; font-size: var(--fs-small); line-height: 1.45;
+  border-radius: inherit;
+  transition: background var(--speed) var(--ease);
+}
+.chat-teaser-open:hover { background: var(--ground-alt); }
+.chat-teaser-mark {
+  width: 30px; height: 30px; flex: none; border-radius: 50%;
+  display: grid; place-items: center;
+  background: var(--ink); color: var(--paper); font-weight: 800; font-size: 0.78rem;
+}
+.chat-teaser-dismiss {
+  position: absolute; top: -9px; right: -9px;
+  width: 26px; height: 26px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: var(--surface); border: 1px solid var(--line); color: var(--text-muted);
+  box-shadow: var(--shadow-md);
+  transition: background var(--speed) var(--ease), color var(--speed) var(--ease), border-color var(--speed) var(--ease);
+}
+.chat-teaser-dismiss:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.chat-teaser-dismiss svg { width: 13px; height: 13px; }
+
+/* Unread count on the launcher: static on purpose. */
+.chat-badge {
+  position: absolute; top: -5px; right: -3px;
+  min-width: 21px; height: 21px; padding: 0 6px;
+  border-radius: var(--r-pill);
+  background: var(--ink); color: var(--paper);
+  font-size: 0.7rem; font-weight: 800; line-height: 21px; text-align: center;
+  box-shadow: 0 0 0 2px var(--paper);
+  animation: badge-in 300ms var(--ease) both;
+}
+@keyframes badge-in { from { opacity: 0; transform: scale(0.7); } }
+
+/* One settle, not a loop, so the bubble reads as coming from the button. */
+.chat-launch.is-nudged { animation: nudge 620ms var(--ease); }
+@keyframes nudge { 0% { transform: translateY(0); } 34% { transform: translateY(-6px); } 100% { transform: translateY(0); } }
 
 /* ------------------------------ Work tiles ------------------------------- */
 .work-tile figure { margin: 0; }
@@ -505,6 +576,35 @@ main { position: relative; z-index: 1; }
   }
 }
 @keyframes rise { from { opacity: 0; transform: translateY(56px); } }
+/* Home only: the four stages break the flat white row. Each card rests at its
+   own tilt and drop, the design stage runs teal and the last one runs ink, so
+   the row reads as a journey instead of four identical boxes. Hover settles a
+   card straight. Tilt uses the standalone rotate/translate properties so it
+   never fights the scroll-driven `rise` transform above. */
+.process-grid--stagger { padding-bottom: 44px; }  /* the deepest drop, so the note below keeps its gap */
+.process-grid--stagger .step {
+  position: relative;
+  rotate: var(--tilt, 0deg);
+  translate: 0 var(--drop, 0px);
+  transform-origin: 50% 100%;
+  transition: rotate var(--speed) var(--ease), translate var(--speed) var(--ease), box-shadow var(--speed) var(--ease);
+}
+.process-grid--stagger .step:nth-child(1) { --tilt: -1.6deg; }
+.process-grid--stagger .step:nth-child(2) { --tilt: 1.2deg;  --drop: 30px; }
+.process-grid--stagger .step:nth-child(3) { --tilt: -0.8deg; --drop: 10px; }
+.process-grid--stagger .step:nth-child(4) { --tilt: 2.2deg;  --drop: 44px; }
+.process-grid--stagger .step:hover {
+  z-index: 2;
+  rotate: 0deg;
+  translate: 0 calc(var(--drop, 0px) - 8px);
+  box-shadow: var(--shadow-lg);
+}
+.step--teal { background: var(--teal-soft); border-color: color-mix(in srgb, var(--teal) 42%, transparent); }
+.step--teal .step-out li::before { background: var(--teal-deep); }
+.step--ink { background: var(--ink); border-color: transparent; color: var(--text-on-ink); }
+.step--ink > p, .step--ink .step-out small { color: var(--text-on-ink-muted); }
+.step--ink .step-out li::before { background: var(--teal); }
+
 .process-note { margin-top: var(--s7); display: flex; flex-wrap: wrap; gap: var(--s4) var(--s6); align-items: center; }
 
 /* ------------------------------ Reviews ---------------------------------- */
@@ -734,6 +834,8 @@ select { appearance: none; background-image: linear-gradient(45deg, transparent 
 /* ------------------------------ Mobile collapses (keep LAST) ------------- */
 @media (max-width: 1080px) {
   .process-grid { grid-template-columns: repeat(2, 1fr); }
+  .process-grid--stagger { padding-bottom: 0; }
+  .process-grid--stagger .step { --drop: 0px; }
   .work-three { grid-template-columns: repeat(2, 1fr); }
   .figure + .figure { border-left: 0; padding-left: 0; }
   .review { width: calc((100% - var(--gap-grid)) / 2); }
@@ -778,6 +880,7 @@ select { appearance: none; background-image: linear-gradient(45deg, transparent 
   .shot-grid { grid-template-columns: 1fr; }
   .chat-drawer { right: var(--s3); bottom: calc(var(--s3) + 64px); width: calc(100vw - var(--s3) * 2); height: min(600px, calc(100svh - 110px)); }
   .chat-launch { right: var(--s3); bottom: var(--s3); }
+  .chat-teaser { right: var(--s3); bottom: calc(var(--s3) + 66px); width: min(286px, calc(100vw - var(--s3) * 2)); }
   .site-footer { padding-bottom: calc(var(--s6) + 64px); }
 }
 @media (max-width: 600px) {
@@ -800,6 +903,6 @@ select { appearance: none; background-image: linear-gradient(45deg, transparent 
   .rail { align-items: flex-start; }
   .review, .rail .work-tile { width: 100%; }
   .prevnext { flex-direction: column; }
-  .chat-launch span { display: none; }
+  .chat-launch span:not(.chat-badge) { display: none; }
   .chat-launch { padding: 0; width: 52px; justify-content: center; }
 }

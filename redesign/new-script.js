@@ -466,18 +466,39 @@
         '</div>';
       var mt = { root: root, log: $('.chat-log', root), chips: $('.chat-chips', root) };
       mounts.push(mt);
-      var greet = document.createElement('div'); greet.className = 'msg msg--bot'; greet.textContent = GREETING; mt.log.appendChild(greet);
-      CHIPS.forEach(function (c) {
-        var b = document.createElement('button'); b.type = 'button'; b.className = 'chip'; b.textContent = c;
-        b.addEventListener('click', function () { send(c); });
-        mt.chips.appendChild(b);
-      });
+      var greetEl = function () {
+        var g = document.createElement('div'); g.className = 'msg msg--bot'; g.textContent = GREETING;
+        mt.log.appendChild(g); mt.log.scrollTop = mt.log.scrollHeight;
+      };
+      var chipsIn = function () {
+        mt.chips.hidden = false;
+        CHIPS.forEach(function (c, i) {
+          var b = document.createElement('button'); b.type = 'button'; b.className = 'chip'; b.textContent = c;
+          b.style.setProperty('--i', String(i));
+          b.addEventListener('click', function () { send(c); });
+          mt.chips.appendChild(b);
+        });
+      };
+      if (history.length) { greetEl(); chipsIn(); mt.chips.hidden = true; }
+      else if (reduced) { greetEl(); chipsIn(); }
+      else {
+        /* The opener is typed, not pasted, so the panel reads as someone being there. */
+        mt.chips.hidden = true;
+        var opener = document.createElement('div');
+        opener.className = 'msg msg--bot';
+        opener.innerHTML = '<span class="typing"><i></i><i></i><i></i></span>';
+        mt.log.appendChild(opener);
+        window.setTimeout(function () {
+          if (!opener.parentNode) return;
+          opener.parentNode.removeChild(opener);
+          greetEl(); chipsIn();
+        }, 900);
+      }
       history.forEach(function (m) {
         var el = document.createElement('div');
         el.className = 'msg msg--' + (m.role === 'user' ? 'me' : m.role === 'note' ? 'note' : 'bot');
         el.innerHTML = linkify(m.content); mt.log.appendChild(el);
       });
-      if (history.length) mt.chips.hidden = true;
       mt.log.scrollTop = mt.log.scrollHeight;
       var form = $('form', root), input = $('input', form);
       form.addEventListener('submit', function (e) { e.preventDefault(); send(input.value); input.value = ''; });
@@ -485,7 +506,7 @@
       if (close && opts.onClose) close.addEventListener('click', opts.onClose);
       return mt;
     };
-    return { mount: mount, send: send };
+    return { mount: mount, send: send, started: function () { return history.length > 0; } };
   })();
 
   var heroMount = $('#hero-chat');
@@ -499,7 +520,25 @@
     drawer.id = 'chat-drawer';
     document.body.appendChild(drawer);
     var mounted = false;
+
+    /* Teaser: the assistant opens the conversation once per session, the way a
+       staffed live chat does. Dismiss it, open it or ignore it and it stays gone. */
+    var TEASE_KEY = 'edweb-chat-teased';
+    var teased = false;
+    try { teased = sessionStorage.getItem(TEASE_KEY) === '1'; } catch (e) {}
+    var markTeased = function () { teased = true; try { sessionStorage.setItem(TEASE_KEY, '1'); } catch (e) {} };
+    var teaser = null, badge = null;
+    var clearBadge = function () { if (badge && badge.parentNode) badge.parentNode.removeChild(badge); badge = null; };
+    var killTeaser = function () {
+      if (!teaser) return;
+      var t = teaser; teaser = null;
+      if (reduced) { t.parentNode && t.parentNode.removeChild(t); return; }
+      t.classList.remove('is-in'); t.classList.add('is-out');
+      window.setTimeout(function () { t.parentNode && t.parentNode.removeChild(t); }, 220);
+    };
+
     var open = function (on) {
+      if (on) { markTeased(); killTeaser(); clearBadge(); }
       if (on && !mounted) { Chat.mount(drawer, { id: 'drawer-chat', closable: true, onClose: function () { open(false); } }); mounted = true; }
       drawer.classList.toggle('is-open', on);
       launch.setAttribute('aria-expanded', String(on));
@@ -519,6 +558,65 @@
       new IntersectionObserver(function (en) {
         if (!drawer.classList.contains('is-open')) launch.classList.toggle('is-hidden', en[0].isIntersecting);
       }, { threshold: 0.2 }).observe(heroMount);
+    }
+
+    var showTeaser = function () {
+      markTeased();
+      teaser = document.createElement('div');
+      teaser.className = 'chat-teaser';
+      teaser.setAttribute('role', 'status');
+      teaser.innerHTML =
+        '<button type="button" class="chat-teaser-open">' +
+          '<span class="chat-teaser-mark" aria-hidden="true">E</span>' +
+          '<span>Hi, I am the Edweb assistant. Want a price or a timeline?</span>' +
+        '</button>' +
+        '<button type="button" class="chat-teaser-dismiss" aria-label="Dismiss this message">' +
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>' +
+        '</button>';
+      document.body.appendChild(teaser);
+      $('.chat-teaser-open', teaser).addEventListener('click', function () { killTeaser(); open(true); });
+      $('.chat-teaser-dismiss', teaser).addEventListener('click', function () { killTeaser(); clearBadge(); });
+
+      badge = document.createElement('span');
+      badge.className = 'chat-badge'; badge.textContent = '1';
+      badge.setAttribute('aria-hidden', 'true');
+      launch.appendChild(badge);
+
+      if (!reduced) {
+        launch.classList.add('is-nudged');
+        launch.addEventListener('animationend', function off() {
+          launch.classList.remove('is-nudged');
+          launch.removeEventListener('animationend', off);
+        });
+        window.requestAnimationFrame(function () {
+          window.requestAnimationFrame(function () { if (teaser) teaser.classList.add('is-in'); });
+        });
+      } else { teaser.classList.add('is-in'); }
+
+      /* It withdraws on its own. The badge is what stays behind. */
+      window.setTimeout(killTeaser, 15000);
+    };
+
+    /* Wait until the launcher is actually on screen, then give up quietly. */
+    var tries = 0;
+    var tryTease = function () {
+      if (teased || drawer.classList.contains('is-open') || Chat.started()) return;
+      if (launch.classList.contains('is-hidden')) {
+        if (++tries > 25) return;
+        window.setTimeout(tryTease, 1200);
+        return;
+      }
+      showTeaser();
+    };
+    if (!teased && !Chat.started()) {
+      var teaseTimer = window.setTimeout(tryTease, 9000);
+      var onDepth = function () {
+        if (window.scrollY < window.innerHeight * 0.6) return;
+        window.removeEventListener('scroll', onDepth);
+        window.clearTimeout(teaseTimer);
+        tryTease();
+      };
+      window.addEventListener('scroll', onDepth, { passive: true });
     }
   })();
 
