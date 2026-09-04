@@ -1195,3 +1195,12 @@ index, packages, contact and pay. No horizontal overflow at 320 / 375 / 768 /
 `better/live-demo-3.png`).
 
 **Not measured.** Throttled-mobile Lighthouse. Field Core Web Vitals.
+
+**Round 6 (same day), Edgar's calls.** Sub-line: option 1, ink at 500 on a 46ch
+measure, applied to every section head site-wide. Work grid: three across on
+`/projects`, matching the home page ruling, page height 4675 -> 4067px at 1440.
+Value strip: the demo rail now sits on its own surface, a step deeper than the
+alt bands (`color-mix(in srgb, var(--ink) 9%, var(--paper))`), so there is one
+real surface change between the masthead card and the ink footer and the page
+still ends light. Zero console errors at 375 / 768 / 1440, align-sweep clean at
+1440 and 768, one known item left at 1280 on the packages add-on row.
