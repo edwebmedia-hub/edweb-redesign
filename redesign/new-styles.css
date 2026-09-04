@@ -225,7 +225,7 @@ main { position: relative; z-index: 1; }
   width: var(--container); margin-inline: auto; height: 100%;
   display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: var(--s6);
 }
-.logo img { width: 176px; height: 32px; object-fit: contain; object-position: left; }
+.logo img { width: 158px; height: 29px; object-fit: contain; object-position: left; }
 .nav-links { display: flex; justify-content: center; gap: clamp(1.1rem, 2.4vw, 2.2rem); }
 .nav-links a {
   position: relative; padding: var(--s2) 0; font-weight: 600; font-size: var(--fs-small);
@@ -983,7 +983,7 @@ select { appearance: none; background-image: linear-gradient(45deg, transparent 
   .nav { grid-template-columns: 1fr auto; gap: var(--s4); padding-top: 8px; }
   .nav-end { justify-self: end; }
   .nav-toggle { margin-right: -10px; }
-  .logo img, .foot-brand img { width: 144px; height: 26px; }
+  .logo img, .foot-brand img { width: 132px; height: 24px; }
   .hero { padding-top: calc(var(--header-h) + var(--s2)); }
   .page-hero { padding-top: calc(var(--header-h) + var(--s2)); }
   .nav-links {
