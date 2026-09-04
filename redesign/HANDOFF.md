@@ -163,6 +163,27 @@ such in the stylesheet.
   `.claude\static-server.mjs`, and note it does not do clean URLs, so `/packages`
   404s locally while working in production.
 
+## 2026-09-04: deploying is now a git push to `edweb-next`
+
+The Vercel project `redesign` is connected to GitHub
+(`edwebmedia-hub/edweb-redesign`, Root Directory `redesign`, production branch
+`edweb-next`). A push to `edweb-next` builds and goes live on edwebmedia.com by
+itself. No token, no `vercel` CLI, no device-code login. Claude can deploy.
+
+- **`C:\Users\edgar\deploy-edweb.cmd` is now dangerous.** It deploys the
+  `edweb-deploy` worktree, pinned to `edweb-logo-refresh`, which does not carry
+  the `edweb-next` commits. Running it rolls the live site backwards.
+- **Any push to `edweb-next` publishes.** Nothing stands in front of it. Push
+  only what is meant to be live.
+- `.vercelignore` is still honoured on git deploys: the `new-*.html` drafts,
+  `_pre-launch-backup/` and the legacy images all 404 in production (checked
+  2026-09-04).
+- The same repo is also connected to the `client-cms` and `erfdevco` projects,
+  so one push builds previews there too. Neither owns a live domain.
+- Same day, the home process row changed: three plain level cards, and Grow on
+  ink black leaning 2.2deg out of the row with a lift and teal bullets
+  (`.step--feature`). Contact and 404 keep the flat `.step` cards.
+
 ## Open
 
 - Pointing `dielekkerdoos.co.za` at its finished build reverses three edits on
