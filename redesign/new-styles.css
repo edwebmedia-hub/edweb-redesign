@@ -576,34 +576,26 @@ main { position: relative; z-index: 1; }
   }
 }
 @keyframes rise { from { opacity: 0; transform: translateY(56px); } }
-/* Home only: the four stages break the flat white row. Each card rests at its
-   own tilt and drop, the design stage runs teal and the last one runs ink, so
-   the row reads as a journey instead of four identical boxes. Hover settles a
-   card straight. Tilt uses the standalone rotate/translate properties so it
-   never fights the scroll-driven `rise` transform above. */
-.process-grid--stagger { padding-bottom: 44px; }  /* the deepest drop, so the note below keeps its gap */
-.process-grid--stagger .step {
+/* One stage carries what the section promises, so it is the only card that
+   breaks the row: ink ground, a small rotation and a lift off the line, while
+   the other three stay flat. The rotation lives on the standalone rotate and
+   translate properties so it never fights the scroll-driven `rise` transform. */
+.step--feature {
   position: relative;
-  rotate: var(--tilt, 0deg);
-  translate: 0 var(--drop, 0px);
+  z-index: 1;
+  background: var(--ink);
+  border-color: transparent;
+  color: var(--text-on-ink);
+  rotate: var(--feature-tilt, -2.2deg);  /* leans away from the row, so the lean depends on which end it sits at */
+  translate: 0 -10px;
   transform-origin: 50% 100%;
+  box-shadow: var(--shadow-lg);
   transition: rotate var(--speed) var(--ease), translate var(--speed) var(--ease), box-shadow var(--speed) var(--ease);
 }
-.process-grid--stagger .step:nth-child(1) { --tilt: -1.6deg; }
-.process-grid--stagger .step:nth-child(2) { --tilt: 1.2deg;  --drop: 30px; }
-.process-grid--stagger .step:nth-child(3) { --tilt: -0.8deg; --drop: 10px; }
-.process-grid--stagger .step:nth-child(4) { --tilt: 2.2deg;  --drop: 44px; }
-.process-grid--stagger .step:hover {
-  z-index: 2;
-  rotate: 0deg;
-  translate: 0 calc(var(--drop, 0px) - 8px);
-  box-shadow: var(--shadow-lg);
-}
-.step--teal { background: var(--teal-soft); border-color: color-mix(in srgb, var(--teal) 42%, transparent); }
-.step--teal .step-out li::before { background: var(--teal-deep); }
-.step--ink { background: var(--ink); border-color: transparent; color: var(--text-on-ink); }
-.step--ink > p, .step--ink .step-out small { color: var(--text-on-ink-muted); }
-.step--ink .step-out li::before { background: var(--teal); }
+.step--feature:last-child { --feature-tilt: 2.2deg; }
+.step--feature:hover { rotate: 0deg; translate: 0 -16px; }
+.step--feature > p, .step--feature .step-out small { color: var(--text-on-ink-muted); }
+.step--feature .step-out li::before { background: var(--teal); }
 
 .process-note { margin-top: var(--s7); display: flex; flex-wrap: wrap; gap: var(--s4) var(--s6); align-items: center; }
 
@@ -834,8 +826,7 @@ select { appearance: none; background-image: linear-gradient(45deg, transparent 
 /* ------------------------------ Mobile collapses (keep LAST) ------------- */
 @media (max-width: 1080px) {
   .process-grid { grid-template-columns: repeat(2, 1fr); }
-  .process-grid--stagger { padding-bottom: 0; }
-  .process-grid--stagger .step { --drop: 0px; }
+  .step--feature { translate: 0; }
   .work-three { grid-template-columns: repeat(2, 1fr); }
   .figure + .figure { border-left: 0; padding-left: 0; }
   .review { width: calc((100% - var(--gap-grid)) / 2); }
