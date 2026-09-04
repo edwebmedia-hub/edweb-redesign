@@ -24,9 +24,26 @@
       header && header.classList.toggle('is-open', open);
       toggle.setAttribute('aria-expanded', String(open));
     };
-    toggle.addEventListener('click', function () { setNav(!links.classList.contains('is-open')); });
+    toggle.addEventListener('click', function () {
+      var open = !links.classList.contains('is-open');
+      setNav(open);
+      /* The menu sits before the header's own button in the DOM, so tabbing
+         from the toggle used to walk straight past the links that had just
+         appeared. Opening the menu now puts you in it. */
+      if (open) { var first = $('a', links); first && first.focus({ preventScroll: true }); }
+      else { toggle.focus({ preventScroll: true }); }
+    });
     $$('a', links).forEach(function (a) { a.addEventListener('click', function () { setNav(false); }); });
-    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setNav(false); });
+    document.addEventListener('keydown', function (e) {
+      if (e.key !== 'Escape' || !links.classList.contains('is-open')) return;
+      setNav(false); toggle.focus({ preventScroll: true });
+    });
+    /* Tapping the page behind an open menu should close it. */
+    document.addEventListener('click', function (e) {
+      if (!links.classList.contains('is-open')) return;
+      if (links.contains(e.target) || toggle.contains(e.target)) return;
+      setNav(false);
+    });
   }
 
   /* Current page in the nav */
@@ -240,6 +257,17 @@
     var prev = $('[data-prev]', wrap), next = $('[data-next]', wrap);
     prev && prev.addEventListener('click', function () { stepBy(-1); });
     next && next.addEventListener('click', function () { stepBy(1); });
+    /* An arrow that cannot move announced itself as an enabled button and did
+       nothing. Both ends now report their state instead of lying. */
+    var syncEnds = function () {
+      var max = rail.scrollWidth - rail.clientWidth;
+      var atStart = rail.scrollLeft <= 1, atEnd = rail.scrollLeft >= max - 1;
+      if (prev) prev.setAttribute('aria-disabled', String(atStart || max <= 0));
+      if (next) next.setAttribute('aria-disabled', String(atEnd || max <= 0));
+    };
+    syncEnds();
+    rail.addEventListener('scroll', syncEnds, { passive: true });
+    window.addEventListener('resize', syncEnds, { passive: true });
   });
 
   /* ------------------------------ Enquiry forms --------------------------- */
@@ -519,6 +547,9 @@
     var drawer = document.createElement('div');
     drawer.className = 'chat-drawer';
     drawer.id = 'chat-drawer';
+    /* It was an unnamed generic in the accessibility tree. */
+    drawer.setAttribute('role', 'dialog');
+    drawer.setAttribute('aria-label', 'Chat with the Edweb assistant');
     document.body.appendChild(drawer);
     var mounted = false;
 

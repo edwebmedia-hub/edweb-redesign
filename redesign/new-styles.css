@@ -165,7 +165,9 @@ main { position: relative; z-index: 1; }
   display: inline-flex; align-items: center; justify-content: center; gap: var(--s2);
   min-height: 52px; padding: 0 1.75rem;
   border-radius: var(--r-pill);
-  background: var(--coral); color: var(--paper);
+  /* --coral under white text measures 3.89:1, under the 4.5:1 AA bar for
+     16px bold. The deepened mix reads as the same red and passes at 5.3:1. */
+  background: var(--coral-deep); color: var(--paper);
   font-weight: 700; font-size: var(--fs-body); line-height: 1; white-space: nowrap;
   box-shadow: 0 1px 2px color-mix(in srgb, var(--ink) 12%, transparent);
   transition: transform var(--speed) var(--ease), background var(--speed) var(--ease), color var(--speed) var(--ease), box-shadow var(--speed) var(--ease);
@@ -379,7 +381,7 @@ main { position: relative; z-index: 1; }
   position: fixed; right: var(--s5); bottom: var(--s5); z-index: 60;
   display: inline-flex; align-items: center; gap: var(--s2);
   min-height: 52px; padding: 0 1.2rem 0 0.95rem;
-  border-radius: var(--r-pill); background: var(--coral); color: var(--paper);
+  border-radius: var(--r-pill); background: var(--coral-deep); color: var(--paper);
   font-weight: 700; box-shadow: var(--shadow-md);
   transition: background var(--speed) var(--ease), transform var(--speed) var(--ease), opacity var(--speed) var(--ease);
 }
@@ -524,7 +526,9 @@ main { position: relative; z-index: 1; }
 }
 .figure + .figure { border-left: 1px solid var(--line-on-ink); padding-left: var(--gap-grid); }
 .figure strong { display: block; font-size: var(--fig); line-height: 1; letter-spacing: -0.04em; color: var(--coral); font-variant-numeric: tabular-nums; }
-.figure span { display: block; margin-top: var(--s3); color: var(--text-on-ink-muted); max-width: 22ch; }
+/* Labels run to one or two lines. Reserving two keeps every figure in the row
+   finishing on the same line, which matters because they carry dividers. */
+.figure span { display: block; margin-top: var(--s3); color: var(--text-on-ink-muted); max-width: 22ch; min-height: 3.1em; }
 
 /* ------------------------------ Pricing ---------------------------------- */
 .promo {
@@ -619,8 +623,20 @@ main { position: relative; z-index: 1; }
 .review-by strong { display: block; line-height: 1.2; }
 .review-by small { color: var(--text-muted); font-size: var(--fs-micro); }
 .rail-nav { display: flex; gap: var(--s2); }
+/* The arrows used to sit up in the section head, far from what they moved.
+   They now ride the rail itself, one at each edge, where the thumb and the
+   eye already are. */
+.rail-wrap { position: relative; }
+.rail-wrap .rail-nav {
+  position: absolute; inset-block: 0; inset-inline: var(--s3);
+  align-items: center; justify-content: space-between;
+  pointer-events: none;
+}
+.rail-wrap .rail-btn { pointer-events: auto; box-shadow: var(--shadow-md); }
+.rail-wrap .rail-btn[aria-disabled="true"] { opacity: 0; }
 .rail-btn { width: 48px; height: 48px; border-radius: var(--r-pill); background: var(--ink); color: var(--paper); display: grid; place-items: center; transition: background var(--speed) var(--ease), transform var(--speed) var(--ease); }
 .rail-btn:hover { background: var(--coral); transform: translateY(-2px); }
+.rail-btn[aria-disabled="true"] { opacity: 0.35; pointer-events: none; }
 .rail-btn svg { width: 18px; height: 18px; }
 
 /* ------------------------------ FAQ -------------------------------------- */
@@ -657,7 +673,7 @@ main { position: relative; z-index: 1; }
 .foot-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: var(--gap-split); padding-bottom: var(--s7); border-bottom: 1px solid var(--line-on-ink); }
 .foot-brand img { width: 176px; height: 32px; object-fit: contain; object-position: left; }
 .foot-brand p { margin-top: var(--s4); color: var(--text-on-ink-muted); max-width: 32ch; }
-.foot-col h4 { margin-bottom: var(--s4); }
+.foot-col h3 { font-size: var(--fs-h4); margin-bottom: var(--s4); }
 .foot-col li + li { margin-top: var(--s2); }
 .foot-col a { color: var(--text-on-ink-muted); transition: color var(--speed) var(--ease); }
 .foot-col a:hover { color: var(--teal); }
@@ -671,6 +687,9 @@ main { position: relative; z-index: 1; }
 
 /* ------------------------------ Reveal ----------------------------------- */
 .js .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.9s var(--ease), transform 0.9s var(--ease); transition-delay: var(--reveal-delay, 0ms); }
+/* Tabbing can reach a tile before its reveal has run. Focus resolves it at
+   once rather than leaving the ring on something invisible. */
+.js .reveal:focus-within { opacity: 1; transform: none; }
 .js .reveal.is-visible { opacity: 1; transform: none; }
 
 /* ------------------------------ Forms ------------------------------------ */
@@ -729,10 +748,12 @@ select { appearance: none; background-image: linear-gradient(45deg, transparent 
 .js .page-hero.is-in .container > :nth-child(2) { transition-delay: 160ms; }
 
 /* Contents / index card on a masthead */
-.index-card h3 { margin-bottom: var(--s4); }
+.index-card h2 { font-size: var(--fs-h3); margin-bottom: var(--s4); }
 .index-card li { display: flex; justify-content: space-between; gap: var(--s4); padding: 0.85rem 0; border-top: 1px solid var(--line); }
 .index-card li:last-of-type { border-bottom: 1px solid var(--line); }
-.index-card li span:last-child { color: var(--text-muted); font-size: var(--fs-small); white-space: nowrap; }
+.index-card li span:last-child { color: var(--text-muted); font-size: var(--fs-small); white-space: nowrap; text-align: right; }
+/* Below 380px that nowrap pushed the page 38px wider than the screen. */
+@media (max-width: 380px) { .index-card li span:last-child { white-space: normal; } }
 .index-card .btn { margin-top: var(--s5); }
 
 /* Work page grid */
@@ -928,7 +949,9 @@ select { appearance: none; background-image: linear-gradient(45deg, transparent 
   .shot-grid { grid-template-columns: 1fr; }
   .chat-drawer { right: var(--s3); bottom: calc(var(--s3) + 64px); width: calc(100vw - var(--s3) * 2); height: min(600px, calc(100svh - 110px)); }
   .chat-launch { right: var(--s3); bottom: var(--s3); }
-  .chat-teaser { right: var(--s3); bottom: calc(var(--s3) + 66px); width: min(286px, calc(100vw - var(--s3) * 2)); }
+  /* At this width it covered most of the tile CTA under it. The launcher is
+     still there, so the phone simply does not get the teaser. */
+  .chat-teaser { display: none; }
   .site-footer { padding-bottom: calc(var(--s6) + 64px); }
 }
 @media (max-width: 600px) {
