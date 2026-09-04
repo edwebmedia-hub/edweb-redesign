@@ -70,7 +70,10 @@
           <h3>Send us the brief</h3>
           <form id="contact-form" novalidate data-conversion="tpRLCIWp79QcEMXcu5E_">
             <input type="hidden" name="type" value="contact" />
-            <div class="form-grid">
+            <div class="form-progress" aria-hidden="true"><i></i></div>
+            <fieldset class="form-group">
+              <legend>What you need <span class="pick-count" data-count-for="services"></span></legend>
+              <div class="form-grid">
               <div class="field span-2">
                 <span>What do you need? Tap as many as apply.</span>
                 <div class="choices">
@@ -112,6 +115,11 @@
                   <label class="choice"><input type="checkbox" name="addons" value="Management from R199/month" /><span>Management, from R199/m</span></label>
                 </div>
               </div>
+</div>
+            </fieldset>
+            <fieldset class="form-group">
+              <legend>About the project</legend>
+              <div class="form-grid">
               <div class="field">
                 <label for="timeline">When do you want it live?</label>
                 <select id="timeline" name="timeline">
@@ -137,6 +145,11 @@
                 <textarea id="message" name="message" required placeholder="One or two lines is enough. If you have a website already, paste the address."></textarea>
                 <span class="field-error" aria-live="polite"></span>
               </div>
+</div>
+            </fieldset>
+            <fieldset class="form-group">
+              <legend>How we reach you</legend>
+              <div class="form-grid">
               <div class="field span-2">
                 <label for="first_name">Your name</label>
                 <input id="first_name" name="first_name" type="text" autocomplete="name" required />
@@ -158,6 +171,7 @@
                 <small>Goes straight to the person who will build the site. Your details are only used to answer this enquiry.</small>
               </div>
             </div>
+            </fieldset>
             <p class="form-status" role="status" aria-live="polite"></p>
           </form>
         </div>

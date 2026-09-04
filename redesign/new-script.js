@@ -292,6 +292,40 @@
     check();
   });
 
+  /* Form craft: how far through you are, how many answers you picked, and a
+     textarea that grows with what you type. All optional polish, so anything
+     missing on a page is simply skipped. */
+  $$('#contact-form, #quote-form').forEach(function (form) {
+    var bar = $('.form-progress i', form);
+    var counts = $$('.pick-count', form);
+    var required = function () { return $$('[required], [data-require-one]', form); };
+    var tick = function () {
+      if (bar) {
+        var req = required();
+        var done = req.filter(function (el) {
+          if (el.hasAttribute('data-require-one')) return $$('[name="' + el.name + '"]:checked', form).length > 0;
+          return el.type === 'checkbox' ? el.checked : String(el.value || '').trim() !== '';
+        }).length;
+        bar.style.width = req.length ? Math.round((done / req.length) * 100) + '%' : '0%';
+      }
+      counts.forEach(function (c) {
+        var n = $$('[name="' + c.getAttribute('data-count-for') + '"]:checked', form).length;
+        c.textContent = n ? n + ' selected' : '';
+      });
+    };
+    form.addEventListener('input', tick);
+    form.addEventListener('change', tick);
+    tick();
+
+    $$('textarea', form).forEach(function (t) {
+      var grow = function () {
+        t.style.height = 'auto';
+        t.style.height = Math.min(t.scrollHeight + 2, 380) + 'px';
+      };
+      t.addEventListener('input', grow);
+    });
+  });
+
   $$('#contact-form, #quote-form').forEach(function (form) {
     var status = $('.form-status', form) || form.appendChild(Object.assign(document.createElement('p'), { className: 'form-status', role: 'status' }));
     var label = function (el) {
@@ -345,7 +379,7 @@
       if (Array.isArray(data.addons)) data.addons = data.addons.join(', ');
       var btn = $('button[type="submit"]', form);
       var was = btn ? btn.textContent : '';
-      if (btn) { btn.disabled = true; btn.textContent = 'Sending'; }
+      if (btn) { btn.disabled = true; btn.setAttribute('data-sending', ''); btn.textContent = 'Sending the brief'; }
       status.className = 'form-status'; status.textContent = '';
       fetch('/api/send-mail', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
         .then(function (r) { return r.json().catch(function () { return {}; }); })
@@ -366,7 +400,7 @@
         .catch(function () {
           status.className = 'form-status is-error';
           status.textContent = 'That did not send. Email info@edwebmedia.com or WhatsApp 084 620 4583 and we will pick it up.';
-          if (btn) { btn.disabled = false; btn.textContent = was; }
+          if (btn) { btn.disabled = false; btn.removeAttribute('data-sending'); btn.textContent = was; }
         });
     });
   });
