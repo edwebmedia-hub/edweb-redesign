@@ -460,7 +460,7 @@
           '<div class="chat-log" aria-live="polite"></div>' +
           '<div class="chat-chips"></div>' +
           '<form class="chat-form"><label class="visually-hidden" for="' + (opts.id || 'chat') + '-in">Your question</label>' +
-          '<input id="' + (opts.id || 'chat') + '-in" type="text" maxlength="500" autocomplete="off" placeholder="Ask about prices, timing, hosting" />' +
+          '<input id="' + (opts.id || 'chat') + '-in" type="text" maxlength="500" autocomplete="off" placeholder="' + (window.matchMedia('(max-width: 600px)').matches ? 'Ask a question' : 'Ask about prices, timing, hosting') + '" />' +
           '<button type="submit" class="chat-send" aria-label="Send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h13M13 6l6 6-6 6"/></svg></button></form>' +
           '<p class="chat-foot">Answers come from our price list. Prefer a person? <a href="https://wa.me/27846204583" target="_blank" rel="noopener">WhatsApp us</a>.</p>' +
         '</div>';

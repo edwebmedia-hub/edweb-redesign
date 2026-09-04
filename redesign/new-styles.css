@@ -891,7 +891,12 @@ select { appearance: none; background-image: linear-gradient(45deg, transparent 
   .hero { min-height: 0; }
   .hero-grid { grid-template-columns: 1fr; padding-block: var(--s6); gap: var(--s7); }
   .hero-copy h1 { max-width: none; }
-  .hero-panel .chat { height: min(520px, 70svh); }
+  /* On a phone the hero panel grows with what it holds. A scrolling box inside
+     a scrolling page fights the thumb, so the page does the scrolling and the
+     suggestions drop to the two that matter: the price and the quote. */
+  .hero-panel .chat { height: auto; }
+  .hero-panel .chat-log { overflow-y: visible; }
+  .hero-panel .chip:nth-child(2), .hero-panel .chip:nth-child(3) { display: none; }
   .head { grid-template-columns: 1fr; align-items: start; }
   .head-end { justify-self: start; }
   .services-grid, .faq-grid, .cta-grid { grid-template-columns: 1fr; }
