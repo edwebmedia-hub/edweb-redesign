@@ -138,10 +138,10 @@ strong { font-weight: 700; }
 .band--ink .lead { color: var(--text-on-ink-muted); }
 /* Same ground twice in a row reads as ONE section, so the two paddings must
    not stack. A band that follows a band of the same tone keeps a third of its
-   top padding. Tones that differ keep the full rhythm. (Edgar, 2026-09-04.) */
+   top padding, so the pair shows about one band of space in total. (Edgar, 2026-09-04.) */
 .band:not(.band--alt):not(.band--ink) + .band:not(.band--alt):not(.band--ink),
 .band--alt + .band--alt,
-.band--ink + .band--ink { padding-top: calc(var(--band) * 0.35); }
+.band--ink + .band--ink { padding-top: calc(var(--band) * 0.15); }
 main { position: relative; z-index: 1; }
 
 /* Section heads: two columns that share a baseline */
