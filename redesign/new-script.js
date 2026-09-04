@@ -551,7 +551,7 @@
           mt.log.scrollTop = mt.log.scrollHeight;
           if (i < GREETING.length) {
             var c = GREETING.charAt(i - 1);
-            window.setTimeout(step, c === ' ' ? 9 : (c === ',' || c === '.') ? 70 : 14);
+            window.setTimeout(step, c === ' ' ? 20 : (c === ',' || c === '.') ? 220 : 30);
             return;
           }
           g.classList.remove('is-typing');
@@ -583,7 +583,7 @@
           if (!opener.parentNode) return;
           opener.parentNode.removeChild(opener);
           typeGreet(chipsIn);
-        }, 900);
+        }, 650);
       }
       history.forEach(function (m) {
         var el = document.createElement('div');
