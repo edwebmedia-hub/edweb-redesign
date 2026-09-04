@@ -150,7 +150,9 @@ main { position: relative; z-index: 1; }
   align-items: end; gap: var(--s5) var(--gap-split);
   margin-bottom: clamp(2rem, 1.5rem + 3vw, 4rem);
 }
-.head .lead { margin-bottom: 0.35em; }
+/* Edgar's pick, 2026-09-04: the section sub-line reads as ink at medium
+   weight on a shorter measure, not as grey caption text. */
+.head .lead { margin-bottom: 0.35em; color: var(--text); font-weight: 500; max-width: 46ch; }
 .head-end { display: flex; flex-direction: column; align-items: start; gap: var(--s4); justify-self: end; }
 
 /* ------------------------------ Backdrop --------------------------------- */
