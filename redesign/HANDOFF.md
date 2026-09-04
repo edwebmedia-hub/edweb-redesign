@@ -45,6 +45,12 @@ hosting project before it goes live.**
 
 **Prices moved 2026-09-03 evening (Edgar: "make this a R1000").** Every once-off fee is now R1,000 under list: business 2,999 / 3,999 / 5,499, stores 4,999 / 6,499 / 8,499, directories 7,999 / 10,999 / from 13,999. Changed together in `api/payfast.js`, `new-pay.html`, `new-packages.html`, `new-home.html`, `new-contact.html`, `404.html`, `new-script.js`, `api/chat.js` and OS `business/PACKAGES.md`. Monthly plans unchanged. Shown as a tilted coral deal tag (`.promo`) with a shine sweep, labelled limited time.
 
+**Post-launch round, 2026-09-04 morning (all live).** Mobile bar and first-heading
+spacing, mobile contact form, studio voice (no first name), no portfolio counts,
+pricing tabs on home, closing CTA bands removed everywhere, pill buttons,
+same-tone neighbours share one gap (`.band--alt + .band--alt` and siblings),
+home work grid three across. Rulings harvested to OS TASTE-PROFILE.
+
 **Preview.** `.claude/launch.json` entry `edweb-next` (port 4240, static server
 on the worktree). `/api/*` 404s locally by design.
 
