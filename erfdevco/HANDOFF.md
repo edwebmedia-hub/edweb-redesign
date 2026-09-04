@@ -485,7 +485,7 @@ All live and approved-in-passing, pushed at d0a8ed3:
 
 Open unchanged: SMTP_PASS, real mandates, launch gates, P24/Martiens answers.
 
-## 2026-09-04: receptionist abuse caps (commit b7ec6ff, NOT YET DEPLOYED)
+## 2026-09-04: receptionist abuse caps (commit b7ec6ff, LIVE, verified turn 11 on production)
 - api/chat.js: 10 user turns per thread (server counts the payload; the 11th
   gets a fixed hand-over line and never reaches the API, reply carries
   `ended: true`), plus 20 requests per IP per 10 minutes (in-memory per warm
