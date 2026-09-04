@@ -58,10 +58,10 @@
   --pad-card: clamp(1.4rem, 1rem + 1.4vw, 2.1rem);
 
   /* Radii: four, each with a job */
-  --r-control: 4px;   /* buttons, inputs, tabs */
+  --r-control: 4px;   /* inputs, tabs, cards' small parts */
   --r-card: 14px;     /* cards and panels */
   --r-media: 10px;    /* images and screenshots */
-  --r-pill: 999px;    /* launcher, chips */
+  --r-pill: 999px;    /* every button, the launcher, chips */
 
   /* Depth via light, not grey borders */
   --shadow-sm: 0 1px 2px color-mix(in srgb, var(--ink) 6%, transparent), 0 6px 18px color-mix(in srgb, var(--ink) 5%, transparent);
@@ -163,8 +163,8 @@ main { position: relative; z-index: 1; }
 /* ------------------------------ Buttons --------------------------------- */
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: var(--s2);
-  min-height: 52px; padding: 0 1.6rem;
-  border-radius: var(--r-control);
+  min-height: 52px; padding: 0 1.75rem;
+  border-radius: var(--r-pill);
   background: var(--coral); color: var(--paper);
   font-weight: 700; font-size: var(--fs-body); line-height: 1; white-space: nowrap;
   box-shadow: 0 1px 2px color-mix(in srgb, var(--ink) 12%, transparent);
@@ -357,7 +357,7 @@ main { position: relative; z-index: 1; }
 }
 .chat-form input:focus { outline: none; border-color: var(--teal-deep); box-shadow: 0 0 0 3px var(--teal-soft); }
 .chat-send {
-  width: 46px; height: 46px; flex: none; border-radius: var(--r-control);
+  width: 46px; height: 46px; flex: none; border-radius: var(--r-pill);
   background: var(--coral); color: var(--paper); display: grid; place-items: center;
   transition: background var(--speed) var(--ease), transform var(--speed) var(--ease);
 }
@@ -522,7 +522,7 @@ main { position: relative; z-index: 1; }
 .review-by strong { display: block; line-height: 1.2; }
 .review-by small { color: var(--text-muted); font-size: var(--fs-micro); }
 .rail-nav { display: flex; gap: var(--s2); }
-.rail-btn { width: 48px; height: 48px; border-radius: var(--r-control); background: var(--ink); color: var(--paper); display: grid; place-items: center; transition: background var(--speed) var(--ease), transform var(--speed) var(--ease); }
+.rail-btn { width: 48px; height: 48px; border-radius: var(--r-pill); background: var(--ink); color: var(--paper); display: grid; place-items: center; transition: background var(--speed) var(--ease), transform var(--speed) var(--ease); }
 .rail-btn:hover { background: var(--coral); transform: translateY(-2px); }
 .rail-btn svg { width: 18px; height: 18px; }
 
