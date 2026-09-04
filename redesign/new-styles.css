@@ -630,17 +630,6 @@ main { position: relative; z-index: 1; }
    They now ride the rail itself, one at each edge, where the thumb and the
    eye already are. */
 .rail-wrap { position: relative; }
-/* Between the masthead card and the footer the page had no surface at all,
-   just paper and a grey barely a step off it. The demo rail sits on its own
-   ground, which also says these are concept builds and not client work. */
-.rail-wrap--panel {
-  /* A step deeper than the alt bands, so it reads as a surface on the page
-     rather than an echo of the band above it. */
-  background: color-mix(in srgb, var(--ink) 9%, var(--paper));
-  border-radius: var(--r-card);
-  padding: var(--s6) var(--s5) var(--s5);
-}
-.rail-wrap--panel .rail { padding-inline: 2px; }
 .rail-wrap .rail-nav {
   position: absolute; inset-block: 0; inset-inline: var(--s3);
   align-items: center; justify-content: space-between;
