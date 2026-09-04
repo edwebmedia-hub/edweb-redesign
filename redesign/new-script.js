@@ -370,11 +370,31 @@
      answers the common questions itself and hands off to WhatsApp. */
   var Chat = (function () {
     var KEY = 'edweb-chat';
+    var KEY_TURN = 'edweb-chat-turn';
+    var KEY_ENDED = 'edweb-chat-ended';
     var mounts = [];
     var busy = false;
     var history = [];
+    var turn = 0;
+    var ended = false;
     try { history = JSON.parse(sessionStorage.getItem(KEY) || '[]'); } catch (e) { history = []; }
-    var save = function () { try { sessionStorage.setItem(KEY, JSON.stringify(history.slice(-24))); } catch (e) {} };
+    try { turn = Number(sessionStorage.getItem(KEY_TURN)) || 0; ended = !!sessionStorage.getItem(KEY_ENDED); } catch (e) {}
+    var save = function () { try { sessionStorage.setItem(KEY, JSON.stringify(history.slice(-24))); sessionStorage.setItem(KEY_TURN, String(turn)); } catch (e) {} };
+    var ENDED_HINT = 'Thread closed. WhatsApp us: 084 620 4583';
+    // The server closes a thread after its turn cap; every mount then points
+    // at a person instead of pretending to listen.
+    var closeMount = function (mt) {
+      var input = $('.chat-form input', mt.root);
+      var sendBtn = $('.chat-send', mt.root);
+      if (input) { input.disabled = true; input.placeholder = ENDED_HINT; }
+      if (sendBtn) sendBtn.disabled = true;
+      if (mt.chips) mt.chips.hidden = true;
+    };
+    var endThread = function () {
+      ended = true;
+      try { sessionStorage.setItem(KEY_ENDED, '1'); } catch (e) {}
+      mounts.forEach(closeMount);
+    };
 
     var GREETING = 'Hi, I am the Edweb assistant. Ask me what a website costs, how long it takes, or what we would build for your business.';
     var CHIPS = ['What does a website cost?', 'How long does it take?', 'Do you host it as well?', 'I want a quote'];
@@ -430,24 +450,26 @@
 
     var send = function (text) {
       text = (text || '').trim().slice(0, 500);
-      if (!text || busy) return;
+      if (!text || busy || ended) return;
       busy = true;
+      turn += 1;
       history.push({ role: 'user', content: text }); save();
       render({ role: 'user', content: text });
       typing(true);
       var payload = history.filter(function (m) { return m.role === 'user' || m.role === 'assistant'; }).slice(-16);
-      var finish = function (reply, lead) {
+      var finish = function (reply, lead, done) {
         typing(false);
         history.push({ role: 'assistant', content: reply }); save();
         render({ role: 'assistant', content: reply });
         if (lead) { history.push({ role: 'note', content: 'Sent to the studio. We will phone you back.' }); save(); render({ role: 'note', content: 'Sent to the studio. We will phone you back.' }); }
         busy = false;
+        if (done) endThread();
       };
       var ctrl = 'AbortController' in window ? new AbortController() : null;
       var timer = ctrl && window.setTimeout(function () { ctrl.abort(); }, 20000);
-      fetch('/api/chat', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ messages: payload }), signal: ctrl && ctrl.signal })
+      fetch('/api/chat', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ messages: payload, turn: turn }), signal: ctrl && ctrl.signal })
         .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
-        .then(function (out) { window.clearTimeout(timer); if (!out || !out.reply) throw new Error('empty'); finish(out.reply, out.lead); })
+        .then(function (out) { window.clearTimeout(timer); if (!out || !out.reply) throw new Error('empty'); finish(out.reply, out.lead, !!out.ended); })
         .catch(function () { window.clearTimeout(timer); finish(offline(text), null); });
     };
 
@@ -466,6 +488,7 @@
         '</div>';
       var mt = { root: root, log: $('.chat-log', root), chips: $('.chat-chips', root) };
       mounts.push(mt);
+      if (ended) closeMount(mt);
       var greet = document.createElement('div'); greet.className = 'msg msg--bot'; greet.textContent = GREETING; mt.log.appendChild(greet);
       CHIPS.forEach(function (c) {
         var b = document.createElement('button'); b.type = 'button'; b.className = 'chip'; b.textContent = c;

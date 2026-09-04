@@ -47,7 +47,14 @@ RULES:
 5. Never ask for payment details, ID numbers or full addresses.
 6. If asked something unrelated to websites or the studio, answer in one friendly sentence and steer back.`;
 
-const RATE_MAX = 40;
+// Abuse limits. A real enquiry is three to six messages; a script hammering
+// the endpoint is not. SESSION_MAX user turns per thread (the widget reports
+// its count, and the payload is counted too), then the assistant hands over
+// and the API is no longer called. RATE_MAX per IP per window is in memory
+// per warm instance; the hard stop is the spend cap on the Anthropic workspace.
+const SESSION_MAX = 10;
+const HANDOVER = 'That is about as far as I can take it here. For anything more, message the studio on WhatsApp (084 620 4583) or use the contact page and we will phone you back.';
+const RATE_MAX = 20;
 const RATE_WINDOW_MS = 10 * 60 * 1000;
 const hits = new Map();
 function rateLimited(ip) {
@@ -93,6 +100,12 @@ module.exports = async function handler(req, res) {
         !m.content.trim() || m.content.length > MAX_CHARS) return res.status(400).json({ error: 'bad message' });
   }
   if (msgs[msgs.length - 1].role !== 'user') return res.status(400).json({ error: 'must end on user' });
+
+  // Conversation cap: answered without touching the API.
+  const turn = Number(req.body && req.body.turn) || 0;
+  const userTurns = msgs.filter((m) => m.role === 'user').length;
+  if (turn > SESSION_MAX || userTurns > SESSION_MAX)
+    return res.status(200).json({ reply: HANDOVER, lead: null, ended: true });
 
   // The API requires strict alternation; collapse any repeats from a retried send.
   const clean = [];
