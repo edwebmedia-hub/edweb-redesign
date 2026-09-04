@@ -532,6 +532,34 @@
         var g = document.createElement('div'); g.className = 'msg msg--bot'; g.textContent = GREETING;
         mt.log.appendChild(g); mt.log.scrollTop = mt.log.scrollHeight;
       };
+      /* The opener is typed out, letter by letter, so the panel reads as
+         someone answering rather than a block of text that was already there.
+         The characters go into an aria-hidden span, and the finished line is
+         written once at the end, so the live region announces it a single
+         time instead of on every keystroke. */
+      var typeGreet = function (done) {
+        var g = document.createElement('div');
+        g.className = 'msg msg--bot is-typing';
+        var out = document.createElement('span');
+        out.setAttribute('aria-hidden', 'true');
+        g.appendChild(out);
+        mt.log.appendChild(g);
+        var i = 0;
+        var step = function () {
+          i += 1;
+          out.textContent = GREETING.slice(0, i);
+          mt.log.scrollTop = mt.log.scrollHeight;
+          if (i < GREETING.length) {
+            var c = GREETING.charAt(i - 1);
+            window.setTimeout(step, c === ' ' ? 9 : (c === ',' || c === '.') ? 70 : 14);
+            return;
+          }
+          g.classList.remove('is-typing');
+          g.textContent = GREETING;
+          done && done();
+        };
+        step();
+      };
       var chipsIn = function () {
         mt.chips.hidden = false;
         mt.log.appendChild(mt.chips);
@@ -554,7 +582,7 @@
         window.setTimeout(function () {
           if (!opener.parentNode) return;
           opener.parentNode.removeChild(opener);
-          greetEl(); chipsIn();
+          typeGreet(chipsIn);
         }, 900);
       }
       history.forEach(function (m) {
