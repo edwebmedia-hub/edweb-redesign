@@ -704,6 +704,18 @@ main { position: relative; z-index: 1; }
   border: 1px solid var(--line-strong); border-radius: var(--r-control); background: var(--surface);
   transition: border-color var(--speed) var(--ease), box-shadow var(--speed) var(--ease);
 }
+/* A select that looks like a text box reads as one. Every browser gets the
+   same chevron, drawn in ink, instead of only the ones that support
+   appearance: base-select. */
+.field select {
+  appearance: none; -webkit-appearance: none;
+  padding-right: 2.6rem; cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231c1c1c' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.95rem center;
+  background-size: 18px;
+}
+.field select:hover { border-color: var(--ink); }
 .field textarea { min-height: 140px; resize: vertical; }
 .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--teal-deep); box-shadow: 0 0 0 3px var(--teal-soft); }
 .field [aria-invalid="true"] { border-color: var(--coral); box-shadow: 0 0 0 3px var(--coral-soft); }
@@ -712,19 +724,38 @@ main { position: relative; z-index: 1; }
 .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s5) var(--s4); }
 .form-grid .span-2 { grid-column: 1 / -1; }
 .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
-.choices { display: flex; flex-wrap: wrap; gap: var(--s2); }
+/* Multi-select answers. They used to be shrink-to-fit chips in a wrapping
+   flex row, so seven answers landed as a ragged 2-3-2 and nothing lined up.
+   Equal cells in a grid line every row up, and an odd last answer takes the
+   full width instead of sitting alone. */
+.choices { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s2); }
+.choices > .choice:last-child:nth-child(odd) { grid-column: 1 / -1; }
 .choice { position: relative; }
-.choice input { position: absolute; inset: 0; opacity: 0; margin: 0; }
+.choice input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; }
 .choice span {
-  display: inline-flex; align-items: center; gap: 0.55em;
+  display: flex; align-items: center; gap: 0.6em;
+  width: 100%; min-height: 52px; height: 100%;
   padding: 0.6rem 0.95rem; border-radius: var(--r-control);
-  border: 1px solid var(--line-strong); background: var(--surface); font-weight: 600; font-size: var(--fs-small);
-  transition: background var(--speed) var(--ease), color var(--speed) var(--ease), border-color var(--speed) var(--ease);
+  border: 1px solid var(--line-strong); background: var(--surface);
+  font-weight: 600; font-size: var(--fs-small); line-height: 1.3;
+  transition: background var(--speed) var(--ease), color var(--speed) var(--ease),
+              border-color var(--speed) var(--ease), transform var(--speed) var(--ease),
+              box-shadow var(--speed) var(--ease);
 }
-.choice:hover span { border-color: var(--ink); }
-.choice span::before { content: ""; width: 16px; height: 16px; flex: none; border-radius: 50%; border: 2px solid var(--line-strong); transition: background var(--speed) var(--ease), border-color var(--speed) var(--ease); }
+.choice:hover span { border-color: var(--ink); transform: translateY(-1px); box-shadow: var(--shadow-sm); }
+.choice input:active + span { transform: translateY(0); }
+/* A tick, because more than one answer is allowed. It used to be a radio dot. */
+.choice span::before {
+  content: ""; width: 20px; height: 20px; flex: none;
+  border-radius: 5px; border: 2px solid var(--line-strong);
+  background-position: center; background-repeat: no-repeat; background-size: 13px;
+  transition: background-color var(--speed) var(--ease), border-color var(--speed) var(--ease);
+}
 .choice input:checked + span { background: var(--ink); color: var(--paper); border-color: var(--ink); }
-.choice input:checked + span::before { background: var(--coral); border-color: var(--coral); box-shadow: inset 0 0 0 3px var(--ink); }
+.choice input:checked + span::before {
+  background-color: var(--coral); border-color: var(--coral);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fafafa' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E");
+}
 .choice input:focus-visible + span { outline: 3px solid var(--teal-deep); outline-offset: 2px; }
 .form-status { margin-top: var(--s4); font-weight: 600; }
 .form-status:empty { display: none; }
@@ -958,8 +989,8 @@ select { appearance: none; background-image: linear-gradient(45deg, transparent 
   .form-card { padding: var(--s5) var(--s4); }
   .form-card h3 { margin-bottom: var(--s4); }
   .form-grid { gap: var(--s4); }
-  .choices { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s2); }
-  .choice span { width: 100%; min-height: 50px; justify-content: flex-start; padding: 0.55rem 0.75rem; font-size: var(--fs-small); line-height: 1.25; }
+  .choices { grid-template-columns: 1fr; }
+  .choice span { padding: 0.7rem 0.85rem; }
   .field input, .field select, .field textarea { font-size: 16px; min-height: 52px; }
   .field textarea { min-height: 110px; }
   .field > label, .field > span:first-child { font-size: var(--fs-body); }
