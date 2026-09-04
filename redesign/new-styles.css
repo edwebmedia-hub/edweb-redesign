@@ -704,6 +704,8 @@ select { appearance: none; background-image: linear-gradient(45deg, transparent 
 .facts svg, .checks svg { fill: none; stroke: currentColor; stroke-width: 1.9; }
 .facts--ink { border-top-color: var(--line-on-ink); display: grid; grid-template-columns: repeat(2, 1fr); column-gap: var(--gap-split); }
 .facts--ink li { border-bottom-color: var(--line-on-ink); }
+.facts--light { border-top-color: var(--line); }
+.facts--light li { border-bottom-color: var(--line); }
 .process-grid--3 { grid-template-columns: repeat(3, 1fr); }
 .page-hero--form .container { align-items: start; }
 .page-hero--form { align-items: start; }
