@@ -484,3 +484,16 @@ All live and approved-in-passing, pushed at d0a8ed3:
   row height, the image can never stretch the section again.
 
 Open unchanged: SMTP_PASS, real mandates, launch gates, P24/Martiens answers.
+
+## 2026-09-04: receptionist abuse caps (commit b7ec6ff, NOT YET DEPLOYED)
+- api/chat.js: 10 user turns per thread (server counts the payload; the 11th
+  gets a fixed hand-over line and never reaches the API, reply carries
+  `ended: true`), plus 20 requests per IP per 10 minutes (in-memory per warm
+  instance, 429 -> widget shows the "busy" line). Unit-tested with a stubbed
+  SDK: 11th turn = no API call, 21st hit from one IP = 429.
+- assets/chat-widget.js v15: on `ended` the input is disabled and the
+  placeholder points at Martiens' number; state persists in sessionStorage.
+- The hard stop is a monthly spend cap on the Anthropic workspace holding the
+  "erfdevco-site" key. Edgar sets it in the console (Settings > Limits).
+- Deploy: `vercel --prod --yes` from erfdevco/ with a fresh token, then verify
+  https://erfdevco.vercel.app/api/chat returns the hand-over on turn 11.
