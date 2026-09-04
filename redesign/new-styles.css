@@ -731,13 +731,13 @@ select { appearance: none; background-image: linear-gradient(45deg, transparent 
   .case-facts { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 900px) {
-  :root { --header-h: 72px; }
-  .nav { grid-template-columns: 1fr auto; gap: var(--s4); }
+  :root { --header-h: 80px; }
+  .nav { grid-template-columns: 1fr auto; gap: var(--s4); padding-top: 8px; }
   .nav-end { justify-self: end; }
   .nav-toggle { margin-right: -10px; }
   .logo img, .foot-brand img { width: 144px; height: 26px; }
-  .hero { padding-top: calc(var(--header-h) + var(--s7)); }
-  .page-hero { padding-top: calc(var(--header-h) + var(--s7)); }
+  .hero { padding-top: calc(var(--header-h) + var(--s2)); }
+  .page-hero { padding-top: calc(var(--header-h) + var(--s2)); }
   .nav-links {
     position: fixed; inset: var(--header-h) 0 auto 0; z-index: 49;
     flex-direction: column; gap: 0; padding: var(--s3) var(--gutter) var(--s5);
