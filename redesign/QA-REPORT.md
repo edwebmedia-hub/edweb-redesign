@@ -1137,3 +1137,61 @@ enquiry routes; conversion fires only on `sent: true`. Payfast picker
 produces the right endpoint and amount. Promote run: 14 pages, zero
 leftover draft references, 404 links repaired. Committed 0878cda on
 `edweb-next`, fast-forwarded into `edweb-logo-refresh`.
+
+## Work page quality pass (2026-09-04)
+
+Scope: `/projects`, plus the shared stylesheet and script, plus the five demo
+sites under `/demos/`. Triggered by Edgar pointing at the closing checklist
+("a large dead space under it") and then at a demo page that "looks wrong".
+
+**Look target.** The page's own client-work grid: full-bleed captures, flat
+rows, no boxed cards, a link out at the end of each band. The closing section
+had to read as part of that page, not as a footnote before the footer.
+
+**Round 1, structure.** Measured with a section probe at 1440: `#standard`
+held 263px of content inside a 567px band (46%), six one-line rows with
+hairline rules under each. Rebuilt as `.standards`: six items, each a coral
+tick, a bold name and a supporting line, three across, closing on a link to
+`/packages`. After: 492.8px of content in 732.8px, symmetric 120px padding,
+rows equal within a row at 1440 / 768 / 375 (78.1 / 77 / 75.5px).
+
+**Round 2, measured sweeps.** `align-sweep` reported four columns off a shared
+line; fixed the demo-rail captions (39px at 768, captions now stack in one
+column below 900px) and the stat-row labels (26px at 1280 and 1440, two lines
+reserved where figures share a row with dividers). Sweep went 4 -> 1; the
+remaining item is the packages add-on row at 1280, documented and not fixed.
+`ground-sweep` clean. `repeat-sweep` no repeated claims.
+
+**Round 3, audit (site-auditor).** Fixed: work-tile links exposing an empty
+accessible name (the `<a>` wraps a `<figure>`, so name-from-content is
+blocked), paper on `--coral` at 3.89:1 against a 4.5:1 bar, a 38px overflow at
+320px from a nowrap value, carousel arrows enabled at the ends and doing
+nothing, mobile menu leaving focus behind it with no outside-click dismissal,
+heading order skipping levels twice, focus landing on an unrevealed tile, an
+unnamed chat drawer, wrong declared image aspect ratios, unused 400w variants,
+identical demo Book links, missing og:url / twitter tags / structured data.
+
+**Round 4, the demo pages.** `/demos/<name>/` is 308-redirected to
+`/demos/<name>` by `cleanUrls`, which moves the document base up a level, so
+every relative `styles.css`, `script.js` and image 404'd in production. Live
+pages were rendering as raw HTML. Each demo page now pins `<base href>`. The
+first attempt inserted it after `<header>` rather than `<head>` (these files
+have no literal head element) and did nothing; corrected to sit directly after
+the charset meta on all 28 pages. Verified live: construction demo renders.
+
+**Round 5, review (site-reviewer, fresh context).** Returned. Cleared since:
+supporting lines back to 16px, the closing row reuses `.pricing-more`, the
+stat-label reservation scoped to widths where dividers exist, the masthead card
+title no longer a competing h2, and the SEO line rewritten so it does not
+contradict the packages page. Left open for Edgar: the value strip below the
+masthead (M3), whether the closing section keeps the tick-grid shape (M2),
+three structurally identical section openers (M4), and whether `/projects`
+moves to the three-across work grid that won on the home page (M9).
+
+**Evidence.** Zero console errors at 375 / 768 / 1280 / 1440 on projects,
+index, packages, contact and pay. No horizontal overflow at 320 / 375 / 768 /
+1280 / 1440. Rail paged 0 -> 1308 -> 0. Captures in the session scratchpad
+(`better/v3-1440.png`, `better/std-view-1440.png`, `better/std-view-390.png`,
+`better/live-demo-3.png`).
+
+**Not measured.** Throttled-mobile Lighthouse. Field Core Web Vitals.
