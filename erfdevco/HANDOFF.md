@@ -462,3 +462,25 @@ All APPROVED by Edgar ("perfect") and live at erfdevco.vercel.app, pushed at 472
 Still open, unchanged: SMTP_PASS (no lead/contact email), real mandates for
 the 9 demo farms, launch gates in CONFIRM-BEFORE-LAUNCH.md, P24 + Martiens
 answers. Vercel token from this session must be deleted by Edgar.
+
+## Round 14 (2026-09-04): phone manners and answered hearts
+
+All live and approved-in-passing, pushed at d0a8ed3:
+- Chat on mobile: no label in the DOM at all (was rendering raw over the
+  circle from stale cached CSS), native slide-up sheet, backdrop tap closes,
+  swipe-down on the header closes, scroll locked behind, 16px input (no iOS
+  zoom), no autofocus keyboard slam, safe-area padding. Chat layers moved
+  above the site header (z 110/120/130) because the header stole taps.
+- Every page now loads styles.css / script.js / chat-widget.js with ?v=14 so
+  stale phone caches cannot resurface old CSS. Bump the number on future
+  asset-affecting deploys.
+- Hearts: tapping one now toasts "Saved to your shortlist. View it" linking
+  listings.html#shortlist, which lands with the Shortlist chip active. The
+  chip and counter already existed; now they are discoverable.
+- Compare: thead cards condense when pinned (.cmp-table.is-stuck via a
+  sentinel IntersectionObserver): photos/ref/district fold away, title+price
+  strip ~99px, so the page scrolls as one piece.
+- FAQ photo is absolutely positioned inside .faq-photo: the list defines the
+  row height, the image can never stretch the section again.
+
+Open unchanged: SMTP_PASS, real mandates, launch gates, P24/Martiens answers.
