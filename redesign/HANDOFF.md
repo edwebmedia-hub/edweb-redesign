@@ -67,13 +67,14 @@ anything below disagrees with the files, the files win.
 
 **Live:** https://edwebmedia.com
 **Branch:** `edweb-logo-refresh`, pushed to `github.com/edwebmedia-hub/edweb-redesign`
-**Deploy:** Edgar double-clicks `C:\Users\edgar\deploy-edweb.cmd`. It calls the
-Vercel CLI as `npx.cmd` by full path with a token read from
-`C:\Users\edgar\.deploy-token`, and logs to `C:\Users\edgar\deploy-log.txt`.
-Written as `.cmd` because his PowerShell is 5.1: no `&&`, and `.ps1` scripts are
-blocked by execution policy. **Claude cannot run it**: a PreToolUse hook denies
-any shell command containing "vercel". Prepare the build, commit, hand over the
-one click. The git push is backup, not the deploy trigger.
+**Deploy (rewired 2026-09-04):** a push to `edweb-next` builds and goes live by
+itself. The Vercel project `redesign` is connected to
+`edwebmedia-hub/edweb-redesign` with Root Directory `redesign` and production
+branch `edweb-next`. No token, no CLI, no click. Claude can deploy.
+The old `C:\Users\edgar\deploy-edweb.cmd` is **dangerous now**: it deploys a
+worktree pinned to `edweb-logo-refresh`, which does not carry this work, so
+running it rolls the live site backwards. It has been renamed to
+`deploy-edweb.OBSOLETE-DO-NOT-RUN.cmd.txt`.
 
 ---
 
@@ -183,6 +184,42 @@ itself. No token, no `vercel` CLI, no device-code login. Claude can deploy.
 - Same day, the home process row changed: three plain level cards, and Grow on
   ink black leaning 2.2deg out of the row with a lift and teal bullets
   (`.step--feature`). Contact and 404 keep the flat `.step` cards.
+
+## 2026-09-04 (afternoon): work page, form, chat, demos
+
+All live. Branch `edweb-next`, tip `4c96f04`.
+
+- **Home process row.** Three plain level cards; `Grow` carries `.step--feature`:
+  ink ground, 2.2deg out of the row, lifted, teal bullets. Hover straightens it.
+  Edgar chose black over red because red is the click colour on that page.
+- **Work page.** Closing section rebuilt as `.standards` (six named standards,
+  three across, closes on a link to /packages). Work grid moved to
+  `.work-three`, matching the home page. Rail arrows ride the rail edges via
+  `.rail-wrap` and fade out at each end. A grey panel behind the demo rail was
+  built and then removed on Edgar's call: the rail sits on the section ground.
+- **Enquiry form.** Three fieldsets (what you need / about the project / how we
+  reach you), a progress rail that fills with the required answers, a live
+  "N selected" count, even answer cells, tick boxes instead of radio dots,
+  chevrons on the selects, textarea that grows, and a real sending state. The
+  "Or reach us directly" ink band was removed from /contact.
+- **Chat.** The assistant types its opener, 30ms a character, 220ms on commas
+  and full stops, 650ms of dots first, about 4.5s of visible typing, then the
+  chips. Letters go into an aria-hidden span; the finished line is written once
+  so the live region announces it a single time. The avatar carries the logo's
+  chevrons. On phones the hero panel grows with its content (no box scrolling
+  inside a scrolling page) and shows two suggestions.
+- **Header logo** 176x32 -> 158x29 desktop, 144x26 -> 132x24 phone.
+- **Section sub-lines** are ink at 500 on a 46ch measure (Edgar picked option 1
+  of three).
+- **Demo pages were broken in production** and are fixed: `/demos/<name>/` is
+  308-redirected to `/demos/<name>`, which moved the document base up a level
+  and 404'd every relative asset, so all five rendered as raw HTML. Each page
+  pins `<base href="/demos/<name>/">` directly after the charset meta.
+
+**Deploys stall sometimes.** After ~14 pushes in an afternoon, Vercel stopped
+building: two pushes and a hand-fired deploy hook all produced nothing for
+about 40 minutes, then it cleared by itself. Nothing was wrong with the repo.
+If a push does not appear, check the deployments list before changing anything.
 
 ## Open
 
