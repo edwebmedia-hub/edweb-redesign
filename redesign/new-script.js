@@ -377,7 +377,7 @@
     var save = function () { try { sessionStorage.setItem(KEY, JSON.stringify(history.slice(-24))); } catch (e) {} };
 
     var GREETING = 'Hi, I am the Edweb assistant. Ask me what a website costs, how long it takes, or what we would build for your business.';
-    var CHIPS = ['What does a website cost?', 'How long does it take?', 'Do you host it as well?', 'I want a quote'];
+    var CHIPS = ['What do the packages cost?', 'How long does a build take?', 'Do you host and maintain it?', 'Get a quote for my business'];
 
     var esc = function (s) { return s.replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
     var linkify = function (s) {
@@ -414,6 +414,7 @@
         el.innerHTML = linkify(m.content);
         log.appendChild(el);
         log.scrollTop = log.scrollHeight;
+        if (mt.panel) mt.panel.classList.remove('is-fresh');
         if (mt.chips && history.length) mt.chips.hidden = true;
       });
     };
@@ -464,7 +465,8 @@
           '<button type="submit" class="chat-send" aria-label="Send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h13M13 6l6 6-6 6"/></svg></button></form>' +
           '<p class="chat-foot">Answers come from our price list. Prefer a person? <a href="https://wa.me/27846204583" target="_blank" rel="noopener">WhatsApp us</a>.</p>' +
         '</div>';
-      var mt = { root: root, log: $('.chat-log', root), chips: $('.chat-chips', root) };
+      var mt = { root: root, log: $('.chat-log', root), chips: $('.chat-chips', root), panel: $('.chat', root) };
+      if (!history.length) mt.panel.classList.add('is-fresh');
       mounts.push(mt);
       var greetEl = function () {
         var g = document.createElement('div'); g.className = 'msg msg--bot'; g.textContent = GREETING;
@@ -472,6 +474,7 @@
       };
       var chipsIn = function () {
         mt.chips.hidden = false;
+        mt.log.appendChild(mt.chips);
         CHIPS.forEach(function (c, i) {
           var b = document.createElement('button'); b.type = 'button'; b.className = 'chip'; b.textContent = c;
           b.style.setProperty('--i', String(i));

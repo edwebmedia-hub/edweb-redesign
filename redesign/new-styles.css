@@ -304,6 +304,12 @@ main { position: relative; z-index: 1; }
   overflow: hidden;
 }
 .hero-panel .chat { height: min(600px, 74svh); }
+/* Before anyone talks to it there is nothing to scroll, so the panel takes the
+   height of what it holds instead of showing a half-empty box. The first
+   message hands it back its full height. */
+.hero-panel .chat.is-fresh { height: auto; }
+.chat.is-fresh .chat-log { flex: 0 0 auto; overflow-y: visible; }
+.chat-drawer:has(.chat.is-fresh) { height: auto; }
 .chat-head {
   display: flex; align-items: center; gap: var(--s3);
   padding: var(--s4) var(--s5);
@@ -341,7 +347,9 @@ main { position: relative; z-index: 1; }
 .typing i:nth-child(2) { animation-delay: 0.15s; }
 .typing i:nth-child(3) { animation-delay: 0.3s; }
 @keyframes dot { 0%, 60%, 100% { opacity: 0.3; transform: translateY(0); } 30% { opacity: 1; transform: translateY(-3px); } }
-.chat-chips { display: flex; flex-wrap: wrap; gap: var(--s2); padding: 0 var(--s5) var(--s3); }
+/* The chips sit in the conversation, under the greeting, not pinned to the
+   bottom of an empty panel. */
+.chat-chips { display: flex; flex-wrap: wrap; gap: var(--s2); padding-top: var(--s1); }
 .chip {
   padding: 0.45rem 0.85rem; border-radius: var(--r-pill);
   border: 1px solid var(--line-strong); background: var(--surface);
