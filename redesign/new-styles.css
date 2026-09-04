@@ -825,11 +825,26 @@ select { appearance: none; background-image: linear-gradient(45deg, transparent 
 
 
 /* ------------------------------ Shared icon sprite ---------------------- */
-.facts svg, .checks svg { fill: none; stroke: currentColor; stroke-width: 1.9; }
+.facts svg, .checks svg, .standards svg { fill: none; stroke: currentColor; stroke-width: 1.9; }
 .facts--ink { border-top-color: var(--line-on-ink); display: grid; grid-template-columns: repeat(2, 1fr); column-gap: var(--gap-split); }
 .facts--ink li { border-bottom-color: var(--line-on-ink); }
 .facts--light { border-top-color: var(--line); }
 .facts--light li { border-bottom-color: var(--line); }
+
+/* The page's closing promise. It used to be six one-line rows with hairline
+   rules under them, which read as a footnote and left half the band empty.
+   Each standard now carries a name and the thing that backs it, three across,
+   and the section ends on a way forward instead of a full stop. */
+.standards { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s7) var(--gap-split); }
+.standards li { display: grid; grid-template-columns: 24px minmax(0, 1fr); gap: var(--s3); align-items: start; }
+.standards svg { width: 24px; height: 24px; color: var(--coral); margin-top: 1px; }
+.standards strong { display: block; font-size: var(--fs-h4); line-height: 1.25; margin-bottom: var(--s2); }
+.standards p { color: var(--text-muted); font-size: var(--fs-small); line-height: 1.6; }
+.standard-more {
+  margin-top: var(--s8); padding-top: var(--s5); border-top: 1px solid var(--line);
+  display: flex; flex-wrap: wrap; gap: var(--s3) var(--s7); align-items: baseline; justify-content: space-between;
+}
+.standard-more p { color: var(--text-muted); }
 .process-grid--3 { grid-template-columns: repeat(3, 1fr); }
 .page-hero--form .container { align-items: start; }
 .page-hero--form { align-items: start; }
@@ -858,6 +873,7 @@ select { appearance: none; background-image: linear-gradient(45deg, transparent 
 /* ------------------------------ Mobile collapses (keep LAST) ------------- */
 @media (max-width: 1080px) {
   .process-grid { grid-template-columns: repeat(2, 1fr); }
+  .standards { grid-template-columns: repeat(2, 1fr); gap: var(--s6) var(--gap-grid); }
   .step--feature { translate: 0; }
   .work-three { grid-template-columns: repeat(2, 1fr); }
   .figure + .figure { border-left: 0; padding-left: 0; }
@@ -904,6 +920,10 @@ select { appearance: none; background-image: linear-gradient(45deg, transparent 
   .page-hero .container { grid-template-columns: 1fr; padding-block: var(--s6); }
   .page-hero h1 { max-width: none; }
   .work-grid, .work-three { grid-template-columns: 1fr; }
+  /* In the rail the caption's button wrapped for some tiles and not others,
+     so tiles in the same row finished on different lines. One column each. */
+  .rail .work-tile figcaption { flex-direction: column; align-items: flex-start; gap: var(--s2); }
+  .rail .work-tile figcaption .btn { margin-left: 0; }
   .work-grid-after { margin-top: var(--s7); }
   .shot-grid { grid-template-columns: 1fr; }
   .chat-drawer { right: var(--s3); bottom: calc(var(--s3) + 64px); width: calc(100vw - var(--s3) * 2); height: min(600px, calc(100svh - 110px)); }
@@ -921,7 +941,7 @@ select { appearance: none; background-image: linear-gradient(45deg, transparent 
   .field input, .field select, .field textarea { font-size: 16px; min-height: 52px; }
   .field textarea { min-height: 110px; }
   .field > label, .field > span:first-child { font-size: var(--fs-body); }
-  .process-grid, .figures, .foot-grid, .form-grid, .case-facts, .journey, .facts--ink { grid-template-columns: 1fr; }
+  .process-grid, .figures, .foot-grid, .form-grid, .case-facts, .journey, .facts--ink, .standards { grid-template-columns: 1fr; }
   .form-grid .span-2 { grid-column: auto; }
   .hero-actions { gap: var(--s4); }
   .hero-actions .btn { width: 100%; }
