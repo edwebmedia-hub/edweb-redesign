@@ -1,12 +1,18 @@
 # Edweb Media (edwebmedia.com), state handoff
 
-## 2026-09-05: phone pass, COMMITTED, NOT DEPLOYED
+## 2026-09-05: phone pass, LIVE at edwebmedia.com (tip 72706c0)
 
 Edgar sent one message on his way to the gym with six phone complaints and
 "overall just enhance the website, don't make crazy changes". All six are in,
 verified at 390 / 768 / 1280 with zero console errors, promoted onto the live
-filenames, committed. **Not pushed, so edwebmedia.com is still the old build.
-One push to `edweb-next` deploys it.**
+filenames, and deployed on his go-ahead. **Verified LIVE on edwebmedia.com,
+not the preview:** the stage switch renders on a phone (process section 206px),
+pricing types stack, rail nav is static with its count, the footer legal row
+centres, the composer is a pill, the assistant sheet is 390x844 at 0,0 with the
+page locked, `aria-modal` set and 0 focusable elements outside it, the send
+button is disabled while empty, and the desktop row still shows all four stages
+with Grow at `rgb(28, 28, 28)` / `rotate: 2.2deg`. `/projects` carries its
+twitter tags and JSON-LD again. Zero console errors.
 
 - **Chat composer, phone and desktop.** `.chat-tray` wraps the form and the
   footnote; the form is one pill holding the input and the send button, focus
