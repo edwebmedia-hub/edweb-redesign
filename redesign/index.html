@@ -359,24 +359,30 @@
           <div><h2 id="process-title">From first call to <span class="accent">live</span> site.</h2></div>
           <p class="lead">Four stages, and you know what lands at the end of each one.</p>
         </div>
+        <div class="stage-switch" data-stage-switch hidden>
+          <button type="button" data-stage="stage-discover">Discover</button>
+          <button type="button" data-stage="stage-design">Design</button>
+          <button type="button" data-stage="stage-build">Build</button>
+          <button type="button" data-stage="stage-grow">Grow</button>
+        </div>
         <div class="process-grid">
-          <article class="card step">
-            <h3>Discover</h3>
+          <article class="card step" id="stage-discover">
+            <h3>Discover <em class="stage-mark">Stage one</em></h3>
             <p>We learn the business, the customers and what the site has to do.</p>
             <div class="step-out"><small>What lands</small><ul><li>Brief and sitemap</li><li>Content list</li></ul></div>
           </article>
-          <article class="card step">
-            <h3>Design</h3>
+          <article class="card step" id="stage-design">
+            <h3>Design <em class="stage-mark">Stage two</em></h3>
             <p>A design shaped around your industry and built to turn visitors into enquiries.</p>
             <div class="step-out"><small>What lands</small><ul><li>Design direction</li><li>First page for approval</li></ul></div>
           </article>
-          <article class="card step">
-            <h3>Build and launch</h3>
+          <article class="card step" id="stage-build">
+            <h3>Build and launch <em class="stage-mark">Stage three</em></h3>
             <p>Every page built, tested on every screen, then put live.</p>
             <div class="step-out"><small>What lands</small><ul><li>All pages and forms</li><li>SSL and tracking</li></ul></div>
           </article>
-          <article class="card step step--feature">
-            <h3>Grow</h3>
+          <article class="card step step--feature" id="stage-grow">
+            <h3>Grow <em class="stage-mark">Stage four</em></h3>
             <p>Hosting, updates and marketing keep it working once the build is done.</p>
             <div class="step-out"><small>What lands</small><ul><li>Hosting and updates</li><li>Monthly report on the care plan</li></ul></div>
           </article>

@@ -635,6 +635,13 @@ main { position: relative; z-index: 1; }
 .step--feature > p, .step--feature .step-out small { color: var(--text-on-ink-muted); }
 .step--feature .step-out li::before { background: var(--teal); }
 
+/* The stage switch is a phone control. On a desktop the four stages sit in
+   their row where they can be taken in at a glance, and it is not rendered.
+   It ships hidden and script unhides it, so with no script the phone falls
+   back to the four stages stacked rather than to a switch that does nothing. */
+.stage-switch { display: none; }
+.stage-mark { display: none; }
+
 .process-note { margin-top: var(--s7); display: flex; flex-wrap: wrap; gap: var(--s4) var(--s6); align-items: center; }
 
 /* ------------------------------ Reviews ---------------------------------- */
@@ -1068,6 +1075,41 @@ select { appearance: none; background-image: linear-gradient(45deg, transparent 
   .chat-drawer .chat-tray { padding-bottom: calc(var(--s5) + env(safe-area-inset-bottom)); }
   html.is-chat-open { overflow: hidden; }
   .chat-launch { right: var(--s3); bottom: var(--s3); }
+  /* Four stages side by side is a glance on a desktop and four screens of
+     scrolling on a phone. Here they become one switch and one stage, and the
+     stage drops its box: on its own it is an answer, not a card in a stack. */
+  .stage-switch:not([hidden]) {
+    display: flex; gap: var(--s1); padding: var(--s1); margin-bottom: var(--s6);
+    background: var(--ground-alt); border-radius: var(--r-pill);
+  }
+  .stage-switch button {
+    flex: 1; min-width: 0; padding: 0.65rem 0.25rem;
+    border-radius: var(--r-pill); font-size: var(--fs-small); font-weight: 700;
+    color: var(--text-muted);
+    transition: background var(--speed) var(--ease), color var(--speed) var(--ease);
+  }
+  .stage-switch button[aria-selected="true"] { background: var(--ink); color: var(--paper); }
+  .process-grid { grid-template-columns: 1fr; }
+  .process-grid .step {
+    background: none; border: 0; border-radius: 0; box-shadow: none; padding: 0;
+    rotate: none; translate: none; color: var(--text);
+  }
+  /* The ink treatment exists to break a row of four. One at a time there is no
+     row to break, so the fourth stage reads like the other three. */
+  .process-grid .step--feature > p,
+  .process-grid .step--feature .step-out small { color: var(--text-muted); }
+  .process-grid .step--feature .step-out li::before { background: var(--coral); }
+  /* The scroll-driven rise belongs to a row entering the viewport. A panel
+     that appears on a tap gets its own entry instead, on the document
+     timeline. No fill mode on purpose: outside the animation the stage sits at
+     its own opacity, so a stage can never be left invisible by an animation
+     that did not run. */
+  .js .process-grid .step { animation: panel 0.45s var(--ease); animation-timeline: auto; }
+  .stage-mark {
+    display: inline-block; margin-left: var(--s2); vertical-align: middle;
+    font-style: normal; font-size: var(--fs-micro); font-weight: 700;
+    letter-spacing: 0.06em; text-transform: uppercase; color: var(--coral-deep);
+  }
   /* Rail arrows used to hang over the middle of the card they were moving,
      covering the words. They drop below the rail, at the thumb end. */
   .rail-wrap .rail-nav {

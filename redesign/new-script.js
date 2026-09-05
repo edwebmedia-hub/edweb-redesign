@@ -195,6 +195,79 @@
     });
   });
 
+  /* ------------------------------ Stage switch ---------------------------- */
+  /* The process stages are four cards in a row on a desktop and one switch
+     with one stage on a phone. The tab semantics are added and removed with
+     the breakpoint, because on a desktop all four are on screen at once and
+     calling them tab panels there would be a lie. */
+  (function () {
+    var sw = $('[data-stage-switch]');
+    if (!sw) return;
+    var btns = $$('button', sw);
+    var panels = btns.map(function (b) { return document.getElementById(b.getAttribute('data-stage')); });
+    if (!btns.length || panels.indexOf(null) > -1) return;
+
+    var narrow = window.matchMedia('(max-width: 900px)');
+    var at = 0;
+
+    var select = function (i) {
+      at = i;
+      btns.forEach(function (b, j) {
+        b.setAttribute('aria-selected', String(j === i));
+        b.tabIndex = j === i ? 0 : -1;
+        panels[j].hidden = j !== i;
+      });
+    };
+
+    var apply = function () {
+      if (narrow.matches) {
+        sw.hidden = false;
+        sw.setAttribute('role', 'tablist');
+        sw.setAttribute('aria-label', 'Build stages');
+        btns.forEach(function (b, j) {
+          b.setAttribute('role', 'tab');
+          b.id = b.getAttribute('data-stage') + '-tab';
+          b.setAttribute('aria-controls', b.getAttribute('data-stage'));
+          panels[j].setAttribute('role', 'tabpanel');
+          panels[j].setAttribute('aria-labelledby', b.id);
+        });
+        select(at);
+      } else {
+        sw.hidden = true;
+        sw.removeAttribute('role');
+        sw.removeAttribute('aria-label');
+        btns.forEach(function (b, j) {
+          b.removeAttribute('role');
+          b.removeAttribute('aria-selected');
+          b.removeAttribute('aria-controls');
+          b.tabIndex = 0;
+          panels[j].hidden = false;
+          panels[j].removeAttribute('role');
+          panels[j].removeAttribute('aria-labelledby');
+        });
+      }
+    };
+
+    btns.forEach(function (b, i) {
+      b.addEventListener('click', function () { select(i); });
+      b.addEventListener('keydown', function (e) {
+        var j = i;
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') j = (i + 1) % btns.length;
+        else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') j = (i - 1 + btns.length) % btns.length;
+        else if (e.key === 'Home') j = 0;
+        else if (e.key === 'End') j = btns.length - 1;
+        else return;
+        e.preventDefault();
+        select(j);
+        btns[j].focus();
+      });
+    });
+
+    apply();
+    if (narrow.addEventListener) narrow.addEventListener('change', apply);
+    else if (narrow.addListener) narrow.addListener(apply);
+  })();
+
   /* ------------------------------ Statement ------------------------------- */
   /* Words light up progressively as the band scrolls into view. */
   (function () {
