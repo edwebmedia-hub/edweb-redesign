@@ -1,6 +1,41 @@
 # Edweb Media (edwebmedia.com), state handoff
 
-## 2026-09-05: phone pass, LIVE at edwebmedia.com (tip 72706c0)
+## Start the next chat with this
+
+> Edweb Media, edwebmedia.com. Everything from the 2026-09-05 phone pass is
+> LIVE and verified (tip 5bba25a on `edweb-next`, worktree
+> `C:\Users\edgar\edweb-next`). One thing is still open: I need to open the site
+> on my actual iPhone, tap the assistant and try to scroll the page behind it.
+> Read `redesign/HANDOFF.md` first.
+
+## Open, only Edgar can close it
+
+1. **iOS Safari scroll lock, UNTESTED.** The full-screen assistant on a phone
+   holds the page behind it with `overflow: hidden` on the root element
+   (`html.is-chat-open` in `new-styles.css`, inside the 900px query). That is
+   the pattern iOS Safari has historically ignored. It was verified in Chrome
+   at 390px only; no iOS device was available. **Edgar: open
+   https://edwebmedia.com/ on the iPhone, tap the red button bottom right, try
+   to scroll.** If the page behind moves, the fix is the fixed-body method:
+   store `window.scrollY`, set `body { position: fixed; top: -Ypx; width: 100% }`
+   while open and restore on close, inside `hold()` in `new-script.js`.
+2. Nothing else. The process-section pick is settled and built.
+
+## Still owed from earlier passes, untouched by this one
+
+One real form send through `api/send-mail.js`, one chat turn that captures a
+lead, and `/pay?test=1` through the Payfast sandbox.
+
+## Evidence kept off the scratchpad
+
+Live proof shots and the three-option page are in
+`C:\Users\edgar\OneDrive\Claude-Backup\edwebmedia-phone-pass-2026-09-05\`:
+live mobile process, live mobile assistant, live desktop process, the desktop
+A/B comparison, and `process-options.html`, the source of the options artifact
+https://claude.ai/code/artifact/100d61b2-bcbb-47c3-a0e3-71b5372735d4
+
+
+## 2026-09-05: phone pass, LIVE at edwebmedia.com (tip 5bba25a)
 
 Edgar sent one message on his way to the gym with six phone complaints and
 "overall just enhance the website, don't make crazy changes". All six are in,
