@@ -1,5 +1,52 @@
 # Edweb Media (edwebmedia.com), state handoff
 
+## 2026-09-05: phone pass, COMMITTED 61587ea, NOT DEPLOYED
+
+Edgar sent one message on his way to the gym with six phone complaints and
+"overall just enhance the website, don't make crazy changes". All six are in,
+verified at 390 / 768 / 1280 with zero console errors, promoted onto the live
+filenames, committed. **Not pushed, so edwebmedia.com is still the old build.
+One push to `edweb-next` deploys it.**
+
+- **Chat composer, phone and desktop.** `.chat-tray` wraps the form and the
+  footnote; the form is one pill holding the input and the send button, focus
+  ring on the pill, send button grey and inert until something is typed
+  (`:has(input:placeholder-shown)`), input 16px on a phone. Markup change in
+  `Chat.mount` (new-script.js), styles at `.chat-tray` / `.chat-form` /
+  `.chat-send`.
+- **Assistant drawer on a phone.** Full viewport, rises from the bottom, square,
+  coral top edge, safe-area padding top and bottom. `hold()` in new-script.js
+  adds `is-chat-open` to the root element and restores the exact scroll position
+  on close; the CSS `html.is-chat-open { overflow: hidden }` sits inside the
+  900px query so the desktop panel is untouched.
+- **Pricing types on a phone.** `.tab-list--row` stacks below 600px: three
+  full-width rows, coral left bar on the active one, each with a `<small>` entry
+  price (R2,999 / R4,999 / R7,999) that is hidden above 600px. Home and packages.
+- **Review and demo rails on a phone.** `.rail-wrap .rail-nav` goes static below
+  the rail, arrows paired at the right, `.rail-count` ("2 / 6") on the left, fed
+  by the existing rail loop. `.rail--even` on the reviews rail so cards match
+  height instead of leaving a hole under short ones.
+- **Footer.** `.foot-legal` centres, stacks and goes up to `--fs-small` below
+  600px.
+- **Payfast "Almost there" page** (`api/payfast.js`). Real header bar aligned to
+  the form column: `/assets/work/logo-edweb-dark.webp` at 176x32 linked to `/`,
+  plus a "Back to payments" link. Was a 32px render of the 500x250
+  `edweb-logo-dark.png` with no link at all. Stray blue-greys (#eef6fa, #e1e8ee,
+  #cdd7e0, #666, #c8101f) replaced with color-mix of the four brand colours.
+
+**Open, waiting on Edgar.** The process section ("From first call to live site")
+on a phone: he said he was not sure about it and asked whether it could be
+improved, which is vague direction, so it went to three live options instead of
+a guess. Artifact for his phone:
+https://claude.ai/code/artifact/100d61b2-bcbb-47c3-a0e3-71b5372735d4
+PROCESS 1 stage switch, PROCESS 2 progress rail, PROCESS 3 swipe deck. He
+answers with a number, then it gets built on the real page. Nothing on the live
+process section changed in this pass.
+
+Rulings harvested to OS `taste/TASTE-PROFILE.md`, "Phone rulings 2026-09-05".
+
+---
+
 ## 2026-09-03: full rebuild LIVE at edwebmedia.com (tip fd57c4d, launched 20:45)
 
 Edgar asked for the whole site redone from scratch ("boring", "I don't like
