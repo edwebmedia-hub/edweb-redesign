@@ -148,6 +148,7 @@ function detailsPage(q, spec, isRecurring) {
 --coral-deep:color-mix(in srgb,var(--coral) 80%,var(--ink));
 --teal-soft:color-mix(in srgb,var(--teal) 18%,var(--paper));
 --teal-deep:color-mix(in srgb,var(--teal) 46%,var(--ink));
+color-scheme:light;
 }
 *{box-sizing:border-box}
 body{margin:0;font-family:Manrope,-apple-system,"Segoe UI",sans-serif;background:var(--paper);color:var(--ink);line-height:1.5}
@@ -267,7 +268,7 @@ module.exports = async function handler(req, res) {
   res.setHeader('Content-Type', 'text/html; charset=utf-8');
   res.status(200).send(
     `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Redirecting to secure payment…</title></head>` +
-      `<body onload="document.forms[0].submit()" style="font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;text-align:center;color:#2b2b2b;background:#fafafa">` +
+      `<body onload="document.forms[0].submit()" style="font-family:Manrope,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;text-align:center;color:#1c1c1c;background:#fafafa;color-scheme:light">` +
       `<form id="pf" action="${env.process}" method="post">${inputs}</form>` +
       `<p style="margin-top:20vh;font-size:18px">${msg}</p>` +
       `<noscript><button type="submit" form="pf">Continue to payment</button></noscript>` +

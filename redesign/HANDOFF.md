@@ -1,6 +1,6 @@
 # Edweb Media (edwebmedia.com), state handoff
 
-## 2026-09-05: phone pass, COMMITTED 61587ea, NOT DEPLOYED
+## 2026-09-05: phone pass, COMMITTED, NOT DEPLOYED
 
 Edgar sent one message on his way to the gym with six phone complaints and
 "overall just enhance the website, don't make crazy changes". All six are in,
@@ -42,6 +42,19 @@ https://claude.ai/code/artifact/100d61b2-bcbb-47c3-a0e3-71b5372735d4
 PROCESS 1 stage switch, PROCESS 2 progress rail, PROCESS 3 swipe deck. He
 answers with a number, then it gets built on the real page. Nothing on the live
 process section changed in this pass.
+
+**site-reviewer RETURNED the first attempt, then passed.** The promote run
+overwrote two things that had only ever been applied to the promoted files and
+never back-ported to the drafts: all the social and structured-data markup on
+`projects.html`, and `step--feature` on the home `Grow` card. Both are now in
+`new-projects.html` and `new-home.html` so promote cannot drop them again. Also
+fixed: closing the drawer above 900px scroll-jumped the page 1500px, because
+`hold()` restored a position the CSS had never locked; the sheet did not trap
+focus; and the send button was styled disabled while reporting as enabled.
+Rounds and evidence in `QA-REPORT.md`, "Phone pass (2026-09-05)".
+
+**If you edit a promoted page directly, back-port it to the `new-*` draft the
+same minute.** That is the second time this class of loss has happened.
 
 Rulings harvested to OS `taste/TASTE-PROFILE.md`, "Phone rulings 2026-09-05".
 

@@ -393,11 +393,13 @@ main { position: relative; z-index: 1; }
   transition: background var(--speed) var(--ease), transform var(--speed) var(--ease);
 }
 /* Inside the tray a lift would push the button out of its own pill. */
-.chat-send:hover { background: var(--coral-deep); }
-.chat-send:active { transform: scale(0.94); }
+.chat-send:not(:disabled):hover { background: var(--coral-deep); }
+.chat-send:not(:disabled):active { transform: scale(0.94); }
 .chat-send svg { width: 19px; height: 19px; }
-/* Nothing typed yet: the button waits instead of inviting an empty send. */
-.chat-form:has(input:placeholder-shown) .chat-send { background: var(--line-strong); pointer-events: none; }
+/* Nothing typed yet: the button waits instead of inviting an empty send. The
+   disabled state is set in script, so if that never runs the button stays a
+   working button rather than a dead one. */
+.chat-send:disabled { background: var(--line-strong); cursor: default; }
 .chat-foot { padding-top: var(--s3); margin: 0; font-size: var(--fs-micro); color: var(--text-muted); text-align: center; }
 
 /* Floating launcher + drawer, every page */

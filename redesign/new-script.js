@@ -603,8 +603,15 @@
         el.innerHTML = linkify(m.content); mt.log.appendChild(el);
       });
       mt.log.scrollTop = mt.log.scrollHeight;
-      var form = $('form', root), input = $('input', form);
-      form.addEventListener('submit', function (e) { e.preventDefault(); send(input.value); input.value = ''; });
+      var form = $('form', root), input = $('input', form), sendBtn = $('.chat-send', form);
+      /* The greyed-out send button was styled disabled but still reported as
+         an enabled control, so a screen reader offered a button that did
+         nothing. It carries the real disabled state now, and the styling
+         follows that instead of the placeholder. */
+      var syncSend = function () { sendBtn.disabled = !input.value.trim(); };
+      syncSend();
+      input.addEventListener('input', syncSend);
+      form.addEventListener('submit', function (e) { e.preventDefault(); send(input.value); input.value = ''; syncSend(); });
       var close = $('.chat-close', root);
       if (close && opts.onClose) close.addEventListener('click', opts.onClose);
       return mt;
@@ -643,24 +650,64 @@
       window.setTimeout(function () { t.parentNode && t.parentNode.removeChild(t); }, 220);
     };
 
-    /* On a phone the drawer covers the screen, so the page behind it is held
-       where it was instead of scrolling away under the panel. The class does
-       nothing above the phone breakpoint, where the drawer is still a panel. */
+    /* Below this width the drawer covers the screen and behaves as a sheet:
+       the page behind is held where it was and the rest of the document is
+       taken out of reach. Above it the drawer is still a panel beside a page
+       the visitor is free to read and scroll, so neither applies. */
+    var sheet = window.matchMedia('(max-width: 900px)');
+
     var lockedAt = 0;
     var hold = function (on) {
       var doc = document.documentElement;
-      if (on) { lockedAt = window.scrollY; doc.classList.add('is-chat-open'); }
-      else if (doc.classList.contains('is-chat-open')) {
+      /* Restoring a scroll position that was never held threw the visitor
+         2000px up the page every time they closed the panel on a desktop. */
+      if (on) {
+        if (!sheet.matches) return;
+        lockedAt = window.scrollY;
+        doc.classList.add('is-chat-open');
+      } else if (doc.classList.contains('is-chat-open')) {
         doc.classList.remove('is-chat-open');
         window.scrollTo(0, lockedAt);
       }
     };
+
+    /* An opaque full-screen sheet with 39 tab stops behind it is a trap in the
+       other direction: Tab off the send button and focus disappears into a
+       page nobody can see. */
+    var inerted = [];
+    var isolate = function (on) {
+      if (on) {
+        if (!sheet.matches) return;
+        Array.prototype.forEach.call(document.body.children, function (el) {
+          if (el === drawer || el.inert) return;
+          el.inert = true;
+          inerted.push(el);
+        });
+        drawer.setAttribute('aria-modal', 'true');
+      } else {
+        inerted.forEach(function (el) { el.inert = false; });
+        inerted = [];
+        drawer.removeAttribute('aria-modal');
+      }
+    };
+
+    /* Rotating a phone to a tablet width while the sheet is open turns it back
+       into a panel. Let the page go rather than hold a position that no longer
+       matches what is on screen. */
+    var release = function () {
+      if (sheet.matches || !drawer.classList.contains('is-open')) return;
+      document.documentElement.classList.remove('is-chat-open');
+      isolate(false);
+    };
+    if (sheet.addEventListener) sheet.addEventListener('change', release);
+    else if (sheet.addListener) sheet.addListener(release);
 
     var open = function (on) {
       if (on) { markTeased(); killTeaser(); clearBadge(); }
       if (on && !mounted) { Chat.mount(drawer, { id: 'drawer-chat', closable: true, onClose: function () { open(false); } }); mounted = true; }
       hold(on);
       drawer.classList.toggle('is-open', on);
+      isolate(on);
       launch.setAttribute('aria-expanded', String(on));
       launch.classList.toggle('is-hidden', on);
       if (on) { var i = $('input', drawer); i && window.setTimeout(function () { i.focus(); }, 250); } else { launch.focus(); }

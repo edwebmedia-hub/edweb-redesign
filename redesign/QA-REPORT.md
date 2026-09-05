@@ -1204,3 +1204,97 @@ alt bands (`color-mix(in srgb, var(--ink) 9%, var(--paper))`), so there is one
 real surface change between the masthead card and the ink footer and the page
 still ends light. Zero console errors at 375 / 768 / 1440, align-sweep clean at
 1440 and 768, one known item left at 1280 on the packages add-on row.
+
+## Phone pass (2026-09-05)
+
+Six phone complaints from Edgar in one message, plus "overall just enhance the
+website, don't make crazy changes". Chrome via chrome-devtools MCP, real device
+emulation at 390x844x3 mobile/touch, plus 768 and 1280. Preview: node static
+server on port 4240 against `C:\Users\edgar\edweb-next\redesign`.
+
+### Round 1: build and self-check
+
+Chat composer rebuilt as a `.chat-tray` + pill `.chat-form`; drawer turned into
+a full-screen sheet with a root-element scroll lock; `.tab-list--row` stacked
+below 600px with entry prices; rail nav moved below the rail with a count;
+`.foot-legal` centred; the Payfast details page given a real header.
+
+Verified in the browser, each one exercised rather than assumed: composer sent
+a real message and got the offline price answer back; tab switching moved
+`is-active` between the three pricing panels; drawer measured 390x844 at 0,0
+with `html` overflow hidden and scroll restored to the exact opening position;
+rail arrows measured below the rail with the count reading 1/6 then 2/6;
+footer legal computed `column` / `center`. Zero console errors on
+`/index.html`, `/new-packages.html`, `/new-projects.html`, `/new-contact.html`.
+Two defects found and fixed inside the round: the arrow pair was split across
+the row by `space-between`, and the disabled arrow kept the drop shadow it only
+needed while floating over a card.
+
+### Round 2: site-reviewer, fresh context. Verdict RETURNED
+
+Four blockers and two should-fixes. Three were regressions this pass carried in
+alongside the six fixes, and all three came from one cause.
+
+**B1. The promote run stripped the social and structured-data markup off
+`projects.html`.** `og:url`, `og:locale`, the correct `og:image`, four
+`twitter:` tags and the whole `CollectionPage` JSON-LD with its six-item
+`ItemList`. Confirmed: `git show 61587ea~1:redesign/projects.html` had 6
+matching lines, the promoted file had 0. Cause: those tags were only ever
+written onto the promoted `projects.html`, never back into
+`new-projects.html`, so promote overwrote them from the stale draft. This
+reversed the 2026-09-04 site-auditor fix.
+
+**B2. The `Grow` process card lost `step--feature`.** Same cause. All four
+cards computed paper backgrounds and `rotate: none` at 1280; the ink card
+leaning 2.2deg that Edgar picked on 2026-09-04 was gone.
+
+**B3. Closing the drawer scroll-jumped the page above 900px.** `hold()` stored
+and restored a scroll position on every viewport, but `html.is-chat-open {
+overflow: hidden }` only exists inside the 900px query. Measured at 1280:
+opened at 4000, scrolled to 6000, closed, landed at 4478. A 1522px jump.
+
+**S1.** The full-screen sheet did not trap focus: 39 focusable elements stayed
+in the tab order behind an opaque sheet.
+**S2.** The send button was styled disabled via `:has(input:placeholder-shown)`
+with `pointer-events: none`, but reported `disabled: false` to the
+accessibility tree.
+
+### Round 3: fixes and re-verification
+
+- **B1, B2 fixed at the source.** The lost meta, JSON-LD and `step--feature`
+  were written into `new-projects.html` and `new-home.html`, not just onto the
+  promoted files, so the next promote cannot drop them again. Re-promoted.
+  Verified: 6 matching meta lines in `projects.html`, JSON-LD parses through
+  `JSON.parse`, and the fourth process card computes
+  `background rgb(28, 28, 28)` with `rotate: 2.2deg` at 1280. The net diff
+  against the pre-pass commit is now only the intended changes.
+- **B3 fixed.** `hold()` and the new `isolate()` both return early unless
+  `matchMedia('(max-width: 900px)')` matches, and a `change` listener releases
+  the lock if the viewport grows past the breakpoint while the sheet is open.
+  Verified at 1280: opened at 4000, scrolled to 6000, closed, stayed at 6000,
+  jump 0, and `is-chat-open` never applied. At 390 the exact restore still
+  holds (4000 in, 4000 out).
+- **S1 fixed.** Every direct child of `body` except the drawer takes `inert`
+  while the sheet is open, and the drawer takes `aria-modal="true"`. Measured
+  at 390 with the sheet open: 8 of 9 body children inert, drawer not inert,
+  0 focusable elements reachable outside the sheet, `aria-modal` present. All
+  inert cleared on close.
+- **S2 fixed.** `syncSend()` sets the real `disabled` property from an `input`
+  listener and again after submit; the CSS styles `:disabled` and guards hover
+  with `:not(:disabled)`. Measured: empty `disabled: true`, one character
+  `false`, cleared `true` again, and a full send still renders the reply and
+  clears the field.
+- **Nice-to-haves taken:** the `projects.html` rail counter now ships `1 / 5`
+  instead of `1 / 1` for readers with JS off, the Payfast redirect page's
+  `#2b2b2b` became `#1c1c1c`, and both Payfast pages declare
+  `color-scheme: light`.
+
+Zero console errors after the fixes at 390 and 1280.
+
+### Not covered
+
+iOS Safari scroll lock (no device available; the root `overflow: hidden`
+pattern is the one iOS has historically ignored, so this is the most likely
+field failure). `/api/payfast` end to end against Payfast, a real form send,
+the chat against a live API key, and Lighthouse. The "From first call to live
+site" section is deliberately unchanged and is out with Edgar as three options.
