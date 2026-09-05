@@ -369,21 +369,36 @@ main { position: relative; z-index: 1; }
    Opacity and blur only: the hover transform stays free. */
 .chat-chips .chip { animation: chip-in 380ms var(--ease) both; animation-delay: calc(var(--i, 0) * 70ms); }
 @keyframes chip-in { from { opacity: 0; filter: blur(4px); } }
-.chat-form { display: flex; gap: var(--s3); padding: var(--s4) var(--s5) var(--s3); border-top: 1px solid var(--line); }
-.chat-form input {
-  flex: 1; min-width: 0; min-height: 46px; padding: 0 0.9rem;
-  border: 1px solid var(--line-strong); border-radius: var(--r-control); background: var(--surface);
+/* The composer is one tray, the way a messaging app builds it: the field and
+   the send button share a single pill instead of standing apart as a box and a
+   floating circle. The whole pill takes the focus ring, not the input inside. */
+.chat-tray { padding: var(--s4) var(--s5) var(--s5); border-top: 1px solid var(--line); background: var(--surface); }
+.chat-form {
+  display: flex; align-items: center; gap: var(--s2);
+  padding: 5px 5px 5px 1.05rem;
+  border: 1px solid var(--line-strong); border-radius: var(--r-pill);
+  background: var(--surface);
   transition: border-color var(--speed) var(--ease), box-shadow var(--speed) var(--ease);
 }
-.chat-form input:focus { outline: none; border-color: var(--teal-deep); box-shadow: 0 0 0 3px var(--teal-soft); }
+.chat-form:focus-within { border-color: var(--teal-deep); box-shadow: 0 0 0 3px var(--teal-soft); }
+.chat-form input {
+  flex: 1; min-width: 0; min-height: 42px; padding: 0;
+  border: 0; border-radius: 0; background: none; color: var(--text);
+}
+.chat-form input::placeholder { color: var(--text-muted); }
+.chat-form input:focus { outline: none; }
 .chat-send {
-  width: 46px; height: 46px; flex: none; border-radius: var(--r-pill);
+  width: 42px; height: 42px; flex: none; border-radius: 50%;
   background: var(--coral); color: var(--paper); display: grid; place-items: center;
   transition: background var(--speed) var(--ease), transform var(--speed) var(--ease);
 }
-.chat-send:hover { background: var(--ink); transform: translateY(-1px); }
-.chat-send svg { width: 18px; height: 18px; }
-.chat-foot { padding: 0 var(--s5) var(--s5); font-size: var(--fs-micro); color: var(--text-muted); text-align: center; }
+/* Inside the tray a lift would push the button out of its own pill. */
+.chat-send:hover { background: var(--coral-deep); }
+.chat-send:active { transform: scale(0.94); }
+.chat-send svg { width: 19px; height: 19px; }
+/* Nothing typed yet: the button waits instead of inviting an empty send. */
+.chat-form:has(input:placeholder-shown) .chat-send { background: var(--line-strong); pointer-events: none; }
+.chat-foot { padding-top: var(--s3); margin: 0; font-size: var(--fs-micro); color: var(--text-muted); text-align: center; }
 
 /* Floating launcher + drawer, every page */
 .chat-launch {
@@ -575,6 +590,8 @@ main { position: relative; z-index: 1; }
 .tab-list--row .tab::before { display: none; }
 .tab-list--row .tab:hover, .tab-list--row .tab[aria-selected="true"] { padding-left: 0; }
 .tab-list--row .tab[aria-selected="true"] { border-bottom-color: var(--coral); }
+/* The entry price rides with each type only once the row stacks. */
+.tab-list--row .tab small { display: none; }
 
 /* ------------------------------ Process ---------------------------------- */
 .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap-grid); align-items: stretch; }
@@ -633,6 +650,10 @@ main { position: relative; z-index: 1; }
 .review-by strong { display: block; line-height: 1.2; }
 .review-by small { color: var(--text-muted); font-size: var(--fs-micro); }
 .rail-nav { display: flex; gap: var(--s2); }
+/* Which of how many. Only earns its place on a phone, where one card fills
+   the screen and the rest of the rail is out of sight. */
+.rail-count { display: none; margin: 0; font-size: var(--fs-small); font-weight: 700; color: var(--text-muted); font-variant-numeric: tabular-nums; }
+.rail-count b { color: var(--text); }
 /* The arrows used to sit up in the section head, far from what they moved.
    They now ride the rail itself, one at each edge, where the thumb and the
    eye already are. */
@@ -1027,8 +1048,37 @@ select { appearance: none; background-image: linear-gradient(45deg, transparent 
   .rail .work-tile figcaption .btn { margin-left: 0; }
   .work-grid-after { margin-top: var(--s7); }
   .shot-grid { grid-template-columns: 1fr; }
-  .chat-drawer { right: var(--s3); bottom: calc(var(--s3) + 64px); width: calc(100vw - var(--s3) * 2); height: min(600px, calc(100svh - 110px)); }
+  /* On a phone the assistant takes the screen the way an app does. It used to
+     float as a card with the page showing above and below it, and that page
+     still scrolled behind the panel. It now rises from the bottom edge, covers
+     everything, and the page underneath is held still while it is open. */
+  .chat-drawer {
+    inset: 0; right: 0; bottom: 0;
+    width: 100%; height: 100dvh;
+    transform-origin: 50% 100%;
+    opacity: 1; filter: none; transform: translateY(100%);
+    transition: transform 360ms var(--ease), visibility 0s linear 360ms;
+  }
+  .chat-drawer.is-open { transform: none; filter: none; }
+  .chat-drawer:not(.is-open) { transition: transform 200ms var(--ease-io), visibility 0s linear 200ms; }
+  .chat-drawer .chat { border: 0; border-radius: 0; box-shadow: none; border-top: 3px solid var(--coral); }
+  .chat-drawer .chat-head { padding-top: calc(var(--s5) + env(safe-area-inset-top)); }
+  .chat-drawer .chat-tray { padding-bottom: calc(var(--s5) + env(safe-area-inset-bottom)); }
+  html.is-chat-open { overflow: hidden; }
   .chat-launch { right: var(--s3); bottom: var(--s3); }
+  /* Rail arrows used to hang over the middle of the card they were moving,
+     covering the words. They drop below the rail, at the thumb end. */
+  .rail-wrap .rail-nav {
+    position: static; inset: auto;
+    align-items: center; justify-content: flex-end;
+    gap: var(--s3); margin-top: var(--s5); pointer-events: auto;
+  }
+  /* Count on the left, the pair of arrows together at the thumb end. */
+  .rail-wrap .rail-count { margin-right: auto; }
+  /* The lift off the card is gone, so the drop shadow it needed goes too. */
+  .rail-wrap .rail-btn { box-shadow: none; }
+  .rail-wrap .rail-btn[aria-disabled="true"] { opacity: 0.25; }
+  .rail-count { display: block; }
   /* At this width it covered most of the tile CTA under it. The launcher is
      still there, so the phone simply does not get the teaser. */
   .chat-teaser { display: none; }
@@ -1052,8 +1102,37 @@ select { appearance: none; background-image: linear-gradient(45deg, transparent 
   .work-tile figcaption, .work-grid .work-tile figcaption, .rail .work-tile figcaption { flex-direction: column; align-items: flex-start; gap: var(--s1); }
   .rail .work-tile figcaption .btn { margin-left: 0; margin-top: var(--s2); }
   .rail { align-items: flex-start; }
+  /* One quote fills the width, so the cards match each other instead of
+     leaving a hole under the short ones. The name row stays pinned low. */
+  .rail--even { align-items: stretch; }
   .review, .rail .work-tile { width: 100%; }
   .prevnext { flex-direction: column; }
   .chat-launch span:not(.chat-badge) { display: none; }
   .chat-launch { padding: 0; width: 52px; justify-content: center; }
+  /* 16px stops the phone zooming the page when the field takes focus. */
+  .chat-form input { font-size: 16px; }
+  /* Two types on one line and the third stranded below it. On a phone the
+     three stack as full-width rows, each carrying its own entry price, so the
+     choice reads as a list rather than a row that broke. */
+  .tab-list--row {
+    flex-direction: column; gap: 0;
+    border-top: 1px solid var(--line); border-bottom: 0;
+    margin-bottom: var(--s6);
+  }
+  .tab-list--row .tab {
+    width: 100%; padding: 0.95rem 0 0.95rem 1.1rem;
+    border-bottom: 1px solid var(--line); margin-bottom: 0;
+  }
+  .tab-list--row .tab::before { display: block; }
+  .tab-list--row .tab:hover, .tab-list--row .tab[aria-selected="true"] { padding-left: 1.4rem; }
+  .tab-list--row .tab[aria-selected="true"] { border-bottom-color: var(--line); }
+  .tab-list--row .tab small { display: block; }
+  /* The closing line sat small and shoved into the left corner. It centres and
+     spaces out, so the last thing on the page looks finished. */
+  .foot-legal {
+    flex-direction: column; align-items: center; text-align: center;
+    gap: var(--s4); padding-top: var(--s6); font-size: var(--fs-small);
+  }
+  .foot-legal nav { justify-content: center; gap: var(--s3) var(--s6); flex-wrap: wrap; }
+  .foot-legal a { display: inline-block; padding-block: 4px; }
 }

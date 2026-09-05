@@ -255,6 +255,7 @@
       rail.scrollBy({ left: dir * w, behavior: reduced ? 'auto' : 'smooth' });
     };
     var prev = $('[data-prev]', wrap), next = $('[data-next]', wrap);
+    var count = $('.rail-count', wrap);
     prev && prev.addEventListener('click', function () { stepBy(-1); });
     next && next.addEventListener('click', function () { stepBy(1); });
     /* An arrow that cannot move announced itself as an enabled button and did
@@ -264,6 +265,15 @@
       var atStart = rail.scrollLeft <= 1, atEnd = rail.scrollLeft >= max - 1;
       if (prev) prev.setAttribute('aria-disabled', String(atStart || max <= 0));
       if (next) next.setAttribute('aria-disabled', String(atEnd || max <= 0));
+      /* On a phone one card fills the width and the rest of the rail is out of
+         sight, so the arrows carry a position with them. */
+      if (count) {
+        var gap = parseFloat(getComputedStyle(rail).columnGap) || 0;
+        var page = rail.clientWidth + gap;
+        var pages = page > 0 ? Math.max(1, Math.round(rail.scrollWidth / page)) : 1;
+        var at = page > 0 ? Math.min(pages, Math.round(rail.scrollLeft / page) + 1) : 1;
+        count.innerHTML = '<b>' + at + '</b> / ' + pages;
+      }
     };
     syncEnds();
     rail.addEventListener('scroll', syncEnds, { passive: true });
@@ -521,10 +531,12 @@
           (opts.closable ? '<button type="button" class="chat-close" aria-label="Close chat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg></button>' : '') + '</div>' +
           '<div class="chat-log" aria-live="polite"></div>' +
           '<div class="chat-chips"></div>' +
+          '<div class="chat-tray">' +
           '<form class="chat-form"><label class="visually-hidden" for="' + (opts.id || 'chat') + '-in">Your question</label>' +
-          '<input id="' + (opts.id || 'chat') + '-in" type="text" maxlength="500" autocomplete="off" placeholder="' + (window.matchMedia('(max-width: 600px)').matches ? 'Ask a question' : 'Ask about prices, timing, hosting') + '" />' +
-          '<button type="submit" class="chat-send" aria-label="Send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h13M13 6l6 6-6 6"/></svg></button></form>' +
+          '<input id="' + (opts.id || 'chat') + '-in" type="text" maxlength="500" autocomplete="off" enterkeyhint="send" placeholder="' + (window.matchMedia('(max-width: 600px)').matches ? 'Ask a question' : 'Ask about prices, timing, hosting') + '" />' +
+          '<button type="submit" class="chat-send" aria-label="Send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12h13M12 6.5l5.5 5.5-5.5 5.5"/></svg></button></form>' +
           '<p class="chat-foot">Answers come from our price list. Prefer a person? <a href="https://wa.me/27846204583" target="_blank" rel="noopener">WhatsApp us</a>.</p>' +
+          '</div>' +
         '</div>';
       var mt = { root: root, log: $('.chat-log', root), chips: $('.chat-chips', root) };
       mounts.push(mt);
@@ -631,9 +643,23 @@
       window.setTimeout(function () { t.parentNode && t.parentNode.removeChild(t); }, 220);
     };
 
+    /* On a phone the drawer covers the screen, so the page behind it is held
+       where it was instead of scrolling away under the panel. The class does
+       nothing above the phone breakpoint, where the drawer is still a panel. */
+    var lockedAt = 0;
+    var hold = function (on) {
+      var doc = document.documentElement;
+      if (on) { lockedAt = window.scrollY; doc.classList.add('is-chat-open'); }
+      else if (doc.classList.contains('is-chat-open')) {
+        doc.classList.remove('is-chat-open');
+        window.scrollTo(0, lockedAt);
+      }
+    };
+
     var open = function (on) {
       if (on) { markTeased(); killTeaser(); clearBadge(); }
       if (on && !mounted) { Chat.mount(drawer, { id: 'drawer-chat', closable: true, onClose: function () { open(false); } }); mounted = true; }
+      hold(on);
       drawer.classList.toggle('is-open', on);
       launch.setAttribute('aria-expanded', String(on));
       launch.classList.toggle('is-hidden', on);

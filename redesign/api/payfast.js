@@ -139,27 +139,48 @@ function detailsPage(q, spec, isRecurring) {
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
+/* Same four brand colours as the site, every other tone mixed from them. */
+:root{
+--ink:#1c1c1c;--paper:#fafafa;--coral:#e0474c;--teal:#7acfd6;
+--muted:color-mix(in srgb,var(--ink) 66%,var(--paper));
+--line:color-mix(in srgb,var(--ink) 14%,transparent);
+--line-strong:color-mix(in srgb,var(--ink) 26%,transparent);
+--coral-deep:color-mix(in srgb,var(--coral) 80%,var(--ink));
+--teal-soft:color-mix(in srgb,var(--teal) 18%,var(--paper));
+--teal-deep:color-mix(in srgb,var(--teal) 46%,var(--ink));
+}
 *{box-sizing:border-box}
-body{margin:0;font-family:Manrope,-apple-system,"Segoe UI",sans-serif;background:#fafafa;color:#2b2b2b;line-height:1.5}
-.test{background:#e0474c;color:#fff;text-align:center;font-weight:700;padding:10px 14px;font-size:14px}
-.wrap{max-width:470px;margin:0 auto;padding:40px 22px 60px}
-.logo{height:32px;margin-bottom:26px}
+body{margin:0;font-family:Manrope,-apple-system,"Segoe UI",sans-serif;background:var(--paper);color:var(--ink);line-height:1.5}
+.test{background:var(--coral);color:var(--paper);text-align:center;font-weight:700;padding:10px 14px;font-size:14px}
+/* The mark used to be a lone 32px image of a 500x250 file, so the wordmark
+   inside it read tiny, and it went nowhere when tapped. It is the site's own
+   header logo now, at the site's own size, and it links home. */
+.bar{border-bottom:1px solid var(--line);background:var(--paper)}
+.bar-in{display:flex;align-items:center;justify-content:space-between;gap:16px;max-width:470px;margin:0 auto;padding:14px 22px}
+.bar img{display:block;width:176px;height:32px;object-fit:contain;object-position:left}
+.back{color:var(--muted);text-decoration:none;font-size:14px;font-weight:600;white-space:nowrap}
+.back:hover{color:var(--coral-deep)}
+.wrap{max-width:470px;margin:0 auto;padding:34px 22px calc(60px + env(safe-area-inset-bottom))}
 h1{font-size:28px;margin:0 0 8px;letter-spacing:-.01em}
-.sub{color:#666;margin:0 0 22px}
-.summary{background:#eef6fa;border:1px solid #e1e8ee;border-radius:14px;padding:15px 18px;margin-bottom:26px;font-size:15px}
-.summary span{display:block;color:#666;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px}
+.sub{color:var(--muted);margin:0 0 22px}
+.summary{background:var(--teal-soft);border:1px solid var(--line);border-radius:14px;padding:15px 18px;margin-bottom:26px;font-size:15px}
+.summary span{display:block;color:var(--muted);font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px}
 .row{display:flex;gap:12px}
 .row label{flex:1}
 label{display:block;font-weight:600;font-size:14px;margin-bottom:15px}
-input{display:block;width:100%;margin-top:6px;padding:12px 14px;border:1px solid #cdd7e0;border-radius:10px;font:inherit;background:#fff;color:#2b2b2b}
-input:focus{outline:none;border-color:#7acfd6;box-shadow:0 0 0 3px rgba(122,207,214,.35)}
-button{width:100%;margin-top:6px;padding:14px;border:0;border-radius:999px;background:#e0474c;color:#fff;font:inherit;font-weight:700;font-size:16px;cursor:pointer}
-button:hover{background:#c8101f}
-.secure{text-align:center;color:#666;font-size:13px;margin-top:18px}
+.opt{color:var(--muted);font-weight:500}
+input{display:block;width:100%;margin-top:6px;padding:12px 14px;border:1px solid var(--line-strong);border-radius:10px;font:inherit;font-size:16px;background:var(--paper);color:var(--ink)}
+input:focus{outline:none;border-color:var(--teal-deep);box-shadow:0 0 0 3px var(--teal-soft)}
+button{width:100%;margin-top:6px;padding:14px;border:0;border-radius:999px;background:var(--coral);color:var(--paper);font:inherit;font-weight:700;font-size:16px;cursor:pointer;transition:background .28s cubic-bezier(.22,1,.36,1)}
+button:hover{background:var(--coral-deep)}
+.secure{text-align:center;color:var(--muted);font-size:13px;margin-top:18px}
 </style></head>
 <body>${test}
+<header class="bar"><div class="bar-in">
+<a href="/" aria-label="Edweb Media home"><img src="/assets/work/logo-edweb-dark.webp" width="176" height="32" alt="Edweb Media"></a>
+<a class="back" href="/pay">Back to payments</a>
+</div></header>
 <main class="wrap">
-<img class="logo" src="https://edwebmedia.com/assets/edweb-logo-dark.png" alt="Edweb Media">
 <h1>Almost there</h1>
 <p class="sub">Enter your details so we know who the payment is from. Next you'll go to Payfast to pay securely.</p>
 <div class="summary"><span>You're paying</span>${summary}</div>
@@ -169,7 +190,7 @@ button:hover{background:#c8101f}
 <label>Last name<input name="ln" required maxlength="60" autocomplete="family-name"></label>
 </div>
 <label>Email<input type="email" name="email" required maxlength="100" autocomplete="email" placeholder="you@example.com"></label>
-<label>Phone <span style="color:#666;font-weight:500">(optional)</span><input name="cell" maxlength="20" autocomplete="tel" placeholder="+27 84 000 0000"></label>
+<label>Phone <span class="opt">(optional)</span><input name="cell" maxlength="20" autocomplete="tel" placeholder="+27 84 000 0000"></label>
 <button type="submit">Continue to payment</button>
 </form>
 <p class="secure">&#128274; Secured by Payfast. Card details are entered on Payfast, never here.</p>
