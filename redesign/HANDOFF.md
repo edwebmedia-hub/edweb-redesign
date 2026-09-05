@@ -34,27 +34,28 @@ One push to `edweb-next` deploys it.**
   `edweb-logo-dark.png` with no link at all. Stray blue-greys (#eef6fa, #e1e8ee,
   #cdd7e0, #666, #c8101f) replaced with color-mix of the four brand colours.
 
-**Open, waiting on Edgar.** The process section ("From first call to live site")
-on a phone: he said he was not sure about it and asked whether it could be
-improved, which is vague direction, so it went to three live options instead of
-a guess. Artifact for his phone:
-https://claude.ai/code/artifact/100d61b2-bcbb-47c3-a0e3-71b5372735d4
-PROCESS 1 stage switch, PROCESS 2 progress rail, PROCESS 3 swipe deck. He
-answers with a number, then it gets built on the real page. Nothing on the live
-process section changed in this pass.
+**Process section: SETTLED 2026-09-05, built in 64fe87a.** He was unsure about
+it on a phone and asked whether it could be improved, which is vague direction,
+so it went to three live options rather than a guess
+(https://claude.ai/code/artifact/100d61b2-bcbb-47c3-a0e3-71b5372735d4 :
+1 stage switch, 2 progress rail, 3 swipe deck). He picked **1 for mobile** and
+asked what it would do to desktop. Shown both: desktop keeping the four-across
+row, and the switch running on desktop too. The second leaves the right half of
+a 1280 page empty, which is his own dead-half rule, so the recommendation was
+the row. He confirmed: **desktop keeps the four-across row exactly as it is,
+mobile gets the switch.**
 
-**site-reviewer RETURNED the first attempt, then passed.** The promote run
-overwrote two things that had only ever been applied to the promoted files and
-never back-ported to the drafts: all the social and structured-data markup on
-`projects.html`, and `step--feature` on the home `Grow` card. Both are now in
-`new-projects.html` and `new-home.html` so promote cannot drop them again. Also
-fixed: closing the drawer above 900px scroll-jumped the page 1500px, because
-`hold()` restored a position the CSS had never locked; the sheet did not trap
-focus; and the send button was styled disabled while reporting as enabled.
-Rounds and evidence in `QA-REPORT.md`, "Phone pass (2026-09-05)".
-
-**If you edit a promoted page directly, back-port it to the `new-*` draft the
-same minute.** That is the second time this class of loss has happened.
+How it is built: `.stage-switch` in `new-home.html` ships `hidden` with
+`data-stage` pointing at the four `.step` articles, which now carry ids
+`stage-discover|design|build|grow` and a `.stage-mark` eyebrow. A block in
+`new-script.js` adds the tablist/tab/tabpanel roles and unhides the switch only
+while `matchMedia('(max-width: 900px)')` matches, and strips them again above
+it, because on a desktop all four stages are on screen and calling them tab
+panels there would be false. With no script a phone falls back to the four
+stacked stages, not a dead switch. Below 900px the stage also drops its card
+box and the ink treatment on Grow, since that treatment exists to break a row
+of four. Section height on a phone: 1057px to 206px. Desktop row untouched,
+verified `rgb(28, 28, 28)` and `rotate: 2.2deg` still on Grow at 1280.
 
 Rulings harvested to OS `taste/TASTE-PROFILE.md`, "Phone rulings 2026-09-05".
 
